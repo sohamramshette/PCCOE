@@ -1,0 +1,109 @@
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Packaging / build
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# ---------------------------------------------------------------------------
+# Environment variables & secrets
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+
+# ---------------------------------------------------------------------------
+# Jupyter
+# ---------------------------------------------------------------------------
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# ---------------------------------------------------------------------------
+# Editors / IDE
+# ---------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---------------------------------------------------------------------------
+# OS-generated files
+# ---------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ---------------------------------------------------------------------------
+# Node / Frontend (React + Vite)
+# ---------------------------------------------------------------------------
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---------------------------------------------------------------------------
+# ML generated artifacts
+# NOTE: We intentionally do NOT ignore all datasets. Dataset commit decisions
+#       will be made later. Only generated model binaries are ignored here.
+# ---------------------------------------------------------------------------
+ml/models/*
+!ml/models/.gitkeep
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.onnx
+*.model
+
+# ---------------------------------------------------------------------------
+# PostgreSQL / local database development files
+# ---------------------------------------------------------------------------
+*.pgdata/
+pgdata/
+*.sql.bak
+*.dump
+
+# ---------------------------------------------------------------------------
+# Temporary files / logs
+# ---------------------------------------------------------------------------
+*.log
+*.tmp
+*.temp
+tmp/
+temp/

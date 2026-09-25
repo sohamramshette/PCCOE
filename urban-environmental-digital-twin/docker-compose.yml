@@ -1,0 +1,25 @@
+# ---------------------------------------------------------------------------
+# Minimal DEVELOPMENT-only compose file.
+#
+# Provides a local PostgreSQL instance for development. This is NOT a
+# production deployment configuration. Application/backend services will be
+# added in a later phase. Values are read from a local `.env` file
+# (see `.env.example`).
+# ---------------------------------------------------------------------------
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: uedt_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
