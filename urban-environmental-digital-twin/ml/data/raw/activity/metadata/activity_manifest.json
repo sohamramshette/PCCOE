@@ -1,0 +1,19 @@
+{
+  "dataset_name": "OpenStreetMap Pune Activity, Industrial, and Construction Dataset",
+  "provider": "OpenStreetMap Foundation (Overpass API)",
+  "retrieval_timestamp": "2026-09-26 11:45:37 UTC",
+  "counts": {
+    "industrial_elements": 49,
+    "construction_elements": 25,
+    "landuse_elements": 405,
+    "poi_activity_elements": 417
+  },
+  "stations": [
+    "11613",
+    "11609",
+    "60658",
+    "3409331",
+    "3409438",
+    "3409526"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "execution_time_seconds": 13.35,
+  "total_rows": 84096,
+  "total_columns": 118,
+  "stations_covered": [
+    11613,
+    11609,
+    60658,
+    3409331,
+    3409438,
+    3409526
+  ],
+  "station_breakdown": {
+    "11609": {
+      "total_hours": 14016,
+      "target_valid_hours": 11847,
+      "pm25_valid_hours": 11847
+    },
+    "11613": {
+      "total_hours": 14016,
+      "target_valid_hours": 11074,
+      "pm25_valid_hours": 11074
+    },
+    "60658": {
+      "total_hours": 14016,
+      "target_valid_hours": 7661,
+      "pm25_valid_hours": 7661
+    },
+    "3409331": {
+      "total_hours": 14016,
+      "target_valid_hours": 9457,
+      "pm25_valid_hours": 9457
+    },
+    "3409438": {
+      "total_hours": 14016,
+      "target_valid_hours": 10819,
+      "pm25_valid_hours": 10819
+    },
+    "3409526": {
+      "total_hours": 14016,
+      "target_valid_hours": 12161,
+      "pm25_valid_hours": 12161
+    }
+  },
+  "leakage_audit": {
+    "check_1_target_alignment": "PASSED: Target correctly shifted by exactly +1 hour within station.",
+    "check_2_no_cross_station_target": "PASSED: Last row of each station has NaN target.",
+    "check_3_no_cross_station_lag": "PASSED: First row of each station has NaN lag_1h.",
+    "check_4_past_only_rolling": "PASSED: Rolling statistics strictly past-looking.",
+    "check_5_target_exclusion": "PASSED: Target excluded from feature inputs."
+  }
+}

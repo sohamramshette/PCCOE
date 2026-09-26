@@ -1,0 +1,99 @@
+{
+  "id": 2585,
+  "name": "AAQMS Karve Road Pune",
+  "locality": null,
+  "timezone": "Asia/Kolkata",
+  "country": {
+    "id": 9,
+    "code": "IN",
+    "name": "India"
+  },
+  "owner": {
+    "id": 4,
+    "name": "Unknown Governmental Organization"
+  },
+  "provider": {
+    "id": 168,
+    "name": "CPCB"
+  },
+  "isMobile": false,
+  "isMonitor": true,
+  "instruments": [
+    {
+      "id": 2,
+      "name": "Government Monitor"
+    }
+  ],
+  "sensors": [
+    {
+      "id": 5338,
+      "name": "co µg/m³",
+      "parameter": {
+        "id": 4,
+        "name": "co",
+        "units": "µg/m³",
+        "displayName": "CO mass"
+      }
+    },
+    {
+      "id": 5372,
+      "name": "o3 µg/m³",
+      "parameter": {
+        "id": 3,
+        "name": "o3",
+        "units": "µg/m³",
+        "displayName": "O₃ mass"
+      }
+    },
+    {
+      "id": 5355,
+      "name": "pm10 µg/m³",
+      "parameter": {
+        "id": 1,
+        "name": "pm10",
+        "units": "µg/m³",
+        "displayName": "PM10"
+      }
+    },
+    {
+      "id": 5354,
+      "name": "pm25 µg/m³",
+      "parameter": {
+        "id": 2,
+        "name": "pm25",
+        "units": "µg/m³",
+        "displayName": "PM2.5"
+      }
+    },
+    {
+      "id": 14235,
+      "name": "so2 µg/m³",
+      "parameter": {
+        "id": 6,
+        "name": "so2",
+        "units": "µg/m³",
+        "displayName": "SO₂ mass"
+      }
+    }
+  ],
+  "coordinates": {
+    "latitude": 18.497484,
+    "longitude": 73.81349
+  },
+  "licenses": null,
+  "bounds": [
+    73.81349,
+    18.497484,
+    73.81349,
+    18.497484
+  ],
+  "distance": null,
+  "datetimeFirst": {
+    "utc": "2016-03-21T08:00:00Z",
+    "local": "2016-03-21T13:30:00+05:30"
+  },
+  "datetimeLast": {
+    "utc": "2018-02-22T03:00:00Z",
+    "local": "2018-02-22T08:30:00+05:30"
+  }
+}

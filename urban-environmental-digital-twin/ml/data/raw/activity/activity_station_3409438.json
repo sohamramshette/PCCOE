@@ -1,0 +1,1685 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-26T11:43:36Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 1709944514,
+      "lat": 18.4638412,
+      "lon": 73.8584177,
+      "tags": {
+        "amenity": "fuel"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1709944517,
+      "lat": 18.4633503,
+      "lon": 73.8583829,
+      "tags": {
+        "amenity": "restaurant",
+        "diet:vegetarian": "only",
+        "name": "Khooshabu"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1795991228,
+      "lat": 18.4586483,
+      "lon": 73.8584426,
+      "tags": {
+        "amenity": "fast_food",
+        "name": "Dominoz Bharati Vidyapeeth",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1886884517,
+      "lat": 18.4433669,
+      "lon": 73.848079,
+      "tags": {
+        "amenity": "hospital",
+        "name": "Sanjiwini Hospital"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1886884518,
+      "lat": 18.446812,
+      "lon": 73.8491251,
+      "tags": {
+        "name": "Hanuman Super market",
+        "shop": "supermarket"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1888334981,
+      "lat": 18.4427184,
+      "lon": 73.8603123,
+      "tags": {
+        "addr:housenumber": "Survey No. 53",
+        "addr:postcode": "411046",
+        "addr:street": "Poona-Satara Highway, Katraj",
+        "name": "Chowgule Industries Maruti Service",
+        "shop": "car_repair",
+        "website": "https://www.chowguleindustries.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2308947788,
+      "lat": 18.4566136,
+      "lon": 73.8563024,
+      "tags": {
+        "amenity": "college",
+        "internet_access": "yes",
+        "name": "Bharati Vidhyapeeth College Of Engineering",
+        "name:en": "bharati  vidhyapeeth ground"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4035849234,
+      "lat": 18.4575638,
+      "lon": 73.8507352,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:postcode": "411043",
+        "addr:street": "Bharti Vidyapeeth Back Market",
+        "amenity": "college",
+        "check_date": "2026-03-15",
+        "int_name": "PICT",
+        "name": "Pune Institute of Computer Technology",
+        "source": "GPS"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4175356670,
+      "lat": 18.4590342,
+      "lon": 73.8505579,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "11, 12",
+        "addr:postcode": "411043",
+        "addr:street": "Pushkaraj No. 1 Co-Operative Housing Society, Behind Bharati Vidyapeeth, Dhanakwadi",
+        "check_date": "2026-03-15",
+        "description": "CADCAMGURU Solutions Pvt Ltd. (CSPL) is the implementing partner for the training program of Pune University. We are a leading organization in the field of CAD, CAE, CATIA & SOLIDWORKS training. CSPL has a memorandum of understanding with the University o",
+        "name": "CADCAMGURU Solutions Pvt. Ltd.",
+        "office": "educational_institution",
+        "opening_hours": "09:30-18:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4342143762,
+      "lat": 18.4597522,
+      "lon": 73.854721,
+      "tags": {
+        "amenity": "college",
+        "name": "Homoeopathic Medical College"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4735665047,
+      "lat": 18.4572357,
+      "lon": 73.8562612,
+      "tags": {
+        "amenity": "college",
+        "internet_access": "yes",
+        "name": "Bharati Vidyapeeth Medical College"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4735665048,
+      "lat": 18.4572866,
+      "lon": 73.8552849,
+      "tags": {
+        "amenity": "college",
+        "name": "Bharati Vidyapeeth Dental College"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4780773526,
+      "lat": 18.4498128,
+      "lon": 73.8544834,
+      "tags": {
+        "name:en": "Neeta travels",
+        "shop": "travel_agency"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4780786621,
+      "lat": 18.4497495,
+      "lon": 73.8546293,
+      "tags": {
+        "name:en": "Natraj travels",
+        "shop": "travel_agency"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6893280447,
+      "lat": 18.4594703,
+      "lon": 73.8562721,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "PUNE",
+        "addr:full": "Sector - 28, Dhankawadi, Pune Satara Road, Pune",
+        "addr:postcode": "411043",
+        "addr:state": "Maharashtra",
+        "amenity": "blood_bank",
+        "contact:mobile": "9420320999",
+        "contact:phone": "02040555555; 02024379432",
+        "name": "Bharati Vidyapeeth Medical Foundation Blood Bank",
+        "operator:type": "ngo",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6906524642,
+      "lat": 18.4661131,
+      "lon": 73.8576829,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:full": "S. No. 30, 4th Floor, Office No. 41, 402, 403, and 5th Floor off 502, Waris Heights, Pune - Satara Road, Dhankwadi, Pune",
+        "addr:postcode": "411030",
+        "addr:state": "Maharashtra",
+        "amenity": "blood_bank",
+        "contact:mobile": "9890927793",
+        "contact:phone": "2065267000",
+        "name": "Chattrapati Shahu Maharaj Pratisthan Blood Bank",
+        "operator:type": "ngo",
+        "source": "OpenGovernmentData",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7042939577,
+      "lat": 18.4565508,
+      "lon": 73.8515434,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Behind Bharti, Vidyapeeth,Inside Patang Plaza, Opp Sachi-Aai Mata Mandir,Katraj",
+        "addr:postcode": "411046",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Nityanand Rehabilitation and Residential Mental Heal",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7044577805,
+      "lat": 18.4658771,
+      "lon": 73.8601231,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Sr.No.22, Plot No.49,Balajinagar, Behind Ellora Palace, Dhankawadi",
+        "addr:postcode": "411043",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Pawar Hospital, Pune",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7049723536,
+      "lat": 18.4573697,
+      "lon": 73.8507923,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Main Road Dhankwadi",
+        "addr:postcode": "411043",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "check_date": "2026-03-15",
+        "healthcare": "hospital",
+        "name": "Dr Patwardhan Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7053694071,
+      "lat": 18.464116,
+      "lon": 73.859008,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Dhankawde Patil Township,Balaji Nagar, Behind Balajinagar Petrol Pump,Dhankawadi",
+        "addr:postcode": "411043",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Siddhi Hospital and Laproscopy Centre Pvt Ltd",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7065820604,
+      "lat": 18.4465478,
+      "lon": 73.8597831,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Near Pmt Bus Depot, Pune Satara Road, Opposite Octroi Office, Katraj",
+        "addr:postcode": "411046",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Sai Sneh Hospital and Diagnostic Centre Pvt Ltd",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7080269673,
+      "lat": 18.4664871,
+      "lon": 73.857691,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "30/3/8 Satara Road",
+        "addr:postcode": "411001",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Shatayu Hospital",
+        "source": "OpenGovernmentData",
+        "wheelchair": "limited"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7226627619,
+      "lat": 18.457239,
+      "lon": 73.855026,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Pune - Satara Road, Katraj - Dhankawadi",
+        "addr:postcode": "411043",
+        "addr:state": "Maharashtra",
+        "addr:subdistrict": "Pune City",
+        "amenity": "hospital",
+        "description": "Medical Colleges Hospital",
+        "name": "Bharati Vidyapeeth Dental College and Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7649461741,
+      "lat": 18.4495732,
+      "lon": 73.8484382,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "43, Dattanagar, Sai Colony, Ambegaon BK, Pune",
+        "addr:postcode": "411046",
+        "addr:state": "Maharastra",
+        "amenity": "hospital",
+        "name": "Shree Sai Prasad Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7649461804,
+      "lat": 18.448115,
+      "lon": 73.849133,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Jambulwadi Road, Datta Vihar, Dattanagar, Shani Nagar, Ambegaon BK, Pune",
+        "addr:postcode": "411046",
+        "addr:state": "Maharastra",
+        "amenity": "hospital",
+        "name": "Bhakare Super Speciality Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7651453355,
+      "lat": 18.449571,
+      "lon": 73.85723,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "C-1 Building, 1st Floor, Manik Moti Complex, Morebaug Road, Katraj, Pune",
+        "addr:postcode": "411046",
+        "addr:state": "Maharastra",
+        "amenity": "hospital",
+        "name": "Shivneri Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7651453397,
+      "lat": 18.4491259,
+      "lon": 73.8577679,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Sr.No 84/2-D, First Floor, Bhagirathi Square, Morebaug Road, Katraj, Pune",
+        "addr:postcode": "411046",
+        "addr:state": "Maharastra",
+        "amenity": "hospital",
+        "name": "Jeevandhara Multispeciality Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8813559775,
+      "lat": 18.4652208,
+      "lon": 73.8495579,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Chandrabhaga Nagar, Dhankawadi, Pune",
+        "addr:postcode": "411043",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "check_date": "2026-03-15",
+        "name": "Government Hospital, Dhankawadi",
+        "source": "Local Knowledge",
+        "wheelchair": "limited"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8813631718,
+      "lat": 18.4482157,
+      "lon": 73.856594,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Katraj",
+        "addr:postcode": "411046",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Hazrat Maulana Yunus Sahab Rahmatullah Alaih Dawakhana",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10807015710,
+      "lat": 18.4508437,
+      "lon": 73.8578188,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "indian",
+        "name": "Katraj Junction"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10807153860,
+      "lat": 18.464428,
+      "lon": 73.8578646,
+      "tags": {
+        "amenity": "bank",
+        "name": "Rajashri Shahu Bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11422209903,
+      "lat": 18.4549968,
+      "lon": 73.85409,
+      "tags": {
+        "addr:full": "Sr.No.79,80,81,76/4 (new), Near Rajaram Gas Agency, Pune-Kashmir Maitri Chowk,Katraj, Pune 411046",
+        "amenity": "college",
+        "email": "sarhadcollege@gmail.com",
+        "name": "Sarhad College of Arts, Commerce and Science",
+        "phone": "+912024368621",
+        "website": "https://www.sarhadcollege.education/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11428471740,
+      "lat": 18.4541966,
+      "lon": 73.8535245,
+      "tags": {
+        "shop": "supermarket"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11431791323,
+      "lat": 18.4542431,
+      "lon": 73.8538732,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:postcode": "411046",
+        "addr:street": "Katraj - Dehu Road Bypass",
+        "name": "katraj dairy",
+        "opening_hours": "Mo-Su 09:00-21:00",
+        "shop": "dairy"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11431794457,
+      "lat": 18.4539687,
+      "lon": 73.8569672,
+      "tags": {
+        "shop": "dairy"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11482377130,
+      "lat": 18.4545326,
+      "lon": 73.8589549,
+      "tags": {
+        "shop": "ticket"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11583657115,
+      "lat": 18.4475111,
+      "lon": 73.8488292,
+      "tags": {
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "patil hospital"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11583993028,
+      "lat": 18.4576616,
+      "lon": 73.8585915,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "on pune satara road opp of bharti hospital",
+        "amenity": "restaurant",
+        "brand": "Pizza Hut",
+        "brand:wikidata": "Q191615",
+        "cuisine": "pizza",
+        "diet:non-vegetarian": "yes",
+        "diet:vegetarian": "yes",
+        "name": "Pizza Hut",
+        "opening_hours": "Mo-Su 10:00-21:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12153290312,
+      "lat": 18.4456735,
+      "lon": 73.8505634,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "pune",
+        "addr:housenumber": "34",
+        "addr:postcode": "411406",
+        "addr:street": "Katraj Ambegaon Khurd Road",
+        "agrarian": "feed;weed;ac_room;yes",
+        "name": "kodam farms",
+        "opening_hours": "24/7",
+        "payment:apple_pay": "yes",
+        "phone": "02305056",
+        "shop": "FARM HOUSE"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12550938692,
+      "lat": 18.4514561,
+      "lon": 73.8577936,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:housenumber": "82/1",
+        "addr:postcode": "411046",
+        "addr:street": "katraj-Satara Road",
+        "air_conditioning": "yes",
+        "amenity": "fast_food",
+        "cuisine": "indian;coffee_shop;sandwich;pizza;burger;breakfast;cake;pasta;chinese;regional;ice_cream;pastry;noodle;tea",
+        "diet:non-vegetarian": "yes",
+        "diet:sugar_free": "yes",
+        "diet:vegetarian": "yes",
+        "internet_access": "wlan",
+        "name": "Just eat and enjoy !!!",
+        "opening_hours": "Mo-Su 09:00-23:00",
+        "operator": "Mee",
+        "phone": "91-1234567890",
+        "smoking": "no",
+        "website": "https://abc.in"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13144481425,
+      "lat": 18.4495259,
+      "lon": 73.8421728,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "Pune",
+        "addr:housenumber": "ship 12 Ss manasvi",
+        "addr:postcode": "411046",
+        "addr:street": "Katraj Ambegaon Khurd Road",
+        "amenity": "restaurant",
+        "cuisine": "chinese;indian",
+        "name": "woknfyr"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13556672520,
+      "lat": 18.4534566,
+      "lon": 73.8584239,
+      "tags": {
+        "amenity": "bus_station",
+        "bus": "yes",
+        "name": "Late Rajiv Gandhi Udyan BRT",
+        "operator": "PMPML",
+        "public_transport": "station"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13735379604,
+      "lat": 18.4488087,
+      "lon": 73.8494882,
+      "tags": {
+        "addr:street": "Jambhulwadi Road",
+        "amenity": "fast_food",
+        "cuisine": "indian",
+        "name": "\u092a\u094d\u0930\u0938\u093e\u0926 \u0905\u092e\u0943\u0924\u0924\u0941\u0932\u094d\u092f"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13784439976,
+      "lat": 18.4539864,
+      "lon": 73.8409138,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "Healing Hands Clinic Ground Floor, Atmosphere Building, Ambegaon Pathar, Ambegaon Budruk",
+        "addr:postcode": "411046",
+        "amenity": "hospital",
+        "brand": "Healing Hands Clinic",
+        "healthcare": "hospital",
+        "healthcare:speciality": "proctology",
+        "name": "Healing Hands Clinic - Katraj, Pune",
+        "opening_hours": "24/7"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13931176797,
+      "lat": 18.4544898,
+      "lon": 73.8532847,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-06-12",
+        "name": "Ganraj Bhel"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13931176799,
+      "lat": 18.4544644,
+      "lon": 73.8531957,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-06-12",
+        "name": "Chamaparan Mutton"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13931176800,
+      "lat": 18.4544501,
+      "lon": 73.8531718,
+      "tags": {
+        "check_date": "2026-06-12",
+        "name": "Hair Expresso",
+        "shop": "hairdresser"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13931201602,
+      "lat": 18.4543999,
+      "lon": 73.8530443,
+      "tags": {
+        "check_date": "2026-06-12",
+        "name": "Pari Estate Agency",
+        "office": "estate_agent"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13931201603,
+      "lat": 18.4543779,
+      "lon": 73.8529784,
+      "tags": {
+        "check_date": "2026-06-12",
+        "name": "Mahesh Supermarket",
+        "shop": "convenience"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13931201604,
+      "lat": 18.4543447,
+      "lon": 73.8528437,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-06-12",
+        "name": "SD Chinese Corner"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13931201605,
+      "lat": 18.4542961,
+      "lon": 73.8527481,
+      "tags": {
+        "amenity": "fast_food",
+        "check_date": "2026-06-12",
+        "cuisine": "juice",
+        "name": "Sujata Mastani"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13931201606,
+      "lat": 18.4542676,
+      "lon": 73.8527098,
+      "tags": {
+        "check_date": "2026-06-12",
+        "name": "Master Unisex Salon",
+        "shop": "hairdresser"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13931201607,
+      "lat": 18.4542355,
+      "lon": 73.8526721,
+      "tags": {
+        "check_date": "2026-06-12",
+        "name": "Suraj Real Estate",
+        "office": "estate_agent"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13931211151,
+      "lat": 18.4536567,
+      "lon": 73.8511414,
+      "tags": {
+        "check_date": "2026-06-12",
+        "name": "Suraj Supermarket",
+        "shop": "convenience"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13931219641,
+      "lat": 18.453963,
+      "lon": 73.8515601,
+      "tags": {
+        "check_date": "2026-06-12",
+        "name": "Crown Bakery",
+        "shop": "bakery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13931219643,
+      "lat": 18.4537062,
+      "lon": 73.8511633,
+      "tags": {
+        "check_date": "2026-06-12",
+        "name": "Sanskar Tailor",
+        "shop": "tailor"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13931219688,
+      "lat": 18.4532257,
+      "lon": 73.851132,
+      "tags": {
+        "check_date": "2026-06-12",
+        "name": "Shreyas Entreprise",
+        "shop": "hardware"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13934896149,
+      "lat": 18.4574462,
+      "lon": 73.8531327,
+      "tags": {
+        "check_date": "2026-06-13",
+        "name": "Xerox",
+        "shop": "copyshop"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13934896150,
+      "lat": 18.457209,
+      "lon": 73.8532004,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-06-13",
+        "name": "Punjabi Mess"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13934897599,
+      "lat": 18.4598821,
+      "lon": 73.8525727,
+      "tags": {
+        "check_date": "2026-06-13",
+        "name": "Security Cabin",
+        "office": "security"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13934902813,
+      "lat": 18.457646,
+      "lon": 73.8532131,
+      "tags": {
+        "check_date": "2026-06-13",
+        "name": "Security Cabin",
+        "office": "security"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13934905243,
+      "lat": 18.4529066,
+      "lon": 73.8511319,
+      "tags": {
+        "check_date": "2026-06-12",
+        "name": "Shubham Jewellers",
+        "shop": "jewelry"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13934905244,
+      "lat": 18.4528055,
+      "lon": 73.851156,
+      "tags": {
+        "check_date": "2026-06-12",
+        "name": "The Perfume House",
+        "shop": "perfumery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13934910338,
+      "lat": 18.4590314,
+      "lon": 73.8526656,
+      "tags": {
+        "check_date": "2026-06-13",
+        "name": "Security Cabin",
+        "office": "security"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13934924013,
+      "lat": 18.4569603,
+      "lon": 73.8532363,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-06-13",
+        "name": "Pizza Toons"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13934931014,
+      "lat": 18.4569091,
+      "lon": 73.8532352,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-06-13",
+        "name": "Legendary Burger"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13934931015,
+      "lat": 18.456749,
+      "lon": 73.8532824,
+      "tags": {
+        "amenity": "fast_food",
+        "check_date": "2026-06-13",
+        "cuisine": "juice",
+        "name": "Thick Drip"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13934931016,
+      "lat": 18.4566807,
+      "lon": 73.8533027,
+      "tags": {
+        "check_date": "2026-06-13",
+        "name": "Maaru Bakers",
+        "shop": "bakery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13934931017,
+      "lat": 18.4565805,
+      "lon": 73.8533106,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-06-13",
+        "name": "Rolls Mania"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13934931018,
+      "lat": 18.4565435,
+      "lon": 73.853313,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-06-13",
+        "name": "Chinese Katta"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13934943002,
+      "lat": 18.4571076,
+      "lon": 73.8532285,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-06-13",
+        "name": "Ashirwad Dining Hall"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13935106263,
+      "lat": 18.4561374,
+      "lon": 73.8533956,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-06-13",
+        "name": "Abhishek Hotel"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13935137438,
+      "lat": 18.4563145,
+      "lon": 73.8533437,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-06-13",
+        "name": "Crazy Cheesy Cafe"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13935140268,
+      "lat": 18.4560378,
+      "lon": 73.8534007,
+      "tags": {
+        "check_date": "2026-06-13",
+        "name": "SP Stationers",
+        "shop": "stationery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13935163461,
+      "lat": 18.4558565,
+      "lon": 73.8531483,
+      "tags": {
+        "amenity": "cafe",
+        "check_date": "2026-06-13",
+        "name": "Street Coffee"
+      }
+    },
+    {
+      "type": "way",
+      "id": 54937943,
+      "center": {
+        "lat": 18.4536001,
+        "lon": 73.861624
+      },
+      "tags": {
+        "intermittent": "no",
+        "leisure": "park",
+        "name": "Katraj Lake",
+        "name:mr": "\u0915\u093e\u0924\u094d\u0930\u091c \u0924\u0932\u093e\u0935",
+        "natural": "water",
+        "water": "lake"
+      }
+    },
+    {
+      "type": "way",
+      "id": 150835043,
+      "center": {
+        "lat": 18.4758454,
+        "lon": 73.8390501
+      },
+      "tags": {
+        "landuse": "forest",
+        "leaf_cycle": "mixed",
+        "leaf_type": "mixed",
+        "name": "Taljai forest"
+      }
+    },
+    {
+      "type": "way",
+      "id": 157291301,
+      "center": {
+        "lat": 18.4418194,
+        "lon": 73.8482291
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Shree Krupa Shrusti Apartment"
+      }
+    },
+    {
+      "type": "way",
+      "id": 317534999,
+      "center": {
+        "lat": 18.4623583,
+        "lon": 73.8642986
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "State Bank Nagar",
+        "name:mr": "\u0938\u094d\u091f\u0947\u091f \u092c\u0901\u0915 \u0928\u0917\u0930"
+      }
+    },
+    {
+      "type": "way",
+      "id": 511315413,
+      "center": {
+        "lat": 18.4545017,
+        "lon": 73.8652752
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Ganga Osian Garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 511316197,
+      "center": {
+        "lat": 18.4524173,
+        "lon": 73.8650379
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Rajas Society Playground"
+      }
+    },
+    {
+      "type": "way",
+      "id": 556263430,
+      "center": {
+        "lat": 18.4440849,
+        "lon": 73.8625817
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Katraj Park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 556266921,
+      "center": {
+        "lat": 18.4466682,
+        "lon": 73.8626756
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Nana Nani Park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 629205482,
+      "center": {
+        "lat": 18.4601688,
+        "lon": 73.8660823
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Mahavir Swami Udyan"
+      }
+    },
+    {
+      "type": "way",
+      "id": 629208593,
+      "center": {
+        "lat": 18.4499237,
+        "lon": 73.8631852
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Pragati Udyan"
+      }
+    },
+    {
+      "type": "way",
+      "id": 888608971,
+      "center": {
+        "lat": 18.4479739,
+        "lon": 73.8590535
+      },
+      "tags": {
+        "alt_name:en": "Katraj Kondhwa Road",
+        "highway": "construction",
+        "oneway": "yes",
+        "ref": "NH548DD"
+      }
+    },
+    {
+      "type": "way",
+      "id": 963113011,
+      "center": {
+        "lat": 18.4577766,
+        "lon": 73.8571487
+      },
+      "tags": {
+        "leisure": "garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 963113013,
+      "center": {
+        "lat": 18.4618246,
+        "lon": 73.8570175
+      },
+      "tags": {
+        "leisure": "garden",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "way",
+      "id": 963119300,
+      "center": {
+        "lat": 18.463256,
+        "lon": 73.8541288
+      },
+      "tags": {
+        "leisure": "garden",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "way",
+      "id": 963119305,
+      "center": {
+        "lat": 18.4632327,
+        "lon": 73.853401
+      },
+      "tags": {
+        "leisure": "garden",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "way",
+      "id": 963120176,
+      "center": {
+        "lat": 18.4643384,
+        "lon": 73.8561465
+      },
+      "tags": {
+        "leisure": "garden",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "way",
+      "id": 963120177,
+      "center": {
+        "lat": 18.4644327,
+        "lon": 73.8567656
+      },
+      "tags": {
+        "leisure": "garden",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1246003672,
+      "center": {
+        "lat": 18.4471272,
+        "lon": 73.8473307
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Shree Datta Niwas Co-operative Housing Society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1246015341,
+      "center": {
+        "lat": 18.4476712,
+        "lon": 73.8481312
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "MSR Olive",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1356125372,
+      "center": {
+        "lat": 18.4504759,
+        "lon": 73.8548918
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:housenumber": "82/2",
+        "addr:postcode": "411047",
+        "addr:street": "Katraj",
+        "leisure": "park",
+        "name": "Play Area",
+        "opening_hours": "sunrise-sunset",
+        "operator": "Someone",
+        "operator:type": "business"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1393118445,
+      "center": {
+        "lat": 18.4490701,
+        "lon": 73.8549905
+      },
+      "tags": {
+        "highway": "construction",
+        "oneway": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1409735210,
+      "center": {
+        "lat": 18.4522393,
+        "lon": 73.8558466
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Ajinkya Samruddhi"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1409994630,
+      "center": {
+        "lat": 18.4541058,
+        "lon": 73.8411488
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Atmosphere",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410068412,
+      "center": {
+        "lat": 18.4521036,
+        "lon": 73.8485436
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Vidya Niketan"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410296058,
+      "center": {
+        "lat": 18.449864,
+        "lon": 73.8467775
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Amber Classic Society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410314993,
+      "center": {
+        "lat": 18.4526245,
+        "lon": 73.8485589
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Amrut Kalash Nagari",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410355978,
+      "center": {
+        "lat": 18.4495531,
+        "lon": 73.8440059
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Relicon Garden Groove",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410357951,
+      "center": {
+        "lat": 18.4569862,
+        "lon": 73.852424
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Bharti Vihar",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410396151,
+      "center": {
+        "lat": 18.4440042,
+        "lon": 73.8448948
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Blue Springs Society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410830825,
+      "center": {
+        "lat": 18.4509765,
+        "lon": 73.8515101
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Ashoka Aagam",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410884675,
+      "center": {
+        "lat": 18.4527578,
+        "lon": 73.8526978
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Shalini Residency",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410923372,
+      "center": {
+        "lat": 18.4459963,
+        "lon": 73.8453505
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Dream City",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1411081414,
+      "center": {
+        "lat": 18.448479,
+        "lon": 73.8463785
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Shree Vitthal Heritage Co Home Design Institute Limited",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1411396659,
+      "center": {
+        "lat": 18.4494947,
+        "lon": 73.8455756
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Hamy Residency",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412118919,
+      "center": {
+        "lat": 18.4511004,
+        "lon": 73.8422633
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Pristine Pacific, Phase -1 & 2",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412119597,
+      "center": {
+        "lat": 18.4499443,
+        "lon": 73.8417691
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Pristine Pacific, Phase -3",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412164829,
+      "center": {
+        "lat": 18.4551224,
+        "lon": 73.849799
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Omkar Swarup",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412419348,
+      "center": {
+        "lat": 18.4546524,
+        "lon": 73.8529574
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Vaishnavi Vihar",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412556579,
+      "center": {
+        "lat": 18.4519146,
+        "lon": 73.8521726
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Prakash Deep Co-op Housing Society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1413605110,
+      "center": {
+        "lat": 18.4520913,
+        "lon": 73.8569881
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Sawant Vihar",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1413639207,
+      "center": {
+        "lat": 18.4511149,
+        "lon": 73.8559641
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Agam Darshan",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1429561891,
+      "center": {
+        "lat": 18.4533495,
+        "lon": 73.8437727
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1429561892,
+      "center": {
+        "lat": 18.453536,
+        "lon": 73.844229
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1429561893,
+      "center": {
+        "lat": 18.4531651,
+        "lon": 73.8445316
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1490269426,
+      "center": {
+        "lat": 18.4483509,
+        "lon": 73.8606928
+      },
+      "tags": {
+        "bridge": "viaduct",
+        "construction": "trunk",
+        "highway": "construction",
+        "lanes": "3",
+        "layer": "1",
+        "oneway": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1490269427,
+      "center": {
+        "lat": 18.448184,
+        "lon": 73.8651696
+      },
+      "tags": {
+        "construction:highway": "tertiary",
+        "highway": "construction",
+        "oneway": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1490269428,
+      "center": {
+        "lat": 18.4482436,
+        "lon": 73.8606745
+      },
+      "tags": {
+        "bridge": "viaduct",
+        "construction": "trunk",
+        "highway": "construction",
+        "lanes": "3",
+        "layer": "1",
+        "oneway": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1490269429,
+      "center": {
+        "lat": 18.4494184,
+        "lon": 73.8542395
+      },
+      "tags": {
+        "construction": "trunk",
+        "highway": "construction",
+        "lanes": "3",
+        "oneway": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1490269430,
+      "center": {
+        "lat": 18.4495411,
+        "lon": 73.8542851
+      },
+      "tags": {
+        "construction": "trunk",
+        "highway": "construction",
+        "lanes": "3",
+        "oneway": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1490269431,
+      "center": {
+        "lat": 18.4491526,
+        "lon": 73.8555741
+      },
+      "tags": {
+        "construction": "trunk",
+        "embankment": "yes",
+        "highway": "construction",
+        "lanes": "3",
+        "oneway": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1490269432,
+      "center": {
+        "lat": 18.4490434,
+        "lon": 73.8555346
+      },
+      "tags": {
+        "construction": "trunk",
+        "embankment": "yes",
+        "highway": "construction",
+        "lanes": "3",
+        "oneway": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1490269433,
+      "center": {
+        "lat": 18.4484126,
+        "lon": 73.8653142
+      },
+      "tags": {
+        "construction": "trunk",
+        "embankment": "yes",
+        "highway": "construction",
+        "lanes": "3",
+        "oneway": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1490269434,
+      "center": {
+        "lat": 18.4483317,
+        "lon": 73.8653081
+      },
+      "tags": {
+        "construction": "trunk",
+        "embankment": "yes",
+        "highway": "construction",
+        "lanes": "3",
+        "oneway": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1490269435,
+      "center": {
+        "lat": 18.4483612,
+        "lon": 73.866281
+      },
+      "tags": {
+        "construction": "trunk",
+        "highway": "construction",
+        "lanes": "3",
+        "oneway": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1490269436,
+      "center": {
+        "lat": 18.4482888,
+        "lon": 73.8663133
+      },
+      "tags": {
+        "construction": "trunk",
+        "highway": "construction",
+        "lanes": "3",
+        "oneway": "yes"
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+model_name,split,n_samples,mae,rmse,r2,medae,explained_variance,delta_mae_vs_persist,delta_rmse_vs_persist,delta_r2_vs_persist
+Model 0 - Persistence Baseline,Validation,10454,4.941,7.7725,0.6727,3.5317,0.6728,0.0,0.0,0.0
+Model 1 - Ridge Regression,Validation,10454,5.7222,8.4181,0.6161,4.2793,0.6163,0.7812,0.6456,-0.0566
+Model 2 - Random Forest,Validation,10454,4.736,7.2059,0.7187,3.5465,0.7237,-0.205,-0.5666,0.046
+Model 3 - HistGradientBoosting,Validation,10454,4.6686,7.1287,0.7247,3.4632,0.7279,-0.2724,-0.6438,0.052
+Model 0 - Persistence Baseline,Test,9769,4.1837,9.8782,0.3628,2.8275,0.3628,0.0,0.0,0.0
+Model 1 - Ridge Regression,Test,9769,4.6819,9.9457,0.354,3.1623,0.3547,0.4982,0.0675,-0.0088
+Model 2 - Random Forest,Test,9769,4.0475,9.1171,0.4572,2.9102,0.4583,-0.1362,-0.7611,0.0944
+Model 3 - HistGradientBoosting,Test,9769,4.1034,9.1094,0.4581,2.9682,0.4591,-0.0803,-0.7688,0.0953

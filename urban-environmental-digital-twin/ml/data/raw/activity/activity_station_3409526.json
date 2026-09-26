@@ -1,0 +1,808 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-26T11:43:36Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 761910880,
+      "lat": 18.5494,
+      "lon": 73.8042565,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "indian",
+        "name": "Rajwada",
+        "name:mr": "\u0930\u093e\u091c\u0935\u093e\u0921\u093e"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1202781532,
+      "lat": 18.5373285,
+      "lon": 73.7935948,
+      "tags": {
+        "amenity": "bank",
+        "name": "Cosmos Bank Pashan Branch",
+        "name:mr": "\u0915\u0949\u0938\u092e\u0949\u0938 \u092c\u0901\u0915 \u092a\u093e\u0937\u093e\u0923 \u0936\u093e\u0916\u093e",
+        "operator": "Cosmos Bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2739397822,
+      "lat": 18.5468582,
+      "lon": 73.805337,
+      "tags": {
+        "name": "h cross",
+        "office": "research",
+        "wheelchair": "yes",
+        "wikidata": "Q12443996",
+        "wikimedia_commons": "Category:Indian Institute of Science Education and Research, Pune",
+        "wikipedia": "en:IISER Pune"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2801208415,
+      "lat": 18.5403032,
+      "lon": 73.8179407,
+      "tags": {
+        "brand": "Volkswagen",
+        "brand:wikidata": "Q246",
+        "name": "Volkswagen Pune West",
+        "name:mr": "\u092b\u094b\u0915\u094d\u0938\u0935\u093e\u0917\u0928 \u092a\u0941\u0923\u0947 \u092a\u0936\u094d\u091a\u093f\u092e",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3657496185,
+      "lat": 18.5402467,
+      "lon": 73.793995,
+      "tags": {
+        "name": "Monginis",
+        "name:mr": "\u092e\u0949\u0902\u091c\u093f\u0928\u0940\u091c",
+        "shop": "pastry"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3657496188,
+      "lat": 18.541331,
+      "lon": 73.7932518,
+      "tags": {
+        "amenity": "bank",
+        "brand": "Oriental Bank of Commerce",
+        "brand:wikidata": "Q367008",
+        "brand:wikipedia": "en:Oriental Bank of Commerce",
+        "name": "Oriental Bank of Commerce",
+        "name:en": "Oriental Bank of Commerce",
+        "name:mr": "\u0913\u0930\u093f\u090f\u0902\u091f\u0932 \u092c\u0901\u0915 \u0911\u092b \u0915\u0949\u092e\u0930\u094d\u0938 \u092a\u093e\u0937\u093e\u0923 \u0936\u093e\u0916\u093e",
+        "operator": "Oriental Bank of Commerce",
+        "short_name": "OBC",
+        "website": "https://www.obcindia.co.in"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3657496190,
+      "lat": 18.5410211,
+      "lon": 73.7925951,
+      "tags": {
+        "amenity": "bank",
+        "brand": "PMC Bank",
+        "name": "PMC Bank",
+        "name:mr": "\u092a\u0940\u090f\u092e\u0938\u0940 \u092c\u0901\u0915",
+        "operator": "PMC Bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3657496196,
+      "lat": 18.5413722,
+      "lon": 73.7930241,
+      "tags": {
+        "amenity": "bank",
+        "brand": "Saraswat Bank",
+        "name": "Saraswat Bank Pashan Branch",
+        "name:mr": "\u0938\u093e\u0930\u0938\u094d\u0935\u0924 \u092c\u0901\u0915 \u092a\u093e\u0937\u093e\u0923 \u0936\u093e\u0916\u093e",
+        "opening_hours": "Mo-Fr 09:00-18:00; Sa,Su 09:00-12:00",
+        "operator": "Saraswat Bank",
+        "wikidata": "Q7423261",
+        "wikipedia": "en:Saraswat Co-operative Bank Ltd"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6466034886,
+      "lat": 18.5413577,
+      "lon": 73.7931307,
+      "tags": {
+        "addr:postcode": "411021",
+        "amenity": "school",
+        "email": "swadhaschool@gmail.com",
+        "name:en": "Swadhaa Waldrof Learning Centre",
+        "phone": "02025871992"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8478889235,
+      "lat": 18.5372815,
+      "lon": 73.7934878,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:country": "IN",
+        "addr:postcode": "411021",
+        "addr:state": "Maharashtra",
+        "addr:street": "Sai Trinity, A Block 2nd Floor, Sr. No. 146, 1/28, Pashan - Sus Rd,",
+        "addr:suburb": "Pashan",
+        "name": "CLR FACILITY SERVICES PVT. LTD",
+        "office": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9965869775,
+      "lat": 18.5359982,
+      "lon": 73.8192931,
+      "tags": {
+        "amenity": "school",
+        "denomination": "roman_catholic",
+        "grades": "Preschool",
+        "name": "St. Edmund Campion Preschool",
+        "operator": "Jesuits",
+        "operator:type": "religious",
+        "religion": "christian"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10301953889,
+      "lat": 18.5461836,
+      "lon": 73.8031407,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "Commercial Complex, Office No. 9, First Floor, Shivranjan Towers",
+        "addr:postcode": "411008",
+        "addr:street": "Someshwar Wadi Road",
+        "name": "Prabhadeep",
+        "shop": "books"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11476253227,
+      "lat": 18.537059,
+      "lon": 73.7956957,
+      "tags": {
+        "name": "Yogiraj Electronics",
+        "shop": "electronics"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11476253230,
+      "lat": 18.5368353,
+      "lon": 73.7955634,
+      "tags": {
+        "operator": "Bharat Gas",
+        "shop": "gas"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11476253235,
+      "lat": 18.5369942,
+      "lon": 73.7956715,
+      "tags": {
+        "name": "Famous Hair Dressers",
+        "shop": "hairdresser"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11476253238,
+      "lat": 18.5369147,
+      "lon": 73.7956296,
+      "tags": {
+        "name": "Shree Enterprises",
+        "shop": "variety_store"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11476253240,
+      "lat": 18.5368715,
+      "lon": 73.7955995,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:housenumber": "Shop 03",
+        "addr:postcode": "411021",
+        "addr:street": "Pashan-Bavdhan Road",
+        "name": "Friends Enterprises",
+        "shop": "variety_store"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11703326044,
+      "lat": 18.537721,
+      "lon": 73.7946627,
+      "tags": {
+        "amenity": "school",
+        "name": "Sahyadri international school and junior college"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11820012777,
+      "lat": 18.5403384,
+      "lon": 73.818224,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:postcode": "411008",
+        "addr:street": "Dr. Homi Bhabha Marg",
+        "brand": "Triumph",
+        "brand:wikidata": "Q1140383",
+        "opening_hours": "Mo-Sa 10:00-19:00; Su 10:00-16:00",
+        "phone": "+91 982 202 0209",
+        "shop": "motorcycle",
+        "website": "https://www.triumphmotorcycles.in"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13169236412,
+      "lat": 18.5402533,
+      "lon": 73.8157941,
+      "tags": {
+        "name": "HP Gas (Aundh Gas)",
+        "shop": "gas"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13169236413,
+      "lat": 18.5404008,
+      "lon": 73.8157771,
+      "tags": {
+        "name": "Narendra Stores",
+        "shop": "convenience"
+      }
+    },
+    {
+      "type": "way",
+      "id": 60981745,
+      "center": {
+        "lat": 18.5454203,
+        "lon": 73.8042894
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Nimhan Bunglow"
+      }
+    },
+    {
+      "type": "way",
+      "id": 86918965,
+      "center": {
+        "lat": 18.5317075,
+        "lon": 73.8134424
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "State Bank Nagar"
+      }
+    },
+    {
+      "type": "way",
+      "id": 86918976,
+      "center": {
+        "lat": 18.5311582,
+        "lon": 73.8132142
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Buena Monte Society"
+      }
+    },
+    {
+      "type": "way",
+      "id": 86919010,
+      "center": {
+        "lat": 18.5362053,
+        "lon": 73.8087297
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "IITM Staff Residential Quarters"
+      }
+    },
+    {
+      "type": "way",
+      "id": 86919015,
+      "center": {
+        "lat": 18.5389603,
+        "lon": 73.8010692
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "DRDO Ground"
+      }
+    },
+    {
+      "type": "way",
+      "id": 86919059,
+      "center": {
+        "lat": 18.5392508,
+        "lon": 73.7962312
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Pashan Gaon",
+        "name:mr": "\u092a\u093e\u0937\u093e\u0923 \u0917\u093e\u0935"
+      }
+    },
+    {
+      "type": "way",
+      "id": 91658392,
+      "center": {
+        "lat": 18.5374504,
+        "lon": 73.8090513
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "NCL Golden Jubilee Hostel"
+      }
+    },
+    {
+      "type": "way",
+      "id": 91658537,
+      "center": {
+        "lat": 18.5414074,
+        "lon": 73.8035651
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "IMD Colony"
+      }
+    },
+    {
+      "type": "way",
+      "id": 91712021,
+      "center": {
+        "lat": 18.5436374,
+        "lon": 73.8182386
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Abhimanshree Co Op Housing Society"
+      }
+    },
+    {
+      "type": "way",
+      "id": 91713335,
+      "center": {
+        "lat": 18.5376095,
+        "lon": 73.807444
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "MERADO Colony"
+      }
+    },
+    {
+      "type": "way",
+      "id": 91910674,
+      "center": {
+        "lat": 18.5318663,
+        "lon": 73.7896604
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "DRDO Colony Pashan"
+      }
+    },
+    {
+      "type": "way",
+      "id": 93846339,
+      "center": {
+        "lat": 18.5304926,
+        "lon": 73.8141681
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Success Towers"
+      }
+    },
+    {
+      "type": "way",
+      "id": 202301146,
+      "center": {
+        "lat": 18.5233099,
+        "lon": 73.8149715
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housename": "The Automotive Research Association of India",
+        "addr:housenumber": "Survey No. 102, Vetal Hill, Off Paud Road",
+        "addr:postcode": "411 004",
+        "addr:street": "ARAI Road",
+        "landuse": "industrial",
+        "name": "Automotive Research Association of India (ARAI)",
+        "website": "https://www.araiindia.com/",
+        "wikipedia": "en:Automotive Research Association of India"
+      }
+    },
+    {
+      "type": "way",
+      "id": 215998963,
+      "center": {
+        "lat": 18.5326276,
+        "lon": 73.8128469
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 233735597,
+      "center": {
+        "lat": 18.5369699,
+        "lon": 73.7954655
+      },
+      "tags": {
+        "landuse": "retail",
+        "name": "DRDO Shopping Complex"
+      }
+    },
+    {
+      "type": "way",
+      "id": 251618640,
+      "center": {
+        "lat": 18.5290108,
+        "lon": 73.8120957
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 359795824,
+      "center": {
+        "lat": 18.5349061,
+        "lon": 73.8109151
+      },
+      "tags": {
+        "addr:postcode": "411008",
+        "addr:street": "Panchawati Road",
+        "building": "industrial",
+        "building:levels": "5"
+      }
+    },
+    {
+      "type": "way",
+      "id": 359795830,
+      "center": {
+        "lat": 18.5362749,
+        "lon": 73.8107378
+      },
+      "tags": {
+        "building": "flats",
+        "landuse": "residential",
+        "name": "D4 Shishir, IITM Colony",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 359809348,
+      "center": {
+        "lat": 18.5462252,
+        "lon": 73.8030174
+      },
+      "tags": {
+        "landuse": "commercial",
+        "layer": "-2",
+        "name": "Shivranjam Commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 359962272,
+      "center": {
+        "lat": 18.5389291,
+        "lon": 73.8060875
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "100 NCL Innovation Park,",
+        "addr:postcode": "411008",
+        "addr:street": "Dr. Homi Bhabha Road",
+        "leisure": "park",
+        "name": "100 NCL Innovation Park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 400004517,
+      "center": {
+        "lat": 18.5390289,
+        "lon": 73.8060686
+      },
+      "tags": {
+        "landuse": "commercial",
+        "name": "NCL Innovation Park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 499586301,
+      "center": {
+        "lat": 18.5422112,
+        "lon": 73.7931048
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:postcode": "411 021",
+        "addr:street": "Pashan-Sus Road",
+        "landuse": "residential",
+        "name": "State Bank Nagar"
+      }
+    },
+    {
+      "type": "way",
+      "id": 499586568,
+      "center": {
+        "lat": 18.5429749,
+        "lon": 73.7932943
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:postcode": "411 021",
+        "addr:street": "Pashan-Sus Road",
+        "landuse": "residential",
+        "name": "Nikash Lawns"
+      }
+    },
+    {
+      "type": "way",
+      "id": 499589653,
+      "center": {
+        "lat": 18.5445492,
+        "lon": 73.7934716
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:postcode": "411 021",
+        "addr:street": "Baner Pashan Link Road",
+        "landuse": "residential",
+        "name": "Amar Serenity"
+      }
+    },
+    {
+      "type": "way",
+      "id": 556074002,
+      "center": {
+        "lat": 18.5455808,
+        "lon": 73.7979816
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Gram Sankruti Udyan"
+      }
+    },
+    {
+      "type": "way",
+      "id": 692252521,
+      "center": {
+        "lat": 18.5411297,
+        "lon": 73.7948132
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Pashan Akhada Park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 784677405,
+      "center": {
+        "lat": 18.5402246,
+        "lon": 73.7926752
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1038306401,
+      "center": {
+        "lat": 18.5435128,
+        "lon": 73.8069039
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1038768928,
+      "center": {
+        "lat": 18.5430717,
+        "lon": 73.807581
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "IISER Pune Faculty quarters"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1038779851,
+      "center": {
+        "lat": 18.5439516,
+        "lon": 73.8075032
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1067555244,
+      "center": {
+        "lat": 18.5362244,
+        "lon": 73.7922791
+      },
+      "tags": {
+        "building": "industrial",
+        "name": "Shri Kal Baronath Saycal Company"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1094465381,
+      "center": {
+        "lat": 18.5421724,
+        "lon": 73.7894327
+      },
+      "tags": {
+        "building": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1094465382,
+      "center": {
+        "lat": 18.5420526,
+        "lon": 73.7893982
+      },
+      "tags": {
+        "building": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1094465383,
+      "center": {
+        "lat": 18.5419662,
+        "lon": 73.7893052
+      },
+      "tags": {
+        "building": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1409746909,
+      "center": {
+        "lat": 18.544561,
+        "lon": 73.8049032
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Amar Landmark",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410109938,
+      "center": {
+        "lat": 18.5490833,
+        "lon": 73.803557
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Neelkanth Apartment",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410345557,
+      "center": {
+        "lat": 18.5489749,
+        "lon": 73.8043057
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Belscot Residency",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410534483,
+      "center": {
+        "lat": 18.5435609,
+        "lon": 73.8017196
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Sahadeo Avenue",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410832734,
+      "center": {
+        "lat": 18.5501644,
+        "lon": 73.8042149
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Sanjay Residency",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1411400652,
+      "center": {
+        "lat": 18.5397225,
+        "lon": 73.7917294
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Heramb Society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1429919446,
+      "center": {
+        "lat": 18.5436082,
+        "lon": 73.8171768
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Bhuvaneshwar Co Op Housing Society"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1560561755,
+      "center": {
+        "lat": 18.5425563,
+        "lon": 73.8049917
+      },
+      "tags": {
+        "access": "private",
+        "highway": "construction"
+      }
+    }
+  ]
+}

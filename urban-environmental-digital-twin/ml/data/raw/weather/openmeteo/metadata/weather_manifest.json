@@ -1,0 +1,118 @@
+{
+  "dataset_name": "Open-Meteo Pune Historical Weather Dataset",
+  "provider": "Open-Meteo GmbH / ECMWF ERA5-Land",
+  "classification": "REANALYSIS",
+  "api_endpoint": "https://archive-api.open-meteo.com/v1/archive",
+  "date_range": {
+    "start_date": "2025-02-18",
+    "end_date": "2026-09-24"
+  },
+  "variables_requested": [
+    "temperature_2m",
+    "relative_humidity_2m",
+    "dew_point_2m",
+    "precipitation",
+    "rain",
+    "surface_pressure",
+    "wind_speed_10m",
+    "wind_direction_10m",
+    "shortwave_radiation_instant",
+    "cloud_cover",
+    "boundary_layer_height"
+  ],
+  "units": {
+    "time": "iso8601",
+    "temperature_2m": "\u00b0C",
+    "relative_humidity_2m": "%",
+    "dew_point_2m": "\u00b0C",
+    "precipitation": "mm",
+    "rain": "mm",
+    "surface_pressure": "hPa",
+    "wind_speed_10m": "m/s",
+    "wind_direction_10m": "\u00b0",
+    "shortwave_radiation_instant": "W/m\u00b2",
+    "cloud_cover": "%",
+    "boundary_layer_height": "m"
+  },
+  "locations": [
+    {
+      "location_id": "central_pune",
+      "station_name": "Pune Urban Center (PMC Anchor)",
+      "requested_lat": 18.5204,
+      "requested_lon": 73.8567,
+      "resolved_grid_lat": 18.523726,
+      "resolved_grid_lon": 73.86876,
+      "elevation_m": 561.0,
+      "record_count": 14016,
+      "raw_file": "ml/data/raw/weather/openmeteo/observations/weather_location_central_pune.json"
+    },
+    {
+      "location_id": "11613",
+      "station_name": "Revenue Colony-Shivajinagar, Pune - IITM",
+      "requested_lat": 18.5301,
+      "requested_lon": 73.8496,
+      "resolved_grid_lat": 18.523726,
+      "resolved_grid_lon": 73.86876,
+      "elevation_m": 560.0,
+      "record_count": 14016,
+      "raw_file": "ml/data/raw/weather/openmeteo/observations/weather_location_11613.json"
+    },
+    {
+      "location_id": "11609",
+      "station_name": "Mhada Colony, Pune - IITM",
+      "requested_lat": 18.573,
+      "requested_lon": 73.9277,
+      "resolved_grid_lat": 18.594023,
+      "resolved_grid_lon": 73.94118,
+      "elevation_m": 581.0,
+      "record_count": 14016,
+      "raw_file": "ml/data/raw/weather/openmeteo/observations/weather_location_11609.json"
+    },
+    {
+      "location_id": "60658",
+      "station_name": "Hadapsar, Pune - IITM",
+      "requested_lat": 18.5018,
+      "requested_lon": 73.9275,
+      "resolved_grid_lat": 18.523726,
+      "resolved_grid_lon": 73.95691,
+      "elevation_m": 570.0,
+      "record_count": 14016,
+      "raw_file": "ml/data/raw/weather/openmeteo/observations/weather_location_60658.json"
+    },
+    {
+      "location_id": "3409331",
+      "station_name": "Bhosari, Pune - IITM",
+      "requested_lat": 18.6401,
+      "requested_lon": 73.849,
+      "resolved_grid_lat": 18.664322,
+      "resolved_grid_lon": 73.8371,
+      "elevation_m": 599.0,
+      "record_count": 14016,
+      "raw_file": "ml/data/raw/weather/openmeteo/observations/weather_location_3409331.json"
+    },
+    {
+      "location_id": "3409438",
+      "station_name": "Katraj Dairy, Pune - MPCB",
+      "requested_lat": 18.4545,
+      "requested_lon": 73.8542,
+      "resolved_grid_lat": 18.453426,
+      "resolved_grid_lon": 73.88454,
+      "elevation_m": 673.0,
+      "record_count": 14016,
+      "raw_file": "ml/data/raw/weather/openmeteo/observations/weather_location_3409438.json"
+    },
+    {
+      "location_id": "3409526",
+      "station_name": "Panchawati_Pashan, Pune - IITM",
+      "requested_lat": 18.5365,
+      "requested_lon": 73.8055,
+      "resolved_grid_lat": 18.523726,
+      "resolved_grid_lon": 73.78061,
+      "elevation_m": 589.0,
+      "record_count": 14016,
+      "raw_file": "ml/data/raw/weather/openmeteo/observations/weather_location_3409526.json"
+    }
+  ],
+  "ingestion_timestamp": "2026-09-26 11:16:25 UTC",
+  "total_rows": 98112
+}

@@ -1,0 +1,213 @@
+{
+  "id": 11609,
+  "name": "Mhada Colony, Pune - IITM",
+  "locality": null,
+  "timezone": "Asia/Kolkata",
+  "country": {
+    "id": 9,
+    "code": "IN",
+    "name": "India"
+  },
+  "owner": {
+    "id": 8546,
+    "name": "Indian Institute of Tropical Meteorology"
+  },
+  "provider": {
+    "id": 168,
+    "name": "CPCB"
+  },
+  "isMobile": false,
+  "isMonitor": true,
+  "instruments": [
+    {
+      "id": 2,
+      "name": "Government Monitor"
+    },
+    {
+      "id": 2,
+      "name": "Government Monitor"
+    }
+  ],
+  "sensors": [
+    {
+      "id": 12236438,
+      "name": "co ppb",
+      "parameter": {
+        "id": 102,
+        "name": "co",
+        "units": "ppb",
+        "displayName": "CO"
+      }
+    },
+    {
+      "id": 39447,
+      "name": "co µg/m³",
+      "parameter": {
+        "id": 4,
+        "name": "co",
+        "units": "µg/m³",
+        "displayName": "CO mass"
+      }
+    },
+    {
+      "id": 12236439,
+      "name": "no ppb",
+      "parameter": {
+        "id": 24,
+        "name": "no",
+        "units": "ppb",
+        "displayName": "NO"
+      }
+    },
+    {
+      "id": 12236440,
+      "name": "no2 ppb",
+      "parameter": {
+        "id": 15,
+        "name": "no2",
+        "units": "ppb",
+        "displayName": "NO₂"
+      }
+    },
+    {
+      "id": 39446,
+      "name": "no2 µg/m³",
+      "parameter": {
+        "id": 5,
+        "name": "no2",
+        "units": "µg/m³",
+        "displayName": "NO₂ mass"
+      }
+    },
+    {
+      "id": 14342068,
+      "name": "nox ppb",
+      "parameter": {
+        "id": 23,
+        "name": "nox",
+        "units": "ppb",
+        "displayName": "NOX"
+      }
+    },
+    {
+      "id": 39448,
+      "name": "o3 µg/m³",
+      "parameter": {
+        "id": 3,
+        "name": "o3",
+        "units": "µg/m³",
+        "displayName": "O₃ mass"
+      }
+    },
+    {
+      "id": 12236441,
+      "name": "o3 µg/m³",
+      "parameter": {
+        "id": 3,
+        "name": "o3",
+        "units": "µg/m³",
+        "displayName": "O₃ mass"
+      }
+    },
+    {
+      "id": 39445,
+      "name": "pm10 µg/m³",
+      "parameter": {
+        "id": 1,
+        "name": "pm10",
+        "units": "µg/m³",
+        "displayName": "PM10"
+      }
+    },
+    {
+      "id": 12236442,
+      "name": "pm10 µg/m³",
+      "parameter": {
+        "id": 1,
+        "name": "pm10",
+        "units": "µg/m³",
+        "displayName": "PM10"
+      }
+    },
+    {
+      "id": 39444,
+      "name": "pm25 µg/m³",
+      "parameter": {
+        "id": 2,
+        "name": "pm25",
+        "units": "µg/m³",
+        "displayName": "PM2.5"
+      }
+    },
+    {
+      "id": 12236443,
+      "name": "pm25 µg/m³",
+      "parameter": {
+        "id": 2,
+        "name": "pm25",
+        "units": "µg/m³",
+        "displayName": "PM2.5"
+      }
+    },
+    {
+      "id": 15090167,
+      "name": "relativehumidity %",
+      "parameter": {
+        "id": 98,
+        "name": "relativehumidity",
+        "units": "%",
+        "displayName": "RH"
+      }
+    },
+    {
+      "id": 15090168,
+      "name": "temperature c",
+      "parameter": {
+        "id": 100,
+        "name": "temperature",
+        "units": "c",
+        "displayName": "Temperature (C)"
+      }
+    },
+    {
+      "id": 14342069,
+      "name": "wind_direction deg",
+      "parameter": {
+        "id": 22,
+        "name": "wind_direction",
+        "units": "deg",
+        "displayName": "Wind direction"
+      }
+    },
+    {
+      "id": 14342070,
+      "name": "wind_speed m/s",
+      "parameter": {
+        "id": 34,
+        "name": "wind_speed",
+        "units": "m/s",
+        "displayName": "Wind speed"
+      }
+    }
+  ],
+  "coordinates": {
+    "latitude": 18.57304,
+    "longitude": 73.927715
+  },
+  "licenses": null,
+  "bounds": [
+    73.927715,
+    18.57304,
+    73.927715,
+    18.57304
+  ],
+  "distance": null,
+  "datetimeFirst": {
+    "utc": "2020-11-13T12:15:00Z",
+    "local": "2020-11-13T17:45:00+05:30"
+  },
+  "datetimeLast": {
+    "utc": "2026-09-24T17:30:00Z",
+    "local": "2026-09-24T23:00:00+05:30"
+  }
+}

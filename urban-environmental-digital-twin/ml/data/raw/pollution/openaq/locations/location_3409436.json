@@ -1,0 +1,169 @@
+{
+  "id": 3409436,
+  "name": "Park Street Wakad, Pimpri Chinchwad - MPCB",
+  "locality": null,
+  "timezone": "Asia/Kolkata",
+  "country": {
+    "id": 9,
+    "code": "IN",
+    "name": "India"
+  },
+  "owner": {
+    "id": 8532,
+    "name": "Maharashtra Pollution Control Board"
+  },
+  "provider": {
+    "id": 168,
+    "name": "CPCB"
+  },
+  "isMobile": false,
+  "isMonitor": true,
+  "instruments": [
+    {
+      "id": 2,
+      "name": "Government Monitor"
+    }
+  ],
+  "sensors": [
+    {
+      "id": 12237991,
+      "name": "co ppb",
+      "parameter": {
+        "id": 102,
+        "name": "co",
+        "units": "ppb",
+        "displayName": "CO"
+      }
+    },
+    {
+      "id": 12237992,
+      "name": "no ppb",
+      "parameter": {
+        "id": 24,
+        "name": "no",
+        "units": "ppb",
+        "displayName": "NO"
+      }
+    },
+    {
+      "id": 12237993,
+      "name": "no2 ppb",
+      "parameter": {
+        "id": 15,
+        "name": "no2",
+        "units": "ppb",
+        "displayName": "NO₂"
+      }
+    },
+    {
+      "id": 14341450,
+      "name": "nox ppb",
+      "parameter": {
+        "id": 23,
+        "name": "nox",
+        "units": "ppb",
+        "displayName": "NOX"
+      }
+    },
+    {
+      "id": 12237994,
+      "name": "o3 µg/m³",
+      "parameter": {
+        "id": 3,
+        "name": "o3",
+        "units": "µg/m³",
+        "displayName": "O₃ mass"
+      }
+    },
+    {
+      "id": 12237995,
+      "name": "pm10 µg/m³",
+      "parameter": {
+        "id": 1,
+        "name": "pm10",
+        "units": "µg/m³",
+        "displayName": "PM10"
+      }
+    },
+    {
+      "id": 12237996,
+      "name": "pm25 µg/m³",
+      "parameter": {
+        "id": 2,
+        "name": "pm25",
+        "units": "µg/m³",
+        "displayName": "PM2.5"
+      }
+    },
+    {
+      "id": 12237997,
+      "name": "relativehumidity %",
+      "parameter": {
+        "id": 98,
+        "name": "relativehumidity",
+        "units": "%",
+        "displayName": "RH"
+      }
+    },
+    {
+      "id": 12237998,
+      "name": "so2 ppb",
+      "parameter": {
+        "id": 101,
+        "name": "so2",
+        "units": "ppb",
+        "displayName": "SO₂"
+      }
+    },
+    {
+      "id": 12237999,
+      "name": "temperature c",
+      "parameter": {
+        "id": 100,
+        "name": "temperature",
+        "units": "c",
+        "displayName": "Temperature (C)"
+      }
+    },
+    {
+      "id": 14341451,
+      "name": "wind_direction deg",
+      "parameter": {
+        "id": 22,
+        "name": "wind_direction",
+        "units": "deg",
+        "displayName": "Wind direction"
+      }
+    },
+    {
+      "id": 14341452,
+      "name": "wind_speed m/s",
+      "parameter": {
+        "id": 34,
+        "name": "wind_speed",
+        "units": "m/s",
+        "displayName": "Wind speed"
+      }
+    }
+  ],
+  "coordinates": {
+    "latitude": 18.59051,
+    "longitude": 73.77946
+  },
+  "licenses": null,
+  "bounds": [
+    73.77946,
+    18.59051,
+    73.77946,
+    18.59051
+  ],
+  "distance": null,
+  "datetimeFirst": {
+    "utc": "2025-02-18T20:15:00Z",
+    "local": "2025-02-19T01:45:00+05:30"
+  },
+  "datetimeLast": {
+    "utc": "2026-09-24T17:30:00Z",
+    "local": "2026-09-24T23:00:00+05:30"
+  }
+}

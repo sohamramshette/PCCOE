@@ -1,0 +1,169 @@
+{
+  "id": 3409437,
+  "name": "Thergaon, Pimpri Chinchwad - MPCB",
+  "locality": null,
+  "timezone": "Asia/Kolkata",
+  "country": {
+    "id": 9,
+    "code": "IN",
+    "name": "India"
+  },
+  "owner": {
+    "id": 8532,
+    "name": "Maharashtra Pollution Control Board"
+  },
+  "provider": {
+    "id": 168,
+    "name": "CPCB"
+  },
+  "isMobile": false,
+  "isMonitor": false,
+  "instruments": [
+    {
+      "id": 1,
+      "name": "N/A"
+    }
+  ],
+  "sensors": [
+    {
+      "id": 12243012,
+      "name": "co ppb",
+      "parameter": {
+        "id": 102,
+        "name": "co",
+        "units": "ppb",
+        "displayName": "CO"
+      }
+    },
+    {
+      "id": 12243013,
+      "name": "no ppb",
+      "parameter": {
+        "id": 24,
+        "name": "no",
+        "units": "ppb",
+        "displayName": "NO"
+      }
+    },
+    {
+      "id": 12243014,
+      "name": "no2 ppb",
+      "parameter": {
+        "id": 15,
+        "name": "no2",
+        "units": "ppb",
+        "displayName": "NO₂"
+      }
+    },
+    {
+      "id": 14341453,
+      "name": "nox ppb",
+      "parameter": {
+        "id": 23,
+        "name": "nox",
+        "units": "ppb",
+        "displayName": "NOX"
+      }
+    },
+    {
+      "id": 12243015,
+      "name": "o3 µg/m³",
+      "parameter": {
+        "id": 3,
+        "name": "o3",
+        "units": "µg/m³",
+        "displayName": "O₃ mass"
+      }
+    },
+    {
+      "id": 12243016,
+      "name": "pm10 µg/m³",
+      "parameter": {
+        "id": 1,
+        "name": "pm10",
+        "units": "µg/m³",
+        "displayName": "PM10"
+      }
+    },
+    {
+      "id": 12243017,
+      "name": "pm25 µg/m³",
+      "parameter": {
+        "id": 2,
+        "name": "pm25",
+        "units": "µg/m³",
+        "displayName": "PM2.5"
+      }
+    },
+    {
+      "id": 12243018,
+      "name": "relativehumidity %",
+      "parameter": {
+        "id": 98,
+        "name": "relativehumidity",
+        "units": "%",
+        "displayName": "RH"
+      }
+    },
+    {
+      "id": 12243019,
+      "name": "so2 ppb",
+      "parameter": {
+        "id": 101,
+        "name": "so2",
+        "units": "ppb",
+        "displayName": "SO₂"
+      }
+    },
+    {
+      "id": 12243020,
+      "name": "temperature c",
+      "parameter": {
+        "id": 100,
+        "name": "temperature",
+        "units": "c",
+        "displayName": "Temperature (C)"
+      }
+    },
+    {
+      "id": 14341454,
+      "name": "wind_direction deg",
+      "parameter": {
+        "id": 22,
+        "name": "wind_direction",
+        "units": "deg",
+        "displayName": "Wind direction"
+      }
+    },
+    {
+      "id": 14341455,
+      "name": "wind_speed m/s",
+      "parameter": {
+        "id": 34,
+        "name": "wind_speed",
+        "units": "m/s",
+        "displayName": "Wind speed"
+      }
+    }
+  ],
+  "coordinates": {
+    "latitude": 18.616318,
+    "longitude": 73.765797
+  },
+  "licenses": null,
+  "bounds": [
+    73.765797,
+    18.616318,
+    73.765797,
+    18.616318
+  ],
+  "distance": null,
+  "datetimeFirst": {
+    "utc": "2025-02-19T06:30:00Z",
+    "local": "2025-02-19T12:00:00+05:30"
+  },
+  "datetimeLast": {
+    "utc": "2026-09-24T17:30:00Z",
+    "local": "2026-09-24T23:00:00+05:30"
+  }
+}

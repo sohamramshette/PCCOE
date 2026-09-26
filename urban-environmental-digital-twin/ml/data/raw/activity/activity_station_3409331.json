@@ -1,0 +1,1004 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-26T11:41:35Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 3842306304,
+      "lat": 18.6291755,
+      "lon": 73.8517596,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "Roshal Garden"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4441618789,
+      "lat": 18.6370551,
+      "lon": 73.8447182,
+      "tags": {
+        "amenity": "bank",
+        "name:en": "Bank of Maharashtra"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7011007178,
+      "lat": 18.6497845,
+      "lon": 73.8399956,
+      "tags": {
+        "shop": "alcohol"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7011030687,
+      "lat": 18.6481784,
+      "lon": 73.8503664,
+      "tags": {
+        "amenity": "fast_food",
+        "brand": "Domino's",
+        "brand:ks": "\u0688\u0648\u0645\u06cc\u0646\u0648\u0632",
+        "brand:pa": "\u0a21\u0a4b\u0a2e\u0a40\u0a28\u0a4b\u0a1c\u0a3c",
+        "brand:ur": "\u0688\u0648\u0645\u06cc\u0646\u0648\u0632",
+        "brand:wikidata": "Q839466",
+        "brand:wikipedia": "en:Domino's Pizza",
+        "cuisine": "pizza",
+        "name": "Domino's",
+        "name:ks": "\u0688\u0648\u0645\u06cc\u0646\u0648\u0632",
+        "name:pa": "\u0a21\u0a4b\u0a2e\u0a40\u0a28\u0a4b\u0a1c\u0a3c",
+        "name:ur": "\u0688\u0648\u0645\u06cc\u0646\u0648\u0632",
+        "takeaway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7031749429,
+      "lat": 18.6502755,
+      "lon": 73.839884,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "360 Restobar"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7031749431,
+      "lat": 18.6502733,
+      "lon": 73.839863,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "PaPa Jees"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7054301099,
+      "lat": 18.6337676,
+      "lon": 73.8493024,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:full": "Sec. No.1, Plot. No.7/8",
+        "addr:housenumber": "beside Hotel Haveli",
+        "addr:postcode": "411039",
+        "addr:state": "Maharashtra",
+        "addr:street": "Pune Nashik Road",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Desai Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7063077064,
+      "lat": 18.6460596,
+      "lon": 73.8499998,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Jay Ganesh Samrajya, C-Wing Opp Panjarpol Pune -Nashik Road, Bhosari",
+        "addr:postcode": "411039",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Pataskar Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8814464678,
+      "lat": 18.6342365,
+      "lon": 73.8492487,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Indrayani Nagar, Tathawade, Bhosari, Pimpri-Chinchwad",
+        "addr:postcode": "411039",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Life Line Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9536733743,
+      "lat": 18.646076,
+      "lon": 73.8499688,
+      "tags": {
+        "addr:city": "pune",
+        "addr:postcode": "411039",
+        "addr:street": "First Floor, C-Wing, Jai Ganesh Samarajya, Panjarpol, Bhosari,Maharashtra, India",
+        "amenity": "hospital",
+        "emergency": "yes",
+        "healthcare": "hospital",
+        "healthcare:speciality": "cataract_surgery_\u00d7_glaucoma_management_\u00d7_squint_management",
+        "name": "Patil Eye Hospital",
+        "operator": "novosalus",
+        "operator:type": "private",
+        "website": "https://www.patileyehospital.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10308752104,
+      "lat": 18.6512049,
+      "lon": 73.8440657,
+      "tags": {
+        "addr:city": "Moshi",
+        "addr:postcode": "412105",
+        "addr:street": "Sector No 6",
+        "amenity": "language_school",
+        "education": "language_school",
+        "language:en": "yes",
+        "name": "Sadhu Vaswani International School"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10312971688,
+      "lat": 18.6370988,
+      "lon": 73.8447457,
+      "tags": {
+        "addr:city": "pune",
+        "addr:housenumber": "radhakrishna complex",
+        "addr:postcode": "411039",
+        "addr:street": "sahara street",
+        "air_conditioning": "yes",
+        "amenity": "bank",
+        "atm": "yes",
+        "branch": "Indrayani nagar",
+        "check_date": "2023-01-07",
+        "drive_through": "yes",
+        "name": "Bank of Maharashtra",
+        "opening_hours": "Mo-Su 09:00-21:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10312986287,
+      "lat": 18.6481462,
+      "lon": 73.8498404,
+      "tags": {
+        "addr:city": "pune",
+        "addr:housenumber": "sector 7",
+        "addr:postcode": "41109",
+        "addr:street": "Spine Road",
+        "amenity": "hospital",
+        "description": "unknown",
+        "ele": "100",
+        "email": "accord.hospitalgmail@.com",
+        "emergency": "yes",
+        "fax": "97656161379",
+        "fixme": "don't know",
+        "healthcare": "hospital",
+        "healthcare:speciality": "orthopaedics;general;gynaecology;dermatology;physiotherapy",
+        "image": "ok",
+        "internet_access": "yes",
+        "internet_access:fee": "no",
+        "name": "Accord hospital",
+        "note": "so good hospital",
+        "operator": "Unknown",
+        "operator:type": "private",
+        "phone": "6497052331",
+        "source": "local knowledge;gps;osm notes",
+        "start_date": "19990412",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10595726177,
+      "lat": 18.6349433,
+      "lon": 73.8435712,
+      "tags": {
+        "amenity": "fast_food"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10807028855,
+      "lat": 18.6315671,
+      "lon": 73.8482182,
+      "tags": {
+        "amenity": "school",
+        "grades": "1-10",
+        "name": "Shri Bhairavnath Secondary and Higher Secondary School"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10807037929,
+      "lat": 18.6311902,
+      "lon": 73.8480258,
+      "tags": {
+        "amenity": "college",
+        "grades": "11-12",
+        "name": "Shri Bhairavnath Junior College"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11482286169,
+      "lat": 18.6332839,
+      "lon": 73.8372734,
+      "tags": {
+        "addr:postcode": "411026",
+        "addr:street": "Indrayani Nagar Road",
+        "internet_access": "wlan",
+        "name": "Accura Machine Tools",
+        "name:en": "Accura Machine Tools",
+        "office": "company",
+        "opening_hours": "Mo-Sa 09:30-17:30"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11777914764,
+      "lat": 18.6355866,
+      "lon": 73.8529542,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:housenumber": "136/2",
+        "addr:street": "Hanuman Colony, Sadgurunagar, Bhosari",
+        "name": "ABRIGOR MEGACORP",
+        "shop": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13144484748,
+      "lat": 18.649566,
+      "lon": 73.8390961,
+      "tags": {
+        "amenity": "fast_food",
+        "brand": "McDonald's",
+        "brand:wikidata": "Q38076",
+        "cuisine": "burger",
+        "name": "McDonald's",
+        "takeaway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13144484749,
+      "lat": 18.6496119,
+      "lon": 73.8390382,
+      "tags": {
+        "brand": "Puma",
+        "brand:wikidata": "Q157064",
+        "name": "Puma",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13144484750,
+      "lat": 18.6496489,
+      "lon": 73.8389668,
+      "tags": {
+        "name": "Mufti",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380081599,
+      "lat": 18.6368602,
+      "lon": 73.8444852,
+      "tags": {
+        "addr:street": "Vaishnao Mata Marg",
+        "amenity": "fast_food",
+        "diet:vegetarian": "yes",
+        "name": "pani puri thela"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380354930,
+      "lat": 18.6377278,
+      "lon": 73.8461765,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:postcode": "411039",
+        "addr:street": "Lkshmi Road",
+        "payment:cash": "yes",
+        "payment:google_pay": "yes",
+        "shop": "tobacco"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380385854,
+      "lat": 18.6374147,
+      "lon": 73.8492172,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "amenity": "fuel",
+        "fuel:cng": "yes",
+        "self_service": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380408108,
+      "lat": 18.6511964,
+      "lon": 73.8447243,
+      "tags": {
+        "amenity": "school",
+        "education": "school"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380413514,
+      "lat": 18.6403702,
+      "lon": 73.8502295,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:street": "Pune Nashik Road",
+        "currency:INR": "yes",
+        "payment:cash": "yes",
+        "payment:google_pay": "yes",
+        "shop": "tobacco"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380422986,
+      "lat": 18.6374942,
+      "lon": 73.8411711,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Haveli",
+        "name": "Priyadarshani school",
+        "office": "educational_institution"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380437570,
+      "lat": 18.632075,
+      "lon": 73.84073,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "Haveli",
+        "amenity": "school",
+        "education": "school",
+        "name": "Swami Samarth"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380450080,
+      "lat": 18.6326092,
+      "lon": 73.8398264,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "Haveli",
+        "addr:street": "Indrayani Nagar Road",
+        "name": "Tirupati Auto garage",
+        "payment:cash": "yes",
+        "payment:google_pay": "yes",
+        "shop": "repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380453522,
+      "lat": 18.6374423,
+      "lon": 73.849513,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:street": "Pune Nashik Road",
+        "amenity": "fuel",
+        "name": "Indian oil"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380466318,
+      "lat": 18.6325411,
+      "lon": 73.8394743,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "Haveli",
+        "addr:street": "Indrayani Nagar Road",
+        "payment:cash": "yes",
+        "payment:google_pay": "yes",
+        "shop": "repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380479800,
+      "lat": 18.6324161,
+      "lon": 73.8375076,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Haveli",
+        "addr:street": "Indrayani Nagar Road",
+        "amenity": "fast_food",
+        "cuisine": "indian",
+        "diet:vegetarian": "yes",
+        "name": "Shree Siddhivinayak Vadapav"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380480702,
+      "lat": 18.6326781,
+      "lon": 73.8395215,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "Haveli",
+        "addr:street": "Indrayani Nagar Road",
+        "payment:cash": "yes",
+        "payment:google_pay": "yes",
+        "shop": "repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380510395,
+      "lat": 18.6327784,
+      "lon": 73.8384684,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Haveli",
+        "addr:street": "Indrayani Nagar Road",
+        "amenity": "fast_food",
+        "cuisine": "indian",
+        "diet:vegetarian": "yes",
+        "name": "Shree Siddhivinayak Vadapav center"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380529306,
+      "lat": 18.6329421,
+      "lon": 73.8381508,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Haveli",
+        "addr:street": "Indrayani Nagar Road",
+        "amenity": "fast_food",
+        "cuisine": "chicken;indian",
+        "diet:chicken": "yes",
+        "diet:non-vegetarian": "yes",
+        "name": "Singh kebab"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380658997,
+      "lat": 18.6374427,
+      "lon": 73.8457671,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:postcode": "411039",
+        "addr:street": "Lkshmi Road",
+        "air_conditioning": "yes",
+        "amenity": "restaurant",
+        "cuisine": "indian",
+        "delivery": "yes",
+        "diet:vegetarian": "yes",
+        "name": "Madhuban hotel"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380680786,
+      "lat": 18.6375976,
+      "lon": 73.844746,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:street": "Lakshmi Road",
+        "amenity": "fast_food",
+        "cuisine": "vada_pav",
+        "diet:vegetarian": "yes",
+        "name": "Ganesh Vadapav"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380803598,
+      "lat": 18.6364332,
+      "lon": 73.8443909,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:street": "Vaishnao Mata Marg",
+        "name": "Anand Medical",
+        "payment:cash": "yes",
+        "payment:google_pay": "yes",
+        "shop": "chemist"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380871585,
+      "lat": 18.6373293,
+      "lon": 73.8447326,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:street": "Lakshmi Road",
+        "name": "Sahara Medial",
+        "payment:cash": "yes",
+        "payment:google_pay": "yes",
+        "shop": "chemist"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380879877,
+      "lat": 18.6373332,
+      "lon": 73.8447552,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:postcode": "411039",
+        "addr:street": "Lakshmi Road",
+        "amenity": "fast_food",
+        "cuisine": "indian",
+        "diet:vegetarian": "yes",
+        "name": "Sahara sweets"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380880732,
+      "lat": 18.6372631,
+      "lon": 73.8447162,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:street": "Lakshmi Road",
+        "name": "Pawan traders",
+        "payment:cash": "yes",
+        "payment:google_pay": "yes",
+        "shop": "supermarket"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380898046,
+      "lat": 18.6482582,
+      "lon": 73.8435299,
+      "tags": {
+        "addr:street": "Spine Road",
+        "amenity": "cafe",
+        "cuisine": "indian;breakfast;coffee_shop",
+        "internet_access": "yes",
+        "name": "Chai Sutta Bar"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380918555,
+      "lat": 18.6373688,
+      "lon": 73.8448993,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:street": "Lkshmi Road",
+        "name": "Kaka stationery",
+        "payment:cash": "yes",
+        "payment:google_pay": "yes",
+        "shop": "stationery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380931357,
+      "lat": 18.6366467,
+      "lon": 73.8449811,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:street": "Lkshmi Road",
+        "payment:cash": "yes",
+        "payment:google_pay": "yes",
+        "service:vehicle:batteries": "yes",
+        "service:vehicle:brakes": "yes",
+        "service:vehicle:electrical": "yes",
+        "service:vehicle:oil_change": "yes",
+        "service:vehicle:tyres": "yes",
+        "service:vehicle:wheels": "yes",
+        "shop": "motorcycle_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13380939122,
+      "lat": 18.6373687,
+      "lon": 73.8448678,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:street": "Lakshmi Road",
+        "name": "Galaxy pet store",
+        "payment:cash": "yes",
+        "payment:google_pay": "yes",
+        "shop": "pet"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13381058497,
+      "lat": 18.6498406,
+      "lon": 73.8398445,
+      "tags": {
+        "addr:city": "Pimpri Chinchwad",
+        "addr:street": "Spine Road",
+        "payment:cash": "yes",
+        "payment:google_pay": "yes",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13381064806,
+      "lat": 18.6372638,
+      "lon": 73.8470185,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:street": "Lkshmi Road",
+        "clothes": "unisex;underwear;women;children;fashion;babies;denim",
+        "name": "Zudioo",
+        "not:brand:wikidata": "Q123375926",
+        "payment:cash": "yes",
+        "payment:debit_cards": "yes",
+        "payment:google_pay": "yes",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13381071099,
+      "lat": 18.6407023,
+      "lon": 73.8500665,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:street": "Pune Nashik Road",
+        "amenity": "fuel",
+        "fuel:diesel": "yes",
+        "name": "Bharat petrol pump",
+        "self_service": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13381080115,
+      "lat": 18.6344258,
+      "lon": 73.8461038,
+      "tags": {
+        "addr:city": "Pune",
+        "amenity": "hospital",
+        "emergency": "yes",
+        "healthcare": "hospital",
+        "name": "Medicover Hospital"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13381090117,
+      "lat": 18.6414573,
+      "lon": 73.8502851,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:street": "Pune Nashik Road",
+        "amenity": "fuel",
+        "branch": "Hindustan Petroleum",
+        "brand": "Hindustan Petroleum",
+        "brand:wikidata": "Q1619375",
+        "fuel:diesel": "yes",
+        "name": "petrol pump",
+        "official_name": "Hindustan Petroleum"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13381102485,
+      "lat": 18.6370528,
+      "lon": 73.846813,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:street": "Vaishnao Mata Marg",
+        "air_conditioning": "yes",
+        "amenity": "cafe",
+        "cuisine": "pizza;italian;asian",
+        "level": "1",
+        "name": "street coffee"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13382544480,
+      "lat": 18.6377931,
+      "lon": 73.8466561,
+      "tags": {
+        "addr:city": "pune",
+        "addr:district": "haveli",
+        "addr:street": "Lakshmi Road",
+        "amenity": "fast_food",
+        "cuisine": "indian",
+        "diet:vegetarian": "yes",
+        "name": "Chitale"
+      }
+    },
+    {
+      "type": "way",
+      "id": 236173670,
+      "center": {
+        "lat": 18.6523195,
+        "lon": 73.844217
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Moshi Traffic Park",
+        "name:mr": "\u092e\u094b\u0936\u0940 \u091f\u094d\u0930\u0945\u092b\u093f\u0915 \u092a\u093e\u0930\u094d\u0915"
+      }
+    },
+    {
+      "type": "way",
+      "id": 237621725,
+      "center": {
+        "lat": 18.6425651,
+        "lon": 73.8367526
+      },
+      "tags": {
+        "landuse": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 242011127,
+      "center": {
+        "lat": 18.6367809,
+        "lon": 73.8430823
+      },
+      "tags": {
+        "leisure": "park",
+        "name:en": "Nana Nani Park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 251882434,
+      "center": {
+        "lat": 18.6435534,
+        "lon": 73.8493975
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 251882435,
+      "center": {
+        "lat": 18.6452192,
+        "lon": 73.8490153
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 251882436,
+      "center": {
+        "lat": 18.6346465,
+        "lon": 73.8478804
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 359520179,
+      "center": {
+        "lat": 18.6386952,
+        "lon": 73.8520874
+      },
+      "tags": {
+        "addr:city": "Bhosari",
+        "addr:postcode": "411026",
+        "addr:street": "Kate Khadi Machine, Pune-Nashik Highway, Pajnjarpol",
+        "building": "industrial",
+        "name": "Micorprecision Technologies"
+      }
+    },
+    {
+      "type": "way",
+      "id": 385106289,
+      "center": {
+        "lat": 18.640068,
+        "lon": 73.8306909
+      },
+      "tags": {
+        "building": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 385110034,
+      "center": {
+        "lat": 18.638116,
+        "lon": 73.8331934
+      },
+      "tags": {
+        "building": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 385110056,
+      "center": {
+        "lat": 18.6379258,
+        "lon": 73.8333429
+      },
+      "tags": {
+        "building": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 502438540,
+      "center": {
+        "lat": 18.6376389,
+        "lon": 73.8326531
+      },
+      "tags": {
+        "landuse": "industrial",
+        "name": "MIDC Bhosari"
+      }
+    },
+    {
+      "type": "way",
+      "id": 683116817,
+      "center": {
+        "lat": 18.6420848,
+        "lon": 73.8304065
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "J-177",
+        "addr:postcode": "411026",
+        "addr:street": "MIDC, Bhosari",
+        "building": "industrial",
+        "building:levels": "2",
+        "height": "6",
+        "name": "Rich Graviss Products Pvt. Ltd."
+      }
+    },
+    {
+      "type": "way",
+      "id": 785862558,
+      "center": {
+        "lat": 18.6443921,
+        "lon": 73.8363151
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 785862559,
+      "center": {
+        "lat": 18.6429998,
+        "lon": 73.8347132
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 785862561,
+      "center": {
+        "lat": 18.6443861,
+        "lon": 73.8486231
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 785862563,
+      "center": {
+        "lat": 18.6461631,
+        "lon": 73.8421231
+      },
+      "tags": {
+        "leisure": "garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1254834579,
+      "center": {
+        "lat": 18.6328432,
+        "lon": 73.8370943
+      },
+      "tags": {
+        "building": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1258394878,
+      "center": {
+        "lat": 18.6483315,
+        "lon": 73.8492975
+      },
+      "tags": {
+        "landuse": "residential",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1459473844,
+      "center": {
+        "lat": 18.6287747,
+        "lon": 73.8464064
+      },
+      "tags": {
+        "landuse": "forest"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1545603614,
+      "center": {
+        "lat": 18.6452078,
+        "lon": 73.8449214
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "PCNTDA Park ,Spine Road ,BHOSARI"
+      }
+    }
+  ]
+}

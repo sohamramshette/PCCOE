@@ -1,0 +1,7 @@
+station_id,station_name,zone_type,n_test,persistence_mae,persistence_rmse,persistence_r2,hgb_mae,hgb_rmse,hgb_r2,hgb_medae,rf_mae,rf_rmse,rf_r2,ridge_mae,ridge_rmse,ridge_r2,hgb_mae_improvement,hgb_mae_pct_improvement
+11609,"Mhada Colony, Pune - IITM",North-Eastern Residential / Airport Corridor,1915,3.5856,4.703,0.6602,3.5259,4.6763,0.664,2.8352,3.3918,4.519,0.6863,3.693,4.9091,0.6297,0.0597,1.66
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",Commercial / Educational Urban Core,1675,4.604,6.1974,0.476,4.5857,6.014,0.5065,3.7738,4.5665,5.8686,0.5301,5.3585,7.2721,0.2785,0.0184,0.4
+60658,"Hadapsar, Pune - IITM",Eastern Commercial / Mixed Suburban Corridor,1090,4.7125,6.14,0.6189,4.702,6.0703,0.6275,3.8172,4.733,6.0621,0.6285,4.9224,6.4274,0.5824,0.0105,0.22
+3409331,"Bhosari, Pune - IITM",Northern Heavy Industrial / Highway Hub (PCMC),1821,4.1848,5.5978,0.4135,3.9937,5.2654,0.4811,3.3015,3.8902,5.462,0.4416,4.3427,5.9783,0.3311,0.1911,4.57
+3409438,"Katraj Dairy, Pune - MPCB",Southern Highway Chokepoint / Ghat Gateway,1397,4.3703,22.3385,0.2132,4.5664,20.2524,0.3533,1.7157,4.5524,20.2066,0.3562,5.998,21.6639,0.26,-0.1961,-4.49
+3409526,"Panchawati_Pashan, Pune - IITM",Western Institutional / Foothill Background,1871,3.9709,5.2362,0.3829,3.6749,4.8794,0.4641,2.8237,3.6307,5.1921,0.3932,4.2958,5.932,0.208,0.296,7.45

@@ -1,0 +1,131 @@
+{
+  "ingestion_timestamp_utc": "2026-09-26T10:59:56Z",
+  "scope": "core",
+  "era": "active",
+  "selected_locations": [
+    11613,
+    60658,
+    3409526,
+    3409438,
+    3409331,
+    11609
+  ],
+  "total_locations_discovered": 19,
+  "total_sensors_cataloged": 214,
+  "downloaded_sensors_count": 11,
+  "total_records_ingested": 419781,
+  "elapsed_seconds": 662.47,
+  "output_csv": "ml\\data\\raw\\pollution\\openaq\\measurements\\raw_measurements.csv",
+  "sensors_manifest": [
+    {
+      "location_id": 11609,
+      "sensor_id": 12236443,
+      "sensor_name": "pm25 µg/m³",
+      "parameter": "pm25",
+      "units": "µg/m³",
+      "datetime_first": "2025-02-18T20:15:00Z",
+      "datetime_last": "2026-09-24T17:30:00Z",
+      "observed_count": 44146
+    },
+    {
+      "location_id": 11613,
+      "sensor_id": 12236463,
+      "sensor_name": "pm25 µg/m³",
+      "parameter": "pm25",
+      "units": "µg/m³",
+      "datetime_first": "2025-02-18T20:15:00Z",
+      "datetime_last": "2026-09-24T17:30:00Z",
+      "observed_count": 38439
+    },
+    {
+      "location_id": 11613,
+      "sensor_id": 12236464,
+      "sensor_name": "relativehumidity %",
+      "parameter": "relativehumidity",
+      "units": "%",
+      "datetime_first": "2025-02-18T20:15:00Z",
+      "datetime_last": "2026-08-21T04:15:00Z",
+      "observed_count": 35481
+    },
+    {
+      "location_id": 11613,
+      "sensor_id": 12236460,
+      "sensor_name": "no2 ppb",
+      "parameter": "no2",
+      "units": "ppb",
+      "datetime_first": "2025-02-18T20:15:00Z",
+      "datetime_last": "2026-09-24T17:30:00Z",
+      "observed_count": 38642
+    },
+    {
+      "location_id": 11613,
+      "sensor_id": 12236466,
+      "sensor_name": "temperature c",
+      "parameter": "temperature",
+      "units": "c",
+      "datetime_first": "2025-02-18T20:15:00Z",
+      "datetime_last": "2026-08-21T04:15:00Z",
+      "observed_count": 35467
+    },
+    {
+      "location_id": 11613,
+      "sensor_id": 12236462,
+      "sensor_name": "pm10 µg/m³",
+      "parameter": "pm10",
+      "units": "µg/m³",
+      "datetime_first": "2025-02-18T20:15:00Z",
+      "datetime_last": "2026-09-24T17:30:00Z",
+      "observed_count": 38462
+    },
+    {
+      "location_id": 11613,
+      "sensor_id": 14341024,
+      "sensor_name": "wind_speed m/s",
+      "parameter": "wind_speed",
+      "units": "m/s",
+      "datetime_first": "2025-10-10T18:15:00Z",
+      "datetime_last": "2026-08-21T04:15:00Z",
+      "observed_count": 21146
+    },
+    {
+      "location_id": 60658,
+      "sensor_id": 12236449,
+      "sensor_name": "pm25 µg/m³",
+      "parameter": "pm25",
+      "units": "µg/m³",
+      "datetime_first": "2025-02-18T20:15:00Z",
+      "datetime_last": "2026-09-24T17:30:00Z",
+      "observed_count": 27810
+    },
+    {
+      "location_id": 3409331,
+      "sensor_id": 12304615,
+      "sensor_name": "pm25 µg/m³",
+      "parameter": "pm25",
+      "units": "µg/m³",
+      "datetime_first": "2025-02-25T13:00:00Z",
+      "datetime_last": "2026-09-24T17:30:00Z",
+      "observed_count": 34708
+    },
+    {
+      "location_id": 3409438,
+      "sensor_id": 12248370,
+      "sensor_name": "pm25 µg/m³",
+      "parameter": "pm25",
+      "units": "µg/m³",
+      "datetime_first": "2025-02-19T21:30:00Z",
+      "datetime_last": "2026-09-23T20:15:00Z",
+      "observed_count": 37543
+    },
+    {
+      "location_id": 3409526,
+      "sensor_id": 12238693,
+      "sensor_name": "pm25 µg/m³",
+      "parameter": "pm25",
+      "units": "µg/m³",
+      "datetime_first": "2025-02-18T20:15:00Z",
+      "datetime_last": "2026-09-24T17:30:00Z",
+      "observed_count": 44901
+    }
+  ]
+}

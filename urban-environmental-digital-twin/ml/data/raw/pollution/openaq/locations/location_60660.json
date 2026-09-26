@@ -1,0 +1,99 @@
+{
+  "id": 60660,
+  "name": "MIT-Kothrud, Pune - IITM",
+  "locality": null,
+  "timezone": "Asia/Kolkata",
+  "country": {
+    "id": 9,
+    "code": "IN",
+    "name": "India"
+  },
+  "owner": {
+    "id": 4,
+    "name": "Unknown Governmental Organization"
+  },
+  "provider": {
+    "id": 163,
+    "name": "caaqm"
+  },
+  "isMobile": false,
+  "isMonitor": true,
+  "instruments": [
+    {
+      "id": 2,
+      "name": "Government Monitor"
+    }
+  ],
+  "sensors": [
+    {
+      "id": 389754,
+      "name": "co µg/m³",
+      "parameter": {
+        "id": 4,
+        "name": "co",
+        "units": "µg/m³",
+        "displayName": "CO mass"
+      }
+    },
+    {
+      "id": 389769,
+      "name": "no2 µg/m³",
+      "parameter": {
+        "id": 5,
+        "name": "no2",
+        "units": "µg/m³",
+        "displayName": "NO₂ mass"
+      }
+    },
+    {
+      "id": 389752,
+      "name": "o3 µg/m³",
+      "parameter": {
+        "id": 3,
+        "name": "o3",
+        "units": "µg/m³",
+        "displayName": "O₃ mass"
+      }
+    },
+    {
+      "id": 389759,
+      "name": "pm10 µg/m³",
+      "parameter": {
+        "id": 1,
+        "name": "pm10",
+        "units": "µg/m³",
+        "displayName": "PM10"
+      }
+    },
+    {
+      "id": 389757,
+      "name": "pm25 µg/m³",
+      "parameter": {
+        "id": 2,
+        "name": "pm25",
+        "units": "µg/m³",
+        "displayName": "PM2.5"
+      }
+    }
+  ],
+  "coordinates": {
+    "latitude": 18.517754,
+    "longitude": 73.8214883
+  },
+  "licenses": null,
+  "bounds": [
+    73.8214883,
+    18.517754,
+    73.8214883,
+    18.517754
+  ],
+  "distance": null,
+  "datetimeFirst": {
+    "utc": "2021-01-12T14:00:00Z",
+    "local": "2021-01-12T19:30:00+05:30"
+  },
+  "datetimeLast": {
+    "utc": "2022-07-11T05:15:00Z",
+    "local": "2022-07-11T10:45:00+05:30"
+  }
+}

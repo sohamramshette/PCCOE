@@ -1,0 +1,26 @@
+station_id,station_name,element_id,element_type,name,construction_type,latitude,longitude,distance_to_station_m,data_type
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",217431365,way,Active Construction Project,building_construction,18.5175444,73.8432118,1550.1,CONSTRUCTION_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",249174603,way,Active Construction Project,building_construction,18.5211118,73.836023,1745.8,CONSTRUCTION_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1116953215,way,Metro Construction,site_development_construction,18.5364078,73.8368536,1515.9,CONSTRUCTION_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1479314590,way,Active Construction Project,building_construction,18.5201433,73.8463101,1160.2,CONSTRUCTION_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1522065342,way,Active Construction Project,site_development_construction,18.5318032,73.8550589,605.9,CONSTRUCTION_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1524315338,way,Sanganna Bharma Dhotre Path,road_infrastructure_construction,18.5358405,73.8368296,1490.0,CONSTRUCTION_PROXY
+11609,"Mhada Colony, Pune - IITM",122024107,way,Viman Nagar Road,road_infrastructure_construction,18.5608338,73.9182356,1680.9,CONSTRUCTION_PROXY
+11609,"Mhada Colony, Pune - IITM",218691419,way,HCMTR,road_infrastructure_construction,18.5633045,73.9097714,2175.7,CONSTRUCTION_PROXY
+11609,"Mhada Colony, Pune - IITM",567680966,way,Viman Nagar Road,road_infrastructure_construction,18.5609363,73.9182074,1673.5,CONSTRUCTION_PROXY
+11609,"Mhada Colony, Pune - IITM",1300653374,way,Active Construction Project,site_development_construction,18.5758679,73.9139718,1481.7,CONSTRUCTION_PROXY
+11609,"Mhada Colony, Pune - IITM",1394479945,way,Active Construction Project,road_infrastructure_construction,18.5616111,73.9207624,1462.4,CONSTRUCTION_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",888608971,way,Active Construction Project,road_infrastructure_construction,18.4479739,73.8590535,888.1,CONSTRUCTION_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1393118445,way,Active Construction Project,road_infrastructure_construction,18.4490701,73.8549905,609.5,CONSTRUCTION_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1490269426,way,Active Construction Project,road_infrastructure_construction,18.4483509,73.8606928,967.7,CONSTRUCTION_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1490269427,way,Active Construction Project,road_infrastructure_construction,18.448184,73.8651696,1353.5,CONSTRUCTION_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1490269428,way,Active Construction Project,road_infrastructure_construction,18.4482436,73.8606745,974.9,CONSTRUCTION_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1490269429,way,Active Construction Project,road_infrastructure_construction,18.4494184,73.8542395,565.1,CONSTRUCTION_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1490269430,way,Active Construction Project,road_infrastructure_construction,18.4495411,73.8542851,551.5,CONSTRUCTION_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1490269431,way,Active Construction Project,road_infrastructure_construction,18.4491526,73.8555741,612.0,CONSTRUCTION_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1490269432,way,Active Construction Project,road_infrastructure_construction,18.4490434,73.8555346,622.9,CONSTRUCTION_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1490269433,way,Active Construction Project,road_infrastructure_construction,18.4484126,73.8653142,1353.7,CONSTRUCTION_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1490269434,way,Active Construction Project,road_infrastructure_construction,18.4483317,73.8653081,1357.7,CONSTRUCTION_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1490269435,way,Active Construction Project,road_infrastructure_construction,18.4483612,73.866281,1445.6,CONSTRUCTION_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1490269436,way,Active Construction Project,road_infrastructure_construction,18.4482888,73.8663133,1452.4,CONSTRUCTION_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",1560561755,way,Active Construction Project,road_infrastructure_construction,18.5425563,73.8049917,675.6,CONSTRUCTION_PROXY

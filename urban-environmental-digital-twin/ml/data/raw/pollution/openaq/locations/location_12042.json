@@ -1,0 +1,99 @@
+{
+  "id": 12042,
+  "name": "Alandi, Pune - IITM",
+  "locality": null,
+  "timezone": "Asia/Kolkata",
+  "country": {
+    "id": 9,
+    "code": "IN",
+    "name": "India"
+  },
+  "owner": {
+    "id": 8546,
+    "name": "Indian Institute of Tropical Meteorology"
+  },
+  "provider": {
+    "id": 168,
+    "name": "CPCB"
+  },
+  "isMobile": false,
+  "isMonitor": true,
+  "instruments": [
+    {
+      "id": 2,
+      "name": "Government Monitor"
+    }
+  ],
+  "sensors": [
+    {
+      "id": 40637,
+      "name": "co µg/m³",
+      "parameter": {
+        "id": 4,
+        "name": "co",
+        "units": "µg/m³",
+        "displayName": "CO mass"
+      }
+    },
+    {
+      "id": 40651,
+      "name": "no2 µg/m³",
+      "parameter": {
+        "id": 5,
+        "name": "no2",
+        "units": "µg/m³",
+        "displayName": "NO₂ mass"
+      }
+    },
+    {
+      "id": 40643,
+      "name": "o3 µg/m³",
+      "parameter": {
+        "id": 3,
+        "name": "o3",
+        "units": "µg/m³",
+        "displayName": "O₃ mass"
+      }
+    },
+    {
+      "id": 40632,
+      "name": "pm10 µg/m³",
+      "parameter": {
+        "id": 1,
+        "name": "pm10",
+        "units": "µg/m³",
+        "displayName": "PM10"
+      }
+    },
+    {
+      "id": 40606,
+      "name": "pm25 µg/m³",
+      "parameter": {
+        "id": 2,
+        "name": "pm25",
+        "units": "µg/m³",
+        "displayName": "PM2.5"
+      }
+    }
+  ],
+  "coordinates": {
+    "latitude": 18.675076,
+    "longitude": 73.892743
+  },
+  "licenses": null,
+  "bounds": [
+    73.892743,
+    18.675076,
+    73.892743,
+    18.675076
+  ],
+  "distance": null,
+  "datetimeFirst": {
+    "utc": "2020-12-16T12:15:00Z",
+    "local": "2020-12-16T17:45:00+05:30"
+  },
+  "datetimeLast": {
+    "utc": "2022-07-21T04:45:00Z",
+    "local": "2022-07-21T10:15:00+05:30"
+  }
+}

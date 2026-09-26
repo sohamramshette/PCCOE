@@ -1,0 +1,2691 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-26T11:41:35Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 639459785,
+      "lat": 18.4986595,
+      "lon": 73.9408485,
+      "tags": {
+        "name": "Amir Chicken Shop",
+        "shop": "butcher"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1532852988,
+      "lat": 18.5094611,
+      "lon": 73.9283293,
+      "tags": {
+        "addr:housename": "Destination Center",
+        "name": "Monginis",
+        "shop": "bakery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1532852993,
+      "lat": 18.5124751,
+      "lon": 73.9284704,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:country": "IN",
+        "addr:postcode": "411013",
+        "addr:state": "Maharashtra",
+        "addr:street": "Magarpatta Inner Circle",
+        "amenity": "cafe",
+        "atm": "no",
+        "cuisine": "coffee_shop",
+        "drive_through": "no",
+        "name": "Cafe Coffee Day",
+        "smoking": "no",
+        "takeaway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1532852998,
+      "lat": 18.5099291,
+      "lon": 73.9285868,
+      "tags": {
+        "addr:housename": "Destination Center",
+        "amenity": "bank",
+        "atm": "yes",
+        "brand": "HDFC",
+        "brand:wikidata": "Q631047",
+        "brand:wikipedia": "en:HDFC Bank",
+        "name": "HDFC Bank",
+        "short_name": "HDFC",
+        "website": "https://www.hdfcbank.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1532852999,
+      "lat": 18.5096188,
+      "lon": 73.9283508,
+      "tags": {
+        "addr:city": "Magarpatta City",
+        "addr:housename": "Destination Center",
+        "addr:postcode": "411028",
+        "addr:street": "Destination Centre",
+        "amenity": "restaurant",
+        "name": "Spice Kitchen"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1532853001,
+      "lat": 18.5094711,
+      "lon": 73.9286247,
+      "tags": {
+        "addr:housename": "Destination Center",
+        "amenity": "bank",
+        "atm": "yes",
+        "brand": "Punjab National Bank",
+        "brand:wikidata": "Q2743499",
+        "name": "Punjab National Bank",
+        "name:en": "Punjab National Bank",
+        "short_name": "PNB",
+        "website": "https://www.pnbindia.in",
+        "wikidata": "Q2743499",
+        "wikimedia_commons": "Category:Punjab National Bank",
+        "wikipedia": "en:Punjab National Bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1710015241,
+      "lat": 18.5050823,
+      "lon": 73.9279049,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "Shamli"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1710015243,
+      "lat": 18.5032866,
+      "lon": 73.9277976,
+      "tags": {
+        "amenity": "restaurant",
+        "diet:vegetarian": "only",
+        "name": "Bashri"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2827466704,
+      "lat": 18.5100192,
+      "lon": 73.9282055,
+      "tags": {
+        "addr:city": "Magarpatta City",
+        "addr:postcode": "411028",
+        "addr:street": "Destination Centre",
+        "name": "Krishna Drug Store",
+        "phone": "+919623419036",
+        "shop": "chemist"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2827466756,
+      "lat": 18.5096816,
+      "lon": 73.9281794,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "F-55",
+        "name": "SRK Dreamz Real Estate",
+        "office": "estate_agent",
+        "phone": "+919049514049"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2827466757,
+      "lat": 18.5096421,
+      "lon": 73.9281767,
+      "tags": {
+        "name": "It's Miller Time",
+        "shop": "alcohol"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2827466758,
+      "lat": 18.5096072,
+      "lon": 73.9281761,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "Marrakesh"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2827467013,
+      "lat": 18.5100229,
+      "lon": 73.9281637,
+      "tags": {
+        "addr:housenumber": "F-2",
+        "name": "OM Properties",
+        "office": "estate_agent",
+        "phone": "+919604048412"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2827467015,
+      "lat": 18.509462,
+      "lon": 73.9281851,
+      "tags": {
+        "name": "Kubar Properties",
+        "office": "estate_agent"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2827467016,
+      "lat": 18.5094595,
+      "lon": 73.9282803,
+      "tags": {
+        "name": "Shree Properties",
+        "office": "estate_agent"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2827467019,
+      "lat": 18.5093984,
+      "lon": 73.9281865,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "Chennai Express"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3529997982,
+      "lat": 18.5131194,
+      "lon": 73.9242281,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "Tower 5, Cybercity",
+        "addr:postcode": "411013",
+        "addr:street": "Magarpatta Inner Circle",
+        "name": "Sas R&D India Pvt Ltd",
+        "office": "it",
+        "opening_hours": "09:00-17:00",
+        "smoking": "isolated"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3645569769,
+      "lat": 18.5129817,
+      "lon": 73.9332453,
+      "tags": {
+        "addr:city": "Hadapsar, Pune",
+        "addr:housenumber": "238/239",
+        "addr:postcode": "411028",
+        "addr:street": "Quadra II, Opposite Magarpatta City",
+        "check_date": "2025-02-27",
+        "name": "Tata Consultancy Servives",
+        "office": "company",
+        "website": "https://www.tcs.com",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4154605789,
+      "lat": 18.5029092,
+      "lon": 73.9277341,
+      "tags": {
+        "amenity": "hospital",
+        "name": "Sahyadri Hospital"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4315073051,
+      "lat": 18.4934732,
+      "lon": 73.9326269,
+      "tags": {
+        "addr:postcode": "411028",
+        "addr:street": "Sasane Nagar Road",
+        "amenity": "bank",
+        "brand": "State Bank of India",
+        "brand:wikidata": "Q1340361",
+        "brand:wikipedia": "en:State Bank of India",
+        "name": "State Bank of India",
+        "opening_hours": "Mo-Sa 10:00-16:00",
+        "short_name": "SBI",
+        "wikidata": "Q65991772"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4315091837,
+      "lat": 18.4935105,
+      "lon": 73.9345047,
+      "tags": {
+        "addr:postcode": "411028",
+        "name": "D-Mart",
+        "opening_hours": "Mo-Su 10:00-22:00",
+        "shop": "supermarket"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4315328090,
+      "lat": 18.4936766,
+      "lon": 73.933014,
+      "tags": {
+        "addr:postcode": "411028",
+        "addr:street": "D-Mart Road",
+        "name": "New Poona Bakery",
+        "shop": "bakery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4315330589,
+      "lat": 18.4936791,
+      "lon": 73.9329734,
+      "tags": {
+        "addr:postcode": "411028",
+        "addr:street": "D-Mart Road",
+        "amenity": "fast_food",
+        "name": "Amul Ice Cream"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6262931930,
+      "lat": 18.5012035,
+      "lon": 73.9379293,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:full": "Laxmi Angan, Shatanand Complex, Hadapsar",
+        "addr:housenumber": "226, Shatanand complex, Near PMT Bus Depot, Next to pearl towers, Gadital, Hadapsar",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "addr:street": "Pune Solapur Road",
+        "amenity": "hospital",
+        "emergency": "yes",
+        "healthcare": "hospital",
+        "healthcare:speciality": "laparoscopic_and_general_surgery;Urology;gastroenterology;paediatrics;piles_surgery",
+        "name": "Pawar Surgical Hospital",
+        "operator": "Dr Vijay Pawar",
+        "operator:type": "private",
+        "start_date": "2006-08-14",
+        "website": "https://www.pawarsurgicalhospital.com/",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6906524648,
+      "lat": 18.4990714,
+      "lon": 73.9412525,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:full": "Survey No.10/1/3, Unnati Nagar, Bantar High School, Hadapsar, Pune",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "amenity": "blood_bank",
+        "contact:mobile": "9890244339",
+        "contact:phone": "02026993247; 02026993248",
+        "email": "akshaybloodbankpune@gmail.com",
+        "name": "Akshay Blood Bank",
+        "opening_hours": "24/7",
+        "operator:type": "ngo",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6906524649,
+      "lat": 18.5050386,
+      "lon": 73.9269939,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:full": "B-007, Basement C/o. Noble Hospital, 153 Magarpatta City Road, Hadapsar, Pune",
+        "addr:postcode": "411013",
+        "addr:state": "Maharashtra",
+        "amenity": "blood_bank",
+        "contact:mobile": "9423581029",
+        "contact:phone": "02066285050; 02066285199",
+        "email": "skrcorporate@yahoo.co.uk; noblebloodbank@yahoo.in",
+        "name": "Noble Hospital Blood Bank",
+        "opening_hours": "24/7",
+        "operator:type": "ngo",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7042945051,
+      "lat": 18.5006535,
+      "lon": 73.936556,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "106, Ramanand Complex, Near Gadital, Sofapur Road, Hadapsar",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Mohite Eye Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7044437265,
+      "lat": 18.5034761,
+      "lon": 73.9291031,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "84 Placino Behind Vaibhav Theatre Hadapsar Behind Vaibhav Theatre Hadapsar",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Welfare Medical Foundatios, Mohintara Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7045304709,
+      "lat": 18.5019965,
+      "lon": 73.9348286,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Sr No 229/A 1, Kamdhenu Estate, Hadapsar",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Ushakiran General Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7045518177,
+      "lat": 18.5025879,
+      "lon": 73.9294803,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "15/2A/2A, Opp Vaibhav Theatre, Pune Solapur Road,Hadapsar",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Zenith Hospital, Pune",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7047804836,
+      "lat": 18.5018572,
+      "lon": 73.9322779,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "# 163/A,Bhosale Garden, Iii Pmc Stop, ,Hadapsar",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Alatkar Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7048498777,
+      "lat": 18.5005568,
+      "lon": 73.9365077,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "228, Ramanand Complex,Poona Sholapur, Road, Near Jenaseva Bank",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Remedy Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7049007104,
+      "lat": 18.5019482,
+      "lon": 73.9315805,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "1st Floor L P Classic, Hadapsar, Pune",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "addr:subdistrict": "Pune City",
+        "amenity": "hospital",
+        "name": "Shraddha Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7051681405,
+      "lat": 18.5035837,
+      "lon": 73.9387286,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Hadapsar",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Mams Sumatibhai Shah Ayurved Mahavidyalayas",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7051906956,
+      "lat": 18.4994516,
+      "lon": 73.9377093,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:full": "Parmar Complex, Ground Floor, Behind Lokseva Hanuman Mandir, Gadital, Hadapsar",
+        "addr:housenumber": "Ground Floor",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "addr:street": "Parmar Complex, Landmark: Behind Lokseva Hanuman Mandir Gadital,Pune Solapur Road, Hadapsar",
+        "amenity": "hospital",
+        "healthcare:speciality": "OPHTHALMOLOGIST;orthodontics",
+        "name": "Abane Hospital",
+        "source": "OpenGovernmentData",
+        "website": "https://www.abanehospital.com/abanehospital"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7053694039,
+      "lat": 18.5031602,
+      "lon": 73.9321491,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "G & S Tower, Survey No.153/A, Hissa No.1 To 4/21, Magarpatta, Pune-Solapur Road, Hadapsar",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Sahyadri Hospital Hadapsar",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7053702772,
+      "lat": 18.5011902,
+      "lon": 73.9383772,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Shatanand Complex, First Floor, Near P.M.T. Depo, Gadital",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Nande Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7054524654,
+      "lat": 18.5008462,
+      "lon": 73.9305311,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "84, Palacino Appartments, Behind Vaibhav Theatre, Pune-Solapur Road, Hadapsar, Pune-411028",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "healthcare:speciality": "general",
+        "name": "Mohintara Hospital, Hadapsar",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7064364271,
+      "lat": 18.5023551,
+      "lon": 73.9288205,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Kanchanjunga Arcade, Off Pune, Solapur Road, Hadapsur",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Pooja Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7069813988,
+      "lat": 18.5103392,
+      "lon": 73.9380687,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Survey No 168, 10-11, DP Rd, Malwadi",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Yash Hospital - V.K. Medical Foundation",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7074576510,
+      "lat": 18.503632,
+      "lon": 73.9381224,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Near Samidha Gas Agency, Malwadi, Hadapsar",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Sane Guruji Arogya Kendra",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7157834581,
+      "lat": 18.5006551,
+      "lon": 73.9359616,
+      "tags": {
+        "amenity": "bank",
+        "atm": "yes",
+        "name": "Janaseva Sahakari Bank",
+        "opening_hours": "Mo-Fr 10:00-13:30,14:30-15:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7157923284,
+      "lat": 18.5004494,
+      "lon": 73.9360535,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:postcode": "411028",
+        "addr:street": "Solapur Road",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "healthcare:speciality": "general",
+        "name": "Dhanvantari Hospital"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7649461724,
+      "lat": 18.500617,
+      "lon": 73.9364994,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "1st Floor, Ramanand Complex, Hadapsar, Pune",
+        "addr:postcode": "411028",
+        "addr:state": "Maharastra",
+        "amenity": "hospital",
+        "name": "Shivam Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7649461774,
+      "lat": 18.5035846,
+      "lon": 73.9273481,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Magarpatta Road, North Hadapsar, Pune",
+        "addr:postcode": "411028",
+        "addr:state": "Maharastra",
+        "amenity": "hospital",
+        "name": "Noble Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7649461788,
+      "lat": 18.5015481,
+      "lon": 73.9357865,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Nitin Heights, Opp. Janaseva Bank, Pune - Solapur Road, Hadapsar, Pune",
+        "addr:postcode": "411028",
+        "addr:state": "Maharastra",
+        "amenity": "hospital",
+        "name": "Dharmadhikari Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8813705904,
+      "lat": 18.4934295,
+      "lon": 73.9315228,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Laxminarayan Park, Hadapsar, Pune",
+        "addr:postcode": "411028",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "name": "Varadvinayak Children and Eye Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10102658119,
+      "lat": 18.4943375,
+      "lon": 73.9202449,
+      "tags": {
+        "name:en": "eagleburgann",
+        "office": "company"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10564392446,
+      "lat": 18.500696,
+      "lon": 73.9415815,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "zJiyaji Mention Building, Near UCO Bank",
+        "addr:postcode": "411028",
+        "addr:street": "Solapur - Pune Hwy, Next to Old Post Office, Gadital, Hadapsar",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "healthcare:speciality": "surgery;laparoscopic",
+        "name": "Dr Mhaske Hospital and Research Centre Pvt Ltd"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11909576683,
+      "lat": 18.4974993,
+      "lon": 73.9185285,
+      "tags": {
+        "man_made": "works",
+        "name": "S. S. P. Enterprises"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12641262080,
+      "lat": 18.5032589,
+      "lon": 73.9273693,
+      "tags": {
+        "amenity": "restaurant",
+        "branch": "Hadapsar",
+        "cuisine": "indian",
+        "diet:vegetarian": "yes",
+        "name": "NaadBrahma Idli",
+        "website": "https://naadbramha.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12942222173,
+      "lat": 18.5011847,
+      "lon": 73.9383338,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:postcode": "411028",
+        "addr:street": "Ground Floor, Parmar Complex, Landmark: Behind Lokseva Hanuman Mandir Gadital,Pune Solapur Road, Hadapsar",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Abane Hospital",
+        "operator": "Novosalus Technology",
+        "operator:type": "private"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13351468001,
+      "lat": 18.5039723,
+      "lon": 73.9297032,
+      "tags": {
+        "addr:city": "Hadapsar, Pune,Maharashtra, India",
+        "addr:district": "Pune",
+        "addr:housenumber": "shop 7",
+        "addr:postcode": "411028",
+        "addr:street": "Gandharv Serenity, Near Villoo Poonawala Hospital",
+        "amenity": "hospital",
+        "contact:facebook": "https://www.facebook.com/profile.php?id=61584589980455",
+        "email": "glazedental16@gmail.com",
+        "healthcare": "hospital",
+        "healthcare:speciality": "dentist;dental_clinic;dental_oral_maxillo_facial_surgery;implantology;dentistry",
+        "image": "https://lh3.googleusercontent.com/p/AF1QipPb1vQQkJt5Ba6ymj6sKFm6yAfjpqxqrgkHxYhO=s1360-w1360-h1020-rw",
+        "internet_access": "wlan",
+        "internet_access:fee": "customers",
+        "mobile": "9623989689",
+        "name": "Glaze Dental Clinic - Speciality Dental Clinic and Implant Centre",
+        "opening_hours": "Mo-Su 10:00-22:00",
+        "payment:cash": "yes",
+        "payment:google_pay": "yes",
+        "short_name": "Glaze Dental",
+        "short_name:en": "Glaze Dental Clinic Hadapsar",
+        "start_date": "2025-10-03"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13383294011,
+      "lat": 18.5037181,
+      "lon": 73.921315,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Maharashtra",
+        "addr:housenumber": "Shop No. 1, Gajraj Estate, Near Yash Honda Showroom",
+        "addr:postcode": "411028",
+        "addr:street": "Solapur Road",
+        "mobile": "9270000909",
+        "name": "K. Pees",
+        "opening_hours": "Mo-Su 10:00-22:00",
+        "operator": "Kais",
+        "payment:cash": "yes",
+        "payment:contactless": "yes",
+        "payment:credit_cards": "yes",
+        "payment:debit_cards": "yes",
+        "payment:mastercard": "yes",
+        "payment:visa": "yes",
+        "shop": "mobile_phone"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13879580719,
+      "lat": 18.5004192,
+      "lon": 73.9392677,
+      "tags": {
+        "amenity": "bus_station",
+        "bus": "yes",
+        "check_date": "2026-05-26",
+        "name": "Hadpsar Gadi Tal",
+        "public_transport": "station"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13954514423,
+      "lat": 18.5125336,
+      "lon": 73.9284561,
+      "tags": {
+        "air_conditioning": "yes",
+        "amenity": "cafe",
+        "baby_feeding": "no",
+        "changing_table": "no",
+        "changing_table:count": "0",
+        "food": "yes",
+        "indoor_seating": "yes",
+        "internet_access": "no",
+        "internet_access:fee": "no",
+        "level": "1",
+        "name": "Cafe Peter",
+        "outdoor_seating": "yes",
+        "payment:cash": "yes",
+        "payment:contactless": "yes",
+        "payment:credit_cards": "yes",
+        "payment:cryptocurrencies": "no",
+        "payment:debit_cards": "yes",
+        "payment:qr_code": "yes",
+        "payment:upi": "yes",
+        "payment:visa": "yes",
+        "payment:visa_debit": "yes",
+        "takeaway": "yes",
+        "toilets": "yes",
+        "toilets:wheelchair": "no",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 14051778480,
+      "lat": 18.5022131,
+      "lon": 73.929276,
+      "tags": {
+        "name": "Hari om",
+        "shop": "supermarket"
+      }
+    },
+    {
+      "type": "node",
+      "id": 14143951386,
+      "lat": 18.5057106,
+      "lon": 73.9269091,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:postcode": "411013",
+        "addr:street": "Dr Zirpe's Liver Pancreas Gall bladder Clinic, near knee clinic, opp. to Noble Hospital, North Hadapsar",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "healthcare:speciality": "consultant_liver_transplant;_pancrease_and_hpb_surgeon",
+        "name": "Dr. Dinesh Zirpe | Liver Transplant | Pancreatic & Gall bladder specialist Surgeon",
+        "website": "https://www.liverspecialistpune.in/#home"
+      }
+    },
+    {
+      "type": "way",
+      "id": 87218843,
+      "center": {
+        "lat": 18.5148924,
+        "lon": 73.926317
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Aditi Garden",
+        "name:mr": "\u0905\u0926\u093f\u0924\u0940 \u0909\u0926\u094d\u092f\u093e\u0928"
+      }
+    },
+    {
+      "type": "way",
+      "id": 106496515,
+      "center": {
+        "lat": 18.5099319,
+        "lon": 73.9154482
+      },
+      "tags": {
+        "landuse": "industrial",
+        "name": "Hadapsar Industrial Estate",
+        "name:mr": "\u0939\u0921\u092a\u0938\u0930 \u0914\u0926\u094d\u092f\u094b\u0917\u093f\u0915 \u0935\u0938\u093e\u0939\u0924"
+      }
+    },
+    {
+      "type": "way",
+      "id": 217659258,
+      "center": {
+        "lat": 18.5146832,
+        "lon": 73.9307089
+      },
+      "tags": {
+        "leisure": "garden",
+        "name": "Magarpatta Circle"
+      }
+    },
+    {
+      "type": "way",
+      "id": 217659259,
+      "center": {
+        "lat": 18.5131179,
+        "lon": 73.930626
+      },
+      "tags": {
+        "leisure": "garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218859886,
+      "center": {
+        "lat": 18.5015203,
+        "lon": 73.9275923
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Ram Manohar Lohia Udyan",
+        "name:etymology:wikidata": "Q2759530",
+        "name:mr": "\u0930\u093e\u092e \u092e\u0928\u094b\u0939\u0930 \u0932\u094b\u0939\u093f\u092f\u093e \u0909\u0926\u094d\u092f\u093e\u0928"
+      }
+    },
+    {
+      "type": "way",
+      "id": 220566715,
+      "center": {
+        "lat": 18.5114728,
+        "lon": 73.9220857
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Jasminum",
+        "name:mr": "\u091c\u093e\u0938\u094d\u092e\u093f\u0928\u092e"
+      }
+    },
+    {
+      "type": "way",
+      "id": 234816391,
+      "center": {
+        "lat": 18.5120329,
+        "lon": 73.935537
+      },
+      "tags": {
+        "landuse": "commercial",
+        "name": "Suzlon Energy Ltd."
+      }
+    },
+    {
+      "type": "way",
+      "id": 256431153,
+      "center": {
+        "lat": 18.5156208,
+        "lon": 73.9301573
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 256431155,
+      "center": {
+        "lat": 18.512855,
+        "lon": 73.92451
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "Office No. 301,Pentagon Tower - 1",
+        "addr:postcode": "411013",
+        "addr:street": "Magarpatta City",
+        "description": "Software company",
+        "landuse": "commercial",
+        "name": "Famic Technologies Pvt Ltd",
+        "website": "https://www.famictech.com/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 256431156,
+      "center": {
+        "lat": 18.5125147,
+        "lon": 73.9275094
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 256431157,
+      "center": {
+        "lat": 18.51613,
+        "lon": 73.9280076
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 256431159,
+      "center": {
+        "lat": 18.5099265,
+        "lon": 73.9248874
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265013898,
+      "center": {
+        "lat": 18.5121264,
+        "lon": 73.9219468
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265013899,
+      "center": {
+        "lat": 18.5116522,
+        "lon": 73.9218909
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265094356,
+      "center": {
+        "lat": 18.5096255,
+        "lon": 73.9294397
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265094357,
+      "center": {
+        "lat": 18.5096293,
+        "lon": 73.9296892
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265156189,
+      "center": {
+        "lat": 18.5139772,
+        "lon": 73.9242318
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265156191,
+      "center": {
+        "lat": 18.5134937,
+        "lon": 73.924278
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265156197,
+      "center": {
+        "lat": 18.5131379,
+        "lon": 73.9246186
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157630,
+      "center": {
+        "lat": 18.5137024,
+        "lon": 73.9244585
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157631,
+      "center": {
+        "lat": 18.5136529,
+        "lon": 73.924509
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157632,
+      "center": {
+        "lat": 18.5135956,
+        "lon": 73.9245448
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157633,
+      "center": {
+        "lat": 18.5135245,
+        "lon": 73.9245672
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157634,
+      "center": {
+        "lat": 18.5134097,
+        "lon": 73.9246835
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157635,
+      "center": {
+        "lat": 18.5133874,
+        "lon": 73.9247548
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157636,
+      "center": {
+        "lat": 18.5133422,
+        "lon": 73.9248123
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157637,
+      "center": {
+        "lat": 18.5132934,
+        "lon": 73.9248653
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157641,
+      "center": {
+        "lat": 18.5129776,
+        "lon": 73.9276342
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157642,
+      "center": {
+        "lat": 18.5133053,
+        "lon": 73.9280285
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157643,
+      "center": {
+        "lat": 18.513134,
+        "lon": 73.9274367
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157644,
+      "center": {
+        "lat": 18.5131765,
+        "lon": 73.9274915
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157645,
+      "center": {
+        "lat": 18.5132085,
+        "lon": 73.9275536
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157646,
+      "center": {
+        "lat": 18.5132253,
+        "lon": 73.9276226
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157647,
+      "center": {
+        "lat": 18.513339,
+        "lon": 73.9277656
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157648,
+      "center": {
+        "lat": 18.5134053,
+        "lon": 73.9277981
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157649,
+      "center": {
+        "lat": 18.5134594,
+        "lon": 73.9278413
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157650,
+      "center": {
+        "lat": 18.5135018,
+        "lon": 73.9278942
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157666,
+      "center": {
+        "lat": 18.5153299,
+        "lon": 73.9284176
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157668,
+      "center": {
+        "lat": 18.515144,
+        "lon": 73.9284395
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157669,
+      "center": {
+        "lat": 18.5151169,
+        "lon": 73.9284607
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157670,
+      "center": {
+        "lat": 18.5151293,
+        "lon": 73.928497
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157671,
+      "center": {
+        "lat": 18.5151092,
+        "lon": 73.9285277
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157672,
+      "center": {
+        "lat": 18.5151133,
+        "lon": 73.9285764
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157673,
+      "center": {
+        "lat": 18.5151191,
+        "lon": 73.9287078
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157674,
+      "center": {
+        "lat": 18.515079,
+        "lon": 73.9286728
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 265157675,
+      "center": {
+        "lat": 18.5150969,
+        "lon": 73.92874
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220189,
+      "center": {
+        "lat": 18.5127678,
+        "lon": 73.9213195
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220193,
+      "center": {
+        "lat": 18.5099943,
+        "lon": 73.9228787
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220195,
+      "center": {
+        "lat": 18.5127653,
+        "lon": 73.9217062
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220197,
+      "center": {
+        "lat": 18.5097588,
+        "lon": 73.9223162
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220199,
+      "center": {
+        "lat": 18.5101878,
+        "lon": 73.9221691
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220202,
+      "center": {
+        "lat": 18.5113049,
+        "lon": 73.9217375
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220204,
+      "center": {
+        "lat": 18.5107454,
+        "lon": 73.9219636
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220206,
+      "center": {
+        "lat": 18.5123312,
+        "lon": 73.9214054
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220212,
+      "center": {
+        "lat": 18.512393,
+        "lon": 73.9215694
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220217,
+      "center": {
+        "lat": 18.5099602,
+        "lon": 73.9246391
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220220,
+      "center": {
+        "lat": 18.5101401,
+        "lon": 73.9223461
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220222,
+      "center": {
+        "lat": 18.5105497,
+        "lon": 73.9221759
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220223,
+      "center": {
+        "lat": 18.510335,
+        "lon": 73.9223182
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220225,
+      "center": {
+        "lat": 18.5124398,
+        "lon": 73.9221851
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220226,
+      "center": {
+        "lat": 18.5109136,
+        "lon": 73.9220462
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220228,
+      "center": {
+        "lat": 18.510716,
+        "lon": 73.9222654
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220229,
+      "center": {
+        "lat": 18.5125532,
+        "lon": 73.921847
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220231,
+      "center": {
+        "lat": 18.5121618,
+        "lon": 73.9221968
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220232,
+      "center": {
+        "lat": 18.5099499,
+        "lon": 73.9252135
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220234,
+      "center": {
+        "lat": 18.5116323,
+        "lon": 73.9216083
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220242,
+      "center": {
+        "lat": 18.5100999,
+        "lon": 73.9246349
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220249,
+      "center": {
+        "lat": 18.5100726,
+        "lon": 73.9251436
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220253,
+      "center": {
+        "lat": 18.5098072,
+        "lon": 73.9246325
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 279220257,
+      "center": {
+        "lat": 18.5097753,
+        "lon": 73.9251547
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281331573,
+      "center": {
+        "lat": 18.5113669,
+        "lon": 73.9240356
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281331575,
+      "center": {
+        "lat": 18.511577,
+        "lon": 73.9241037
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281755253,
+      "center": {
+        "lat": 18.5096937,
+        "lon": 73.9266267
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281755254,
+      "center": {
+        "lat": 18.5096572,
+        "lon": 73.9272489
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281755255,
+      "center": {
+        "lat": 18.5090034,
+        "lon": 73.928058
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281755258,
+      "center": {
+        "lat": 18.5110552,
+        "lon": 73.9243288
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281755259,
+      "center": {
+        "lat": 18.5112316,
+        "lon": 73.9242195
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281755260,
+      "center": {
+        "lat": 18.5110975,
+        "lon": 73.9243496
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281755261,
+      "center": {
+        "lat": 18.5110707,
+        "lon": 73.92455
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281755262,
+      "center": {
+        "lat": 18.5111135,
+        "lon": 73.9250007
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281773957,
+      "center": {
+        "lat": 18.511349,
+        "lon": 73.9248332
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281773958,
+      "center": {
+        "lat": 18.5115454,
+        "lon": 73.9249076
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281773959,
+      "center": {
+        "lat": 18.5117153,
+        "lon": 73.9250076
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281773961,
+      "center": {
+        "lat": 18.5118227,
+        "lon": 73.9239467
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281773962,
+      "center": {
+        "lat": 18.5118437,
+        "lon": 73.9243906
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281773963,
+      "center": {
+        "lat": 18.5118011,
+        "lon": 73.9245838
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281773965,
+      "center": {
+        "lat": 18.5111531,
+        "lon": 73.9238729
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281773966,
+      "center": {
+        "lat": 18.5111888,
+        "lon": 73.9230475
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281773967,
+      "center": {
+        "lat": 18.511871,
+        "lon": 73.9230945
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281835448,
+      "center": {
+        "lat": 18.5133468,
+        "lon": 73.9210212
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281835476,
+      "center": {
+        "lat": 18.5121683,
+        "lon": 73.9224083
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281835491,
+      "center": {
+        "lat": 18.5127495,
+        "lon": 73.9224206
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281835499,
+      "center": {
+        "lat": 18.5129192,
+        "lon": 73.9239951
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281835525,
+      "center": {
+        "lat": 18.5132509,
+        "lon": 73.9222041
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 292770490,
+      "center": {
+        "lat": 18.4960379,
+        "lon": 73.9194229
+      },
+      "tags": {
+        "landuse": "industrial",
+        "name": "Ramtekdi Industrial Estate",
+        "name:mr": "\u0930\u093e\u092e\u091f\u0947\u0915\u0921\u0940 \u0914\u0926\u094d\u092f\u094b\u0917\u093f\u0915 \u0935\u0938\u093e\u0939\u0924"
+      }
+    },
+    {
+      "type": "way",
+      "id": 365632489,
+      "center": {
+        "lat": 18.493773,
+        "lon": 73.9311013
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Navjeevan Park Society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 384667642,
+      "center": {
+        "lat": 18.5173482,
+        "lon": 73.9170934
+      },
+      "tags": {
+        "landuse": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 384667643,
+      "center": {
+        "lat": 18.5040104,
+        "lon": 73.9251979
+      },
+      "tags": {
+        "landuse": "commercial",
+        "name": "Vijay Sales"
+      }
+    },
+    {
+      "type": "way",
+      "id": 469320325,
+      "center": {
+        "lat": 18.5096961,
+        "lon": 73.9266108
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "grevillea park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 469322847,
+      "center": {
+        "lat": 18.5111511,
+        "lon": 73.9273805
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Magarpatta City School Ground"
+      }
+    },
+    {
+      "type": "way",
+      "id": 469323826,
+      "center": {
+        "lat": 18.5096639,
+        "lon": 73.9272658
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "club house"
+      }
+    },
+    {
+      "type": "way",
+      "id": 469351177,
+      "center": {
+        "lat": 18.5148931,
+        "lon": 73.9261254
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 469351190,
+      "center": {
+        "lat": 18.5148571,
+        "lon": 73.9268364
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 469351345,
+      "center": {
+        "lat": 18.5142234,
+        "lon": 73.9266005
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 469351564,
+      "center": {
+        "lat": 18.5155297,
+        "lon": 73.9267308
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 469351957,
+      "center": {
+        "lat": 18.5116124,
+        "lon": 73.9313883
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 469392069,
+      "center": {
+        "lat": 18.5106663,
+        "lon": 73.9305666
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 469394293,
+      "center": {
+        "lat": 18.5100548,
+        "lon": 73.9227977
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 469394443,
+      "center": {
+        "lat": 18.511957,
+        "lon": 73.9218934
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 470109423,
+      "center": {
+        "lat": 18.5049275,
+        "lon": 73.9306108
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "bhosale garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 472272180,
+      "center": {
+        "lat": 18.5122117,
+        "lon": 73.9153803
+      },
+      "tags": {
+        "landuse": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 473827085,
+      "center": {
+        "lat": 18.5043441,
+        "lon": 73.9343271
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 756570256,
+      "center": {
+        "lat": 18.5107985,
+        "lon": 73.9355281
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:postcode": "411028",
+        "addr:street": "Malwadi Road",
+        "landuse": "residential",
+        "name": "Marvel Bounty",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 923955976,
+      "center": {
+        "lat": 18.5075757,
+        "lon": 73.9472137
+      },
+      "tags": {
+        "landuse": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1019957219,
+      "center": {
+        "lat": 18.5011638,
+        "lon": 73.9290908
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:postcode": "411028",
+        "addr:street": "Solapur Road",
+        "landuse": "residential",
+        "name": "Samrat Garden",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1153427909,
+      "center": {
+        "lat": 18.4981607,
+        "lon": 73.9314643
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1247692008,
+      "center": {
+        "lat": 18.5148289,
+        "lon": 73.9263493
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1409730518,
+      "center": {
+        "lat": 18.5003555,
+        "lon": 73.9291764
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Agarwal Gardens",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1409958283,
+      "center": {
+        "lat": 18.5030865,
+        "lon": 73.9225041
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Manisha   Apartments",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1409961913,
+      "center": {
+        "lat": 18.4906093,
+        "lon": 73.935586
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Yogiraj Complex",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410095847,
+      "center": {
+        "lat": 18.5048707,
+        "lon": 73.928264
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Narayan Baug Society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410319510,
+      "center": {
+        "lat": 18.5007298,
+        "lon": 73.931296
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Priyanka Residency",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410392004,
+      "center": {
+        "lat": 18.5023521,
+        "lon": 73.9308429
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Bhosale Park",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410469988,
+      "center": {
+        "lat": 18.5054764,
+        "lon": 73.9323355
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Chaurang Sanskruti",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410827345,
+      "center": {
+        "lat": 18.5057586,
+        "lon": 73.9300906
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Samarth Shrushti CO.OP.Housing Society Ltd",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410836885,
+      "center": {
+        "lat": 18.4913505,
+        "lon": 73.9337963
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Binawat Township",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410842203,
+      "center": {
+        "lat": 18.4984587,
+        "lon": 73.9233508
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Mantri Niwas",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410844150,
+      "center": {
+        "lat": 18.5054576,
+        "lon": 73.9388763
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Saraswathi Garden",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410864878,
+      "center": {
+        "lat": 18.5090619,
+        "lon": 73.9282958
+      },
+      "tags": {
+        "landuse": "commercial",
+        "name": "Cocoon Hotel"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410892528,
+      "center": {
+        "lat": 18.4975263,
+        "lon": 73.9371039
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Shanti Residency",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1411140135,
+      "center": {
+        "lat": 18.4986557,
+        "lon": 73.9348661
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Ganga Residency",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1411147323,
+      "center": {
+        "lat": 18.5032234,
+        "lon": 73.9305429
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Unika",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1411389732,
+      "center": {
+        "lat": 18.504806,
+        "lon": 73.9312742
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Vastu Samruddhi Society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1411436434,
+      "center": {
+        "lat": 18.5029002,
+        "lon": 73.933773
+      },
+      "tags": {
+        "landuse": "commercial",
+        "name": "Moistin"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412092294,
+      "center": {
+        "lat": 18.5022726,
+        "lon": 73.9351993
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Shivneri, Kamdhenu Estate Cooperative Housing Society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412103772,
+      "center": {
+        "lat": 18.513102,
+        "lon": 73.9336864
+      },
+      "tags": {
+        "landuse": "commercial",
+        "name": "Tata Consultancy Services"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412104665,
+      "center": {
+        "lat": 18.4961593,
+        "lon": 73.9295803
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Radhika Garden Society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412118055,
+      "center": {
+        "lat": 18.4919231,
+        "lon": 73.9331322
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Siddhivinayak Angan",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412119357,
+      "center": {
+        "lat": 18.5021346,
+        "lon": 73.9252823
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Siddhivinayak Park",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412132220,
+      "center": {
+        "lat": 18.5073058,
+        "lon": 73.9401164
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Nilesh Park",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412185579,
+      "center": {
+        "lat": 18.5008226,
+        "lon": 73.9305986
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Palacino Apartment",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412194827,
+      "center": {
+        "lat": 18.5027602,
+        "lon": 73.9212733
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Suryalok Nagari",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412419629,
+      "center": {
+        "lat": 18.4882351,
+        "lon": 73.934103
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Vardhaman Township",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412549907,
+      "center": {
+        "lat": 18.5027767,
+        "lon": 73.9210228
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Poorva Nagari",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1413213330,
+      "center": {
+        "lat": 18.4898405,
+        "lon": 73.9327604
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Pratik nagar society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1413217361,
+      "center": {
+        "lat": 18.5026253,
+        "lon": 73.9207109
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Ganraj Estate",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1413227286,
+      "center": {
+        "lat": 18.5066626,
+        "lon": 73.9371426
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Jay Prakash CHS",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1413228253,
+      "center": {
+        "lat": 18.5121728,
+        "lon": 73.9335057
+      },
+      "tags": {
+        "landuse": "commercial",
+        "name": "HCL technologies"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1413602623,
+      "center": {
+        "lat": 18.5059001,
+        "lon": 73.9295187
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Shree Laxmi Classic Society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1413603004,
+      "center": {
+        "lat": 18.4927412,
+        "lon": 73.9350243
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Shrawandhara Society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1482291620,
+      "center": {
+        "lat": 18.5118743,
+        "lon": 73.9227984
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:postcode": "411013",
+        "addr:street": "Jasminium, Magarpatta City",
+        "landuse": "residential",
+        "name": "Jasminium Gate 2",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1482292224,
+      "center": {
+        "lat": 18.5099951,
+        "lon": 73.9236929
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:postcode": "411013",
+        "addr:street": "Jasminium, Magarpatta City",
+        "landuse": "residential",
+        "name": "Jasminium Gate 1",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1482298059,
+      "center": {
+        "lat": 18.5135776,
+        "lon": 73.9223191
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Jasminium Gate 3",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1527723389,
+      "center": {
+        "lat": 18.5134583,
+        "lon": 73.9128295
+      },
+      "tags": {
+        "building": "industrial"
+      }
+    }
+  ]
+}

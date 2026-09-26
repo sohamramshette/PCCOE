@@ -1,0 +1,418 @@
+station_id,station_name,element_id,element_type,category,subcategory,name,latitude,longitude,distance_to_station_m,data_type
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",761948537,node,institutional,school,Symbiosis Nursery School,18.533081,73.8377434,1293.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",761948610,node,commercial,pastry,Monginis,18.5300262,73.8366561,1364.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1211826817,node,commercial,fast_food,न्या. रानडे बालक मंदिर,18.5188515,73.8497965,1250.9,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1645621321,node,transportation,bus_station,Manapa Bhavan,18.5230248,73.8534229,884.0,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1690324169,node,commercial,supermarket,CoEP Department of Mathematics,18.5306945,73.8568225,764.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1884439681,node,institutional,school,College of Agriculture,18.5319801,73.8446658,560.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2203119229,node,commercial,pastry,Sweet Chariot,18.527138,73.8416279,902.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2266979717,node,commercial,computer,DCC,18.5176256,73.8446764,1481.0,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2266979719,node,commercial,fast_food,McDonald's,18.5182703,73.8446191,1416.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2273735910,node,commercial,restaurant,Vaishali,18.520848,73.8412179,1356.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2273735911,node,commercial,stationery,Venus Traders,18.5193628,73.8420529,1434.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2289294093,node,institutional,hospital,Surya Sahyadri Hospital,18.521259,73.8556767,1173.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2314870623,node,commercial,restaurant,Roopali,18.5193443,73.8414253,1474.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2314870624,node,commercial,fast_food,Subway,18.5242458,73.8414419,1078.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2410718621,node,commercial,car,DSK Toyota,18.5301849,73.8371555,1312.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2410718623,node,commercial,restaurant,Little Italy,18.5348218,73.8381397,1317.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2410718631,node,commercial,restaurant,Soul Kitch,18.5348843,73.8381849,1315.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2488142173,node,commercial,restaurant,Shivsagar,18.5202983,73.8457959,1161.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2784710434,node,commercial,restaurant,Marrakesh,18.5244163,73.8415682,1056.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2787018959,node,commercial,clothes,United Colors of Benetton,18.5178585,73.8442941,1471.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2787021729,node,commercial,cafe,Cafe Coffee Day,18.522171,73.841185,1250.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2787023153,node,commercial,restaurant,Yana Sizzlers,18.5279415,73.84293,743.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2801208405,node,commercial,bank,Union Bank of India,18.5234997,73.8468419,789.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2815529435,node,commercial,estate_agent,Welworth Realty,18.5204008,73.8458154,1150.0,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2859985519,node,commercial,clothes,Blackberrys,18.5196777,73.8452633,1245.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2859985523,node,commercial,bank,Federal Bank,18.5233029,73.8474353,789.5,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2868930208,node,commercial,sports,Adidas,18.521793,73.8469923,963.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",2962669671,node,commercial,fast_food,Mad Over Donuts,18.5192288,73.8454021,1287.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3269062066,node,commercial,cafe,"Bookbar - Artisanal cafe, bookstore and pizzahouse",18.5254171,73.8413938,1009.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3533166441,node,commercial,estate_agent,D.S. Kulkarni Developers Ltd. (DSK House),18.523818,73.8485283,707.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3533168741,node,commercial,bag,Samsonite,18.5237544,73.8485578,714.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3533206593,node,commercial,cafe,Cafe Coffee Day,18.5228996,73.8483963,810.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3647377242,node,commercial,bank,IDBI Bank,18.5264608,73.8417085,925.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3647377483,node,commercial,bank,Kotak Mahindra Bank,18.5256406,73.8414424,992.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3657496170,node,commercial,bank,Bank of India,18.523593,73.8413081,1134.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3657496187,node,commercial,restaurant,Niranjan,18.5260651,73.8419578,922.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3740997841,node,commercial,educational_institution,IIT-ian's Pace,18.5255039,73.8418526,963.5,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3746861106,node,commercial,cafe,Cafe Coffee Day,18.5250285,73.8416866,1007.0,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3837531761,node,commercial,clothes,Allen Solly,18.5183544,73.8441782,1425.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3837531764,node,commercial,bank,Canara Bank,18.5180542,73.8439103,1467.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3837531765,node,commercial,bank,Union Bank of India,18.518195,73.8445681,1426.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3837531767,node,commercial,cafe,Floyds 23,18.5190715,73.8452439,1309.5,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3837531770,node,commercial,clothes,Louis Philippe,18.5183994,73.8442031,1420.0,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3837531777,node,commercial,bank,SVC Bank,18.5182807,73.8439874,1441.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",3837531778,node,commercial,shoes,Shoe Paradise,18.5182364,73.8446007,1420.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",4096665537,node,commercial,lawyer,Sai Consulting,18.5204962,73.8542894,1176.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",4194017589,node,commercial,financial_advisor,Cholamandalam Investment & Finance Company Private LTD,18.5253578,73.8430266,870.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",4225717790,node,commercial,bank,ICICI Bank,18.5246685,73.8430695,915.9,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",4520447491,node,commercial,cafe,,18.5246063,73.8415847,1042.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",4520464891,node,commercial,cafe,,18.5243666,73.8436958,891.0,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",4520491891,node,commercial,cafe,,18.5221741,73.8443861,1038.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",4730247391,node,commercial,clothes,,18.5185045,73.8566891,1490.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",4730286190,node,commercial,bicycle,,18.5185091,73.856746,1492.9,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",4853188614,node,commercial,restaurant,Supreme Corner,18.520535,73.8460261,1128.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",5050478621,node,commercial,mobile_phone,,18.540747,73.8516941,1204.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",5215769223,node,commercial,craft,,18.523101,73.859014,1261.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",5257379221,node,institutional,school,,18.5337068,73.8386677,1220.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",5257379321,node,commercial,internet_cafe,,18.5264459,73.8420236,896.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",5554773711,node,commercial,bank,"PDCC Bank, Agricultural College Branch",18.5322077,73.8492595,237.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",5554773712,node,commercial,restaurant,Aalok,18.5253926,73.8532647,650.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",6116290213,node,commercial,clothes,Raymond,18.5220658,73.8475313,919.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",6116290216,node,commercial,restaurant,Surabhi,18.5254288,73.8496605,519.5,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",6145662564,node,commercial,restaurant,Gandharva,18.5226465,73.8490851,830.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",6185529693,node,commercial,bank,Janata Sahakari Bank Ltd. Pune,18.523505,73.8461991,816.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",6201762552,node,commercial,restaurant,Aakash,18.5239983,73.8413832,1100.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",6201762553,node,commercial,bank,Axis Bank,18.5231094,73.841182,1179.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",6201762554,node,commercial,bank,Allahabad Bank,18.5224787,73.8412075,1225.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",6201762555,node,commercial,electronics,Reliance Digital,18.5222899,73.8411737,1242.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",6201762556,node,commercial,cafe,Starbucks,18.5224787,73.8411525,1229.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",6201762557,node,commercial,fast_food,Subway,18.5215682,73.8411753,1299.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",6201762558,node,commercial,fast_food,Haldiram's,18.5213482,73.8412222,1314.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",6201762559,node,commercial,newspaper,The Times of India,18.5211803,73.8413,1322.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",6250078437,node,commercial,cafe,Kathaa,18.5208204,73.8405007,1408.9,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",6250078438,node,commercial,bank,State Bank of India,18.536419,73.851137,721.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",6612854042,node,institutional,hospital,ONP Leela Hospital,18.5329215,73.8468085,430.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",7045274083,node,institutional,hospital,Punarvasu Chikitsalaya,18.5284781,73.8423179,788.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",7048881959,node,institutional,hospital,Pramodini Urology Foundation,18.5199125,73.8410217,1449.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",7049516396,node,institutional,hospital,Pune Fertility Center,18.5287757,73.8479868,225.0,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",7051137462,node,institutional,hospital,Dr. Karve Childrens Hospital,18.5259905,73.85012,460.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",7052987873,node,institutional,hospital,Dr.Prakash Katariya Laser Cure,18.5223591,73.8441311,1036.0,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",7068155283,node,institutional,hospital,Pungliya Hospital,18.5226796,73.8508487,835.5,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",7076609433,node,institutional,hospital,Z Y - Vision,18.5247371,73.8408494,1098.5,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",7083324260,node,institutional,hospital,Centre For Laproscopy Surgery,18.5207937,73.8452496,1131.9,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",7615324875,node,transportation,bus_station,PMPML Bus Parking,18.5338511,73.8602685,1199.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",7650321105,node,commercial,fast_food,Fast food,18.5295693,73.8564329,722.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",7651453337,node,commercial,educational_institution,Haribhai V. Desai College,18.518273,73.855527,1456.0,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",7651453353,node,institutional,hospital,Bapat Hospital,18.530365,73.842063,795.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",7651453399,node,institutional,hospital,ASG Eye Hospital,18.528932,73.8436351,642.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",7651453418,node,institutional,hospital,MJM Hospital,18.5245059,73.8438216,870.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",8012406220,node,commercial,restaurant,,18.5248153,73.8416321,1025.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",8096707880,node,commercial,yes,,18.5191489,73.842519,1428.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",8378425319,node,commercial,bank,State Bank of India,18.5293438,73.8580109,890.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",8441743015,node,commercial,restaurant,Lalit Mahal,18.5284491,73.8427597,744.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",9174851579,node,commercial,cafe,Cafe Sky,18.5253605,73.8403187,1111.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",9174988012,node,commercial,camera,Primes & Zooms,18.5313697,73.8423255,779.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",9232843269,node,commercial,restaurant,Mathura,18.5189279,73.8446593,1347.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10016346067,node,commercial,bank,Punjab National Bank,18.5199629,73.8410598,1442.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10016347966,node,commercial,bicycle,SB bikes,18.5300796,73.8617475,1280.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10030779720,node,commercial,motorcycle,Bajaj Chetak experience center,18.5302017,73.8438116,610.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10030782217,node,commercial,motorcycle,Bajaj KTM,18.5387536,73.8514479,981.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10054090699,node,commercial,bank,State Bank of India,18.5303276,73.8429593,700.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10088327705,node,commercial,restaurant,Mess 2,18.5266135,73.8389423,1188.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10092584877,node,commercial,sports,Cyclogist Bike Hub,18.5326136,73.8460659,465.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10172977859,node,institutional,hospital,Oyster and Pearl Hospital,18.5318931,73.8472769,315.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10172977866,node,institutional,hospital,Phadke Hospital,18.5183149,73.843879,1442.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10172986710,node,institutional,hospital,DEENDAYAL MEMORIAL HOSPITAL,18.5249802,73.8411721,1055.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10607887440,node,commercial,copyshop,Kamdhenu,18.5197274,73.8417666,1418.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10607887441,node,commercial,copyshop,New PPC,18.5197265,73.8418114,1415.9,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10607887442,node,commercial,pastry,Cake & cream,18.519684,73.8419006,1414.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10607887443,node,commercial,fast_food,Pizzawala,18.5195972,73.8417593,1430.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10692790205,node,commercial,bank,Udyam Vikas Sahakari Bank,18.5233595,73.8440512,950.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10724927253,node,institutional,school,Aandra association primary school,18.5192589,73.8453597,1285.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10724950765,node,institutional,school,bhisma school of indic studies,18.5178349,73.8449626,1448.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10725596914,node,commercial,cafe,Captain Coffee.,18.5207406,73.8557679,1227.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10725603596,node,commercial,restaurant,Sudamache Pohe,18.520062,73.8562912,1320.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10956621505,node,commercial,bank,,18.5285908,73.8432854,686.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",10956621605,node,commercial,restaurant,,18.5302971,73.8438489,606.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11024194524,node,commercial,educational_institution,ALLEN Career Institute,18.5226964,73.8449296,959.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11024199533,node,commercial,educational_institution,PW Vidyapeeth Pune,18.5213811,73.841336,1303.5,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11064114243,node,commercial,restaurant,Anna,18.5226554,73.8419157,1158.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11093633824,node,commercial,restaurant,Chirp,18.5223189,73.8438225,1058.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11146013987,node,commercial,electronics,OnePlus Showroom,18.5235266,73.8484647,740.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11323257169,node,commercial,restaurant,,18.5192856,73.8433683,1370.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11323266169,node,commercial,cafe,,18.5205671,73.8438757,1219.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11363285158,node,commercial,fast_food,,18.5231358,73.8476316,801.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11363349548,node,commercial,restaurant,Sandeep,18.5229261,73.8474846,828.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11473008546,node,commercial,restaurant,Pizza Hut,18.5220882,73.8411575,1259.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11473008547,node,commercial,fast_food,Venky's Xprs,18.5215191,73.841182,1303.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11505392601,node,commercial,travel_agency,Ajit Travels,18.5247804,73.8498473,592.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11505392603,node,commercial,electronics,Unicorn,18.5246461,73.8496226,606.5,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11766049477,node,commercial,bakery,Santosh Bakery,18.5229957,73.8443822,962.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11766669869,node,commercial,restaurant,Joshi wadewale,18.5225079,73.849542,844.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11771519843,node,commercial,restaurant,Durga Cafe & Janhvis Corner,18.5239007,73.8438136,920.5,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11771534665,node,commercial,restaurant,Rajwadi Gaurav,18.5234768,73.8436739,965.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11819957241,node,commercial,optician,My Spectz,18.5250694,73.8498327,559.9,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11819983331,node,commercial,bank,Federal Bank,18.5289906,73.8527179,351.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11829978481,node,commercial,restaurant,Namaskar Hotel & Bar,18.5241824,73.8435471,916.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11829980051,node,commercial,bakery,Santosh Bakery,18.5236155,73.8436688,954.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",11909388851,node,institutional,hospital,Dr. Rajendra Mehata Hospital,18.5376938,73.8515302,868.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",12176164667,node,institutional,school,,18.5173559,73.8531214,1464.9,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",12347471729,node,commercial,tea,Triveni,18.5193938,73.8410244,1494.9,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",12473144881,node,commercial,clothes,W,18.5201299,73.8410294,1430.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",12473454968,node,commercial,art,Art Station,18.5228754,73.8411189,1202.0,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",12473454970,node,commercial,cafe,Coffee Nation,18.5229626,73.8411319,1194.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",12475129605,node,commercial,restaurant,Asha Dining Hall,18.5198379,73.8430094,1336.0,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",12679864921,node,commercial,computer,Computer Department,18.5307003,73.855437,619.0,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",12680401565,node,commercial,computer,FOSS LAB,18.5313873,73.8552935,617.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",12801991325,node,commercial,fast_food,Guru Misal,18.5212977,73.8463126,1038.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",12801991326,node,commercial,cafe,Blue Tokai Coffee Roasters,18.5241167,73.8437345,908.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",12802005129,node,commercial,restaurant,Athavale Silver Leaf,18.5232985,73.8474067,790.9,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",12802015306,node,commercial,restaurant,Naivaidya,18.5233494,73.8472044,792.0,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",12802031071,node,commercial,restaurant,parampara,18.5234836,73.8470197,784.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",12825417757,node,commercial,tea,Chaha Khari,18.5194193,73.848784,1190.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",12976993801,node,institutional,college,"Biotechnology Department, Fergusson College",18.5264219,73.8402377,1068.5,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13390674189,node,institutional,school,ahilyadevi high school,18.5184408,73.85139,1310.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13394413446,node,institutional,college,COEP,18.53051,73.8579376,880.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13546492147,node,commercial,restaurant,Somae,18.530601,73.8390103,1117.9,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13605940270,node,transportation,bus_station,,18.5226563,73.8535016,924.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13616177778,node,commercial,bakery,Ramsar Bakery,18.5249531,73.8534614,702.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13616189565,node,commercial,travel_agency,Nilkantheshwar Tours And Travels,18.5334317,73.860193,1176.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13616206127,node,transportation,fuel,Shell,18.5309499,73.8540491,478.5,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13616217308,node,commercial,beverages,Nira Vikri Kendra,18.5202344,73.849199,1097.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13624341139,node,commercial,car,Hyundai,18.5250623,73.8536877,706.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13624366141,node,commercial,herbalist,Herbalife,18.5297027,73.8519519,251.9,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13624420814,node,commercial,restaurant,Fountain Family Resto And Bar,18.5267316,73.8520364,454.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13624423289,node,transportation,fuel,Shell,18.5310543,73.8520401,278.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13624425442,node,commercial,bank,HDFC Bank,18.5301043,73.8511592,164.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13629201421,node,institutional,college,Engineering College Ground,18.5279867,73.8532932,454.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13637440656,node,commercial,restaurant,Sea Nonas,18.5257849,73.8417922,952.8,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13637460766,node,commercial,mobile_phone,Airtel,18.5263681,73.8420584,896.9,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13637464784,node,commercial,bed,The Sleep Company,18.5278956,73.8428551,752.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13637465598,node,commercial,restaurant,Peshwa Restaurant,18.5201848,73.8410276,1425.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13637480287,node,commercial,clothes,Zudio,18.5289623,73.8435502,650.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13637491798,node,commercial,bank,SBM Bank,18.5300127,73.8513453,184.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13644196892,node,commercial,government,RTO Pune,18.5299478,73.8632719,1441.5,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13644326122,node,transportation,fuel,Petrol Pump,18.5291084,73.8630476,1422.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13645646232,node,transportation,fuel,Shell,18.5293609,73.8623543,1347.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13645657221,node,commercial,restaurant,New Central Restaurant,18.5262027,73.850606,446.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13649952150,node,institutional,college,Coep ground,18.5284958,73.8532395,423.2,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13650015705,node,institutional,college,Coep College,18.5303369,73.8567993,759.5,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13865568585,node,commercial,bank,State Bank of India,18.523643,73.8481881,733.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13875564971,node,commercial,fast_food,Joshi Wadapaw,18.5195747,73.8410318,1478.5,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13875722187,node,institutional,college,EVS Department,18.5267095,73.8401112,1069.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13959165145,node,commercial,beauty,The Nail Place,18.5185366,73.849981,1286.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13959199789,node,commercial,educational_institution,नवीन मराठी शाळा,18.5179472,73.8488881,1353.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13959205635,node,commercial,tailor,प्रिया लेडीज टेलर्स,18.5186745,73.8497622,1270.6,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13959206649,node,commercial,hairdresser,K Salons Professionals,18.5186575,73.8499598,1272.9,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13959215071,node,commercial,printer_ink,Zeal Infotech,18.5186438,73.8497629,1274.0,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13959216811,node,commercial,florist,जगदंबा फुल भंडार व फ्लॉवर डेकोरेशन,18.5183328,73.8500489,1309.3,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13964049010,node,commercial,houseware,Purewhite Owlery Ventures LLP kent purifier shop,18.5176867,73.8491477,1381.1,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13964487995,node,commercial,motorcycle,Pashankar Honda,18.5270158,73.8511002,377.7,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13964487996,node,commercial,optician,Lenskart,18.5245795,73.8495683,613.9,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13979743105,node,commercial,government,महाराष्ट्र लघुउद्योग विकास महामंडळ मर्या,18.5175646,73.8540396,1470.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",13979808991,node,commercial,restaurant,एरंडेज झकास अस्सल कोल्हापुरी मिसळ,18.5185862,73.8497779,1280.4,ACTIVITY_PROXY
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",14039043235,node,commercial,fast_food,Ganesh Paan Shop,18.5267473,73.8419119,892.2,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",2183552797,node,commercial,supermarket,Janata Sahakari Bank,18.5596624,73.9282894,1484.4,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",2183552808,node,commercial,bakery,Bangalore Iyengar Bakery,18.5618865,73.9318372,1310.5,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",2183569905,node,commercial,bakery,Bangalore Iyengar Bakery,18.56503,73.9166535,1463.3,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",2183569906,node,commercial,cafe,Cafe Coffee Day,18.5657868,73.918066,1294.0,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",2183569908,node,commercial,bank,ICICI Bank,18.5658586,73.9180486,1290.5,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",2183569914,node,commercial,butcher,Amir Chicken And Eggs,18.564969,73.9174743,1399.7,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",7046858056,node,institutional,hospital,Medipoint Hospital,18.5623861,73.933849,1346.5,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",7051070000,node,institutional,hospital,Kohakade Hospital,18.5628578,73.9320606,1217.8,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",7226727387,node,institutional,hospital,PMC Sangamnerkar Hospital (N. G. O.),18.561134,73.921412,1476.6,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",8829660545,node,commercial,bank,State Bank of India,18.5633784,73.9182844,1459.3,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",8829687877,node,commercial,restaurant,Shree Krishna Veg Court,18.5652962,73.9180346,1331.1,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",10692769362,node,institutional,school,air force school viman nagar,18.5733551,73.9167695,1152.8,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",11001450613,node,commercial,company,Technology Innovation and Collaboration Center (TICC),18.5661394,73.9179113,1283.2,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",12048805499,node,commercial,company,Panchshil Business Park - Tower A,18.5643174,73.9178322,1419.1,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",12536607694,node,commercial,educational_institution,EKTA ACADEMY BORATE CLASSES,18.5602966,73.9311837,1459.5,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",12942088174,node,institutional,hospital,Dr. Bhupeshkumar Kaware,18.563916,73.9186177,1391.7,ACTIVITY_PROXY
+11609,"Mhada Colony, Pune - IITM",158889476,way,commercial,mall,Inorbit Mall,18.5604457,73.9206662,1580.6,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",639459785,node,commercial,butcher,Amir Chicken Shop,18.4986595,73.9408485,1450.3,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",1532852988,node,commercial,bakery,Monginis,18.5094611,73.9283293,856.4,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",1532852993,node,commercial,cafe,Cafe Coffee Day,18.5124751,73.9284704,1191.4,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",1532852998,node,commercial,bank,HDFC Bank,18.5099291,73.9285868,911.2,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",1532852999,node,commercial,restaurant,Spice Kitchen,18.5096188,73.9283508,874.0,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",1532853001,node,commercial,bank,Punjab National Bank,18.5094711,73.9286247,861.2,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",1710015241,node,commercial,restaurant,Shamli,18.5050823,73.9279049,367.5,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",1710015243,node,commercial,restaurant,Bashri,18.5032866,73.9277976,168.3,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",2827466704,node,commercial,chemist,Krishna Drug Store,18.5100192,73.9282055,917.0,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",2827466756,node,commercial,estate_agent,SRK Dreamz Real Estate,18.5096816,73.9281794,879.3,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",2827466757,node,commercial,alcohol,It's Miller Time,18.5096421,73.9281767,874.9,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",2827466758,node,commercial,restaurant,Marrakesh,18.5096072,73.9281761,871.0,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",2827467013,node,commercial,estate_agent,OM Properties,18.5100229,73.9281637,917.0,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",2827467015,node,commercial,estate_agent,Kubar Properties,18.509462,73.9281851,855.0,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",2827467016,node,commercial,estate_agent,Shree Properties,18.5094595,73.9282803,855.7,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",2827467019,node,commercial,restaurant,Chennai Express,18.5093984,73.9281865,848.0,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",3529997982,node,commercial,it,Sas R&D India Pvt Ltd,18.5131194,73.9242281,1305.1,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",3645569769,node,commercial,company,Tata Consultancy Servives,18.5129817,73.9332453,1383.1,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",4154605789,node,institutional,hospital,Sahyadri Hospital,18.5029092,73.9277341,125.8,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",4315073051,node,commercial,bank,State Bank of India,18.4934732,73.9326269,1072.2,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",4315091837,node,commercial,supermarket,D-Mart,18.4935105,73.9345047,1181.2,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",4315328090,node,commercial,bakery,New Poona Bakery,18.4936766,73.933014,1074.2,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",4315330589,node,commercial,fast_food,Amul Ice Cream,18.4936791,73.9329734,1071.7,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",6262931930,node,institutional,hospital,Pawar Surgical Hospital,18.5012035,73.9379293,1101.7,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",6906524648,node,commercial,blood_bank,Akshay Blood Bank,18.4990714,73.9412525,1481.6,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",6906524649,node,commercial,blood_bank,Noble Hospital Blood Bank,18.5050386,73.9269939,364.0,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7042945051,node,institutional,hospital,Mohite Eye Hospital,18.5006535,73.936556,963.4,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7044437265,node,institutional,hospital,"Welfare Medical Foundatios, Mohintara Hospital",18.5034761,73.9291031,251.6,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7045304709,node,institutional,hospital,Ushakiran General Hospital,18.5019965,73.9348286,773.1,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7045518177,node,institutional,hospital,"Zenith Hospital, Pune",18.5025879,73.9294803,226.5,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7047804836,node,institutional,hospital,Alatkar Hospital,18.5018572,73.9322779,503.9,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7048498777,node,institutional,hospital,Remedy Hospital,18.5005568,73.9365077,959.9,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7049007104,node,institutional,hospital,Shraddha Hospital,18.5019482,73.9315805,430.6,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7051681405,node,institutional,hospital,Mams Sumatibhai Shah Ayurved Mahavidyalayas,18.5035837,73.9387286,1200.5,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7051906956,node,institutional,hospital,Abane Hospital,18.4994516,73.9377093,1107.8,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7053694039,node,institutional,hospital,Sahyadri Hospital Hadapsar,18.5031602,73.9321491,513.0,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7053702772,node,institutional,hospital,Nande Hospital,18.5011902,73.9383772,1149.0,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7054524654,node,institutional,hospital,"Mohintara Hospital, Hadapsar",18.5008462,73.9305311,336.8,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7064364271,node,institutional,hospital,Pooja Hospital,18.5023551,73.9288205,152.3,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7069813988,node,institutional,hospital,Yash Hospital - V.K. Medical Foundation,18.5103392,73.9380687,1464.1,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7074576510,node,institutional,hospital,Sane Guruji Arogya Kendra,18.503632,73.9381224,1138.5,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7157834581,node,commercial,bank,Janaseva Sahakari Bank,18.5006551,73.9359616,901.3,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7157923284,node,institutional,hospital,Dhanvantari Hospital,18.5004494,73.9360535,914.4,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7649461724,node,institutional,hospital,Shivam Hospital,18.500617,73.9364994,958.0,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7649461774,node,institutional,hospital,Noble Hospital,18.5035846,73.9273481,199.1,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",7649461788,node,institutional,hospital,Dharmadhikari Hospital,18.5015481,73.9357865,874.2,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",8813705904,node,institutional,hospital,Varadvinayak Children and Eye Hospital,18.4934295,73.9315228,1022.9,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",10102658119,node,commercial,company,,18.4943375,73.9202449,1128.7,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",10564392446,node,institutional,hospital,Dr Mhaske Hospital and Research Centre Pvt Ltd,18.500696,73.9415815,1489.9,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",12641262080,node,commercial,restaurant,NaadBrahma Idli,18.5032589,73.9273693,162.8,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",12942222173,node,institutional,hospital,Abane Hospital,18.5011847,73.9383338,1144.4,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",13351468001,node,institutional,hospital,Glaze Dental Clinic - Speciality Dental Clinic and Implant Centre,18.5039723,73.9297032,335.1,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",13383294011,node,commercial,mobile_phone,K. Pees,18.5037181,73.921315,686.2,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",13879580719,node,transportation,bus_station,Hadpsar Gadi Tal,18.5004192,73.9392677,1250.3,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",13954514423,node,commercial,cafe,Cafe Peter,18.5125336,73.9284561,1197.8,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",14051778480,node,commercial,supermarket,Hari om,18.5022131,73.929276,192.8,ACTIVITY_PROXY
+60658,"Hadapsar, Pune - IITM",14143951386,node,institutional,hospital,Dr. Dinesh Zirpe | Liver Transplant | Pancreatic & Gall bladder specialist Surgeon,18.5057106,73.9269091,439.3,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",3842306304,node,commercial,restaurant,Roshal Garden,18.6291755,73.8517596,1249.1,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",4441618789,node,commercial,bank,,18.6370551,73.8447182,564.1,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",7011007178,node,commercial,alcohol,,18.6497845,73.8399956,1435.2,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",7011030687,node,commercial,fast_food,Domino's,18.6481784,73.8503664,909.7,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",7031749429,node,commercial,restaurant,360 Restobar,18.6502755,73.839884,1484.1,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",7031749431,node,commercial,restaurant,PaPa Jees,18.6502733,73.839863,1485.4,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",7054301099,node,institutional,hospital,Desai Hospital,18.6337676,73.8493024,704.9,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",7063077064,node,institutional,hospital,Pataskar Hospital,18.6460596,73.8499998,671.0,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",8814464678,node,institutional,hospital,Life Line Hospital,18.6342365,73.8492487,652.5,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",9536733743,node,institutional,hospital,Patil Eye Hospital,18.646076,73.8499688,672.3,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",10308752104,node,commercial,language_school,Sadhu Vaswani International School,18.6512049,73.8440657,1339.8,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",10312971688,node,commercial,bank,Bank of Maharashtra,18.6370988,73.8447457,558.8,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",10312986287,node,institutional,hospital,Accord hospital,18.6481462,73.8498404,899.1,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",10595726177,node,commercial,fast_food,,18.6349433,73.8435712,809.9,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",10807028855,node,institutional,school,Shri Bhairavnath Secondary and Higher Secondary School,18.6315671,73.8482182,952.4,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",10807037929,node,institutional,college,Shri Bhairavnath Junior College,18.6311902,73.8480258,996.0,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",11482286169,node,commercial,company,Accura Machine Tools,18.6332839,73.8372734,1449.5,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",11777914764,node,commercial,yes,ABRIGOR MEGACORP,18.6355866,73.8529542,652.3,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13144484748,node,commercial,fast_food,McDonald's,18.649566,73.8390961,1482.1,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13144484749,node,commercial,clothes,Puma,18.6496119,73.8390382,1490.1,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13144484750,node,commercial,clothes,Mufti,18.6496489,73.8389668,1498.3,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380081599,node,commercial,fast_food,pani puri thela,18.6368602,73.8444852,596.7,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380354930,node,commercial,tobacco,,18.6377278,73.8461765,397.6,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380385854,node,transportation,fuel,,18.6374147,73.8492172,299.5,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380408108,node,institutional,school,,18.6511964,73.8447243,1313.5,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380413514,node,commercial,tobacco,,18.6403702,73.8502295,133.0,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380422986,node,commercial,educational_institution,Priyadarshani school,18.6374942,73.8411711,874.3,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380437570,node,institutional,school,Swami Samarth,18.632075,73.84073,1247.2,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380450080,node,commercial,repair,Tirupati Auto garage,18.6326092,73.8398264,1276.0,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380453522,node,transportation,fuel,Indian oil,18.6374423,73.849513,300.4,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380466318,node,commercial,repair,,18.6325411,73.8394743,1309.1,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380479800,node,commercial,fast_food,Shree Siddhivinayak Vadapav,18.6324161,73.8375076,1482.0,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380480702,node,commercial,repair,,18.6326781,73.8395215,1295.6,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380510395,node,commercial,fast_food,Shree Siddhivinayak Vadapav center,18.6327784,73.8384684,1376.3,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380529306,node,commercial,fast_food,Singh kebab,18.6329421,73.8381508,1392.9,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380658997,node,commercial,restaurant,Madhuban hotel,18.6374427,73.8457671,450.9,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380680786,node,commercial,fast_food,Ganesh Vadapav,18.6375976,73.844746,527.6,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380803598,node,commercial,chemist,Anand Medical,18.6364332,73.8443909,634.1,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380871585,node,commercial,chemist,Sahara Medial,18.6373293,73.8447326,545.1,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380879877,node,commercial,fast_food,Sahara sweets,18.6373332,73.8447552,542.8,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380880732,node,commercial,supermarket,Pawan traders,18.6372631,73.8447162,550.7,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380898046,node,commercial,cafe,Chai Sutta Bar,18.6482582,73.8435299,1074.7,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380918555,node,commercial,stationery,Kaka stationery,18.6373688,73.8448993,528.1,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380931357,node,commercial,motorcycle_repair,,18.6366467,73.8449811,571.6,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13380939122,node,commercial,pet,Galaxy pet store,18.6373687,73.8448678,530.8,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13381058497,node,commercial,clothes,,18.6498406,73.8398445,1450.4,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13381064806,node,commercial,clothes,Zudioo,18.6372638,73.8470185,378.2,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13381071099,node,transportation,fuel,Bharat petrol pump,18.6407023,73.8500665,130.8,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13381080115,node,institutional,hospital,Medicover Hospital,18.6344258,73.8461038,700.9,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13381090117,node,transportation,fuel,petrol pump,18.6414573,73.8502851,202.8,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13381102485,node,commercial,cafe,street coffee,18.6370528,73.846813,409.8,ACTIVITY_PROXY
+3409331,"Bhosari, Pune - IITM",13382544480,node,commercial,fast_food,Chitale,18.6377931,73.8466561,356.1,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1709944514,node,transportation,fuel,,18.4638412,73.8584177,1129.9,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1709944517,node,commercial,restaurant,Khooshabu,18.4633503,73.8583829,1078.5,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1795991228,node,commercial,fast_food,Dominoz Bharati Vidyapeeth,18.4586483,73.8584426,642.7,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1886884517,node,institutional,hospital,Sanjiwini Hospital,18.4433669,73.848079,1396.2,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1886884518,node,commercial,supermarket,Hanuman Super market,18.446812,73.8491251,1008.6,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",1888334981,node,commercial,car_repair,Chowgule Industries Maruti Service,18.4427184,73.8603123,1460.1,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",2308947788,node,institutional,college,Bharati Vidhyapeeth College Of Engineering,18.4566136,73.8563024,323.1,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",4035849234,node,institutional,college,Pune Institute of Computer Technology,18.4575638,73.8507352,499.6,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",4175356670,node,commercial,educational_institution,CADCAMGURU Solutions Pvt. Ltd.,18.4590342,73.8505579,633.9,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",4342143762,node,institutional,college,Homoeopathic Medical College,18.4597522,73.854721,586.6,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",4735665047,node,institutional,college,Bharati Vidyapeeth Medical College,18.4572357,73.8562612,373.9,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",4735665048,node,institutional,college,Bharati Vidyapeeth Dental College,18.4572866,73.8552849,330.3,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",4780773526,node,commercial,travel_agency,,18.4498128,73.8544834,522.0,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",4780786621,node,commercial,travel_agency,,18.4497495,73.8546293,530.2,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",6893280447,node,commercial,blood_bank,Bharati Vidyapeeth Medical Foundation Blood Bank,18.4594703,73.8562721,594.3,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",6906524642,node,commercial,blood_bank,Chattrapati Shahu Maharaj Pratisthan Blood Bank,18.4661131,73.8576829,1342.6,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",7042939577,node,institutional,hospital,Nityanand Rehabilitation and Residential Mental Heal,18.4565508,73.8515434,361.3,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",7044577805,node,institutional,hospital,"Pawar Hospital, Pune",18.4658771,73.8601231,1410.9,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",7049723536,node,institutional,hospital,Dr Patwardhan Hospital,18.4573697,73.8507923,480.6,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",7053694071,node,institutional,hospital,Siddhi Hospital and Laproscopy Centre Pvt Ltd,18.464116,73.859008,1183.4,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",7065820604,node,institutional,hospital,Sai Sneh Hospital and Diagnostic Centre Pvt Ltd,18.4465478,73.8597831,1062.4,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",7080269673,node,institutional,hospital,Shatayu Hospital,18.4664871,73.857691,1382.8,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",7226627619,node,institutional,hospital,Bharati Vidyapeeth Dental College and Hospital,18.457239,73.855026,316.8,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",7649461741,node,institutional,hospital,Shree Sai Prasad Hospital,18.4495732,73.8484382,818.2,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",7649461804,node,institutional,hospital,Bhakare Super Speciality Hospital,18.448115,73.849133,888.7,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",7651453355,node,institutional,hospital,Shivneri Hospital,18.449571,73.85723,634.5,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",7651453397,node,institutional,hospital,Jeevandhara Multispeciality Hospital,18.4491259,73.8577679,706.2,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",8813559775,node,institutional,hospital,"Government Hospital, Dhankawadi",18.4652208,73.8495579,1288.7,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",8813631718,node,institutional,hospital,Hazrat Maulana Yunus Sahab Rahmatullah Alaih Dawakhana,18.4482157,73.856594,743.0,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",10807015710,node,commercial,restaurant,Katraj Junction,18.4508437,73.8578188,557.7,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",10807153860,node,commercial,bank,Rajashri Shahu Bank,18.464428,73.8578646,1169.7,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",11422209903,node,institutional,college,"Sarhad College of Arts, Commerce and Science",18.4549968,73.85409,56.4,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",11428471740,node,commercial,supermarket,,18.4541966,73.8535245,78.8,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",11431791323,node,commercial,dairy,katraj dairy,18.4542431,73.8538732,44.8,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",11431794457,node,commercial,dairy,,18.4539687,73.8569672,297.8,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",11482377130,node,commercial,ticket,,18.4545326,73.8589549,501.5,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",11583657115,node,institutional,hospital,patil hospital,18.4475111,73.8488292,961.7,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",11583993028,node,commercial,restaurant,Pizza Hut,18.4576616,73.8585915,581.5,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",12153290312,node,commercial,FARM HOUSE,kodam farms,18.4456735,73.8505634,1053.8,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",12550938692,node,commercial,fast_food,Just eat and enjoy !!!,18.4514561,73.8577936,508.2,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13144481425,node,commercial,restaurant,woknfyr,18.4495259,73.8421728,1383.9,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13556672520,node,transportation,bus_station,Late Rajiv Gandhi Udyan BRT,18.4534566,73.8584239,460.4,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13735379604,node,commercial,fast_food,प्रसाद अमृततुल्य,18.4488087,73.8494882,804.7,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13784439976,node,institutional,hospital,"Healing Hands Clinic - Katraj, Pune",18.4539864,73.8409138,1402.6,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13931176797,node,commercial,restaurant,Ganraj Bhel,18.4544898,73.8532847,96.5,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13931176799,node,commercial,restaurant,Chamaparan Mutton,18.4544644,73.8531957,106.0,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13931176800,node,commercial,hairdresser,Hair Expresso,18.4544501,73.8531718,108.6,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13931201602,node,commercial,estate_agent,Pari Estate Agency,18.4543999,73.8530443,122.4,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13931201603,node,commercial,convenience,Mahesh Supermarket,18.4543779,73.8529784,129.6,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13931201604,node,commercial,restaurant,SD Chinese Corner,18.4543447,73.8528437,144.1,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13931201605,node,commercial,fast_food,Sujata Mastani,18.4542961,73.8527481,154.8,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13931201606,node,commercial,hairdresser,Master Unisex Salon,18.4542676,73.8527098,159.3,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13931201607,node,commercial,estate_agent,Suraj Real Estate,18.4542355,73.8526721,163.8,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13931211151,node,commercial,convenience,Suraj Supermarket,18.4536567,73.8511414,336.0,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13931219641,node,commercial,bakery,Crown Bakery,18.453963,73.8515601,284.8,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13931219643,node,commercial,tailor,Sanskar Tailor,18.4537062,73.8511633,332.2,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13931219688,node,commercial,hardware,Shreyas Entreprise,18.4532257,73.851132,353.3,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13934896149,node,commercial,copyshop,Xerox,18.4574462,73.8531327,346.4,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13934896150,node,commercial,restaurant,Punjabi Mess,18.457209,73.8532004,319.1,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13934897599,node,commercial,security,Security Cabin,18.4598821,73.8525727,622.6,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13934902813,node,commercial,security,Security Cabin,18.457646,73.8532131,365.0,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13934905243,node,commercial,jewelry,Shubham Jewellers,18.4529066,73.8511319,368.9,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13934905244,node,commercial,perfumery,The Perfume House,18.4528055,73.851156,372.3,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13934910338,node,commercial,security,Security Cabin,18.4590314,73.8526656,529.2,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13934924013,node,commercial,restaurant,Pizza Toons,18.4569603,73.8532363,291.8,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13934931014,node,commercial,restaurant,Legendary Burger,18.4569091,73.8532352,286.6,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13934931015,node,commercial,fast_food,Thick Drip,18.456749,73.8532824,268.2,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13934931016,node,commercial,bakery,Maaru Bakers,18.4566807,73.8533027,260.3,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13934931017,node,commercial,restaurant,Rolls Mania,18.4565805,73.8533106,249.6,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13934931018,node,commercial,restaurant,Chinese Katta,18.4565435,73.853313,245.7,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13934943002,node,commercial,restaurant,Ashirwad Dining Hall,18.4571076,73.8532285,307.5,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13935106263,node,commercial,restaurant,Abhishek Hotel,18.4561374,73.8533956,200.9,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13935137438,node,commercial,restaurant,Crazy Cheesy Cafe,18.4563145,73.8533437,221.1,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13935140268,node,commercial,stationery,SP Stationers,18.4560378,73.8534007,190.6,ACTIVITY_PROXY
+3409438,"Katraj Dairy, Pune - MPCB",13935163461,node,commercial,cafe,Street Coffee,18.4558565,73.8531483,187.2,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",761910880,node,commercial,restaurant,Rajwada,18.5494,73.8042565,1440.4,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",1202781532,node,commercial,bank,Cosmos Bank Pashan Branch,18.5373285,73.7935948,1258.5,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",2739397822,node,commercial,research,h cross,18.5468582,73.805337,1151.9,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",2801208415,node,commercial,car,Volkswagen Pune West,18.5403032,73.8179407,1378.1,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",3657496185,node,commercial,pastry,Monginis,18.5402467,73.793995,1282.5,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",3657496188,node,commercial,bank,Oriental Bank of Commerce,18.541331,73.7932518,1398.5,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",3657496190,node,commercial,bank,PMC Bank,18.5410211,73.7925951,1450.4,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",3657496196,node,commercial,bank,Saraswat Bank Pashan Branch,18.5413722,73.7930241,1422.5,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",6466034886,node,institutional,school,,18.5413577,73.7931307,1411.5,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",8478889235,node,commercial,yes,CLR FACILITY SERVICES PVT. LTD,18.5372815,73.7934878,1269.4,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",9965869775,node,institutional,school,St. Edmund Campion Preschool,18.5359982,73.8192931,1455.2,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",10301953889,node,commercial,books,Prabhadeep,18.5461836,73.8031407,1105.1,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",11476253227,node,commercial,electronics,Yogiraj Electronics,18.537059,73.7956957,1035.5,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",11476253230,node,commercial,gas,,18.5368353,73.7955634,1048.2,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",11476253235,node,commercial,hairdresser,Famous Hair Dressers,18.5369942,73.7956715,1037.6,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",11476253238,node,commercial,variety_store,Shree Enterprises,18.5369147,73.7956296,1041.6,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",11476253240,node,commercial,variety_store,Friends Enterprises,18.5368715,73.7955995,1044.6,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",11703326044,node,institutional,school,Sahyadri international school and junior college,18.537721,73.7946627,1150.6,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",11820012777,node,commercial,motorcycle,,18.5403384,73.818224,1407.7,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",13169236412,node,commercial,gas,HP Gas (Aundh Gas),18.5402533,73.8157941,1162.7,ACTIVITY_PROXY
+3409526,"Panchawati_Pashan, Pune - IITM",13169236413,node,commercial,convenience,Narendra Stores,18.5404008,73.8157771,1167.1,ACTIVITY_PROXY

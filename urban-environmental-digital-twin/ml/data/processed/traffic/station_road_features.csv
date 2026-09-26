@@ -1,0 +1,7 @@
+location_id,station_name,zone_type,latitude,longitude,buffer_radius_m,buffer_area_km2,total_road_segments,total_road_length_km,major_road_length_km,local_road_length_km,major_road_density_km_per_km2,total_road_density_km_per_km2,distance_to_nearest_major_road_m,nearest_major_road_name,nearest_major_road_class,data_type
+11609,"Mhada Colony, Pune - IITM",North-Eastern Residential / Airport Corridor,18.573,73.9277,1500,7.07,295,42.97,5.88,37.08,0.832,6.079,1118.4,Nagar Road,trunk,STATIC_ROAD_NETWORK
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",Commercial / Educational Urban Core,18.5301,73.8496,1500,7.07,789,108.68,36.86,71.82,5.214,15.375,8.4,Ganeshkhind Road,trunk,STATIC_ROAD_NETWORK
+60658,"Hadapsar, Pune - IITM",Eastern Commercial / Mixed Suburban Corridor,18.5018,73.9275,1500,7.07,937,136.96,17.61,119.35,2.492,19.376,53.6,Solapur Road,trunk,STATIC_ROAD_NETWORK
+3409331,"Bhosari, Pune - IITM",Northern Heavy Industrial / Highway Hub (PCMC),18.6401,73.849,1500,7.07,646,138.21,39.78,98.43,5.628,19.553,138.3,Pune Nashik Road,trunk,STATIC_ROAD_NETWORK
+3409438,"Katraj Dairy, Pune - MPCB",Southern Highway Chokepoint / Ghat Gateway,18.4545,73.8542,1500,7.07,1415,177.41,19.12,158.29,2.704,25.098,424.9,Unnamed,trunk_link,STATIC_ROAD_NETWORK
+3409526,"Panchawati_Pashan, Pune - IITM",Western Institutional / Foothill Background,18.5365,73.8055,1500,7.07,250,34.36,8.33,26.03,1.178,4.861,154.6,Dr. Homi Bhabha Marg,secondary,STATIC_ROAD_NETWORK

@@ -1,0 +1,6 @@
+subgroup,n_test,persistence_mae,hgb_mae,hgb_rmse,hgb_r2,mae_improvement
+Diurnal: Daytime (06:00-18:00 IST),4973,4.2621,4.1863,9.1514,0.4082,0.0758
+Diurnal: Nighttime (18:00-06:00 IST),4796,4.1023,4.0173,9.0657,0.5005,0.0849
+Season: Active Monsoon (Jul-Sep),9769,4.1837,4.1034,9.1094,0.4581,0.0803
+Pollution: Moderate/Low PM2.5 (<= 35 ug/m3),9271,3.8462,3.8214,6.7891,0.3522,0.0248
+Pollution: Elevated PM2.5 (> 35 ug/m3),498,10.4655,9.3519,27.7442,0.3275,1.1135

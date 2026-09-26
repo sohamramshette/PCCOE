@@ -1,0 +1,4156 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-26T11:37:35Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 761948537,
+      "lat": 18.533081,
+      "lon": 73.8377434,
+      "tags": {
+        "amenity": "school",
+        "check_date": "2026-03-10",
+        "name": "Symbiosis Nursery School"
+      }
+    },
+    {
+      "type": "node",
+      "id": 761948610,
+      "lat": 18.5300262,
+      "lon": 73.8366561,
+      "tags": {
+        "brand": "Monginis",
+        "brand:wikidata": "Q6899504",
+        "diet:vegetarian": "yes",
+        "name": "Monginis",
+        "name:bn": "\u09ae\u09a8\u099c\u09bf\u09a8\u09bf\u09b8",
+        "name:en": "Monginis",
+        "payment:cash": "yes",
+        "shop": "pastry",
+        "takeaway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1211826817,
+      "lat": 18.5188515,
+      "lon": 73.8497965,
+      "tags": {
+        "amenity": "fast_food",
+        "check_date": "2026-03-12",
+        "name": "\u0928\u094d\u092f\u093e. \u0930\u093e\u0928\u0921\u0947 \u092c\u093e\u0932\u0915 \u092e\u0902\u0926\u093f\u0930"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1645621321,
+      "lat": 18.5230248,
+      "lon": 73.8534229,
+      "tags": {
+        "amenity": "bus_station",
+        "bus": "yes",
+        "check_date": "2026-03-12",
+        "internet_access": "no",
+        "name": "Manapa Bhavan",
+        "name:mr": "\u092e\u0928\u092a\u093e \u092d\u0935\u0928",
+        "network": "PMPML",
+        "operator": "PMPML",
+        "public_transport": "station"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1690324169,
+      "lat": 18.5306945,
+      "lon": 73.8568225,
+      "tags": {
+        "check_date": "2026-03-12",
+        "name": "CoEP Department of Mathematics",
+        "shop": "supermarket"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1884439681,
+      "lat": 18.5319801,
+      "lon": 73.8446658,
+      "tags": {
+        "addr:postcode": "411005",
+        "addr:street": "Shivaji Nagar",
+        "amenity": "school",
+        "check_date": "2026-03-12",
+        "name": "College of Agriculture"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2203119229,
+      "lat": 18.527138,
+      "lon": 73.8416279,
+      "tags": {
+        "amenity": "cafe",
+        "brand": "Sweet Chariot",
+        "brand:wikidata": "Q124374392",
+        "delivery": "yes",
+        "name": "Sweet Chariot",
+        "shop": "pastry",
+        "takeaway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2266979717,
+      "lat": 18.5176256,
+      "lon": 73.8446764,
+      "tags": {
+        "name": "DCC",
+        "shop": "computer"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2266979719,
+      "lat": 18.5182703,
+      "lon": 73.8446191,
+      "tags": {
+        "addr:housename": "Suyog Plaza",
+        "addr:housenumber": "1728",
+        "addr:postcode": "411004",
+        "addr:street": "Jangli Maharaj Path",
+        "amenity": "fast_food",
+        "brand": "McDonald's",
+        "brand:pa": "\u0a2e\u0a48\u0a15\u0a21\u0a4b\u0a28\u0a32\u0a21\u2019\u0a1c\u0a3c",
+        "brand:ur": "\u0645\u06a9\u0688\u0648\u0646\u0644\u0688\u0632",
+        "brand:wikidata": "Q38076",
+        "brand:wikipedia": "en:McDonald's",
+        "brand:wikipedia:pa": "\u0a2e\u0a48\u0a15\u0a21\u0a4b\u0a28\u0a32\u0a21\u2019\u0a1c\u0a3c",
+        "brand:wikipedia:ur": "\u0645\u06a9\u0688\u0648\u0646\u0644\u0688\u0632",
+        "cuisine": "burger",
+        "name": "McDonald's",
+        "name:mr": "\u092e\u0945\u0915\u0921\u0949\u0928\u0932\u094d\u0921\u094d\u0938",
+        "name:pa": "\u0a2e\u0a48\u0a15\u0a21\u0a4b\u0a28\u0a32\u0a21\u2019\u0a1c\u0a3c",
+        "name:ur": "\u0645\u06a9\u0688\u0648\u0646\u0644\u0688\u0632",
+        "opening_hours": "Mo-Su 07:00-24:00",
+        "takeaway": "yes",
+        "website": "https://www.mcdonaldsindia.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2273735910,
+      "lat": 18.520848,
+      "lon": 73.8412179,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2025-01-04",
+        "cuisine": "indian",
+        "name": "Vaishali",
+        "name:en": "Vaishali",
+        "name:mr": "\u0935\u0948\u0936\u093e\u0932\u0940"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2273735911,
+      "lat": 18.5193628,
+      "lon": 73.8420529,
+      "tags": {
+        "addr:floor": "G",
+        "check_date": "2025-01-04",
+        "level": "0",
+        "name": "Venus Traders",
+        "name:en": "Venus Traders",
+        "name:mr": "\u0935\u094d\u0939\u0940\u0928\u0938 \u091f\u094d\u0930\u0947\u0921\u0930\u094d\u0938",
+        "shop": "stationery",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2289294093,
+      "lat": 18.521259,
+      "lon": 73.8556767,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:full": "Near Shaniwar Wada",
+        "addr:housenumber": "1317",
+        "addr:postcode": "411011",
+        "addr:street": "Agarwal Road",
+        "addr:suburb": "Kasba Peth",
+        "amenity": "hospital",
+        "check_date": "2026-03-12",
+        "healthcare": "hospital",
+        "name": "Surya Sahyadri Hospital",
+        "name:mr": "\u0938\u0941\u0930\u094d\u092f\u093e \u0930\u0941\u0917\u094d\u0923\u093e\u0932\u092f",
+        "operator": "Sahyadri Hospitals",
+        "phone": "02024574232",
+        "website": "https://www.sahyadrihospital.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2314870623,
+      "lat": 18.5193443,
+      "lon": 73.8414253,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "indian",
+        "name": "Roopali",
+        "name:mr": "\u0930\u0942\u092a\u093e\u0932\u0940"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2314870624,
+      "lat": 18.5242458,
+      "lon": 73.8414419,
+      "tags": {
+        "amenity": "fast_food",
+        "brand": "Subway",
+        "brand:pa": "\u0a38\u0a2c\u0a35\u0a47\u0a05",
+        "brand:ur": "\u0633\u0628 \u0648\u06d2",
+        "brand:wikidata": "Q244457",
+        "brand:wikipedia": "en:Subway (restaurant)",
+        "cuisine": "sandwich",
+        "name": "Subway",
+        "name:pa": "\u0a38\u0a2c\u0a35\u0a47\u0a05",
+        "name:ur": "\u0633\u0628 \u0648\u06d2",
+        "takeaway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2410718621,
+      "lat": 18.5301849,
+      "lon": 73.8371555,
+      "tags": {
+        "brand": "Toyota",
+        "brand:wikidata": "Q53268",
+        "name": "DSK Toyota",
+        "operator": "DSK",
+        "service": "dealer",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2410718623,
+      "lat": 18.5348218,
+      "lon": 73.8381397,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-03-10",
+        "cuisine": "italian",
+        "name": "Little Italy"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2410718631,
+      "lat": 18.5348843,
+      "lon": 73.8381849,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-03-10",
+        "name": "Soul Kitch"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2488142173,
+      "lat": 18.5202983,
+      "lon": 73.8457959,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "indian",
+        "name": "Shivsagar",
+        "name:mr": "\u0936\u093f\u0935\u0938\u093e\u0917\u0930",
+        "phone": "02025889601",
+        "website": "https://shivsagar.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2784710434,
+      "lat": 18.5244163,
+      "lon": 73.8415682,
+      "tags": {
+        "amenity": "restaurant",
+        "capacity": "50",
+        "cuisine": "regional",
+        "name": "Marrakesh"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2787018959,
+      "lat": 18.5178585,
+      "lon": 73.8442941,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housename": "Renaissance Complex",
+        "addr:housenumber": "1277-A",
+        "addr:street": "Jangli Maharaj Path",
+        "brand": "United Colors of Benetton",
+        "brand:wikidata": "Q817139",
+        "check_date:opening_hours": "2022-12-07",
+        "name": "United Colors of Benetton",
+        "opening_hours": "Mo-Su 10:00-22:00",
+        "phone": "02025532542",
+        "shop": "clothes",
+        "short_name": "Benetton"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2787021729,
+      "lat": 18.522171,
+      "lon": 73.841185,
+      "tags": {
+        "amenity": "cafe",
+        "brand": "Cafe Coffee Day",
+        "brand:wikidata": "Q5017235",
+        "brand:wikipedia": "en:Caf\u00e9 Coffee Day",
+        "cuisine": "coffee_shop",
+        "internet_access": "yes",
+        "name": "Cafe Coffee Day",
+        "takeaway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2787023153,
+      "lat": 18.5279415,
+      "lon": 73.84293,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "sizzlers",
+        "name": "Yana Sizzlers",
+        "name:mr": "\u092f\u093e\u0928\u093e \u0938\u093f\u091d\u0932\u0930\u094d\u0938",
+        "opening_hours": "Mo-Su 12:00-23:00",
+        "phone": "02066013897",
+        "website": "https://www.yanasizzlers.com/",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2801208405,
+      "lat": 18.5234997,
+      "lon": 73.8468419,
+      "tags": {
+        "amenity": "bank",
+        "atm": "yes",
+        "brand": "Union Bank of India",
+        "brand:wikidata": "Q2004078",
+        "brand:wikipedia": "en:Andhra Bank",
+        "name": "Union Bank of India",
+        "name:en": "Andhra Bank",
+        "name:mr": "\u0906\u0902\u0927\u094d\u0930\u093e \u092c\u0901\u0915",
+        "operator": "Andhra Bank",
+        "website": "https://www.andhrabank.in"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2815529435,
+      "lat": 18.5204008,
+      "lon": 73.8458154,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "Butte Patil Chambers, Off. No. 1, 2 nd Floor, Near Shivsagar Hotel",
+        "addr:postcode": "411004",
+        "addr:street": "Jangli Maharaj Path",
+        "name": "Welworth Realty",
+        "office": "estate_agent",
+        "phone": "020 - 25530544",
+        "website": "http://welworthrealty.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2859985519,
+      "lat": 18.5196777,
+      "lon": 73.8452633,
+      "tags": {
+        "brand": "Blackberrys",
+        "brand:wikidata": "Q4922570",
+        "name": "Blackberrys",
+        "name:mr": "\u092c\u094d\u0932\u0945\u0915\u092c\u0947\u0930\u0940\u091c",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2859985523,
+      "lat": 18.5233029,
+      "lon": 73.8474353,
+      "tags": {
+        "amenity": "bank",
+        "atm": "yes",
+        "brand": "Federal Bank",
+        "brand:wikidata": "Q2044983",
+        "brand:wikipedia": "en:Federal Bank",
+        "name": "Federal Bank",
+        "name:en": "Federal Bank",
+        "name:mr": "\u092b\u0947\u0921\u0930\u0932 \u092c\u0901\u0915",
+        "operator": "Federal Bank",
+        "website": "https://www.federalbank.co.in"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2868930208,
+      "lat": 18.521793,
+      "lon": 73.8469923,
+      "tags": {
+        "addr:street": "JM Road",
+        "brand": "Adidas",
+        "brand:wikidata": "Q3895",
+        "name": "Adidas",
+        "name:mr": "\u0906\u0926\u093f\u0926\u093e\u0938",
+        "phone": "+918003893845",
+        "shop": "sports",
+        "website": "https://www.adidas.co.in/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2962669671,
+      "lat": 18.5192288,
+      "lon": 73.8454021,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:postcode": "411004",
+        "addr:street": "Jangli Maharaj Road",
+        "amenity": "fast_food",
+        "cuisine": "donut",
+        "name": "Mad Over Donuts",
+        "name:mr": "\u092e\u0945\u0921 \u0913\u0935\u094d\u0939\u0930 \u0921\u094b\u0928\u091f\u094d\u0938",
+        "opening_hours": "Mo-Su 09:00-23:00",
+        "phone": "02025530117",
+        "website": "https://www.madoverdonuts.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3269062066,
+      "lat": 18.5254171,
+      "lon": 73.8413938,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:housenumber": "Ground Floor, Sanas Memories, 1&2,",
+        "addr:postcode": "411003",
+        "addr:street": "Fergusson College Road",
+        "amenity": "cafe",
+        "cuisine": "coffee_shop",
+        "internet_access": "yes",
+        "name": "Bookbar - Artisanal cafe, bookstore and pizzahouse",
+        "opening_hours": "Mo-Su 10:00-23:30",
+        "outdoor_seating": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3533166441,
+      "lat": 18.523818,
+      "lon": 73.8485283,
+      "tags": {
+        "email": "sales@dskdl.com",
+        "fax": "02025535772",
+        "name": "D.S. Kulkarni Developers Ltd. (DSK House)",
+        "office": "estate_agent",
+        "phone": "02066047100",
+        "website": "http://www.dskdl.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3533168741,
+      "lat": 18.5237544,
+      "lon": 73.8485578,
+      "tags": {
+        "brand": "Samsonite",
+        "brand:wikidata": "Q1203426",
+        "name": "Samsonite",
+        "shop": "bag"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3533206593,
+      "lat": 18.5228996,
+      "lon": 73.8483963,
+      "tags": {
+        "amenity": "cafe",
+        "brand": "Cafe Coffee Day",
+        "brand:wikidata": "Q5017235",
+        "cuisine": "coffee_shop",
+        "name": "Cafe Coffee Day",
+        "opening_hours": "Mo-Su 09:00-23:00",
+        "phone": "+919326877251",
+        "takeaway": "yes",
+        "website": "https://www.cafecoffeeday.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3647377242,
+      "lat": 18.5264608,
+      "lon": 73.8417085,
+      "tags": {
+        "amenity": "bank",
+        "brand": "IDBI Bank",
+        "brand:wikidata": "Q3633485",
+        "brand:wikipedia": "en:IDBI Bank",
+        "name": "IDBI Bank",
+        "name:en": "IDBI Bank",
+        "old_name": "Industrial Development Bank of India",
+        "short_name": "IDBI",
+        "website": "https://www.idbi.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3647377483,
+      "lat": 18.5256406,
+      "lon": 73.8414424,
+      "tags": {
+        "amenity": "bank",
+        "brand": "Kotak Mahindra Bank",
+        "brand:wikidata": "Q2040404",
+        "name": "Kotak Mahindra Bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3657496170,
+      "lat": 18.523593,
+      "lon": 73.8413081,
+      "tags": {
+        "amenity": "bank",
+        "brand": "Bank of India",
+        "brand:wikidata": "Q2004439",
+        "brand:wikipedia": "en:Bank of India",
+        "name": "Bank of India",
+        "name:en": "Bank of India",
+        "name:mr": "\u092c\u0901\u0915 \u0911\u092b \u0907\u0902\u0921\u093f\u092f\u093e",
+        "operator": "Bank of India",
+        "short_name": "BoI",
+        "website": "https://www.bankofindia.co.in/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3657496187,
+      "lat": 18.5260651,
+      "lon": 73.8419578,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "Niranjan",
+        "name:mr": "\u0928\u093f\u0930\u0902\u091c\u0928"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3740997841,
+      "lat": 18.5255039,
+      "lon": 73.8418526,
+      "tags": {
+        "addr:housename": "Nandadeep",
+        "addr:housenumber": "101",
+        "addr:place": "Shivaji Nagar",
+        "addr:postcode": "411005",
+        "addr:street": "F C Road",
+        "contact:mobile": "+91 932 153 1777;+91 907 567 7458;+91 788 788 1666",
+        "level": "2",
+        "name": "IIT-ian's Pace",
+        "office": "educational_institution",
+        "phone": "+91 20 3242 3377",
+        "website": "https://iitianspace.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3746861106,
+      "lat": 18.5250285,
+      "lon": 73.8416866,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housename": "Bhosale Heights",
+        "addr:postcode": "411005",
+        "addr:street": "Gopal Krushna Gokhale Path",
+        "amenity": "cafe",
+        "brand": "Cafe Coffee Day",
+        "brand:wikidata": "Q5017235",
+        "brand:wikipedia": "en:Caf\u00e9 Coffee Day",
+        "cuisine": "coffee_shop",
+        "name": "Cafe Coffee Day",
+        "opening_hours": "Mo-Su 09:00-23:00",
+        "phone": "+919272200142",
+        "takeaway": "yes",
+        "website": "https://www.cafecoffeeday.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3837531761,
+      "lat": 18.5183544,
+      "lon": 73.8441782,
+      "tags": {
+        "brand": "Allen Solly",
+        "brand:wikidata": "Q110036995",
+        "check_date": "2024-04-14",
+        "name": "Allen Solly",
+        "name:en": "Allen Solly",
+        "name:mr": "\u0905\u0945\u0932\u0928 \u0938\u094b\u0932\u0940",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3837531764,
+      "lat": 18.5180542,
+      "lon": 73.8439103,
+      "tags": {
+        "amenity": "bank",
+        "brand": "Canara Bank",
+        "brand:en": "Canara Bank",
+        "brand:hi": "\u0915\u0947\u0928\u0930\u093e \u092c\u0948\u0902\u0915",
+        "brand:kn": "\u0c95\u0cc6\u0ca8\u0cb0\u0cbe \u0cac\u0ccd\u0caf\u0cbe\u0c82\u0c95\u0ccd",
+        "brand:pa": "\u0a15\u0a47\u0a28\u0a30\u0a3e \u0a2c\u0a48\u0a02\u0a15",
+        "brand:pnb": "\u06a9\u06cc\u0646\u0631\u0627 \u0628\u06cc\u0646\u06a9",
+        "brand:ur": "\u06a9\u06cc\u0646\u0631\u0627 \u0628\u06cc\u0646\u06a9",
+        "brand:wikidata": "Q2003777",
+        "brand:wikipedia": "en:Canara Bank",
+        "brand:wikipedia:pa": "\u0a15\u0a47\u0a28\u0a30\u0a3e \u0a2c\u0a48\u0a02\u0a15",
+        "name": "Canara Bank",
+        "name:en": "Canara Bank",
+        "name:hi": "\u0915\u0947\u0928\u0930\u093e \u092c\u0948\u0902\u0915",
+        "name:kn": "\u0c95\u0cc6\u0ca8\u0cb0\u0cbe \u0cac\u0ccd\u0caf\u0cbe\u0c82\u0c95\u0ccd",
+        "name:mr": "\u0915\u0945\u0928\u0930\u093e \u092c\u0901\u0915",
+        "name:pa": "\u0a15\u0a47\u0a28\u0a30\u0a3e \u0a2c\u0a48\u0a02\u0a15",
+        "name:pnb": "\u06a9\u06cc\u0646\u0631\u0627 \u0628\u06cc\u0646\u06a9",
+        "name:ur": "\u06a9\u06cc\u0646\u0631\u0627 \u0628\u06cc\u0646\u06a9",
+        "website": "https://www.canarabank.com/",
+        "wikidata": "Q73865794"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3837531765,
+      "lat": 18.518195,
+      "lon": 73.8445681,
+      "tags": {
+        "addr:housenumber": "1728",
+        "addr:postcode": "411004",
+        "addr:street": "Jangli Maharaj Path",
+        "amenity": "bank",
+        "brand": "Union Bank of India",
+        "brand:wikidata": "Q2004078",
+        "brand:wikipedia": "en:Corporation Bank",
+        "name": "Union Bank of India",
+        "name:en": "Corporation Bank",
+        "name:mr": "\u0915\u0949\u0930\u094d\u092a\u094b\u0930\u0947\u0936\u0928 \u092c\u0901\u0915",
+        "website": "https://corpbank.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3837531767,
+      "lat": 18.5190715,
+      "lon": 73.8452439,
+      "tags": {
+        "amenity": "cafe",
+        "name": "Floyds 23",
+        "name:mr": "\u092b\u094d\u0932\u0949\u0907\u0921\u094d\u0938 \u0968\u0969"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3837531770,
+      "lat": 18.5183994,
+      "lon": 73.8442031,
+      "tags": {
+        "brand": "Louis Philippe",
+        "brand:wikidata": "Q18350510",
+        "name": "Louis Philippe",
+        "name:mr": "\u0932\u0941\u0908 \u092b\u093f\u0932\u0940\u092a",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3837531777,
+      "lat": 18.5182807,
+      "lon": 73.8439874,
+      "tags": {
+        "amenity": "bank",
+        "atm": "yes",
+        "brand": "SVC Bank",
+        "name": "SVC Bank",
+        "name:mr": "\u090f\u0938\u0935\u094d\u0939\u0940\u0938\u0940 \u092c\u0901\u0915"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3837531778,
+      "lat": 18.5182364,
+      "lon": 73.8446007,
+      "tags": {
+        "addr:housenumber": "1728",
+        "addr:postcode": "411004",
+        "addr:street": "Jangli Maharaj Path",
+        "name": "Shoe Paradise",
+        "name:mr": "\u0936\u0942 \u092a\u0945\u0930\u093e\u0921\u093e\u0908\u091c",
+        "shop": "shoes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4096665537,
+      "lat": 18.5204962,
+      "lon": 73.8542894,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "#2",
+        "addr:postcode": "411045",
+        "addr:street": "Niranjav Madhav Marg",
+        "check_date": "2026-03-12",
+        "description": "New Law firm corplexalliance.in ",
+        "name": "Sai Consulting",
+        "office": "lawyer",
+        "opening_hours": "10 to 8",
+        "website": "https://corplexallinace.in"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4194017589,
+      "lat": 18.5253578,
+      "lon": 73.8430266,
+      "tags": {
+        "name": "Cholamandalam Investment & Finance Company Private LTD",
+        "office": "financial_advisor"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4225717790,
+      "lat": 18.5246685,
+      "lon": 73.8430695,
+      "tags": {
+        "amenity": "bank",
+        "brand": "ICICI Bank",
+        "brand:wikidata": "Q1653258",
+        "brand:wikipedia": "en:ICICI Bank",
+        "name": "ICICI Bank",
+        "name:en": "ICICI Bank",
+        "short_name": "ICICI",
+        "website": "https://www.icicibank.com"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4520447491,
+      "lat": 18.5246063,
+      "lon": 73.8415847,
+      "tags": {
+        "amenity": "cafe",
+        "name:en": "Shabree Sharvaree"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4520464891,
+      "lat": 18.5243666,
+      "lon": 73.8436958,
+      "tags": {
+        "amenity": "cafe",
+        "name:en": "Jivan"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4520491891,
+      "lat": 18.5221741,
+      "lon": 73.8443861,
+      "tags": {
+        "amenity": "cafe",
+        "name:en": "Kedar"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4730247391,
+      "lat": 18.5185045,
+      "lon": 73.8566891,
+      "tags": {
+        "name:en": "Amar matching",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4730286190,
+      "lat": 18.5185091,
+      "lon": 73.856746,
+      "tags": {
+        "name:en": "Uberoi cycle trading co.",
+        "shop": "bicycle"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4853188614,
+      "lat": 18.520535,
+      "lon": 73.8460261,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "indian",
+        "name": "Supreme Corner",
+        "name:mr": "\u0938\u0941\u092a\u094d\u0930\u0940\u092e \u0915\u0949\u0930\u094d\u0928\u0930"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5050478621,
+      "lat": 18.540747,
+      "lon": 73.8516941,
+      "tags": {
+        "name:en": "Vodaphone Central Store",
+        "opening_hours": "Mo-Sa 10:00-20:00",
+        "shop": "mobile_phone"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5215769223,
+      "lat": 18.523101,
+      "lon": 73.859014,
+      "tags": {
+        "addr:housenumber": "256/3",
+        "addr:street": "Kasba Peth",
+        "check_date": "2026-03-12",
+        "email": "revatimetalcrafts@gmail.com",
+        "name:en": "Revati metal crafts",
+        "phone": "020-24570811",
+        "shop": "craft"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5257379221,
+      "lat": 18.5337068,
+      "lon": 73.8386677,
+      "tags": {
+        "addr:street": "Harikrushna Mandir Path",
+        "amenity": "school",
+        "check_date": "2026-03-10",
+        "name:en": "RIMYI Iyengar Yoga Institute",
+        "name:pl": "Szko\u0142a Jogi Pami\u0119ci BKS Iyengara"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5257379321,
+      "lat": 18.5264459,
+      "lon": 73.8420236,
+      "tags": {
+        "amenity": "internet_cafe",
+        "name:en": "Internet caf\u00e9 Global",
+        "name:pl": "Global kawiarenka internetowa"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5554773711,
+      "lat": 18.5322077,
+      "lon": 73.8492595,
+      "tags": {
+        "amenity": "bank",
+        "atm": "no",
+        "brand": "PDCC Bank",
+        "name": "PDCC Bank, Agricultural College Branch",
+        "name:mr": "\u092a\u0941\u0923\u0947 \u091c\u093f\u0932\u094d\u0939\u093e \u092e\u0927\u094d\u092f\u0935\u0930\u094d\u0924\u0940 \u0938\u0939\u0915\u093e\u0930\u0940 \u092c\u0901\u0915, \u0915\u0943\u0937\u0940 \u092e\u0939\u093e\u0935\u093f\u0926\u094d\u092f\u093e\u0932\u092f \u0936\u093e\u0916\u093e",
+        "operator": "PDCC Bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5554773712,
+      "lat": 18.5253926,
+      "lon": 73.8532647,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "Aalok",
+        "name:mr": "\u0906\u0932\u094b\u0915"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6116290213,
+      "lat": 18.5220658,
+      "lon": 73.8475313,
+      "tags": {
+        "brand": "Raymond",
+        "brand:wikidata": "Q3537018",
+        "name": "Raymond",
+        "name:mr": "\u0930\u0947\u092e\u0902\u0921",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6116290216,
+      "lat": 18.5254288,
+      "lon": 73.8496605,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "Surabhi",
+        "name:mr": "\u0938\u0941\u0930\u092d\u093f"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6145662564,
+      "lat": 18.5226465,
+      "lon": 73.8490851,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "Gandharva",
+        "name:mr": "\u0917\u0902\u0927\u0930\u094d\u0935"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6185529693,
+      "lat": 18.523505,
+      "lon": 73.8461991,
+      "tags": {
+        "addr:street": "Ghole Road",
+        "amenity": "bank",
+        "name": "Janata Sahakari Bank Ltd. Pune",
+        "opening_hours": "Mo-Sa 09:30-18:30"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6201762552,
+      "lat": 18.5239983,
+      "lon": 73.8413832,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "Aakash",
+        "name:mr": "\u0906\u0915\u093e\u0936"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6201762553,
+      "lat": 18.5231094,
+      "lon": 73.841182,
+      "tags": {
+        "amenity": "bank",
+        "brand": "Axis Bank",
+        "brand:wikidata": "Q2003549",
+        "brand:wikipedia": "en:Axis Bank",
+        "name": "Axis Bank",
+        "name:mr": "\u0972\u0915\u094d\u0938\u093f\u0938 \u092c\u0901\u0915",
+        "operator": "Axis Bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6201762554,
+      "lat": 18.5224787,
+      "lon": 73.8412075,
+      "tags": {
+        "amenity": "bank",
+        "brand": "Allahabad Bank",
+        "brand:wikidata": "Q2003789",
+        "name": "Allahabad Bank",
+        "name:mr": "\u0905\u0932\u093e\u0939\u093e\u092c\u093e\u0926 \u092c\u0901\u0915",
+        "operator": "Allahabad Bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6201762555,
+      "lat": 18.5222899,
+      "lon": 73.8411737,
+      "tags": {
+        "brand": "Reliance Digital",
+        "brand:wikidata": "Q7311012",
+        "name": "Reliance Digital",
+        "name:mr": "\u0930\u093f\u0932\u093e\u092f\u0928\u094d\u0938 \u0921\u093f\u091c\u093f\u091f\u0932",
+        "shop": "electronics"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6201762556,
+      "lat": 18.5224787,
+      "lon": 73.8411525,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:postcode": "411004",
+        "addr:street": "Gopal Krushna Gokhale Path",
+        "amenity": "cafe",
+        "brand": "Starbucks",
+        "brand:pa": "\u0a38\u0a1f\u0a3e\u0a30\u0a2c\u0a15\u0a38",
+        "brand:ur": "\u0627\u0633\u0679\u0627\u0631\u0628\u06a9\u0633",
+        "brand:wikidata": "Q37158",
+        "brand:wikipedia": "en:Starbucks",
+        "check_date": "2026-05-25",
+        "cuisine": "coffee_shop",
+        "description": "Seattle-based coffeehouse chain known for its signature roasts, light bites and WiFi availability.",
+        "internet_access": "wlan",
+        "internet_access:fee": "customers",
+        "name": "Starbucks",
+        "name:mr": "\u0938\u094d\u091f\u093e\u0930\u092c\u0915\u094d\u0938",
+        "name:pa": "\u0a38\u0a1f\u0a3e\u0a30\u0a2c\u0a15\u0a38",
+        "name:ur": "\u0627\u0633\u0679\u0627\u0631\u0628\u06a9\u0633",
+        "official_name": "Starbucks Coffee",
+        "official_name:pa": "\u0a38\u0a1f\u0a3e\u0a30\u0a2c\u0a15\u0a38 \u0a15\u0a4c\u0a2b\u0a40",
+        "official_name:ur": "\u0627\u0633\u0679\u0627\u0631\u0628\u06a9\u0633 \u06a9\u0627\u0641\u06cc",
+        "opening_hours": "Mo-Su 07:00-23:00",
+        "outdoor_seating": "no",
+        "takeaway": "yes",
+        "website": "https://www.starbucks.in/",
+        "wikimedia_commons": "File:Starbucks Fergusson College.jpg"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6201762557,
+      "lat": 18.5215682,
+      "lon": 73.8411753,
+      "tags": {
+        "amenity": "fast_food",
+        "brand": "Subway",
+        "brand:pa": "\u0a38\u0a2c\u0a35\u0a47\u0a05",
+        "brand:ur": "\u0633\u0628 \u0648\u06d2",
+        "brand:wikidata": "Q244457",
+        "brand:wikipedia": "en:Subway (restaurant)",
+        "cuisine": "sandwich",
+        "name": "Subway",
+        "name:mr": "\u0938\u092c\u0935\u0947",
+        "name:pa": "\u0a38\u0a2c\u0a35\u0a47\u0a05",
+        "name:ur": "\u0633\u0628 \u0648\u06d2",
+        "takeaway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6201762558,
+      "lat": 18.5213482,
+      "lon": 73.8412222,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:postcode": "411004",
+        "addr:street": "Gopal Krushna Gokhale Path",
+        "air_conditioning": "yes",
+        "alt_name": "Haldiram",
+        "amenity": "fast_food",
+        "branch": "FC Road, Pune",
+        "brand": "Haldiram's",
+        "brand:wikidata": "Q17054442",
+        "cuisine": "indian",
+        "diet:vegetarian": "yes",
+        "drive_through": "no",
+        "name": "Haldiram's",
+        "opening_hours": "Mo-Su 08:00-23:00",
+        "phone": "+91 84462 19369;+91 703 000 0146",
+        "smoking": "no",
+        "takeaway": "yes",
+        "website": "https://www.haldirams.com/retail-stores",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6201762559,
+      "lat": 18.5211803,
+      "lon": 73.8413,
+      "tags": {
+        "check_date": "2023-08-07",
+        "name": "The Times of India",
+        "name:mr": "\u0926 \u091f\u093e\u0907\u092e\u094d\u0938 \u0911\u092b \u0907\u0902\u0921\u093f\u092f\u093e",
+        "office": "newspaper"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6250078437,
+      "lat": 18.5208204,
+      "lon": 73.8405007,
+      "tags": {
+        "amenity": "cafe",
+        "name": "Kathaa",
+        "name:mr": "\u0915\u0925\u093e"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6250078438,
+      "lat": 18.536419,
+      "lon": 73.851137,
+      "tags": {
+        "amenity": "bank",
+        "branch": "Shivajinagar Branch",
+        "brand": "State Bank of India",
+        "brand:wikidata": "Q1340361",
+        "name": "State Bank of India",
+        "name:mr": "\u092d\u093e\u0930\u0924\u0940\u092f \u0938\u094d\u091f\u0947\u091f \u092c\u0901\u0915, \u0936\u093f\u0935\u093e\u091c\u0940\u0928\u0917\u0930 \u0936\u093e\u0916\u093e",
+        "operator": "State Bank of India",
+        "short_name": "SBI"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6612854042,
+      "lat": 18.5329215,
+      "lon": 73.8468085,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:full": "near Hotel Pride",
+        "addr:housenumber": "1671 - 75",
+        "addr:neighbourhood": "Shivaji Nagar",
+        "addr:postcode": "411005",
+        "addr:street": "Ganeshkhind Road",
+        "addr:suburb": "Narveer Tanaji Wadi",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "healthcare:speciality": "gynaecology",
+        "name": "ONP Leela Hospital",
+        "operator": "ONP Hospitals",
+        "phone": "020 6721 6600;020 6721 6699;9373813199",
+        "website": "https://onphospitals.com",
+        "wikidata": "Q65057391",
+        "wikipedia": "en:ONP Hospitals"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7045274083,
+      "lat": 18.5284781,
+      "lon": 73.8423179,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "1123 B, Shanti-Prasad, Shivaji Nagar, Near Hotel Lalit Mahal, Model Colony",
+        "addr:postcode": "411016",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Punarvasu Chikitsalaya",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7048881959,
+      "lat": 18.5199125,
+      "lon": 73.8410217,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "9/7/20 A, Fergnsson College Road,Opp Hotel Vaishali,Next To Obc Bank",
+        "addr:postcode": "411004",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Pramodini Urology Foundation",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7049516396,
+      "lat": 18.5287757,
+      "lon": 73.8479868,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "1162/3, Crescent Exclusee, Shivaji Nagar",
+        "addr:postcode": "411005",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Pune Fertility Center",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7051137462,
+      "lat": 18.5259905,
+      "lon": 73.85012,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "1233, Shivaji Nagar, J.M. Road",
+        "addr:postcode": "411005",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Dr. Karve Childrens Hospital",
+        "natural": "tree",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7052987873,
+      "lat": 18.5223591,
+      "lon": 73.8441311,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Ganga Nagar",
+        "addr:postcode": "411001",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Dr.Prakash Katariya Laser Cure",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7068155283,
+      "lat": 18.5226796,
+      "lon": 73.8508487,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "No. 562 / 1, Jada Bhuvan, Shivaji Nagaar, Opp Bal Gandharv Bridge;Survey No 1187/13, Chiroda Niwas, Ghole Road, Next to NIO, Pune",
+        "addr:postcode": "411005",
+        "addr:state": "Maharashtra;Maharastra",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Pungliya Hospital",
+        "source": "OpenGovernmentData;Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7076609433,
+      "lat": 18.5247371,
+      "lon": 73.8408494,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "101, Trikaya House Deendayal Hospital Lane F C Road",
+        "addr:postcode": "411004",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Z Y - Vision",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7083324260,
+      "lat": 18.5207937,
+      "lon": 73.8452496,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "1206/4,OppositeSambhaji Park,K.P Kulkarni Road",
+        "addr:postcode": "411004",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Centre For Laproscopy Surgery",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7615324875,
+      "lat": 18.5338511,
+      "lon": 73.8602685,
+      "tags": {
+        "amenity": "bus_station",
+        "bus": "yes",
+        "internet_access": "no",
+        "name": "PMPML Bus Parking",
+        "network": "PMPML",
+        "operator": "PMPML",
+        "public_transport": "station",
+        "wikidata": "Q7260109",
+        "wikimedia_commons": "Category:Pune Mahanagar Parivahan Mahamandal Limited",
+        "wikipedia": "en:Pune Mahanagar Parivahan Mahamandal Limited"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7650321105,
+      "lat": 18.5295693,
+      "lon": 73.8564329,
+      "tags": {
+        "amenity": "fast_food",
+        "check_date": "2026-03-12",
+        "name": "Fast food"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7651453337,
+      "lat": 18.518273,
+      "lon": 73.855527,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:full": "Behind Shaniwar Wada, Budhwar Peth, Pune",
+        "addr:postcode": "411002",
+        "addr:state": "Maharastra",
+        "addr:street": "Mahanagarpalika Vidyalay Path",
+        "check_date": "2026-03-15",
+        "name": "Haribhai V. Desai College",
+        "office": "educational_institution"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7651453353,
+      "lat": 18.530365,
+      "lon": 73.842063,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:full": "1137/8, Lakaki Road, Rage Path, Model Colony, Shivajinagar, Pune",
+        "addr:housenumber": "29",
+        "addr:postcode": "411016",
+        "addr:state": "Maharastra",
+        "addr:street": "\u0932\u0915\u093e\u0915\u0940 \u0930\u0938\u094d\u0924\u093e",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "healthcare:speciality": "general",
+        "name": "Bapat Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7651453399,
+      "lat": 18.528932,
+      "lon": 73.8436351,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Plot No. 557 / 1, 2 &3, Fergusson College Road, Bhamburda, Shivajinagar, Pune",
+        "addr:postcode": "411005",
+        "addr:state": "Maharastra",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "ASG Eye Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7651453418,
+      "lat": 18.5245059,
+      "lon": 73.8438216,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Janardhan Sadan, 1194/23, Ghole Road, Sud Nagar, Shivajinagar, Pune",
+        "addr:postcode": "411005",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "MJM Hospital",
+        "source": "Local Knowledge"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8012406220,
+      "lat": 18.5248153,
+      "lon": 73.8416321,
+      "tags": {
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8096707880,
+      "lat": 18.5191489,
+      "lon": 73.842519,
+      "tags": {
+        "office": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8378425319,
+      "lat": 18.5293438,
+      "lon": 73.8580109,
+      "tags": {
+        "amenity": "bank",
+        "branch": "COEP",
+        "brand": "State Bank of India",
+        "brand:wikidata": "Q1340361",
+        "brand:wikipedia": "en:State Bank of India",
+        "check_date": "2026-03-12",
+        "name": "State Bank of India",
+        "short_name": "SBI"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8441743015,
+      "lat": 18.5284491,
+      "lon": 73.8427597,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "indian",
+        "name": "Lalit Mahal",
+        "name:mr": "\u0932\u0932\u0940\u0924 \u092e\u0939\u093e\u0932"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9174851579,
+      "lat": 18.5253605,
+      "lon": 73.8403187,
+      "tags": {
+        "addr:street": "Fergusson college campus Rd, cannol Road 8, Pune, Maharashtra 411004",
+        "amenity": "cafe",
+        "name": "Cafe Sky",
+        "opening_hours": "Mo-Su 10:00-22:00",
+        "phone": "086002 02030"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9174988012,
+      "lat": 18.5313697,
+      "lon": 73.8423255,
+      "tags": {
+        "addr:street": "1117, A/1, Ashish, Lakaki Rd, Model Colony, Shivajinagar, Pune, Maharashtra 411016",
+        "description": "Camera & related Equipment Rental and second hand store.",
+        "name": "Primes & Zooms",
+        "opening_hours": "Mo-Su 09:30-19:00",
+        "phone": "087674 77102",
+        "shop": "camera",
+        "website": "https://primesandzooms.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9232843269,
+      "lat": 18.5189279,
+      "lon": 73.8446593,
+      "tags": {
+        "addr:street": "1262/A, Prestige Chamber Jangli Maharaj Road, opp sai service petrol pump Pune Maharashtra 411004 IN, Jangali Maharaj Rd, Pune, Maharashtra",
+        "amenity": "restaurant",
+        "check_date": "2024-04-14",
+        "cuisine": "Marathi",
+        "description": "Contemporary outlet preparing Indian vegetarian dishes in a vibrant, white-walled dining room.",
+        "diet:vegetarian": "yes",
+        "name": "Mathura",
+        "name:en": "Mathura",
+        "name:mr": "\u092e\u0925\u0941\u0930\u093e",
+        "opening_hours": "Mo-Su 11:30-23:30",
+        "phone": "020 2553 1875",
+        "website": "https://mathurapureveg.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10016346067,
+      "lat": 18.5199629,
+      "lon": 73.8410598,
+      "tags": {
+        "amenity": "bank",
+        "brand": "Punjab National Bank",
+        "brand:wikidata": "Q2743499",
+        "name": "Punjab National Bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10016347966,
+      "lat": 18.5300796,
+      "lon": 73.8617475,
+      "tags": {
+        "check_date": "2026-03-12",
+        "name": "SB bikes",
+        "shop": "bicycle"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10030779720,
+      "lat": 18.5302017,
+      "lon": 73.8438116,
+      "tags": {
+        "brand": "Bajaj",
+        "brand:wikidata": "Q10910065",
+        "name": "Bajaj Chetak experience center",
+        "name:mr": "\u092c\u091c\u093e\u091c \u091a\u0947\u0924\u0915 \u0905\u0928\u0941\u092d\u0935 \u0915\u0947\u0902\u0926\u094d\u0930",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10030782217,
+      "lat": 18.5387536,
+      "lon": 73.8514479,
+      "tags": {
+        "alt_name": "Bajaj wakdewadi",
+        "alt_name:mr": "\u092c\u091c\u093e\u091c \u0935\u093e\u0915\u0921\u0947\u0935\u093e\u0921\u0940",
+        "branch": "Wakdewadi",
+        "brand": "Bajaj",
+        "brand:wikidata": "Q10910065",
+        "check_date": "2023-02-23",
+        "name": "Bajaj KTM",
+        "name:en": "Bajaj KTM",
+        "name:mr": "\u092c\u091c\u093e\u091c \u0915\u0947\u091f\u0940\u090f\u092e",
+        "opening_hours": "Mo-Sa 09:00-13:00,14:00-18:00; Su off",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10054090699,
+      "lat": 18.5303276,
+      "lon": 73.8429593,
+      "tags": {
+        "amenity": "bank",
+        "brand": "State Bank of India",
+        "brand:wikidata": "Q1340361",
+        "name": "State Bank of India",
+        "short_name": "SBI"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10088327705,
+      "lat": 18.5266135,
+      "lon": 73.8389423,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "mess",
+        "name": "Mess 2"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10092584877,
+      "lat": 18.5326136,
+      "lon": 73.8460659,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "33A",
+        "addr:postcode": "411005",
+        "addr:street": "Vimalabai Jadhav Road, Narveer Tanaji Wadi, Shivajinagar",
+        "name": "Cyclogist Bike Hub",
+        "opening_hours": "Th-Tu 10:00-21:00; We off",
+        "operator": "Abhijit Lokre",
+        "phone": "+919049831361",
+        "shop": "sports",
+        "sport": "cycling"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10172977859,
+      "lat": 18.5318931,
+      "lon": 73.8472769,
+      "tags": {
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Oyster and Pearl Hospital"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10172977866,
+      "lat": 18.5183149,
+      "lon": 73.843879,
+      "tags": {
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "name": "Phadke Hospital"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10172986710,
+      "lat": 18.5249802,
+      "lon": 73.8411721,
+      "tags": {
+        "addr:city": "Pune",
+        "amenity": "hospital",
+        "healthcare": "hospital",
+        "healthcare:speciality": "general;ophthalmology",
+        "name": "DEENDAYAL MEMORIAL HOSPITAL",
+        "operator": "GOVT",
+        "operator:type": "government"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10607887440,
+      "lat": 18.5197274,
+      "lon": 73.8417666,
+      "tags": {
+        "addr:floor": "G",
+        "addr:housenumber": "1225/D",
+        "addr:street": "Hotel Rupali street",
+        "check_date": "2023-02-05",
+        "email": "kamdhenu013@gmail.com",
+        "level": "0",
+        "name": "Kamdhenu",
+        "name:en": "Kamdhenu",
+        "name:mr": "\u0915\u093e\u092e\u0927\u0947\u0928\u0942",
+        "opening_hours": "Mo-Sa 09:00-22:00; Su 11:30-22:00",
+        "shop": "copyshop",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10607887441,
+      "lat": 18.5197265,
+      "lon": 73.8418114,
+      "tags": {
+        "addr:floor": "G",
+        "addr:housenumber": "1225/D",
+        "addr:street": "Hotel Rupali street",
+        "check_date": "2023-02-05",
+        "email": "newppc345@gmail.com",
+        "level": "0",
+        "name": "New PPC",
+        "name:en": "New PPC",
+        "name:mr": "\u0928\u094d\u092f\u0942 \u092a\u0940\u092a\u0940\u0938\u0940",
+        "shop": "copyshop",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10607887442,
+      "lat": 18.519684,
+      "lon": 73.8419006,
+      "tags": {
+        "addr:floor": "G",
+        "addr:housenumber": "1225/D",
+        "addr:street": "Hotel Rupali street",
+        "check_date": "2023-02-05",
+        "level": "0",
+        "name": "Cake & cream",
+        "name:en": "Cake & cream",
+        "name:mr": "\u0915\u0947\u0915 & \u0915\u094d\u0930\u0940\u092e",
+        "shop": "pastry",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10607887443,
+      "lat": 18.5195972,
+      "lon": 73.8417593,
+      "tags": {
+        "addr:floor": "G",
+        "amenity": "fast_food",
+        "check_date": "2023-02-06",
+        "cuisine": "pizza",
+        "drive_through": "no",
+        "level": "0",
+        "name": "Pizzawala",
+        "name:en": "Pizzawala",
+        "name:mr": "\u092a\u093f\u091d\u094d\u091d\u093e\u0935\u093e\u0932\u093e",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10692790205,
+      "lat": 18.5233595,
+      "lon": 73.8440512,
+      "tags": {
+        "amenity": "bank",
+        "name": "Udyam Vikas Sahakari Bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10724927253,
+      "lat": 18.5192589,
+      "lon": 73.8453597,
+      "tags": {
+        "amenity": "school",
+        "name": "Aandra association primary school"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10724950765,
+      "lat": 18.5178349,
+      "lon": 73.8449626,
+      "tags": {
+        "amenity": "school",
+        "name": "bhisma school of indic studies"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10725596914,
+      "lat": 18.5207406,
+      "lon": 73.8557679,
+      "tags": {
+        "amenity": "cafe",
+        "check_date": "2026-03-12",
+        "cuisine": "coffee_shop",
+        "name": "Captain Coffee."
+      }
+    },
+    {
+      "type": "node",
+      "id": 10725603596,
+      "lat": 18.520062,
+      "lon": 73.8562912,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-03-12",
+        "name": "Sudamache Pohe"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10956621505,
+      "lat": 18.5285908,
+      "lon": 73.8432854,
+      "tags": {
+        "amenity": "bank",
+        "email": "bom1144@mahabank.co.in",
+        "name:en": "Bank of Maharashtra Overseas Branch",
+        "phone": "917030924113"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10956621605,
+      "lat": 18.5302971,
+      "lon": 73.8438489,
+      "tags": {
+        "addr:street": "Gopal Krushna Gokhale Path",
+        "amenity": "restaurant",
+        "name:en": "Yana Sizzlers & Wok"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11024194524,
+      "lat": 18.5226964,
+      "lon": 73.8449296,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "A&T House, 1205/01/10",
+        "addr:postcode": "411004",
+        "addr:street": "Nanasaheb Deshpande path, Shivajinagar",
+        "name": "ALLEN Career Institute",
+        "office": "educational_institution",
+        "website": "https://www.allen.ac.in/pune/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11024199533,
+      "lat": 18.5213811,
+      "lon": 73.841336,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "Plot no-1216,1st Floor, Amrut Chamber",
+        "addr:postcode": "411004",
+        "addr:street": "Fergusson College Road, Above Haldiram, Shivajinagar",
+        "name": "PW Vidyapeeth Pune",
+        "office": "educational_institution",
+        "website": "https://www.pw.live/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11064114243,
+      "lat": 18.5226554,
+      "lon": 73.8419157,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "Anna",
+        "opening_hours": "Mo-Su 07:00-23:00",
+        "phone": "+91960700999"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11093633824,
+      "lat": 18.5223189,
+      "lon": 73.8438225,
+      "tags": {
+        "addr:street": "Apte Road",
+        "amenity": "restaurant",
+        "name": "Chirp"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11146013987,
+      "lat": 18.5235266,
+      "lon": 73.8484647,
+      "tags": {
+        "addr:street": "J M Road",
+        "name": "OnePlus Showroom",
+        "shop": "electronics"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11323257169,
+      "lat": 18.5192856,
+      "lon": 73.8433683,
+      "tags": {
+        "addr:postcode": "411004",
+        "addr:street": "Apte Path",
+        "amenity": "restaurant",
+        "cuisine": "indian",
+        "diet:vegetarian": "yes",
+        "name:en": "Green Signal Pure Veg",
+        "opening_hours": "Mo-Su 07:30-23:00",
+        "phone": "096044 13322"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11323266169,
+      "lat": 18.5205671,
+      "lon": 73.8438757,
+      "tags": {
+        "addr:housenumber": "1206B/28",
+        "addr:postcode": "411005",
+        "addr:street": "Bapusaheb Gupte Path",
+        "amenity": "cafe",
+        "name:en": "Cafe Peter",
+        "opening_hours": "Mo-Su 08:00-00:00",
+        "website": "https://www.cafepeterapteroad.in/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11363285158,
+      "lat": 18.5231358,
+      "lon": 73.8476316,
+      "tags": {
+        "amenity": "fast_food",
+        "check_date": "2023-11-20",
+        "cuisine": "paan"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11363349548,
+      "lat": 18.5229261,
+      "lon": 73.8474846,
+      "tags": {
+        "air_conditioning": "yes",
+        "amenity": "restaurant",
+        "cuisine": "mutton",
+        "name": "Sandeep",
+        "name:mr": "\u0938\u0902\u0926\u0940\u092a",
+        "outdoor_seating": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11473008546,
+      "lat": 18.5220882,
+      "lon": 73.8411575,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:housenumber": "1A-E",
+        "addr:postcode": "411004",
+        "addr:street": "Gopal Krushna Gokhale Path",
+        "amenity": "restaurant",
+        "brand": "Pizza Hut",
+        "brand:wikidata": "Q191615",
+        "cuisine": "pizza",
+        "name": "Pizza Hut",
+        "opening_hours": "Mo-Su 11:00-23:00",
+        "phone": "+91 865 561 6021",
+        "website": "https://restaurants.pizzahut.co.in/pizza-hut-fc-collage-road-pizza-delivery-fc-collage-road-pune-2581/Home",
+        "website:menu": "https://restaurants.pizzahut.co.in/pizza-hut-fc-collage-road-pizza-delivery-fc-collage-road-pune-2581/Home"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11473008547,
+      "lat": 18.5215191,
+      "lon": 73.841182,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:postcode": "411004",
+        "addr:street": "Gopal Krushna Gokhale Path",
+        "amenity": "fast_food",
+        "branch": "F C Road",
+        "brand": "Venky's",
+        "cuisine": "chicken",
+        "diet:chicken": "yes",
+        "drive_through": "no",
+        "name": "Venky's Xprs",
+        "name:en": "Venky's Xprs",
+        "name:hi": "\u0935\u0947\u0902\u0915\u0940\u091c\u093c \u090f\u0915\u094d\u0938\u092a\u094d\u0930\u0947\u0938",
+        "name:mr": "\u0935\u0947\u0902\u0915\u0940\u091c \u090f\u0915\u094d\u0938\u092a\u094d\u0930\u0947\u0938",
+        "opening_hours": "Mo-Su 07:00-23:00",
+        "phone": "+91 982 290 8443",
+        "website": "https://venkys.com/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11505392601,
+      "lat": 18.5247804,
+      "lon": 73.8498473,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:postcode": "411005",
+        "addr:street": "Jangli Maharaj Path",
+        "level": "0",
+        "name": "Ajit Travels",
+        "name:en": "Ajit Travels",
+        "name:hi": "\u0905\u091c\u093f\u0924 \u091f\u094d\u0930\u0945\u0935\u094d\u0939\u0932\u094d\u0938",
+        "name:mr": "\u0905\u091c\u093f\u0924 \u091f\u094d\u0930\u0945\u0935\u094d\u0939\u0932\u094d\u0938",
+        "shop": "travel_agency"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11505392603,
+      "lat": 18.5246461,
+      "lon": 73.8496226,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:postcode": "411005",
+        "addr:street": "Jangli Maharaj Path",
+        "air_conditioning": "yes",
+        "brand": "Apple Store",
+        "brand:wikidata": "Q421253",
+        "level": "0",
+        "name": "Unicorn",
+        "name:en": "Unicorn",
+        "name:hi": "\u092f\u0942\u0928\u093f\u0915\u0949\u0930\u094d\u0928",
+        "name:mr": "\u092f\u0942\u0928\u093f\u0915\u0949\u0930\u094d\u0928",
+        "opening_hours": "Mo-Su 10:00-21:00",
+        "phone": "+91 20 6604 0738",
+        "shop": "electronics",
+        "short_name": "Apple"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11766049477,
+      "lat": 18.5229957,
+      "lon": 73.8443822,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:street": "Apte Path",
+        "name": "Santosh Bakery",
+        "shop": "bakery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11766669869,
+      "lat": 18.5225079,
+      "lon": 73.849542,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "Joshi wadewale"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11771519843,
+      "lat": 18.5239007,
+      "lon": 73.8438136,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "Durga Cafe & Janhvis Corner"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11771534665,
+      "lat": 18.5234768,
+      "lon": 73.8436739,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "Rajwadi Gaurav"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11819957241,
+      "lat": 18.5250694,
+      "lon": 73.8498327,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:postcode": "411005",
+        "addr:street": "Jangli Maharaj Path",
+        "name": "My Spectz",
+        "name:en": "My Spectz",
+        "shop": "optician"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11819983331,
+      "lat": 18.5289906,
+      "lon": 73.8527179,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:postcode": "411005",
+        "addr:street": "Dr. Rajendra Prasad Path",
+        "amenity": "bank",
+        "branch": "Pune Main Branch",
+        "brand": "Federal Bank",
+        "brand:wikidata": "Q2044983",
+        "check_date": "2026-03-12",
+        "name": "Federal Bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11829978481,
+      "lat": 18.5241824,
+      "lon": 73.8435471,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "italian;indian;chinese",
+        "diet:non-vegetarian": "yes",
+        "diet:vegan": "yes",
+        "diet:vegetarian": "yes",
+        "name": "Namaskar Hotel & Bar"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11829980051,
+      "lat": 18.5236155,
+      "lon": 73.8436688,
+      "tags": {
+        "name": "Santosh Bakery",
+        "shop": "bakery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11909388851,
+      "lat": 18.5376938,
+      "lon": 73.8515302,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Wakadewadi",
+        "addr:postcode": "411003",
+        "addr:street": "Old Pune\u2013Mumbai Highway",
+        "amenity": "hospital",
+        "emergency": "yes",
+        "healthcare": "hospital",
+        "healthcare:speciality": "skin_specialties",
+        "name": "Dr. Rajendra Mehata Hospital"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12176164667,
+      "lat": 18.5173559,
+      "lon": 73.8531214,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:postcode": "411030",
+        "addr:street": "Kishore Bhadbhade Path",
+        "amenity": "school",
+        "check_date": "2026-03-12"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12347471729,
+      "lat": 18.5193938,
+      "lon": 73.8410244,
+      "tags": {
+        "name": "Triveni",
+        "shop": "tea"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12473144881,
+      "lat": 18.5201299,
+      "lon": 73.8410294,
+      "tags": {
+        "check_date": "2025-01-04",
+        "clothes": "women",
+        "name": "W",
+        "name:en": "W",
+        "name:mr": "\u0921\u092c\u0932\u094d\u092f\u0942",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12473454968,
+      "lat": 18.5228754,
+      "lon": 73.8411189,
+      "tags": {
+        "check_date": "2025-01-04",
+        "name": "Art Station",
+        "name:en": "Art Station",
+        "name:mr": "\u0906\u0930\u094d\u091f \u0938\u094d\u091f\u0947\u0936\u0928",
+        "shop": "art"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12473454970,
+      "lat": 18.5229626,
+      "lon": 73.8411319,
+      "tags": {
+        "addr:floor": "G",
+        "amenity": "cafe",
+        "check_date": "2025-01-04",
+        "level": "0",
+        "name": "Coffee Nation",
+        "name:en": "Coffee Nation",
+        "name:mr": "\u0915\u0949\u092b\u0940 \u0928\u0947\u0936\u0928",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12475129605,
+      "lat": 18.5198379,
+      "lon": 73.8430094,
+      "tags": {
+        "addr:floor": "1",
+        "amenity": "restaurant",
+        "check_date": "2025-01-05",
+        "cuisine": "Marathi",
+        "diet:vegetarian": "yes",
+        "established": "1949",
+        "level": "1",
+        "name": "Asha Dining Hall",
+        "name:en": "Asha Dining Hall",
+        "name:mr": "\u0906\u0936\u093e \u0921\u093e\u092f\u0928\u093f\u0902\u0917 \u0939\u0949\u0932",
+        "source": "survey"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12679864921,
+      "lat": 18.5307003,
+      "lon": 73.855437,
+      "tags": {
+        "check_date": "2026-03-12",
+        "description": "Department",
+        "name": "Computer Department",
+        "shop": "computer"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12680401565,
+      "lat": 18.5313873,
+      "lon": 73.8552935,
+      "tags": {
+        "check_date": "2026-03-12",
+        "name": "FOSS LAB",
+        "shop": "computer"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12801991325,
+      "lat": 18.5212977,
+      "lon": 73.8463126,
+      "tags": {
+        "addr:floor": "G",
+        "amenity": "fast_food",
+        "check_date": "2025-05-01",
+        "cuisine": "indian",
+        "diet:vegetarian": "yes",
+        "level": "0",
+        "name": "Guru Misal",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12801991326,
+      "lat": 18.5241167,
+      "lon": 73.8437345,
+      "tags": {
+        "air_conditioning": "yes",
+        "amenity": "cafe",
+        "brand": "Blue Tokai Coffee Roasters",
+        "brand:wikidata": "Q137711807",
+        "check_date": "2025-05-01",
+        "cuisine": "coffee_shop",
+        "delivery": "yes",
+        "internet_access": "wlan",
+        "internet_access:fee": "customers",
+        "name": "Blue Tokai Coffee Roasters",
+        "outdoor_seating": "no",
+        "payment:cash": "yes",
+        "payment:credit_cards": "yes",
+        "payment:debit_cards": "yes",
+        "smoking": "isolated",
+        "takeaway": "yes",
+        "toilets": "yes",
+        "toilets:wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12802005129,
+      "lat": 18.5232985,
+      "lon": 73.8474067,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2025-05-01",
+        "cuisine": "indian",
+        "diet:vegetarian": "yes",
+        "name": "Athavale Silver Leaf",
+        "payment:cash": "yes",
+        "payment:credit_cards": "yes",
+        "payment:debit_cards": "yes",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12802015306,
+      "lat": 18.5233494,
+      "lon": 73.8472044,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2025-05-01",
+        "cuisine": "indian",
+        "diet:vegetarian": "yes",
+        "name": "Naivaidya",
+        "payment:cash": "yes",
+        "payment:credit_cards": "yes",
+        "payment:debit_cards": "yes",
+        "wheelchair": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12802031071,
+      "lat": 18.5234836,
+      "lon": 73.8470197,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "indian",
+        "diet:vegetarian": "yes",
+        "name": "parampara"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12825417757,
+      "lat": 18.5194193,
+      "lon": 73.848784,
+      "tags": {
+        "addr:postcode": "411030",
+        "name": "Chaha Khari",
+        "payment:google_pay": "yes",
+        "shop": "tea"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12976993801,
+      "lat": 18.5264219,
+      "lon": 73.8402377,
+      "tags": {
+        "addr:postcode": "411004",
+        "addr:street": "Chaturshringi Road",
+        "amenity": "college",
+        "contact:instagram": "fergussoncollege_official",
+        "email": "contact@fergusson.edu",
+        "level": "1",
+        "name": "Biotechnology Department, Fergusson College",
+        "opening_hours": "Mo-Sa 11:00-16:00",
+        "phone": "020-67656456",
+        "website": "https://www.fergusson.edu"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13390674189,
+      "lat": 18.5184408,
+      "lon": 73.85139,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "pune",
+        "addr:postcode": "411030",
+        "amenity": "school",
+        "check_date": "2026-03-12",
+        "education": "school",
+        "name": "ahilyadevi high school"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13394413446,
+      "lat": 18.53051,
+      "lon": 73.8579376,
+      "tags": {
+        "Ground": "COEP Ground",
+        "amenity": "college",
+        "check_date": "2026-03-12",
+        "education": "college",
+        "name": "COEP",
+        "name:en": "College Of Engineering Pune"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13546492147,
+      "lat": 18.530601,
+      "lon": 73.8390103,
+      "tags": {
+        "air_conditioning": "yes",
+        "amenity": "restaurant",
+        "check_date": "2025-12-22",
+        "cuisine": "burger;coffee_shop;italian;sandwich;asian;indian;french;breakfast;pasta",
+        "diet:vegetarian": "yes",
+        "internet_access": "wlan",
+        "internet_access:fee": "customers",
+        "name": "Somae",
+        "name:en": "Somae",
+        "payment:app": "yes",
+        "payment:cash": "yes",
+        "payment:credit_cards": "yes",
+        "payment:debit_cards": "yes",
+        "wheelchair": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13605940270,
+      "lat": 18.5226563,
+      "lon": 73.8535016,
+      "tags": {
+        "amenity": "bus_station",
+        "bus": "yes",
+        "check_date": "2026-03-12",
+        "public_transport": "station"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13616177778,
+      "lat": 18.5249531,
+      "lon": 73.8534614,
+      "tags": {
+        "check_date": "2026-03-04",
+        "name": "Ramsar Bakery",
+        "shop": "bakery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13616189565,
+      "lat": 18.5334317,
+      "lon": 73.860193,
+      "tags": {
+        "check_date": "2026-03-04",
+        "name": "Nilkantheshwar Tours And Travels",
+        "shop": "travel_agency"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13616206127,
+      "lat": 18.5309499,
+      "lon": 73.8540491,
+      "tags": {
+        "amenity": "fuel",
+        "brand": "Shell",
+        "brand:wikidata": "Q110716465",
+        "check_date": "2026-03-04",
+        "name": "Shell"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13616217308,
+      "lat": 18.5202344,
+      "lon": 73.849199,
+      "tags": {
+        "check_date": "2026-03-04",
+        "name": "Nira Vikri Kendra",
+        "shop": "beverages"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13624341139,
+      "lat": 18.5250623,
+      "lon": 73.8536877,
+      "tags": {
+        "brand": "Hyundai",
+        "brand:wikidata": "Q55931",
+        "check_date": "2026-03-07",
+        "name": "Hyundai",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13624366141,
+      "lat": 18.5297027,
+      "lon": 73.8519519,
+      "tags": {
+        "check_date": "2026-03-07",
+        "name": "Herbalife",
+        "shop": "herbalist"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13624420814,
+      "lat": 18.5267316,
+      "lon": 73.8520364,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-03-07",
+        "name": "Fountain Family Resto And Bar"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13624423289,
+      "lat": 18.5310543,
+      "lon": 73.8520401,
+      "tags": {
+        "amenity": "fuel",
+        "brand": "Shell",
+        "brand:wikidata": "Q110716465",
+        "check_date": "2026-03-07",
+        "name": "Shell"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13624425442,
+      "lat": 18.5301043,
+      "lon": 73.8511592,
+      "tags": {
+        "amenity": "bank",
+        "brand": "HDFC Bank",
+        "brand:wikidata": "Q631047",
+        "check_date": "2026-03-07",
+        "name": "HDFC Bank",
+        "short_name": "HDFC"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13629201421,
+      "lat": 18.5279867,
+      "lon": 73.8532932,
+      "tags": {
+        "amenity": "college",
+        "check_date": "2026-03-09",
+        "education": "college",
+        "name": "Engineering College Ground"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13637440656,
+      "lat": 18.5257849,
+      "lon": 73.8417922,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-03-11",
+        "name": "Sea Nonas"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13637460766,
+      "lat": 18.5263681,
+      "lon": 73.8420584,
+      "tags": {
+        "brand": "Airtel",
+        "brand:wikidata": "Q854867",
+        "check_date": "2026-03-11",
+        "name": "Airtel",
+        "shop": "mobile_phone"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13637464784,
+      "lat": 18.5278956,
+      "lon": 73.8428551,
+      "tags": {
+        "check_date": "2026-03-11",
+        "name": "The Sleep Company",
+        "shop": "bed"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13637465598,
+      "lat": 18.5201848,
+      "lon": 73.8410276,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-03-11",
+        "name": "Peshwa Restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13637480287,
+      "lat": 18.5289623,
+      "lon": 73.8435502,
+      "tags": {
+        "brand": "Zudio",
+        "brand:wikidata": "Q123375926",
+        "check_date": "2026-03-11",
+        "name": "Zudio",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13637491798,
+      "lat": 18.5300127,
+      "lon": 73.8513453,
+      "tags": {
+        "amenity": "bank",
+        "check_date": "2026-03-11",
+        "name": "SBM Bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13644196892,
+      "lat": 18.5299478,
+      "lon": 73.8632719,
+      "tags": {
+        "check_date": "2026-03-13",
+        "government": "register_office",
+        "name": "RTO Pune",
+        "office": "government"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13644326122,
+      "lat": 18.5291084,
+      "lon": 73.8630476,
+      "tags": {
+        "amenity": "fuel",
+        "check_date": "2026-03-13",
+        "name": "Petrol Pump"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13645646232,
+      "lat": 18.5293609,
+      "lon": 73.8623543,
+      "tags": {
+        "amenity": "fuel",
+        "check_date": "2026-03-13",
+        "name": "Shell"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13645657221,
+      "lat": 18.5262027,
+      "lon": 73.850606,
+      "tags": {
+        "amenity": "restaurant",
+        "check_date": "2026-03-13",
+        "name": "New Central Restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13649952150,
+      "lat": 18.5284958,
+      "lon": 73.8532395,
+      "tags": {
+        "amenity": "college",
+        "check_date": "2026-03-15",
+        "education": "college",
+        "name": "Coep ground"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13650015705,
+      "lat": 18.5303369,
+      "lon": 73.8567993,
+      "tags": {
+        "amenity": "college",
+        "check_date": "2026-03-15",
+        "education": "college",
+        "name": "Coep College"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13865568585,
+      "lat": 18.523643,
+      "lon": 73.8481881,
+      "tags": {
+        "amenity": "bank",
+        "brand": "State Bank of India",
+        "brand:wikidata": "Q1340361",
+        "check_date": "2026-05-23",
+        "name": "State Bank of India",
+        "short_name": "SBI"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13875564971,
+      "lat": 18.5195747,
+      "lon": 73.8410318,
+      "tags": {
+        "amenity": "fast_food",
+        "check_date": "2026-05-25",
+        "cuisine": "indian",
+        "diet:vegetarian": "yes",
+        "internet_access": "no",
+        "name": "Joshi Wadapaw",
+        "payment:cash": "yes",
+        "payment:credit_cards": "yes",
+        "payment:debit_cards": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13875722187,
+      "lat": 18.5267095,
+      "lon": 73.8401112,
+      "tags": {
+        "amenity": "college",
+        "description": "enviroment scienc department",
+        "education": "college",
+        "name": "EVS Department"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13959165145,
+      "lat": 18.5185366,
+      "lon": 73.849981,
+      "tags": {
+        "beauty": "nails",
+        "name": "The Nail Place",
+        "shop": "beauty"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13959199789,
+      "lat": 18.5179472,
+      "lon": 73.8488881,
+      "tags": {
+        "name": "\u0928\u0935\u0940\u0928 \u092e\u0930\u093e\u0920\u0940 \u0936\u093e\u0933\u093e",
+        "office": "educational_institution"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13959205635,
+      "lat": 18.5186745,
+      "lon": 73.8497622,
+      "tags": {
+        "name": "\u092a\u094d\u0930\u093f\u092f\u093e \u0932\u0947\u0921\u0940\u091c \u091f\u0947\u0932\u0930\u094d\u0938",
+        "shop": "tailor"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13959206649,
+      "lat": 18.5186575,
+      "lon": 73.8499598,
+      "tags": {
+        "name": "K Salons Professionals",
+        "shop": "hairdresser"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13959215071,
+      "lat": 18.5186438,
+      "lon": 73.8497629,
+      "tags": {
+        "name": "Zeal Infotech",
+        "shop": "printer_ink"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13959216811,
+      "lat": 18.5183328,
+      "lon": 73.8500489,
+      "tags": {
+        "name": "\u091c\u0917\u0926\u0902\u092c\u093e \u092b\u0941\u0932 \u092d\u0902\u0921\u093e\u0930 \u0935 \u092b\u094d\u0932\u0949\u0935\u0930 \u0921\u0947\u0915\u094b\u0930\u0947\u0936\u0928",
+        "shop": "florist"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13964049010,
+      "lat": 18.5176867,
+      "lon": 73.8491477,
+      "tags": {
+        "name": "Purewhite Owlery Ventures LLP kent purifier shop",
+        "shop": "houseware"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13964487995,
+      "lat": 18.5270158,
+      "lon": 73.8511002,
+      "tags": {
+        "brand": "Honda",
+        "brand:wikidata": "Q9584",
+        "name": "Pashankar Honda",
+        "name:en": "Pashankar Honda",
+        "name:hi": "\u092a\u093e\u0937\u093e\u0923\u0915\u0930 \u0939\u094b\u0902\u0921\u093e",
+        "name:mr": "\u092a\u093e\u0937\u093e\u0923\u0915\u0930 \u0939\u094b\u0902\u0921\u093e",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13964487996,
+      "lat": 18.5245795,
+      "lon": 73.8495683,
+      "tags": {
+        "brand": "Lenskart",
+        "brand:wikidata": "Q17068753",
+        "name": "Lenskart",
+        "shop": "optician"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13979743105,
+      "lat": 18.5175646,
+      "lon": 73.8540396,
+      "tags": {
+        "name": "\u092e\u0939\u093e\u0930\u093e\u0937\u094d\u091f\u094d\u0930 \u0932\u0918\u0941\u0909\u0926\u094d\u092f\u094b\u0917 \u0935\u093f\u0915\u093e\u0938 \u092e\u0939\u093e\u092e\u0902\u0921\u0933 \u092e\u0930\u094d\u092f\u093e",
+        "office": "government"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13979808991,
+      "lat": 18.5185862,
+      "lon": 73.8497779,
+      "tags": {
+        "amenity": "restaurant",
+        "name": "\u090f\u0930\u0902\u0921\u0947\u091c \u091d\u0915\u093e\u0938 \u0905\u0938\u094d\u0938\u0932 \u0915\u094b\u0932\u094d\u0939\u093e\u092a\u0941\u0930\u0940 \u092e\u093f\u0938\u0933"
+      }
+    },
+    {
+      "type": "node",
+      "id": 14039043235,
+      "lat": 18.5267473,
+      "lon": 73.8419119,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:postcode": "411005",
+        "addr:street": "FC Road",
+        "amenity": "fast_food",
+        "drive_through": "no",
+        "name": "Ganesh Paan Shop",
+        "opening_hours": "Closes at 11:30pm"
+      }
+    },
+    {
+      "type": "way",
+      "id": 121897350,
+      "center": {
+        "lat": 18.5204869,
+        "lon": 73.8553445
+      },
+      "tags": {
+        "garden:type": "public",
+        "leisure": "garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 149110265,
+      "center": {
+        "lat": 18.5323825,
+        "lon": 73.8386358
+      },
+      "tags": {
+        "access": "yes",
+        "addr:city": "Pune",
+        "addr:district": "Shivajinagar",
+        "addr:housenumber": "GRJQ+W49",
+        "addr:postcode": "411016",
+        "addr:street": "Harikrishna Mandir Path",
+        "leisure": "park",
+        "name": "Chittranjan Vatika",
+        "name:mr": "\u091a\u093f\u0924\u094d\u0924\u0930\u0902\u091c\u0928 \u0935\u093e\u091f\u093f\u0915\u093e",
+        "opening_hours": "Mo-Su 06:00-11:00, 16:00-20:00"
+      }
+    },
+    {
+      "type": "way",
+      "id": 149110279,
+      "center": {
+        "lat": 18.5236923,
+        "lon": 73.8337877
+      },
+      "tags": {
+        "access": "yes",
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:postcode": "411016",
+        "addr:street": "Senapati Bapat Rd, Shivaji Nagar",
+        "leisure": "park",
+        "name": "Symbi Hill",
+        "operator": "Symbiosis University",
+        "operator:type": "private"
+      }
+    },
+    {
+      "type": "way",
+      "id": 172252347,
+      "center": {
+        "lat": 18.5329115,
+        "lon": 73.8539668
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Patil Estate",
+        "name:mr": "\u092a\u093e\u091f\u0940\u0932 \u0907\u0938\u094d\u091f\u0947\u091f",
+        "residential": "slum"
+      }
+    },
+    {
+      "type": "way",
+      "id": 197313931,
+      "center": {
+        "lat": 18.5134201,
+        "lon": 73.8269551
+      },
+      "tags": {
+        "building": "industrial",
+        "name": "Studio 1"
+      }
+    },
+    {
+      "type": "way",
+      "id": 199261924,
+      "center": {
+        "lat": 18.5205613,
+        "lon": 73.8471253
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Sambhaji Udyan",
+        "name:etymology:wikidata": "Q2737041",
+        "name:mr": "\u0938\u0902\u092d\u093e\u091c\u0940 \u0909\u0926\u094d\u092f\u093e\u0928"
+      }
+    },
+    {
+      "type": "way",
+      "id": 207872438,
+      "center": {
+        "lat": 18.5376879,
+        "lon": 73.8359712
+      },
+      "tags": {
+        "landuse": "retail"
+      }
+    },
+    {
+      "type": "way",
+      "id": 208180364,
+      "center": {
+        "lat": 18.5236663,
+        "lon": 73.840739
+      },
+      "tags": {
+        "access": "yes",
+        "garden:type": "public",
+        "leisure": "garden",
+        "name": "Fergusson College Botanical Garden",
+        "opening_hours": "24/7"
+      }
+    },
+    {
+      "type": "way",
+      "id": 215535662,
+      "center": {
+        "lat": 18.5186426,
+        "lon": 73.8478053
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "V. D. Vartak Udyan",
+        "name:mr": "\u0935\u093e. \u0926. \u0935\u0930\u094d\u0924\u0915 \u0909\u0926\u094d\u092f\u093e\u0928"
+      }
+    },
+    {
+      "type": "way",
+      "id": 215732323,
+      "center": {
+        "lat": 18.539893,
+        "lon": 73.8347264
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Yashwant Nagar Society"
+      }
+    },
+    {
+      "type": "way",
+      "id": 215732327,
+      "center": {
+        "lat": 18.5402715,
+        "lon": 73.8368342
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 215804388,
+      "center": {
+        "lat": 18.5456506,
+        "lon": 73.8522117
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Kamalnayan Bajaj Udyan",
+        "name:mr": "\u0915\u092e\u0932\u0928\u092f\u0928 \u092c\u091c\u093e\u091c \u0909\u0926\u094d\u092f\u093e\u0928"
+      }
+    },
+    {
+      "type": "way",
+      "id": 217271099,
+      "center": {
+        "lat": 18.5187255,
+        "lon": 73.8568786
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Jijamata Udyan",
+        "name:mr": "\u091c\u093f\u091c\u093e\u092e\u093e\u0924\u093e \u0909\u0926\u094d\u092f\u093e\u0928"
+      }
+    },
+    {
+      "type": "way",
+      "id": 217278888,
+      "center": {
+        "lat": 18.5270984,
+        "lon": 73.8323727
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Shri Samarth Ramdas Udyan",
+        "name:mr": "\u0936\u094d\u0930\u0940 \u0938\u092e\u0930\u094d\u0925 \u0930\u093e\u092e\u0926\u093e\u0938 \u0909\u0926\u094d\u092f\u093e\u0928"
+      }
+    },
+    {
+      "type": "way",
+      "id": 217431365,
+      "center": {
+        "lat": 18.5175444,
+        "lon": 73.8432118
+      },
+      "tags": {
+        "building": "construction"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218059629,
+      "center": {
+        "lat": 18.5141359,
+        "lon": 73.8567528
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218059630,
+      "center": {
+        "lat": 18.512664,
+        "lon": 73.8563683
+      },
+      "tags": {
+        "landuse": "retail"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218078581,
+      "center": {
+        "lat": 18.521884,
+        "lon": 73.8499663
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218078582,
+      "center": {
+        "lat": 18.5225503,
+        "lon": 73.8482073
+      },
+      "tags": {
+        "leisure": "garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218110078,
+      "center": {
+        "lat": 18.5297523,
+        "lon": 73.8493577
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218110079,
+      "center": {
+        "lat": 18.5170936,
+        "lon": 73.8432373
+      },
+      "tags": {
+        "leisure": "garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218405558,
+      "center": {
+        "lat": 18.5446378,
+        "lon": 73.8519754
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218405559,
+      "center": {
+        "lat": 18.5299257,
+        "lon": 73.8374222
+      },
+      "tags": {
+        "leisure": "garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218405561,
+      "center": {
+        "lat": 18.5285211,
+        "lon": 73.8485857
+      },
+      "tags": {
+        "leisure": "garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218405563,
+      "center": {
+        "lat": 18.5406294,
+        "lon": 73.8499876
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218405571,
+      "center": {
+        "lat": 18.5286997,
+        "lon": 73.8493923
+      },
+      "tags": {
+        "leisure": "garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218422393,
+      "center": {
+        "lat": 18.5166578,
+        "lon": 73.8424049
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218422394,
+      "center": {
+        "lat": 18.5185598,
+        "lon": 73.8427856
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218422395,
+      "center": {
+        "lat": 18.5360129,
+        "lon": 73.8441426
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218422401,
+      "center": {
+        "lat": 18.5130705,
+        "lon": 73.8442788
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218422402,
+      "center": {
+        "lat": 18.5131539,
+        "lon": 73.844887
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218422403,
+      "center": {
+        "lat": 18.516885,
+        "lon": 73.8435708
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218422405,
+      "center": {
+        "lat": 18.5197353,
+        "lon": 73.8496564
+      },
+      "tags": {
+        "leisure": "garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218422407,
+      "center": {
+        "lat": 18.5194964,
+        "lon": 73.8494161
+      },
+      "tags": {
+        "leisure": "garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218834879,
+      "center": {
+        "lat": 18.5317474,
+        "lon": 73.8632565
+      },
+      "tags": {
+        "landuse": "industrial",
+        "man_made": "works",
+        "name": "Sudarshan Chemicals",
+        "name:mr": "\u0938\u0941\u0926\u0930\u094d\u0936\u0928 \u0915\u0947\u092e\u093f\u0915\u0932\u094d\u0938"
+      }
+    },
+    {
+      "type": "way",
+      "id": 219798481,
+      "center": {
+        "lat": 18.52507,
+        "lon": 73.8677991
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "Pune",
+        "addr:housenumber": "47",
+        "addr:postcode": "411001",
+        "addr:street": "Pune Railway Station Road",
+        "building": "public",
+        "landuse": "commercial",
+        "name": "Dr. Babasaheb Ambedkar Sanskrutik Bhavan",
+        "name:en": "Dr. Babasaheb Ambedkar Sanskrutik Bhavan",
+        "name:mr": "\u0921\u0949. \u092c\u093e\u092c\u093e\u0938\u093e\u0939\u0947\u092c \u0906\u0902\u092c\u0947\u0921\u0915\u0930 \u0938\u093e\u0902\u0938\u094d\u0915\u0943\u0924\u093f\u0915 \u092d\u0935\u0928",
+        "official_name": "Bharat Ratna Dr. Babasaheb Ambedkar Sanskrutik Bhavan",
+        "official_name:en": "Bharat Ratna Dr. Babasaheb Ambedkar Sanskrutik Bhavan",
+        "official_name:mr": "\u092d\u093e\u0930\u0924 \u0930\u0924\u094d\u0928 \u0921\u0949. \u092c\u093e\u092c\u093e\u0938\u093e\u0939\u0947\u092c \u0906\u0902\u092c\u0947\u0921\u0915\u0930 \u0938\u093e\u0902\u0938\u094d\u0915\u0943\u0924\u093f\u0915 \u092d\u0935\u0928"
+      }
+    },
+    {
+      "type": "way",
+      "id": 227926125,
+      "center": {
+        "lat": 18.5304269,
+        "lon": 73.8312801
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Parimal Udyan",
+        "name:mr": "\u092a\u0930\u093f\u092e\u0932 \u0909\u0926\u094d\u092f\u093e\u0928"
+      }
+    },
+    {
+      "type": "way",
+      "id": 238842701,
+      "center": {
+        "lat": 18.5316293,
+        "lon": 73.8473126
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 238842702,
+      "center": {
+        "lat": 18.5305296,
+        "lon": 73.8516566
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 247009988,
+      "center": {
+        "lat": 18.5360903,
+        "lon": 73.833135
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Pankunwar Firodiya Udyan",
+        "name:mr": "\u092a\u093e\u0928\u0915\u0941\u0902\u0935\u0930 \u092b\u093f\u0930\u094b\u0926\u093f\u092f\u093e \u0909\u0926\u094d\u092f\u093e\u0928"
+      }
+    },
+    {
+      "type": "way",
+      "id": 249174603,
+      "center": {
+        "lat": 18.5211118,
+        "lon": 73.836023
+      },
+      "tags": {
+        "building": "construction"
+      }
+    },
+    {
+      "type": "way",
+      "id": 251878752,
+      "center": {
+        "lat": 18.5108594,
+        "lon": 73.8373457
+      },
+      "tags": {
+        "landuse": "industrial",
+        "name": "Ayurveda Rasashala",
+        "name:mr": "\u0906\u092f\u0941\u0930\u094d\u0935\u0947\u0926 \u0930\u0938\u0936\u093e\u0933\u093e"
+      }
+    },
+    {
+      "type": "way",
+      "id": 257203329,
+      "center": {
+        "lat": 18.5192772,
+        "lon": 73.8355284
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 264444878,
+      "center": {
+        "lat": 18.5133978,
+        "lon": 73.8463646
+      },
+      "tags": {
+        "alt_name": "State Council for Education and Training",
+        "alt_name:mr": "\u0930\u093e\u091c\u094d\u092f \u0936\u0948\u0915\u094d\u0937\u0923\u093f\u0915 \u0938\u0902\u0936\u094b\u0927\u0928 \u0935 \u092a\u094d\u0930\u0936\u093f\u0915\u094d\u0937\u0923 \u092a\u0930\u093f\u0937\u0926",
+        "landuse": "commercial",
+        "name": "Chitrashala",
+        "name:mr": "\u091a\u093f\u0924\u094d\u0930\u0936\u093e\u0933\u093e"
+      }
+    },
+    {
+      "type": "way",
+      "id": 264444879,
+      "center": {
+        "lat": 18.5127359,
+        "lon": 73.846746
+      },
+      "tags": {
+        "alt_name": "State Council for Education and Training",
+        "alt_name:mr": "\u0930\u093e\u091c\u094d\u092f \u0936\u0948\u0915\u094d\u0937\u0923\u093f\u0915 \u0938\u0902\u0936\u094b\u0927\u0928 \u0935 \u092a\u094d\u0930\u0936\u093f\u0915\u094d\u0937\u0923 \u092a\u0930\u093f\u0937\u0926",
+        "landuse": "commercial",
+        "name": "Chitrashala",
+        "name:mr": "\u091a\u093f\u0924\u094d\u0930\u0936\u093e\u0933\u093e"
+      }
+    },
+    {
+      "type": "way",
+      "id": 280784425,
+      "center": {
+        "lat": 18.527483,
+        "lon": 73.8518725
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 280784426,
+      "center": {
+        "lat": 18.5288963,
+        "lon": 73.8530516
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281308041,
+      "center": {
+        "lat": 18.5223017,
+        "lon": 73.8414344
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 281883273,
+      "center": {
+        "lat": 18.5380812,
+        "lon": 73.8335523
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 282003252,
+      "center": {
+        "lat": 18.5232455,
+        "lon": 73.839005
+      },
+      "tags": {
+        "leisure": "garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 331478714,
+      "center": {
+        "lat": 18.5186742,
+        "lon": 73.8408211
+      },
+      "tags": {
+        "landuse": "industrial",
+        "name": "Aryabhooshan Chhapkhana",
+        "name:mr": "\u0906\u0930\u094d\u092f\u092d\u0942\u0937\u0923 \u091b\u093e\u092a\u0916\u093e\u0928\u093e",
+        "wikidata": "Q98802415",
+        "wikimedia_commons": "Category:Aryabhushan Bhavan"
+      }
+    },
+    {
+      "type": "way",
+      "id": 331500156,
+      "center": {
+        "lat": 18.532571,
+        "lon": 73.8709322
+      },
+      "tags": {
+        "landuse": "industrial",
+        "name": "Raja Bahadur International Limited",
+        "name:mr": "\u0930\u093e\u091c\u093e \u092c\u0939\u093e\u0926\u0942\u0930 \u0907\u0902\u091f\u0930\u0928\u0945\u0936\u0928\u0932 \u0932\u093f\u092e\u093f\u091f\u0947\u0921"
+      }
+    },
+    {
+      "type": "way",
+      "id": 342557182,
+      "center": {
+        "lat": 18.5413688,
+        "lon": 73.8525265
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 342557183,
+      "center": {
+        "lat": 18.5402113,
+        "lon": 73.8524927
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 342557184,
+      "center": {
+        "lat": 18.5341405,
+        "lon": 73.8526391
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 342557185,
+      "center": {
+        "lat": 18.5391397,
+        "lon": 73.8501385
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 342557186,
+      "center": {
+        "lat": 18.5361582,
+        "lon": 73.8524523
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 342557187,
+      "center": {
+        "lat": 18.5307743,
+        "lon": 73.8543934
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 359814369,
+      "center": {
+        "lat": 18.540233,
+        "lon": 73.8632112
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "maharastra",
+        "addr:housenumber": "sangamwadi",
+        "addr:postcode": "411001",
+        "addr:street": "Sangamwadi Road",
+        "leisure": "park",
+        "mobile": "9623899592",
+        "name": "janvi parking lot",
+        "opening_hours": "24/7",
+        "operator": "janvi thombare",
+        "operator:type": "private"
+      }
+    },
+    {
+      "type": "way",
+      "id": 359814491,
+      "center": {
+        "lat": 18.5378157,
+        "lon": 73.8632344
+      },
+      "tags": {
+        "access": "private",
+        "addr:city": "Pune",
+        "addr:district": "maharastra",
+        "addr:housenumber": "sangamwadi",
+        "addr:postcode": "411001",
+        "addr:street": "27",
+        "leisure": "park",
+        "mobile": "98230123458",
+        "name": "mayuri miss ki parking",
+        "opening_hours": "24/7",
+        "operator": "mayuri parihar",
+        "operator:type": "private"
+      }
+    },
+    {
+      "type": "way",
+      "id": 385071936,
+      "center": {
+        "lat": 18.5114462,
+        "lon": 73.8372736
+      },
+      "tags": {
+        "building": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 488357561,
+      "center": {
+        "lat": 18.5301686,
+        "lon": 73.8518394
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Thube Park",
+        "opening_hours": "6:30am to 11:30pm"
+      }
+    },
+    {
+      "type": "way",
+      "id": 631742591,
+      "center": {
+        "lat": 18.5410047,
+        "lon": 73.8533028
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Madhavrao Scindia Garden",
+        "name:etymology:wikidata": "Q1854649"
+      }
+    },
+    {
+      "type": "way",
+      "id": 669739311,
+      "center": {
+        "lat": 18.5328593,
+        "lon": 73.8343115
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 669739313,
+      "center": {
+        "lat": 18.5326484,
+        "lon": 73.8343565
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 784243514,
+      "center": {
+        "lat": 18.5274145,
+        "lon": 73.8505402
+      },
+      "tags": {
+        "landuse": "commercial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 784243515,
+      "center": {
+        "lat": 18.5287655,
+        "lon": 73.8512128
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "COEP Hostel"
+      }
+    },
+    {
+      "type": "way",
+      "id": 817845822,
+      "center": {
+        "lat": 18.5272791,
+        "lon": 73.8770368
+      },
+      "tags": {
+        "industrial": "depot",
+        "landuse": "industrial",
+        "name": "Pune Station PMPML Depot",
+        "name:en": "Pune Station PMPML Depot"
+      }
+    },
+    {
+      "type": "way",
+      "id": 940925672,
+      "center": {
+        "lat": 18.5227813,
+        "lon": 73.8570969
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "Vijaya Kailas Tikone Udyan"
+      }
+    },
+    {
+      "type": "way",
+      "id": 994861901,
+      "center": {
+        "lat": 18.5256173,
+        "lon": 73.8348262
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1080875014,
+      "center": {
+        "lat": 18.5399833,
+        "lon": 73.8338962
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Yaswant Apartment"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1080917282,
+      "center": {
+        "lat": 18.5427476,
+        "lon": 73.8385744
+      },
+      "tags": {
+        "landuse": "commercial",
+        "name": "Ashok Sankul"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1116953215,
+      "center": {
+        "lat": 18.5364078,
+        "lon": 73.8368536
+      },
+      "tags": {
+        "landuse": "construction",
+        "name": "Metro Construction"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1126614518,
+      "center": {
+        "lat": 18.5342885,
+        "lon": 73.8481978
+      },
+      "tags": {
+        "brand": "Pune Mahanagar Parivahan Mahamandal Limited",
+        "brand:wikidata": "Q7260109",
+        "brand:wikipedia": "Pune_Mahanagar_Parivahan_Mahamandal_Limited",
+        "industrial": "bus_depot",
+        "landuse": "industrial",
+        "name": "PMPML Bus Depot",
+        "operator": "Pune Mahanagar Parivahan Mahamandal Limited (PMPML)"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1145090768,
+      "center": {
+        "lat": 18.5188771,
+        "lon": 73.8553464
+      },
+      "tags": {
+        "landuse": "grass",
+        "min_height": "0.5"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1145105970,
+      "center": {
+        "lat": 18.519359,
+        "lon": 73.8550766
+      },
+      "tags": {
+        "landuse": "grass",
+        "min_height": "0.5"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1148409037,
+      "center": {
+        "lat": 18.5199171,
+        "lon": 73.8557134
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1148409039,
+      "center": {
+        "lat": 18.5193612,
+        "lon": 73.8553483
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1228898172,
+      "center": {
+        "lat": 18.5263292,
+        "lon": 73.8646044
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1228898178,
+      "center": {
+        "lat": 18.524732,
+        "lon": 73.8641356
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1228898235,
+      "center": {
+        "lat": 18.5265847,
+        "lon": 73.8626745
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1228898310,
+      "center": {
+        "lat": 18.5249997,
+        "lon": 73.8620047
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1229602062,
+      "center": {
+        "lat": 18.5229066,
+        "lon": 73.8650805
+      },
+      "tags": {
+        "addr:postcode": "411011",
+        "addr:suburb": "Mangalwar Peth",
+        "landuse": "residential",
+        "name": "Sadanand Nagar"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1229602082,
+      "center": {
+        "lat": 18.5226116,
+        "lon": 73.8666436
+      },
+      "tags": {
+        "description": "Ladkat Petrol Pump,\nPlot No.36, Manik Nagar/New Mangalwar Peth,\nLane No.1A,\nPune Station Road, Pune-411001",
+        "landuse": "commercial",
+        "name": "Ladkat Petrol Pump"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1303561844,
+      "center": {
+        "lat": 18.5241448,
+        "lon": 73.8687254
+      },
+      "tags": {
+        "landuse": "commercial",
+        "name": "Bholaikhana Pune Station"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1304320750,
+      "center": {
+        "lat": 18.5344348,
+        "lon": 73.8684297
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "landuse": "commercial",
+        "name": "RBM Road",
+        "postal_code": "411001"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1338764023,
+      "center": {
+        "lat": 18.5498993,
+        "lon": 73.8307178
+      },
+      "tags": {
+        "industrial": "depot",
+        "landuse": "industrial",
+        "name": "SPPU Test Center"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412670027,
+      "center": {
+        "lat": 18.5241134,
+        "lon": 73.8496489
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1446378599,
+      "center": {
+        "lat": 18.527172,
+        "lon": 73.8575601
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1459188502,
+      "center": {
+        "lat": 18.5388129,
+        "lon": 73.8634897
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "maharastra",
+        "addr:housenumber": "sangamwadi pune",
+        "addr:postcode": "411001",
+        "addr:street": "alfi road",
+        "leisure": "park",
+        "name": "yuvi parking",
+        "opening_hours": "24/7",
+        "operator": "yuvraj kolar",
+        "operator:type": "private"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1479314590,
+      "center": {
+        "lat": 18.5201433,
+        "lon": 73.8463101
+      },
+      "tags": {
+        "building": "construction"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1482921565,
+      "center": {
+        "lat": 18.5364048,
+        "lon": 73.8384531
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1482932328,
+      "center": {
+        "lat": 18.5277108,
+        "lon": 73.8643341
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1483377887,
+      "center": {
+        "lat": 18.5264983,
+        "lon": 73.8530319
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1483377888,
+      "center": {
+        "lat": 18.5264464,
+        "lon": 73.8535294
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1483377893,
+      "center": {
+        "lat": 18.5262579,
+        "lon": 73.8531181
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1483377894,
+      "center": {
+        "lat": 18.5262233,
+        "lon": 73.8533441
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1483377895,
+      "center": {
+        "lat": 18.5262288,
+        "lon": 73.8532197
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1485919418,
+      "center": {
+        "lat": 18.5229409,
+        "lon": 73.8621247
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Kamla nehru hosptital",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1488580796,
+      "center": {
+        "lat": 18.5400938,
+        "lon": 73.8487473
+      },
+      "tags": {
+        "depot": "subway",
+        "industrial": "depot",
+        "landuse": "industrial",
+        "name": "Pune Metro Purple Line Depot Range Hills",
+        "operator": "Maha Metro"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1488610918,
+      "center": {
+        "lat": 18.5384768,
+        "lon": 73.8489018
+      },
+      "tags": {
+        "building": "yes",
+        "depot": "subway",
+        "industrial": "depot",
+        "landuse": "industrial",
+        "operator": "Maha Metro"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1488610947,
+      "center": {
+        "lat": 18.5377601,
+        "lon": 73.8491621
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1521268011,
+      "center": {
+        "lat": 18.5453316,
+        "lon": 73.8663922
+      },
+      "tags": {
+        "area": "yes",
+        "building": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1521268012,
+      "center": {
+        "lat": 18.5454014,
+        "lon": 73.8664507
+      },
+      "tags": {
+        "area": "yes",
+        "building": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1521268013,
+      "center": {
+        "lat": 18.545566,
+        "lon": 73.8665943
+      },
+      "tags": {
+        "area": "yes",
+        "building": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1521268014,
+      "center": {
+        "lat": 18.5456393,
+        "lon": 73.8666288
+      },
+      "tags": {
+        "area": "yes",
+        "building": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1522065342,
+      "center": {
+        "lat": 18.5318032,
+        "lon": 73.8550589
+      },
+      "tags": {
+        "landuse": "construction"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1524315338,
+      "center": {
+        "lat": 18.5358405,
+        "lon": 73.8368296
+      },
+      "tags": {
+        "highway": "construction",
+        "name": "Sanganna Bharma Dhotre Path",
+        "name:mr": "\u0938\u0902\u0917\u0928\u094d\u0928\u093e \u092d\u0930\u092e\u093e \u0927\u094b\u0924\u094d\u0930\u0947 \u092a\u0925",
+        "oneway": "no"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1531434086,
+      "center": {
+        "lat": 18.5238754,
+        "lon": 73.8534419
+      },
+      "tags": {
+        "landuse": "commercial",
+        "loc_name": "MaNaPa Bhavan",
+        "loc_name:en": "MaNaPa Bhavan",
+        "loc_name:hi": "\u092e\u093e\u0928\u092a\u093e \u092d\u0935\u0928",
+        "loc_name:mr": "\u092e\u093e\u0928\u092a\u093e \u092d\u0935\u0928",
+        "name": "Mahanagarpalika Bhavan",
+        "name:en": "Mahanagarpalika Bhavan",
+        "name:hi": "\u092e\u093e\u0939\u093e\u0928\u0917\u0930\u092a\u093e\u0932\u093f\u0915\u093e \u092d\u0935\u0928"
+      }
+    }
+  ]
+}

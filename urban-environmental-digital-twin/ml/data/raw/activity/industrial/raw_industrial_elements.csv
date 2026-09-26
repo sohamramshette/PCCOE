@@ -1,0 +1,50 @@
+station_id,station_name,element_id,element_type,name,operator,industrial_type,latitude,longitude,distance_to_station_m,data_type
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",197313931,way,Studio 1,,industrial_zone,18.5134201,73.8269551,3023.3,STATIC_INDUSTRIAL
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",218834879,way,Sudarshan Chemicals,,works,18.5317474,73.8632565,1451.4,STATIC_INDUSTRIAL
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",251878752,way,Ayurveda Rasashala,,industrial_zone,18.5108594,73.8373457,2499.3,STATIC_INDUSTRIAL
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",331478714,way,Aryabhooshan Chhapkhana,,industrial_zone,18.5186742,73.8408211,1571.9,STATIC_INDUSTRIAL
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",331500156,way,Raja Bahadur International Limited,,industrial_zone,18.532571,73.8709322,2265.8,STATIC_INDUSTRIAL
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",385071936,way,Unnamed Industrial,,industrial_zone,18.5114462,73.8372736,2447.7,STATIC_INDUSTRIAL
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",817845822,way,Pune Station PMPML Depot,,depot,18.5272791,73.8770368,2909.6,STATIC_INDUSTRIAL
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1126614518,way,PMPML Bus Depot,Pune Mahanagar Parivahan Mahamandal Limited (PMPML),bus_depot,18.5342885,73.8481978,488.6,STATIC_INDUSTRIAL
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1338764023,way,SPPU Test Center,,depot,18.5498993,73.8307178,2968.1,STATIC_INDUSTRIAL
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1488580796,way,Pune Metro Purple Line Depot Range Hills,Maha Metro,depot,18.5400938,73.8487473,1114.9,STATIC_INDUSTRIAL
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1488610918,way,Unnamed Industrial,Maha Metro,depot,18.5384768,73.8489018,934.4,STATIC_INDUSTRIAL
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1521268011,way,Unnamed Industrial,,industrial_zone,18.5453316,73.8663922,2450.0,STATIC_INDUSTRIAL
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1521268012,way,Unnamed Industrial,,industrial_zone,18.5454014,73.8664507,2459.8,STATIC_INDUSTRIAL
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1521268013,way,Unnamed Industrial,,industrial_zone,18.545566,73.8665943,2483.4,STATIC_INDUSTRIAL
+11613,"Revenue Colony-Shivajinagar, Pune - IITM",1521268014,way,Unnamed Industrial,,industrial_zone,18.5456393,73.8666288,2491.7,STATIC_INDUSTRIAL
+11609,"Mhada Colony, Pune - IITM",2279178859,node,Baker Gauges,,works,18.5643551,73.9161886,1548.0,STATIC_INDUSTRIAL
+11609,"Mhada Colony, Pune - IITM",218691424,way,CTR,,works,18.5623096,73.9204462,1413.4,STATIC_INDUSTRIAL
+11609,"Mhada Colony, Pune - IITM",359795550,way,Osumare,,industrial_zone,18.5618408,73.9392839,1740.9,STATIC_INDUSTRIAL
+11609,"Mhada Colony, Pune - IITM",359921377,way,Sharma and Sons,,industrial_zone,18.5536928,73.9400533,2510.9,STATIC_INDUSTRIAL
+11609,"Mhada Colony, Pune - IITM",360254797,way,Makhwana and  Co.,,industrial_zone,18.5508672,73.9431147,2949.1,STATIC_INDUSTRIAL
+11609,"Mhada Colony, Pune - IITM",385800595,way,Unnamed Industrial,,industrial_zone,18.5637942,73.9439682,1997.1,STATIC_INDUSTRIAL
+11609,"Mhada Colony, Pune - IITM",910115693,way,Unnamed Industrial,,industrial_zone,18.564562,73.9373472,1383.6,STATIC_INDUSTRIAL
+11609,"Mhada Colony, Pune - IITM",1036864303,way,Shreeji Cans,,industrial_zone,18.5506258,73.9310794,2513.3,STATIC_INDUSTRIAL
+11609,"Mhada Colony, Pune - IITM",1459106246,way,Unnamed Industrial,,storage,18.5512836,73.9184434,2604.4,STATIC_INDUSTRIAL
+11609,"Mhada Colony, Pune - IITM",1459106471,way,Unnamed Industrial,,metal_processing,18.5510198,73.9184788,2630.3,STATIC_INDUSTRIAL
+11609,"Mhada Colony, Pune - IITM",1459107225,way,Unnamed Industrial,,storage,18.5515598,73.918453,2575.6,STATIC_INDUSTRIAL
+11609,"Mhada Colony, Pune - IITM",1459107434,way,Unnamed Industrial,,storage,18.5507851,73.9183582,2659.2,STATIC_INDUSTRIAL
+11609,"Mhada Colony, Pune - IITM",1459108920,way,Unnamed Industrial,,concrete_plant,18.5505539,73.9176659,2710.8,STATIC_INDUSTRIAL
+60658,"Hadapsar, Pune - IITM",11909576683,node,S. S. P. Enterprises,,works,18.4974993,73.9185285,1060.0,STATIC_INDUSTRIAL
+60658,"Hadapsar, Pune - IITM",106496515,way,Hadapsar Industrial Estate,,industrial_zone,18.5099319,73.9154482,1559.7,STATIC_INDUSTRIAL
+60658,"Hadapsar, Pune - IITM",292770490,way,Ramtekdi Industrial Estate,,industrial_zone,18.4960379,73.9194229,1065.8,STATIC_INDUSTRIAL
+60658,"Hadapsar, Pune - IITM",384667642,way,Unnamed Industrial,,industrial_zone,18.5173482,73.9170934,2047.7,STATIC_INDUSTRIAL
+60658,"Hadapsar, Pune - IITM",472272180,way,Unnamed Industrial,,industrial_zone,18.5122117,73.9153803,1724.4,STATIC_INDUSTRIAL
+60658,"Hadapsar, Pune - IITM",923955976,way,Unnamed Industrial,,industrial_zone,18.5075757,73.9472137,2175.7,STATIC_INDUSTRIAL
+60658,"Hadapsar, Pune - IITM",1527723389,way,Unnamed Industrial,,industrial_zone,18.5134583,73.9128295,2018.3,STATIC_INDUSTRIAL
+3409331,"Bhosari, Pune - IITM",237621725,way,Unnamed Industrial,,industrial_zone,18.6425651,73.8367526,1319.2,STATIC_INDUSTRIAL
+3409331,"Bhosari, Pune - IITM",359520179,way,Micorprecision Technologies,,industrial_zone,18.6386952,73.8520874,360.9,STATIC_INDUSTRIAL
+3409331,"Bhosari, Pune - IITM",385106289,way,Unnamed Industrial,,industrial_zone,18.640068,73.8306909,1929.1,STATIC_INDUSTRIAL
+3409331,"Bhosari, Pune - IITM",385110034,way,Unnamed Industrial,,industrial_zone,18.638116,73.8331934,1680.0,STATIC_INDUSTRIAL
+3409331,"Bhosari, Pune - IITM",385110056,way,Unnamed Industrial,,industrial_zone,18.6379258,73.8333429,1667.3,STATIC_INDUSTRIAL
+3409331,"Bhosari, Pune - IITM",502438540,way,MIDC Bhosari,,industrial_zone,18.6376389,73.8326531,1744.0,STATIC_INDUSTRIAL
+3409331,"Bhosari, Pune - IITM",683116817,way,Rich Graviss Products Pvt. Ltd.,,industrial_zone,18.6420848,73.8304065,1971.4,STATIC_INDUSTRIAL
+3409331,"Bhosari, Pune - IITM",1254834579,way,Unnamed Industrial,,industrial_zone,18.6328432,73.8370943,1491.6,STATIC_INDUSTRIAL
+3409526,"Panchawati_Pashan, Pune - IITM",202301146,way,Automotive Research Association of India (ARAI),,industrial_zone,18.5233099,73.8149715,1774.3,STATIC_INDUSTRIAL
+3409526,"Panchawati_Pashan, Pune - IITM",359795824,way,Unnamed Industrial,,industrial_zone,18.5349061,73.8109151,597.8,STATIC_INDUSTRIAL
+3409526,"Panchawati_Pashan, Pune - IITM",1067555244,way,Shri Kal Baronath Saycal Company,,industrial_zone,18.5362244,73.7922791,1394.2,STATIC_INDUSTRIAL
+3409526,"Panchawati_Pashan, Pune - IITM",1094465381,way,Unnamed Industrial,,industrial_zone,18.5421724,73.7894327,1807.5,STATIC_INDUSTRIAL
+3409526,"Panchawati_Pashan, Pune - IITM",1094465382,way,Unnamed Industrial,,industrial_zone,18.5420526,73.7893982,1806.3,STATIC_INDUSTRIAL
+3409526,"Panchawati_Pashan, Pune - IITM",1094465383,way,Unnamed Industrial,,industrial_zone,18.5419662,73.7893052,1812.3,STATIC_INDUSTRIAL

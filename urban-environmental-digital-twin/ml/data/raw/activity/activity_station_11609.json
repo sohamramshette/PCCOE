@@ -1,0 +1,1126 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-26T11:37:35Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 2183552797,
+      "lat": 18.5596624,
+      "lon": 73.9282894,
+      "tags": {
+        "check_date": "2026-03-09",
+        "name": "Janata Sahakari Bank",
+        "opening_hours": "Mo-Fr 10:00-17:00, 09:00-18:00; Sa 10:00-16:00",
+        "shop": "supermarket"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2183552808,
+      "lat": 18.5618865,
+      "lon": 73.9318372,
+      "tags": {
+        "check_date": "2026-03-09",
+        "name": "Bangalore Iyengar Bakery",
+        "shop": "bakery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2183569905,
+      "lat": 18.56503,
+      "lon": 73.9166535,
+      "tags": {
+        "name": "Bangalore Iyengar Bakery",
+        "shop": "bakery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2183569906,
+      "lat": 18.5657868,
+      "lon": 73.918066,
+      "tags": {
+        "amenity": "cafe",
+        "brand": "Cafe Coffee Day",
+        "brand:wikidata": "Q5017235",
+        "cuisine": "coffee_shop",
+        "name": "Cafe Coffee Day",
+        "takeaway": "yes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2183569908,
+      "lat": 18.5658586,
+      "lon": 73.9180486,
+      "tags": {
+        "amenity": "bank",
+        "atm": "yes",
+        "branch": "Viman Nagar",
+        "brand": "ICICI Bank",
+        "brand:wikidata": "Q1653258",
+        "name": "ICICI Bank",
+        "short_name": "ICICI"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2183569914,
+      "lat": 18.564969,
+      "lon": 73.9174743,
+      "tags": {
+        "name": "Amir Chicken And Eggs",
+        "shop": "butcher"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2279178859,
+      "lat": 18.5643551,
+      "lon": 73.9161886,
+      "tags": {
+        "man_made": "works",
+        "name": "Baker Gauges"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7046858056,
+      "lat": 18.5623861,
+      "lon": 73.933849,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Plot No:38, Survey No.49/2, Off Pune Nagar Road, Shivraj Chowk, Near Bhaji Market, Chandan Nagar, Kharadi",
+        "addr:postcode": "411014",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "check_date": "2026-03-09",
+        "email": "info@medipointhospitalpune.in",
+        "healthcare": "hospital",
+        "name": "Medipoint Hospital",
+        "source": "OpenGovernmentData",
+        "website": "https://medipointhospitalpune.in/"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7051070000,
+      "lat": 18.5628578,
+      "lon": 73.9320606,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Plot No 21, Sr.No 49/2, Near Rupee Co Op Bank,In Front Of Maruti Mandir & Chandan Nagar Bus Stop, Pune-Nagar Road",
+        "addr:postcode": "411014",
+        "addr:state": "Maharashtra",
+        "amenity": "hospital",
+        "check_date": "2026-03-09",
+        "healthcare": "hospital",
+        "name": "Kohakade Hospital",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7226727387,
+      "lat": 18.561134,
+      "lon": 73.921412,
+      "tags": {
+        "addr:district": "Pune",
+        "addr:full": "Vadgaonsheri, Next To Inorbit Mall, Nagar Road, Somnath Nagar, Pune",
+        "addr:postcode": "411014",
+        "addr:state": "Maharashtra",
+        "addr:subdistrict": "Pune City",
+        "amenity": "hospital",
+        "check_date": "2026-03-09",
+        "healthcare": "hospital",
+        "name": "PMC Sangamnerkar Hospital (N. G. O.)",
+        "source": "OpenGovernmentData"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8829660545,
+      "lat": 18.5633784,
+      "lon": 73.9182844,
+      "tags": {
+        "amenity": "bank",
+        "atm": "no",
+        "brand": "State Bank of India",
+        "brand:wikidata": "Q1340361",
+        "check_date": "2026-03-09",
+        "name": "State Bank of India",
+        "short_name": "SBI"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8829687877,
+      "lat": 18.5652962,
+      "lon": 73.9180346,
+      "tags": {
+        "amenity": "restaurant",
+        "cuisine": "south_indian",
+        "diet:vegetarian": "yes",
+        "name": "Shree Krishna Veg Court",
+        "name:en": "Sree Krishna Veg Court",
+        "opening_hours": "Mo-Su 08:00-22:00"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10692769362,
+      "lat": 18.5733551,
+      "lon": 73.9167695,
+      "tags": {
+        "amenity": "school",
+        "name": "air force school viman nagar"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11001450613,
+      "lat": 18.5661394,
+      "lon": 73.9179113,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:postcode": "411014",
+        "addr:street": "Viman Nagar Road",
+        "alt_name": "TICC",
+        "name": "Technology Innovation and Collaboration Center (TICC)",
+        "office": "company",
+        "opening_hours": "Mo-Fr 09:00-19:00",
+        "website": "bajajfinserv.in"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12048805499,
+      "lat": 18.5643174,
+      "lon": 73.9178322,
+      "tags": {
+        "addr:city": "Pune-Maharashtra",
+        "addr:housenumber": "Survey No - 206/2, CTS No. 78 to 85 Viman Nagar, Lohegaon, Pune, Maharashtra 411014",
+        "addr:postcode": "411014",
+        "name": "Panchshil Business Park - Tower A",
+        "office": "company"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12536607694,
+      "lat": 18.5602966,
+      "lon": 73.9311837,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "Sr.No. 47/3/1",
+        "addr:postcode": "411014",
+        "addr:street": "Kharadi Road",
+        "check_date": "2026-03-09",
+        "name": "EKTA ACADEMY BORATE CLASSES",
+        "office": "educational_institution"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12942088174,
+      "lat": 18.563916,
+      "lon": 73.9186177,
+      "tags": {
+        "addr:city": "Pune",
+        "addr:postcode": "411014",
+        "addr:street": "Poona Super Speciality Clinic , Office-B409, B Wing, Nyati Empress (Reliance Mart), Opp sambar Restaurant, Near Gigaspace IT Park, VimanNagar",
+        "amenity": "hospital",
+        "check_date": "2026-03-12",
+        "healthcare": "hospital",
+        "name": "Dr. Bhupeshkumar Kaware",
+        "operator": "Novosalus Technology",
+        "operator:type": "private"
+      }
+    },
+    {
+      "type": "way",
+      "id": 107670065,
+      "center": {
+        "lat": 18.5626965,
+        "lon": 73.9135137
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Neco Gardens"
+      }
+    },
+    {
+      "type": "way",
+      "id": 107670309,
+      "center": {
+        "lat": 18.5629875,
+        "lon": 73.9197226
+      },
+      "tags": {
+        "landuse": "commercial",
+        "name": "Gigaspace IT Park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 107671210,
+      "center": {
+        "lat": 18.5685172,
+        "lon": 73.9158693
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 122024107,
+      "center": {
+        "lat": 18.5608338,
+        "lon": 73.9182356
+      },
+      "tags": {
+        "highway": "construction",
+        "name": "Viman Nagar Road",
+        "oneway": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 142235004,
+      "center": {
+        "lat": 18.560536,
+        "lon": 73.9148235
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Eden Garden Society"
+      }
+    },
+    {
+      "type": "way",
+      "id": 152330033,
+      "center": {
+        "lat": 18.5711814,
+        "lon": 73.9091802
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Konark Campus Housing Society"
+      }
+    },
+    {
+      "type": "way",
+      "id": 152330077,
+      "center": {
+        "lat": 18.5689434,
+        "lon": 73.9103855
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Lunkad Queens Land"
+      }
+    },
+    {
+      "type": "way",
+      "id": 152331477,
+      "center": {
+        "lat": 18.5663939,
+        "lon": 73.9162371
+      },
+      "tags": {
+        "designation": "Joggers Park",
+        "leisure": "park",
+        "name": "Joggers Park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 152333025,
+      "center": {
+        "lat": 18.5653857,
+        "lon": 73.9102813
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "Viman Nagar",
+        "addr:postcode": "411014",
+        "addr:street": "Viman Nagar Road",
+        "leisure": "park",
+        "name": "Udaan Biodiversity Park",
+        "name:mr": "\u0909\u0921\u093e\u0928 \u092c\u093e\u092f\u094b\u0921\u093e\u092f\u0935\u094d\u0939\u0930\u094d\u0938\u093f\u091f\u0940 \u092a\u093e\u0930\u094d\u0915"
+      }
+    },
+    {
+      "type": "way",
+      "id": 158889476,
+      "center": {
+        "lat": 18.5604457,
+        "lon": 73.9206662
+      },
+      "tags": {
+        "addr:housename": "Inorbit Mall",
+        "addr:street": "Ahmadnagar Road",
+        "check_date": "2026-03-09",
+        "landuse": "retail",
+        "name": "Inorbit Mall",
+        "shop": "mall"
+      }
+    },
+    {
+      "type": "way",
+      "id": 208058066,
+      "center": {
+        "lat": 18.5619733,
+        "lon": 73.9167705
+      },
+      "tags": {
+        "landuse": "retail"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218691419,
+      "center": {
+        "lat": 18.5633045,
+        "lon": 73.9097714
+      },
+      "tags": {
+        "construction": "primary",
+        "highway": "construction",
+        "name": "HCMTR"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218691424,
+      "center": {
+        "lat": 18.5623096,
+        "lon": 73.9204462
+      },
+      "tags": {
+        "landuse": "industrial",
+        "man_made": "works",
+        "name": "CTR"
+      }
+    },
+    {
+      "type": "way",
+      "id": 218691425,
+      "center": {
+        "lat": 18.5643315,
+        "lon": 73.9160496
+      },
+      "tags": {
+        "landuse": "commercial",
+        "name": "Panchshil Business Park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 294839139,
+      "center": {
+        "lat": 18.5622116,
+        "lon": 73.9354073
+      },
+      "tags": {
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 359795550,
+      "center": {
+        "lat": 18.5618408,
+        "lon": 73.9392839
+      },
+      "tags": {
+        "addr:city": "Pune, Maharashtra",
+        "addr:district": "Pune",
+        "addr:housenumber": "8/565",
+        "addr:postcode": "411014",
+        "addr:street": "Osumare, Survey No.43, Pathare - Thube Nagar, Kharadi",
+        "building": "industrial",
+        "building:levels": "0",
+        "description": "We tailor strategies to your unique goals, from SEO to social media, ensuring the perfect fit for your business. When you choose Osumare, you choose a digital marketing partner dedicated to your success. Join us and watch your business thrive online!",
+        "height": "0",
+        "name": "Osumare",
+        "website": "https://osumare.com/"
+      }
+    },
+    {
+      "type": "way",
+      "id": 359921377,
+      "center": {
+        "lat": 18.5536928,
+        "lon": 73.9400533
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "074",
+        "addr:postcode": "411014",
+        "addr:street": "Kharadi Bypass",
+        "building": "industrial",
+        "building:levels": "4",
+        "height": "7",
+        "name": "Sharma and Sons"
+      }
+    },
+    {
+      "type": "way",
+      "id": 360254797,
+      "center": {
+        "lat": 18.5508672,
+        "lon": 73.9431147
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:housenumber": "044",
+        "addr:postcode": "411014",
+        "addr:street": "Kharadi gaon road",
+        "building": "industrial",
+        "building:levels": "2",
+        "height": "1",
+        "name": "Makhwana and  Co."
+      }
+    },
+    {
+      "type": "way",
+      "id": 375382143,
+      "center": {
+        "lat": 18.5723472,
+        "lon": 73.9090249
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:postcode": "411014",
+        "addr:street": "New Airport Road",
+        "landuse": "residential",
+        "name": "Rohan Mithila",
+        "website": "https://www.rohanbuilders.com/rohan-mithila-crisil-rated-residential-project-vimannagar-pune.html"
+      }
+    },
+    {
+      "type": "way",
+      "id": 385800595,
+      "center": {
+        "lat": 18.5637942,
+        "lon": 73.9439682
+      },
+      "tags": {
+        "building": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 494577377,
+      "center": {
+        "lat": 18.5584717,
+        "lon": 73.9206932
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "PMC Garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 551014625,
+      "center": {
+        "lat": 18.5816698,
+        "lon": 73.9150382
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 551014626,
+      "center": {
+        "lat": 18.5813313,
+        "lon": 73.920443
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 551014627,
+      "center": {
+        "lat": 18.5810884,
+        "lon": 73.9244671
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 551014629,
+      "center": {
+        "lat": 18.5782558,
+        "lon": 73.9255849
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 551014630,
+      "center": {
+        "lat": 18.5801925,
+        "lon": 73.9210782
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 551014631,
+      "center": {
+        "lat": 18.5791112,
+        "lon": 73.9224392
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 551014632,
+      "center": {
+        "lat": 18.5776366,
+        "lon": 73.9241969
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 551014633,
+      "center": {
+        "lat": 18.5767608,
+        "lon": 73.9250691
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 551014634,
+      "center": {
+        "lat": 18.5797997,
+        "lon": 73.9157484
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 551014635,
+      "center": {
+        "lat": 18.5837927,
+        "lon": 73.9140399
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 551014636,
+      "center": {
+        "lat": 18.5830961,
+        "lon": 73.9252129
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 552180017,
+      "center": {
+        "lat": 18.5584846,
+        "lon": 73.9207134
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "PMC Garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 567680966,
+      "center": {
+        "lat": 18.5609363,
+        "lon": 73.9182074
+      },
+      "tags": {
+        "highway": "construction",
+        "name": "Viman Nagar Road",
+        "oneway": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 910115693,
+      "center": {
+        "lat": 18.564562,
+        "lon": 73.9373472
+      },
+      "tags": {
+        "landuse": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1036864303,
+      "center": {
+        "lat": 18.5506258,
+        "lon": 73.9310794
+      },
+      "tags": {
+        "building": "industrial",
+        "company": "engineering",
+        "name": "Shreeji Cans"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1137975324,
+      "center": {
+        "lat": 18.5740995,
+        "lon": 73.9088383
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Shubh Nirvana",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1156199642,
+      "center": {
+        "lat": 18.5831219,
+        "lon": 73.9209619
+      },
+      "tags": {
+        "landuse": "grass"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1258097064,
+      "center": {
+        "lat": 18.5597627,
+        "lon": 73.923951
+      },
+      "tags": {
+        "addr:city": "Pune",
+        "addr:district": "haveli",
+        "addr:postcode": "411014",
+        "addr:street": "nagar road",
+        "landuse": "commercial",
+        "name": "St. Frances De Sales School Ground"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1258099213,
+      "center": {
+        "lat": 18.5590743,
+        "lon": 73.9243368
+      },
+      "tags": {
+        "landuse": "residential",
+        "residential": "garden"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1258189010,
+      "center": {
+        "lat": 18.5589158,
+        "lon": 73.9249305
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1300653374,
+      "center": {
+        "lat": 18.5758679,
+        "lon": 73.9139718
+      },
+      "tags": {
+        "landuse": "construction"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1386055155,
+      "center": {
+        "lat": 18.560863,
+        "lon": 73.9256739
+      },
+      "tags": {
+        "leisure": "park",
+        "name": "M Bhaskar S Shinde Udyan"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1394479945,
+      "center": {
+        "lat": 18.5616111,
+        "lon": 73.9207624
+      },
+      "tags": {
+        "highway": "construction",
+        "oneway": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410056578,
+      "center": {
+        "lat": 18.5609929,
+        "lon": 73.9347616
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Vishaldeep Residency",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410060890,
+      "center": {
+        "lat": 18.5647803,
+        "lon": 73.9114253
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Viman Paradise",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410313379,
+      "center": {
+        "lat": 18.5589442,
+        "lon": 73.9301232
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Krish Ambience",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410360596,
+      "center": {
+        "lat": 18.5685219,
+        "lon": 73.9204663
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Bhatnagar Avenue",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410559849,
+      "center": {
+        "lat": 18.5666035,
+        "lon": 73.9138596
+      },
+      "tags": {
+        "landuse": "commercial",
+        "name": "Lunkad Sky Station"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410568385,
+      "center": {
+        "lat": 18.5670007,
+        "lon": 73.9122791
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Lunkad Zodiac",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410865102,
+      "center": {
+        "lat": 18.5580017,
+        "lon": 73.9335135
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Matoshree Housing Society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1410900618,
+      "center": {
+        "lat": 18.5657952,
+        "lon": 73.9188027
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Disha Skyline",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1411071139,
+      "center": {
+        "lat": 18.560974,
+        "lon": 73.9160877
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Eden Garden Co-operative Housing Society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1411119820,
+      "center": {
+        "lat": 18.5627011,
+        "lon": 73.9221092
+      },
+      "tags": {
+        "landuse": "commercial",
+        "name": "Four Points by Sheraton"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1411191395,
+      "center": {
+        "lat": 18.5687307,
+        "lon": 73.9138832
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Gera Terraces II",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1411400505,
+      "center": {
+        "lat": 18.5622937,
+        "lon": 73.928384
+      },
+      "tags": {
+        "landuse": "commercial",
+        "name": "Vedriti"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1411401446,
+      "center": {
+        "lat": 18.5688227,
+        "lon": 73.9124269
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Hermes Drome",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1411934586,
+      "center": {
+        "lat": 18.5695206,
+        "lon": 73.9120606
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Siddhivinayak Pride",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412131686,
+      "center": {
+        "lat": 18.5755011,
+        "lon": 73.9108076
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Rohan Mithila"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412136825,
+      "center": {
+        "lat": 18.5676772,
+        "lon": 73.9139835
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Roshma Residency",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412171891,
+      "center": {
+        "lat": 18.5594251,
+        "lon": 73.9266607
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Sankalp Society"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412789946,
+      "center": {
+        "lat": 18.5584675,
+        "lon": 73.9276973
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Sai Nandanvan",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1412944475,
+      "center": {
+        "lat": 18.568432,
+        "lon": 73.9218293
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Shravani Garden Society",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1413235634,
+      "center": {
+        "lat": 18.5668569,
+        "lon": 73.9117117
+      },
+      "tags": {
+        "landuse": "residential",
+        "name": "Konark Nagar",
+        "residential": "apartments"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1459106246,
+      "center": {
+        "lat": 18.5512836,
+        "lon": 73.9184434
+      },
+      "tags": {
+        "industrial": "storage",
+        "landuse": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1459106471,
+      "center": {
+        "lat": 18.5510198,
+        "lon": 73.9184788
+      },
+      "tags": {
+        "industrial": "metal_processing",
+        "landuse": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1459107225,
+      "center": {
+        "lat": 18.5515598,
+        "lon": 73.918453
+      },
+      "tags": {
+        "industrial": "storage",
+        "landuse": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1459107434,
+      "center": {
+        "lat": 18.5507851,
+        "lon": 73.9183582
+      },
+      "tags": {
+        "industrial": "storage",
+        "landuse": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1459108920,
+      "center": {
+        "lat": 18.5505539,
+        "lon": 73.9176659
+      },
+      "tags": {
+        "industrial": "concrete_plant",
+        "landuse": "industrial"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1459439686,
+      "center": {
+        "lat": 18.5613274,
+        "lon": 73.930562
+      },
+      "tags": {
+        "landuse": "residential"
+      }
+    }
+  ]
+}

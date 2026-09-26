@@ -1,0 +1,76 @@
+{
+  "dataset_name": "OpenStreetMap Pune Station Road Network",
+  "provider": "OpenStreetMap Foundation (Overpass API)",
+  "classification": "STATIC_ROAD_NETWORK",
+  "retrieval_timestamp": "2026-09-26 11:30:03 UTC",
+  "search_radius_meters": 1500,
+  "stations": [
+    {
+      "location_id": "11613",
+      "station_name": "Revenue Colony-Shivajinagar, Pune - IITM",
+      "latitude": 18.5301,
+      "longitude": 73.8496,
+      "zone_type": "Commercial / Educational Urban Core",
+      "buffer_radius_m": 1500,
+      "road_segments_count": 789,
+      "nodes_count": 3653,
+      "raw_file": "ml/data/raw/traffic/osm/stations/osm_station_11613.json"
+    },
+    {
+      "location_id": "11609",
+      "station_name": "Mhada Colony, Pune - IITM",
+      "latitude": 18.573,
+      "longitude": 73.9277,
+      "zone_type": "North-Eastern Residential / Airport Corridor",
+      "buffer_radius_m": 1500,
+      "road_segments_count": 295,
+      "nodes_count": 1312,
+      "raw_file": "ml/data/raw/traffic/osm/stations/osm_station_11609.json"
+    },
+    {
+      "location_id": "60658",
+      "station_name": "Hadapsar, Pune - IITM",
+      "latitude": 18.5018,
+      "longitude": 73.9275,
+      "zone_type": "Eastern Commercial / Mixed Suburban Corridor",
+      "buffer_radius_m": 1500,
+      "road_segments_count": 937,
+      "nodes_count": 4250,
+      "raw_file": "ml/data/raw/traffic/osm/stations/osm_station_60658.json"
+    },
+    {
+      "location_id": "3409331",
+      "station_name": "Bhosari, Pune - IITM",
+      "latitude": 18.6401,
+      "longitude": 73.849,
+      "zone_type": "Northern Heavy Industrial / Highway Hub (PCMC)",
+      "buffer_radius_m": 1500,
+      "road_segments_count": 646,
+      "nodes_count": 3277,
+      "raw_file": "ml/data/raw/traffic/osm/stations/osm_station_3409331.json"
+    },
+    {
+      "location_id": "3409438",
+      "station_name": "Katraj Dairy, Pune - MPCB",
+      "latitude": 18.4545,
+      "longitude": 73.8542,
+      "zone_type": "Southern Highway Chokepoint / Ghat Gateway",
+      "buffer_radius_m": 1500,
+      "road_segments_count": 1415,
+      "nodes_count": 5671,
+      "raw_file": "ml/data/raw/traffic/osm/stations/osm_station_3409438.json"
+    },
+    {
+      "location_id": "3409526",
+      "station_name": "Panchawati_Pashan, Pune - IITM",
+      "latitude": 18.5365,
+      "longitude": 73.8055,
+      "zone_type": "Western Institutional / Foothill Background",
+      "buffer_radius_m": 1500,
+      "road_segments_count": 250,
+      "nodes_count": 1051,
+      "raw_file": "ml/data/raw/traffic/osm/stations/osm_station_3409526.json"
+    }
+  ],
+  "total_road_segments": 4332
+}

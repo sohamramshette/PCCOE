@@ -1,0 +1,99 @@
+{
+  "id": 11608,
+  "name": "Bhosari, Pune - IITM",
+  "locality": null,
+  "timezone": "Asia/Kolkata",
+  "country": {
+    "id": 9,
+    "code": "IN",
+    "name": "India"
+  },
+  "owner": {
+    "id": 4,
+    "name": "Unknown Governmental Organization"
+  },
+  "provider": {
+    "id": 163,
+    "name": "caaqm"
+  },
+  "isMobile": false,
+  "isMonitor": true,
+  "instruments": [
+    {
+      "id": 2,
+      "name": "Government Monitor"
+    }
+  ],
+  "sensors": [
+    {
+      "id": 39442,
+      "name": "co µg/m³",
+      "parameter": {
+        "id": 4,
+        "name": "co",
+        "units": "µg/m³",
+        "displayName": "CO mass"
+      }
+    },
+    {
+      "id": 39441,
+      "name": "no2 µg/m³",
+      "parameter": {
+        "id": 5,
+        "name": "no2",
+        "units": "µg/m³",
+        "displayName": "NO₂ mass"
+      }
+    },
+    {
+      "id": 39443,
+      "name": "o3 µg/m³",
+      "parameter": {
+        "id": 3,
+        "name": "o3",
+        "units": "µg/m³",
+        "displayName": "O₃ mass"
+      }
+    },
+    {
+      "id": 39440,
+      "name": "pm10 µg/m³",
+      "parameter": {
+        "id": 1,
+        "name": "pm10",
+        "units": "µg/m³",
+        "displayName": "PM10"
+      }
+    },
+    {
+      "id": 39439,
+      "name": "pm25 µg/m³",
+      "parameter": {
+        "id": 2,
+        "name": "pm25",
+        "units": "µg/m³",
+        "displayName": "PM2.5"
+      }
+    }
+  ],
+  "coordinates": {
+    "latitude": 18.640051,
+    "longitude": 73.848956
+  },
+  "licenses": null,
+  "bounds": [
+    73.848956,
+    18.640051,
+    73.848956,
+    18.640051
+  ],
+  "distance": null,
+  "datetimeFirst": {
+    "utc": "2020-11-13T12:15:00Z",
+    "local": "2020-11-13T17:45:00+05:30"
+  },
+  "datetimeLast": {
+    "utc": "2022-07-07T04:45:00Z",
+    "local": "2022-07-07T10:15:00+05:30"
+  }
+}

@@ -1,0 +1,456 @@
+{
+  "timestamp_utc": "2026-09-26T12:32:47.054638+00:00",
+  "task": "Next-Hour PM2.5 Forecasting (t+1)",
+  "unit": "ug/m3",
+  "partitions": {
+    "train": {
+      "total_rows": 58608,
+      "valid_targets": 42796
+    },
+    "validation": {
+      "total_rows": 13104,
+      "valid_targets": 10454
+    },
+    "test": {
+      "total_rows": 12384,
+      "valid_targets": 9769
+    }
+  },
+  "model_comparison": [
+    {
+      "model_name": "Model 0 - Persistence Baseline",
+      "split": "Validation",
+      "n_samples": 10454,
+      "mae": 4.941,
+      "rmse": 7.7725,
+      "r2": 0.6727,
+      "medae": 3.5317,
+      "explained_variance": 0.6728,
+      "delta_mae_vs_persist": 0.0,
+      "delta_rmse_vs_persist": 0.0,
+      "delta_r2_vs_persist": 0.0
+    },
+    {
+      "model_name": "Model 1 - Ridge Regression",
+      "split": "Validation",
+      "n_samples": 10454,
+      "mae": 5.7222,
+      "rmse": 8.4181,
+      "r2": 0.6161,
+      "medae": 4.2793,
+      "explained_variance": 0.6163,
+      "delta_mae_vs_persist": 0.7812,
+      "delta_rmse_vs_persist": 0.6456,
+      "delta_r2_vs_persist": -0.0566
+    },
+    {
+      "model_name": "Model 2 - Random Forest",
+      "split": "Validation",
+      "n_samples": 10454,
+      "mae": 4.736,
+      "rmse": 7.2059,
+      "r2": 0.7187,
+      "medae": 3.5465,
+      "explained_variance": 0.7237,
+      "delta_mae_vs_persist": -0.205,
+      "delta_rmse_vs_persist": -0.5666,
+      "delta_r2_vs_persist": 0.046
+    },
+    {
+      "model_name": "Model 3 - HistGradientBoosting",
+      "split": "Validation",
+      "n_samples": 10454,
+      "mae": 4.6686,
+      "rmse": 7.1287,
+      "r2": 0.7247,
+      "medae": 3.4632,
+      "explained_variance": 0.7279,
+      "delta_mae_vs_persist": -0.2724,
+      "delta_rmse_vs_persist": -0.6438,
+      "delta_r2_vs_persist": 0.052
+    },
+    {
+      "model_name": "Model 0 - Persistence Baseline",
+      "split": "Test",
+      "n_samples": 9769,
+      "mae": 4.1837,
+      "rmse": 9.8782,
+      "r2": 0.3628,
+      "medae": 2.8275,
+      "explained_variance": 0.3628,
+      "delta_mae_vs_persist": 0.0,
+      "delta_rmse_vs_persist": 0.0,
+      "delta_r2_vs_persist": 0.0
+    },
+    {
+      "model_name": "Model 1 - Ridge Regression",
+      "split": "Test",
+      "n_samples": 9769,
+      "mae": 4.6819,
+      "rmse": 9.9457,
+      "r2": 0.354,
+      "medae": 3.1623,
+      "explained_variance": 0.3547,
+      "delta_mae_vs_persist": 0.4982,
+      "delta_rmse_vs_persist": 0.0675,
+      "delta_r2_vs_persist": -0.0088
+    },
+    {
+      "model_name": "Model 2 - Random Forest",
+      "split": "Test",
+      "n_samples": 9769,
+      "mae": 4.0475,
+      "rmse": 9.1171,
+      "r2": 0.4572,
+      "medae": 2.9102,
+      "explained_variance": 0.4583,
+      "delta_mae_vs_persist": -0.1362,
+      "delta_rmse_vs_persist": -0.7611,
+      "delta_r2_vs_persist": 0.0944
+    },
+    {
+      "model_name": "Model 3 - HistGradientBoosting",
+      "split": "Test",
+      "n_samples": 9769,
+      "mae": 4.1034,
+      "rmse": 9.1094,
+      "r2": 0.4581,
+      "medae": 2.9682,
+      "explained_variance": 0.4591,
+      "delta_mae_vs_persist": -0.0803,
+      "delta_rmse_vs_persist": -0.7688,
+      "delta_r2_vs_persist": 0.0953
+    }
+  ],
+  "station_metrics": [
+    {
+      "station_id": 11609,
+      "station_name": "Mhada Colony, Pune - IITM",
+      "zone_type": "North-Eastern Residential / Airport Corridor",
+      "n_test": 1915,
+      "persistence_mae": 3.5856,
+      "persistence_rmse": 4.703,
+      "persistence_r2": 0.6602,
+      "hgb_mae": 3.5259,
+      "hgb_rmse": 4.6763,
+      "hgb_r2": 0.664,
+      "hgb_medae": 2.8352,
+      "rf_mae": 3.3918,
+      "rf_rmse": 4.519,
+      "rf_r2": 0.6863,
+      "ridge_mae": 3.693,
+      "ridge_rmse": 4.9091,
+      "ridge_r2": 0.6297,
+      "hgb_mae_improvement": 0.0597,
+      "hgb_mae_pct_improvement": 1.66
+    },
+    {
+      "station_id": 11613,
+      "station_name": "Revenue Colony-Shivajinagar, Pune - IITM",
+      "zone_type": "Commercial / Educational Urban Core",
+      "n_test": 1675,
+      "persistence_mae": 4.604,
+      "persistence_rmse": 6.1974,
+      "persistence_r2": 0.476,
+      "hgb_mae": 4.5857,
+      "hgb_rmse": 6.014,
+      "hgb_r2": 0.5065,
+      "hgb_medae": 3.7738,
+      "rf_mae": 4.5665,
+      "rf_rmse": 5.8686,
+      "rf_r2": 0.5301,
+      "ridge_mae": 5.3585,
+      "ridge_rmse": 7.2721,
+      "ridge_r2": 0.2785,
+      "hgb_mae_improvement": 0.0184,
+      "hgb_mae_pct_improvement": 0.4
+    },
+    {
+      "station_id": 60658,
+      "station_name": "Hadapsar, Pune - IITM",
+      "zone_type": "Eastern Commercial / Mixed Suburban Corridor",
+      "n_test": 1090,
+      "persistence_mae": 4.7125,
+      "persistence_rmse": 6.14,
+      "persistence_r2": 0.6189,
+      "hgb_mae": 4.702,
+      "hgb_rmse": 6.0703,
+      "hgb_r2": 0.6275,
+      "hgb_medae": 3.8172,
+      "rf_mae": 4.733,
+      "rf_rmse": 6.0621,
+      "rf_r2": 0.6285,
+      "ridge_mae": 4.9224,
+      "ridge_rmse": 6.4274,
+      "ridge_r2": 0.5824,
+      "hgb_mae_improvement": 0.0105,
+      "hgb_mae_pct_improvement": 0.22
+    },
+    {
+      "station_id": 3409331,
+      "station_name": "Bhosari, Pune - IITM",
+      "zone_type": "Northern Heavy Industrial / Highway Hub (PCMC)",
+      "n_test": 1821,
+      "persistence_mae": 4.1848,
+      "persistence_rmse": 5.5978,
+      "persistence_r2": 0.4135,
+      "hgb_mae": 3.9937,
+      "hgb_rmse": 5.2654,
+      "hgb_r2": 0.4811,
+      "hgb_medae": 3.3015,
+      "rf_mae": 3.8902,
+      "rf_rmse": 5.462,
+      "rf_r2": 0.4416,
+      "ridge_mae": 4.3427,
+      "ridge_rmse": 5.9783,
+      "ridge_r2": 0.3311,
+      "hgb_mae_improvement": 0.1911,
+      "hgb_mae_pct_improvement": 4.57
+    },
+    {
+      "station_id": 3409438,
+      "station_name": "Katraj Dairy, Pune - MPCB",
+      "zone_type": "Southern Highway Chokepoint / Ghat Gateway",
+      "n_test": 1397,
+      "persistence_mae": 4.3703,
+      "persistence_rmse": 22.3385,
+      "persistence_r2": 0.2132,
+      "hgb_mae": 4.5664,
+      "hgb_rmse": 20.2524,
+      "hgb_r2": 0.3533,
+      "hgb_medae": 1.7157,
+      "rf_mae": 4.5524,
+      "rf_rmse": 20.2066,
+      "rf_r2": 0.3562,
+      "ridge_mae": 5.998,
+      "ridge_rmse": 21.6639,
+      "ridge_r2": 0.26,
+      "hgb_mae_improvement": -0.1961,
+      "hgb_mae_pct_improvement": -4.49
+    },
+    {
+      "station_id": 3409526,
+      "station_name": "Panchawati_Pashan, Pune - IITM",
+      "zone_type": "Western Institutional / Foothill Background",
+      "n_test": 1871,
+      "persistence_mae": 3.9709,
+      "persistence_rmse": 5.2362,
+      "persistence_r2": 0.3829,
+      "hgb_mae": 3.6749,
+      "hgb_rmse": 4.8794,
+      "hgb_r2": 0.4641,
+      "hgb_medae": 2.8237,
+      "rf_mae": 3.6307,
+      "rf_rmse": 5.1921,
+      "rf_r2": 0.3932,
+      "ridge_mae": 4.2958,
+      "ridge_rmse": 5.932,
+      "ridge_r2": 0.208,
+      "hgb_mae_improvement": 0.296,
+      "hgb_mae_pct_improvement": 7.45
+    }
+  ],
+  "subgroup_metrics": [
+    {
+      "subgroup": "Diurnal: Daytime (06:00-18:00 IST)",
+      "n_test": 4973,
+      "persistence_mae": 4.2621,
+      "hgb_mae": 4.1863,
+      "hgb_rmse": 9.1514,
+      "hgb_r2": 0.4082,
+      "mae_improvement": 0.0758
+    },
+    {
+      "subgroup": "Diurnal: Nighttime (18:00-06:00 IST)",
+      "n_test": 4796,
+      "persistence_mae": 4.1023,
+      "hgb_mae": 4.0173,
+      "hgb_rmse": 9.0657,
+      "hgb_r2": 0.5005,
+      "mae_improvement": 0.0849
+    },
+    {
+      "subgroup": "Season: Active Monsoon (Jul-Sep)",
+      "n_test": 9769,
+      "persistence_mae": 4.1837,
+      "hgb_mae": 4.1034,
+      "hgb_rmse": 9.1094,
+      "hgb_r2": 0.4581,
+      "mae_improvement": 0.0803
+    },
+    {
+      "subgroup": "Pollution: Moderate/Low PM2.5 (<= 35 ug/m3)",
+      "n_test": 9271,
+      "persistence_mae": 3.8462,
+      "hgb_mae": 3.8214,
+      "hgb_rmse": 6.7891,
+      "hgb_r2": 0.3522,
+      "mae_improvement": 0.0248
+    },
+    {
+      "subgroup": "Pollution: Elevated PM2.5 (> 35 ug/m3)",
+      "n_test": 498,
+      "persistence_mae": 10.4655,
+      "hgb_mae": 9.3519,
+      "hgb_rmse": 27.7442,
+      "hgb_r2": 0.3275,
+      "mae_improvement": 1.1135
+    }
+  ],
+  "extended_pollutant_benchmark": [
+    {
+      "configuration": "Station 11613 - Core Features (Network HGB)",
+      "split": "Validation",
+      "n_samples": 1864,
+      "mae": 4.9618,
+      "rmse": 6.5213,
+      "r2": 0.7004
+    },
+    {
+      "configuration": "Station 11613 - Extended Features (with PM10, NO2)",
+      "split": "Validation",
+      "n_samples": 1864,
+      "mae": 5.9332,
+      "rmse": 7.9701,
+      "r2": 0.5525
+    },
+    {
+      "configuration": "Station 11613 - Core Features (Network HGB)",
+      "split": "Test",
+      "n_samples": 1675,
+      "mae": 4.5857,
+      "rmse": 6.014,
+      "r2": 0.5065
+    },
+    {
+      "configuration": "Station 11613 - Extended Features (with PM10, NO2)",
+      "split": "Test",
+      "n_samples": 1675,
+      "mae": 7.0194,
+      "rmse": 9.376,
+      "r2": -0.1994
+    }
+  ],
+  "top_features": [
+    {
+      "feature_name": "pm25",
+      "rf_gini_importance": 0.2939785857726478,
+      "hgb_permutation_mae_loss": 5.5582565570819025,
+      "category": "PM2.5 History"
+    },
+    {
+      "feature_name": "pm25_rolling_mean_3h",
+      "rf_gini_importance": 0.24187531936843476,
+      "hgb_permutation_mae_loss": 1.0261170286328556,
+      "category": "PM2.5 History"
+    },
+    {
+      "feature_name": "pm25_lag_1h",
+      "rf_gini_importance": 0.12383561900055895,
+      "hgb_permutation_mae_loss": 0.0931335849715813,
+      "category": "PM2.5 History"
+    },
+    {
+      "feature_name": "pm25_rolling_mean_6h",
+      "rf_gini_importance": 0.1119348242316127,
+      "hgb_permutation_mae_loss": 0.04273726571538532,
+      "category": "PM2.5 History"
+    },
+    {
+      "feature_name": "pm25_lag_2h",
+      "rf_gini_importance": 0.047037638573626125,
+      "hgb_permutation_mae_loss": 0.02907174765660283,
+      "category": "PM2.5 History"
+    },
+    {
+      "feature_name": "pm25_rolling_mean_12h",
+      "rf_gini_importance": 0.037235929280510165,
+      "hgb_permutation_mae_loss": 0.014336122132305285,
+      "category": "PM2.5 History"
+    },
+    {
+      "feature_name": "pm25_rolling_mean_24h",
+      "rf_gini_importance": 0.021427236175205894,
+      "hgb_permutation_mae_loss": 0.30186619975676815,
+      "category": "PM2.5 History"
+    },
+    {
+      "feature_name": "pm25_lag_24h",
+      "rf_gini_importance": 0.016643322862100247,
+      "hgb_permutation_mae_loss": 0.00970713049562182,
+      "category": "PM2.5 History"
+    },
+    {
+      "feature_name": "pm25_lag_3h",
+      "rf_gini_importance": 0.016524722001866818,
+      "hgb_permutation_mae_loss": -0.0009557668671597242,
+      "category": "PM2.5 History"
+    },
+    {
+      "feature_name": "pm25_lag_6h",
+      "rf_gini_importance": 0.014397603540382891,
+      "hgb_permutation_mae_loss": 0.006836256677320307,
+      "category": "PM2.5 History"
+    },
+    {
+      "feature_name": "pm25_lag_12h",
+      "rf_gini_importance": 0.005743404955378576,
+      "hgb_permutation_mae_loss": -0.0009314996689216315,
+      "category": "PM2.5 History"
+    },
+    {
+      "feature_name": "solar_rad_wm2",
+      "rf_gini_importance": 0.004660745713122729,
+      "hgb_permutation_mae_loss": 0.07566154837370327,
+      "category": "Weather"
+    },
+    {
+      "feature_name": "pm25_rolling_std_6h",
+      "rf_gini_importance": 0.0034880782524181636,
+      "hgb_permutation_mae_loss": 0.03194601561772661,
+      "category": "PM2.5 History"
+    },
+    {
+      "feature_name": "pbl_height_m",
+      "rf_gini_importance": 0.0031610702063141383,
+      "hgb_permutation_mae_loss": 0.009649996753190315,
+      "category": "Atmospheric Dispersion"
+    },
+    {
+      "feature_name": "pm25_rolling_std_24h",
+      "rf_gini_importance": 0.00276986975534539,
+      "hgb_permutation_mae_loss": 0.014014568288858342,
+      "category": "PM2.5 History"
+    },
+    {
+      "feature_name": "hour_cos",
+      "rf_gini_importance": 0.00251036432379731,
+      "hgb_permutation_mae_loss": 0.04597141496915284,
+      "category": "Temporal"
+    },
+    {
+      "feature_name": "day",
+      "rf_gini_importance": 0.0024677238036272396,
+      "hgb_permutation_mae_loss": -0.00047472525052008054,
+      "category": "Other"
+    },
+    {
+      "feature_name": "wind_v",
+      "rf_gini_importance": 0.002318473379787615,
+      "hgb_permutation_mae_loss": 0.06121038231561471,
+      "category": "Atmospheric Dispersion"
+    },
+    {
+      "feature_name": "ventilation_index",
+      "rf_gini_importance": 0.002084627719202453,
+      "hgb_permutation_mae_loss": 0.002010625726919457,
+      "category": "Atmospheric Dispersion"
+    },
+    {
+      "feature_name": "precip_rolling_sum_24h",
+      "rf_gini_importance": 0.001988420838323277,
+      "hgb_permutation_mae_loss": -0.00019780994541314102,
+      "category": "Weather"
+    }
+  ]
+}

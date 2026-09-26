@@ -1,0 +1,980 @@
+{
+  "dataset_name": "Urban Environmental Digital Twin - Model Ready Feature Store",
+  "timestamp_utc": "2026-09-26 12:15:06 UTC",
+  "canonical_grain": "ONE ROW = ONE MONITORING STATION \u00d7 ONE HOUR (station_id, datetime_utc)",
+  "row_count": 84096,
+  "column_count": 118,
+  "target": {
+    "name": "target_pm25_t_plus_1",
+    "horizon": "t+1 hour (next-hour ambient PM2.5)",
+    "unit": "ug/m3",
+    "observed_valid_rows": 63019,
+    "observed_valid_pct": 74.94
+  },
+  "splits": {
+    "train": {
+      "rows": 58608,
+      "start_utc": "2025-02-18T00:00:00Z",
+      "end_utc": "2026-03-31T23:00:00Z",
+      "valid_target_rows": 42796
+    },
+    "validation": {
+      "rows": 13104,
+      "start_utc": "2026-04-01T00:00:00Z",
+      "end_utc": "2026-06-30T23:00:00Z",
+      "valid_target_rows": 10454
+    },
+    "test": {
+      "rows": 12384,
+      "start_utc": "2026-07-01T00:00:00Z",
+      "end_utc": "2026-09-24T23:00:00Z",
+      "valid_target_rows": 9769
+    }
+  },
+  "features": {
+    "station_id": {
+      "category": "STATIC_SPATIAL",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "station_name": {
+      "category": "STATIC_SPATIAL",
+      "dtype": "str",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "zone_type": {
+      "category": "STATIC_SPATIAL",
+      "dtype": "str",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "latitude": {
+      "category": "STATIC_SPATIAL",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "longitude": {
+      "category": "STATIC_SPATIAL",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "datetime_utc": {
+      "category": "STATIC_SPATIAL",
+      "dtype": "str",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "datetime_local_ist": {
+      "category": "STATIC_SPATIAL",
+      "dtype": "str",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "year": {
+      "category": "TEMPORAL",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "month": {
+      "category": "TEMPORAL",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "day": {
+      "category": "STATIC_SPATIAL",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "hour_utc": {
+      "category": "TEMPORAL",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "hour_ist": {
+      "category": "TEMPORAL",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "day_of_week": {
+      "category": "TEMPORAL",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "is_weekend": {
+      "category": "TEMPORAL",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm25": {
+      "category": "POLLUTION_OBSERVED",
+      "dtype": "float64",
+      "null_count": 21077,
+      "null_pct": 25.06,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm25_obs_count": {
+      "category": "POLLUTION_OBSERVED",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm25_completeness_flag": {
+      "category": "POLLUTION_OBSERVED",
+      "dtype": "str",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm10": {
+      "category": "POLLUTANT_CONTEXT",
+      "dtype": "float64",
+      "null_count": 73023,
+      "null_pct": 86.83,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm10_obs_count": {
+      "category": "POLLUTANT_CONTEXT",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "no2": {
+      "category": "POLLUTANT_CONTEXT",
+      "dtype": "float64",
+      "null_count": 73002,
+      "null_pct": 86.81,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "no2_obs_count": {
+      "category": "POLLUTANT_CONTEXT",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "temp_insitu_c": {
+      "category": "IN_SITU_METEOROLOGY",
+      "dtype": "float64",
+      "null_count": 74016,
+      "null_pct": 88.01,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "temp_insitu_obs_count": {
+      "category": "IN_SITU_METEOROLOGY",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "humidity_insitu_pct": {
+      "category": "IN_SITU_METEOROLOGY",
+      "dtype": "float64",
+      "null_count": 73941,
+      "null_pct": 87.92,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "humidity_insitu_obs_count": {
+      "category": "IN_SITU_METEOROLOGY",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "wind_speed_insitu_ms": {
+      "category": "IN_SITU_METEOROLOGY",
+      "dtype": "float64",
+      "null_count": 73943,
+      "null_pct": 87.93,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "wind_speed_insitu_obs_count": {
+      "category": "IN_SITU_METEOROLOGY",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "weather_grid_latitude": {
+      "category": "WEATHER_DYNAMIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "weather_grid_longitude": {
+      "category": "WEATHER_DYNAMIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "weather_elevation_m": {
+      "category": "WEATHER_DYNAMIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "temp_c": {
+      "category": "WEATHER_DYNAMIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "humidity_pct": {
+      "category": "WEATHER_DYNAMIC",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "dew_point_c": {
+      "category": "WEATHER_DYNAMIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "precip_mm": {
+      "category": "WEATHER_DYNAMIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "rain_mm": {
+      "category": "WEATHER_DYNAMIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pressure_hpa": {
+      "category": "WEATHER_DYNAMIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "wind_speed_ms": {
+      "category": "WEATHER_DYNAMIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "wind_dir_deg": {
+      "category": "WEATHER_DYNAMIC",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "solar_rad_wm2": {
+      "category": "WEATHER_DYNAMIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "cloud_cover_pct": {
+      "category": "WEATHER_DYNAMIC",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pbl_height_m": {
+      "category": "WEATHER_DYNAMIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "total_road_length_km": {
+      "category": "TRAFFIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "major_road_length_km": {
+      "category": "TRAFFIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "local_road_length_km": {
+      "category": "TRAFFIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "major_road_density_km_per_km2": {
+      "category": "TRAFFIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "total_road_density_km_per_km2": {
+      "category": "TRAFFIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "distance_to_nearest_major_road_m": {
+      "category": "TRAFFIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "traffic_proxy_index": {
+      "category": "TRAFFIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "industrial_elements_2km": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "dist_nearest_industrial_m": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "has_industrial_within_1km": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "construction_elements_1_5km": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "dist_nearest_construction_m": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "has_construction_within_1km": {
+      "category": "STATIC_SPATIAL",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "poi_total_count_1_5km": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "poi_density_per_km2": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "poi_commercial_count": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "poi_institutional_count": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "poi_transit_count": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "landuse_elements_total": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "landuse_residential_count": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "landuse_commercial_count": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "landuse_industrial_count": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "landuse_green_count": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "dominant_landuse": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "str",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pollution_data_type": {
+      "category": "PROVENANCE",
+      "dtype": "str",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "weather_data_type": {
+      "category": "PROVENANCE",
+      "dtype": "str",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "traffic_road_data_type": {
+      "category": "TRAFFIC",
+      "dtype": "str",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "traffic_proxy_data_type": {
+      "category": "TRAFFIC",
+      "dtype": "str",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "activity_data_type": {
+      "category": "PROVENANCE",
+      "dtype": "str",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "target_pm25_t_plus_1": {
+      "category": "TARGET",
+      "dtype": "float64",
+      "null_count": 21077,
+      "null_pct": 25.06,
+      "is_target": true,
+      "leakage_risk": "TARGET VARIABLE"
+    },
+    "target_available": {
+      "category": "TARGET",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": true,
+      "leakage_risk": "TARGET VARIABLE"
+    },
+    "hour_sin": {
+      "category": "TEMPORAL",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "hour_cos": {
+      "category": "TEMPORAL",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "month_sin": {
+      "category": "TEMPORAL",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "month_cos": {
+      "category": "TEMPORAL",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "day_of_week_sin": {
+      "category": "TEMPORAL",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "day_of_week_cos": {
+      "category": "TEMPORAL",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "is_monsoon": {
+      "category": "TEMPORAL",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "wind_u": {
+      "category": "ATMOSPHERIC_DISPERSION",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "wind_v": {
+      "category": "ATMOSPHERIC_DISPERSION",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "ventilation_index": {
+      "category": "ATMOSPHERIC_DISPERSION",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "temp_dewpoint_spread": {
+      "category": "ATMOSPHERIC_DISPERSION",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "is_precipitating": {
+      "category": "ATMOSPHERIC_DISPERSION",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "atmospheric_stagnation_flag": {
+      "category": "ATMOSPHERIC_DISPERSION",
+      "dtype": "int64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm25_lag_1h": {
+      "category": "POLLUTION_HISTORY",
+      "dtype": "float64",
+      "null_count": 21077,
+      "null_pct": 25.06,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm25_lag_2h": {
+      "category": "POLLUTION_HISTORY",
+      "dtype": "float64",
+      "null_count": 21077,
+      "null_pct": 25.06,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm25_lag_3h": {
+      "category": "POLLUTION_HISTORY",
+      "dtype": "float64",
+      "null_count": 21077,
+      "null_pct": 25.06,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm25_lag_6h": {
+      "category": "POLLUTION_HISTORY",
+      "dtype": "float64",
+      "null_count": 21077,
+      "null_pct": 25.06,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm25_lag_12h": {
+      "category": "POLLUTION_HISTORY",
+      "dtype": "float64",
+      "null_count": 21107,
+      "null_pct": 25.1,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm25_lag_24h": {
+      "category": "POLLUTION_HISTORY",
+      "dtype": "float64",
+      "null_count": 21167,
+      "null_pct": 25.17,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "temp_c_lag_1h": {
+      "category": "WEATHER_HISTORY",
+      "dtype": "float64",
+      "null_count": 6,
+      "null_pct": 0.01,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "wind_speed_ms_lag_1h": {
+      "category": "WEATHER_HISTORY",
+      "dtype": "float64",
+      "null_count": 6,
+      "null_pct": 0.01,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pbl_height_m_lag_1h": {
+      "category": "WEATHER_HISTORY",
+      "dtype": "float64",
+      "null_count": 6,
+      "null_pct": 0.01,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "temp_c_lag_3h": {
+      "category": "WEATHER_HISTORY",
+      "dtype": "float64",
+      "null_count": 18,
+      "null_pct": 0.02,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "wind_speed_ms_lag_3h": {
+      "category": "WEATHER_HISTORY",
+      "dtype": "float64",
+      "null_count": 18,
+      "null_pct": 0.02,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pbl_height_m_lag_3h": {
+      "category": "WEATHER_HISTORY",
+      "dtype": "float64",
+      "null_count": 18,
+      "null_pct": 0.02,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "temp_c_lag_6h": {
+      "category": "WEATHER_HISTORY",
+      "dtype": "float64",
+      "null_count": 36,
+      "null_pct": 0.04,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "wind_speed_ms_lag_6h": {
+      "category": "WEATHER_HISTORY",
+      "dtype": "float64",
+      "null_count": 36,
+      "null_pct": 0.04,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pbl_height_m_lag_6h": {
+      "category": "WEATHER_HISTORY",
+      "dtype": "float64",
+      "null_count": 36,
+      "null_pct": 0.04,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "humidity_pct_lag_1h": {
+      "category": "WEATHER_HISTORY",
+      "dtype": "float64",
+      "null_count": 6,
+      "null_pct": 0.01,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "ventilation_index_lag_1h": {
+      "category": "ATMOSPHERIC_DISPERSION",
+      "dtype": "float64",
+      "null_count": 6,
+      "null_pct": 0.01,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm25_rolling_mean_3h": {
+      "category": "POLLUTION_HISTORY",
+      "dtype": "float64",
+      "null_count": 16487,
+      "null_pct": 19.6,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm25_rolling_mean_6h": {
+      "category": "POLLUTION_HISTORY",
+      "dtype": "float64",
+      "null_count": 17066,
+      "null_pct": 20.29,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm25_rolling_mean_12h": {
+      "category": "POLLUTION_HISTORY",
+      "dtype": "float64",
+      "null_count": 16776,
+      "null_pct": 19.95,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm25_rolling_mean_24h": {
+      "category": "POLLUTION_HISTORY",
+      "dtype": "float64",
+      "null_count": 16444,
+      "null_pct": 19.55,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm25_rolling_std_6h": {
+      "category": "POLLUTION_HISTORY",
+      "dtype": "float64",
+      "null_count": 17066,
+      "null_pct": 20.29,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pm25_rolling_std_24h": {
+      "category": "POLLUTION_HISTORY",
+      "dtype": "float64",
+      "null_count": 16444,
+      "null_pct": 19.55,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "temp_c_rolling_mean_6h": {
+      "category": "WEATHER_HISTORY",
+      "dtype": "float64",
+      "null_count": 12,
+      "null_pct": 0.01,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "wind_speed_ms_rolling_mean_6h": {
+      "category": "WEATHER_HISTORY",
+      "dtype": "float64",
+      "null_count": 12,
+      "null_pct": 0.01,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "pbl_height_m_rolling_mean_6h": {
+      "category": "WEATHER_HISTORY",
+      "dtype": "float64",
+      "null_count": 12,
+      "null_pct": 0.01,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "precip_rolling_sum_6h": {
+      "category": "WEATHER_HISTORY",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "precip_rolling_sum_24h": {
+      "category": "WEATHER_HISTORY",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "traffic_stagnation_ratio": {
+      "category": "TRAFFIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "traffic_ventilation_ratio": {
+      "category": "TRAFFIC",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "industrial_dispersion_ratio": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "construction_dispersion_ratio": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    },
+    "poi_traffic_interaction": {
+      "category": "ACTIVITY_LANDUSE",
+      "dtype": "float64",
+      "null_count": 0,
+      "null_pct": 0.0,
+      "is_target": false,
+      "leakage_risk": "NONE (Past/Contemporaneous only)"
+    }
+  }
+}

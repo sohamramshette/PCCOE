@@ -1,0 +1,51 @@
+"""
+Pydantic schemas for static spatial infrastructure exposures.
+"""
+
+from typing import Optional
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict
+
+
+class TrafficExposureRead(BaseModel):
+    station_id: int
+    buffer_radius_m: float
+    buffer_area_km2: float
+    total_road_segments: int
+    total_road_length_km: float
+    major_road_length_km: float
+    local_road_length_km: float
+    major_road_density_km_per_km2: float
+    total_road_density_km_per_km2: float
+    distance_to_nearest_major_road_m: float
+    nearest_major_road_name: Optional[str] = None
+    nearest_major_road_class: Optional[str] = None
+    data_provenance: str
+    updated_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class ActivityExposureRead(BaseModel):
+    station_id: int
+    industrial_elements_2km: int
+    dist_nearest_industrial_m: float
+    has_industrial_within_1km: bool
+    construction_elements_1_5km: int
+    dist_nearest_construction_m: float
+    has_construction_within_1km: bool
+    poi_total_count_1_5km: int
+    poi_density_per_km2: float
+    poi_commercial_count: int
+    poi_institutional_count: int
+    poi_transit_count: int
+    landuse_elements_total: int
+    landuse_residential_count: int
+    landuse_commercial_count: int
+    landuse_industrial_count: int
+    landuse_green_count: int
+    dominant_landuse: str
+    data_provenance: str
+    updated_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)

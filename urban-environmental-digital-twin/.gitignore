@@ -98,6 +98,10 @@ ml/models/*
 pgdata/
 *.sql.bak
 *.dump
+backend/*.db
+*.db
+*.sqlite
+*.sqlite3
 
 # ---------------------------------------------------------------------------
 # Temporary files / logs
