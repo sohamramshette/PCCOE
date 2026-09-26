@@ -1,0 +1,7 @@
+-- Phase 8 migration record.
+-- Applied to Supabase as migration:
+-- 20260926125135 / phase_8_database_architecture
+--
+-- The hosted migration contains the complete DDL, foreign keys,
+-- uniqueness constraints, indexes and RLS enablement.
+-- This repository file records the migration identity for reproducibility.
