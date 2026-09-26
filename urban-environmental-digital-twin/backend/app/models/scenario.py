@@ -24,6 +24,7 @@ class Scenario(Base):
     # Scope & Modeling Model Association
     station_id = Column(Integer, ForeignKey("stations.station_id", ondelete="SET NULL"), nullable=True, index=True, comment="Target station (NULL indicates network-wide scenario)")
     model_id = Column(String(100), ForeignKey("model_registry.model_id", ondelete="RESTRICT"), nullable=False, index=True, comment="Underlying forecasting model used for simulation")
+    baseline_time_utc = Column(DateTime(timezone=True), nullable=True, index=True, comment="Historical baseline reference hour (UTC)")
     
     # Parameterized Policy Levers (Hypothetical Modifiers)
     traffic_reduction_pct = Column(Float, nullable=False, default=0.0, comment="Hypothetical traffic intensity reduction (%) [0.0, 100.0]")
@@ -52,12 +53,14 @@ class ScenarioResult(Base):
     id = Column(BigInteger().with_variant(Integer, "sqlite"), primary_key=True, autoincrement=True)
     scenario_id = Column(String(64), ForeignKey("scenarios.scenario_id", ondelete="CASCADE"), nullable=False, index=True)
     station_id = Column(Integer, ForeignKey("stations.station_id", ondelete="CASCADE"), nullable=False, index=True)
+    baseline_time_utc = Column(DateTime(timezone=True), nullable=True, index=True, comment="Historical baseline reference hour (UTC)")
     target_time_utc = Column(DateTime(timezone=True), nullable=False, index=True, comment="Simulated hour (UTC)")
     
     baseline_pm25 = Column(Float, nullable=False, comment="Unmodified baseline forecasted PM2.5 (µg/m³)")
     scenario_pm25 = Column(Float, nullable=False, comment="Simulated PM2.5 with policy intervention (µg/m³)")
     delta_pm25 = Column(Float, nullable=False, comment="Absolute change (scenario - baseline) in µg/m³")
     pct_change = Column(Float, nullable=False, comment="Relative percentage change (%)")
+    metadata_json = Column(Text, nullable=True, comment="Structured JSON audit and execution metadata")
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
     # Relationships

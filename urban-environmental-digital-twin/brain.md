@@ -906,9 +906,25 @@ Any AI coding agent working on this repository MUST:
   - Created automated test suite with 29 test cases under `backend/tests/` (100% pass rate).
   - Documented API architecture in `docs/architecture/api_architecture.md`.
 
+- [x] **Phase 10: What-If / Counterfactual Simulation Engine:** **COMPLETED & VERIFIED (50/50 TESTS PASSED)**.
+  - Implemented the What-If / Counterfactual Simulation Engine under `backend/app/services/scenario_service.py` adhering to strict scientific boundaries:
+    * **Model-Based Counterfactual Estimate:** Explicitly labeled as `MODEL_COUNTERFACTUAL_ESTIMATE`, carrying `interpretation_note: "Counterfactual model estimate; not a causal measurement."` and `uncertainty_available: false`.
+    * **Database Immutability:** Raw observations, weather reanalysis, traffic proxy, and spatial exposures remain strictly read-only; snapshot tests guarantee 0 modifications.
+    * **Feature Safety:** Modifies ONLY verified features in `ml/models/feature_names.json`:
+      - `TRAFFIC_REDUCTION`: `traffic_proxy_index` ($X_{\text{base}} \times m_t$), `traffic_stagnation_ratio` ($X_{\text{base}} \times m_t$), `traffic_ventilation_ratio` ($X_{\text{base}} \times m_t$), `poi_traffic_interaction` ($X_{\text{base}} \times m_t$).
+      - `INDUSTRIAL_ACTIVITY_REDUCTION`: `has_industrial_within_1km` ($X_{\text{base}} \times m_i$), `industrial_dispersion_ratio` ($X_{\text{base}} \times m_i$).
+      - `COMBINED_INTERVENTION`: Independent application of both policy levers.
+    * **In-Memory Serving Reuse:** Pre-loaded `ModelServingManager` evaluates both baseline and counterfactual feature rows without reloading or retraining models.
+    * **Calculations:** Absolute change ($\hat{y}_{\text{cf}} - \hat{y}_{\text{base}}$), estimated reduction ($\hat{y}_{\text{base}} - \hat{y}_{\text{cf}}$), and division-by-zero protected percentage change.
+  - Minimal schema enhancement with Alembic migration `0002_scenario_baseline_and_metadata.py` adding `baseline_time_utc` and `metadata_json`.
+  - Comprehensive Pydantic v2 schemas in `backend/app/schemas/scenario.py` with parameter bounds validation ($0 \le \text{pct} \le 100$).
+  - REST API endpoints under `/api/v1/scenarios` (`POST /`, `GET /`, `GET /{id}`, `POST /{id}/run`, `GET /{id}/results`).
+  - Automated test suite `backend/tests/test_scenarios.py` with 21 tests (total backend test suite: 50 passed).
+  - Comprehensive documentation in `docs/ml/counterfactual_simulation_report.md` and updated `docs/architecture/api_architecture.md`.
+
 ### Next Immediate Action:
-**Phase 10: Digital Twin What-If Intervention Simulation Engine & Attribution Layer.**
-*(Awaiting user instructions. Do NOT implement simulator or React/frontend until requested.)*
+**Phase 11: Frontend Interactive Urban Digital Twin Dashboard (React + Vite + Leaflet / MapLibre).**
+*(Awaiting user instructions. Do NOT start React frontend until requested.)*
 
 ---
 

@@ -10,7 +10,12 @@ from backend.app.schemas.spatial import TrafficExposureRead, ActivityExposureRea
 from backend.app.schemas.traffic import TrafficProxyRead
 from backend.app.schemas.model_registry import ModelRegistrySummary, ModelRegistryDetail
 from backend.app.schemas.prediction import PredictionItem, PaginatedPredictions
-from backend.app.schemas.scenario import ScenarioBase, ScenarioCreate, ScenarioRead, ScenarioResultRead
+from backend.app.schemas.scenario import (
+    ScenarioBase, ScenarioCreate, ScenarioRead, ScenarioResultRead,
+    InterventionType, InterventionParams, ScenarioCreateRequest, ScenarioResponse,
+    ScenarioRunResponse, ScenarioResultResponse, ScenarioListResponse,
+    ScenarioResultsListResponse, FeatureAuditItem
+)
 from backend.app.schemas.forecast import ForecastResponse, ForecastUnavailableResponse
 
 __all__ = [
@@ -23,5 +28,8 @@ __all__ = [
     "ModelRegistrySummary", "ModelRegistryDetail",
     "PredictionItem", "PaginatedPredictions",
     "ScenarioBase", "ScenarioCreate", "ScenarioRead", "ScenarioResultRead",
+    "InterventionType", "InterventionParams", "ScenarioCreateRequest", "ScenarioResponse",
+    "ScenarioRunResponse", "ScenarioResultResponse", "ScenarioListResponse",
+    "ScenarioResultsListResponse", "FeatureAuditItem",
     "ForecastResponse", "ForecastUnavailableResponse",
 ]

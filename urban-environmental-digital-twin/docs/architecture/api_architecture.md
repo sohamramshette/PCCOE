@@ -329,6 +329,66 @@ The FastAPI backend serves as the bridge between the normalized relational datab
 
 ---
 
+---
+
+### 2.8 What-If / Counterfactual Scenario Simulation API (Phase 10)
+
+| Method | Endpoint | Query / Body | Description |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/v1/scenarios` | Body: `ScenarioCreateRequest` | Creates and validates a What-If scenario with defined intervention levers. |
+| `GET` | `/api/v1/scenarios` | `limit: int`, `offset: int` | Returns a paginated list of created scenarios. |
+| `GET` | `/api/v1/scenarios/{scenario_id}` | *None* | Retrieves metadata, parameters, and simulation status for a scenario. |
+| `POST` | `/api/v1/scenarios/{scenario_id}/run` | *None* | Executes counterfactual simulation, evaluates baseline & counterfactual model outputs, and records result. |
+| `GET` | `/api/v1/scenarios/{scenario_id}/results` | `limit: int`, `offset: int` | Retrieves persisted simulation results and structured feature modification audits. |
+
+#### Example Counterfactual Run Response (`POST /api/v1/scenarios/{id}/run`):
+```json
+{
+  "scenario_id": "scen_8f3a9d2c1b4e",
+  "station_id": 11613,
+  "station_name": "Revenue Colony-Shivajinagar, Pune - IITM",
+  "baseline_timestamp_utc": "2026-09-24T17:00:00Z",
+  "target_timestamp_utc": "2026-09-24T18:00:00Z",
+  "model_id": "gradient_boosting_baseline",
+  "model_type": "GRADIENT_BOOSTING",
+  "intervention": {
+    "type": "TRAFFIC_REDUCTION",
+    "traffic_reduction_percent": 30.0
+  },
+  "baseline_prediction_pm25": 43.69,
+  "counterfactual_prediction_pm25": 43.51,
+  "absolute_change_pm25": -0.18,
+  "estimated_reduction_pm25": 0.18,
+  "percentage_change": -0.41,
+  "unit": "ug/m3",
+  "uncertainty_available": false,
+  "uncertainty_note": "Point estimate only; the current baseline model does not provide calibrated uncertainty.",
+  "interpretation_note": "Counterfactual model estimate; not a causal measurement.",
+  "data_classification": "MODEL_COUNTERFACTUAL_ESTIMATE",
+  "affected_features_audit": [
+    {
+      "feature_name": "traffic_proxy_index",
+      "baseline_value": 0.78,
+      "counterfactual_value": 0.546,
+      "delta": -0.234,
+      "transformation": "30.0% reduction (x0.7000)",
+      "classification": "TRAFFIC_PROXY"
+    },
+    {
+      "feature_name": "traffic_stagnation_ratio",
+      "baseline_value": 0.2847,
+      "counterfactual_value": 0.1993,
+      "delta": -0.0854,
+      "transformation": "30.0% reduction (x0.7000)",
+      "classification": "DERIVED_INTERACTION"
+    }
+  ],
+  "created_at": "2026-09-26T15:10:05Z"
+}
+```
+
+---
+
 ## 3. Forecast Feature Construction & Pipeline Alignment
 
 To guarantee that predictions in FastAPI match the offline evaluation pipeline exactly:
@@ -346,49 +406,28 @@ To guarantee that predictions in FastAPI match the offline evaluation pipeline e
 ## 4. Error Handling & Security
 
 - **400 Bad Request:** Triggered when query parameters fail logical validation (e.g. `start >= end`).
-- **404 Not Found:** Triggered when `station_id` or `model_id` does not exist in the database.
-- **422 Unprocessable Content:** Triggered when query parameters exceed physical bounds (`limit=0`, `limit=1001`), or when required environmental inputs are missing at prediction time.
+- **404 Not Found:** Triggered when `station_id`, `model_id`, or `scenario_id` does not exist in the database.
+- **422 Unprocessable Content:** Triggered when query parameters exceed physical bounds (`limit=0`, `limit=1001`), intervention percentages are outside $[0.0, 100.0]$, or required historical environmental inputs are missing at prediction time.
 - **500 Internal Server Error:** Handled by a global Starlette middleware exception handler. It logs the full traceback server-side and returns a generic, sanitized JSON response.
 
 ---
 
 ## 5. Automated Test Suite Results
 
-A comprehensive test suite ([`backend/tests/`](file:///c:/Users/lenovo/OneDrive/Desktop/PCCOE/PCCOE/urban-environmental-digital-twin/backend/tests/)) containing **29 test cases** verified all API endpoints:
+A comprehensive test suite ([`backend/tests/`](file:///c:/Users/lenovo/OneDrive/Desktop/PCCOE/PCCOE/urban-environmental-digital-twin/backend/tests/)) containing **50 test cases** verified all API endpoints and counterfactual simulation behaviors:
 
 ```text
 ============================= test session starts =============================
-backend/tests/test_forecast.py::test_forecast_default_model PASSED       [  3%]
-backend/tests/test_forecast.py::test_forecast_specific_timestamp PASSED  [  6%]
-backend/tests/test_forecast.py::test_forecast_alternative_model PASSED   [ 10%]
-backend/tests/test_forecast.py::test_forecast_persistence_model PASSED   [ 13%]
-backend/tests/test_forecast.py::test_forecast_nonexistent_station PASSED [ 17%]
-backend/tests/test_forecast.py::test_forecast_unavailable_future_data PASSED [ 20%]
-backend/tests/test_health.py::test_health_success PASSED                 [ 24%]
-backend/tests/test_health.py::test_api_v1_health_success PASSED          [ 27%]
-backend/tests/test_health.py::test_health_database_failure PASSED        [ 31%]
-backend/tests/test_models.py::test_list_models PASSED                    [ 34%]
-backend/tests/test_models.py::test_get_model_detail PASSED               [ 37%]
-backend/tests/test_models.py::test_get_nonexistent_model PASSED          [ 41%]
-backend/tests/test_observations.py::test_get_observations_pagination PASSED [ 44%]
-backend/tests/test_observations.py::test_null_value_preservation PASSED  [ 48%]
-backend/tests/test_observations.py::test_temporal_filtering PASSED       [ 51%]
-backend/tests/test_observations.py::test_invalid_temporal_parameters PASSED [ 55%]
-backend/tests/test_observations.py::test_invalid_limit_bounds PASSED     [ 58%]
-backend/tests/test_observations.py::test_observations_nonexistent_station PASSED [ 62%]
-backend/tests/test_predictions.py::test_get_predictions_pagination PASSED [ 65%]
-backend/tests/test_predictions.py::test_filter_predictions_by_model PASSED [ 68%]
-backend/tests/test_predictions.py::test_absolute_error_computation PASSED [ 72%]
-backend/tests/test_predictions.py::test_predictions_nonexistent_station PASSED [ 75%]
-backend/tests/test_stations.py::test_list_stations PASSED                [ 79%]
-backend/tests/test_stations.py::test_get_station_detail PASSED           [ 82%]
-backend/tests/test_stations.py::test_get_nonexistent_station PASSED      [ 86%]
-backend/tests/test_weather.py::test_get_weather_pagination_and_provenance PASSED [ 89%]
-backend/tests/test_weather.py::test_weather_temporal_filtering PASSED    [ 93%]
-backend/tests/test_weather.py::test_weather_invalid_time_range PASSED    [ 96%]
-backend/tests/test_weather.py::test_weather_nonexistent_station PASSED   [100%]
+backend/tests/test_forecast.py . . . . . .                                [ 12%]
+backend/tests/test_health.py . . .                                        [ 18%]
+backend/tests/test_models.py . . .                                        [ 24%]
+backend/tests/test_observations.py . . . . . .                            [ 36%]
+backend/tests/test_predictions.py . . . .                                 [ 44%]
+backend/tests/test_scenarios.py . . . . . . . . . . . . . . . . . . . . . [ 86%]
+backend/tests/test_stations.py . . .                                      [ 92%]
+backend/tests/test_weather.py . . . .                                     [100%]
 
-============================== 29 passed in 10.15s ==============================
+============================== 50 passed in 7.34s ==============================
 ```
 
 ---
