@@ -412,3 +412,11 @@ python backend/scripts/load_predictions.py
 # 5. Run full automated validation suite
 python backend/scripts/validate_database.py
 ```
+
+---
+
+## 10. Security & Row-Level Security (RLS)
+- In production PostgreSQL / Supabase, Row-Level Security (RLS) is enabled on all public tables (`ALTER TABLE ... ENABLE ROW LEVEL SECURITY`).
+- Application authentication and user access policies are separated from data ingestion and will be bound during frontend/auth integration.
+- Public read access is granted for reference metadata and observations, while administrative write access is restricted to authenticated service roles and migration scripts.
+

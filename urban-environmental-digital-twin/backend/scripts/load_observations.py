@@ -59,62 +59,51 @@ def load_observations_and_weather(limit: int = None, chunk_size: int = 5000):
         # Check existing row counts
         existing_obs = db.query(EnvironmentalObservation).count()
         existing_wx = db.query(WeatherReanalysis).count()
-        print(f"Initial table counts -> Observations: {existing_obs:,} | Weather: {existing_wx:,}")
+        print(f"Current DB State: {existing_obs:,} observations, {existing_wx:,} weather records.")
 
-        # If data already loaded and no limit, report
-        if existing_obs > 0 and limit is None:
-            print("Existing data detected. Loading in append / idempotent mode...")
+        if existing_obs >= 84096 and existing_wx >= 84096 and not limit:
+            print("Both tables already contain all 84,096 records. Ingestion skipped (idempotent).")
+            return
 
-        total_obs_inserted = 0
-        total_wx_inserted = 0
+        # Load CSV in chunks
+        print("\nBeginning chunked ingestion from master CSV...")
+        chunk_iter = pd.read_csv(csv_path, chunksize=chunk_size, low_memory=False)
+
         rows_processed = 0
+        obs_batch = []
+        wx_batch = []
 
-        # Read CSV in chunks
-        chunk_iter = pd.read_csv(csv_path, chunksize=chunk_size)
+        for chunk_idx, chunk in enumerate(chunk_iter):
+            for _, row in chunk.iterrows():
+                dt_utc = datetime.fromisoformat(row["datetime_utc"]).astimezone(timezone.utc)
+                dt_local = datetime.fromisoformat(row["datetime_local_ist"])
+                station_id = int(row["station_id"])
 
-        for chunk_idx, df in enumerate(chunk_iter):
-            if limit and rows_processed >= limit:
-                break
-            
-            if limit and rows_processed + len(df) > limit:
-                df = df.iloc[:limit - rows_processed]
-
-            obs_mappings = []
-            wx_mappings = []
-
-            for _, row in df.iterrows():
-                dt_utc_str = row["datetime_utc"]
-                dt_utc = datetime.fromisoformat(dt_utc_str.replace("Z", "+00:00"))
-                
-                dt_ist_str = row["datetime_local_ist"]
-                dt_ist = datetime.fromisoformat(dt_ist_str)
-
-                sid = int(row["station_id"])
-
-                # 1. Environmental Observation mapping
-                obs_mappings.append({
-                    "station_id": sid,
+                # Observation record
+                obs_record = {
+                    "station_id": station_id,
                     "datetime_utc": dt_utc,
-                    "datetime_local_ist": dt_ist,
+                    "datetime_local_ist": dt_local,
                     "pm25": clean_val(row.get("pm25")),
-                    "pm25_obs_count": int(row["pm25_obs_count"]) if pd.notnull(row.get("pm25_obs_count")) else None,
+                    "pm25_obs_count": int(row["pm25_obs_count"]) if pd.notna(row.get("pm25_obs_count")) else None,
                     "pm25_completeness_flag": str(row.get("pm25_completeness_flag", "MISSING")),
                     "pm10": clean_val(row.get("pm10")),
-                    "pm10_obs_count": int(row["pm10_obs_count"]) if pd.notnull(row.get("pm10_obs_count")) else None,
+                    "pm10_obs_count": int(row["pm10_obs_count"]) if pd.notna(row.get("pm10_obs_count")) else None,
                     "no2": clean_val(row.get("no2")),
-                    "no2_obs_count": int(row["no2_obs_count"]) if pd.notnull(row.get("no2_obs_count")) else None,
+                    "no2_obs_count": int(row["no2_obs_count"]) if pd.notna(row.get("no2_obs_count")) else None,
                     "so2": clean_val(row.get("so2")),
                     "co": clean_val(row.get("co")),
                     "o3": clean_val(row.get("o3")),
-                    "temp_insitu_c": clean_val(row.get("temp_insitu_c")),
-                    "humidity_insitu_pct": clean_val(row.get("humidity_insitu_pct")),
-                    "wind_speed_insitu_ms": clean_val(row.get("wind_speed_insitu_ms")),
+                    "temp_insitu_c": clean_val(row.get("temperature")),
+                    "humidity_insitu_pct": clean_val(row.get("relative_humidity")),
+                    "wind_speed_insitu_ms": clean_val(row.get("wind_speed")),
                     "data_provenance": "OBSERVED"
-                })
+                }
+                obs_batch.append(obs_record)
 
-                # 2. Weather Reanalysis mapping
-                wx_mappings.append({
-                    "station_id": sid,
+                # Weather record
+                wx_record = {
+                    "station_id": station_id,
                     "datetime_utc": dt_utc,
                     "temp_c": float(row["temp_c"]),
                     "humidity_pct": float(row["humidity_pct"]),
@@ -131,21 +120,31 @@ def load_observations_and_weather(limit: int = None, chunk_size: int = 5000):
                     "grid_longitude": float(row["weather_grid_longitude"]),
                     "elevation_m": float(row["weather_elevation_m"]),
                     "data_provenance": "REANALYSIS (ECMWF ERA5-Land via Open-Meteo)"
-                })
+                }
+                wx_batch.append(wx_record)
 
-            # Bulk insert mappings
-            db.bulk_insert_mappings(EnvironmentalObservation, obs_mappings)
-            db.bulk_insert_mappings(WeatherReanalysis, wx_mappings)
+                rows_processed += 1
+                if limit and rows_processed >= limit:
+                    break
+
+            # Bulk insert chunks
+            if obs_batch:
+                db.bulk_insert_mappings(EnvironmentalObservation, obs_batch)
+                obs_batch.clear()
+
+            if wx_batch:
+                db.bulk_insert_mappings(WeatherReanalysis, wx_batch)
+                wx_batch.clear()
+
             db.commit()
+            print(f"  Ingested chunk {chunk_idx + 1}: {rows_processed:,} cumulative rows...")
 
-            total_obs_inserted += len(obs_mappings)
-            total_wx_inserted += len(wx_mappings)
-            rows_processed += len(df)
-
-            print(f"  Chunk {chunk_idx + 1:3d}: Processed {rows_processed:6,d} rows... ({time.time()-t0:.1f}s)")
+            if limit and rows_processed >= limit:
+                break
 
         final_obs = db.query(EnvironmentalObservation).count()
         final_wx = db.query(WeatherReanalysis).count()
+
         print("\n" + "=" * 75)
         print(f"LOADING COMPLETE IN {time.time()-t0:.2f}s")
         print(f"  Total Rows Processed:                {rows_processed:,}")
@@ -161,10 +160,15 @@ def load_observations_and_weather(limit: int = None, chunk_size: int = 5000):
         db.close()
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Entrypoint function compatible with scaffold invocations."""
     parser = argparse.ArgumentParser(description="Load master hourly observations and weather into DB")
     parser.add_argument("--limit", type=int, default=None, help="Optional maximum rows to ingest for quick verification")
     parser.add_argument("--chunk-size", type=int, default=10000, help="Batch insertion chunk size")
     args = parser.parse_args()
 
     load_observations_and_weather(limit=args.limit, chunk_size=args.chunk_size)
+
+
+if __name__ == "__main__":
+    main()

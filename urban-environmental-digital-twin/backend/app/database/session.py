@@ -1,23 +1,24 @@
 """
 Urban Environmental Digital Twin - Database Session & Engine Configuration
 ===========================================================================
-Initializes SQLAlchemy 2.0 DeclarativeBase, database engine with connection pooling,
+Initializes SQLAlchemy DeclarativeBase, engine with connection pooling,
 session factory, and FastAPI-ready session generator dependency.
-Supports automatic resilient fallback for local offline testing if PostgreSQL daemon
-is not active on localhost.
+Supports both direct DATABASE_URL environment variables and resilient local verification mode.
 """
 
+import os
 import logging
 from typing import Generator
 from sqlalchemy import event, create_engine
 from sqlalchemy.engine import Engine
-from sqlalchemy.orm import declarative_base, sessionmaker, Session
+from sqlalchemy.orm import sessionmaker, Session
+from backend.app.database.base import Base
 from backend.app.config.settings import settings
 
 logger = logging.getLogger(__name__)
 
-# Base declarative class
-Base = declarative_base()
+# Re-export Base for compatibility
+__all__ = ["Base", "engine", "SessionLocal", "get_db", "DATABASE_URL"]
 
 
 @event.listens_for(Engine, "connect")
@@ -34,7 +35,13 @@ def set_sqlite_pragma(dbapi_connection, connection_record):
 
 def get_configured_engine():
     """Initializes and returns the database engine with PostgreSQL pooling and resilient fallback."""
-    target_url = settings.sqlalchemy_database_uri
+    # Priority: explicit DATABASE_URL env var, then settings URI
+    target_url = os.environ.get("DATABASE_URL") or settings.sqlalchemy_database_uri
+
+    if target_url.startswith("postgres://"):
+        target_url = target_url.replace("postgres://", "postgresql+psycopg2://", 1)
+    elif target_url.startswith("postgresql://") and "+psycopg2" not in target_url and "+psycopg" not in target_url:
+        target_url = target_url.replace("postgresql://", "postgresql+psycopg2://", 1)
 
     if target_url.startswith("sqlite"):
         return create_engine(
@@ -68,6 +75,7 @@ def get_configured_engine():
 
 
 engine = get_configured_engine()
+DATABASE_URL = str(engine.url)
 
 # Session factory
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
