@@ -389,6 +389,18 @@ The FastAPI backend serves as the bridge between the normalized relational datab
 
 ---
 
+### 2.9 Future API Candidates (Planned — Not Implemented)
+
+The following endpoints are architectural candidates for future iterations (Phase 12+) and are **not** implemented in the current production FastAPI router:
+
+| Method | Candidate Endpoint | Proposed Purpose | Status |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/v1/stations/{station_id}/forecast/explain` | Returns local TreeSHAP / KernelSHAP feature attributions for a given prediction. | Planned (Phase 12+) |
+| `POST` | `/api/v1/scenarios/{scenario_id}/explain` | Generates structured LLM-synthesized narrative explanations of scenario counterfactual outcomes. | Planned (Phase 13+) |
+| `POST` | `/api/v1/forecast/batch` | Multi-station parallel forecast inference across all 6 monitoring stations simultaneously. | Planned (Future) |
+
+---
+
 ## 3. Forecast Feature Construction & Pipeline Alignment
 
 To guarantee that predictions in FastAPI match the offline evaluation pipeline exactly:
@@ -439,9 +451,10 @@ From the project root:
 ```bash
 uvicorn backend.app.main:app --reload --host 0.0.0.0 --port 8000
 ```
-Interactive documentation is available at:
+Interactive and machine-readable documentation is available at:
 - Swagger UI: `http://localhost:8000/docs`
 - ReDoc: `http://localhost:8000/redoc`
+- OpenAPI JSON Schema: `http://localhost:8000/openapi.json`
 - Live Health Probe: `http://localhost:8000/health`
 
 ### 6.2 Running the Test Suite

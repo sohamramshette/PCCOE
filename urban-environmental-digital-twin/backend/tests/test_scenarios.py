@@ -602,3 +602,47 @@ def test_list_scenarios_pagination(client: TestClient):
     data = list_res.json()
     assert data["total"] == 2
     assert len(data["items"]) == 2
+
+
+def test_thirty_percent_traffic_reduction_semantic_consistency(client: TestClient):
+    """
+    Test 26: Validates that selecting a 30% traffic reduction is consistently
+    represented as exactly 30.0% across definition, persistence, feature modification,
+    and simulation results (Phase 11 consistency audit).
+    """
+    create_res = client.post(
+        "/api/v1/scenarios",
+        json={
+            "scenario_name": "30% Traffic Reduction at Peak",
+            "station_id": VALID_STATION_ID,
+            "baseline_timestamp_utc": VALID_BASELINE_TIMESTAMP,
+            "model_id": "gradient_boosting_baseline",
+            "intervention": {
+                "type": "TRAFFIC_REDUCTION",
+                "traffic_reduction_percent": 30.0
+            },
+            "description": "Peak evening traffic restriction trial"
+        }
+    )
+    assert create_res.status_code == 201
+    scen_data = create_res.json()
+    scen_id = scen_data["scenario_id"]
+    assert scen_data["traffic_reduction_pct"] == 30.0
+    assert scen_data["intervention"]["traffic_reduction_percent"] == 30.0
+
+    # Execute simulation
+    run_res = client.post(f"/api/v1/scenarios/{scen_id}/run")
+    assert run_res.status_code == 200
+    run_data = run_res.json()
+    assert run_data["intervention"]["traffic_reduction_percent"] == 30.0
+
+    # Check affected feature audit
+    traffic_audit = next(
+        (item for item in run_data["affected_features_audit"] if item["feature_name"] == "traffic_proxy_index"),
+        None
+    )
+    assert traffic_audit is not None
+    assert "30.0% reduction (x0.7000)" in traffic_audit["transformation"]
+    expected_cf = round(traffic_audit["baseline_value"] * 0.70, 4)
+    assert abs(traffic_audit["counterfactual_value"] - expected_cf) <= 0.001
+

@@ -95,36 +95,35 @@ Do not expand the MVP unnecessarily.
 
 # 5. AI/ML ARCHITECTURE
 
-Pipeline (**Planned**):
+Pipeline:
 
 ```
-Data Sources
+Data Sources (OpenAQ, ERA5-Land, OSM, Traffic Proxy)
     ↓
-Data Cleaning
+Data Cleaning & Multi-Domain Spatio-Temporal Alignment
     ↓
-Feature Engineering
+Feature Engineering (118 features, strict chronological splits)
     ↓
-ML Prediction Model
+ML Prediction Models (Persistence, Ridge, Random Forest, HistGradientBoosting)
     ↓
-PM2.5 Forecast
+PM2.5 Forecast (Next-hour t+1)
     ↓
-Explainability / Contribution Analysis
+What-If / Counterfactual Scenario Engine (Traffic & Industrial curbs)
     ↓
-Scenario / Digital Twin Engine
+FastAPI Model Serving & Scenario Execution Layer
     ↓
-Scenario Comparison
+Interactive Digital Twin Visualization (Phase 11 — Next)
     ↓
-AI Explanation
+Future Attribution & AI Explanation (SHAP & LLM — Planned Future)
 ```
 
-Initial ML models:
+Implemented Baseline ML Models (Phase 7):
+- **Model 0 — Persistence Baseline:** Non-parametric heuristic $\hat{y}_{t+1} = y_t$ with lag fallback.
+- **Model 1 — Standardized Ridge Regression:** Regularized linear model ($L_2$ penalty $\alpha=100.0$) with median imputation and standard scaling.
+- **Model 2 — Random Forest Regressor:** Bagged ensemble of 100 regression trees (`max_depth=15`, `min_samples_split=5`).
+- **Model 3 — HistGradientBoosting Regressor:** Production default histogram-based gradient boosted trees (`max_iter=150`, `learning_rate=0.08`, `max_depth=10`, Test MAE: $4.10\,\mu\text{g/m}^3$, RMSE: $9.11\,\mu\text{g/m}^3$).
 
-- **Baseline:** Random Forest
-- **Main candidate:** XGBoost
-- Time-series alternatives such as LSTM may be evaluated later **only** if
-  justified by the dataset and project timeline.
-
-Do not introduce complex models without measurable benefit.
+*Planned / Future models:* XGBoost, deep spatio-temporal architectures (e.g. Graph Neural Networks or LSTMs) may be evaluated in future research phases. None are currently deployed in production. Do not introduce complex models without measurable benefit.
 
 ---
 
@@ -311,7 +310,9 @@ measurement.
 
 # 9. SOURCE CONTRIBUTION / EXPLAINABILITY
 
-The first implementation may use SHAP or other model explainability methods.
+> **Status:** Planned Future Work (Phase 12+). Not currently implemented in production.
+
+Future implementations may use SHAP (SHapley Additive exPlanations) or tree feature attribution methods.
 
 **Important scientific limitation:** SHAP feature importance is NOT
 automatically equivalent to physical emission-source apportionment.
@@ -326,133 +327,110 @@ Therefore:
 
 ---
 
-# 10. DIGITAL TWIN / WHAT-IF ENGINE
+# 10. DIGITAL TWIN / WHAT-IF COUNTERFACTUAL ENGINE
 
-The digital twin should allow users to modify intervention variables.
+> **Status:** Implemented & Verified in Phase 10 (21/21 Scenario Tests Passed).
 
-Example:
+The What-If / Counterfactual Simulation Engine allows users to evaluate model-based shifts under hypothetical policy interventions without modifying raw historical records.
 
-```
-Baseline:
-  Traffic  = 100%
-  Industry = 100%
-  Dust     = 100%
+### Supported Interventions:
+1. `TRAFFIC_REDUCTION`: $0.0 \le p_t \le 100.0\%$. Modifies `traffic_proxy_index`, `traffic_stagnation_ratio`, `traffic_ventilation_ratio`, `poi_traffic_interaction` by $(1.0 - p_t/100)$.
+2. `INDUSTRIAL_ACTIVITY_REDUCTION`: $0.0 \le p_i \le 100.0\%$. Modifies `has_industrial_within_1km` and `industrial_dispersion_ratio` by $(1.0 - p_i/100)$.
+3. `COMBINED_INTERVENTION`: Applies traffic and industrial curbs simultaneously and independently.
 
-Scenario:
-  Traffic  = 80%
-  Industry = 100%
-  Dust     = 100%
-```
+*Note on Construction:* Construction intervention is currently a documented/future concept and is not yet implemented in the scenario engine.
 
-The modified features are passed through the prediction model.
+The engine returns:
+- Baseline prediction ($\mu\text{g/m}^3$)
+- Counterfactual prediction ($\mu\text{g/m}^3$)
+- Absolute difference ($\Delta = \hat{y}_{\text{cf}} - \hat{y}_{\text{base}}$)
+- Estimated reduction ($-\Delta$)
+- Percentage change ($\% \Delta$, division-by-zero protected)
+- Structured feature modification audit list
+- Explicit non-causal disclaimer and `uncertainty_available: false`
 
-The system returns:
-
-- Baseline prediction
-- Scenario prediction
-- Absolute difference
-- Percentage difference
-- Changed parameters
-- Scenario metadata
-
-**Important:** Scenario outputs are modeled simulations, not observed
-measurements.
+**Important:** Scenario outputs are strictly **model-based counterfactual estimates**, not physical measurements or causal claims.
 
 ---
 
-# 11. DATABASE ARCHITECTURE
+## 11. DATABASE ARCHITECTURE
 
-**Database:** PostgreSQL
+> **Status:** Implemented & Verified in Phase 8 (PostgreSQL 15+ / SQLAlchemy 2.0 / Alembic migrations).
 
-Planned entities (**Planned**):
+The normalized relational schema contains **10 tables**:
+1. `stations`: 6 CAAQMN air quality monitoring station entities.
+2. `station_traffic_exposure`: Static 1.5 km road buffer metrics.
+3. `station_activity_exposure`: Static industrial, construction, land-use, and POI metrics.
+4. `traffic_proxy`: 48-hour weekday/weekend diurnal mobility curves.
+5. `environmental_observations`: 84,096 in-situ hourly measurements (NULLs strictly preserved).
+6. `weather_reanalysis`: 84,096 ECMWF ERA5-Land hourly meteorological records.
+7. `model_registry`: 4 registered baseline models with metadata and validation metrics.
+8. `model_predictions`: 80,892 historical validation and test prediction logs.
+9. `scenarios`: What-If scenario definitions, policy levers, and simulation status.
+10. `scenario_results`: Persisted counterfactual simulation outputs and execution metadata.
 
-- locations
-- pollution_readings
-- weather_readings
-- traffic_readings
-- activity_readings
-- forecasts
-- scenarios
-- model_runs
-
-Database design should be based on actual datasets after inspection. Do not
-prematurely create a highly complex schema.
-
-**Future migration system:** Alembic (**Planned**)
+**Migrations:** Managed via Alembic (`0001_initial_schema`, `0002_scenario_baseline_and_metadata`).
 
 ---
 
-# 12. BACKEND ARCHITECTURE
+## 12. BACKEND ARCHITECTURE
 
-**Backend:** FastAPI
+> **Status:** Implemented & Verified in Phase 9 & 10 (FastAPI 0.110+ / Pydantic v2).
 
 High-level structure:
-
 ```
-Frontend
+Client / Dashboard (Phase 11)
     ↓
-FastAPI
-    ↓
-Services
-    ├── Database
-    ├── ML
-    ├── Scenario Engine
-    └── AI
+FastAPI Master Router (/api/v1/)
+    ├── /health & /api/v1/health       (Database & entity connectivity probes)
+    ├── /api/v1/stations              (Station metadata & spatial exposure buffers)
+    ├── /api/v1/stations/{id}/observations  (Paginated historical sensor observations)
+    ├── /api/v1/stations/{id}/weather (Paginated ECMWF ERA5-Land reanalysis)
+    ├── /api/v1/stations/{id}/predictions (Historical model predictions & errors)
+    ├── /api/v1/models                (MLOps model registry & metrics)
+    ├── /api/v1/stations/{id}/forecast (Real-time next-hour inference via ModelServingManager)
+    └── /api/v1/scenarios             (What-If counterfactual simulation engine)
 ```
 
-Expected API categories (**Planned**):
-
-- /api/pollution
-- /api/forecast
-- /api/scenarios
-- /api/ai
-
-API contracts should use Pydantic schemas. Business logic should remain in
-services rather than being placed directly inside route handlers.
+Business logic is completely decoupled from route handlers and resides in dedicated services (`backend/app/services/`).
 
 ---
 
-# 13. ML-BACKEND INTEGRATION
+## 13. ML-BACKEND INTEGRATION
 
-The ML model should not be duplicated inside multiple backend routes.
+> **Status:** Implemented & Verified in Phase 9.
 
-Preferred architecture:
-
-```
-FastAPI
-    ↓
-ML Service
-    ↓
-Saved Model
-    ↓
-Prediction
-```
-
-The scenario engine should reuse the same prediction pipeline. Model
-preprocessing and feature ordering must remain consistent between training and
-inference.
+Model serving uses the `ModelServingManager` singleton:
+- **One-time startup loading:** Model weights (`.joblib`) and `preprocessor.joblib` are loaded into memory once during application startup (`lifespan`).
+- **Zero disk I/O on inference requests:** Both forecast and scenario simulations execute against in-memory models.
+- **Pipeline consistency:** The identical 98 core features and preprocessor transformations are shared between offline training and live serving.
 
 ---
 
-# 14. AI / LLM ARCHITECTURE
+## 14. AI / LLM EXPLANATION ARCHITECTURE
+
+> **Status:** Planned Future Work (Phase 13+). Not currently implemented.
 
 The LLM is NOT responsible for numerical pollution prediction.
 
-Correct architecture:
-
+Intended future architecture:
 ```
 Environmental Data
     ↓
 ML Model
     ↓
-Numerical Results
+Numerical Forecast & Scenario Delta
     ↓
-LLM
+LLM Natural-Language Explainer (Planned)
     ↓
-Natural-language explanation
+Human-Readable Advisory / Explanation
 ```
 
-The LLM may explain:
+The LLM will explain:
+- Forecast trends
+- Model-based contributing features
+- Scenario comparison deltas
+- Important health cautions
 
 - Forecast
 - Main contributing features
@@ -467,30 +445,27 @@ source of truth.
 
 # 15. FRONTEND ARCHITECTURE
 
-**Frontend:** React + Vite
+> **Status:** Implemented & Verified in Phase 11. Production build passed (`tsc && vite build` in 31.92s).
 
-Frontend will be developed AFTER:
+**Frontend Technology Stack:**
+- **Framework:** React 18 (`react`, `react-dom` 18.3.1)
+- **Tooling:** Vite 5 + TypeScript 5 (Strict Mode)
+- **Routing:** React Router DOM v6
+- **Data Visualization:** Recharts 2 (Null-preserving line charts, dual-axis weather, scenario bars)
+- **Iconography:** Lucide React
+- **Styling:** Custom Vanilla CSS Design System with dark slate palette and epistemological badges
 
-1. Dataset understanding
-2. ML model
-3. Validation
-4. Scenario engine
-5. Database
-6. FastAPI APIs
+**Implemented Pages & Features:**
+1. **Overview Dashboard (`/`):** Network KPI tiles (6 active stations, latest observed PM2.5, next-hour forecast, serving model), focus station toggle, 48-hour PM2.5 trend, contemporaneous ERA5-Land weather parameters, baseline models registry table.
+2. **Stations Registry (`/stations`):** Grid of all 6 continuous CAAQMS stations in Pune & PCMC with authority, geographic coordinates, and zone classifications.
+3. **Station Diagnostics (`/stations/:stationId`):** In-depth geospatial profile with 1.5 km road exposure buffers, 2.0 km industrial and activity buffers, co-located observed vs predicted PM2.5 time-series, ERA5-Land atmospheric trends, and raw hourly observations table.
+4. **Real-Time Next-Hour Forecasting (`/forecast`):** Live model inference ($t+1$) served by in-memory `ForecastService`, contemporaneous input features snapshot, and verification status.
+5. **What-If Policy Intervention Simulator (`/scenarios`):** Interactive parameter configuration supporting `TRAFFIC_REDUCTION`, `INDUSTRIAL_ACTIVITY_REDUCTION`, and `COMBINED_INTERVENTION`. Simulation execution against `/api/v1/scenarios/{id}/run`, bar chart delta visualization, and granular feature audit trail.
 
-Planned UI sections (**Planned**):
-
-- Overview dashboard
-- Digital twin map
-- Pollution forecast
-- Source/contribution analysis
-- Scenario simulator
-- Scenario comparison
-- AI explanation
-- Model validation
-
-Do not begin frontend development before backend contracts are reasonably
-stable.
+**Epistemological Integrity in UI:**
+- Missing sensor values remain visibly missing (no synthetic interpolation).
+- All cards and metrics display clear provenance badges: `OBSERVED`, `REANALYSIS`, `STATIC_ROAD_NETWORK`, `TRAFFIC_PROXY`, `ACTIVITY_PROXY`, `PREDICTED`, `SCENARIO / SIMULATED`.
+- Counterfactual simulations include explicit scientific interpretation and uncertainty notices (`MODEL_COUNTERFACTUAL_ESTIMATE`).
 
 ---
 
@@ -500,111 +475,109 @@ Current repository structure (synchronized with the actual repository):
 
 ```
 urban-environmental-digital-twin/
-│
 ├── backend/
+│   ├── alembic/                      # Alembic database migrations
+│   │   ├── versions/                 # 0001_initial_schema, 0002_scenario_baseline_and_metadata
+│   │   └── env.py
 │   ├── app/
-│   │   ├── __init__.py
-│   │   ├── config/          (__init__.py)
-│   │   ├── database/        (__init__.py)
-│   │   ├── models/          (__init__.py)
-│   │   ├── schemas/         (__init__.py)
-│   │   ├── routes/          (__init__.py)
-│   │   └── services/        (__init__.py)
-│   └── tests/               (__init__.py)
-│
+│   │   ├── api/                      # FastAPI routes & master router
+│   │   │   ├── routes/               # stations, observations, weather, predictions, models, forecast, scenarios, health
+│   │   │   └── router.py
+│   │   ├── config/                   # pydantic-settings configuration
+│   │   ├── database/                 # SQLAlchemy Base, connection pooling, SQLite verification fallback
+│   │   ├── models/                   # 10 Declarative SQLAlchemy 2.0 ORM models
+│   │   ├── schemas/                  # Pydantic v2 validation and serialization schemas
+│   │   ├── services/                 # Business logic, feature construction, model serving, scenarios
+│   │   └── main.py                   # FastAPI application factory & lifespan
+│   ├── scripts/                      # Idempotent DB loaders & validation suite
+│   ├── tests/                        # Pytest suite (50 automated tests, 100% pass)
+│   └── requirements.txt
 ├── ml/
 │   ├── data/
-│   │   ├── raw/             (.gitkeep)
-│   │   ├── processed/       (.gitkeep)
-│   │   └── external/        (.gitkeep)
-│   ├── notebooks/           (.gitkeep)
-│   ├── src/                 (__init__.py)
-│   └── models/              (.gitkeep)
-│
-├── database/
-│   ├── migrations/          (.gitkeep)
-│   └── seed/                (.gitkeep)
-│
-├── ai/
-│   ├── prompts/             (.gitkeep)
-│   └── services/            (.gitkeep)
-│
-├── frontend/                (.gitkeep — NOT yet initialized with Vite)
-│
+│   │   ├── raw/                      # OpenAQ, ERA5-Land, OSM ways, traffic proxy archives
+│   │   └── processed/                # master_hourly_dataset.csv, feature_dataset.csv, train/val/test splits
+│   ├── models/                       # Model artifacts (preprocessor.joblib, model joblibs, feature_names.json)
+│   ├── results/                      # Evaluation reports, station metrics, figures
+│   └── src/
+│       ├── data/                     # Ingestion scripts & build_master_dataset.py
+│       ├── features/                 # build_features.py (118-feature store engineering)
+│       └── models/                   # train_baselines.py, evaluate_models.py, run_baseline_experiments.py
+├── frontend/
+│   ├── src/                          # React + Vite application (Phase 11 - Complete & Verified)
+│   │   ├── api/                      # Centralized typed fetch API client
+│   │   ├── components/               # Layout, common badges, Recharts, feature tables
+│   │   ├── pages/                    # Dashboard, Stations, StationDetails, Forecast, Scenarios
+│   │   ├── types/                    # Strict TypeScript models matching Pydantic schemas
+│   │   ├── utils/                    # Formatters, NAQI bands, provenance classifications
+│   │   ├── App.tsx                   # React Router route tree
+│   │   ├── main.tsx                  # React 18 DOM mount
+│   │   └── index.css                 # Design system & responsive styling
+│   ├── .env.example                  # VITE_API_BASE_URL=http://localhost:8000
+│   ├── index.html                    # HTML5 entry with Outfit & Inter typography
+│   ├── package.json                  # Dependencies & scripts
+│   ├── tsconfig.json                 # Strict TypeScript compiler options
+│   ├── vite.config.ts                # Vite configuration
+│   └── README.md                     # Frontend architecture & local development guide
 ├── docs/
-│   ├── architecture/        (README.md, .gitkeep)
-│   ├── dataset/             (.gitkeep)
-│   └── .gitkeep
-│
-├── .gitignore
-├── .env.example
-├── README.md
-├── brain.md
-└── docker-compose.yml       (dev-only PostgreSQL placeholder)
+│   ├── architecture/                 # api_architecture.md, database_architecture.md, README.md
+│   ├── dataset/                      # Dataset inventories, schemas, and quality reports
+│   ├── ml/                           # baseline_model_report.md, counterfactual_simulation_report.md, feature_engineering_report.md
+│   ├── REPRODUCIBILITY.md            # Detailed environment setup, artifact regeneration, and workflow guide
+│   ├── phase_10_5_repository_cleanup_report.md # Consistency audit report
+│   └── phase_11_frontend_report.md   # Complete frontend development report
+├── brain.md                          # Single source of truth project brain
+├── README.md                         # Project overview and public documentation
+├── docker-compose.yml                # Development PostgreSQL container configuration
+├── alembic.ini                       # Alembic CLI configuration
+├── .env.example                      # Sanitized environment configuration template
+└── .gitignore                        # Git exclusion rules
 ```
-
-Keep this section synchronized with the repository.
-
-**Note:** Only skeleton/placeholder files exist so far (`__init__.py` and
-`.gitkeep`). No application implementation files have been created.
 
 ---
 
-# 17. DEVELOPMENT ORDER
+# 17. DEVELOPMENT EXECUTION & PHASES
 
-Follow this order unless there is a documented reason to change it:
+The project follows a phased engineering progression:
 
-| Phase | Task |
-| ----- | ---- |
-| Phase 1  | Dataset discovery |
-| Phase 2  | Data cleaning |
-| Phase 3  | EDA |
-| Phase 4  | Feature engineering |
-| Phase 5  | Baseline ML model |
-| Phase 6  | Model evaluation |
-| Phase 7  | XGBoost / improved model |
-| Phase 8  | Explainability |
-| Phase 9  | What-if simulation engine |
-| Phase 10 | Database |
-| Phase 11 | FastAPI |
-| Phase 12 | API testing |
-| Phase 13 | React + Vite |
-| Phase 14 | Map integration |
-| Phase 15 | LLM explanation |
-| Phase 16 | End-to-end integration |
-| Phase 17 | Testing |
-| Phase 18 | Hackathon demo preparation |
+| Phase | Milestone | Status | Key Deliverable |
+| :---: | :--- | :---: | :--- |
+| **Phase 1** | OpenAQ Air Quality Data Acquisition & Audit | **Completed** | 6 CAAQMN stations, 15-min raw measurements |
+| **Phase 2** | Weather Data Acquisition (Open-Meteo / ERA5-Land) | **Completed** | 7 locations, 14,016 contiguous hours, 0 nulls |
+| **Phase 3** | Traffic & Road Infrastructure Acquisition | **Completed** | OSM Overpass highway ways + Pune diurnal traffic curve |
+| **Phase 4** | Activity, Industrial & Land-Use Acquisition | **Completed** | 49 industrial, 25 construction, 405 land-use, 417 POIs |
+| **Phase 5** | Data Integration & Master Dataset Generation | **Completed** | `master_hourly_dataset.csv` (84,096 station-hours, 70 cols) |
+| **Phase 6** | ML Feature Engineering & Digital Twin Transformation | **Completed** | `feature_dataset.csv` (118 cols, 5 leakage checks passed) |
+| **Phase 7** | Baseline ML Model Training & Evaluation | **Completed** | 4 models evaluated, Test MAE $4.05$--$4.18\,\mu\text{g/m}^3$ |
+| **Phase 8** | Database Architecture & Persistence Layer | **Completed** | 10 normalized tables, Alembic migrations, PostgreSQL/SQLite |
+| **Phase 9** | FastAPI Backend & Real-Time Model Serving API | **Completed** | 29/29 tests passed, in-memory model serving |
+| **Phase 10** | What-If / Counterfactual Simulation Engine | **Completed** | 50/50 tests passed, counterfactual API verified |
+| **Phase 10.5** | Repository Consistency & Reproducibility Cleanup | **Completed** | Docs, schemas, provenance, and tests synchronized |
+| **Phase 11** | Interactive React / Vite Frontend Dashboard | **Completed** | React 18, TS 5, Vite 5, Recharts, 5 pages operational |
+| **Phase 12** | Model Explainability & Attribution Layer (SHAP) | **Planned** | Post-frontend attribution visualization |
+| **Phase 13** | AI / LLM Explanation & Advisory Layer | **Planned** | LLM-based natural language summaries |
 
 ---
 
-# 18. CURRENT STATUS
-
-At project initialization:
+# 18. CURRENT VERIFIED STATUS
 
 ```
-[ ] Dataset selected
-[ ] Dataset downloaded
-[ ] Data cleaned
-[ ] EDA completed
-[ ] Baseline model trained
-[ ] Model evaluated
-[ ] Explainability implemented
-[ ] Scenario engine implemented
-[ ] Database implemented
-[ ] FastAPI implemented
-[ ] API tested
-[ ] Frontend implemented
-[ ] Map implemented
-[ ] AI explanation implemented
-[ ] End-to-end integration
-[ ] Final testing
-[ ] Demo ready
+[x] Phase 1: OpenAQ air quality dataset acquired & audited
+[x] Phase 2: Open-Meteo / ERA5-Land weather acquired & verified (0 nulls)
+[x] Phase 3: Traffic road network & diurnal proxy acquired
+[x] Phase 4: Industrial, construction, land-use, and POI proxies acquired
+[x] Phase 5: Master hourly dataset generated (84,096 rows, 70 cols)
+[x] Phase 6: Feature engineering completed (118 features, zero leakage)
+[x] Phase 7: Baseline models trained & evaluated (Persistence, Ridge, RF, HGB)
+[x] Phase 8: PostgreSQL database & Alembic migrations verified
+[x] Phase 9: FastAPI backend & in-memory model serving verified (29/29 tests)
+[x] Phase 10: What-If counterfactual simulation engine verified (50/50 tests)
+[x] Phase 10.5: Repository consistency, documentation, and reproducibility cleanup
+[x] Phase 11: React + Vite interactive digital twin frontend (COMPLETED & BUILT)
+[ ] Phase 12: SHAP feature attribution & contribution analysis (PLANNED)
+[ ] Phase 13: LLM natural-language advisory layer (PLANNED)
 ```
 
-**Overall status:** Repository scaffolding **Completed** (skeleton only). All
-functional items above are **Planned**.
-
-Only mark an item as completed when it is actually implemented and tested.
+**Overall status:** Phases 1–11 **COMPLETED & FULLY VERIFIED (50/50 backend tests passing, frontend builds with 0 errors)**. Phase 12 (SHAP Explainability) is **NEXT / PLANNED**.
 
 ---
 
@@ -922,9 +895,59 @@ Any AI coding agent working on this repository MUST:
   - Automated test suite `backend/tests/test_scenarios.py` with 21 tests (total backend test suite: 50 passed).
   - Comprehensive documentation in `docs/ml/counterfactual_simulation_report.md` and updated `docs/architecture/api_architecture.md`.
 
-### Next Immediate Action:
-**Phase 11: Frontend Interactive Urban Digital Twin Dashboard (React + Vite + Leaflet / MapLibre).**
-*(Awaiting user instructions. Do NOT start React frontend until requested.)*
+- [x] **Phase 11: Frontend Interactive Urban Digital Twin Dashboard (React + Vite):** **COMPLETED, AUDITED & VERIFIED (51/51 BACKEND TESTS PASSED, ZERO FRONTEND BUILD ERRORS)**.
+  - Built production React 18 + Vite 5 + TypeScript single-page application under `frontend/` adhering to strict architectural separation.
+  - Implemented core views:
+    * **Dashboard (`/`):** Network overview across 6 Pune & PCMC monitoring stations, live observed PM2.5 with Indian NAQI categorization, next-hour forecasting, chronological 48h PM2.5 trends, and ECMWF ERA5-Land meteorology.
+    * **Stations Registry (`/stations`):** Active monitoring stations listing with urban morphology zoning and direct diagnostic links.
+    * **Station Diagnostics (`/stations/:id`):** Road density (1.5 km buffer) and activity/industrial buffers (2.0 km), observed vs. model prediction time series, and raw historical readings table with regulatory completeness flags.
+    * **Next-Hour Forecast Serving (`/forecast`):** Station & model selector, $t+1$ prediction inference with input features audit and clear distinction between observed missingness and model preprocessor median fallback.
+    * **What-If Intervention Simulator (`/scenarios`):** Traffic and industrial curtailment policy levers with live counterfactual delta simulation and granular feature modification audit trails.
+  - Conducted Phase 11 Frontend Data Consistency Audit:
+    * Fixed date parsing bug by implementing `parseUtcDate` in `formatters.ts` to append `'Z'` to naive ISO timestamps, preventing IST (-5h30m) timezone shift into pre-period Feb 17.
+    * Enforced canonical analytical date boundaries (`2025-02-18 00:00:00 UTC` to `2026-09-24 23:00:00 UTC`).
+    * Corrected scenario percentage representation: user-selected 30% traffic reduction is consistently 30% across slider, domain model, database, API, and UI displays (`Traffic Reduction: 30%`). Added automated regression test `test_thirty_percent_traffic_reduction_semantic_consistency`.
+    * Relabeled missing forecast input feature to `Baseline PM2.5 (t): Missing` with distinct `(Input fallback: model pipeline median)` indicator, preserving observed sensor missingness without synthetic target imputation.
+    * Fixed PM2.5 chart ordering: removed `.reverse()` calls and enforced chronological ascending ordering (`datetime_utc ASC`, oldest to newest).
+    * Updated terminology from "Real-Time" to "Next-Hour PM2.5 Forecast (Historical Inference)".
+    * Dashboard correctly renders `Latest Observed PM2.5 = NO DATA` alongside available next-hour forecast without fabricating sensor readings.
+  - Implemented **Phase 11 Extension: Pune Digital Twin Map (`/digital-twin`)**:
+    * Integrated React Leaflet v4 (`react-leaflet` + `leaflet`) with OpenStreetMap basemap tiles.
+    * Real-time spatial mapping of all 6 monitoring stations using verified FastAPI `GET /api/v1/stations` coordinates.
+    * Interactive custom HTML markers (`L.divIcon`) with pulse indicators, station ID badges, and popup cards displaying observed PM2.5 (`NO DATA` when missing) and direct station diagnostic links.
+    * Toggleable 1.5 km road exposure buffers and 2.0 km activity exposure buffers based on verified spatial schemas.
+    * Explicitly labeled vector road networks and industrial footprints as planned/deferred layers without fabricating geometries.
+    * Added `/digital-twin` route to `App.tsx` and updated sidebar navigation.
+  - Full documentation in `docs/phase_11_frontend_report.md`.
+
+- [x] **Phase 12: Scenario Result Visualization:** **COMPLETED & VERIFIED (51/51 BACKEND TESTS PASSED, ZERO FRONTEND BUILD ERRORS)**.
+  - Implemented dedicated `ScenarioResultVisualization` component under `frontend/src/components/scenarios/ScenarioResultVisualization.tsx`.
+  - Comprehensive analytical results section:
+    * **Scenario Summary:** Station name & numerical ID, baseline timestamp (UTC), target timestamp ($t+1$), status (`COMPLETED`).
+    * **Provenance & Warning:** Prominent `MODEL COUNTERFACTUAL ESTIMATE` badge and alert notice: *"Counterfactual values are model estimates produced by the digital twin scenario engine. They are not observed measurements."*
+    * **5 Quantitative Result Cards:** Baseline PM2.5, Counterfactual PM2.5, Absolute Change ($\Delta$, with sign and direction), Relative Change (%), and Intervention Magnitude (with explicit multipliers e.g. $m_{\text{traffic}} = 0.70$).
+    * **Primary Chart:** Recharts `BarChart` comparing `Baseline PM2.5` vs `Counterfactual PM2.5` labeled strictly in `PM2.5 (µg/m³)`.
+    * **Intervention Explanation & Audit:** Narrative description of policy lever transformations accompanied by `FeatureAuditTable` detailing affected core features and applied scaling formulas.
+    * **UX States:** Seamless reactive states for Loading, Empty ("Run a scenario to see counterfactual results"), Error, and Success.
+- [x] **Phase 13: Model Performance + Data & Methodology Pages:** **COMPLETED & VERIFIED (51/51 BACKEND TESTS PASSED, ZERO FRONTEND BUILD ERRORS, E2E BROWSER VERIFIED)**.
+  - Designed and built two informative, technically transparent frontend interfaces under `frontend/src/pages/`:
+    * **Model Performance (`/model-performance`):**
+      - Overview: Next-hour PM2.5 forecasting objective ($\le 2.5\,\mu\text{m}$, `target_pm25_t_plus_1` in $\mu\text{g/m}^3$) with neutral evaluation metric guidance (lower MAE/RMSE = smaller error, higher R² = greater variance explained; zero subjective ranking or tier labels).
+      - Consolidated Performance Matrix: Persistence, Ridge ($\alpha=100.0$), Random Forest, HistGradientBoosting displaying exact documented Validation and Test MAE, RMSE, and R² from `docs/ml/baseline_model_report.md`.
+      - Recharts Grouped BarChart: Side-by-side comparison of Test MAE and Test RMSE in `PM2.5 error (µg/m³)` without distorted normalization.
+      - Station 11613 Extended Benchmark: Highlights the critical contrast between Universal Network HGB (Test MAE 4.5857, Test R² 0.5065) and Single-Station HGB (Test MAE 7.0194, Test R² -0.1994) explaining multi-station spatial pooling vs seasonal co-pollutant drift.
+      - Chronological Split Representation: Train (407 days, 42,796 valid rows / 73.02%), Validation (91 days, 10,454 valid rows / 79.78%), and Test (86 days, 9,769 valid rows / 78.88%) enforcing zero leakage and strictly later test timeframes.
+      - Feature Attribution Table: Top 10 predictive features with Gini importance and Permutation MAE loss, accompanied by mandatory non-causal statistical caveat.
+      - Project Limitations: 5 documented limitations (sensor missingness, reanalysis weather, proxy traffic, counterfactual model estimates, point forecasts without calibrated Bayesian uncertainty).
+    * **Data & Methodology (`/data-methodology`):**
+      - Dataset Overview: Master analytical grain `(station_id, datetime_utc)`, 84,096 station-hour rows, 584 calendar days (2025-02-18 to 2026-09-24), 6 monitoring stations, 70 master / 118 engineered columns.
+      - Multi-Source Provenance Classification Table: Categorizes all 8 data layers (`OBSERVED`, `REANALYSIS`, `STATIC_ROAD_NETWORK`, `TRAFFIC_PROXY`, `STATIC_INDUSTRIAL`, `CONSTRUCTION_PROXY`, `STATIC_LAND_USE`, `ACTIVITY_PROXY`).
+      - PM2.5 Data Quality Breakdown: 63,019 valid observations (74.94%), 21,077 missing sensor dropouts (25.06%), CPCB completeness classifications (`COMPLETE`, `PARTIAL`, `INSUFFICIENT`, `MISSING`), and explicit target non-imputation policy for supervised learning.
+      - Visual Data Processing Pipeline: Responsive 9-stage HTML/CSS pipeline flowchart from raw acquisition to counterfactual simulation.
+      - Feature Engineering Taxonomy: 10 structured domains covering all 118 engineered features and leakage test confirmations.
+      - Epistemological Transparency Panel: Observed vs Derived vs Proxy data definitions and scientific methodology guarantees (UTC timestamps, chronological splits, target non-imputation, raw data immutability).
+  - Configured navigation in `Sidebar.tsx` and routes in `App.tsx` with smooth SPA routing and page reload capability.
+  - Full documentation in `docs/phase_13_model_performance_methodology_report.md`.
 
 ---
 
