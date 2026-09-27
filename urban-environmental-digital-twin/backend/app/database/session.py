@@ -24,13 +24,14 @@ __all__ = ["Base", "engine", "SessionLocal", "get_db", "DATABASE_URL"]
 @event.listens_for(Engine, "connect")
 def set_sqlite_pragma(dbapi_connection, connection_record):
     """Enable foreign key enforcement if using SQLite in verification mode."""
-    cursor = dbapi_connection.cursor()
-    try:
-        cursor.execute("PRAGMA foreign_keys=ON")
-    except Exception:
-        pass
-    finally:
-        cursor.close()
+    if type(dbapi_connection).__module__.startswith("sqlite"):
+        cursor = dbapi_connection.cursor()
+        try:
+            cursor.execute("PRAGMA foreign_keys=ON")
+        except Exception:
+            pass
+        finally:
+            cursor.close()
 
 
 def get_configured_engine():

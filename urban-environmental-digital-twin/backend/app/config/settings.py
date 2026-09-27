@@ -74,6 +74,11 @@ class Settings(BaseSettings):
     OPENAQ_API_KEY: Optional[str] = Field(default=None, description="OpenAQ REST API v3 key")
     LLM_API_KEY: Optional[str] = Field(default=None, description="LLM integration API key")
 
+    # Supabase Configuration
+    SUPABASE_URL: Optional[str] = Field(default=None, description="Supabase Project URL")
+    SUPABASE_ANON_KEY: Optional[str] = Field(default=None, description="Supabase Public Anon Key")
+    SUPABASE_SERVICE_ROLE_KEY: Optional[str] = Field(default=None, description="Supabase Service Role Key")
+
     @property
     def cors_origins(self) -> list[str]:
         """Parse comma-separated CORS origins into a list of strings."""
