@@ -190,13 +190,13 @@ export const StationDetails: React.FC = () => {
       </div>
 
       {/* Spatial Exposures (Road Network & Urban Activity) */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '1.5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))', gap: '1.5rem' }}>
         {/* Road Network Exposure */}
         <div className="card">
           <div className="card-header">
             <div>
               <div className="card-title">
-                <Car size={18} color="#a78bfa" />
+                <Car size={18} color="#f97316" />
                 <span>Road Network Exposure Buffer</span>
               </div>
               <div className="card-subtitle">1,500m Geographic Station Buffer</div>
@@ -271,7 +271,7 @@ export const StationDetails: React.FC = () => {
         <div className="card-header">
           <div>
             <div className="card-title">
-              <Wind size={18} color="#60a5fa" />
+              <Wind size={18} color="#2563eb" />
               <span>Co-Located Weather Reanalysis (ECMWF ERA5-Land)</span>
             </div>
             <div className="card-subtitle">
@@ -329,7 +329,7 @@ export const StationDetails: React.FC = () => {
                             ? 'rgba(16, 185, 129, 0.15)'
                             : 'rgba(239, 68, 68, 0.15)',
                         color:
-                          obs.pm25_completeness_flag === 'FULL' ? '#34d399' : '#f87171',
+                          obs.pm25_completeness_flag === 'FULL' ? '#047857' : '#b91c1c',
                       }}
                     >
                       {obs.pm25_completeness_flag}

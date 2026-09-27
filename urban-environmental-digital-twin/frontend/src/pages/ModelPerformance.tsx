@@ -68,7 +68,7 @@ export const ModelPerformance: React.FC = () => {
       </div>
 
       {/* Section C & D: Validation Metrics Table & Grouped Bar Chart */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 450px), 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
         {/* Table Card */}
         <div className="card">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
@@ -128,21 +128,21 @@ export const ModelPerformance: React.FC = () => {
           <div style={{ width: '100%', height: 280 }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 20 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.05)" />
-                <XAxis dataKey="name" stroke="#94a3b8" fontSize={11} tickLine={false} dy={8} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <XAxis dataKey="name" stroke="#64748b" fontSize={11} tickLine={false} dy={8} />
                 <YAxis stroke="#64748b" fontSize={11} tickLine={false} unit=" µg/m³" />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#151e2e',
-                    borderColor: 'rgba(255, 255, 255, 0.1)',
-                    borderRadius: '8px',
-                    color: '#f8fafc',
+                    backgroundColor: '#ffffff',
+                    borderColor: '#e2e8f0',
+                    borderRadius: '12px',
+                    color: '#0f172a',
                   }}
                   formatter={(val: unknown, name: string) => [`${formatNumber(Number(val), 2)} µg/m³`, name]}
                 />
                 <Legend verticalAlign="top" align="right" wrapperStyle={{ paddingBottom: '10px', fontSize: '12px' }} />
-                <Bar dataKey="Test MAE" fill="#06b6d4" radius={[4, 4, 0, 0]} barSize={28} />
-                <Bar dataKey="Test RMSE" fill="#3b82f6" radius={[4, 4, 0, 0]} barSize={28} />
+                <Bar dataKey="Test MAE" fill="#2563eb" radius={[4, 4, 0, 0]} barSize={28} />
+                <Bar dataKey="Test RMSE" fill="#f97316" radius={[4, 4, 0, 0]} barSize={28} />
               </BarChart>
             </ResponsiveContainer>
           </div>

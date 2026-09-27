@@ -31,7 +31,7 @@ cp .env.example .env
 ```
 Ensure `VITE_API_BASE_URL` points to your active FastAPI instance:
 ```env
-VITE_API_BASE_URL=http://localhost:8000
+VITE_API_BASE_URL=http://127.0.0.1:8000
 ```
 
 ### 2. Install Dependencies

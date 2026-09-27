@@ -9,11 +9,18 @@ import {
   Layers,
   BarChart2,
   BookOpen,
+  PanelLeftClose,
+  PanelLeftOpen,
 } from 'lucide-react';
 import { getHealth } from '../../api/health';
 import { HealthResponse } from '../../types/common';
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+  collapsed: boolean;
+  onToggle: () => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
   const [health, setHealth] = useState<HealthResponse | null>(null);
   const [isHealthy, setIsHealthy] = useState<boolean | null>(null);
 
@@ -41,14 +48,24 @@ export const Sidebar: React.FC = () => {
     };
   }, []);
 
-  const navItems = [
-    { to: '/', label: 'Dashboard', icon: <LayoutDashboard size={18} /> },
-    { to: '/stations', label: 'Stations', icon: <MapPin size={18} /> },
-    { to: '/digital-twin', label: 'Pune Digital Twin', icon: <Layers size={18} /> },
-    { to: '/forecast', label: 'Next-Hour Forecast', icon: <TrendingUp size={18} /> },
-    { to: '/scenarios', label: 'What-If Scenarios', icon: <SlidersHorizontal size={18} /> },
-    { to: '/model-performance', label: 'Model Performance', icon: <BarChart2 size={18} /> },
-    { to: '/data-methodology', label: 'Data & Methodology', icon: <BookOpen size={18} /> },
+  const navGroups = [
+    {
+      label: 'MONITOR',
+      items: [
+        { to: '/', label: 'Dashboard', icon: <LayoutDashboard size={18} /> },
+        { to: '/stations', label: 'Stations', icon: <MapPin size={18} /> },
+        { to: '/digital-twin', label: 'Pune Digital Twin', icon: <Layers size={18} /> },
+      ],
+    },
+    {
+      label: 'ANALYZE',
+      items: [
+        { to: '/forecast', label: 'Next-Hour Forecast', icon: <TrendingUp size={18} /> },
+        { to: '/scenarios', label: 'What-If Scenarios', icon: <SlidersHorizontal size={18} /> },
+        { to: '/model-performance', label: 'Model Performance', icon: <BarChart2 size={18} /> },
+        { to: '/data-methodology', label: 'Data & Methodology', icon: <BookOpen size={18} /> },
+      ],
+    },
   ];
 
   return (
@@ -69,7 +86,7 @@ export const Sidebar: React.FC = () => {
           >
             <Activity size={20} />
           </div>
-          <div>
+          <div className="brand-copy">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
               <span>Urban Twin</span>
               <span className="brand-badge">PUNE</span>
@@ -77,21 +94,37 @@ export const Sidebar: React.FC = () => {
             <div className="brand-subtitle">Environmental Digital Twin</div>
           </div>
         </div>
+        <button
+          className="sidebar-toggle"
+          type="button"
+          onClick={onToggle}
+          aria-label={collapsed ? 'Expand navigation' : 'Collapse navigation'}
+          title={collapsed ? 'Expand navigation' : 'Collapse navigation'}
+        >
+          {collapsed ? <PanelLeftOpen size={17} /> : <PanelLeftClose size={17} />}
+        </button>
       </div>
 
       <nav style={{ flex: 1 }}>
         <ul className="nav-list">
-          {navItems.map((item) => (
-            <li key={item.to}>
-              <NavLink
-                to={item.to}
-                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-                end={item.to === '/'}
-              >
-                {item.icon}
-                <span>{item.label}</span>
-              </NavLink>
-            </li>
+          {navGroups.map((group) => (
+            <React.Fragment key={group.label}>
+              <li className="nav-group-label">{group.label}</li>
+              {group.items.map((item) => (
+                <li key={item.to}>
+                  <NavLink
+                    to={item.to}
+                    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                    end={item.to === '/'}
+                    title={collapsed ? item.label : undefined}
+                  >
+                    <span className="nav-icon">{item.icon}</span>
+                    <span className="nav-label">{item.label}</span>
+                    <span className="nav-active-mark" aria-hidden="true" />
+                  </NavLink>
+                </li>
+              ))}
+            </React.Fragment>
           ))}
         </ul>
       </nav>
@@ -105,7 +138,7 @@ export const Sidebar: React.FC = () => {
             marginBottom: '0.5rem',
           }}
         >
-          <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+          <span className="backend-label" style={{ color: 'var(--text-muted)', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
             <Layers size={13} />
             FastAPI Backend
           </span>
@@ -122,7 +155,7 @@ export const Sidebar: React.FC = () => {
         </div>
 
         {health && (
-          <div style={{ color: 'var(--text-muted)', fontSize: '0.7rem', lineHeight: 1.4 }}>
+          <div className="backend-metrics" style={{ color: 'var(--text-muted)', fontSize: '0.7rem', lineHeight: 1.4 }}>
             <div>Active Stations: {health.active_stations ?? 6}</div>
             <div>Registered Models: {health.registered_models ?? 4}</div>
           </div>

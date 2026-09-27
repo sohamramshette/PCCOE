@@ -9,11 +9,13 @@ import { Scenarios } from './pages/Scenarios';
 import { DigitalTwinMap } from './pages/DigitalTwinMap';
 import { ModelPerformance } from './pages/ModelPerformance';
 import { DataMethodology } from './pages/DataMethodology';
+import { LandingPage } from './pages/LandingPage';
 
 export const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/welcome" element={<LandingPage />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="stations" element={<Stations />} />

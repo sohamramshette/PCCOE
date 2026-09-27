@@ -53,7 +53,7 @@ export const Stations: React.FC = () => {
         </button>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: '1.25rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 380px), 1fr))', gap: '1.25rem' }}>
         {stations.map((st) => (
           <div key={st.station_id} className="card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
@@ -64,7 +64,7 @@ export const Stations: React.FC = () => {
                       width: 28,
                       height: 28,
                       borderRadius: '6px',
-                      backgroundColor: 'rgba(6, 182, 212, 0.15)',
+                      backgroundColor: 'rgba(37, 99, 235, 0.08)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -85,7 +85,7 @@ export const Stations: React.FC = () => {
                     fontSize: '0.7rem',
                     fontWeight: 700,
                     backgroundColor: st.is_active ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)',
-                    color: st.is_active ? '#34d399' : '#f87171',
+                    color: st.is_active ? '#047857' : '#b91c1c',
                   }}
                 >
                   {st.is_active ? 'ACTIVE' : 'INACTIVE'}
@@ -136,7 +136,7 @@ export const Stations: React.FC = () => {
           display: 'flex',
           alignItems: 'center',
           gap: '1rem',
-          backgroundColor: 'rgba(255, 255, 255, 0.02)',
+          backgroundColor: 'rgba(248, 250, 252, 0.72)',
         }}
       >
         <ShieldCheck size={24} color="var(--primary)" style={{ flexShrink: 0 }} />

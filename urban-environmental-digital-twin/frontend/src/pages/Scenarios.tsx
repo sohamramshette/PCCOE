@@ -206,17 +206,8 @@ export const Scenarios: React.FC = () => {
 
       {actionSuccess && (
         <div
-          style={{
-            backgroundColor: 'rgba(16, 185, 129, 0.1)',
-            border: '1px solid rgba(16, 185, 129, 0.3)',
-            color: '#34d399',
-            padding: '0.75rem 1rem',
-            borderRadius: 'var(--radius-md)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.6rem',
-            fontSize: '0.85rem',
-          }}
+          className="toast toast-success"
+          style={{ color: '#047857', fontSize: '0.85rem' }}
         >
           <CheckCircle2 size={18} />
           <span>{actionSuccess}</span>
@@ -225,7 +216,7 @@ export const Scenarios: React.FC = () => {
 
       {error && <ErrorDisplay message={error} onRetry={loadScenariosAndStations} />}
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: '1.5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))', gap: '1.5rem' }}>
         {/* Scenario Creation Form */}
         <div className="card">
           <div className="card-header">
@@ -303,12 +294,12 @@ export const Scenarios: React.FC = () => {
 
             {/* Traffic Slider */}
             {(interventionType === 'TRAFFIC_REDUCTION' || interventionType === 'COMBINED_INTERVENTION') && (
-              <div className="form-group" style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '0.85rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+              <div className="form-group" style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
                   <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0 }}>
-                    <Car size={15} color="#fbbf24" /> Traffic Reduction:
+                    <Car size={15} color="#ea580c" /> Traffic Reduction:
                   </label>
-                  <strong style={{ color: '#fbbf24', fontSize: '0.95rem' }}>{trafficPercent}%</strong>
+                  <strong style={{ color: '#ea580c', fontSize: '0.95rem' }}>{trafficPercent}%</strong>
                 </div>
                 <input
                   type="range"
@@ -327,7 +318,7 @@ export const Scenarios: React.FC = () => {
 
             {/* Industrial Slider */}
             {(interventionType === 'INDUSTRIAL_ACTIVITY_REDUCTION' || interventionType === 'COMBINED_INTERVENTION') && (
-              <div className="form-group" style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '0.85rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+              <div className="form-group" style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
                   <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0 }}>
                     <Factory size={15} color="#f87171" /> Industrial Activity Reduction:
@@ -391,7 +382,7 @@ export const Scenarios: React.FC = () => {
                   <tr
                     key={sc.scenario_id}
                     style={{
-                      backgroundColor: sc.scenario_id === selectedScenarioId ? 'rgba(6, 182, 212, 0.08)' : 'inherit',
+                      backgroundColor: sc.scenario_id === selectedScenarioId ? 'rgba(37, 99, 235, 0.06)' : 'inherit',
                       cursor: 'pointer',
                     }}
                     onClick={() => {
@@ -417,7 +408,7 @@ export const Scenarios: React.FC = () => {
                             sc.simulation_status === 'COMPLETED'
                               ? 'rgba(16, 185, 129, 0.15)'
                               : 'rgba(234, 179, 8, 0.15)',
-                          color: sc.simulation_status === 'COMPLETED' ? '#34d399' : '#fde047',
+                          color: sc.simulation_status === 'COMPLETED' ? '#047857' : '#b45309',
                           fontWeight: 600,
                         }}
                       >

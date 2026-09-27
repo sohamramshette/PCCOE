@@ -49,17 +49,17 @@ export const WeatherContextChart: React.FC<WeatherContextChartProps> = ({ data, 
       <div style={{ width: '100%', height }}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 25 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.05)" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
             <XAxis dataKey="label" stroke="#64748b" fontSize={11} tickLine={false} dy={10} />
-            <YAxis yAxisId="left" stroke="#38bdf8" fontSize={11} tickLine={false} unit="°C" />
-            <YAxis yAxisId="right" orientation="right" stroke="#a78bfa" fontSize={11} tickLine={false} unit="%" />
+            <YAxis yAxisId="left" stroke="#2563eb" fontSize={11} tickLine={false} unit="°C" />
+            <YAxis yAxisId="right" orientation="right" stroke="#f97316" fontSize={11} tickLine={false} unit="%" />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#151e2e',
-                borderColor: 'rgba(255, 255, 255, 0.1)',
-                borderRadius: '8px',
+                backgroundColor: '#ffffff',
+                borderColor: '#e2e8f0',
+                borderRadius: '12px',
                 fontSize: '12px',
-                color: '#f8fafc',
+                color: '#0f172a',
               }}
               formatter={(val: unknown, name: unknown) => {
                 if (name === 'Temperature') return [`${formatNumber(Number(val), 1)} °C`, 'Temperature'];
@@ -74,7 +74,7 @@ export const WeatherContextChart: React.FC<WeatherContextChartProps> = ({ data, 
               type="monotone"
               dataKey="temp"
               name="Temperature"
-              stroke="#38bdf8"
+              stroke="#2563eb"
               strokeWidth={2}
               dot={false}
             />
@@ -83,7 +83,7 @@ export const WeatherContextChart: React.FC<WeatherContextChartProps> = ({ data, 
               type="monotone"
               dataKey="humidity"
               name="Humidity"
-              stroke="#a78bfa"
+              stroke="#f97316"
               strokeWidth={2}
               dot={false}
             />
@@ -92,7 +92,7 @@ export const WeatherContextChart: React.FC<WeatherContextChartProps> = ({ data, 
               type="monotone"
               dataKey="wind"
               name="Wind Speed"
-              stroke="#fbbf24"
+              stroke="#059669"
               strokeWidth={1.5}
               strokeDasharray="3 3"
               dot={false}

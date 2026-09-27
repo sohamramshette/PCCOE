@@ -149,8 +149,8 @@ export const DataMethodology: React.FC = () => {
 
         <div
           style={{
-            backgroundColor: 'rgba(6, 182, 212, 0.06)',
-            border: '1px solid rgba(6, 182, 212, 0.2)',
+            backgroundColor: 'rgba(37, 99, 235, 0.05)',
+            border: '1px solid var(--border-blue)',
             borderRadius: 'var(--radius-sm)',
             padding: '0.85rem 1rem',
             fontSize: '0.82rem',

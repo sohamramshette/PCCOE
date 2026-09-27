@@ -156,8 +156,8 @@ export const Dashboard: React.FC = () => {
       <div
         className="card"
         style={{
-          background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%)',
-          borderColor: 'rgba(6, 182, 212, 0.25)',
+          background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(249, 115, 22, 0.04) 100%)',
+          borderColor: 'var(--border-blue)',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
@@ -270,7 +270,7 @@ export const Dashboard: React.FC = () => {
       </div>
 
       {/* Main Grid: Time Series & Weather Context */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '1.5rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 450px), 1fr))', gap: '1.5rem' }}>
         {/* PM2.5 Recent Trend Card */}
         <div className="card">
           <div className="card-header">
@@ -335,27 +335,27 @@ export const Dashboard: React.FC = () => {
           ) : latestWeather ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
-                <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: '#ffffff', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                    <Thermometer size={14} color="#38bdf8" /> Temperature
+                    <Thermometer size={14} color="#2563eb" /> Temperature
                   </div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
                     {formatNumber(latestWeather.temp_c, 1)} <span style={{ fontSize: '0.8rem', fontWeight: 400 }}>°C</span>
                   </div>
                 </div>
 
-                <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: '#ffffff', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                    <Droplets size={14} color="#a78bfa" /> Humidity
+                    <Droplets size={14} color="#f97316" /> Humidity
                   </div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
                     {formatNumber(latestWeather.humidity_pct, 1)} <span style={{ fontSize: '0.8rem', fontWeight: 400 }}>%</span>
                   </div>
                 </div>
 
-                <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: '#ffffff', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                    <Wind size={14} color="#fbbf24" /> Wind Speed
+                    <Wind size={14} color="#059669" /> Wind Speed
                   </div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
                     {formatNumber(latestWeather.wind_speed_ms, 2)} <span style={{ fontSize: '0.8rem', fontWeight: 400 }}>m/s</span>
@@ -364,11 +364,11 @@ export const Dashboard: React.FC = () => {
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem', fontSize: '0.85rem' }}>
-                <div style={{ padding: '0.5rem 0.75rem', background: 'rgba(255, 255, 255, 0.01)', borderRadius: '6px' }}>
+                <div style={{ padding: '0.5rem 0.75rem', background: '#f8fafc', borderRadius: '6px' }}>
                   <span style={{ color: 'var(--text-muted)' }}>Surface Pressure:</span>{' '}
                   <strong>{formatNumber(latestWeather.pressure_hpa, 1)} hPa</strong>
                 </div>
-                <div style={{ padding: '0.5rem 0.75rem', background: 'rgba(255, 255, 255, 0.01)', borderRadius: '6px' }}>
+                <div style={{ padding: '0.5rem 0.75rem', background: '#f8fafc', borderRadius: '6px' }}>
                   <span style={{ color: 'var(--text-muted)' }}>Boundary Layer (PBLH):</span>{' '}
                   <strong>{formatNumber(latestWeather.pbl_height_m, 0)} m</strong>
                 </div>
@@ -429,7 +429,7 @@ export const Dashboard: React.FC = () => {
                     <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{m.model_id}</div>
                   </td>
                   <td>
-                    <code style={{ fontSize: '0.8rem', color: '#38bdf8' }}>{m.model_type}</code>
+                    <code style={{ fontSize: '0.8rem', color: '#1d4ed8' }}>{m.model_type}</code>
                   </td>
                   <td>{m.horizon} ({m.target})</td>
                   <td>{formatNumber(m.validation_mae, 4)} µg/m³</td>
@@ -445,7 +445,7 @@ export const Dashboard: React.FC = () => {
                         borderRadius: '4px',
                         fontSize: '0.75rem',
                         backgroundColor: m.is_active ? 'rgba(16, 185, 129, 0.15)' : 'rgba(148, 163, 184, 0.1)',
-                        color: m.is_active ? '#34d399' : '#94a3b8',
+                        color: m.is_active ? '#047857' : '#64748b',
                         fontWeight: 600,
                       }}
                     >

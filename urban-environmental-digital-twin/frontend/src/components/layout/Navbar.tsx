@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { Calendar, ExternalLink, ShieldCheck } from 'lucide-react';
+import { Calendar, ExternalLink, ShieldCheck, ChevronRight } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const location = useLocation();
@@ -13,38 +13,37 @@ export const Navbar: React.FC = () => {
     }
     if (location.pathname === '/forecast') return 'Next-Hour PM2.5 Forecast';
     if (location.pathname === '/scenarios') return 'What-If Counterfactual Policy Simulator';
-    return 'Digital Twin Dashboard';
+    if (location.pathname === '/digital-twin') return 'Pune Digital Twin';
+    if (location.pathname === '/model-performance') return 'Model Performance';
+    if (location.pathname === '/data-methodology') return 'Data & Methodology';
+    return 'Urban Environmental Workspace';
   };
+
+  const sectionLabel = location.pathname.startsWith('/stations')
+    ? 'MONITORING NETWORK'
+    : location.pathname === '/forecast' || location.pathname === '/scenarios' || location.pathname === '/model-performance'
+      ? 'ANALYTICS'
+      : location.pathname === '/data-methodology'
+        ? 'DATA GOVERNANCE'
+        : 'PUNE · PCMC';
 
   const apiDocsUrl = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'}/docs`;
 
   return (
     <header className="top-navbar">
-      <div>
-        <h1 style={{ fontSize: '1.15rem', fontWeight: 600 }}>{getPageTitle()}</h1>
-        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.4rem', marginTop: '0.1rem' }}>
+      <div className="navbar-context">
+        <div className="navbar-breadcrumb"><span>{sectionLabel}</span><ChevronRight size={12} /><span>WORKSPACE</span></div>
+        <h1>{getPageTitle()}</h1>
+        <div className="navbar-period">
           <Calendar size={12} />
-          <span>Synchronized Analytical Period: Feb 18, 2025 → Sep 24, 2026</span>
+          <span>Historical window · Feb 18, 2025 — Sep 24, 2026</span>
         </div>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.4rem',
-            padding: '0.35rem 0.75rem',
-            borderRadius: 'var(--radius-full)',
-            backgroundColor: 'rgba(6, 182, 212, 0.08)',
-            border: '1px solid rgba(6, 182, 212, 0.25)',
-            fontSize: '0.75rem',
-            color: 'var(--primary)',
-            fontWeight: 500,
-          }}
-        >
+      <div className="navbar-actions">
+        <div className="provenance-status">
           <ShieldCheck size={14} />
-          <span>Scientific Provenance Verified</span>
+          <span>Provenance verified</span>
         </div>
 
         <a
@@ -52,7 +51,7 @@ export const Navbar: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-secondary"
-          style={{ padding: '0.4rem 0.75rem', fontSize: '0.8rem', gap: '0.35rem' }}
+          style={{ padding: '0.5rem 0.8rem', fontSize: '0.8rem', gap: '0.4rem' }}
           title="Open FastAPI Swagger Interactive Documentation"
         >
           <span>FastAPI Docs</span>

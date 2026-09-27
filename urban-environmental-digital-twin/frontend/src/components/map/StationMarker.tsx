@@ -54,9 +54,9 @@ export const StationMarker: React.FC<StationMarkerProps> = ({
           center={[station.latitude, station.longitude]}
           radius={1500}
           pathOptions={{
-            color: '#06b6d4',
+            color: '#2563eb',
             weight: 1.5,
-            fillColor: '#06b6d4',
+            fillColor: '#2563eb',
             fillOpacity: 0.08,
             dashArray: '4, 4',
           }}

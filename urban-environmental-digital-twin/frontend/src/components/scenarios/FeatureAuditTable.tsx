@@ -35,11 +35,11 @@ export const FeatureAuditTable: React.FC<FeatureAuditTableProps> = ({ auditItems
               <td>
                 <code
                   style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                    backgroundColor: '#f1f5f9',
                     padding: '0.2rem 0.4rem',
                     borderRadius: '4px',
                     fontSize: '0.8rem',
-                    color: '#38bdf8',
+                    color: '#1d4ed8',
                   }}
                 >
                   {item.feature_name}

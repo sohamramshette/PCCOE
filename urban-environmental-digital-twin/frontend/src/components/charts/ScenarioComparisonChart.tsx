@@ -71,22 +71,22 @@ export const ScenarioComparisonChart: React.FC<ScenarioComparisonChartProps> = (
       <div style={{ width: '100%', height }}>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 10, right: 30, left: 10, bottom: 20 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.05)" />
-            <XAxis dataKey="category" stroke="#94a3b8" fontSize={12} tickLine={false} dy={8} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+            <XAxis dataKey="category" stroke="#64748b" fontSize={12} tickLine={false} dy={8} />
             <YAxis stroke="#64748b" fontSize={11} tickLine={false} unit=" µg/m³" />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#151e2e',
-                borderColor: 'rgba(255, 255, 255, 0.1)',
-                borderRadius: '8px',
-                color: '#f8fafc',
+                backgroundColor: '#ffffff',
+                borderColor: '#e2e8f0',
+                borderRadius: '12px',
+                color: '#0f172a',
               }}
               formatter={(val: unknown) => [`${formatNumber(Number(val), 2)} µg/m³`, 'PM2.5 Concentration']}
             />
             <Legend verticalAlign="top" align="right" wrapperStyle={{ paddingBottom: '10px', fontSize: '12px' }} />
             <Bar dataKey="pm25" name="PM2.5 (µg/m³)" radius={[6, 6, 0, 0]} barSize={55}>
               <Cell fill="#94a3b8" />
-              <Cell fill="#06b6d4" />
+              <Cell fill="#2563eb" />
             </Bar>
           </BarChart>
         </ResponsiveContainer>

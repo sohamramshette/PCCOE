@@ -47,8 +47,8 @@ export const MapLegend: React.FC<MapLegendProps> = ({
               width: 14,
               height: 14,
               borderRadius: '50%',
-              border: '2px solid #06b6d4',
-              backgroundColor: 'rgba(6, 182, 212, 0.15)',
+              border: '2px solid #2563eb',
+              backgroundColor: 'rgba(37, 99, 235, 0.12)',
             }}
           />
           <div className="map-legend-text">

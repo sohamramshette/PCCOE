@@ -63,7 +63,7 @@ export const ScenarioResultVisualization: React.FC<ScenarioResultVisualizationPr
             width: 48,
             height: 48,
             borderRadius: '50%',
-            backgroundColor: 'rgba(6, 182, 212, 0.1)',
+            backgroundColor: 'rgba(37, 99, 235, 0.08)',
             color: 'var(--primary)',
             display: 'flex',
             alignItems: 'center',
@@ -136,7 +136,7 @@ export const ScenarioResultVisualization: React.FC<ScenarioResultVisualizationPr
   const industrialReduction = scenario?.industrial_reduction_pct ?? (activeResult?.intervention?.industrial_activity_reduction_percent as number | undefined) ?? 0;
 
   return (
-    <div className="card" style={{ border: '1px solid rgba(6, 182, 212, 0.3)' }}>
+    <div className="card" style={{ border: '1px solid var(--border-blue)' }}>
       {/* 1. Header & Summary Section */}
       <div className="card-header" style={{ flexWrap: 'wrap', gap: '0.75rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '1rem' }}>
         <div>
@@ -183,7 +183,7 @@ export const ScenarioResultVisualization: React.FC<ScenarioResultVisualizationPr
             fontSize: '0.85rem',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#f87171', fontWeight: 700, marginBottom: '0.35rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#b91c1c', fontWeight: 700, marginBottom: '0.35rem' }}>
             <AlertTriangle size={18} />
             <span>MODEL ESTIMATE NOTICE</span>
           </div>
@@ -255,13 +255,13 @@ export const ScenarioResultVisualization: React.FC<ScenarioResultVisualizationPr
             <div className="stat-label">Intervention Magnitude</div>
             <div className="stat-value" style={{ fontSize: '1.25rem' }}>
               {trafficReduction > 0 && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#fbbf24' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#b45309' }}>
                   <Car size={16} />
                   <span>Traffic: -{trafficReduction}%</span>
                 </div>
               )}
               {industrialReduction > 0 && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#f87171', marginTop: trafficReduction > 0 ? '0.2rem' : 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#b91c1c', marginTop: trafficReduction > 0 ? '0.2rem' : 0 }}>
                   <Factory size={16} />
                   <span>Ind: -{industrialReduction}%</span>
                 </div>

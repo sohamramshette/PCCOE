@@ -96,7 +96,7 @@ export function getPm25AqiCategory(pm25: number | null | undefined): AqiCategory
     return {
       label: 'No Data',
       color: '#94a3b8',
-      textColor: '#cbd5e1',
+      textColor: '#475569',
       bgLight: 'rgba(148, 163, 184, 0.1)',
     };
   }
@@ -105,7 +105,7 @@ export function getPm25AqiCategory(pm25: number | null | undefined): AqiCategory
     return {
       label: 'Good',
       color: '#10b981',
-      textColor: '#34d399',
+      textColor: '#047857',
       bgLight: 'rgba(16, 185, 129, 0.12)',
     };
   }
@@ -113,7 +113,7 @@ export function getPm25AqiCategory(pm25: number | null | undefined): AqiCategory
     return {
       label: 'Satisfactory',
       color: '#84cc16',
-      textColor: '#a3e635',
+      textColor: '#4d7c0f',
       bgLight: 'rgba(132, 204, 22, 0.12)',
     };
   }
@@ -121,15 +121,15 @@ export function getPm25AqiCategory(pm25: number | null | undefined): AqiCategory
     return {
       label: 'Moderate',
       color: '#eab308',
-      textColor: '#fde047',
-      bgLight: 'rgba(234, 179, 8, 0.12)',
+      textColor: '#a16207',
+      bgLight: 'rgba(234, 179, 8, 0.14)',
     };
   }
   if (pm25 <= 120) {
     return {
       label: 'Poor',
       color: '#f97316',
-      textColor: '#fb923c',
+      textColor: '#c2410c',
       bgLight: 'rgba(249, 115, 22, 0.12)',
     };
   }
@@ -137,14 +137,14 @@ export function getPm25AqiCategory(pm25: number | null | undefined): AqiCategory
     return {
       label: 'Very Poor',
       color: '#ef4444',
-      textColor: '#f87171',
+      textColor: '#b91c1c',
       bgLight: 'rgba(239, 68, 68, 0.12)',
     };
   }
   return {
     label: 'Severe',
     color: '#991b1b',
-    textColor: '#fca5a5',
-    bgLight: 'rgba(153, 27, 27, 0.2)',
+    textColor: '#7f1d1d',
+    bgLight: 'rgba(153, 27, 27, 0.14)',
   };
 }

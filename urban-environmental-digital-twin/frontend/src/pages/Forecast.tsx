@@ -147,9 +147,9 @@ export const Forecast: React.FC = () => {
           <div
             className="card"
             style={{
-              background: 'linear-gradient(135deg, #151e2e 0%, #1e293b 100%)',
-              borderColor: 'rgba(6, 182, 212, 0.3)',
-              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(239, 246, 255, 0.92))',
+              borderColor: 'var(--border-blue)',
+              boxShadow: 'var(--shadow-md)',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
@@ -176,7 +176,7 @@ export const Forecast: React.FC = () => {
 
               <div
                 style={{
-                  backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                  backgroundColor: 'rgba(248, 250, 252, 0.9)',
                   padding: '1rem 1.25rem',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid var(--border-subtle)',
@@ -196,7 +196,7 @@ export const Forecast: React.FC = () => {
 
                 <div style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '0.5rem', marginTop: '0.2rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-secondary)' }}>
-                    <TrendingUp size={15} color="#818cf8" />
+                    <TrendingUp size={15} color="var(--primary)" />
                     <span>Target Horizon (t + 1):</span>
                   </div>
                   <strong>{formatDateTime(forecast.target_time_utc)}</strong>
@@ -219,7 +219,7 @@ export const Forecast: React.FC = () => {
                 fontSize: '0.8rem',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#34d399' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#047857' }}>
                 <span
                   style={{
                     width: 8,
@@ -254,7 +254,7 @@ export const Forecast: React.FC = () => {
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: '#ffffff', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Baseline PM2.5 (t)</div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
                     {forecast.input_features_summary.pm25_t !== null && forecast.input_features_summary.pm25_t !== undefined
@@ -264,14 +264,14 @@ export const Forecast: React.FC = () => {
                   <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.35rem', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
                     <ProvenanceBadge classification="OBSERVED" />
                     {(forecast.input_features_summary.pm25_t === null || forecast.input_features_summary.pm25_t === undefined) && (
-                      <span style={{ color: '#fbbf24', fontSize: '0.7rem' }}>
+                      <span style={{ color: '#b45309', fontSize: '0.7rem' }}>
                         Input fallback: model pipeline median
                       </span>
                     )}
                   </div>
                 </div>
 
-                <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: '#ffffff', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Air Temperature</div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
                     {formatNumber(forecast.input_features_summary.temp_c, 1)} °C
@@ -281,7 +281,7 @@ export const Forecast: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: '#ffffff', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Wind Speed</div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
                     {formatNumber(forecast.input_features_summary.wind_speed_ms, 2)} m/s
@@ -291,7 +291,7 @@ export const Forecast: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: '#ffffff', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Ventilation Index</div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
                     {formatNumber(forecast.input_features_summary.ventilation_index, 1)} m²/s
@@ -301,7 +301,7 @@ export const Forecast: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ background: 'rgba(255, 255, 255, 0.02)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: '#ffffff', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Traffic Intensity Index</div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
                     {formatNumber(forecast.input_features_summary.traffic_proxy_index, 3)}
@@ -316,7 +316,7 @@ export const Forecast: React.FC = () => {
         </div>
       ) : (
         <div className="card" style={{ textAlign: 'center', padding: '3rem 1.5rem' }}>
-          <AlertTriangle size={36} color="#fbbf24" style={{ margin: '0 auto 1rem' }} />
+          <AlertTriangle size={36} color="#d97706" style={{ margin: '0 auto 1rem' }} />
           <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>Forecast Currently Unavailable</h3>
           <p style={{ color: 'var(--text-secondary)', maxWidth: '500px', margin: '0 auto', fontSize: '0.9rem' }}>
             No complete historical observation and weather record is available for this station at the latest timestamp.
@@ -332,7 +332,7 @@ export const Forecast: React.FC = () => {
           display: 'flex',
           alignItems: 'flex-start',
           gap: '1rem',
-          backgroundColor: 'rgba(255, 255, 255, 0.02)',
+          backgroundColor: 'rgba(248, 250, 252, 0.72)',
         }}
       >
         <Info size={22} color="var(--primary)" style={{ flexShrink: 0, marginTop: '0.2rem' }} />
