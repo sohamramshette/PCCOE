@@ -9,11 +9,14 @@ import {
   RotateCcw,
   Calendar,
   Info,
+  Radio,
+  RefreshCw,
 } from 'lucide-react';
 
 import { getStations } from '../api/stations';
 import { getObservations } from '../api/observations';
 import { getSpatialInterpolation, interpolateCoordinate } from '../api/spatial';
+import { triggerOpenAQSync } from '../api/sync';
 import { Station } from '../types/station';
 import { ObservationItem } from '../types/observation';
 import { InterpolatedGridPoint, CoordinateInterpolationResponse } from '../types/spatial';
@@ -33,9 +36,20 @@ interface AtmosphericEpisode {
   timestamp?: string;
   description: string;
   seasonTag: string;
+  isLive?: boolean;
 }
 
 const ATMOSPHERIC_EPISODES: AtmosphericEpisode[] = [
+  {
+    id: 'live_telemetry',
+    name: 'Live Telemetry Stream',
+    badge: 'LIVE AUTO-SYNC',
+    color: '#2563eb',
+    timestamp: undefined, // pulls freshest realtime observation
+    description: 'Active real-time telemetry stream ingesting live CPCB / IITM SAFAR telemetry via OpenAQ API v3. Station cards, AQI tiers, and IDW spatial continuous dots auto-renew continuously.',
+    seasonTag: 'Continuous Real-Time Stream · Auto-Renew Active',
+    isLive: true,
+  },
   {
     id: 'monsoon_clean',
     name: 'Latest / Post-Monsoon Clean',
@@ -69,7 +83,10 @@ export const DigitalTwinMap: React.FC = () => {
   const [stations, setStations] = useState<Station[]>([]);
   const [selectedStationId, setSelectedStationId] = useState<number | null>(null);
   const [latestObservations, setLatestObservations] = useState<Record<number, ObservationItem | null>>({});
-  const [selectedEpisodeId, setSelectedEpisodeId] = useState<string>('monsoon_clean');
+  const [selectedEpisodeId, setSelectedEpisodeId] = useState<string>('live_telemetry');
+  const [lastSyncTime, setLastSyncTime] = useState<string>('Just now');
+  const [isSyncingLive, setIsSyncingLive] = useState<boolean>(false);
+  const [countdown, setCountdown] = useState<number>(30);
   
   // Layer controls
   const [showTrafficBuffer, setShowTrafficBuffer] = useState<boolean>(true);
@@ -100,6 +117,26 @@ export const DigitalTwinMap: React.FC = () => {
     }
   }, []);
 
+  const refreshStationReadings = async (stationList: Station[], targetTimestamp?: string) => {
+    const obsMap: Record<number, ObservationItem | null> = {};
+    await Promise.all(
+      stationList.map(async (st) => {
+        try {
+          const obsRes = await getObservations(st.station_id, {
+            limit: 1,
+            order: 'desc',
+            valid_pm25_only: true,
+            ...(targetTimestamp ? { end: targetTimestamp } : {})
+          });
+          obsMap[st.station_id] = obsRes.items.length > 0 ? obsRes.items[0] : null;
+        } catch {
+          obsMap[st.station_id] = null;
+        }
+      })
+    );
+    setLatestObservations(obsMap);
+  };
+
   const loadData = async (episodeId: string = selectedEpisodeId) => {
     try {
       setLoading(true);
@@ -115,27 +152,12 @@ export const DigitalTwinMap: React.FC = () => {
 
       const ep = ATMOSPHERIC_EPISODES.find((e) => e.id === episodeId) || ATMOSPHERIC_EPISODES[0];
 
-      // Fetch observation for each station in parallel (order='desc' and valid_pm25_only=true to get latest valid measurement)
-      const obsMap: Record<number, ObservationItem | null> = {};
-      await Promise.all(
-        stationList.map(async (st) => {
-          try {
-            const obsRes = await getObservations(st.station_id, {
-              limit: 1,
-              order: 'desc',
-              valid_pm25_only: true,
-              ...(ep.timestamp ? { end: ep.timestamp } : {})
-            });
-            obsMap[st.station_id] = obsRes.items.length > 0 ? obsRes.items[0] : null;
-          } catch {
-            obsMap[st.station_id] = null;
-          }
-        })
-      );
-      setLatestObservations(obsMap);
+      // Fetch observation for each station in parallel
+      await refreshStationReadings(stationList, ep.timestamp);
 
       // Load spatial interpolation grid
       await loadHeatmap(idwPower, ep.timestamp);
+      setLastSyncTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to load spatial digital twin data.');
     } finally {
@@ -146,6 +168,52 @@ export const DigitalTwinMap: React.FC = () => {
   useEffect(() => {
     loadData();
   }, []);
+
+  const handleForceLiveSync = async () => {
+    try {
+      setIsSyncingLive(true);
+      await triggerOpenAQSync();
+      const currentStations = stations.length > 0 ? stations : await getStations(true);
+      await refreshStationReadings(currentStations, undefined);
+      await loadHeatmap(idwPower, undefined);
+      setLastSyncTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+      setCountdown(30);
+    } catch (err) {
+      console.error('Manual live sync failed:', err);
+    } finally {
+      setIsSyncingLive(false);
+    }
+  };
+
+  // Real-Time Auto-Renew & Countdown Effect
+  useEffect(() => {
+    if (!currentEpisode.isLive) return;
+
+    const timer = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          // Trigger automated background renew
+          (async () => {
+            try {
+              setIsSyncingLive(true);
+              const currentStations = stations.length > 0 ? stations : await getStations(true);
+              await refreshStationReadings(currentStations, undefined);
+              await loadHeatmap(idwPower, undefined);
+              setLastSyncTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+            } catch (e) {
+              console.error('Auto-renew telemetry error:', e);
+            } finally {
+              setIsSyncingLive(false);
+            }
+          })();
+          return 30;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [selectedEpisodeId, stations, idwPower, loadHeatmap, currentEpisode.isLive]);
 
   const handleMapClick = async (lat: number, lon: number) => {
     try {
@@ -167,29 +235,21 @@ export const DigitalTwinMap: React.FC = () => {
   const handleEpisodeChange = async (episodeId: string) => {
     setSelectedEpisodeId(episodeId);
     setCustomInspection(null);
+    setCountdown(30);
     const ep = ATMOSPHERIC_EPISODES.find((e) => e.id === episodeId) || ATMOSPHERIC_EPISODES[0];
     
-    // Load heatmap for episode
+    // If switching to live telemetry, force a fresh pull
+    if (ep.isLive) {
+      handleForceLiveSync();
+      return;
+    }
+
+    // Load heatmap for historical episode
     await loadHeatmap(idwPower, ep.timestamp);
 
-    // Refresh station readings for this episode
-    const obsMap: Record<number, ObservationItem | null> = {};
-    await Promise.all(
-      stations.map(async (st) => {
-        try {
-          const obsRes = await getObservations(st.station_id, {
-            limit: 1,
-            order: 'desc',
-            valid_pm25_only: true,
-            ...(ep.timestamp ? { end: ep.timestamp } : {})
-          });
-          obsMap[st.station_id] = obsRes.items.length > 0 ? obsRes.items[0] : null;
-        } catch {
-          obsMap[st.station_id] = null;
-        }
-      })
-    );
-    setLatestObservations(obsMap);
+    // Refresh station readings for historical episode
+    const currentStations = stations.length > 0 ? stations : await getStations(true);
+    await refreshStationReadings(currentStations, ep.timestamp);
   };
 
   const handleSyncSuccess = () => {
@@ -288,7 +348,7 @@ export const DigitalTwinMap: React.FC = () => {
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <Calendar size={15} className="text-primary" />
                 <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#1e293b' }}>
-                  Seasonal Pollution Episode:
+                  Monitoring Mode &amp; Scenarios:
                 </span>
               </div>
 
@@ -311,18 +371,48 @@ export const DigitalTwinMap: React.FC = () => {
                         border: isSelected ? `2px solid ${ep.color}` : '1px solid #cbd5e1',
                         backgroundColor: isSelected ? `${ep.color}15` : '#ffffff',
                         color: isSelected ? ep.color : '#475569',
+                        boxShadow: isSelected && ep.isLive ? '0 0 10px rgba(37, 99, 235, 0.2)' : 'none',
                         transition: 'all 0.15s ease',
                       }}
                     >
-                      <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: ep.color }} />
+                      {ep.isLive ? (
+                        <span style={{ position: 'relative', display: 'flex', height: '8px', width: '8px' }}>
+                          <span
+                            style={{
+                              position: 'absolute',
+                              display: 'inline-flex',
+                              height: '100%',
+                              width: '100%',
+                              borderRadius: '50%',
+                              backgroundColor: '#ef4444',
+                              opacity: 0.75,
+                              animation: 'pulse 1.5s infinite',
+                            }}
+                          />
+                          <span
+                            style={{
+                              position: 'relative',
+                              display: 'inline-flex',
+                              borderRadius: '50%',
+                              height: '8px',
+                              width: '8px',
+                              backgroundColor: '#dc2626',
+                            }}
+                          />
+                        </span>
+                      ) : (
+                        <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: ep.color }} />
+                      )}
+
                       <span>{ep.name}</span>
+
                       <span
                         style={{
                           fontSize: '9px',
                           fontWeight: 700,
                           padding: '1px 5px',
                           borderRadius: '4px',
-                          backgroundColor: isSelected ? ep.color : '#f1f5f9',
+                          backgroundColor: isSelected ? (ep.isLive ? '#2563eb' : ep.color) : '#f1f5f9',
                           color: isSelected ? '#ffffff' : '#475569',
                         }}
                       >
@@ -334,28 +424,99 @@ export const DigitalTwinMap: React.FC = () => {
               </div>
             </div>
 
-            {/* Active Episode Meteorological Context Banner */}
-            <div
-              style={{
-                marginBottom: '0.75rem',
-                padding: '0.55rem 0.85rem',
-                borderRadius: '6px',
-                fontSize: '0.75rem',
-                lineHeight: 1.45,
-                backgroundColor: `${currentEpisode.color}10`,
-                borderLeft: `4px solid ${currentEpisode.color}`,
-                color: '#334155',
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '8px',
-              }}
-            >
-              <Info size={15} style={{ color: currentEpisode.color, flexShrink: 0, marginTop: '2px' }} />
-              <div>
-                <strong style={{ color: currentEpisode.color }}>{currentEpisode.seasonTag}:</strong>{' '}
-                {currentEpisode.description}
+            {/* Active Mode Banner: Live Stream vs Historical Scenarios */}
+            {currentEpisode.isLive ? (
+              <div
+                style={{
+                  marginBottom: '0.75rem',
+                  padding: '0.65rem 0.95rem',
+                  borderRadius: '8px',
+                  fontSize: '0.75rem',
+                  lineHeight: 1.45,
+                  backgroundColor: '#f0fdf4',
+                  border: '1px solid #bbf7d0',
+                  borderLeft: '4px solid #16a34a',
+                  color: '#14532d',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                  gap: '12px',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', flex: 1, minWidth: '280px' }}>
+                  <Radio size={16} style={{ color: '#16a34a', flexShrink: 0, marginTop: '2px' }} />
+                  <div>
+                    <div style={{ fontWeight: 700, color: '#15803d', marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span>LIVE TELEMETRY STREAM ACTIVE</span>
+                      <span style={{ fontSize: '9px', fontWeight: 700, padding: '1px 6px', borderRadius: '4px', backgroundColor: '#dcfce7', color: '#166534', border: '1px solid #86efac' }}>
+                        ● AUTO-RENEWING
+                      </span>
+                    </div>
+                    <div style={{ color: '#334155' }}>
+                      Ingesting continuous telemetry from CPCB / IITM SAFAR stations via OpenAQ API v3. Map grid nodes, station cards, and pinpoint estimates renew dynamically.
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ textAlign: 'right', fontSize: '11px', color: '#475569' }}>
+                    <div>Last renewed: <strong style={{ color: '#0f172a' }}>{lastSyncTime}</strong></div>
+                    <div style={{ fontSize: '10px', color: '#16a34a' }}>
+                      Next auto-poll in <strong>{countdown}s</strong>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleForceLiveSync}
+                    disabled={isSyncingLive}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '5px',
+                      padding: '6px 12px',
+                      borderRadius: '6px',
+                      border: '1px solid #16a34a',
+                      backgroundColor: '#16a34a',
+                      color: '#ffffff',
+                      fontSize: '11px',
+                      fontWeight: 600,
+                      cursor: isSyncingLive ? 'not-allowed' : 'pointer',
+                      opacity: isSyncingLive ? 0.7 : 1,
+                      boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+                    }}
+                    title="Force an instant pull from OpenAQ CAAQMS servers"
+                  >
+                    <RefreshCw size={12} className={isSyncingLive ? 'animate-spin' : ''} />
+                    <span>{isSyncingLive ? 'Syncing...' : 'Force Sync Now'}</span>
+                  </button>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div
+                style={{
+                  marginBottom: '0.75rem',
+                  padding: '0.55rem 0.85rem',
+                  borderRadius: '6px',
+                  fontSize: '0.75rem',
+                  lineHeight: 1.45,
+                  backgroundColor: `${currentEpisode.color}10`,
+                  borderLeft: `4px solid ${currentEpisode.color}`,
+                  color: '#334155',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '8px',
+                }}
+              >
+                <Info size={15} style={{ color: currentEpisode.color, flexShrink: 0, marginTop: '2px' }} />
+                <div>
+                  <strong style={{ color: currentEpisode.color }}>{currentEpisode.seasonTag}:</strong>{' '}
+                  {currentEpisode.description}
+                  <span style={{ marginLeft: '6px', fontSize: '10px', color: '#64748b', fontStyle: 'italic' }}>
+                    (Historical scenario mode active · live auto-sync paused for demonstration)
+                  </span>
+                </div>
+              </div>
+            )}
 
             {/* Spatial Heatmap Layer Controls */}
             <div

@@ -11,6 +11,7 @@ Production-ready FastAPI application layer providing:
   - Live database health probes and OpenAPI documentation
 """
 
+import asyncio
 import logging
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
@@ -24,6 +25,8 @@ from backend.app.config.settings import settings
 from backend.app.services.model_serving import model_serving
 from backend.app.api.router import api_router
 from backend.app.api.routes.health import router as health_router
+from backend.app.database.session import SessionLocal
+from backend.app.services.openaq_service import OpenAQSyncService
 
 # Configure logging
 logging.basicConfig(
@@ -33,11 +36,38 @@ logging.basicConfig(
 logger = logging.getLogger("digital_twin_api")
 
 
+async def scheduled_telemetry_sync():
+    """Runs periodic telemetry sync in the background every 15 minutes."""
+    await asyncio.sleep(25)
+    while True:
+        try:
+            logger.info("Executing scheduled OpenAQ background telemetry sync...")
+            with SessionLocal() as db:
+                res = OpenAQSyncService.sync_all_stations(db=db)
+                logger.info(
+                    f"Scheduled OpenAQ sync completed: "
+                    f"{res.get('stations_successful', 0)} stations checked, "
+                    f"{res.get('records_ingested', 0)} ingested, "
+                    f"{res.get('records_updated', 0)} updated."
+                )
+        except asyncio.CancelledError:
+            logger.info("Scheduled OpenAQ sync task cancelled.")
+            break
+        except Exception as e:
+            logger.error(f"Error during scheduled OpenAQ sync: {e}")
+
+        try:
+            await asyncio.sleep(900)
+        except asyncio.CancelledError:
+            break
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """
     Application lifespan manager.
-    Loads trained ML model artifacts and preprocessors once during startup into memory.
+    Loads trained ML model artifacts and preprocessors once during startup into memory,
+    and runs background telemetry ingestion scheduler.
     """
     logger.info("Initializing Urban Environmental Digital Twin Application...")
     try:
@@ -49,7 +79,18 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.error(f"Failed to initialize model serving artifacts during startup: {e}")
 
+    sync_task = None
+    if settings.APP_ENV != "testing":
+        sync_task = asyncio.create_task(scheduled_telemetry_sync())
+
     yield
+
+    if sync_task:
+        sync_task.cancel()
+        try:
+            await sync_task
+        except asyncio.CancelledError:
+            pass
 
     logger.info("Shutting down Urban Environmental Digital Twin Application.")
 
