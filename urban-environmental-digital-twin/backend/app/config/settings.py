@@ -6,6 +6,7 @@ application constants using Pydantic Settings (Pydantic v2).
 """
 
 import os
+from datetime import date
 from pathlib import Path
 from typing import Optional
 from pydantic import Field, computed_field
@@ -65,6 +66,20 @@ class Settings(BaseSettings):
         default=PROJECT_ROOT / "ml" / "data" / "processed" / "features" / "feature_dataset.csv",
         description="Path to processed feature store CSV"
     )
+
+    # Open-Meteo historical forecast ingestion
+    OPEN_METEO_HISTORICAL_FORECAST_API_URL: str = Field(
+        default="https://historical-forecast-api.open-meteo.com/v1/forecast",
+        description="Open-Meteo Historical Forecast API endpoint"
+    )
+    WEATHER_LOCATION_NAME: str = Field(
+        default="Pune, Maharashtra, India",
+        description="Location label for weather source records"
+    )
+    WEATHER_LATITUDE: float = Field(default=18.5196, description="Requested weather latitude")
+    WEATHER_LONGITUDE: float = Field(default=73.8554, description="Requested weather longitude")
+    WEATHER_START_DATE: date = Field(default=date(2025, 1, 1), description="Inclusive UTC start date")
+    WEATHER_END_DATE: date = Field(default=date(2026, 9, 26), description="Inclusive UTC end date")
 
     # Pagination Defaults
     DEFAULT_PAGE_LIMIT: int = Field(default=50, description="Default pagination page limit")

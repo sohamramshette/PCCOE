@@ -1,0 +1,69 @@
+{
+  "run_id": "20260928T115523846722Z",
+  "manifest_file": "ml/data/raw/weather/openmeteo/historical_forecast/manifest_20260928T115523846722Z.json",
+  "provider": "Open-Meteo Historical Forecast API",
+  "api_url": "https://historical-forecast-api.open-meteo.com/v1/forecast",
+  "request_parameters": {
+    "latitude": "18.5196",
+    "longitude": "73.8554",
+    "start_date": "2025-01-01",
+    "end_date": "2026-09-26",
+    "hourly": "temperature_2m,dew_point_2m,relative_humidity_2m,apparent_temperature,surface_pressure,cloud_cover,precipitation,wind_speed_10m,evapotranspiration,wind_gusts_10m,wind_direction_10m",
+    "timezone": "UTC"
+  },
+  "location_name": "Pune, Maharashtra, India",
+  "requested_latitude": 18.5196,
+  "requested_longitude": 73.8554,
+  "resolved_grid_latitude": 18.523726,
+  "resolved_grid_longitude": 73.86876,
+  "date_range": {
+    "start": "2025-01-01T00:00:00Z",
+    "end": "2026-09-26T23:00:00Z"
+  },
+  "record_count": 15216,
+  "columns": [
+    "datetime_utc",
+    "date_utc",
+    "latitude",
+    "longitude",
+    "grid_latitude",
+    "grid_longitude",
+    "source",
+    "location_name",
+    "temperature_2m",
+    "dew_point_2m",
+    "relative_humidity_2m",
+    "apparent_temperature",
+    "surface_pressure",
+    "cloud_cover",
+    "precipitation",
+    "wind_speed_10m",
+    "evapotranspiration",
+    "wind_gusts_10m",
+    "wind_direction_10m"
+  ],
+  "duplicate_timestamps_removed": 0,
+  "missing_timestamps": 0,
+  "missing_values_by_variable": {
+    "temperature_2m": 0,
+    "dew_point_2m": 0,
+    "relative_humidity_2m": 0,
+    "apparent_temperature": 0,
+    "surface_pressure": 0,
+    "cloud_cover": 0,
+    "precipitation": 0,
+    "wind_speed_10m": 0,
+    "evapotranspiration": 0,
+    "wind_gusts_10m": 0,
+    "wind_direction_10m": 0
+  },
+  "raw_response_sha256": "057a2602f0449e89b6b61e0f7d33110354e54f40ccee538f8dfd9ba066c68524",
+  "raw_response_file": "ml/data/raw/weather/openmeteo/historical_forecast/pune_hourly_20260928T115523846722Z.json",
+  "processed_csv_file": "ml/data/processed/weather/historical_forecast/pune_hourly_20260928T115523846722Z.csv",
+  "database": {
+    "inserted": 15216,
+    "updated": 0,
+    "upserted": 15216
+  },
+  "database_status": "complete"
+}

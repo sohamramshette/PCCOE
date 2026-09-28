@@ -2,7 +2,7 @@
 Urban Environmental Digital Twin - Database Integrity & Validation Suite
 ========================================================================
 Executes comprehensive automated verification checks on the database:
-  1. Table Schema Existence (all 10 normalized tables present)
+  1. Table Schema Existence (all 11 normalized tables present)
   2. Foreign Key Constraint Enforcement (orphaned records rejected)
   3. Unique Constraint Enforcement (duplicate station-hour rejected)
   4. NULL Preservation Integrity (missing observations stay NULL, never 0)
@@ -30,6 +30,7 @@ from backend.app.models import (
     Station,
     EnvironmentalObservation,
     WeatherReanalysis,
+    WeatherHourlyObservation,
     StationTrafficExposure,
     StationActivityExposure,
     TrafficProxy,
@@ -51,7 +52,7 @@ def run_database_validation():
 
     try:
         # Check 1: Table Existence
-        print("\n--- Check 1: Verifying All 10 Normalized Tables Exist ---")
+        print("\n--- Check 1: Verifying All 11 Normalized Tables Exist ---")
         expected_tables = {
             "stations",
             "station_traffic_exposure",
@@ -60,6 +61,7 @@ def run_database_validation():
             "model_registry",
             "environmental_observations",
             "weather_reanalysis",
+            "weather_hourly_observations",
             "model_predictions",
             "scenarios",
             "scenario_results"
@@ -245,6 +247,7 @@ def run_database_validation():
             "model_registry": db.query(ModelRegistry).count(),
             "environmental_observations": db.query(EnvironmentalObservation).count(),
             "weather_reanalysis": db.query(WeatherReanalysis).count(),
+            "weather_hourly_observations": db.query(WeatherHourlyObservation).count(),
             "model_predictions": db.query(ModelPrediction).count(),
             "scenarios": db.query(Scenario).count(),
             "scenario_results": db.query(ScenarioResult).count(),

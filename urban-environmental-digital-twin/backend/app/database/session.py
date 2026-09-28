@@ -66,8 +66,9 @@ def get_configured_engine():
         return pg_engine
     except Exception as e:
         logger.warning(
-            f"Notice: PostgreSQL connection to {target_url} failed ({e}). "
-            f"Operating in local verification mode using {settings.SQLITE_DEV_URL}."
+            "PostgreSQL connection failed (%s). Operating in local verification mode using %s.",
+            type(e).__name__,
+            settings.SQLITE_DEV_URL,
         )
         return create_engine(
             settings.SQLITE_DEV_URL,

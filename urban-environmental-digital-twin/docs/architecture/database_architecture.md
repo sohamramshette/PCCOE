@@ -18,7 +18,7 @@ The Urban Environmental Digital Twin relies on a dual-tier data architecture to 
 ```
                            +----------------------------------------+
                            |       Upstream Multi-Source Data       |
-                           | (OpenAQ, ERA5, OSM, Traffic Profile)   |
+                           | (OpenAQ, ERA5, Open-Meteo, OSM, Traffic)|
                            +-------------------+--------------------+
                                                |
                                                v
@@ -34,6 +34,7 @@ The Urban Environmental Digital Twin relies on a dual-tier data architecture to 
 |  - Lags & rolling windows     |                                |   - Station metadata              |
 |  - Cyclical encodings         |                                |   - Hourly observations           |
 |  - Offline model training     |                                |   - Hourly ERA5 reanalysis        |
+|   - Source/location weather hours |
 |  ml/data/processed/features/  |                                |   - Static spatial exposures      |
 +-------------------------------+                                |   - Traffic diurnal proxy         |
                                                                  |   - Model registry & predictions  |
@@ -54,6 +55,29 @@ The Urban Environmental Digital Twin relies on a dual-tier data architecture to 
 erDiagram
     stations ||--o{ environmental_observations : "monitors"
     stations ||--o{ weather_reanalysis : "spatially joined"
+    weather_hourly_observations {
+        bigint id PK
+        datetime datetime_utc "Unique with source and location"
+        date date_utc
+        string source
+        string location_name
+        float latitude
+        float longitude
+        float grid_latitude
+        float grid_longitude
+        float temperature_2m
+        float dew_point_2m
+        float relative_humidity_2m
+        float apparent_temperature
+        float surface_pressure
+        float cloud_cover
+        float precipitation
+        float wind_speed_10m
+        float evapotranspiration
+        float wind_gusts_10m
+        float wind_direction_10m
+        string source_response_sha256
+    }
     stations ||--|| station_traffic_exposure : "characterizes"
     stations ||--|| station_activity_exposure : "characterizes"
     stations ||--o{ model_predictions : "forecasted for"
@@ -235,6 +259,14 @@ Every column and table follows explicit ontological labeling to prevent scientif
 - **Key Columns:** `temp_c`, `humidity_pct`, `dew_point_c`, `precip_mm`, `rain_mm`, `pressure_hpa`, `wind_speed_ms`, `wind_dir_deg`, `solar_rad_wm2`, `cloud_cover_pct`, `pbl_height_m`, `grid_resolution_km` (10.0), `data_provenance` (`ECMWF_ERA5_LAND_OPEN_METEO_REANALYSIS`).
 - **Row Count:** 84,096 rows.
 
+#### Source/location-based hourly forecast observations
+- **Table:** `weather_hourly_observations` (independent of station-keyed `weather_reanalysis`).
+- **Purpose:** Preserve the finalized Open-Meteo Historical Forecast API data and requested location/provider metadata without changing the existing station dataset.
+- **Unique Constraint:** `(source, location_name, datetime_utc)`; ingestion upserts this key.
+- **Key Columns:** `datetime_utc`, `date_utc`, requested and resolved coordinates, `source`, `location_name`, all eleven weather variables, and `source_response_sha256`.
+- **Missing Values:** Weather measurements are nullable and stay `NULL`; no synthetic filling.
+- **Row Count:** 15,216 hourly records (Pune, January 1, 2025 through September 26, 2026).
+
 ### 4.4 `station_traffic_exposure` & `station_activity_exposure`
 - **Purpose:** Station-level static spatial features derived from OpenStreetMap spatial buffers.
 - **Primary Key / Foreign Key:** `station_id` references `stations(station_id)`.
@@ -277,9 +309,10 @@ Indexes have been selectively placed based strictly on anticipated API and front
 
 1. **`ix_obs_station_time` on `environmental_observations (station_id, datetime_utc)`:** Supports rapid time-range queries for station history charts (`WHERE station_id = 11613 AND datetime_utc BETWEEN ...`).
 2. **`ix_weather_station_time` on `weather_reanalysis (station_id, datetime_utc)`:** Accelerates synchronous joining with observations.
-3. **`ix_pred_station_target` on `model_predictions (station_id, target_time_utc)`:** Supports instant retrieval of forecasted curves alongside observed truth.
-4. **`ix_pred_model_target` on `model_predictions (model_id, target_time_utc)`:** Enables model comparison dashboards across Pune.
-5. **`ix_scenario_res_scen_time` on `scenario_results (scenario_id, target_time_utc)`:** Enables fast retrieval of what-if scenario impact curves.
+3. **`ix_weather_hourly_datetime` on `weather_hourly_observations (datetime_utc)`:** Supports source/location-based weather period queries.
+4. **`ix_pred_station_target` on `model_predictions (station_id, target_time_utc)`:** Supports instant retrieval of forecasted curves alongside observed truth.
+5. **`ix_pred_model_target` on `model_predictions (model_id, target_time_utc)`:** Enables model comparison dashboards across Pune.
+6. **`ix_scenario_res_scen_time` on `scenario_results (scenario_id, target_time_utc)`:** Enables fast retrieval of what-if scenario impact curves.
 
 ---
 
@@ -289,6 +322,7 @@ Alembic has been initialized and configured under `backend/alembic/` with config
 
 - **Metadata Binding:** `backend/alembic/env.py` imports `Base.metadata` from `backend.app.models`, enabling automated schema inspection and migration diffs.
 - **Initial Migration:** `backend/alembic/versions/0001_initial_schema.py` encapsulates the entire normalized schema (10 tables, all primary/foreign keys, indexes, unique constraints).
+- **Historical Forecast Migration:** `backend/alembic/versions/0003_open_meteo_weather.py` adds `weather_hourly_observations` as an independent source/location-keyed table.
 - **PostgreSQL DDL Compilation:** The migration was tested and verified offline using:
   ```bash
   python -m alembic -c alembic.ini upgrade head --sql
@@ -305,6 +339,7 @@ Three reproducible loading scripts under `backend/scripts/` populate the relatio
 | :--- | :--- | :--- | :--- | :--- |
 | `backend/scripts/load_reference_data.py` | `stations`, `station_traffic_exposure`, `station_activity_exposure`, `traffic_proxy`, `model_registry` | `master_hourly_dataset.csv`, `pune_traffic_profile.csv`, `model_comparison.csv`, `metrics.json` | 68 rows | Upsert/Merge, idempotent |
 | `backend/scripts/load_observations.py` | `environmental_observations`, `weather_reanalysis` | `ml/data/processed/integration/master_hourly_dataset.csv` | 168,192 rows (84,096 each) | Chunked batching (2,500 rows/batch), NULL preservation, explicit reanalysis labeling |
+| `ml/src/data/ingest_weather_historical_forecast.py` | `weather_hourly_observations` | Open-Meteo Historical Forecast API | 15,216 records | Retained raw JSON, validation, NULL preservation, source/location/timestamp upsert |
 | `backend/scripts/load_predictions.py` | `model_predictions` | `ml/results/test_predictions.csv`, `val_predictions.csv` | 80,892 rows | Filtered to registered baseline models, compound indexed |
 
 ---
@@ -318,8 +353,8 @@ An automated verification suite (`backend/scripts/validate_database.py`) execute
 URBAN ENVIRONMENTAL DIGITAL TWIN: DATABASE VALIDATION SUITE
 ===========================================================================
 
---- Check 1: Verifying All 10 Normalized Tables Exist ---
-  [PASSED] All 10 normalized tables verified:
+--- Check 1: Verifying All 11 Normalized Tables Exist ---
+  [PASSED] All 11 normalized tables verified:
            - environmental_observations     (19 columns)
            - model_predictions              (10 columns)
            - model_registry                 (17 columns)
@@ -330,6 +365,7 @@ URBAN ENVIRONMENTAL DIGITAL TWIN: DATABASE VALIDATION SUITE
            - stations                       (12 columns)
            - traffic_proxy                  (7 columns)
            - weather_reanalysis             (19 columns)
+           - weather_hourly_observations    (22 columns)
 
 --- Check 2: Verifying 6 Pune Monitoring Stations ---
   [PASSED] Verified all 6 official monitoring stations:
@@ -368,6 +404,7 @@ URBAN ENVIRONMENTAL DIGITAL TWIN: DATABASE VALIDATION SUITE
   model_registry                :       4 rows
   environmental_observations    :  84,096 rows
   weather_reanalysis            :  84,096 rows
+  weather_hourly_observations   :  15,216 rows
   model_predictions             :  80,892 rows
   scenarios                     :       0 rows (schema ready)
   scenario_results              :       0 rows (schema ready)
@@ -419,4 +456,3 @@ python backend/scripts/validate_database.py
 - In production PostgreSQL / Supabase, Row-Level Security (RLS) is enabled on all public tables (`ALTER TABLE ... ENABLE ROW LEVEL SECURITY`).
 - Application authentication and user access policies are separated from data ingestion and will be bound during frontend/auth integration.
 - Public read access is granted for reference metadata and observations, while administrative write access is restricted to authenticated service roles and migration scripts.
-

@@ -15,6 +15,7 @@ Status legend:
 | ---------- | -------- | ----------------- | --------- | ---- | :----: | ------------------------- | ---------- |
 | `openaq_pune` | Pollution & Meteorology | OpenAQ (CPCB / MPCB / IITM SAFAR) | Pune & PCMC, Maharashtra | **Observed** | **Selected** | PM2.5, PM10, NO2, SO2, CO, O3, Temp, Humidity, Wind | Feb 2025 – Sep 2026 (Active) / Nov 2020 – Jul 2022 (Historical) |
 | `openmeteo_pune_weather` | Meteorology | Open-Meteo / ECMWF (ERA5-Land) | Pune Metropolitan Area (7 locations) | **Reanalysis** | **Selected** | Temperature, Relative Humidity, Wind Speed, Wind Direction, Precipitation, Surface Pressure, Solar Radiation, PBL Height | Feb 2025 – Sep 2026 (14,016 contiguous hours) |
+| `openmeteo_pune_historical_forecast` | Meteorology | Open-Meteo Historical Forecast API | Pune, Maharashtra (18.5196, 73.8554) | **Hourly historical forecast** | **Selected (ingestion only; not trained)** | 11 requested hourly weather variables | Jan 1, 2025 – Sep 26, 2026 (15,216 hours) |
 | `osm_pune_road_network` | Traffic & Infrastructure | OpenStreetMap (Overpass API) | 6 Core Pune Monitoring Station Buffers (1.5 km) | **Static Road Network** | **Selected** | Total road length, major road density, distance to nearest major highway corridor, road classifications | 2025–2026 Infrastructure Snapshot |
 | `pune_traffic_proxy` | Traffic Activity | Empirical (Pune CMP / IITM SAFAR) | Pune Metropolitan Area | **Traffic Proxy** | **Selected** | Diurnal hourly traffic intensity index (0.0 to 1.0), rush hour multipliers, weekday vs weekend profiles | Hourly Diurnal Cycle (24 hrs) |
 | `osm_pune_activity_industrial` | Industrial Activity | OpenStreetMap (Overpass API) | 6 Core Station Buffers (2 km) | **Static Industrial / Industrial Proxy** | **Selected** | Industrial facility locations, factory centroids, distance to nearest industrial cluster, count within 2 km | 2025–2026 Snapshot |
@@ -23,7 +24,7 @@ Status legend:
 | `osm_pune_activity_poi` | Urban Human Activity | OpenStreetMap (Overpass API) | 6 Core Station Buffers (1.5 km) | **Activity Proxy** | **Selected** | Commercial, institutional, and transit points of interest counts and spatial density (POIs/km²) | 2025–2026 Snapshot |
 | `master_hourly_dataset` | Integrated Analytical Dataset | PCCOE Multi-Domain Pipeline | 6 Core Pune Monitoring Stations | **Unified Multi-Domain** | **Selected** | Ground-truth PM2.5, Weather Reanalysis, Traffic Road & Diurnal Proxy, Urban Activity & Land-Use Proxies (70 cols) | Feb 18, 2025 – Sep 24, 2026 (84,096 station-hours) |
 | `feature_dataset` | Model-Ready Feature Store | PCCOE Feature Engineering Pipeline | 6 Core Pune Monitoring Stations | **Derived / Model-Ready** | **Selected** | Target PM2.5 (t+1), wind vectors, ventilation index, station-wise lags, rolling stats, traffic interactions (118 cols) | Feb 18, 2025 – Sep 24, 2026 (84,096 station-hours) |
-| `urban_digital_twin_db` | Application Persistence Layer | PostgreSQL 15+ / SQLAlchemy 2.0 / Alembic | 6 Core Stations / Pune Metro | **Relational Serving** | **Selected** | 10 normalized tables: stations, hourly observations, ERA5 reanalysis, spatial exposures, diurnal traffic, model registry, predictions, what-if scenarios | 84,096 obs, 84,096 weather, 80,892 preds, 4 models |
+| `urban_digital_twin_db` | Application Persistence Layer | PostgreSQL 15+ / SQLAlchemy 2.0 / Alembic | 6 Core Stations / Pune Metro | **Relational Serving** | **Selected** | 11 normalized tables, including station-based reanalysis and source/location weather | 84,096 obs, 84,096 reanalysis, 15,216 forecast weather, 80,892 preds, 4 models |
 | `midc_mpcb_pune_industrial` | Industrial Activity | MIDC / MPCB Official Portals | Pune & PCMC Industrial Belts | **Static Industrial** | **Selected (Reference)** | Industrial estate boundaries, Red/Orange pollution category unit counts (>3,200 regional units) | Multi-year Statistics |
 | `maharera_pune_projects` | Construction Activity | MahaRERA Registration Portal | Pune & PCMC Real Estate | **Observed (Admin)** | **Rejected (MVP)** | Project approvals, sanctioned built-up area (Rejected due to lack of open bulk API; CAPTCHA portal) | 2017 to present |
 | `tomtom_pune_traffic` | Traffic | TomTom Traffic Stats (Enterprise) | Pune Urban | Probe / Observed | Rejected (MVP) | Segment speeds, congestion index | Requires commercial enterprise purchase |
@@ -98,6 +99,16 @@ Status legend:
 - **Known Limitations:**
   - Numerical model reanalysis rather than in-situ physical thermistor/anemometer readings.
   - ERA5-Land grid resolution is ~10 km; localized micro-canyon turbulence inside narrow street canyons is smoothed to regional boundary layer dynamics.
+
+#### Finalized Historical Forecast feed (separate ML ingestion dataset)
+- **Dataset Identifier:** `openmeteo_pune_historical_forecast`
+- **Provider / Endpoint:** Open-Meteo Historical Forecast API, `https://historical-forecast-api.open-meteo.com/v1/forecast`; no API key.
+- **Location / Period:** Pune (`18.5196`, `73.8554`), January 1, 2025 through September 26, 2026 inclusive, hourly UTC.
+- **Variables:** `temperature_2m`, `dew_point_2m`, `relative_humidity_2m`, `apparent_temperature`, `surface_pressure`, `cloud_cover`, `precipitation`, `wind_speed_10m`, `evapotranspiration`, `wind_gusts_10m`, `wind_direction_10m`.
+- **Storage:** Raw API JSON and run manifests in `ml/data/raw/weather/openmeteo/historical_forecast/`; processed snapshots in `ml/data/processed/weather/historical_forecast/`; SQLAlchemy table `weather_hourly_observations`.
+- **Ingestion Script:** `ml/src/data/ingest_weather_historical_forecast.py`
+- **Details and rerun instructions:** [weather_historical_forecast.md](./weather_historical_forecast.md)
+- This location-based feed is stored separately from the existing station-keyed `weather_reanalysis` records. It is not used to train any model in this ingestion stage.
 
 ---
 
@@ -252,5 +263,4 @@ Status legend:
 1. **Pristine Raw Preservation:** Raw datasets in `ml/data/raw/` must never be altered or imputed.
 2. **Classification Rule:** Datasets must strictly retain their observed vs modeled classification. Proxy variables (e.g. traffic congestion indices) must not be termed observed traffic volume.
 3. **Selection Criteria:** Datasets are upgraded from *Candidate* to *Selected* only after successful acquisition, schema verification, and generation of a data quality report.
-
 

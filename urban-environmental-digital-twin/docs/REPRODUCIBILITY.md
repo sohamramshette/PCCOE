@@ -113,7 +113,16 @@ python ml/src/data/ingest_weather.py
 - Queries the Open-Meteo Historical Weather API across the 7 geographic locations.
 - Writes raw records to `ml/data/raw/weather/openmeteo/` and standardized hourly records to `ml/data/processed/weather/weather_hourly_processed.csv`.
 
-#### 2.3 Ingest OpenStreetMap Road Network & Diurnal Traffic Proxy:
+#### 2.3 Ingest finalized Pune Historical Forecast weather:
+```powershell
+python -m alembic -c alembic.ini upgrade head
+python ml/src/data/ingest_weather_historical_forecast.py
+```
+- Fetches hourly data for Pune (`18.5196`, `73.8554`) from January 1, 2025 through September 26, 2026 using the Open-Meteo Historical Forecast API.
+- Stores immutable raw responses and per-run manifests in `ml/data/raw/weather/openmeteo/historical_forecast/`, processed snapshots in `ml/data/processed/weather/historical_forecast/`, and idempotently upserts records into `weather_hourly_observations`.
+- Details and configuration: [Pune Historical Forecast weather](dataset/weather_historical_forecast.md).
+
+#### 2.4 Ingest OpenStreetMap Road Network & Diurnal Traffic Proxy:
 ```bash
 python ml/src/data/ingest_traffic.py
 ```
@@ -121,7 +130,7 @@ python ml/src/data/ingest_traffic.py
 - Combines with Pune Comprehensive Mobility Plan (CMP) diurnal curves.
 - Outputs `ml/data/processed/traffic/station_road_features.csv` and `traffic_hourly_proxy.csv`.
 
-#### 2.4 Ingest Urban Activity, Industrial, Construction & Land Use:
+#### 2.5 Ingest Urban Activity, Industrial, Construction & Land Use:
 ```bash
 python ml/src/data/ingest_activity.py
 ```

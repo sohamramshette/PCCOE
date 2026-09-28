@@ -8,6 +8,7 @@ from backend.app.database.session import Base
 from backend.app.models.station import Station
 from backend.app.models.observation import EnvironmentalObservation
 from backend.app.models.weather import WeatherReanalysis
+from backend.app.models.weather_hourly_observation import WeatherHourlyObservation
 from backend.app.models.spatial import StationTrafficExposure, StationActivityExposure
 from backend.app.models.traffic import TrafficProxy
 from backend.app.models.model_registry import ModelRegistry
@@ -19,6 +20,7 @@ __all__ = [
     "Station",
     "EnvironmentalObservation",
     "WeatherReanalysis",
+    "WeatherHourlyObservation",
     "StationTrafficExposure",
     "StationActivityExposure",
     "TrafficProxy",

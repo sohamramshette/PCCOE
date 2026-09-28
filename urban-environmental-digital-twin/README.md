@@ -40,7 +40,7 @@ The **Urban Environmental Digital Twin** addresses this challenge for the **Pune
 | **Phase 5** | Data Integration & Master Dataset Generation | **Completed** | 84,096 station-hours, 70 columns, 0 duplicate keys |
 | **Phase 6** | ML Feature Engineering & Digital Twin Transformation | **Completed** | 118 engineered features, 5 time-series leakage checks |
 | **Phase 7** | Baseline ML Model Training & Evaluation | **Completed** | 4 models evaluated, Test MAE $4.05$--$4.18\,\mu\text{g/m}^3$ |
-| **Phase 8** | Database Architecture & Persistence Layer | **Completed** | 10 tables, Alembic migrations, PostgreSQL + local SQLite |
+| **Phase 8** | Database Architecture & Persistence Layer | **Completed** | 11 tables, Alembic migrations, PostgreSQL + local SQLite |
 | **Phase 9** | FastAPI Backend & Real-Time Model Serving API | **Completed** | 29/29 tests passed, in-memory model serving |
 | **Phase 10** | What-If / Counterfactual Simulation Engine | **Completed** | 50/50 tests passed, counterfactual API verified |
 | **Phase 10.5** | Repository Consistency & Reproducibility Cleanup | **Completed** | Docs, schemas, provenance, and tests synchronized |
