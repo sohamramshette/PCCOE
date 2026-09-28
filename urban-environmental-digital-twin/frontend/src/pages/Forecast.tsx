@@ -317,6 +317,41 @@ export const Forecast: React.FC = () => {
               </div>
             </div>
           )}
+
+          {forecast.feature_attributions && forecast.feature_attributions.length > 0 && (
+            <div className="card">
+              <div className="card-header">
+                <div>
+                  <div className="card-title">
+                    <TrendingUp size={18} color="var(--accent)" />
+                    <span>Top SHAP Drivers for This Forecast</span>
+                  </div>
+                  <div className="card-subtitle">
+                    Contribution values show which built features pushed the prediction up or down for this hour
+                  </div>
+                </div>
+                <span className="badge badge-reanalysis">Explainability</span>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.9rem' }}>
+                {forecast.feature_attributions.map((item, index) => (
+                  <div key={`${item.feature}-${index}`} style={{ background: '#ffffff', border: '1px solid var(--border-subtle)', borderRadius: '8px', padding: '0.9rem 1rem' }}>
+                    <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                      {item.feature}
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.55rem' }}>
+                      <span style={{ fontWeight: 700, fontSize: '1.05rem', color: item.direction === 'positive' ? '#b91c1c' : '#0f766e' }}>
+                        {item.direction === 'positive' ? '+' : '-'}{formatNumber(Math.abs(item.contribution), 3)}
+                      </span>
+                      <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                        {item.direction === 'positive' ? 'pushes up' : 'pushes down'}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       ) : (
         <div className="card" style={{ textAlign: 'center', padding: '3rem 1.5rem' }}>

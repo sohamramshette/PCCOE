@@ -80,3 +80,30 @@ def test_forecast_unavailable_future_data(client):
     assert detail["station_id"] == 11613
     assert "unavailable" in detail["detail"].lower()
     assert detail["latest_available_data_utc"] is not None
+
+
+def test_forecast_shap_contributions_present(client):
+    """Verifies that the forecast response includes a ranked SHAP-style explanation for the prediction."""
+    response = client.get("/api/v1/stations/11613/forecast")
+    assert response.status_code == status.HTTP_200_OK
+    data = response.json()
+
+    assert "feature_attributions" in data
+    assert isinstance(data["feature_attributions"], list)
+    assert len(data["feature_attributions"]) > 0
+
+    first = data["feature_attributions"][0]
+    assert "feature" in first
+    assert "contribution" in first
+    assert "direction" in first
+
+
+def test_forecast_shap_contributions_are_meaningful(client):
+    """SHAP values should reflect real feature influence, not all-zero placeholders."""
+    response = client.get("/api/v1/stations/11613/forecast")
+    assert response.status_code == status.HTTP_200_OK
+    data = response.json()
+
+    contributions = [abs(item["contribution"]) for item in data["feature_attributions"]]
+    assert contributions, "No feature attribution values generated"
+    assert max(contributions) > 0.001, "SHAP contributions are collapsing to zero instead of real feature influence"

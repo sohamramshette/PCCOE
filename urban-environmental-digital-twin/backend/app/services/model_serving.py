@@ -13,6 +13,7 @@ from typing import Dict, Any, List, Optional
 import joblib
 import numpy as np
 import pandas as pd
+import shap
 from backend.app.config.settings import settings
 
 logger = logging.getLogger("model_serving")
@@ -137,6 +138,81 @@ class ModelServingManager:
         # Physical boundary: PM2.5 concentration cannot be negative
         bounded_pred = max(0.0, prediction_val)
         return round(bounded_pred, 2)
+
+    def explain_prediction(self, model_id: str, feature_df: pd.DataFrame) -> List[Dict[str, Any]]:
+        """Returns the top SHAP-style feature contributions for a single forecast instance."""
+        if model_id == "persistence_baseline":
+            return []
+
+        if not self.is_model_available(model_id):
+            raise ValueError(f"Requested model '{model_id}' is not loaded in model serving registry.")
+
+        if self.preprocessor is None:
+            return []
+
+        missing_feats = [col for col in self.core_features if col not in feature_df.columns]
+        if missing_feats:
+            return []
+
+        try:
+            model = self.loaded_models[model_id]
+            X_proc = self.preprocessor.transform(feature_df[self.core_features])
+            X_proc_dense = X_proc.toarray() if hasattr(X_proc, "toarray") else X_proc
+
+            # Tree-based ensembles need a tree-aware explainer. For HistGradientBoosting
+            # and forest regressors, the generic SHAP Explainer uses the same single-row
+            # sample as both background and input, which collapses contributions to zero.
+            model_name = type(model).__name__.lower()
+            tree_model = (
+                hasattr(model, "estimators_")
+                or hasattr(model, "tree_")
+                or "forest" in model_name
+                or "tree" in model_name
+                or "gradientboosting" in model_name
+                or "histgradientboosting" in model_name
+                or "randomforest" in model_name
+                or "decisiontree" in model_name
+            )
+
+            if tree_model:
+                shap_values = shap.TreeExplainer(model).shap_values(X_proc_dense)
+                if isinstance(shap_values, list):
+                    shap_values = shap_values[0]
+                values = np.asarray(shap_values)
+            else:
+                explainer = shap.Explainer(model, X_proc_dense)
+                shap_values = explainer(X_proc_dense, check_additivity=False)
+                values = shap_values.values
+
+            if values is None:
+                return []
+
+            values_arr = np.asarray(values)
+            if values_arr.ndim == 0:
+                return []
+            row_contrib = values_arr[0] if values_arr.ndim > 1 else values_arr
+            if row_contrib.size == 0:
+                return []
+
+            feature_names = list(self.preprocessor.get_feature_names_out())
+            max_feature_count = min(len(feature_names), row_contrib.shape[0])
+            attributions = []
+            for index in range(max_feature_count):
+                feature_name = feature_names[index]
+                contribution = float(row_contrib[index])
+                if np.isnan(contribution):
+                    continue
+                attributions.append({
+                    "feature": str(feature_name),
+                    "contribution": round(contribution, 4),
+                    "direction": "positive" if contribution >= 0 else "negative",
+                })
+
+            attributions.sort(key=lambda item: abs(item["contribution"]), reverse=True)
+            return attributions[:8]
+        except Exception as exc:
+            logger.warning(f"Unable to compute SHAP feature attributions for model '{model_id}': {exc}")
+            return []
 
 
 model_serving = ModelServingManager.get_instance()

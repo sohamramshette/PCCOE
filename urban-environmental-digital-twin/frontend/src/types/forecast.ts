@@ -12,6 +12,12 @@ export interface InputFeaturesSummary {
   [key: string]: number | string | null | undefined;
 }
 
+export interface FeatureAttribution {
+  feature: string;
+  contribution: number;
+  direction: 'positive' | 'negative';
+}
+
 export interface ForecastResponse {
   station_id: number;
   station_name: string;
@@ -24,6 +30,7 @@ export interface ForecastResponse {
   unit: string;
   data_availability_status: string;
   input_features_summary?: InputFeaturesSummary | null;
+  feature_attributions?: FeatureAttribution[];
 }
 
 export interface ForecastUnavailableResponse {

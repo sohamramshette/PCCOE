@@ -410,6 +410,7 @@ class ForecastService:
 
         # Execute prediction through in-memory cached model
         predicted_pm25 = model_serving.predict(target_model_id, feat_df)
+        feature_attributions = model_serving.explain_prediction(target_model_id, feat_df)
 
         return {
             "station_id": station.station_id,
@@ -428,5 +429,6 @@ class ForecastService:
                 "wind_speed_ms": round(float(feat_df["wind_speed_ms"].iloc[0]), 2) if pd.notna(feat_df["wind_speed_ms"].iloc[0]) else None,
                 "ventilation_index": round(float(feat_df["ventilation_index"].iloc[0]), 2) if pd.notna(feat_df["ventilation_index"].iloc[0]) else None,
                 "traffic_proxy_index": round(float(feat_df["traffic_proxy_index"].iloc[0]), 3) if pd.notna(feat_df["traffic_proxy_index"].iloc[0]) else None
-            }
+            },
+            "feature_attributions": feature_attributions
         }

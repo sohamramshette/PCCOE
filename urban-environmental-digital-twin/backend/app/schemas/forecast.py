@@ -27,6 +27,10 @@ class ForecastResponse(BaseModel):
         default=None,
         description="Key contemporaneous features used (pm25_t, temp_c, wind_speed_ms, ventilation_index, traffic_proxy_index)"
     )
+    feature_attributions: list[Dict[str, Any]] = Field(
+        default_factory=list,
+        description="Top SHAP-style feature contributions driving the prediction for this forecast instance"
+    )
 
 
 class ForecastUnavailableResponse(BaseModel):
