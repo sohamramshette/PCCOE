@@ -54,10 +54,10 @@ def get_configured_engine():
     try:
         pg_engine = create_engine(
             target_url,
-            pool_size=10,
-            max_overflow=20,
-            pool_recycle=3600,
-            pool_timeout=3,
+            pool_size=5,
+            max_overflow=5,
+            pool_recycle=300,
+            pool_timeout=15,
             pool_pre_ping=True
         )
         # Probe connection

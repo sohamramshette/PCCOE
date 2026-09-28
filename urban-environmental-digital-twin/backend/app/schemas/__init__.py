@@ -17,6 +17,7 @@ from backend.app.schemas.scenario import (
     ScenarioResultsListResponse, FeatureAuditItem
 )
 from backend.app.schemas.forecast import ForecastResponse, ForecastUnavailableResponse
+from backend.app.schemas.llm import ForecastExplanationResponse, ScenarioExplanationResponse
 
 __all__ = [
     "PaginatedResponse", "ErrorResponse", "HealthResponse",
@@ -32,4 +33,5 @@ __all__ = [
     "ScenarioRunResponse", "ScenarioResultResponse", "ScenarioListResponse",
     "ScenarioResultsListResponse", "FeatureAuditItem",
     "ForecastResponse", "ForecastUnavailableResponse",
+    "ForecastExplanationResponse", "ScenarioExplanationResponse",
 ]

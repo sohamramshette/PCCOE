@@ -1,5 +1,6 @@
 import { apiClient } from './client';
 import { ForecastResponse } from '../types/forecast';
+import { ForecastExplanation } from '../types/llm';
 
 export interface GetForecastParams {
   timestamp?: string;
@@ -14,3 +15,14 @@ export async function getForecast(
     params,
   });
 }
+
+export async function getForecastExplanation(
+  stationId: number,
+  params: GetForecastParams = {}
+): Promise<ForecastExplanation> {
+  return apiClient<ForecastExplanation>(`/api/v1/stations/${stationId}/forecast/explain`, {
+    params,
+    timeoutMs: 45000,
+  });
+}
+

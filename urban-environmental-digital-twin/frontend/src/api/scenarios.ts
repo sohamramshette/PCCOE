@@ -6,6 +6,7 @@ import {
   ScenarioListResponse,
   ScenarioResultsListResponse,
 } from '../types/scenario';
+import { ScenarioExplanation } from '../types/llm';
 
 export async function createScenario(data: ScenarioCreateRequest): Promise<ScenarioResponse> {
   return apiClient<ScenarioResponse>('/api/v1/scenarios', {
@@ -38,3 +39,11 @@ export async function getScenarioResults(
     params,
   });
 }
+
+export async function explainScenario(scenarioId: string): Promise<ScenarioExplanation> {
+  return apiClient<ScenarioExplanation>(`/api/v1/scenarios/${scenarioId}/explain`, {
+    method: 'POST',
+    timeoutMs: 45000,
+  });
+}
+

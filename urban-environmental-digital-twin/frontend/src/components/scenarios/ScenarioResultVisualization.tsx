@@ -22,6 +22,7 @@ import { ProvenanceBadge } from '../common/ProvenanceBadge';
 import { LoadingSpinner } from '../common/LoadingSpinner';
 import { ScenarioComparisonChart } from '../charts/ScenarioComparisonChart';
 import { FeatureAuditTable } from './FeatureAuditTable';
+import { AiScenarioAnalysis } from './AiScenarioAnalysis';
 import { formatNumber, formatDateTime } from '../../utils/formatters';
 
 interface ScenarioResultVisualizationProps {
@@ -289,6 +290,14 @@ export const ScenarioResultVisualization: React.FC<ScenarioResultVisualizationPr
             stationName={stationName}
           />
         </div>
+
+        {/* AI Policy Impact Brief & Civic Recommendations */}
+        {(scenario?.scenario_id || activeResult?.scenario_id) && (
+          <AiScenarioAnalysis
+            scenarioId={scenario?.scenario_id || activeResult?.scenario_id || ''}
+            isSimulated={Boolean(activeResult || latestPastResult)}
+          />
+        )}
 
         {/* 5. Intervention Explanation & Core Feature Transformations */}
         <div style={{ backgroundColor: 'var(--bg-surface)', padding: '1.25rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)' }}>

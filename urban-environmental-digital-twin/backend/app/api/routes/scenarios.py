@@ -24,6 +24,8 @@ from backend.app.schemas.scenario import (
     ScenarioResultsListResponse,
 )
 from backend.app.schemas.forecast import ForecastUnavailableResponse
+from backend.app.schemas.llm import ScenarioExplanationResponse
+from backend.app.services.llm_service import LLMExplanationService
 
 router = APIRouter(prefix="/scenarios", tags=["What-If Scenarios & Interventions"])
 
@@ -200,3 +202,35 @@ def get_scenario_results(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=str(exc)
         )
+
+
+@router.post(
+    "/{scenario_id}/explain",
+    response_model=ScenarioExplanationResponse,
+    responses={
+        200: {"model": ScenarioExplanationResponse, "description": "AI-generated narrative policy analysis."},
+        400: {"description": "Scenario has not been run or simulation failed."},
+        404: {"description": "Scenario not found."}
+    },
+    summary="Get AI Policy Explanation for Scenario Run",
+    description=(
+        "Generates an AI-synthesized policy impact brief and recommendations "
+        "for a simulated What-If counterfactual scenario using Google Gemini."
+    )
+)
+def explain_scenario_result(
+    scenario_id: str,
+    db: Session = Depends(get_db)
+):
+    try:
+        explanation = LLMExplanationService.explain_scenario(
+            db=db,
+            scenario_id=scenario_id
+        )
+        return explanation
+    except ValueError as ve:
+        msg = str(ve)
+        if "not exist" in msg or "not found" in msg:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=msg)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=msg)
+

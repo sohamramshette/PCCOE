@@ -7,7 +7,7 @@ Enforces strict checks ensuring future/unavailable data is not fabricated.
 """
 
 from datetime import datetime, timezone, timedelta
-from typing import Optional, Dict, Any, Tuple
+from typing import Optional, Dict, Any, Tuple, List
 import math
 import numpy as np
 import pandas as pd

@@ -17,6 +17,7 @@ import { LoadingSpinner } from '../components/common/LoadingSpinner';
 import { ErrorDisplay } from '../components/common/ErrorDisplay';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';
 import { AqiPill } from '../components/common/AqiPill';
+import { AiForecastAdvisory } from '../components/forecast/AiForecastAdvisory';
 import { formatNumber, formatDateTime, formatDateTimeIST } from '../utils/formatters';
 
 export const Forecast: React.FC = () => {
@@ -236,6 +237,9 @@ export const Forecast: React.FC = () => {
               </div>
             </div>
           </div>
+
+          {/* AI Atmospheric & Public Health Advisory (Gemini Powered) */}
+          <AiForecastAdvisory stationId={forecast.station_id} modelId={selectedModelId} />
 
           {/* Model Features Extracted at Inference */}
           {forecast.input_features_summary && (

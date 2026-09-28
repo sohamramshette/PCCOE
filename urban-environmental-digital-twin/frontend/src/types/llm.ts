@@ -1,0 +1,37 @@
+/**
+ * Urban Environmental Digital Twin - AI / LLM Explanation Types
+ * Matches backend/app/schemas/llm.py
+ */
+
+export interface ForecastExplanation {
+  station_id: number;
+  station_name: string;
+  prediction_time_utc: string;
+  target_time_utc: string;
+  predicted_pm25: number;
+  aqi_category: string;
+  executive_summary: string;
+  atmospheric_drivers: string[];
+  health_advisory: string;
+  recommended_actions: string[];
+  epistemological_note: string;
+  generated_at: string;
+}
+
+export interface ScenarioExplanation {
+  scenario_id: string;
+  scenario_name: string;
+  station_id: number;
+  station_name: string;
+  baseline_pm25: number;
+  counterfactual_pm25: number;
+  delta_pm25: number;
+  percent_change: number;
+  intervention_summary: string;
+  executive_summary: string;
+  mechanism_explanation: string;
+  policy_effectiveness: 'HIGH' | 'MODERATE' | 'LOW' | 'CONDITIONAL' | string;
+  municipal_recommendations: string[];
+  epistemological_note: string;
+  generated_at: string;
+}

@@ -25,7 +25,7 @@ interface RequestOptions extends RequestInit {
 }
 
 export async function apiClient<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
-  const { timeoutMs = 15000, params, ...customConfig } = options;
+  const { timeoutMs = 30000, params, ...customConfig } = options;
 
   let url = `${API_BASE_URL}${endpoint}`;
   if (params) {
@@ -84,7 +84,7 @@ export async function apiClient<T>(endpoint: string, options: RequestOptions = {
       throw error;
     }
     if (error instanceof DOMException && error.name === 'AbortError') {
-      throw new ApiError(408, 'REQUEST_TIMEOUT', 'Request timed out after 15 seconds.');
+      throw new ApiError(408, 'REQUEST_TIMEOUT', `Request timed out after ${Math.round(timeoutMs / 1000)} seconds.`);
     }
     const message = error instanceof Error ? error.message : 'Network request failed';
     throw new ApiError(0, 'NETWORK_ERROR', `Unable to connect to backend at ${API_BASE_URL} (${message}). Ensure FastAPI is running.`);

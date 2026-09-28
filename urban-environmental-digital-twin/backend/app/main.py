@@ -76,9 +76,20 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+def _get_cors_headers(request: Request) -> dict:
+    origin = request.headers.get("origin")
+    if origin and (origin in settings.cors_origins or "*" in settings.cors_origins):
+        return {
+            "Access-Control-Allow-Origin": origin,
+            "Access-Control-Allow-Credentials": "true",
+        }
+    return {}
+
 
 # ---------------------------------------------------------------------------
 # Standardized Error Handling
@@ -92,7 +103,8 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
             "detail": exc.errors(),
             "code": "VALIDATION_ERROR",
             "timestamp": datetime.now(timezone.utc).isoformat()
-        }
+        },
+        headers=_get_cors_headers(request),
     )
 
 
@@ -105,7 +117,8 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException):
             "detail": exc.detail,
             "code": f"HTTP_{exc.status_code}",
             "timestamp": datetime.now(timezone.utc).isoformat()
-        }
+        },
+        headers=_get_cors_headers(request),
     )
 
 
@@ -119,7 +132,8 @@ async def generic_exception_handler(request: Request, exc: Exception):
             "detail": "An unexpected internal server error occurred. Please consult system logs.",
             "code": "INTERNAL_SERVER_ERROR",
             "timestamp": datetime.now(timezone.utc).isoformat()
-        }
+        },
+        headers=_get_cors_headers(request),
     )
 
 
