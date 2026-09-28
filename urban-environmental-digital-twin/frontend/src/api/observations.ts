@@ -6,6 +6,8 @@ export interface GetObservationsParams {
   end?: string;
   limit?: number;
   offset?: number;
+  order?: 'asc' | 'desc';
+  valid_pm25_only?: boolean;
 }
 
 export async function getObservations(

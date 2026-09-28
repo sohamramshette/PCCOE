@@ -63,5 +63,6 @@ def interpolate_coordinate(
         db=db,
         lat=request.latitude,
         lon=request.longitude,
-        power=request.power
+        power=request.power,
+        target_timestamp=request.timestamp
     )

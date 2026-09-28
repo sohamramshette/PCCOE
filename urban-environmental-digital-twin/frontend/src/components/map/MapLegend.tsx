@@ -107,6 +107,40 @@ export const MapLegend: React.FC<MapLegendProps> = ({
         </div>
       </div>
 
+      {/* CPCB NAQI Heatmap Color Legend */}
+      <div style={{ marginTop: '0.65rem', paddingTop: '0.65rem', borderTop: '1px solid #e2e8f0' }}>
+        <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#334155', marginBottom: '6px', display: 'flex', justifyContent: 'space-between' }}>
+          <span>CPCB NAQI Breakpoints (PM2.5)</span>
+          <span style={{ fontSize: '9px', color: '#64748b' }}>µg/m³</span>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '4px', fontSize: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <div style={{ width: 9, height: 9, borderRadius: '50%', backgroundColor: '#00E400', flexShrink: 0 }} />
+            <span style={{ color: '#166534', fontWeight: 600 }}>Good (0–30)</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <div style={{ width: 9, height: 9, borderRadius: '50%', backgroundColor: '#92D050', flexShrink: 0 }} />
+            <span style={{ color: '#3f6212', fontWeight: 600 }}>Satisfactory (31–60)</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <div style={{ width: 9, height: 9, borderRadius: '50%', backgroundColor: '#FFFF00', flexShrink: 0, border: '1px solid #ca8a04' }} />
+            <span style={{ color: '#854d0e', fontWeight: 600 }}>Moderate (61–90)</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <div style={{ width: 9, height: 9, borderRadius: '50%', backgroundColor: '#FF7E00', flexShrink: 0 }} />
+            <span style={{ color: '#9a3412', fontWeight: 600 }}>Poor (91–120)</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <div style={{ width: 9, height: 9, borderRadius: '50%', backgroundColor: '#FF0000', flexShrink: 0 }} />
+            <span style={{ color: '#991b1b', fontWeight: 600 }}>Very Poor (121–250)</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <div style={{ width: 9, height: 9, borderRadius: '50%', backgroundColor: '#7E0023', flexShrink: 0 }} />
+            <span style={{ color: '#581c87', fontWeight: 600 }}>Severe (&gt;250)</span>
+          </div>
+        </div>
+      </div>
+
       <div className="map-legend-footer">
         <Info size={12} />
         <span>OSM Basemap &copy; OpenStreetMap contributors</span>

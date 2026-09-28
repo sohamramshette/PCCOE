@@ -200,12 +200,13 @@ class SpatialInterpolationService:
         db: Session,
         lat: float,
         lon: float,
-        power: float = 2.0
+        power: float = 2.0,
+        target_timestamp: Optional[datetime] = None
     ) -> Dict[str, Any]:
         """
         Interpolates PM2.5 concentration for an arbitrary single coordinate (e.g. map click).
         """
-        readings = cls.get_latest_station_readings(db)
+        readings = cls.get_latest_station_readings(db, target_timestamp)
         if not readings:
             tier, color = get_naqi_tier_and_color(45.0)
             return {

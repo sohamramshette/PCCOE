@@ -7,6 +7,8 @@ import {
   Flame,
   Crosshair,
   RotateCcw,
+  Calendar,
+  Info,
 } from 'lucide-react';
 
 import { getStations } from '../api/stations';
@@ -23,10 +25,51 @@ import { ErrorDisplay } from '../components/common/ErrorDisplay';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';
 import { formatNumber } from '../utils/formatters';
 
+interface AtmosphericEpisode {
+  id: string;
+  name: string;
+  badge: string;
+  color: string;
+  timestamp?: string;
+  description: string;
+  seasonTag: string;
+}
+
+const ATMOSPHERIC_EPISODES: AtmosphericEpisode[] = [
+  {
+    id: 'monsoon_clean',
+    name: 'Latest / Post-Monsoon Clean',
+    badge: 'GOOD / SATISFACTORY',
+    color: '#059669',
+    timestamp: undefined, // uses latest in DB (Sep 24, 2026)
+    description: 'Monsoon precipitation scavenging has washed particulate matter out of the troposphere. Station PM2.5 ranges from 1.1 to 32.4 µg/m³ (all CPCB Good/Satisfactory green dots).',
+    seasonTag: 'Sep 2026 · Post-Monsoon Clean Air'
+  },
+  {
+    id: 'winter_moderate',
+    name: 'Winter Traffic Morning',
+    badge: 'MODERATE / POOR',
+    color: '#ca8a04',
+    timestamp: '2026-01-06T07:00:00Z',
+    description: 'Morning commute emissions under moderate winter cooling. Station PM2.5 ranges from 35.4 to 101.5 µg/m³ across Pune (Yellow & Orange plumes).',
+    seasonTag: 'Jan 06, 2026 · Morning Commute Peak'
+  },
+  {
+    id: 'winter_smog',
+    name: 'Winter Smog Inversion',
+    badge: 'VERY POOR / SEVERE',
+    color: '#dc2626',
+    timestamp: '2025-12-26T16:00:00Z',
+    description: 'Ground-level thermal inversion traps vehicular & industrial emissions. PM2.5 spikes up to 570.8 µg/m³ in Hadapsar (Red & Maroon hotspots).',
+    seasonTag: 'Dec 26, 2025 · Winter Inversion Smog'
+  }
+];
+
 export const DigitalTwinMap: React.FC = () => {
   const [stations, setStations] = useState<Station[]>([]);
   const [selectedStationId, setSelectedStationId] = useState<number | null>(null);
   const [latestObservations, setLatestObservations] = useState<Record<number, ObservationItem | null>>({});
+  const [selectedEpisodeId, setSelectedEpisodeId] = useState<string>('monsoon_clean');
   
   // Layer controls
   const [showTrafficBuffer, setShowTrafficBuffer] = useState<boolean>(true);
@@ -43,19 +86,21 @@ export const DigitalTwinMap: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const loadHeatmap = useCallback(async (powerVal: number = idwPower) => {
+  const currentEpisode = ATMOSPHERIC_EPISODES.find((e) => e.id === selectedEpisodeId) || ATMOSPHERIC_EPISODES[0];
+
+  const loadHeatmap = useCallback(async (powerVal: number = idwPower, timestamp?: string) => {
     try {
       setHeatmapLoading(true);
-      const res = await getSpatialInterpolation({ power: powerVal });
+      const res = await getSpatialInterpolation({ power: powerVal, timestamp });
       setHeatmapGrid(res.grid_points);
     } catch (err: unknown) {
       console.error('Failed to load spatial interpolation heatmap:', err);
     } finally {
       setHeatmapLoading(false);
     }
-  }, [idwPower]);
+  }, []);
 
-  const loadData = async () => {
+  const loadData = async (episodeId: string = selectedEpisodeId) => {
     try {
       setLoading(true);
       setError(null);
@@ -68,12 +113,19 @@ export const DigitalTwinMap: React.FC = () => {
         setSelectedStationId(stationList[0].station_id);
       }
 
-      // Fetch latest observation for each station in parallel
+      const ep = ATMOSPHERIC_EPISODES.find((e) => e.id === episodeId) || ATMOSPHERIC_EPISODES[0];
+
+      // Fetch observation for each station in parallel (order='desc' and valid_pm25_only=true to get latest valid measurement)
       const obsMap: Record<number, ObservationItem | null> = {};
       await Promise.all(
         stationList.map(async (st) => {
           try {
-            const obsRes = await getObservations(st.station_id, { limit: 1 });
+            const obsRes = await getObservations(st.station_id, {
+              limit: 1,
+              order: 'desc',
+              valid_pm25_only: true,
+              ...(ep.timestamp ? { end: ep.timestamp } : {})
+            });
             obsMap[st.station_id] = obsRes.items.length > 0 ? obsRes.items[0] : null;
           } catch {
             obsMap[st.station_id] = null;
@@ -83,7 +135,7 @@ export const DigitalTwinMap: React.FC = () => {
       setLatestObservations(obsMap);
 
       // Load spatial interpolation grid
-      await loadHeatmap(idwPower);
+      await loadHeatmap(idwPower, ep.timestamp);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to load spatial digital twin data.');
     } finally {
@@ -98,7 +150,7 @@ export const DigitalTwinMap: React.FC = () => {
   const handleMapClick = async (lat: number, lon: number) => {
     try {
       setInspectingCoord(true);
-      const res = await interpolateCoordinate(lat, lon, idwPower);
+      const res = await interpolateCoordinate(lat, lon, idwPower, currentEpisode.timestamp);
       setCustomInspection(res);
     } catch (err) {
       console.error('Coordinate interpolation failed:', err);
@@ -109,14 +161,41 @@ export const DigitalTwinMap: React.FC = () => {
 
   const handlePowerChange = (newPower: number) => {
     setIdwPower(newPower);
-    loadHeatmap(newPower);
+    loadHeatmap(newPower, currentEpisode.timestamp);
+  };
+
+  const handleEpisodeChange = async (episodeId: string) => {
+    setSelectedEpisodeId(episodeId);
+    setCustomInspection(null);
+    const ep = ATMOSPHERIC_EPISODES.find((e) => e.id === episodeId) || ATMOSPHERIC_EPISODES[0];
+    
+    // Load heatmap for episode
+    await loadHeatmap(idwPower, ep.timestamp);
+
+    // Refresh station readings for this episode
+    const obsMap: Record<number, ObservationItem | null> = {};
+    await Promise.all(
+      stations.map(async (st) => {
+        try {
+          const obsRes = await getObservations(st.station_id, {
+            limit: 1,
+            order: 'desc',
+            valid_pm25_only: true,
+            ...(ep.timestamp ? { end: ep.timestamp } : {})
+          });
+          obsMap[st.station_id] = obsRes.items.length > 0 ? obsRes.items[0] : null;
+        } catch {
+          obsMap[st.station_id] = null;
+        }
+      })
+    );
+    setLatestObservations(obsMap);
   };
 
   const handleSyncSuccess = () => {
     // Refresh both observations and continuous heatmap
     loadData();
   };
-
 
   const selectedStation = stations.find((s) => s.station_id === selectedStationId) || null;
 
@@ -191,6 +270,93 @@ export const DigitalTwinMap: React.FC = () => {
         <div className="digital-twin-grid">
           {/* Left Column: Interactive Map */}
           <div className="map-column">
+            {/* Atmospheric Episode / Season Selector */}
+            <div
+              className="card"
+              style={{
+                marginBottom: '0.75rem',
+                padding: '0.65rem 0.9rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+                gap: '0.6rem',
+                background: '#ffffff',
+                border: '1px solid #e2e8f0',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Calendar size={15} className="text-primary" />
+                <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#1e293b' }}>
+                  Seasonal Pollution Episode:
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                {ATMOSPHERIC_EPISODES.map((ep) => {
+                  const isSelected = ep.id === selectedEpisodeId;
+                  return (
+                    <button
+                      key={ep.id}
+                      onClick={() => handleEpisodeChange(ep.id)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        padding: '4px 10px',
+                        borderRadius: '6px',
+                        fontSize: '11px',
+                        fontWeight: isSelected ? 700 : 500,
+                        cursor: 'pointer',
+                        border: isSelected ? `2px solid ${ep.color}` : '1px solid #cbd5e1',
+                        backgroundColor: isSelected ? `${ep.color}15` : '#ffffff',
+                        color: isSelected ? ep.color : '#475569',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: ep.color }} />
+                      <span>{ep.name}</span>
+                      <span
+                        style={{
+                          fontSize: '9px',
+                          fontWeight: 700,
+                          padding: '1px 5px',
+                          borderRadius: '4px',
+                          backgroundColor: isSelected ? ep.color : '#f1f5f9',
+                          color: isSelected ? '#ffffff' : '#475569',
+                        }}
+                      >
+                        {ep.badge}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Active Episode Meteorological Context Banner */}
+            <div
+              style={{
+                marginBottom: '0.75rem',
+                padding: '0.55rem 0.85rem',
+                borderRadius: '6px',
+                fontSize: '0.75rem',
+                lineHeight: 1.45,
+                backgroundColor: `${currentEpisode.color}10`,
+                borderLeft: `4px solid ${currentEpisode.color}`,
+                color: '#334155',
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '8px',
+              }}
+            >
+              <Info size={15} style={{ color: currentEpisode.color, flexShrink: 0, marginTop: '2px' }} />
+              <div>
+                <strong style={{ color: currentEpisode.color }}>{currentEpisode.seasonTag}:</strong>{' '}
+                {currentEpisode.description}
+              </div>
+            </div>
+
             {/* Spatial Heatmap Layer Controls */}
             <div
               style={{

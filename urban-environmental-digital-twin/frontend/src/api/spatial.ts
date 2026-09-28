@@ -22,11 +22,12 @@ export async function getSpatialInterpolation(
 export async function interpolateCoordinate(
   latitude: number,
   longitude: number,
-  power: number = 2.0
+  power: number = 2.0,
+  timestamp?: string
 ): Promise<CoordinateInterpolationResponse> {
   return apiClient<CoordinateInterpolationResponse>('/api/v1/spatial/interpolate-coordinate', {
     method: 'POST',
-    body: JSON.stringify({ latitude, longitude, power }),
+    body: JSON.stringify({ latitude, longitude, power, timestamp }),
     timeoutMs: 15000,
   });
 }

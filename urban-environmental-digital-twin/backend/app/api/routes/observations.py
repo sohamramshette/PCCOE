@@ -30,6 +30,8 @@ def get_station_observations(
     end: Optional[datetime] = Query(default=None, description="End timestamp filter in UTC (ISO 8601)"),
     limit: int = Query(default=settings.DEFAULT_PAGE_LIMIT, ge=1, le=settings.MAX_PAGE_LIMIT, description="Page limit (1 to 1000)"),
     offset: int = Query(default=0, ge=0, description="Page offset (0 or positive integer)"),
+    order: str = Query(default="asc", pattern="^(asc|desc)$", description="Sort order by observation datetime ('asc' or 'desc')"),
+    valid_pm25_only: bool = Query(default=False, description="Filter only records with valid (non-null) PM2.5 measurements"),
     db: Session = Depends(get_db)
 ):
     # Validate temporal ordering
@@ -45,7 +47,9 @@ def get_station_observations(
         start=start,
         end=end,
         limit=limit,
-        offset=offset
+        offset=offset,
+        order=order,
+        valid_pm25_only=valid_pm25_only
     )
 
     if items is None:

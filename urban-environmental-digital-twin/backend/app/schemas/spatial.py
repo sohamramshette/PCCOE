@@ -81,6 +81,7 @@ class CoordinateInterpolationRequest(BaseModel):
     latitude: float
     longitude: float
     power: float = 2.0
+    timestamp: Optional[datetime] = None
 
 
 class ContributingStationWeight(BaseModel):

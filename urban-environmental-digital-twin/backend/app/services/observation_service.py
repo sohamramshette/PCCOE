@@ -20,7 +20,9 @@ class ObservationService:
         start: Optional[datetime] = None,
         end: Optional[datetime] = None,
         limit: int = 50,
-        offset: int = 0
+        offset: int = 0,
+        order: str = "asc",
+        valid_pm25_only: bool = False
     ) -> Tuple[Optional[List[EnvironmentalObservation]], int]:
         """
         Retrieves paginated historical observations for a specific station.
@@ -39,10 +41,17 @@ class ObservationService:
             query = query.filter(EnvironmentalObservation.datetime_utc >= start)
         if end is not None:
             query = query.filter(EnvironmentalObservation.datetime_utc <= end)
+        if valid_pm25_only:
+            query = query.filter(EnvironmentalObservation.pm25.isnot(None))
 
         total = query.count()
+        order_col = (
+            EnvironmentalObservation.datetime_utc.desc()
+            if order.lower() == "desc"
+            else EnvironmentalObservation.datetime_utc.asc()
+        )
         items = (
-            query.order_by(EnvironmentalObservation.datetime_utc.asc())
+            query.order_by(order_col)
             .offset(offset)
             .limit(limit)
             .all()
