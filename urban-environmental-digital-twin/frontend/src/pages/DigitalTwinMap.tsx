@@ -1,17 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import {
   MapPin,
-  Calendar,
   Database,
   ArrowRight,
+  Flame,
+  Crosshair,
+  RotateCcw,
 } from 'lucide-react';
+
 import { getStations } from '../api/stations';
 import { getObservations } from '../api/observations';
+import { getSpatialInterpolation, interpolateCoordinate } from '../api/spatial';
 import { Station } from '../types/station';
 import { ObservationItem } from '../types/observation';
+import { InterpolatedGridPoint, CoordinateInterpolationResponse } from '../types/spatial';
 import { PuneTwinMap } from '../components/map/PuneTwinMap';
 import { MapLegend } from '../components/map/MapLegend';
+import { SyncWidget } from '../components/sync/SyncWidget';
 import { LoadingSpinner } from '../components/common/LoadingSpinner';
 import { ErrorDisplay } from '../components/common/ErrorDisplay';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';
@@ -25,9 +31,29 @@ export const DigitalTwinMap: React.FC = () => {
   // Layer controls
   const [showTrafficBuffer, setShowTrafficBuffer] = useState<boolean>(true);
   const [showActivityBuffer, setShowActivityBuffer] = useState<boolean>(false);
+  const [showHeatmap, setShowHeatmap] = useState<boolean>(true);
+  const [idwPower, setIdwPower] = useState<number>(2.0);
+
+  // Heatmap & Inspection state
+  const [heatmapGrid, setHeatmapGrid] = useState<InterpolatedGridPoint[]>([]);
+  const [heatmapLoading, setHeatmapLoading] = useState<boolean>(false);
+  const [customInspection, setCustomInspection] = useState<CoordinateInterpolationResponse | null>(null);
+  const [inspectingCoord, setInspectingCoord] = useState<boolean>(false);
 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  const loadHeatmap = useCallback(async (powerVal: number = idwPower) => {
+    try {
+      setHeatmapLoading(true);
+      const res = await getSpatialInterpolation({ power: powerVal });
+      setHeatmapGrid(res.grid_points);
+    } catch (err: unknown) {
+      console.error('Failed to load spatial interpolation heatmap:', err);
+    } finally {
+      setHeatmapLoading(false);
+    }
+  }, [idwPower]);
 
   const loadData = async () => {
     try {
@@ -55,6 +81,9 @@ export const DigitalTwinMap: React.FC = () => {
         })
       );
       setLatestObservations(obsMap);
+
+      // Load spatial interpolation grid
+      await loadHeatmap(idwPower);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to load spatial digital twin data.');
     } finally {
@@ -66,22 +95,48 @@ export const DigitalTwinMap: React.FC = () => {
     loadData();
   }, []);
 
+  const handleMapClick = async (lat: number, lon: number) => {
+    try {
+      setInspectingCoord(true);
+      const res = await interpolateCoordinate(lat, lon, idwPower);
+      setCustomInspection(res);
+    } catch (err) {
+      console.error('Coordinate interpolation failed:', err);
+    } finally {
+      setInspectingCoord(false);
+    }
+  };
+
+  const handlePowerChange = (newPower: number) => {
+    setIdwPower(newPower);
+    loadHeatmap(newPower);
+  };
+
+  const handleSyncSuccess = () => {
+    // Refresh both observations and continuous heatmap
+    loadData();
+  };
+
+
   const selectedStation = stations.find((s) => s.station_id === selectedStationId) || null;
 
   return (
     <div className="page-container">
       {/* Header & Spatial Subtitle */}
-      <div className="page-header" style={{ marginBottom: '1.25rem' }}>
+      <div className="page-header" style={{ marginBottom: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <h1 className="page-title">Pune Digital Twin</h1>
           <p className="page-subtitle">
-            Spatial view of Pune environmental monitoring and urban exposure
+            Spatial continuous air quality interpolation &amp; live environmental telemetry
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          <ProvenanceBadge classification="OBSERVED" />
-          <ProvenanceBadge classification="REANALYSIS" />
-          <ProvenanceBadge classification="STATIC" />
+        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+          <SyncWidget onSyncCompleted={handleSyncSuccess} />
+          <div style={{ display: 'flex', gap: '0.4rem' }}>
+            <ProvenanceBadge classification="OBSERVED" />
+            <ProvenanceBadge classification="REANALYSIS" />
+            <ProvenanceBadge classification="STATIC" />
+          </div>
         </div>
       </div>
 
@@ -102,27 +157,27 @@ export const DigitalTwinMap: React.FC = () => {
 
         <div className="card" style={{ padding: '0.85rem 1.15rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '0.2rem' }}>
-            <Calendar size={14} className="text-primary" />
-            <span>Analytical Period</span>
+            <Flame size={14} className="text-primary" />
+            <span>Spatial Interpolation</span>
           </div>
           <div style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.25rem' }}>
-            18 Feb 2025 → 24 Sep 2026
+            2D IDW Continuous Surface
           </div>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-            584 synchronized calendar days
+            {heatmapGrid.length} grid cells across Pune &amp; PCMC
           </div>
         </div>
 
         <div className="card" style={{ padding: '0.85rem 1.15rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '0.2rem' }}>
             <Database size={14} className="text-primary" />
-            <span>Data</span>
+            <span>Live Data Sync</span>
           </div>
           <div style={{ fontSize: '0.92rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.25rem' }}>
-            Observed PM2.5 + ERA5-Land + urban exposure
+            OpenAQ API v3 Pipeline
           </div>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-            Zero synthetic data; ground truth preserved
+            In-situ sensor telemetry + reanalysis
           </div>
         </div>
       </div>
@@ -136,7 +191,98 @@ export const DigitalTwinMap: React.FC = () => {
         <div className="digital-twin-grid">
           {/* Left Column: Interactive Map */}
           <div className="map-column">
-            <div className="card map-card" style={{ padding: 0, overflow: 'hidden', position: 'relative' }}>
+            {/* Spatial Heatmap Layer Controls */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '8px 14px',
+                backgroundColor: '#ffffff',
+                border: '1px solid #e2e8f0',
+                borderRadius: '8px 8px 0 0',
+                fontSize: '12px',
+                gap: '8px',
+                flexWrap: 'wrap',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <button
+                  onClick={() => setShowHeatmap(!showHeatmap)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '5px 10px',
+                    borderRadius: '6px',
+                    border: '1px solid',
+                    borderColor: showHeatmap ? '#f97316' : '#cbd5e1',
+                    backgroundColor: showHeatmap ? '#fff7ed' : '#ffffff',
+                    color: showHeatmap ? '#ea580c' : '#64748b',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                  }}
+                  title="Toggle continuous PM2.5 IDW spatial interpolation heatmap"
+                >
+                  <Flame size={14} />
+                  <span>IDW Heatmap Layer ({showHeatmap ? 'ON' : 'OFF'})</span>
+                </button>
+
+                {showHeatmap && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ color: '#64748b', fontSize: '11px' }}>Power (p):</span>
+                    {[1.5, 2.0, 3.0].map((p) => (
+                      <button
+                        key={p}
+                        onClick={() => handlePowerChange(p)}
+                        style={{
+                          padding: '2px 8px',
+                          borderRadius: '4px',
+                          border: '1px solid',
+                          borderColor: idwPower === p ? '#2563eb' : '#e2e8f0',
+                          backgroundColor: idwPower === p ? '#eff6ff' : '#ffffff',
+                          color: idwPower === p ? '#1d4ed8' : '#64748b',
+                          fontSize: '11px',
+                          fontWeight: idwPower === p ? 700 : 500,
+                          cursor: 'pointer',
+                        }}
+                      >
+                        {p.toFixed(1)}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#64748b', fontSize: '11px' }}>
+                {heatmapLoading && <span style={{ color: '#ea580c', fontStyle: 'italic' }}>Calculating IDW...</span>}
+                {inspectingCoord && <span style={{ color: '#2563eb', fontStyle: 'italic' }}>Estimating coordinate...</span>}
+                <Crosshair size={13} style={{ color: '#3b82f6' }} />
+                <span>Click map to inspect any neighborhood coordinate</span>
+                {customInspection && (
+                  <button
+                    onClick={() => setCustomInspection(null)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      padding: '2px 6px',
+                      borderRadius: '4px',
+                      border: '1px solid #cbd5e1',
+                      background: '#f8fafc',
+                      color: '#475569',
+                      fontSize: '10px',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <RotateCcw size={10} /> Clear Pin
+                  </button>
+                )}
+              </div>
+
+            </div>
+
+            <div className="card map-card" style={{ padding: 0, overflow: 'hidden', position: 'relative', borderRadius: '0 0 8px 8px' }}>
               <PuneTwinMap
                 stations={stations}
                 selectedStationId={selectedStationId}
@@ -144,6 +290,11 @@ export const DigitalTwinMap: React.FC = () => {
                 latestObservations={latestObservations}
                 showTrafficBuffer={showTrafficBuffer}
                 showActivityBuffer={showActivityBuffer}
+                showHeatmap={showHeatmap}
+                heatmapGridPoints={heatmapGrid}
+                customInspectionResult={customInspection}
+                onMapClickCoordinate={handleMapClick}
+                onClearCustomInspection={() => setCustomInspection(null)}
               />
 
               {/* Overlay Map Legend */}
@@ -160,6 +311,79 @@ export const DigitalTwinMap: React.FC = () => {
 
           {/* Right Column: Station Selector & Spatial Exposure Panel */}
           <div className="station-sidebar-column">
+            {/* Custom Coordinate Pinpoint Inspection Banner */}
+            {customInspection && (
+              <div
+                className="card"
+                style={{
+                  padding: '1.15rem',
+                  marginBottom: '1rem',
+                  border: `2px solid ${customInspection.color}`,
+                  backgroundColor: '#fafafa',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Crosshair size={15} style={{ color: customInspection.color }} />
+                    <span style={{ fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', color: '#1e293b' }}>
+                      Pinpoint Location Estimate
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => setCustomInspection(null)}
+                    style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '13px' }}
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '4px' }}>
+                  <span style={{ fontSize: '1.8rem', fontWeight: 800, color: customInspection.color }}>
+                    {customInspection.interpolated_pm25}
+                  </span>
+                  <span style={{ fontSize: '0.85rem', color: '#64748b' }}>µg/m³</span>
+                  <span
+                    style={{
+                      marginLeft: 'auto',
+                      padding: '2px 8px',
+                      borderRadius: '10px',
+                      fontSize: '11px',
+                      fontWeight: 700,
+                      backgroundColor: `${customInspection.color}20`,
+                      color: customInspection.color,
+                      border: `1px solid ${customInspection.color}60`,
+                    }}
+                  >
+                    {customInspection.aqi_category}
+                  </span>
+                </div>
+
+                <div style={{ fontSize: '0.75rem', color: '#475569', marginBottom: '0.6rem' }}>
+                  Nearest: <strong>{customInspection.nearest_station_name}</strong> ({customInspection.distance_to_nearest_km} km)
+                  <span style={{ marginLeft: '6px', color: '#059669', fontWeight: 600 }}>
+                    • {Math.round(customInspection.confidence_score * 100)}% confidence
+                  </span>
+                </div>
+
+                <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '6px' }}>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#334155', marginBottom: '4px' }}>
+                    Sensor Attribution Weights:
+                  </div>
+                  {customInspection.contributing_stations.slice(0, 3).map((st) => (
+                    <div key={st.station_id} style={{ fontSize: '0.75rem', marginBottom: '4px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', color: '#475569' }}>
+                        <span>{st.station_name.split(',')[0]} ({st.distance_km} km)</span>
+                        <span style={{ fontWeight: 600 }}>{st.weight_percentage}%</span>
+                      </div>
+                      <div style={{ height: '3px', width: '100%', backgroundColor: '#e2e8f0', borderRadius: '2px', overflow: 'hidden' }}>
+                        <div style={{ height: '100%', width: `${st.weight_percentage}%`, backgroundColor: '#3b82f6' }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="card" style={{ padding: '1.25rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
@@ -168,6 +392,7 @@ export const DigitalTwinMap: React.FC = () => {
                 </div>
                 <span className="badge badge-primary">{stations.length} Active</span>
               </div>
+
 
               {/* Station List Selector */}
               <div className="twin-station-list">

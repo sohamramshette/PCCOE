@@ -49,3 +49,57 @@ class ActivityExposureRead(BaseModel):
     updated_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class InterpolatedGridPoint(BaseModel):
+    lat: float
+    lon: float
+    pm25: float
+    aqi_category: str
+    color: str
+    distance_to_nearest_km: float
+    nearest_station_id: int
+    nearest_station_name: str
+    confidence: float
+
+
+class SpatialInterpolationResponse(BaseModel):
+    method: str
+    power: float
+    grid_step: float
+    total_grid_points: int
+    bounding_box: dict
+    timestamp_utc: datetime
+    min_pm25: float
+    max_pm25: float
+    mean_pm25: float
+    active_stations_count: int
+    grid_points: list[InterpolatedGridPoint]
+
+
+class CoordinateInterpolationRequest(BaseModel):
+    latitude: float
+    longitude: float
+    power: float = 2.0
+
+
+class ContributingStationWeight(BaseModel):
+    station_id: int
+    station_name: str
+    distance_km: float
+    weight_percentage: float
+    observed_pm25: float
+
+
+class CoordinateInterpolationResponse(BaseModel):
+    latitude: float
+    longitude: float
+    interpolated_pm25: float
+    aqi_category: str
+    color: str
+    confidence_score: float
+    nearest_station_id: int
+    nearest_station_name: str
+    distance_to_nearest_km: float
+    contributing_stations: list[ContributingStationWeight]
+

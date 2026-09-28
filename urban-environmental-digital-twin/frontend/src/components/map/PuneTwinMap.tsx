@@ -3,7 +3,10 @@ import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { Station } from '../../types/station';
 import { ObservationItem } from '../../types/observation';
+import { InterpolatedGridPoint, CoordinateInterpolationResponse } from '../../types/spatial';
 import { StationMarker } from './StationMarker';
+import { SpatialHeatmapLayer } from './SpatialHeatmapLayer';
+import { CustomPointInspector } from './CustomPointInspector';
 
 interface MapControllerProps {
   selectedStation: Station | null;
@@ -36,6 +39,11 @@ interface PuneTwinMapProps {
   latestObservations: Record<number, ObservationItem | null>;
   showTrafficBuffer: boolean;
   showActivityBuffer: boolean;
+  showHeatmap?: boolean;
+  heatmapGridPoints?: InterpolatedGridPoint[];
+  customInspectionResult?: CoordinateInterpolationResponse | null;
+  onMapClickCoordinate?: (lat: number, lon: number) => void;
+  onClearCustomInspection?: () => void;
 }
 
 export const PuneTwinMap: React.FC<PuneTwinMapProps> = ({
@@ -45,6 +53,11 @@ export const PuneTwinMap: React.FC<PuneTwinMapProps> = ({
   latestObservations,
   showTrafficBuffer,
   showActivityBuffer,
+  showHeatmap = false,
+  heatmapGridPoints = [],
+  customInspectionResult = null,
+  onMapClickCoordinate,
+  onClearCustomInspection,
 }) => {
   // Center of PCMC / Pune air quality monitoring network
   const defaultCenter: [number, number] = [18.64, 73.80];
@@ -70,6 +83,21 @@ export const PuneTwinMap: React.FC<PuneTwinMapProps> = ({
         {/* Camera Controller to pan/zoom smoothly */}
         <MapController selectedStation={selectedStation} stations={stations} />
 
+        {/* 2D IDW Spatial Air Quality Heatmap Layer */}
+        <SpatialHeatmapLayer
+          gridPoints={heatmapGridPoints}
+          visible={showHeatmap}
+        />
+
+        {/* Pinpoint Coordinate Inspector on Map Click */}
+        {onMapClickCoordinate && (
+          <CustomPointInspector
+            inspectionResult={customInspectionResult}
+            onMapClick={onMapClickCoordinate}
+            onClear={onClearCustomInspection || (() => {})}
+          />
+        )}
+
         {/* Render 6 Monitoring Stations */}
         {stations.map((station) => (
           <StationMarker
@@ -86,3 +114,4 @@ export const PuneTwinMap: React.FC<PuneTwinMapProps> = ({
     </div>
   );
 };
+

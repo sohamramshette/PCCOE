@@ -6,7 +6,11 @@ from backend.app.schemas.common import PaginatedResponse, ErrorResponse, HealthR
 from backend.app.schemas.station import StationBase, StationCreate, StationRead, StationDetail
 from backend.app.schemas.observation import ObservationItem, PaginatedObservations
 from backend.app.schemas.weather import WeatherItem, PaginatedWeather
-from backend.app.schemas.spatial import TrafficExposureRead, ActivityExposureRead
+from backend.app.schemas.spatial import (
+    TrafficExposureRead, ActivityExposureRead,
+    InterpolatedGridPoint, SpatialInterpolationResponse,
+    CoordinateInterpolationRequest, CoordinateInterpolationResponse
+)
 from backend.app.schemas.traffic import TrafficProxyRead
 from backend.app.schemas.model_registry import ModelRegistrySummary, ModelRegistryDetail
 from backend.app.schemas.prediction import PredictionItem, PaginatedPredictions
@@ -21,6 +25,7 @@ from backend.app.schemas.forecast import (
     TrajectoryPoint, ForecastTrajectoryResponse
 )
 from backend.app.schemas.llm import ForecastExplanationResponse, ScenarioExplanationResponse
+from backend.app.schemas.sync import StationSyncResult, OpenAQSyncResponse, SyncStatusResponse
 
 __all__ = [
     "PaginatedResponse", "ErrorResponse", "HealthResponse",
@@ -28,6 +33,8 @@ __all__ = [
     "ObservationItem", "PaginatedObservations",
     "WeatherItem", "PaginatedWeather",
     "TrafficExposureRead", "ActivityExposureRead",
+    "InterpolatedGridPoint", "SpatialInterpolationResponse",
+    "CoordinateInterpolationRequest", "CoordinateInterpolationResponse",
     "TrafficProxyRead",
     "ModelRegistrySummary", "ModelRegistryDetail",
     "PredictionItem", "PaginatedPredictions",
@@ -38,4 +45,6 @@ __all__ = [
     "ForecastResponse", "ForecastUnavailableResponse",
     "TrajectoryPoint", "ForecastTrajectoryResponse",
     "ForecastExplanationResponse", "ScenarioExplanationResponse",
+    "StationSyncResult", "OpenAQSyncResponse", "SyncStatusResponse",
 ]
+
