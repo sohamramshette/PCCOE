@@ -107,3 +107,46 @@ def test_forecast_shap_contributions_are_meaningful(client):
     contributions = [abs(item["contribution"]) for item in data["feature_attributions"]]
     assert contributions, "No feature attribution values generated"
     assert max(contributions) > 0.001, "SHAP contributions are collapsing to zero instead of real feature influence"
+
+
+def test_forecast_trajectory_default_24h(client):
+    """
+    Verifies that GET /api/v1/stations/11613/forecast/trajectory returns a valid
+    24-hour continuous multi-step forecast trajectory with compounding confidence bounds.
+    """
+    response = client.get("/api/v1/stations/11613/forecast/trajectory")
+    assert response.status_code == status.HTTP_200_OK
+    data = response.json()
+
+    assert data["station_id"] == 11613
+    assert data["horizon_hours"] == 24
+    assert len(data["trajectory"]) == 24
+    assert data["peak_predicted_pm25"] >= data["min_predicted_pm25"]
+    assert data["average_predicted_pm25"] >= 0.0
+    assert data["dominant_naqi_category"] in ["Good", "Satisfactory", "Moderate", "Poor", "Very Poor", "Severe"]
+    assert "uncertainty_note" in data
+
+    for i, pt in enumerate(data["trajectory"]):
+        assert pt["step"] == i + 1
+        assert pt["predicted_pm25"] >= 0.0
+        assert pt["lower_bound_pm25"] <= pt["predicted_pm25"]
+        assert pt["upper_bound_pm25"] >= pt["predicted_pm25"]
+        assert pt["lower_bound_pm25"] >= 0.0
+        assert pt["aqi_category"] in ["Good", "Satisfactory", "Moderate", "Poor", "Very Poor", "Severe"]
+
+
+def test_forecast_trajectory_custom_horizon(client):
+    """Verifies that user can query custom horizon lengths (e.g. 12 hours)."""
+    response = client.get("/api/v1/stations/11613/forecast/trajectory?horizon_hours=12")
+    assert response.status_code == status.HTTP_200_OK
+    data = response.json()
+    assert data["horizon_hours"] == 12
+    assert len(data["trajectory"]) == 12
+
+
+def test_forecast_trajectory_unavailable_future(client):
+    """Verifies that requesting trajectory from a future timestamp without historical inputs returns 422."""
+    response = client.get("/api/v1/stations/11613/forecast/trajectory?timestamp=2030-01-01T12:00:00Z")
+    assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
+    assert response.json()["detail"]["status"] == "UNAVAILABLE"
+

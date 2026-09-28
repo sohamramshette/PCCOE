@@ -42,3 +42,37 @@ class ForecastUnavailableResponse(BaseModel):
         default=None,
         description="Latest timestamp with complete observations and weather inputs in the system"
     )
+
+
+class TrajectoryPoint(BaseModel):
+    step: int = Field(description="Forecast horizon step in hours (1 to 24)")
+    target_time_utc: datetime = Field(description="Target forecast hour in UTC")
+    predicted_pm25: float = Field(description="Predicted PM2.5 in ug/m3")
+    lower_bound_pm25: float = Field(description="Empirical lower confidence bound (ug/m3)")
+    upper_bound_pm25: float = Field(description="Empirical upper confidence bound (ug/m3)")
+    aqi_category: str = Field(description="Indian NAQI tier category for predicted PM2.5")
+    traffic_proxy_index: float = Field(description="Simulated diurnal traffic intensity factor")
+    ventilation_index: float = Field(description="Simulated atmospheric ventilation index (m2/s)")
+
+
+class ForecastTrajectoryResponse(BaseModel):
+    station_id: int = Field(description="Monitoring station ID")
+    station_name: str = Field(description="Name of monitoring station")
+    initialization_time_utc: datetime = Field(description="Initialization hour (t) in UTC")
+    horizon_hours: int = Field(default=24, description="Total forecast lead horizon in hours")
+    model_id: str = Field(description="Model identifier used for inference")
+    model_type: str = Field(description="Model algorithm family")
+    unit: str = Field(default="ug/m3", description="Concentration measurement unit")
+    data_availability_status: str = Field(default="HISTORICAL_INPUTS_VERIFIED")
+    trajectory: list[TrajectoryPoint] = Field(description="Sequence of 24 hourly multi-step predictions")
+    peak_predicted_pm25: float = Field(description="Highest predicted PM2.5 concentration in the trajectory")
+    peak_target_time_utc: datetime = Field(description="Hour of highest predicted PM2.5")
+    min_predicted_pm25: float = Field(description="Lowest predicted PM2.5 concentration in the trajectory")
+    min_target_time_utc: datetime = Field(description="Hour of lowest predicted PM2.5")
+    average_predicted_pm25: float = Field(description="24-hour mean predicted PM2.5")
+    dominant_naqi_category: str = Field(description="Most frequent NAQI category across the 24-hour forecast")
+    uncertainty_note: str = Field(
+        default="Empirical 95% confidence intervals compound across multi-step autoregressive horizons.",
+        description="Scientific uncertainty disclosure"
+    )
+

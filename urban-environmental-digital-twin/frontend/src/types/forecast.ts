@@ -40,3 +40,34 @@ export interface ForecastUnavailableResponse {
   detail: string;
   latest_available_data_utc?: string | null;
 }
+
+export interface TrajectoryPoint {
+  step: number;
+  target_time_utc: string;
+  predicted_pm25: number;
+  lower_bound_pm25: number;
+  upper_bound_pm25: number;
+  aqi_category: string;
+  traffic_proxy_index: number;
+  ventilation_index: number;
+}
+
+export interface ForecastTrajectoryResponse {
+  station_id: number;
+  station_name: string;
+  initialization_time_utc: string;
+  horizon_hours: number;
+  model_id: string;
+  model_type: string;
+  unit: string;
+  data_availability_status: string;
+  trajectory: TrajectoryPoint[];
+  peak_predicted_pm25: number;
+  peak_target_time_utc: string;
+  min_predicted_pm25: number;
+  min_target_time_utc: string;
+  average_predicted_pm25: number;
+  dominant_naqi_category: string;
+  uncertainty_note: string;
+}
+

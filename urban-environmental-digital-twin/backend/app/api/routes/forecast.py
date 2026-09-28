@@ -14,7 +14,9 @@ from sqlalchemy.orm import Session
 from backend.app.database.session import get_db
 from backend.app.services.forecast_service import ForecastService, ForecastDataUnavailableException
 from backend.app.services.llm_service import LLMExplanationService
-from backend.app.schemas.forecast import ForecastResponse, ForecastUnavailableResponse
+from backend.app.schemas.forecast import (
+    ForecastResponse, ForecastUnavailableResponse, ForecastTrajectoryResponse
+)
 from backend.app.schemas.llm import ForecastExplanationResponse
 from backend.app.config.settings import settings
 
@@ -79,6 +81,72 @@ def get_station_forecast(
         )
 
     return forecast
+
+
+@router.get(
+    "/{station_id}/forecast/trajectory",
+    response_model=ForecastTrajectoryResponse,
+    responses={
+        200: {"model": ForecastTrajectoryResponse, "description": "Successful 24-hour PM2.5 multi-horizon forecast trajectory."},
+        404: {"description": "Station or model not found."},
+        422: {"model": ForecastUnavailableResponse, "description": "Current forecast inputs unavailable at prediction time."}
+    },
+    summary="Get 24-Hour PM2.5 Forecast Trajectory",
+    description=(
+        "Simulates a multi-step autoregressive 24-hour PM2.5 forecast trajectory forward from "
+        "the initialization hour. Computes empirical compounding 95% confidence intervals, "
+        "diurnal traffic variations, and NAQI tier classifications."
+    )
+)
+def get_station_forecast_trajectory(
+    station_id: int,
+    timestamp: Optional[datetime] = Query(
+        default=None,
+        description="Forecast initialization hour in UTC (ISO 8601). If omitted, defaults to latest complete historical hour."
+    ),
+    model_id: Optional[str] = Query(
+        default=None,
+        description=f"Model identifier to execute (defaults to configured active baseline: '{settings.DEFAULT_FORECAST_MODEL_ID}')"
+    ),
+    horizon_hours: int = Query(
+        default=24,
+        ge=1,
+        le=48,
+        description="Forecast horizon length in hours (default 24 hours)"
+    ),
+    db: Session = Depends(get_db)
+):
+    try:
+        trajectory = ForecastService.generate_trajectory_forecast(
+            db=db,
+            station_id=station_id,
+            timestamp=timestamp,
+            model_id=model_id,
+            horizon_hours=horizon_hours
+        )
+    except ForecastDataUnavailableException as exc:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail={
+                "status": "UNAVAILABLE",
+                "station_id": exc.station_id,
+                "detail": str(exc),
+                "latest_available_data_utc": exc.latest_available_dt.isoformat() if exc.latest_available_dt else None
+            }
+        )
+    except ValueError as ve:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=str(ve)
+        )
+
+    if trajectory is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Monitoring station {station_id} not found."
+        )
+
+    return trajectory
 
 
 @router.get(

@@ -8,16 +8,17 @@ import {
   Info,
 } from 'lucide-react';
 import { getStations } from '../api/stations';
-import { getForecast } from '../api/forecast';
+import { getForecast, getForecastTrajectory } from '../api/forecast';
 import { getModels } from '../api/models';
 import { Station } from '../types/station';
-import { ForecastResponse } from '../types/forecast';
+import { ForecastResponse, ForecastTrajectoryResponse } from '../types/forecast';
 import { ModelSummary } from '../types/model';
 import { LoadingSpinner } from '../components/common/LoadingSpinner';
 import { ErrorDisplay } from '../components/common/ErrorDisplay';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';
 import { AqiPill } from '../components/common/AqiPill';
 import { AiForecastAdvisory } from '../components/forecast/AiForecastAdvisory';
+import { ForecastTrajectoryChart } from '../components/forecast/ForecastTrajectoryChart';
 import { formatNumber, formatDateTime, formatDateTimeIST } from '../utils/formatters';
 
 export const Forecast: React.FC = () => {
@@ -27,8 +28,11 @@ export const Forecast: React.FC = () => {
   const [selectedModelId, setSelectedModelId] = useState<string>('gradient_boosting_baseline');
 
   const [forecast, setForecast] = useState<ForecastResponse | null>(null);
+  const [trajectory, setTrajectory] = useState<ForecastTrajectoryResponse | null>(null);
+  const [horizonHours, setHorizonHours] = useState<number>(24);
   const [loading, setLoading] = useState<boolean>(true);
   const [fetchingForecast, setFetchingForecast] = useState<boolean>(false);
+  const [fetchingTrajectory, setFetchingTrajectory] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   // Load stations & models
@@ -54,20 +58,47 @@ export const Forecast: React.FC = () => {
     init();
   }, []);
 
-  // Fetch forecast whenever station or model changes
-  const fetchActiveForecast = async (stationId: number, modelId: string) => {
+  // Fetch forecast and trajectory whenever station or model changes
+  const fetchActiveForecast = async (stationId: number, modelId: string, horizon: number = 24) => {
     try {
       setFetchingForecast(true);
       setError(null);
-      const res = await getForecast(stationId, { model_id: modelId });
+      const [res, trajRes] = await Promise.all([
+        getForecast(stationId, { model_id: modelId }),
+        getForecastTrajectory(stationId, { model_id: modelId, horizon_hours: horizon }).catch((err) => {
+          console.warn('Trajectory fetch unavailable:', err);
+          return null;
+        }),
+      ]);
       setForecast(res);
+      setTrajectory(trajRes);
     } catch (err: unknown) {
       setForecast(null);
+      setTrajectory(null);
       setError(err instanceof Error ? err.message : 'Unable to generate forecast for selected station.');
     } finally {
       setFetchingForecast(false);
     }
   };
+
+  const handleHorizonChange = async (hours: number) => {
+    setHorizonHours(hours);
+    if (selectedStationId) {
+      try {
+        setFetchingTrajectory(true);
+        const traj = await getForecastTrajectory(selectedStationId, {
+          model_id: selectedModelId,
+          horizon_hours: hours,
+        });
+        setTrajectory(traj);
+      } catch (err) {
+        console.error('Failed to change horizon', err);
+      } finally {
+        setFetchingTrajectory(false);
+      }
+    }
+  };
+
 
   useEffect(() => {
     if (selectedStationId) {
@@ -237,6 +268,16 @@ export const Forecast: React.FC = () => {
               </div>
             </div>
           </div>
+
+          {/* 24-Hour Multi-Horizon Forecast Trajectory */}
+          {trajectory && (
+            <ForecastTrajectoryChart
+              trajectoryData={trajectory}
+              selectedHorizon={horizonHours}
+              onHorizonChange={handleHorizonChange}
+              loading={fetchingTrajectory}
+            />
+          )}
 
           {/* AI Atmospheric & Public Health Advisory (Gemini Powered) */}
           <AiForecastAdvisory stationId={forecast.station_id} modelId={selectedModelId} />

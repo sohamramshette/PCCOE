@@ -16,7 +16,10 @@ from backend.app.schemas.scenario import (
     ScenarioRunResponse, ScenarioResultResponse, ScenarioListResponse,
     ScenarioResultsListResponse, FeatureAuditItem
 )
-from backend.app.schemas.forecast import ForecastResponse, ForecastUnavailableResponse
+from backend.app.schemas.forecast import (
+    ForecastResponse, ForecastUnavailableResponse,
+    TrajectoryPoint, ForecastTrajectoryResponse
+)
 from backend.app.schemas.llm import ForecastExplanationResponse, ScenarioExplanationResponse
 
 __all__ = [
@@ -33,5 +36,6 @@ __all__ = [
     "ScenarioRunResponse", "ScenarioResultResponse", "ScenarioListResponse",
     "ScenarioResultsListResponse", "FeatureAuditItem",
     "ForecastResponse", "ForecastUnavailableResponse",
+    "TrajectoryPoint", "ForecastTrajectoryResponse",
     "ForecastExplanationResponse", "ScenarioExplanationResponse",
 ]
