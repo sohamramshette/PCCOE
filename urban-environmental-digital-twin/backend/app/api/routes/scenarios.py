@@ -5,6 +5,7 @@ Exposes REST endpoints for creating, retrieving, executing, and auditing
 model-based counterfactual intervention scenarios (Phase 10).
 """
 
+import json
 from typing import Optional, Dict, Any
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
@@ -24,7 +25,7 @@ from backend.app.schemas.scenario import (
     ScenarioResultsListResponse,
 )
 from backend.app.schemas.forecast import ForecastUnavailableResponse
-from backend.app.schemas.llm import ScenarioExplanationResponse
+from backend.app.schemas.llm import ScenarioExplanationResponse, PolicyReportResponse
 from backend.app.services.llm_service import LLMExplanationService
 
 router = APIRouter(prefix="/scenarios", tags=["What-If Scenarios & Interventions"])
@@ -33,22 +34,29 @@ router = APIRouter(prefix="/scenarios", tags=["What-If Scenarios & Interventions
 def _format_scenario_dict(sc) -> Dict[str, Any]:
     """Helper to convert Scenario model to serializable dictionary with formatted intervention."""
     intervention_dict: Dict[str, Any] = {}
-    if sc.traffic_reduction_pct > 0.0 and sc.industrial_reduction_pct > 0.0:
-        intervention_dict = {
-            "type": "COMBINED_INTERVENTION",
-            "traffic_reduction_percent": sc.traffic_reduction_pct,
-            "industrial_activity_reduction_percent": sc.industrial_reduction_pct,
-        }
-    elif sc.industrial_reduction_pct > 0.0:
-        intervention_dict = {
-            "type": "INDUSTRIAL_ACTIVITY_REDUCTION",
-            "industrial_activity_reduction_percent": sc.industrial_reduction_pct,
-        }
-    else:
-        intervention_dict = {
-            "type": "TRAFFIC_REDUCTION",
-            "traffic_reduction_percent": sc.traffic_reduction_pct,
-        }
+    if sc.weather_reference_period and sc.weather_reference_period.startswith("{"):
+        try:
+            intervention_dict = json.loads(sc.weather_reference_period)
+        except Exception:
+            pass
+
+    if not intervention_dict:
+        if sc.traffic_reduction_pct > 0.0 and sc.industrial_reduction_pct > 0.0:
+            intervention_dict = {
+                "type": "COMBINED_INTERVENTION",
+                "traffic_reduction_percent": sc.traffic_reduction_pct,
+                "industrial_activity_reduction_percent": sc.industrial_reduction_pct,
+            }
+        elif sc.industrial_reduction_pct > 0.0:
+            intervention_dict = {
+                "type": "INDUSTRIAL_ACTIVITY_REDUCTION",
+                "industrial_activity_reduction_percent": sc.industrial_reduction_pct,
+            }
+        else:
+            intervention_dict = {
+                "type": "TRAFFIC_REDUCTION",
+                "traffic_reduction_percent": sc.traffic_reduction_pct,
+            }
 
     return {
         "scenario_id": sc.scenario_id,
@@ -228,6 +236,38 @@ def explain_scenario_result(
             scenario_id=scenario_id
         )
         return explanation
+    except ValueError as ve:
+        msg = str(ve)
+        if "not exist" in msg or "not found" in msg:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=msg)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=msg)
+
+
+@router.post(
+    "/{scenario_id}/report",
+    response_model=PolicyReportResponse,
+    responses={
+        200: {"model": PolicyReportResponse, "description": "AI-generated comprehensive policy decision brief and action roadmap."},
+        400: {"description": "Scenario has not been run or simulation failed."},
+        404: {"description": "Scenario not found."}
+    },
+    summary="Generate AI Executive Policy Action Decision Brief",
+    description=(
+        "Synthesizes an executive policy action decision brief comparing intervention outcomes "
+        "against baseline forecasts using Google Gemini. Includes CPCB/WHO health risk reductions, "
+        "economic and feasibility reviews, phased municipal action roadmaps, and full downloadable Markdown report."
+    )
+)
+def generate_scenario_policy_report(
+    scenario_id: str,
+    db: Session = Depends(get_db)
+):
+    try:
+        report = LLMExplanationService.generate_policy_report(
+            db=db,
+            scenario_id=scenario_id
+        )
+        return report
     except ValueError as ve:
         msg = str(ve)
         if "not exist" in msg or "not found" in msg:

@@ -6,6 +6,11 @@ import {
   Factory,
   PlusCircle,
   ListFilter,
+  Zap,
+  Trees,
+  HardHat,
+  FileText,
+  Sparkles,
 } from 'lucide-react';
 import { getStations } from '../api/stations';
 import { createScenario, getScenarios, runScenario, getScenarioResults } from '../api/scenarios';
@@ -19,6 +24,7 @@ import {
 import { LoadingSpinner } from '../components/common/LoadingSpinner';
 import { ErrorDisplay } from '../components/common/ErrorDisplay';
 import { ScenarioResultVisualization } from '../components/scenarios/ScenarioResultVisualization';
+import { PolicyReportModal } from '../components/scenarios/PolicyReportModal';
 import { formatNumber } from '../utils/formatters';
 
 export const Scenarios: React.FC = () => {
@@ -29,14 +35,49 @@ export const Scenarios: React.FC = () => {
   const [pastResults, setPastResults] = useState<ScenarioResultResponse[]>([]);
 
   // Form State
-  const [scenarioName, setScenarioName] = useState<string>('30% Traffic Reduction at Peak');
+  const [scenarioName, setScenarioName] = useState<string>('Pune Clean Air Action Plan 2026');
   const [isCustomName, setIsCustomName] = useState<boolean>(false);
   const [stationId, setStationId] = useState<number>(11613);
   const [baselineTimestampUtc, setBaselineTimestampUtc] = useState<string>('2026-09-24T17:00:00Z');
-  const [interventionType, setInterventionType] = useState<InterventionType>('TRAFFIC_REDUCTION');
-  const [trafficPercent, setTrafficPercent] = useState<number>(30);
+  const [interventionType, setInterventionType] = useState<InterventionType>('COMPREHENSIVE_POLICY');
+  const [trafficPercent, setTrafficPercent] = useState<number>(25);
   const [industrialPercent, setIndustrialPercent] = useState<number>(20);
-  const [description, setDescription] = useState<string>('Simulating urban traffic demand management during evening rush hour.');
+  const [evFleetPercent, setEvFleetPercent] = useState<number>(35);
+  const [greenBufferPercent, setGreenBufferPercent] = useState<number>(25);
+  const [constructionDustSuppression, setConstructionDustSuppression] = useState<boolean>(true);
+  const [description, setDescription] = useState<string>('Multi-sector clean air initiative combining peak traffic rationing, industrial curb, 35% bus/fleet electrification, vegetative buffer belts, and strict construction misting.');
+  const [isReportModalOpen, setIsReportModalOpen] = useState<boolean>(false);
+
+  const applyPreset = (preset: 'pune_action_plan' | 'ev_transition' | 'green_buffer' | 'winter_emergency') => {
+    setIsCustomName(true);
+    if (preset === 'pune_action_plan') {
+      setScenarioName('Pune Clean Air Action Plan 2026');
+      setInterventionType('COMPREHENSIVE_POLICY');
+      setTrafficPercent(25);
+      setIndustrialPercent(20);
+      setEvFleetPercent(35);
+      setGreenBufferPercent(25);
+      setConstructionDustSuppression(true);
+      setDescription('Multi-sector clean air initiative combining peak traffic rationing, industrial curb, 35% bus/fleet electrification, vegetative buffer belts, and strict construction misting.');
+    } else if (preset === 'ev_transition') {
+      setScenarioName('50% Public & Commercial Fleet Electrification');
+      setInterventionType('EV_FLEET_TRANSITION');
+      setEvFleetPercent(50);
+      setDescription('Accelerated electrification of PMPML transit buses, freight light commercial vehicles, and auto-rickshaws eliminating tailpipe combustion emissions.');
+    } else if (preset === 'green_buffer') {
+      setScenarioName('35% Urban Canopy & Green Buffer Expansion');
+      setInterventionType('GREEN_BUFFER_EXPANSION');
+      setGreenBufferPercent(35);
+      setDescription('Establishing multi-tiered vegetative buffer zones along industrial boundaries and major highways to accelerate particulate dry deposition.');
+    } else if (preset === 'winter_emergency') {
+      setScenarioName('Severe Winter Stagnation Emergency Curbs');
+      setInterventionType('COMBINED_INTERVENTION');
+      setTrafficPercent(40);
+      setIndustrialPercent(40);
+      setConstructionDustSuppression(true);
+      setDescription('Emergency Graded Response Action Plan (GRAP) curbing heavy vehicle movements, non-essential manufacturing, and halting construction dust.');
+    }
+  };
 
   const handleTrafficChange = (val: number) => {
     setTrafficPercent(val);
@@ -123,6 +164,27 @@ export const Scenarios: React.FC = () => {
       setError(null);
       setActionSuccess(null);
 
+      const isTrafficActive =
+        interventionType === 'TRAFFIC_REDUCTION' ||
+        interventionType === 'COMBINED_INTERVENTION' ||
+        interventionType === 'COMPREHENSIVE_POLICY';
+
+      const isIndustrialActive =
+        interventionType === 'INDUSTRIAL_ACTIVITY_REDUCTION' ||
+        interventionType === 'COMBINED_INTERVENTION' ||
+        interventionType === 'COMPREHENSIVE_POLICY';
+
+      const isEvActive =
+        interventionType === 'EV_FLEET_TRANSITION' ||
+        interventionType === 'COMPREHENSIVE_POLICY';
+
+      const isGreenActive =
+        interventionType === 'GREEN_BUFFER_EXPANSION' ||
+        interventionType === 'COMPREHENSIVE_POLICY';
+
+      const isDustActive =
+        interventionType === 'COMPREHENSIVE_POLICY' ? constructionDustSuppression : false;
+
       const payload = {
         scenario_name: scenarioName,
         station_id: stationId,
@@ -130,14 +192,11 @@ export const Scenarios: React.FC = () => {
         model_id: 'gradient_boosting_baseline',
         intervention: {
           type: interventionType,
-          traffic_reduction_percent:
-            interventionType === 'TRAFFIC_REDUCTION' || interventionType === 'COMBINED_INTERVENTION'
-              ? Number(trafficPercent)
-              : undefined,
-          industrial_activity_reduction_percent:
-            interventionType === 'INDUSTRIAL_ACTIVITY_REDUCTION' || interventionType === 'COMBINED_INTERVENTION'
-              ? Number(industrialPercent)
-              : undefined,
+          traffic_reduction_percent: isTrafficActive ? Number(trafficPercent) : undefined,
+          industrial_activity_reduction_percent: isIndustrialActive ? Number(industrialPercent) : undefined,
+          ev_fleet_transition_percent: isEvActive ? Number(evFleetPercent) : undefined,
+          green_buffer_increase_percent: isGreenActive ? Number(greenBufferPercent) : undefined,
+          construction_dust_suppression: isDustActive,
         },
         description,
       };
@@ -224,7 +283,50 @@ export const Scenarios: React.FC = () => {
               <PlusCircle size={18} color="var(--primary)" />
               <span>Configure Policy Intervention</span>
             </div>
-            <span className="badge badge-proxy">Hypothetical Lever</span>
+            <span className="badge badge-proxy">Multi-Lever Studio</span>
+          </div>
+
+          {/* Quick Presets */}
+          <div style={{ marginBottom: '1rem' }}>
+            <label className="form-label" style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '0.4rem', display: 'block' }}>
+              Quick Policy Presets:
+            </label>
+            <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                style={{ fontSize: '0.75rem', padding: '0.3rem 0.6rem', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
+                onClick={() => applyPreset('pune_action_plan')}
+              >
+                <span>🌿 Clean Air Plan 2026</span>
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                style={{ fontSize: '0.75rem', padding: '0.3rem 0.6rem', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
+                onClick={() => applyPreset('ev_transition')}
+              >
+                <Zap size={12} color="#059669" />
+                <span>50% EV Transit Fleet</span>
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                style={{ fontSize: '0.75rem', padding: '0.3rem 0.6rem', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
+                onClick={() => applyPreset('green_buffer')}
+              >
+                <Trees size={12} color="#10b981" />
+                <span>35% Canopy Buffer</span>
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                style={{ fontSize: '0.75rem', padding: '0.3rem 0.6rem', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
+                onClick={() => applyPreset('winter_emergency')}
+              >
+                <span>⚠️ Winter Smog Curbs</span>
+              </button>
+            </div>
           </div>
 
           <form onSubmit={handleCreateScenario}>
@@ -282,10 +384,16 @@ export const Scenarios: React.FC = () => {
                   if (!isCustomName) {
                     if (nextType === 'TRAFFIC_REDUCTION') setScenarioName(`${trafficPercent}% Traffic Reduction at Peak`);
                     else if (nextType === 'INDUSTRIAL_ACTIVITY_REDUCTION') setScenarioName(`${industrialPercent}% Industrial Curtailment`);
+                    else if (nextType === 'EV_FLEET_TRANSITION') setScenarioName(`${evFleetPercent}% Fleet Electrification Mandate`);
+                    else if (nextType === 'GREEN_BUFFER_EXPANSION') setScenarioName(`${greenBufferPercent}% Green Buffer Zone Expansion`);
+                    else if (nextType === 'COMPREHENSIVE_POLICY') setScenarioName('Pune Integrated Clean Air Action Plan 2026');
                     else setScenarioName(`${trafficPercent}% Traffic & ${industrialPercent}% Industrial Reduction`);
                   }
                 }}
               >
+                <option value="COMPREHENSIVE_POLICY">Comprehensive Multi-Sector Clean Air Plan</option>
+                <option value="EV_FLEET_TRANSITION">EV Fleet Transition (Tailpipe Mitigation)</option>
+                <option value="GREEN_BUFFER_EXPANSION">Urban Green Buffer & Vegetative Canopy</option>
                 <option value="TRAFFIC_REDUCTION">Traffic Congestion Reduction</option>
                 <option value="INDUSTRIAL_ACTIVITY_REDUCTION">Industrial Activity Curtailment</option>
                 <option value="COMBINED_INTERVENTION">Combined Traffic & Industrial Policy</option>
@@ -293,7 +401,7 @@ export const Scenarios: React.FC = () => {
             </div>
 
             {/* Traffic Slider */}
-            {(interventionType === 'TRAFFIC_REDUCTION' || interventionType === 'COMBINED_INTERVENTION') && (
+            {(interventionType === 'TRAFFIC_REDUCTION' || interventionType === 'COMBINED_INTERVENTION' || interventionType === 'COMPREHENSIVE_POLICY') && (
               <div className="form-group" style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
                   <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0 }}>
@@ -317,7 +425,7 @@ export const Scenarios: React.FC = () => {
             )}
 
             {/* Industrial Slider */}
-            {(interventionType === 'INDUSTRIAL_ACTIVITY_REDUCTION' || interventionType === 'COMBINED_INTERVENTION') && (
+            {(interventionType === 'INDUSTRIAL_ACTIVITY_REDUCTION' || interventionType === 'COMBINED_INTERVENTION' || interventionType === 'COMPREHENSIVE_POLICY') && (
               <div className="form-group" style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
                   <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0 }}>
@@ -337,6 +445,86 @@ export const Scenarios: React.FC = () => {
                 <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                   Reduces active industrial unit density and dispersion ratios within 2 km buffer.
                 </div>
+              </div>
+            )}
+
+            {/* EV Fleet Transition Slider */}
+            {(interventionType === 'EV_FLEET_TRANSITION' || interventionType === 'COMPREHENSIVE_POLICY') && (
+              <div className="form-group" style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
+                  <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0 }}>
+                    <Zap size={15} color="#059669" /> EV Fleet Electrification Mandate:
+                  </label>
+                  <strong style={{ color: '#059669', fontSize: '0.95rem' }}>{evFleetPercent}%</strong>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  step="5"
+                  value={evFleetPercent}
+                  onChange={(e) => setEvFleetPercent(Number(e.target.value))}
+                  style={{ width: '100%', cursor: 'pointer' }}
+                />
+                <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
+                  Eliminates up to 65% of vehicle-related combustion emissions (traffic stagnation ratios).
+                </div>
+              </div>
+            )}
+
+            {/* Urban Green Buffer Slider */}
+            {(interventionType === 'GREEN_BUFFER_EXPANSION' || interventionType === 'COMPREHENSIVE_POLICY') && (
+              <div className="form-group" style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
+                  <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0 }}>
+                    <Trees size={15} color="#10b981" /> Urban Green Buffer Zone Expansion:
+                  </label>
+                  <strong style={{ color: '#10b981', fontSize: '0.95rem' }}>{greenBufferPercent}%</strong>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  step="5"
+                  value={greenBufferPercent}
+                  onChange={(e) => setGreenBufferPercent(Number(e.target.value))}
+                  style={{ width: '100%', cursor: 'pointer' }}
+                />
+                <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
+                  Expands vegetative canopy filtration and attenuates industrial particulate dispersion.
+                </div>
+              </div>
+            )}
+
+            {/* Construction Dust Suppression Checkbox */}
+            {interventionType === 'COMPREHENSIVE_POLICY' && (
+              <div
+                style={{
+                  background: '#f8fafc',
+                  padding: '0.85rem',
+                  borderRadius: '8px',
+                  border: '1px solid var(--border-subtle)',
+                  marginBottom: '1rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <HardHat size={16} color="#d97706" />
+                  <div>
+                    <div style={{ fontSize: '0.85rem', fontWeight: 600 }}>Enforce Construction Dust Suppression</div>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                      Mandates perimeter misting and wind screens (curbs 65% of fugitive dust elements).
+                    </div>
+                  </div>
+                </div>
+                <input
+                  type="checkbox"
+                  checked={constructionDustSuppression}
+                  onChange={(e) => setConstructionDustSuppression(e.target.checked)}
+                  style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                />
               </div>
             )}
 
@@ -446,20 +634,52 @@ export const Scenarios: React.FC = () => {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.8rem', marginBottom: '1rem' }}>
                   <div>Target Station: <strong>{stations.find((s) => s.station_id === selectedScenario.station_id)?.station_name ?? selectedScenario.station_id ?? 'Network'}</strong></div>
                   <div>Status: <strong>{selectedScenario.simulation_status}</strong></div>
-                  <div>Traffic Reduction: <strong>{selectedScenario.traffic_reduction_pct}%</strong></div>
-                  <div>Industrial Reduction: <strong>{selectedScenario.industrial_reduction_pct}%</strong></div>
+                  <div>Traffic: <strong>{selectedScenario.traffic_reduction_pct}%</strong></div>
+                  <div>Industrial: <strong>{selectedScenario.industrial_reduction_pct}%</strong></div>
+                  {(selectedScenario.intervention as any)?.ev_fleet_transition_percent && (
+                    <div>EV Fleet: <strong>{(selectedScenario.intervention as any).ev_fleet_transition_percent}%</strong></div>
+                  )}
+                  {(selectedScenario.intervention as any)?.green_buffer_increase_percent && (
+                    <div>Green Buffer: <strong>{(selectedScenario.intervention as any).green_buffer_increase_percent}%</strong></div>
+                  )}
+                  {(selectedScenario.intervention as any)?.construction_dust_suppression && (
+                    <div>Dust Screen: <strong>Enforced</strong></div>
+                  )}
                 </div>
               </div>
 
-              <button
-                onClick={handleRunActiveScenario}
-                className="btn btn-primary"
-                style={{ width: '100%', gap: '0.5rem' }}
-                disabled={running}
-              >
-                <Play size={16} />
-                <span>{running ? 'Simulating Counterfactual Model Output...' : 'Execute Counterfactual Simulation'}</span>
-              </button>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <button
+                  onClick={handleRunActiveScenario}
+                  className="btn btn-primary"
+                  style={{ width: '100%', gap: '0.5rem' }}
+                  disabled={running}
+                >
+                  <Play size={16} />
+                  <span>{running ? 'Simulating Counterfactual Model Output...' : 'Execute Counterfactual Simulation'}</span>
+                </button>
+
+                {(selectedScenario.simulation_status === 'COMPLETED' || pastResults.length > 0 || activeRunResult) && (
+                  <button
+                    onClick={() => setIsReportModalOpen(true)}
+                    className="btn btn-secondary"
+                    style={{
+                      width: '100%',
+                      gap: '0.5rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderColor: 'rgba(99, 102, 241, 0.4)',
+                      color: '#4f46e5',
+                      fontWeight: 600,
+                    }}
+                  >
+                    <FileText size={16} />
+                    <span>Generate AI Policy Decision Brief</span>
+                    <Sparkles size={14} />
+                  </button>
+                )}
+              </div>
             </div>
           ) : (
             <div className="state-container">Select a scenario to inspect or run.</div>
@@ -477,6 +697,15 @@ export const Scenarios: React.FC = () => {
           stations.find((s) => s.station_id === selectedScenario?.station_id)?.station_name ??
           `Station ${selectedScenario?.station_id || 'Network'}`
         }
+        onOpenReportModal={() => setIsReportModalOpen(true)}
+      />
+
+      {/* AI Executive Policy Action Decision Brief Modal */}
+      <PolicyReportModal
+        isOpen={isReportModalOpen}
+        onClose={() => setIsReportModalOpen(false)}
+        scenarioId={selectedScenarioId || ''}
+        scenarioName={selectedScenario?.scenario_name || 'Policy Scenario'}
       />
     </div>
   );

@@ -35,3 +35,20 @@ export interface ScenarioExplanation {
   epistemological_note: string;
   generated_at: string;
 }
+
+export interface PolicyActionItem {
+  phase: string;
+  action: string;
+  responsible_agency: string;
+  target_metric: string;
+}
+
+export interface PolicyReportResponse {
+  report_title: string;
+  verdict: 'HIGHLY_RECOMMENDED' | 'FEASIBLE_WITH_TARGETING' | 'MODERATE_IMPACT' | 'LOW_RETURN' | string;
+  executive_summary: string;
+  health_benefit_projection: string;
+  economic_and_feasibility_analysis: string;
+  action_plan: PolicyActionItem[];
+  markdown_content: string;
+}

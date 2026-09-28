@@ -51,3 +51,32 @@ class ScenarioExplanationResponse(BaseModel):
         description="Scientific transparency disclosure"
     )
     generated_at: str = Field(description="ISO timestamp when AI explanation was synthesized")
+
+
+class PolicyActionItem(BaseModel):
+    phase: str = Field(description="Implementation phase: Immediate (0-30 Days), Medium-Term (1-6 Months), or Long-Term (1-3 Years)")
+    action: str = Field(description="Concrete municipal intervention measure")
+    responsible_agency: str = Field(description="Designated municipal department or authority (e.g. PMC Traffic Police, MPCB)")
+    target_metric: str = Field(description="Measurable operational KPI or compliance threshold")
+
+
+class PolicyReportResponse(BaseModel):
+    scenario_id: str = Field(description="Scenario identifier")
+    scenario_name: str = Field(description="User-defined scenario title")
+    station_id: int = Field(description="Station identifier")
+    station_name: str = Field(description="Station name")
+    baseline_pm25: float = Field(description="Baseline model predicted PM2.5 (ug/m3)")
+    counterfactual_pm25: float = Field(description="Simulated counterfactual PM2.5 (ug/m3)")
+    delta_pm25: float = Field(description="Absolute PM2.5 change (ug/m3)")
+    percent_change: float = Field(description="Percentage PM2.5 change (%)")
+    baseline_naqi: str = Field(description="Baseline CPCB NAQI tier")
+    counterfactual_naqi: str = Field(description="Simulated counterfactual CPCB NAQI tier")
+    report_title: str = Field(description="Executive brief title")
+    verdict: str = Field(description="Policy recommendation verdict: HIGHLY_RECOMMENDED, FEASIBLE_WITH_TARGETING, MODERATE_IMPACT, LOW_RETURN")
+    executive_summary: str = Field(description="Executive narrative summarizing policy effectiveness and municipal decision")
+    health_benefit_projection: str = Field(description="Epidemiological public health projection (e.g. ER visits avoided)")
+    economic_and_feasibility_analysis: str = Field(description="Capital cost, operational friction, and stakeholder compliance review")
+    action_plan: List[PolicyActionItem] = Field(description="Phased operational implementation roadmap")
+    markdown_content: str = Field(description="Full formatted Markdown text of the executive decision brief for download/copying")
+    generated_at: str = Field(description="ISO timestamp when AI policy report was synthesized")
+

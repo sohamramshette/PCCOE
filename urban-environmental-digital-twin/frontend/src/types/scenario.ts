@@ -6,12 +6,18 @@
 export type InterventionType = 
   | 'TRAFFIC_REDUCTION'
   | 'INDUSTRIAL_ACTIVITY_REDUCTION'
-  | 'COMBINED_INTERVENTION';
+  | 'COMBINED_INTERVENTION'
+  | 'EV_FLEET_TRANSITION'
+  | 'GREEN_BUFFER_EXPANSION'
+  | 'COMPREHENSIVE_POLICY';
 
 export interface InterventionParams {
   type: InterventionType;
   traffic_reduction_percent?: number | null;
   industrial_activity_reduction_percent?: number | null;
+  ev_fleet_transition_percent?: number | null;
+  green_buffer_increase_percent?: number | null;
+  construction_dust_suppression?: boolean | null;
 }
 
 export interface FeatureAuditItem {

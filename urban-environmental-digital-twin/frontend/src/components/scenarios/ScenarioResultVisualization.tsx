@@ -11,6 +11,8 @@ import {
   Minus,
   Car,
   Factory,
+  FileText,
+  Sparkles,
 } from 'lucide-react';
 import {
   ScenarioResponse,
@@ -31,6 +33,7 @@ interface ScenarioResultVisualizationProps {
   pastResults: ScenarioResultResponse[];
   running: boolean;
   stationName?: string;
+  onOpenReportModal?: () => void;
 }
 
 export const ScenarioResultVisualization: React.FC<ScenarioResultVisualizationProps> = ({
@@ -39,6 +42,7 @@ export const ScenarioResultVisualization: React.FC<ScenarioResultVisualizationPr
   pastResults,
   running,
   stationName = 'Monitoring Network',
+  onOpenReportModal,
 }) => {
   // 1. Loading State
   if (running) {
@@ -165,7 +169,31 @@ export const ScenarioResultVisualization: React.FC<ScenarioResultVisualizationPr
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+          {onOpenReportModal && (
+            <button
+              onClick={onOpenReportModal}
+              className="btn btn-primary"
+              style={{
+                background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+                border: 'none',
+                padding: '0.4rem 0.85rem',
+                fontSize: '0.8rem',
+                fontWeight: 600,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                boxShadow: '0 2px 8px rgba(99, 102, 241, 0.3)',
+                cursor: 'pointer',
+              }}
+              title="Generate comprehensive AI Policy Decision Brief"
+            >
+              <FileText size={15} />
+              <span>Decision Brief</span>
+              <Sparkles size={12} />
+            </button>
+          )}
+
           <span className="badge badge-success" style={{ fontWeight: 600 }}>
             {scenario?.simulation_status || 'COMPLETED'}
           </span>

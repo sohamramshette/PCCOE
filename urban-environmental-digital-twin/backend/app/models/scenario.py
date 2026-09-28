@@ -30,7 +30,7 @@ class Scenario(Base):
     traffic_reduction_pct = Column(Float, nullable=False, default=0.0, comment="Hypothetical traffic intensity reduction (%) [0.0, 100.0]")
     industrial_reduction_pct = Column(Float, nullable=False, default=0.0, comment="Hypothetical industrial emission curb (%) [0.0, 100.0]")
     construction_halt = Column(Boolean, nullable=False, default=False, comment="Hypothetical complete construction pause flag")
-    weather_reference_period = Column(String(50), nullable=True, comment="Meteorological reference baseline")
+    weather_reference_period = Column(Text, nullable=True, comment="Meteorological reference baseline or JSON metadata")
     
     # Audit & Status Tracking
     simulation_status = Column(String(20), nullable=False, default="DRAFT", comment="Status: DRAFT, QUEUED, COMPLETED, FAILED")

@@ -24,11 +24,17 @@ from backend.app.schemas.forecast import (
     ForecastResponse, ForecastUnavailableResponse,
     TrajectoryPoint, ForecastTrajectoryResponse
 )
-from backend.app.schemas.llm import ForecastExplanationResponse, ScenarioExplanationResponse
+from backend.app.schemas.llm import (
+    ForecastExplanationResponse,
+    ScenarioExplanationResponse,
+    PolicyActionItem,
+    PolicyReportResponse,
+)
 from backend.app.schemas.sync import StationSyncResult, OpenAQSyncResponse, SyncStatusResponse
 
 __all__ = [
     "PaginatedResponse", "ErrorResponse", "HealthResponse",
+
     "StationBase", "StationCreate", "StationRead", "StationDetail",
     "ObservationItem", "PaginatedObservations",
     "WeatherItem", "PaginatedWeather",
@@ -45,6 +51,8 @@ __all__ = [
     "ForecastResponse", "ForecastUnavailableResponse",
     "TrajectoryPoint", "ForecastTrajectoryResponse",
     "ForecastExplanationResponse", "ScenarioExplanationResponse",
+    "PolicyActionItem", "PolicyReportResponse",
     "StationSyncResult", "OpenAQSyncResponse", "SyncStatusResponse",
 ]
+
 

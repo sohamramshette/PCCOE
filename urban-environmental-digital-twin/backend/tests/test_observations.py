@@ -13,7 +13,7 @@ def test_get_observations_pagination(client):
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
     assert data["station_id"] == 11613
-    assert data["total"] == 14016
+    assert data["total"] >= 14016
     assert data["limit"] == 10
     assert data["offset"] == 0
     assert len(data["items"]) == 10

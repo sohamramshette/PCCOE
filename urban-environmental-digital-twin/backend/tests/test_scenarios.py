@@ -646,3 +646,120 @@ def test_thirty_percent_traffic_reduction_semantic_consistency(client: TestClien
     expected_cf = round(traffic_audit["baseline_value"] * 0.70, 4)
     assert abs(traffic_audit["counterfactual_value"] - expected_cf) <= 0.001
 
+
+def test_ev_fleet_transition_intervention(client: TestClient):
+    """
+    Test 27: Validates EV Fleet Transition policy lever.
+    Verifies creation, execution, and tailpipe combustion mitigation feature scaling.
+    """
+    create_res = client.post(
+        "/api/v1/scenarios",
+        json={
+            "scenario_name": "50% Fleet Electrification Mandate",
+            "station_id": VALID_STATION_ID,
+            "baseline_timestamp_utc": VALID_BASELINE_TIMESTAMP,
+            "model_id": "gradient_boosting_baseline",
+            "intervention": {
+                "type": "EV_FLEET_TRANSITION",
+                "ev_fleet_transition_percent": 50.0
+            },
+            "description": "50% public transit and commercial EV transition"
+        }
+    )
+    assert create_res.status_code == 201
+    scen_data = create_res.json()
+    scen_id = scen_data["scenario_id"]
+    assert scen_data["intervention"]["ev_fleet_transition_percent"] == 50.0
+
+    run_res = client.post(f"/api/v1/scenarios/{scen_id}/run")
+    assert run_res.status_code == 200
+    run_data = run_res.json()
+    assert "counterfactual_prediction_pm25" in run_data
+    assert "affected_features_audit" in run_data
+
+    # EV modifies traffic_stagnation_ratio and traffic_ventilation_ratio
+    ev_audit = next(
+        (item for item in run_data["affected_features_audit"] if item["feature_name"] == "traffic_stagnation_ratio"),
+        None
+    )
+    assert ev_audit is not None
+    assert "EV fleet transition" in ev_audit["transformation"]
+    assert "50.0%" in ev_audit["transformation"]
+
+
+def test_green_buffer_expansion_intervention(client: TestClient):
+    """
+    Test 28: Validates Green Buffer Zone Expansion policy lever.
+    Verifies that landuse_green_count increases and particulate dispersion ratio is attenuated.
+    """
+    create_res = client.post(
+        "/api/v1/scenarios",
+        json={
+            "scenario_name": "30% Urban Canopy Enhancement",
+            "station_id": VALID_STATION_ID,
+            "baseline_timestamp_utc": VALID_BASELINE_TIMESTAMP,
+            "model_id": "gradient_boosting_baseline",
+            "intervention": {
+                "type": "GREEN_BUFFER_EXPANSION",
+                "green_buffer_increase_percent": 30.0
+            },
+            "description": "Tree canopy and vegetative buffering expansion"
+        }
+    )
+    assert create_res.status_code == 201
+    scen_id = create_res.json()["scenario_id"]
+
+    run_res = client.post(f"/api/v1/scenarios/{scen_id}/run")
+    assert run_res.status_code == 200
+    run_data = run_res.json()
+    assert "counterfactual_prediction_pm25" in run_data
+
+    green_audit = next(
+        (item for item in run_data["affected_features_audit"] if item["feature_name"] == "landuse_green_count"),
+        None
+    )
+    assert green_audit is not None
+    assert "vegetative buffer increase" in green_audit["transformation"]
+    expected_green = round(green_audit["baseline_value"] * 1.15, 4)
+    assert abs(green_audit["counterfactual_value"] - expected_green) <= 0.001
+
+
+def test_comprehensive_multi_lever_policy(client: TestClient):
+    """
+    Test 29: Validates Comprehensive Multi-Lever Policy combining traffic curbs,
+    industrial limits, EV fleet transition, green buffers, and construction suppression.
+    """
+    create_res = client.post(
+        "/api/v1/scenarios",
+        json={
+            "scenario_name": "Pune Clean Air Action Plan 2026",
+            "station_id": VALID_STATION_ID,
+            "baseline_timestamp_utc": VALID_BASELINE_TIMESTAMP,
+            "model_id": "gradient_boosting_baseline",
+            "intervention": {
+                "type": "COMPREHENSIVE_POLICY",
+                "traffic_reduction_percent": 25.0,
+                "industrial_activity_reduction_percent": 20.0,
+                "ev_fleet_transition_percent": 30.0,
+                "green_buffer_increase_percent": 25.0,
+                "construction_dust_suppression": True
+            },
+            "description": "Multi-sector integrated clean air enforcement"
+        }
+    )
+    assert create_res.status_code == 201
+    scen_id = create_res.json()["scenario_id"]
+
+    run_res = client.post(f"/api/v1/scenarios/{scen_id}/run")
+    assert run_res.status_code == 200
+    run_data = run_res.json()
+    assert "counterfactual_prediction_pm25" in run_data
+    assert run_data["absolute_change_pm25"] <= 0.0
+
+    # Ensure all levers generated audits
+    feature_names = [a["feature_name"] for a in run_data["affected_features_audit"]]
+    assert "traffic_proxy_index" in feature_names
+    assert "has_industrial_within_1km" in feature_names or "industrial_dispersion_ratio" in feature_names
+    assert "landuse_green_count" in feature_names
+    assert "construction_elements_1_5km" in feature_names
+

@@ -64,6 +64,8 @@ FEATURE_PROVENANCE_CLASSIFICATION = {
     "poi_traffic_interaction": "DERIVED_INTERACTION",
     "has_industrial_within_1km": "STATIC_SPATIAL_PROXY",
     "industrial_dispersion_ratio": "DERIVED_INTERACTION",
+    "landuse_green_count": "VEGETATIVE_BUFFER_PROXY",
+    "construction_elements_1_5km": "CONSTRUCTION_DUST_PROXY",
 }
 
 
@@ -106,8 +108,11 @@ class ScenarioService:
         baseline_dt = cls._ensure_utc(req.baseline_timestamp_utc)
 
         # 4. Extract intervention parameters
-        traffic_pct = 0.0
-        industrial_pct = 0.0
+        traffic_pct = float(req.intervention.traffic_reduction_percent or 0.0)
+        industrial_pct = float(req.intervention.industrial_activity_reduction_percent or 0.0)
+        ev_pct = float(req.intervention.ev_fleet_transition_percent or 0.0)
+        green_pct = float(req.intervention.green_buffer_increase_percent or 0.0)
+        construction_halt = bool(req.intervention.construction_dust_suppression or False)
 
         if req.intervention.type == InterventionType.TRAFFIC_REDUCTION:
             traffic_pct = float(req.intervention.traffic_reduction_percent or 0.0)
@@ -116,12 +121,29 @@ class ScenarioService:
         elif req.intervention.type == InterventionType.COMBINED_INTERVENTION:
             traffic_pct = float(req.intervention.traffic_reduction_percent or 0.0)
             industrial_pct = float(req.intervention.industrial_activity_reduction_percent or 0.0)
+        elif req.intervention.type == InterventionType.EV_FLEET_TRANSITION:
+            ev_pct = float(req.intervention.ev_fleet_transition_percent or 0.0)
+        elif req.intervention.type == InterventionType.GREEN_BUFFER_EXPANSION:
+            green_pct = float(req.intervention.green_buffer_increase_percent or 0.0)
 
         # Validate bounds
         if not (0.0 <= traffic_pct <= 100.0):
             raise ScenarioValidationException(f"Traffic reduction percentage {traffic_pct} out of bounds [0, 100].")
         if not (0.0 <= industrial_pct <= 100.0):
             raise ScenarioValidationException(f"Industrial reduction percentage {industrial_pct} out of bounds [0, 100].")
+        if not (0.0 <= ev_pct <= 100.0):
+            raise ScenarioValidationException(f"EV fleet transition percentage {ev_pct} out of bounds [0, 100].")
+        if not (0.0 <= green_pct <= 100.0):
+            raise ScenarioValidationException(f"Green buffer percentage {green_pct} out of bounds [0, 100].")
+
+        meta_intervention = {
+            "type": req.intervention.type.value if hasattr(req.intervention.type, 'value') else str(req.intervention.type),
+            "traffic_reduction_percent": traffic_pct,
+            "industrial_activity_reduction_percent": industrial_pct,
+            "ev_fleet_transition_percent": ev_pct,
+            "green_buffer_increase_percent": green_pct,
+            "construction_dust_suppression": construction_halt,
+        }
 
         # 5. Persist scenario entity
         scenario_id = f"scen_{uuid.uuid4().hex[:12]}"
@@ -134,8 +156,8 @@ class ScenarioService:
             baseline_time_utc=baseline_dt,
             traffic_reduction_pct=traffic_pct,
             industrial_reduction_pct=industrial_pct,
-            construction_halt=False,
-            weather_reference_period=baseline_dt.isoformat(),
+            construction_halt=construction_halt,
+            weather_reference_period=json.dumps(meta_intervention),
             simulation_status="DRAFT",
             is_modeled_scenario=True,
             created_by=created_by,
@@ -145,6 +167,7 @@ class ScenarioService:
         db.commit()
         db.refresh(scenario)
         return scenario
+
 
     @classmethod
     def get_scenario(cls, db: Session, scenario_id: str) -> Optional[Scenario]:
@@ -173,8 +196,11 @@ class ScenarioService:
     def apply_intervention_to_features(
         cls,
         baseline_df: pd.DataFrame,
-        traffic_reduction_pct: float,
-        industrial_reduction_pct: float
+        traffic_reduction_pct: float = 0.0,
+        industrial_reduction_pct: float = 0.0,
+        ev_fleet_transition_pct: float = 0.0,
+        green_buffer_increase_pct: float = 0.0,
+        construction_dust_suppression: bool = False,
     ) -> Tuple[pd.DataFrame, List[FeatureAuditItem]]:
         """
         Creates a decoupled deep copy of baseline features and modifies ONLY the
@@ -186,9 +212,11 @@ class ScenarioService:
         # Multipliers
         m_traffic = 1.0 - (traffic_reduction_pct / 100.0)
         m_industrial = 1.0 - (industrial_reduction_pct / 100.0)
+        # EV fleet transition directly mitigates tailpipe exhaust (~65% of vehicle PM2.5)
+        m_ev = 1.0 - 0.65 * (ev_fleet_transition_pct / 100.0)
 
         # 1. Apply Traffic Intervention
-        if traffic_reduction_pct > 0.0 or traffic_reduction_pct == 0.0:
+        if traffic_reduction_pct > 0.0 or (traffic_reduction_pct == 0.0 and ev_fleet_transition_pct == 0.0 and green_buffer_increase_pct == 0.0 and not construction_dust_suppression):
             for feat in TRAFFIC_INTERVENTION_FEATURES:
                 if feat in cf_df.columns:
                     cf_df[feat] = cf_df[feat].astype(float)
@@ -207,8 +235,28 @@ class ScenarioService:
                         )
                     )
 
-        # 2. Apply Industrial Activity Intervention
-        if industrial_reduction_pct > 0.0 or industrial_reduction_pct == 0.0:
+        # 2. Apply EV Fleet Transition Intervention (reduces tailpipe stagnation/ventilation ratios)
+        if ev_fleet_transition_pct > 0.0:
+            for feat in ["traffic_stagnation_ratio", "traffic_ventilation_ratio"]:
+                if feat in cf_df.columns:
+                    cf_df[feat] = cf_df[feat].astype(float)
+                    base_val = float(cf_df[feat].iloc[0])
+                    cf_val = round(base_val * m_ev, 6)
+                    cf_df.at[0, feat] = cf_val
+                    delta = round(cf_val - base_val, 6)
+                    audit_items.append(
+                        FeatureAuditItem(
+                            feature_name=feat,
+                            baseline_value=round(base_val, 4),
+                            counterfactual_value=round(cf_val, 4),
+                            delta=round(delta, 4),
+                            transformation=f"{ev_fleet_transition_pct:.1f}% EV fleet transition (tailpipe x{m_ev:.4f})",
+                            classification="DERIVED_INTERACTION"
+                        )
+                    )
+
+        # 3. Apply Industrial Activity Intervention
+        if industrial_reduction_pct > 0.0 or (industrial_reduction_pct == 0.0 and ev_fleet_transition_pct == 0.0 and green_buffer_increase_pct == 0.0 and not construction_dust_suppression):
             for feat in INDUSTRIAL_INTERVENTION_FEATURES:
                 if feat in cf_df.columns:
                     cf_df[feat] = cf_df[feat].astype(float)
@@ -226,6 +274,60 @@ class ScenarioService:
                             classification=FEATURE_PROVENANCE_CLASSIFICATION.get(feat, "STATIC_SPATIAL_PROXY")
                         )
                     )
+
+        # 4. Apply Urban Green Buffer Expansion (increases vegetative sink & accelerates deposition)
+        if green_buffer_increase_pct > 0.0:
+            if "landuse_green_count" in cf_df.columns:
+                cf_df["landuse_green_count"] = cf_df["landuse_green_count"].astype(float)
+                base_val = float(baseline_df["landuse_green_count"].iloc[0])
+                cf_val = round(base_val * (1.0 + 0.5 * green_buffer_increase_pct / 100.0), 6)
+                cf_df.at[0, "landuse_green_count"] = cf_val
+                delta = round(cf_val - base_val, 6)
+                audit_items.append(
+                    FeatureAuditItem(
+                        feature_name="landuse_green_count",
+                        baseline_value=round(base_val, 4),
+                        counterfactual_value=round(cf_val, 4),
+                        delta=round(delta, 4),
+                        transformation=f"{green_buffer_increase_pct:.1f}% vegetative buffer increase",
+                        classification="VEGETATIVE_BUFFER_PROXY"
+                    )
+                )
+            if "industrial_dispersion_ratio" in cf_df.columns:
+                cf_df["industrial_dispersion_ratio"] = cf_df["industrial_dispersion_ratio"].astype(float)
+                base_val = float(cf_df["industrial_dispersion_ratio"].iloc[0])
+                cf_val = round(base_val / (1.0 + 0.15 * green_buffer_increase_pct / 100.0), 6)
+                cf_df.at[0, "industrial_dispersion_ratio"] = cf_val
+                delta = round(cf_val - base_val, 6)
+                audit_items.append(
+                    FeatureAuditItem(
+                        feature_name="industrial_dispersion_ratio",
+                        baseline_value=round(base_val, 4),
+                        counterfactual_value=round(cf_val, 4),
+                        delta=round(delta, 4),
+                        transformation=f"Green sink filtration reduction (-{green_buffer_increase_pct * 0.15:.1f}%)",
+                        classification="DERIVED_INTERACTION"
+                    )
+                )
+
+        # 5. Apply Construction Dust Suppression (65% fugitive dust containment)
+        if construction_dust_suppression:
+            if "construction_elements_1_5km" in cf_df.columns:
+                cf_df["construction_elements_1_5km"] = cf_df["construction_elements_1_5km"].astype(float)
+                base_val = float(baseline_df["construction_elements_1_5km"].iloc[0])
+                cf_val = round(base_val * 0.35, 6)
+                cf_df.at[0, "construction_elements_1_5km"] = cf_val
+                delta = round(cf_val - base_val, 6)
+                audit_items.append(
+                    FeatureAuditItem(
+                        feature_name="construction_elements_1_5km",
+                        baseline_value=round(base_val, 4),
+                        counterfactual_value=round(cf_val, 4),
+                        delta=round(delta, 4),
+                        transformation="65% fugitive dust suppression (screens & mist canons)",
+                        classification="CONSTRUCTION_DUST_PROXY"
+                    )
+                )
 
         return cf_df, audit_items
 
@@ -279,10 +381,25 @@ class ScenarioService:
         # 3. Construct counterfactual feature representation
         traffic_pct = scenario.traffic_reduction_pct
         industrial_pct = scenario.industrial_reduction_pct
+        
+        meta_intervention: Dict[str, Any] = {}
+        if scenario.weather_reference_period and scenario.weather_reference_period.startswith("{"):
+            try:
+                meta_intervention = json.loads(scenario.weather_reference_period)
+            except Exception:
+                pass
+
+        ev_pct = float(meta_intervention.get("ev_fleet_transition_percent", 0.0))
+        green_pct = float(meta_intervention.get("green_buffer_increase_percent", 0.0))
+        dust_halt = bool(scenario.construction_halt or meta_intervention.get("construction_dust_suppression", False))
+
         cf_df, audit_items = cls.apply_intervention_to_features(
             baseline_df=baseline_df,
             traffic_reduction_pct=traffic_pct,
-            industrial_reduction_pct=industrial_pct
+            industrial_reduction_pct=industrial_pct,
+            ev_fleet_transition_pct=ev_pct,
+            green_buffer_increase_pct=green_pct,
+            construction_dust_suppression=dust_halt,
         )
 
         # 4. Execute counterfactual forecast prediction
@@ -299,7 +416,9 @@ class ScenarioService:
 
         # Construct intervention description dict
         intervention_dict: Dict[str, Any] = {}
-        if traffic_pct > 0.0 and industrial_pct > 0.0:
+        if meta_intervention:
+            intervention_dict = meta_intervention
+        elif traffic_pct > 0.0 and industrial_pct > 0.0:
             intervention_dict = {
                 "type": "COMBINED_INTERVENTION",
                 "traffic_reduction_percent": traffic_pct,
@@ -315,6 +434,7 @@ class ScenarioService:
                 "type": "INDUSTRIAL_ACTIVITY_REDUCTION",
                 "industrial_activity_reduction_percent": industrial_pct
             }
+
 
         # Structured metadata
         execution_meta = {

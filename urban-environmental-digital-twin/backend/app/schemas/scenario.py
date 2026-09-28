@@ -16,12 +16,15 @@ class InterventionType(str, Enum):
     TRAFFIC_REDUCTION = "TRAFFIC_REDUCTION"
     INDUSTRIAL_ACTIVITY_REDUCTION = "INDUSTRIAL_ACTIVITY_REDUCTION"
     COMBINED_INTERVENTION = "COMBINED_INTERVENTION"
+    EV_FLEET_TRANSITION = "EV_FLEET_TRANSITION"
+    GREEN_BUFFER_EXPANSION = "GREEN_BUFFER_EXPANSION"
+    COMPREHENSIVE_POLICY = "COMPREHENSIVE_POLICY"
 
 
 class InterventionParams(BaseModel):
     type: InterventionType = Field(
         ...,
-        description="Hypothetical policy intervention type: TRAFFIC_REDUCTION, INDUSTRIAL_ACTIVITY_REDUCTION, or COMBINED_INTERVENTION"
+        description="Hypothetical policy intervention type: TRAFFIC_REDUCTION, INDUSTRIAL_ACTIVITY_REDUCTION, COMBINED_INTERVENTION, EV_FLEET_TRANSITION, GREEN_BUFFER_EXPANSION, or COMPREHENSIVE_POLICY"
     )
     traffic_reduction_percent: Optional[float] = Field(
         default=None,
@@ -34,6 +37,22 @@ class InterventionParams(BaseModel):
         ge=0.0,
         le=100.0,
         description="Hypothetical industrial activity curb percentage [0.0, 100.0]"
+    )
+    ev_fleet_transition_percent: Optional[float] = Field(
+        default=None,
+        ge=0.0,
+        le=100.0,
+        description="Hypothetical electric vehicle fleet transition percentage [0.0, 100.0]"
+    )
+    green_buffer_increase_percent: Optional[float] = Field(
+        default=None,
+        ge=0.0,
+        le=100.0,
+        description="Hypothetical urban green canopy buffer expansion percentage [0.0, 100.0]"
+    )
+    construction_dust_suppression: Optional[bool] = Field(
+        default=False,
+        description="Enforces strict 65% fugitive dust suppression along construction corridors"
     )
 
     @model_validator(mode="after")
@@ -49,7 +68,28 @@ class InterventionParams(BaseModel):
                 raise ValueError("traffic_reduction_percent is required for COMBINED_INTERVENTION.")
             if self.industrial_activity_reduction_percent is None:
                 raise ValueError("industrial_activity_reduction_percent is required for COMBINED_INTERVENTION.")
+        elif self.type == InterventionType.EV_FLEET_TRANSITION:
+            if self.ev_fleet_transition_percent is None:
+                raise ValueError("ev_fleet_transition_percent is required for EV_FLEET_TRANSITION intervention.")
+        elif self.type == InterventionType.GREEN_BUFFER_EXPANSION:
+            if self.green_buffer_increase_percent is None:
+                raise ValueError("green_buffer_increase_percent is required for GREEN_BUFFER_EXPANSION intervention.")
+        elif self.type == InterventionType.COMPREHENSIVE_POLICY:
+            active_count = 0
+            if (self.traffic_reduction_percent or 0.0) > 0.0:
+                active_count += 1
+            if (self.industrial_activity_reduction_percent or 0.0) > 0.0:
+                active_count += 1
+            if (self.ev_fleet_transition_percent or 0.0) > 0.0:
+                active_count += 1
+            if (self.green_buffer_increase_percent or 0.0) > 0.0:
+                active_count += 1
+            if self.construction_dust_suppression:
+                active_count += 1
+            if active_count == 0:
+                raise ValueError("At least one active policy lever is required for COMPREHENSIVE_POLICY.")
         return self
+
 
 
 class FeatureAuditItem(BaseModel):

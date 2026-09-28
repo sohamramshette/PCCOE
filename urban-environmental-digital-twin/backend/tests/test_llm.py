@@ -119,3 +119,87 @@ def test_scenario_explain_unrun_error(client):
     explain_resp = client.post(f"/api/v1/scenarios/{scenario_id}/explain")
     assert explain_resp.status_code == status.HTTP_400_BAD_REQUEST
     assert "has not been simulated yet" in explain_resp.json()["detail"]
+
+
+def test_scenario_policy_report_workflow(client):
+    """
+    Validates end-to-end generation of an AI Executive Policy Decision Brief
+    with health risk projections, feasibility analysis, phased action roadmap,
+    and downloadable Markdown content.
+    """
+    # 1. Create multi-lever scenario
+    create_payload = {
+        "scenario_name": "Executive Clean Air Taskforce 2026",
+        "description": "Multi-lever clean air trial for municipal policymaking",
+        "station_id": 11613,
+        "baseline_timestamp_utc": "2026-09-24T17:00:00Z",
+        "model_id": "gradient_boosting_baseline",
+        "intervention": {
+            "type": "COMPREHENSIVE_POLICY",
+            "traffic_reduction_percent": 30.0,
+            "industrial_activity_reduction_percent": 25.0,
+            "ev_fleet_transition_percent": 40.0,
+            "green_buffer_increase_percent": 20.0,
+            "construction_dust_suppression": True
+        }
+    }
+    create_resp = client.post("/api/v1/scenarios", json=create_payload)
+    assert create_resp.status_code == status.HTTP_201_CREATED
+    scenario_id = create_resp.json()["scenario_id"]
+
+    # 2. Run simulation
+    run_resp = client.post(f"/api/v1/scenarios/{scenario_id}/run")
+    assert run_resp.status_code == status.HTTP_200_OK
+
+    # 3. Request executive policy report
+    report_resp = client.post(f"/api/v1/scenarios/{scenario_id}/report")
+    assert report_resp.status_code == status.HTTP_200_OK
+    rep_data = report_resp.json()
+
+    assert "report_title" in rep_data
+    assert rep_data["verdict"] in [
+        "HIGHLY_RECOMMENDED",
+        "FEASIBLE_WITH_TARGETING",
+        "MODERATE_IMPACT",
+        "LOW_RETURN",
+        "RECOMMENDED_WITH_CONDITIONS",
+        "MODERATE_EFFICACY",
+        "LOW_FEASIBILITY_HIGH_COST",
+    ]
+    assert len(rep_data["executive_summary"]) > 20
+    assert len(rep_data["health_benefit_projection"]) > 20
+    assert len(rep_data["economic_and_feasibility_analysis"]) > 20
+    assert isinstance(rep_data["action_plan"], list)
+    assert len(rep_data["action_plan"]) >= 3
+    for item in rep_data["action_plan"]:
+        assert "phase" in item
+        assert "action" in item
+        assert "responsible_agency" in item
+        assert "target_metric" in item
+
+    assert "# " in rep_data["markdown_content"]
+    assert "## 1. Impact Matrix" in rep_data["markdown_content"]
+    assert "## 5. Phased Municipal Action Roadmap" in rep_data["markdown_content"]
+
+
+def test_scenario_policy_report_unrun_error(client):
+    """
+    Verifies that requesting a policy report for an unsimulated scenario returns 400.
+    """
+    create_payload = {
+        "scenario_name": "Unrun Report Scenario",
+        "station_id": 11613,
+        "baseline_timestamp_utc": "2026-09-24T17:00:00Z",
+        "model_id": "gradient_boosting_baseline",
+        "intervention": {
+            "type": "EV_FLEET_TRANSITION",
+            "ev_fleet_transition_percent": 30.0
+        }
+    }
+    create_resp = client.post("/api/v1/scenarios", json=create_payload)
+    assert create_resp.status_code == status.HTTP_201_CREATED
+    scenario_id = create_resp.json()["scenario_id"]
+
+    report_resp = client.post(f"/api/v1/scenarios/{scenario_id}/report")
+    assert report_resp.status_code == status.HTTP_400_BAD_REQUEST
+    assert "has not been simulated yet" in report_resp.json()["detail"]
