@@ -151,33 +151,33 @@ export const Dashboard: React.FC = () => {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <div className="dashboard-page" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* Top Banner / Summary */}
       <div
-        className="card"
+        className="card dashboard-summary-card"
         style={{
           background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(249, 115, 22, 0.04) 100%)',
           borderColor: 'var(--border-blue)',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.4rem' }}>
+        <div className="dashboard-summary-header">
+          <div className="dashboard-summary-copy">
+            <div className="dashboard-summary-badges">
               <span className="badge badge-observed">Continuous Monitoring</span>
               <span className="badge badge-reanalysis">ECMWF ERA5-Land Reanalysis</span>
             </div>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>Pune Urban Environmental Digital Twin</h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', maxWidth: '780px', marginTop: '0.3rem' }}>
+            <h2>Pune Urban Environmental Digital Twin</h2>
+            <p>
               Multi-source environmental intelligence fusing physical CAAQMS telemetry with atmospheric reanalysis
               and machine learning forecasting for the Pune & PCMC metropolitan corridor.
             </p>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <div className="form-group" style={{ margin: 0, minWidth: '220px' }}>
+          <div className="dashboard-summary-controls">
+            <div className="form-group dashboard-station-select-group">
               <label className="form-label" style={{ fontSize: '0.75rem' }}>Select Focus Station</label>
               <select
-                className="form-select"
+                className="form-select dashboard-station-select"
                 value={selectedStationId || ''}
                 onChange={(e) => setSelectedStationId(Number(e.target.value))}
               >
@@ -192,8 +192,7 @@ export const Dashboard: React.FC = () => {
               onClick={() => {
                 if (selectedStationId) setSelectedStationId(selectedStationId);
               }}
-              className="btn btn-secondary"
-              style={{ marginTop: '1.2rem', padding: '0.65rem' }}
+              className="btn btn-secondary dashboard-refresh-button"
               title="Refresh Station Data"
             >
               <RefreshCw size={16} />
@@ -334,7 +333,7 @@ export const Dashboard: React.FC = () => {
             <LoadingSpinner message="Loading atmospheric parameters..." />
           ) : latestWeather ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' }}>
+              <div className="weather-metric-grid">
                 <div style={{ background: '#ffffff', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                     <Thermometer size={14} color="#2563eb" /> Temperature
@@ -363,7 +362,7 @@ export const Dashboard: React.FC = () => {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem', fontSize: '0.85rem' }}>
+              <div className="weather-context-grid">
                 <div style={{ padding: '0.5rem 0.75rem', background: '#f8fafc', borderRadius: '6px' }}>
                   <span style={{ color: 'var(--text-muted)' }}>Surface Pressure:</span>{' '}
                   <strong>{formatNumber(latestWeather.pressure_hpa, 1)} hPa</strong>

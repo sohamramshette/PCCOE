@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Activity, ArrowDown, ArrowRight, ArrowUpRight, Database, MapPin, Wind } from 'lucide-react';
 import { getStations } from '../api/stations';
+import { FoldText } from '../components/landing/FoldText';
+import { LandingTreeBackground } from '../components/landing/LandingTreeBackground';
+import TechText from '../components/landing/TechText';
 import { PuneTwinMap } from '../components/map/PuneTwinMap';
 import { Station } from '../types/station';
 
@@ -12,7 +15,7 @@ const leafParticles = Array.from({ length: 16 }, (_, index) => ({
   duration: `${13 + Math.random() * 10}s`,
   width: `${8 + Math.random() * 7}px`,
   height: `${5 + Math.random() * 5}px`,
-  opacity: 0.25 + Math.random() * 0.3,
+  opacity: 0.52 + Math.random() * 0.28,
   rotation: `${Math.round(Math.random() * 360)}deg`,
 }));
 
@@ -41,6 +44,7 @@ export const LandingPage: React.FC = () => {
 
   return (
     <div className="landing-page">
+      <LandingTreeBackground />
       <div className="leaf-container" aria-hidden="true">
         {leafParticles.map((leaf) => (
           <span
@@ -71,8 +75,10 @@ export const LandingPage: React.FC = () => {
           <a href="#live-twin">Live Twin</a>
         </nav>
 
-        <Link to="/" className="btn btn-primary landing-nav-action">
-          Open dashboard <ArrowUpRight size={16} />
+        <Link to="/" className="btn btn-primary landing-nav-action" aria-label="Open dashboard" title="Open dashboard">
+          <span className="landing-nav-action-label">Open dashboard</span>
+          <span className="landing-nav-action-compact">Dashboard</span>
+          <ArrowUpRight size={16} />
         </Link>
       </header>
 
@@ -80,7 +86,35 @@ export const LandingPage: React.FC = () => {
         <section className="landing-hero" aria-labelledby="landing-title">
           <div className="landing-hero-copy">
             <span className="landing-eyebrow"><span className="landing-eyebrow-dot" /> PUNE · URBAN ENVIRONMENTAL DIGITAL TWIN</span>
-            <h1 id="landing-title">Pune’s air,<br />seen as a <span className="gradient-text">living system.</span></h1>
+            <h1 id="landing-title" aria-label="Pune’s air, seen as a living system.">
+              <TechText
+                className="landing-tech-title"
+                text="Pune’s air"
+                fontWeight={700}
+                fontSize={144}
+                color="#111827"
+                accentColor="#2f7a4d"
+                reveal="letter"
+                dashLength={4}
+                dashGap={2}
+                specks={15}
+              />
+              <FoldText
+                text="seen as a living system."
+                splitBy="word"
+                hinge="top"
+                trigger="mount"
+                duration={0.65}
+                stagger={0.045}
+                ease="power3.out"
+                perspective={700}
+                creaseShading={0.55}
+                fontSize="inherit"
+                fontWeight={700}
+                color="inherit"
+                className="gradient-text landing-fold-title"
+              />
+            </h1>
             <p>
               Explore ground observations, atmospheric reanalysis, next-hour forecasts, and policy scenarios in one connected view of the city.
             </p>

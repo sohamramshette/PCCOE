@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import {
   LayoutDashboard,
   MapPin,
@@ -71,29 +71,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
-        <div className="brand-title">
-          <div
-            style={{
-              width: 32,
-              height: 32,
-              borderRadius: 'var(--radius-md)',
-              background: 'linear-gradient(135deg, var(--primary), var(--accent))',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-            }}
-          >
-            <Activity size={20} />
-          </div>
+        <Link to="/welcome" className="brand-title" aria-label="Urban Twin Pune home">
+          <span className="landing-brand-mark" aria-hidden="true">
+            <Activity size={19} />
+          </span>
           <div className="brand-copy">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
               <span>Urban Twin</span>
-              <span className="brand-badge">PUNE</span>
+              <span className="landing-brand-city">PUNE</span>
             </div>
             <div className="brand-subtitle">Environmental Digital Twin</div>
           </div>
-        </div>
+        </Link>
         <button
           className="sidebar-toggle"
           type="button"
