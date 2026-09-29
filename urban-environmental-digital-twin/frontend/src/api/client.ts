@@ -4,7 +4,7 @@
  */
 
 const DEFAULT_API_URL = import.meta.env.PROD
-  ? 'https://pccoe-75ij.onrender.com'
+  ? 'https://pccoe-75ji.onrender.com'
   : 'http://localhost:8000';
 
 const RAW_API_URL =

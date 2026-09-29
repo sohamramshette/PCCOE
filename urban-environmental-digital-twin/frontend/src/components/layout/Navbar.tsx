@@ -28,7 +28,7 @@ export const Navbar: React.FC = () => {
         : 'PUNE · PCMC';
 
   const defaultApiUrl = import.meta.env.PROD
-    ? 'https://pccoe-75ij.onrender.com'
+    ? 'https://pccoe-75ji.onrender.com'
     : 'http://localhost:8000';
 
   const baseApiUrl = (
