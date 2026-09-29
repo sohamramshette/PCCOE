@@ -23,15 +23,15 @@ def test_get_sync_status(client):
 
 def test_trigger_openaq_sync_with_mock(client, monkeypatch):
     """Verifies that POST /api/v1/sync/openaq successfully ingests telemetry readings."""
-    # Mock OpenAQ API response
+    now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:00:00Z")
     sample_api_response = [
         {
             "sensorsId": 12236463,
             "value": 42.8,
             "parameter": {"name": "pm25"},
             "datetime": {
-                "utc": "2026-09-28T12:00:00Z",
-                "local": "2026-09-28T17:30:00+05:30"
+                "utc": now_iso,
+                "local": now_iso
             }
         },
         {
@@ -39,8 +39,8 @@ def test_trigger_openaq_sync_with_mock(client, monkeypatch):
             "value": 75.3,
             "parameter": {"name": "pm10"},
             "datetime": {
-                "utc": "2026-09-28T12:00:00Z",
-                "local": "2026-09-28T17:30:00+05:30"
+                "utc": now_iso,
+                "local": now_iso
             }
         }
     ]

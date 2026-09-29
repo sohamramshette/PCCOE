@@ -4,6 +4,7 @@ import L from 'leaflet';
 import { Station } from '../../types/station';
 import { ObservationItem } from '../../types/observation';
 import { InterpolatedGridPoint, CoordinateInterpolationResponse } from '../../types/spatial';
+import { AlertItem } from '../../types/alert';
 import { StationMarker } from './StationMarker';
 import { SpatialHeatmapLayer } from './SpatialHeatmapLayer';
 import { CustomPointInspector } from './CustomPointInspector';
@@ -37,6 +38,7 @@ interface PuneTwinMapProps {
   selectedStationId: number | null;
   onSelectStation: (stationId: number) => void;
   latestObservations: Record<number, ObservationItem | null>;
+  alertsByStation?: Record<number, AlertItem[]>;
   showTrafficBuffer: boolean;
   showActivityBuffer: boolean;
   showHeatmap?: boolean;
@@ -51,6 +53,7 @@ export const PuneTwinMap: React.FC<PuneTwinMapProps> = ({
   selectedStationId,
   onSelectStation,
   latestObservations,
+  alertsByStation = {},
   showTrafficBuffer,
   showActivityBuffer,
   showHeatmap = false,
@@ -105,6 +108,7 @@ export const PuneTwinMap: React.FC<PuneTwinMapProps> = ({
             station={station}
             isSelected={station.station_id === selectedStationId}
             latestObservation={latestObservations[station.station_id]}
+            alerts={alertsByStation[station.station_id] || []}
             onSelect={onSelectStation}
             showTrafficBuffer={showTrafficBuffer}
             showActivityBuffer={showActivityBuffer}

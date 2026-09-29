@@ -290,11 +290,42 @@ For a complete guide detailing tracked vs. generated files and end-to-end artifa
    ```bash
    python -m pytest backend/tests -v
    ```
-   *(50/50 automated tests must pass).*
+   *(54/54 automated tests must pass).*
 
 ---
 
-## 9. Security & Data Integrity Note
+## 9. Environmental Alert & Anomaly Engine
+
+The digital twin includes an autonomous **Environmental Alert & Anomaly Engine** that continuously scans incoming CAAQMS sensor telemetry, ERA5 atmospheric reanalysis, and machine learning forecast models to detect anomalies and manage the alert lifecycle.
+
+### Detection Capabilities
+1. **Regulatory Pollutant Exceedances (`PM25_THRESHOLD`, `PM10_THRESHOLD`, `NO2_THRESHOLD`, `SO2_THRESHOLD`, `CO_THRESHOLD`, `O3_THRESHOLD`):**
+   - Multi-tier thresholds aligned with Central Pollution Control Board (CPCB) National Ambient Air Quality Standards (NAAQS) and National AQI (NAQI) breakpoints (e.g., PM2.5 standard: 60 µg/m³, alert: 90 µg/m³, critical: 120 µg/m³).
+2. **PM2.5 Rapid Surge / Spike (`PM25_SPIKE`):**
+   - Detects sudden surges between consecutive hourly observations (e.g. +50% surge with minimum absolute threshold $\ge 15\,\mu\text{g/m}^3$ to suppress clean-air noise).
+3. **Statistical Outlier Detection (`PM25_ANOMALY`):**
+   - Evaluates a deterministic two-sided rolling $z$-score ($|z| \ge 2.5$) against the station's recent 24-hour baseline. Requires $\ge 6$ valid observations and baseline $\sigma \ge 2.0\,\mu\text{g/m}^3$. Missing physical values are never interpolated.
+4. **Forecast-vs-Actual Divergence (`FORECAST_DEVIATION`):**
+   - Compares ground-truth observed PM2.5 against previously served machine learning model predictions for the target hour ($|\text{actual} - \text{predicted}| \ge 20\,\mu\text{g/m}^3$).
+5. **Sensor Telemetry Health & Latency (`DATA_GAP`, `SENSOR_OFFLINE`):**
+   - Identifies telemetry dropouts exceeding 3 hours (`DATA_GAP`) or 6 hours (`SENSOR_OFFLINE`) without confusing missing sensor readings with zero concentrations.
+6. **Atmospheric Stagnation & Poor Dispersion (`LOW_WIND`, `LOW_PBL`, `ATMOSPHERIC_STAGNATION`):**
+   - Evaluates ERA5 boundary layer physics: wind speed $\le 1.0\,\text{m/s}$, PBL height $\le 250\,\text{m}$, or ventilation index (wind $\times$ PBL) $\le 500\,\text{m}^2/\text{s}$ according to WMO / EPA dispersion standards.
+
+### Alert Lifecycle & Deduplication
+- **Lifecycle States:** `ACTIVE` $\rightarrow$ `ACKNOWLEDGED` $\rightarrow$ `RESOLVED`.
+- **Deterministic Deduplication:** Prevents database bloat by matching `(station_id, alert_type, active_status)`. Existing active alerts have their observed values, deviations, and timestamps updated in place rather than creating duplicate rows.
+- **Automatic Resolution:** When the triggering physical or atmospheric condition clears, the engine automatically transitions the alert to `RESOLVED` and sets `ended_at`.
+- **Ingestion Pipeline Integration:** Evaluated synchronously during OpenAQ sync jobs (`OpenAQSyncService`), ensuring alerts update automatically as soon as new telemetry arrives.
+
+### Data Provenance & Limitations
+- **Data Provenance:** Every alert explicitly documents its origin (`OBSERVED`, `REANALYSIS`, `PREDICTED`, `DERIVED`).
+- **Null Safety:** Missing physical observations are strictly preserved as `NULL` and never coerced to 0.0.
+- **Analytical Nature:** Anomaly detection represents an analytical signal indicating statistical or regulatory deviation, not an automated causal explanation. Causality requires field investigation.
+
+---
+
+## 10. Security & Data Integrity Note
 
 - **Never commit secrets:** The `.env` file is git-ignored. Only `.env.example` with empty placeholders is committed.
 - **Model binaries:** Serialized model weights (`*.joblib`) and local databases (`*.db`, `*.sqlite`) are git-ignored.

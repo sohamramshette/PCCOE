@@ -31,6 +31,10 @@ from backend.app.schemas.llm import (
     PolicyReportResponse,
 )
 from backend.app.schemas.sync import StationSyncResult, OpenAQSyncResponse, SyncStatusResponse
+from backend.app.schemas.alert import (
+    AlertBase, AlertCreate, AlertUpdate, AlertRead, AlertSummary,
+    PaginatedAlerts, AlertEvaluationResult
+)
 
 __all__ = [
     "PaginatedResponse", "ErrorResponse", "HealthResponse",
@@ -53,6 +57,8 @@ __all__ = [
     "ForecastExplanationResponse", "ScenarioExplanationResponse",
     "PolicyActionItem", "PolicyReportResponse",
     "StationSyncResult", "OpenAQSyncResponse", "SyncStatusResponse",
+    "AlertBase", "AlertCreate", "AlertUpdate", "AlertRead", "AlertSummary",
+    "PaginatedAlerts", "AlertEvaluationResult",
 ]
 
 

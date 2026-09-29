@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import {
   MapPin,
@@ -11,14 +11,17 @@ import {
   Info,
   Radio,
   RefreshCw,
+  AlertTriangle,
 } from 'lucide-react';
 
 import { getStations } from '../api/stations';
 import { getObservations } from '../api/observations';
 import { getSpatialInterpolation, interpolateCoordinate } from '../api/spatial';
 import { triggerOpenAQSync } from '../api/sync';
+import { getActiveAlerts } from '../api/alerts';
 import { Station } from '../types/station';
 import { ObservationItem } from '../types/observation';
+import { AlertItem } from '../types/alert';
 import { InterpolatedGridPoint, CoordinateInterpolationResponse } from '../types/spatial';
 import { PuneTwinMap } from '../components/map/PuneTwinMap';
 import { MapLegend } from '../components/map/MapLegend';
@@ -87,6 +90,7 @@ export const DigitalTwinMap: React.FC = () => {
   const [lastSyncTime, setLastSyncTime] = useState<string>('Just now');
   const [isSyncingLive, setIsSyncingLive] = useState<boolean>(false);
   const [countdown, setCountdown] = useState<number>(30);
+  const [activeAlerts, setActiveAlerts] = useState<AlertItem[]>([]);
   
   // Layer controls
   const [showTrafficBuffer, setShowTrafficBuffer] = useState<boolean>(true);
@@ -105,6 +109,15 @@ export const DigitalTwinMap: React.FC = () => {
 
   const currentEpisode = ATMOSPHERIC_EPISODES.find((e) => e.id === selectedEpisodeId) || ATMOSPHERIC_EPISODES[0];
 
+  const alertsByStation = useMemo(() => {
+    const map: Record<number, AlertItem[]> = {};
+    for (const a of activeAlerts) {
+      if (!map[a.station_id]) map[a.station_id] = [];
+      map[a.station_id].push(a);
+    }
+    return map;
+  }, [activeAlerts]);
+
   const loadHeatmap = useCallback(async (powerVal: number = idwPower, timestamp?: string) => {
     try {
       setHeatmapLoading(true);
@@ -119,8 +132,8 @@ export const DigitalTwinMap: React.FC = () => {
 
   const refreshStationReadings = async (stationList: Station[], targetTimestamp?: string) => {
     const obsMap: Record<number, ObservationItem | null> = {};
-    await Promise.all(
-      stationList.map(async (st) => {
+    await Promise.all([
+      ...stationList.map(async (st) => {
         try {
           const obsRes = await getObservations(st.station_id, {
             limit: 1,
@@ -132,8 +145,16 @@ export const DigitalTwinMap: React.FC = () => {
         } catch {
           obsMap[st.station_id] = null;
         }
-      })
-    );
+      }),
+      (async () => {
+        try {
+          const freshAlerts = await getActiveAlerts();
+          setActiveAlerts(freshAlerts || []);
+        } catch {
+          // ignore background alert fetch error
+        }
+      })()
+    ]);
     setLatestObservations(obsMap);
   };
 
@@ -615,6 +636,7 @@ export const DigitalTwinMap: React.FC = () => {
                 selectedStationId={selectedStationId}
                 onSelectStation={(id) => setSelectedStationId(id)}
                 latestObservations={latestObservations}
+                alertsByStation={alertsByStation}
                 showTrafficBuffer={showTrafficBuffer}
                 showActivityBuffer={showActivityBuffer}
                 showHeatmap={showHeatmap}
@@ -728,6 +750,8 @@ export const DigitalTwinMap: React.FC = () => {
                   const obs = latestObservations[station.station_id];
                   const hasVal = obs && obs.pm25 !== null && obs.pm25 !== undefined;
 
+                  const stationAlertCount = alertsByStation[station.station_id]?.length || 0;
+
                   return (
                     <div
                       key={station.station_id}
@@ -735,7 +759,29 @@ export const DigitalTwinMap: React.FC = () => {
                       className={`twin-station-item ${isSelected ? 'active' : ''}`}
                     >
                       <div className="twin-station-info">
-                        <div className="twin-station-name">{station.station_name}</div>
+                        <div className="twin-station-name" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                          <span>{station.station_name}</span>
+                          {stationAlertCount > 0 && (
+                            <span
+                              style={{
+                                padding: '1px 5px',
+                                borderRadius: '4px',
+                                backgroundColor: '#fee2e2',
+                                color: '#b91c1c',
+                                fontSize: '10px',
+                                fontWeight: 700,
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '2px',
+                                border: '1px solid #fca5a5',
+                              }}
+                              title={`${stationAlertCount} active environmental anomalies`}
+                            >
+                              <AlertTriangle size={10} />
+                              <span>{stationAlertCount}</span>
+                            </span>
+                          )}
+                        </div>
                         <div className="twin-station-meta">
                           <span>ID: {station.station_id}</span>
                           <span>•</span>
@@ -773,6 +819,39 @@ export const DigitalTwinMap: React.FC = () => {
                     <span className="badge badge-success">ACTIVE</span>
                   </div>
 
+                  {/* Active Station Alerts Banner */}
+                  {(alertsByStation[selectedStation.station_id]?.length || 0) > 0 && (
+                    <div
+                      style={{
+                        margin: '0.5rem 0 0.75rem 0',
+                        padding: '0.6rem 0.75rem',
+                        backgroundColor: '#fee2e2',
+                        border: '1px solid #fca5a5',
+                        borderRadius: 'var(--radius-sm)',
+                        fontSize: '0.8rem',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.2rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontWeight: 700, color: '#991b1b' }}>
+                          <AlertTriangle size={13} />
+                          <span>
+                            {alertsByStation[selectedStation.station_id].length} Active Alert
+                            {alertsByStation[selectedStation.station_id].length > 1 ? 's' : ''}
+                          </span>
+                        </div>
+                        <Link
+                          to={`/alerts?station_id=${selectedStation.station_id}`}
+                          style={{ color: '#b91c1c', fontWeight: 600, fontSize: '0.75rem' }}
+                        >
+                          View all →
+                        </Link>
+                      </div>
+                      <div style={{ color: '#7f1d1d', fontSize: '0.75rem', lineHeight: 1.35 }}>
+                        {alertsByStation[selectedStation.station_id][0].message}
+                      </div>
+                    </div>
+                  )}
+
                   <div className="selected-station-grid">
                     <div className="diag-stat">
                       <div className="diag-label">Station ID</div>
@@ -794,7 +873,7 @@ export const DigitalTwinMap: React.FC = () => {
                     </div>
                   </div>
 
-                  <div style={{ marginTop: '1rem' }}>
+                  <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                     <Link
                       to={`/stations/${selectedStation.station_id}`}
                       className="btn btn-primary btn-sm w-full"
@@ -803,6 +882,15 @@ export const DigitalTwinMap: React.FC = () => {
                       <span>Explore Station Diagnostics</span>
                       <ArrowRight size={14} />
                     </Link>
+                    {(alertsByStation[selectedStation.station_id]?.length || 0) > 0 && (
+                      <Link
+                        to={`/alerts?station_id=${selectedStation.station_id}`}
+                        className="btn btn-secondary btn-sm w-full"
+                        style={{ justifyContent: 'center', color: '#b91c1c' }}
+                      >
+                        <span>Manage Station Alerts ({alertsByStation[selectedStation.station_id].length})</span>
+                      </Link>
+                    )}
                   </div>
                 </div>
               )}

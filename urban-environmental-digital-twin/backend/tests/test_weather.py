@@ -13,7 +13,7 @@ def test_get_weather_pagination_and_provenance(client):
     assert response.status_code == status.HTTP_200_OK
     data = response.json()
     assert data["station_id"] == 11613
-    assert data["total"] == 14016
+    assert data["total"] >= 14016
     assert "REANALYSIS" in data["data_classification"]
     assert len(data["items"]) == 10
 

@@ -949,6 +949,28 @@ Any AI coding agent working on this repository MUST:
   - Configured navigation in `Sidebar.tsx` and routes in `App.tsx` with smooth SPA routing and page reload capability.
   - Full documentation in `docs/phase_13_model_performance_methodology_report.md`.
 
+- [x] **Phase 14: Environmental Alert & Anomaly Engine:** **COMPLETED & VERIFIED (54/54 TESTS PASSED, ZERO FRONTEND BUILD ERRORS)**.
+  - Implemented complete autonomous Alert & Anomaly Engine across backend and frontend.
+  - **SQLAlchemy Entity & Database Migration:**
+    * Entity `Alert` in `backend/app/models/alert.py` with enums `AlertStatus` (`ACTIVE`, `ACKNOWLEDGED`, `RESOLVED`), `AlertSeverity` (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`), and `AlertType` (15 distinct categories).
+    * Alembic migration `0004_alerts_engine.py` applied to PostgreSQL/Supabase database.
+  - **Centralized Configuration:**
+    * `backend/app/config/alert_thresholds.py` centralizing CPCB NAAQS standards, NAQI breakpoints, spike criteria, and WMO stagnation ventilation bounds.
+  - **Scientific Anomaly Detection:**
+    * Pure deterministic detection algorithms in `backend/app/services/anomaly_service.py`: pollutant exceedances, PM2.5 spikes, rolling z-score baseline anomalies, forecast-vs-actual divergence, telemetry dropouts, and atmospheric stagnation.
+  - **Alert Service & Deduplication:**
+    * `backend/app/services/alert_service.py` manages lifecycle transitions, automatic condition-based resolution, and strict deduplication without duplicate row creation.
+  - **Ingestion Pipeline Hook:**
+    * Integrated with `OpenAQSyncService` in `backend/app/services/openaq_service.py` with fault-tolerant non-fatal evaluation.
+  - **FastAPI Endpoints:**
+    * `GET /api/v1/alerts`, `GET /api/v1/alerts/active`, `GET /api/v1/alerts/summary`, `GET /api/v1/alerts/{alert_id}`, `GET /api/v1/stations/{station_id}/alerts`, `POST /api/v1/alerts/{alert_id}/acknowledge`, `POST /api/v1/alerts/{alert_id}/resolve`, `POST /api/v1/alerts/evaluate`.
+  - **Frontend UI & Components:**
+    * Dedicated alerts page `/alerts` (`Alerts.tsx`), `AlertSeverityBadge.tsx`, `AlertCard.tsx`, `AlertTable.tsx`, `AlertDetailModal.tsx`.
+    * Active Environmental Alerts widget on `Dashboard.tsx`.
+    * Pulsing station alert indicators and popup deep-dive links on `PuneTwinMap.tsx` / `DigitalTwinMap.tsx`.
+  - **Verification:**
+    * 16 dedicated unit and integration tests in `backend/tests/test_alerts.py`. All 54 automated backend tests pass. Frontend TypeScript compiles and production bundle builds with zero errors.
+
 ---
 
 # 28. PROJECT COMPLETION CHECKLIST

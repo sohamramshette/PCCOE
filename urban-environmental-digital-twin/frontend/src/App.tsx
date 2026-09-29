@@ -9,6 +9,7 @@ import { Scenarios } from './pages/Scenarios';
 import { DigitalTwinMap } from './pages/DigitalTwinMap';
 import { ModelPerformance } from './pages/ModelPerformance';
 import { DataMethodology } from './pages/DataMethodology';
+import { Alerts } from './pages/Alerts';
 import { LandingPage } from './pages/LandingPage';
 
 export const App: React.FC = () => {
@@ -21,6 +22,7 @@ export const App: React.FC = () => {
           <Route path="stations" element={<Stations />} />
           <Route path="stations/:stationId" element={<StationDetails />} />
           <Route path="digital-twin" element={<DigitalTwinMap />} />
+          <Route path="alerts" element={<Alerts />} />
           <Route path="forecast" element={<Forecast />} />
           <Route path="scenarios" element={<Scenarios />} />
           <Route path="model-performance" element={<ModelPerformance />} />

@@ -3,20 +3,26 @@ import { Link } from 'react-router-dom';
 import { MapPin, ArrowRight, Activity } from 'lucide-react';
 import { Station } from '../../types/station';
 import { ObservationItem } from '../../types/observation';
+import { AlertItem } from '../../types/alert';
+import { AlertSeverityBadge } from '../alerts/AlertSeverityBadge';
+import { formatAlertTypeName } from '../alerts/AlertCard';
 import { ProvenanceBadge } from '../common/ProvenanceBadge';
 import { formatNumber, formatDateTime } from '../../utils/formatters';
 
 interface StationPopupProps {
   station: Station;
   latestObservation?: ObservationItem | null;
+  alerts?: AlertItem[];
 }
 
 export const StationPopup: React.FC<StationPopupProps> = ({
   station,
   latestObservation,
+  alerts = [],
 }) => {
   const hasObservation = latestObservation && latestObservation.pm25 !== null && latestObservation.pm25 !== undefined;
   const pm25Value = hasObservation ? latestObservation.pm25 : null;
+  const activeAlerts = alerts.filter((a) => a.status === 'ACTIVE' || a.status === 'ACKNOWLEDGED');
 
   return (
     <div className="station-popup-content">
@@ -33,6 +39,33 @@ export const StationPopup: React.FC<StationPopupProps> = ({
       </div>
 
       <div className="station-popup-body">
+        {/* Active Alerts Banner if present */}
+        {activeAlerts.length > 0 && (
+          <div
+            style={{
+              padding: '0.5rem 0.65rem',
+              backgroundColor: '#fee2e2',
+              border: '1px solid #fca5a5',
+              borderRadius: 'var(--radius-sm)',
+              marginBottom: '0.6rem',
+              fontSize: '0.78rem',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontWeight: 700, color: '#991b1b' }}>
+                <AlertSeverityBadge severity={activeAlerts[0].severity} size="sm" />
+                <span>{activeAlerts.length} Active Alert{activeAlerts.length > 1 ? 's' : ''}</span>
+              </div>
+              <Link to={`/alerts?station_id=${station.station_id}`} style={{ color: '#b91c1c', fontWeight: 600, fontSize: '0.72rem' }}>
+                View all →
+              </Link>
+            </div>
+            <div style={{ color: '#7f1d1d', lineHeight: 1.3 }}>
+              <strong>{formatAlertTypeName(activeAlerts[0].alert_type)}:</strong> {activeAlerts[0].message}
+            </div>
+          </div>
+        )}
+
         <div className="station-popup-row">
           <span className="popup-label">Authority:</span>
           <span className="popup-value">{station.monitoring_authority}</span>
@@ -77,7 +110,7 @@ export const StationPopup: React.FC<StationPopupProps> = ({
         </div>
       </div>
 
-      <div className="station-popup-footer">
+      <div className="station-popup-footer" style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
         <Link
           to={`/stations/${station.station_id}`}
           className="btn btn-primary btn-sm w-full"
@@ -86,6 +119,15 @@ export const StationPopup: React.FC<StationPopupProps> = ({
           <span>View Station Details</span>
           <ArrowRight size={14} />
         </Link>
+        {activeAlerts.length > 0 && (
+          <Link
+            to={`/alerts?station_id=${station.station_id}`}
+            className="btn btn-secondary btn-sm w-full"
+            style={{ justifyContent: 'center', fontSize: '0.78rem' }}
+          >
+            <span>Inspect {activeAlerts.length} Station Alert{activeAlerts.length > 1 ? 's' : ''}</span>
+          </Link>
+        )}
       </div>
     </div>
   );

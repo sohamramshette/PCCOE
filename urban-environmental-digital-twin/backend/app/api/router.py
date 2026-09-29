@@ -16,6 +16,7 @@ from backend.app.api.routes import (
     scenarios,
     spatial,
     sync,
+    alerts,
 )
 
 api_router = APIRouter()
@@ -33,4 +34,5 @@ api_router.include_router(forecast.router)
 api_router.include_router(scenarios.router)
 api_router.include_router(spatial.router)
 api_router.include_router(sync.router)
+api_router.include_router(alerts.router)
 

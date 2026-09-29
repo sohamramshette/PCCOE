@@ -10,21 +10,25 @@ import {
   ArrowRight,
   RefreshCw,
   Info,
+  AlertTriangle,
 } from 'lucide-react';
 import { getStations } from '../api/stations';
 import { getObservations } from '../api/observations';
 import { getWeather } from '../api/weather';
 import { getForecast } from '../api/forecast';
 import { getModels } from '../api/models';
+import { getActiveAlerts } from '../api/alerts';
 import { Station } from '../types/station';
 import { ObservationItem } from '../types/observation';
 import { WeatherItem } from '../types/weather';
 import { ForecastResponse } from '../types/forecast';
 import { ModelSummary } from '../types/model';
+import { Alert } from '../types/alert';
 import { LoadingSpinner } from '../components/common/LoadingSpinner';
 import { ErrorDisplay } from '../components/common/ErrorDisplay';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';
 import { AqiPill } from '../components/common/AqiPill';
+import { AlertSeverityBadge } from '../components/alerts/AlertSeverityBadge';
 import { Pm25TimeSeriesChart, ChartDataPoint } from '../components/charts/Pm25TimeSeriesChart';
 import { formatNumber, formatDateTime, parseUtcDate, isWithinCanonicalPeriod } from '../utils/formatters';
 
@@ -35,22 +39,28 @@ export const Dashboard: React.FC = () => {
   const [weatherItems, setWeatherItems] = useState<WeatherItem[]>([]);
   const [forecast, setForecast] = useState<ForecastResponse | null>(null);
   const [models, setModels] = useState<ModelSummary[]>([]);
+  const [activeAlerts, setActiveAlerts] = useState<Alert[]>([]);
   
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingDetails, setLoadingDetails] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Initial load: stations and models
+  // Initial load: stations, models, and active alerts
   const loadInitialData = async () => {
     try {
       setLoading(true);
       setError(null);
-      const [stationList, modelList] = await Promise.all([
+      const [stationList, modelList, alertsList] = await Promise.all([
         getStations(true),
         getModels(),
+        getActiveAlerts().catch((err) => {
+          console.error('Failed to load active alerts:', err);
+          return [] as Alert[];
+        }),
       ]);
       setStations(stationList);
       setModels(modelList);
+      setActiveAlerts(alertsList);
       if (stationList.length > 0 && selectedStationId === null) {
         setSelectedStationId(stationList[0].station_id);
       }
@@ -266,6 +276,136 @@ export const Dashboard: React.FC = () => {
             Test MAE: <strong>4.10 µg/m³</strong> (HistGradientBoosting)
           </div>
         </div>
+      </div>
+
+      {/* Active Environmental Alerts Card */}
+      <div
+        className="card"
+        style={{
+          borderLeft: activeAlerts.length > 0 ? '4px solid #ef4444' : '4px solid #10b981',
+          background:
+            activeAlerts.length > 0
+              ? 'linear-gradient(135deg, rgba(239, 68, 68, 0.03) 0%, #ffffff 100%)'
+              : '#ffffff',
+        }}
+      >
+        <div
+          className="card-header"
+          style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}
+        >
+          <div>
+            <div className="card-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <AlertTriangle size={18} color={activeAlerts.length > 0 ? '#ef4444' : '#10b981'} />
+              <span>Active Environmental Alerts</span>
+              <span
+                style={{
+                  fontSize: '0.8rem',
+                  fontWeight: 700,
+                  padding: '0.15rem 0.55rem',
+                  borderRadius: '9999px',
+                  backgroundColor: activeAlerts.length > 0 ? 'rgba(239, 68, 68, 0.12)' : 'rgba(16, 185, 129, 0.12)',
+                  color: activeAlerts.length > 0 ? '#b91c1c' : '#047857',
+                }}
+              >
+                {activeAlerts.length}
+              </span>
+            </div>
+            <div className="card-subtitle">
+              Continuous CAAQMS anomaly detection & dispersion limit monitoring
+            </div>
+          </div>
+          <Link
+            to="/alerts"
+            style={{
+              fontSize: '0.85rem',
+              fontWeight: 600,
+              color: 'var(--primary)',
+              textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              padding: '0.35rem 0.75rem',
+              borderRadius: '6px',
+              backgroundColor: 'rgba(37, 99, 235, 0.08)',
+              border: '1px solid rgba(37, 99, 235, 0.2)',
+            }}
+          >
+            <span>View All Alerts →</span>
+          </Link>
+        </div>
+
+        {activeAlerts.length === 0 ? (
+          <div
+            style={{
+              padding: '0.75rem 0',
+              color: 'var(--text-muted)',
+              fontSize: '0.875rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            }}
+          >
+            <span>✓ All CAAQMS stations report nominal parameters within regulatory thresholds and dispersion bounds.</span>
+          </div>
+        ) : (
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '1rem',
+              marginTop: '0.75rem',
+            }}
+          >
+            {activeAlerts.slice(0, 4).map((alert) => (
+              <div
+                key={alert.alert_id}
+                style={{
+                  padding: '0.85rem 1rem',
+                  backgroundColor: '#f8fafc',
+                  borderRadius: '8px',
+                  border: '1px solid var(--border-subtle)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.35rem',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <AlertSeverityBadge severity={alert.severity} />
+                  <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                    {formatDateTime(alert.detected_at)}
+                  </span>
+                </div>
+                <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--text-dark)', marginTop: '0.2rem' }}>
+                  {alert.station_name || `Station #${alert.station_id}`}
+                </div>
+                <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#334155' }}>
+                  {alert.alert_type.replace(/_/g, ' ')}
+                </div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                  {alert.observed_value !== null && alert.expected_value !== null ? (
+                    <span>
+                      <strong>{formatNumber(alert.observed_value, 1)}</strong>
+                      {alert.pollutant ? ' µg/m³' : ''} vs expected{' '}
+                      <strong>{formatNumber(alert.expected_value, 1)}</strong>
+                      {alert.pollutant ? ' µg/m³' : ''}
+                    </span>
+                  ) : alert.deviation != null ? (
+                    <span>
+                      Deviation:{' '}
+                      <strong>
+                        {alert.deviation > 0 ? '+' : ''}
+                        {formatNumber(alert.deviation, 1)}
+                      </strong>
+                      {alert.pollutant ? ' µg/m³' : ''}
+                    </span>
+                  ) : (
+                    <span>{alert.message}</span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Main Grid: Time Series & Weather Context */}

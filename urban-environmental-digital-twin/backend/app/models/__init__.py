@@ -14,6 +14,7 @@ from backend.app.models.traffic import TrafficProxy
 from backend.app.models.model_registry import ModelRegistry
 from backend.app.models.prediction import ModelPrediction
 from backend.app.models.scenario import Scenario, ScenarioResult
+from backend.app.models.alert import Alert, AlertStatus, AlertSeverity, AlertType
 
 __all__ = [
     "Base",
@@ -28,4 +29,8 @@ __all__ = [
     "ModelPrediction",
     "Scenario",
     "ScenarioResult",
+    "Alert",
+    "AlertStatus",
+    "AlertSeverity",
+    "AlertType",
 ]

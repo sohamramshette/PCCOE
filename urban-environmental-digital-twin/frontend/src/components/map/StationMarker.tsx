@@ -3,12 +3,14 @@ import { Marker, Popup, Circle } from 'react-leaflet';
 import L from 'leaflet';
 import { Station } from '../../types/station';
 import { ObservationItem } from '../../types/observation';
+import { AlertItem } from '../../types/alert';
 import { StationPopup } from './StationPopup';
 
 interface StationMarkerProps {
   station: Station;
   isSelected: boolean;
   latestObservation?: ObservationItem | null;
+  alerts?: AlertItem[];
   onSelect: (stationId: number) => void;
   showTrafficBuffer: boolean;
   showActivityBuffer: boolean;
@@ -18,6 +20,7 @@ export const StationMarker: React.FC<StationMarkerProps> = ({
   station,
   isSelected,
   latestObservation,
+  alerts = [],
   onSelect,
   showTrafficBuffer,
   showActivityBuffer,
@@ -31,12 +34,15 @@ export const StationMarker: React.FC<StationMarkerProps> = ({
     }
   }, [isSelected]);
 
+  const hasActiveAlerts = alerts && alerts.length > 0;
+
   const customIcon = L.divIcon({
     className: 'custom-station-marker-wrapper',
     html: `
-      <div class="custom-station-pin ${isSelected ? 'selected' : ''}" title="${station.station_name}">
+      <div class="custom-station-pin ${isSelected ? 'selected' : ''} ${hasActiveAlerts ? 'has-alert' : ''}" title="${station.station_name}${hasActiveAlerts ? ` (${alerts.length} active alerts)` : ''}">
         <div class="pin-badge">
           <span class="pin-id">${station.station_id}</span>
+          ${hasActiveAlerts ? `<span class="pin-alert-count">${alerts.length}</span>` : ''}
         </div>
         <div class="pin-pulse"></div>
       </div>
@@ -88,7 +94,7 @@ export const StationMarker: React.FC<StationMarkerProps> = ({
         }}
       >
         <Popup className="custom-leaflet-popup" autoPan={true} closeButton={true}>
-          <StationPopup station={station} latestObservation={latestObservation} />
+          <StationPopup station={station} latestObservation={latestObservation} alerts={alerts} />
         </Popup>
       </Marker>
     </>

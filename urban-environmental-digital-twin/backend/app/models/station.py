@@ -32,6 +32,7 @@ class Station(Base):
     activity_exposure = relationship("StationActivityExposure", back_populates="station", uselist=False, cascade="all, delete-orphan")
     predictions = relationship("ModelPrediction", back_populates="station", cascade="all, delete-orphan")
     scenarios = relationship("Scenario", back_populates="station")
+    alerts = relationship("Alert", back_populates="station", cascade="all, delete-orphan")
 
     def __repr__(self) -> str:
         return f"<Station(id={self.station_id}, name='{self.station_name}', zone='{self.zone_type}')>"

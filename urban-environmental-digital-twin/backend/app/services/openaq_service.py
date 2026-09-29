@@ -303,6 +303,25 @@ class OpenAQSyncService:
                 db.rollback()
                 logger.error(f"Failed to commit synchronized observations: {e}")
 
+        # Trigger Environmental Alert & Anomaly Engine evaluation
+        alert_summary = None
+        try:
+            from backend.app.services.alert_service import AlertService
+            alert_eval_res = AlertService.evaluate_all_stations(db=db, evaluation_time=now_utc)
+            alert_summary = {
+                "alerts_created": alert_eval_res.alerts_created,
+                "alerts_updated": alert_eval_res.alerts_updated,
+                "alerts_resolved": alert_eval_res.alerts_resolved,
+                "active_total": alert_eval_res.active_total
+            }
+            logger.info(
+                f"Alert evaluation completed after sync: {alert_eval_res.alerts_created} created, "
+                f"{alert_eval_res.alerts_updated} updated, {alert_eval_res.alerts_resolved} resolved. "
+                f"Active alerts: {alert_eval_res.active_total}."
+            )
+        except Exception as alert_err:
+            logger.warning(f"Non-fatal alert evaluation failure following sync: {alert_err}")
+
         cls._last_sync_time = now_utc
         cls._last_sync_status = "SUCCESS" if successful_stations > 0 else "PARTIAL"
         cls._total_synced_count += records_ingested
@@ -314,6 +333,7 @@ class OpenAQSyncService:
             "stations_successful": successful_stations,
             "records_ingested": records_ingested,
             "records_updated": records_updated,
+            "alerts": alert_summary,
             "details": results
         }
 

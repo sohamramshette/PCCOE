@@ -79,6 +79,17 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.error(f"Failed to initialize model serving artifacts during startup: {e}")
 
+    # Ensure canonical environmental alerts are populated if table is empty
+    try:
+        from backend.app.models.alert import Alert
+        with SessionLocal() as db:
+            if db.query(Alert).count() == 0:
+                from backend.scripts.seed_alerts import seed_alerts
+                logger.info("Alerts table empty. Seeding canonical environmental alerts...")
+                seed_alerts(db)
+    except Exception as e:
+        logger.warning(f"Non-fatal alert auto-seed check skipped: {e}")
+
     sync_task = None
     if settings.APP_ENV != "testing":
         sync_task = asyncio.create_task(scheduled_telemetry_sync())

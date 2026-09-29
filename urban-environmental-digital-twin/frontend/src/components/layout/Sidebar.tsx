@@ -11,6 +11,7 @@ import {
   BookOpen,
   PanelLeftClose,
   PanelLeftOpen,
+  AlertTriangle,
 } from 'lucide-react';
 import { getHealth } from '../../api/health';
 import { HealthResponse } from '../../types/common';
@@ -55,6 +56,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
         { to: '/', label: 'Dashboard', icon: <LayoutDashboard size={18} /> },
         { to: '/stations', label: 'Stations', icon: <MapPin size={18} /> },
         { to: '/digital-twin', label: 'Pune Digital Twin', icon: <Layers size={18} /> },
+        { to: '/alerts', label: 'Alerts & Events', icon: <AlertTriangle size={18} /> },
       ],
     },
     {
