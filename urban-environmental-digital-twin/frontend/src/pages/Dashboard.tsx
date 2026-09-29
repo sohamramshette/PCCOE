@@ -75,8 +75,8 @@ export const Dashboard: React.FC = () => {
         setLoadingDetails(true);
         // Fetch the last 48 hourly observations and weather for the station
         const [obsRes, weatherRes] = await Promise.all([
-          getObservations(selectedStationId, { limit: 48, offset: 0 }),
-          getWeather(selectedStationId, { limit: 24, offset: 0 }),
+          getObservations(selectedStationId, { limit: 48, offset: 0, order: 'desc', valid_pm25_only: true }),
+          getWeather(selectedStationId, { limit: 24, offset: 0, order: 'desc' }),
         ]);
 
         if (!isCurrent) return;

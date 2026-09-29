@@ -50,9 +50,9 @@ export const StationDetails: React.FC = () => {
       setError(null);
       const [stationRes, obsRes, weatherRes, predRes] = await Promise.all([
         getStation(numericStationId),
-        getObservations(numericStationId, { limit: 48 }),
-        getWeather(numericStationId, { limit: 24 }),
-        getPredictions(numericStationId, { limit: 48 }),
+        getObservations(numericStationId, { limit: 48, order: 'desc', valid_pm25_only: true }),
+        getWeather(numericStationId, { limit: 24, order: 'desc' }),
+        getPredictions(numericStationId, { limit: 48, order: 'desc' }),
       ]);
 
       setStation(stationRes);

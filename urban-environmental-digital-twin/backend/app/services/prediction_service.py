@@ -20,7 +20,8 @@ class PredictionService:
         start: Optional[datetime] = None,
         end: Optional[datetime] = None,
         limit: int = 50,
-        offset: int = 0
+        offset: int = 0,
+        order: str = "asc"
     ) -> Tuple[Optional[List[ModelPrediction]], int]:
         """
         Retrieves paginated historical predictions for a station.
@@ -42,8 +43,13 @@ class PredictionService:
             query = query.filter(ModelPrediction.target_time_utc <= end)
 
         total = query.count()
+        order_col = (
+            ModelPrediction.target_time_utc.desc()
+            if order.lower() == "desc"
+            else ModelPrediction.target_time_utc.asc()
+        )
         items = (
-            query.order_by(ModelPrediction.target_time_utc.asc())
+            query.order_by(order_col)
             .offset(offset)
             .limit(limit)
             .all()

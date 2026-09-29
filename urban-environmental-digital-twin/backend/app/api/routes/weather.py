@@ -30,6 +30,7 @@ def get_station_weather(
     end: Optional[datetime] = Query(default=None, description="End timestamp filter in UTC (ISO 8601)"),
     limit: int = Query(default=settings.DEFAULT_PAGE_LIMIT, ge=1, le=settings.MAX_PAGE_LIMIT, description="Page limit (1 to 1000)"),
     offset: int = Query(default=0, ge=0, description="Page offset (0 or positive integer)"),
+    order: str = Query(default="asc", pattern="^(asc|desc)$", description="Sort order by timestamp ('asc' or 'desc')"),
     db: Session = Depends(get_db)
 ):
     if start is not None and end is not None and start >= end:
@@ -44,7 +45,8 @@ def get_station_weather(
         start=start,
         end=end,
         limit=limit,
-        offset=offset
+        offset=offset,
+        order=order
     )
 
     if items is None:

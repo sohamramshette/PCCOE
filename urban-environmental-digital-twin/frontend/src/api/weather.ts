@@ -6,6 +6,7 @@ export interface GetWeatherParams {
   end?: string;
   limit?: number;
   offset?: number;
+  order?: 'asc' | 'desc';
 }
 
 export async function getWeather(

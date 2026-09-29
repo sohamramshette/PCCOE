@@ -7,6 +7,7 @@ export interface GetPredictionsParams {
   end?: string;
   limit?: number;
   offset?: number;
+  order?: 'asc' | 'desc';
 }
 
 export async function getPredictions(

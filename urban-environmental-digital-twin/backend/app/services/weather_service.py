@@ -20,7 +20,8 @@ class WeatherService:
         start: Optional[datetime] = None,
         end: Optional[datetime] = None,
         limit: int = 50,
-        offset: int = 0
+        offset: int = 0,
+        order: str = "asc"
     ) -> Tuple[Optional[List[WeatherReanalysis]], int]:
         """
         Retrieves paginated meteorological reanalysis records for a station.
@@ -41,8 +42,13 @@ class WeatherService:
             query = query.filter(WeatherReanalysis.datetime_utc <= end)
 
         total = query.count()
+        order_col = (
+            WeatherReanalysis.datetime_utc.desc()
+            if order.lower() == "desc"
+            else WeatherReanalysis.datetime_utc.asc()
+        )
         items = (
-            query.order_by(WeatherReanalysis.datetime_utc.asc())
+            query.order_by(order_col)
             .offset(offset)
             .limit(limit)
             .all()

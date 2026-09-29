@@ -31,16 +31,15 @@ export function parseUtcDate(isoString?: string | null): Date {
 }
 
 /**
- * Validates whether an observation timestamp falls strictly within the project's
- * canonical analytical period.
+ * Validates whether an observation timestamp falls within the monitoring period
+ * (from the canonical start date onwards, preventing epoch/corrupt dates).
  */
 export function isWithinCanonicalPeriod(isoString?: string | null): boolean {
   if (!isoString) return false;
   const d = parseUtcDate(isoString);
   if (isNaN(d.getTime())) return false;
   const start = new Date(CANONICAL_START_UTC).getTime();
-  const end = new Date(CANONICAL_END_UTC).getTime();
-  return d.getTime() >= start && d.getTime() <= end;
+  return d.getTime() >= start;
 }
 
 export function formatDateTime(isoString?: string | null): string {

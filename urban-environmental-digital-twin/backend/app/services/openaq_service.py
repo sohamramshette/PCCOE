@@ -18,6 +18,7 @@ from sqlalchemy import desc
 from backend.app.config.settings import settings
 from backend.app.models.station import Station
 from backend.app.models.observation import EnvironmentalObservation
+from backend.app.models.weather import WeatherReanalysis
 
 logger = logging.getLogger("OpenAQ_Sync")
 
@@ -76,6 +77,45 @@ class OpenAQSyncService:
         except Exception as e:
             logger.error(f"Unexpected error querying OpenAQ for station {station_id}: {e}")
 
+    @classmethod
+    def _fetch_openmeteo_live(cls, lat: float, lon: float) -> Optional[Dict[str, Any]]:
+        """
+        Fetches real-time atmospheric and air quality parameters from Open-Meteo Air Quality
+        when official hardware feeds experience upstream network ingestion delay.
+        """
+        url = (
+            f"https://air-quality-api.open-meteo.com/v1/air-quality?"
+            f"latitude={lat}&longitude={lon}&current=pm10,pm2_5,nitrogen_dioxide,sulphur_dioxide,ozone"
+        )
+        headers = {"User-Agent": "UrbanTwin-LiveTelemetry/1.0", "Accept": "application/json"}
+        req = urllib.request.Request(url, headers=headers)
+        try:
+            with urllib.request.urlopen(req, timeout=10) as response:
+                if response.status == 200:
+                    payload = json.loads(response.read().decode("utf-8"))
+                    return payload.get("current", {})
+        except Exception as e:
+            logger.warning(f"Failed to query Open-Meteo live fallback for ({lat}, {lon}): {e}")
+        return None
+
+    @classmethod
+    def _fetch_openmeteo_weather(cls, lat: float, lon: float) -> Optional[Dict[str, Any]]:
+        """
+        Fetches real-time surface meteorology from Open-Meteo Weather API.
+        """
+        url = (
+            f"https://api.open-meteo.com/v1/forecast?"
+            f"latitude={lat}&longitude={lon}&current=temperature_2m,relative_humidity_2m,dew_point_2m,precipitation,rain,surface_pressure,wind_speed_10m,wind_direction_10m,cloud_cover"
+        )
+        headers = {"User-Agent": "UrbanTwin-LiveTelemetry/1.0", "Accept": "application/json"}
+        req = urllib.request.Request(url, headers=headers)
+        try:
+            with urllib.request.urlopen(req, timeout=10) as response:
+                if response.status == 200:
+                    payload = json.loads(response.read().decode("utf-8"))
+                    return payload.get("current", {})
+        except Exception as e:
+            logger.warning(f"Failed to query Open-Meteo weather fallback for ({lat}, {lon}): {e}")
         return None
 
     @classmethod
@@ -89,6 +129,7 @@ class OpenAQSyncService:
         
         stations = db.query(Station).filter(Station.is_active == True).all()
         station_map = {s.station_id: s.station_name for s in stations}
+        station_coords = {s.station_id: (float(s.latitude), float(s.longitude)) for s in stations}
         
         results = []
         records_ingested = 0
@@ -97,76 +138,119 @@ class OpenAQSyncService:
 
         for station_id, default_name in PUNE_STATION_MAP.items():
             station_name = station_map.get(station_id, default_name)
+            lat, lon = station_coords.get(station_id, (18.5204, 73.8567))
             raw_readings = cls._fetch_location_latest(station_id)
 
-            if not raw_readings:
-                # Check if station exists in DB to report fallback status
-                results.append({
-                    "station_id": station_id,
-                    "station_name": station_name,
-                    "timestamp_utc": None,
-                    "pm25": None,
-                    "pm10": None,
-                    "no2": None,
-                    "status": "UP_TO_DATE_OFFLINE",
-                    "detail": "OpenAQ API returned no new data or API key was absent; cached observations intact."
-                })
-                continue
-
-            # Group sensors by timestamp to assemble observation
             pollutants: Dict[str, float] = {}
             target_time_utc: Optional[datetime] = None
+            pm25_val: Optional[float] = None
 
-            for item in raw_readings:
-                val = item.get("value")
-                dt_obj = item.get("datetime", {})
-                utc_str = dt_obj.get("utc")
-                param_obj = item.get("parameter", {})
-                param_name = param_obj.get("name") if isinstance(param_obj, dict) else None
+            if raw_readings:
+                for item in raw_readings:
+                    val = item.get("value")
+                    dt_obj = item.get("datetime", {})
+                    utc_str = dt_obj.get("utc")
+                    param_obj = item.get("parameter", {})
+                    param_name = param_obj.get("name") if isinstance(param_obj, dict) else None
 
-                if val is not None and utc_str:
-                    try:
-                        parsed_dt = datetime.fromisoformat(utc_str.replace("Z", "+00:00"))
-                        if target_time_utc is None or parsed_dt > target_time_utc:
-                            target_time_utc = parsed_dt
-                    except Exception:
-                        pass
+                    if val is not None and utc_str:
+                        try:
+                            parsed_dt = datetime.fromisoformat(utc_str.replace("Z", "+00:00"))
+                            if target_time_utc is None or parsed_dt > target_time_utc:
+                                target_time_utc = parsed_dt
+                        except Exception:
+                            pass
 
-                # If parameter object is missing in latest endpoint, sensorsId can provide parameter or check val
-                # In OpenAQ v3 latest endpoint, item has 'coordinates', 'value', 'sensorsId', 'datetime'
-                # Check sensor parameter if provided
-                if param_name and val is not None:
-                    mapped_field = PARAMETER_MAP.get(param_name.lower())
-                    if mapped_field:
-                        pollutants[mapped_field] = float(val)
+                    if param_name and val is not None:
+                        mapped_field = PARAMETER_MAP.get(param_name.lower())
+                        if mapped_field:
+                            pollutants[mapped_field] = float(val)
 
-            # In OpenAQ v3 latest, if parameter is nested or top-level value
-            # Extract pm25 if found or default from value
-            pm25_val = pollutants.get("pm25")
-            if pm25_val is None and raw_readings:
-                # Scan for positive reasonable PM2.5 in readings
-                for r in raw_readings:
-                    v = r.get("value")
-                    if v is not None and 0.0 <= float(v) <= 1000.0:
-                        # Find highest confidence PM2.5 candidate
-                        p_name = r.get("parameter", {}).get("name", "") if isinstance(r.get("parameter"), dict) else ""
-                        if "pm25" in p_name.lower():
-                            pm25_val = float(v)
-                            break
-                if pm25_val is None and len(raw_readings) > 0:
-                    # Look at second item which often maps to pm25 in CAAQMN locations
-                    first_val = raw_readings[0].get("value")
-                    if first_val is not None:
-                        pm25_val = float(first_val)
+                pm25_val = pollutants.get("pm25")
+                if pm25_val is None:
+                    for r in raw_readings:
+                        v = r.get("value")
+                        if v is not None and 0.0 <= float(v) <= 1000.0:
+                            p_name = r.get("parameter", {}).get("name", "") if isinstance(r.get("parameter"), dict) else ""
+                            if "pm25" in p_name.lower():
+                                pm25_val = float(v)
+                                break
+                    if pm25_val is None and len(raw_readings) > 0:
+                        first_val = raw_readings[0].get("value")
+                        if first_val is not None:
+                            pm25_val = float(first_val)
+
+            # Detect if OpenAQ upstream hardware readings are absent or lagged (> 6 hours old)
+            is_stale = False
+            if target_time_utc is None or (now_utc - target_time_utc) > timedelta(hours=6):
+                is_stale = True
+
+            completeness_flag = "REALTIME_SYNC"
+            provenance_status = "INGESTED"
+
+            # Hybrid Live Bridge: Use real-time Open-Meteo Air Quality & CAMS when upstream CPCB feed has lag
+            if is_stale:
+                live_aq = cls._fetch_openmeteo_live(lat, lon)
+                if live_aq and live_aq.get("pm2_5") is not None:
+                    time_str = live_aq.get("time")
+                    if time_str:
+                        try:
+                            parsed_live_dt = datetime.fromisoformat(time_str.replace("Z", "+00:00"))
+                            if parsed_live_dt.tzinfo is None:
+                                parsed_live_dt = parsed_live_dt.replace(tzinfo=timezone.utc)
+                            target_time_utc = parsed_live_dt
+                        except Exception:
+                            target_time_utc = now_utc
+                    else:
+                        target_time_utc = now_utc
+                    pm25_val = float(live_aq.get("pm2_5"))
+                    if live_aq.get("pm10") is not None:
+                        pollutants["pm10"] = float(live_aq.get("pm10"))
+                    if live_aq.get("nitrogen_dioxide") is not None:
+                        pollutants["no2"] = float(live_aq.get("nitrogen_dioxide"))
+                    completeness_flag = "REALTIME_LIVE"
+                    provenance_status = "HYBRID_LIVE_INGESTED"
 
             if target_time_utc is None:
                 target_time_utc = now_utc
 
-            # Ensure UTC timezone
             if target_time_utc.tzinfo is None:
                 target_time_utc = target_time_utc.replace(tzinfo=timezone.utc)
 
             local_ist = (target_time_utc + ist_offset).replace(tzinfo=None)
+
+            # Sync real-time weather alongside pollution
+            existing_wx = (
+                db.query(WeatherReanalysis)
+                .filter(
+                    WeatherReanalysis.station_id == station_id,
+                    WeatherReanalysis.datetime_utc == target_time_utc
+                )
+                .first()
+            )
+            if not existing_wx:
+                live_wx = cls._fetch_openmeteo_weather(lat, lon)
+                if live_wx and live_wx.get("temperature_2m") is not None:
+                    new_wx = WeatherReanalysis(
+                        station_id=station_id,
+                        datetime_utc=target_time_utc,
+                        temp_c=float(live_wx.get("temperature_2m", 25.0)),
+                        humidity_pct=float(live_wx.get("relative_humidity_2m", 60.0)),
+                        dew_point_c=float(live_wx.get("dew_point_2m", 18.0)),
+                        precip_mm=float(live_wx.get("precipitation", 0.0)),
+                        rain_mm=float(live_wx.get("rain", 0.0)),
+                        pressure_hpa=float(live_wx.get("surface_pressure", 950.0)),
+                        wind_speed_ms=float(live_wx.get("wind_speed_10m", 2.0)),
+                        wind_dir_deg=float(live_wx.get("wind_direction_10m", 180.0)),
+                        solar_rad_wm2=0.0,
+                        cloud_cover_pct=float(live_wx.get("cloud_cover", 0.0)),
+                        pbl_height_m=350.0,
+                        grid_latitude=lat,
+                        grid_longitude=lon,
+                        elevation_m=560.0,
+                        data_provenance="REALTIME (Open-Meteo Atmospheric Telemetry)"
+                    )
+                    db.add(new_wx)
 
             # Check if this observation exists in DB
             existing = (
@@ -179,28 +263,26 @@ class OpenAQSyncService:
             )
 
             if existing:
-                # Update if pm25 was missing
                 if existing.pm25 is None and pm25_val is not None:
                     existing.pm25 = pm25_val
-                    existing.pm25_completeness_flag = "REALTIME_SYNC"
+                    existing.pm25_completeness_flag = completeness_flag
                     records_updated += 1
                     status_str = "UPDATED"
                 else:
                     status_str = "ALREADY_PRESENT"
             else:
-                # Insert new observation
                 new_obs = EnvironmentalObservation(
                     station_id=station_id,
                     datetime_utc=target_time_utc,
                     datetime_local_ist=local_ist,
                     pm25=pm25_val,
                     pm25_obs_count=1,
-                    pm25_completeness_flag="REALTIME_SYNC",
+                    pm25_completeness_flag=completeness_flag,
                     pm10=pollutants.get("pm10")
                 )
                 db.add(new_obs)
                 records_ingested += 1
-                status_str = "INGESTED"
+                status_str = provenance_status
 
             successful_stations += 1
             results.append({
@@ -211,7 +293,7 @@ class OpenAQSyncService:
                 "pm10": pollutants.get("pm10"),
                 "no2": pollutants.get("no2"),
                 "status": status_str,
-                "detail": f"Successfully processed telemetry from OpenAQ API v3 ({status_str})"
+                "detail": f"Processed telemetry via {completeness_flag} ({status_str})"
             })
 
         if records_ingested > 0 or records_updated > 0:
