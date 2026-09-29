@@ -64,7 +64,7 @@ export const LandingPage: React.FC = () => {
       </div>
 
       <header className="landing-nav">
-        <Link to="/welcome" className="landing-brand" aria-label="Pune Urban Twin home">
+        <Link to="/" className="landing-brand" aria-label="Pune Urban Twin home">
           <span className="landing-brand-mark"><Activity size={19} /></span>
           <span>Urban Twin <span className="landing-brand-city">PUNE</span></span>
         </Link>
@@ -75,7 +75,7 @@ export const LandingPage: React.FC = () => {
           <a href="#live-twin">Live Twin</a>
         </nav>
 
-        <Link to="/" className="btn btn-primary landing-nav-action" aria-label="Open dashboard" title="Open dashboard">
+        <Link to="/dashboard" className="btn btn-primary landing-nav-action" aria-label="Open dashboard" title="Open dashboard">
           <span className="landing-nav-action-label">Open dashboard</span>
           <span className="landing-nav-action-compact">Dashboard</span>
           <ArrowUpRight size={16} />
@@ -119,7 +119,7 @@ export const LandingPage: React.FC = () => {
               Explore ground observations, atmospheric reanalysis, next-hour forecasts, and policy scenarios in one connected view of the city.
             </p>
             <div className="landing-actions">
-              <Link to="/" className="btn btn-primary">
+              <Link to="/dashboard" className="btn btn-primary">
                 Explore the dashboard <ArrowRight size={16} />
               </Link>
               <a href="#live-twin" className="btn btn-secondary">
@@ -178,7 +178,7 @@ export const LandingPage: React.FC = () => {
               <span className="landing-kicker">FROM MEASUREMENT TO DECISION</span>
               <h2 id="capabilities-title">Follow the evidence, all the way through.</h2>
             </div>
-            <Link to="/" className="landing-text-link">Visit the dashboard <ArrowRight size={15} /></Link>
+            <Link to="/dashboard" className="landing-text-link">Visit the dashboard <ArrowRight size={15} /></Link>
           </div>
           <div className="landing-capability-grid">
             <Link to="/stations" className="landing-capability">
@@ -213,7 +213,7 @@ export const LandingPage: React.FC = () => {
 
         <footer className="landing-footer">
           <span>Urban Environmental Digital Twin · Pune &amp; PCMC</span>
-          <Link to="/">Enter the monitoring workspace <ArrowUpRight size={14} /></Link>
+          <Link to="/dashboard">Enter the monitoring workspace <ArrowUpRight size={14} /></Link>
         </footer>
       </main>
     </div>

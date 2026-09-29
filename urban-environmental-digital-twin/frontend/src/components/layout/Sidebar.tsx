@@ -53,7 +53,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
     {
       label: 'MONITOR',
       items: [
-        { to: '/', label: 'Dashboard', icon: <LayoutDashboard size={18} /> },
+        { to: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={18} /> },
         { to: '/stations', label: 'Stations', icon: <MapPin size={18} /> },
         { to: '/digital-twin', label: 'Pune Digital Twin', icon: <Layers size={18} /> },
         { to: '/alerts', label: 'Alerts & Events', icon: <AlertTriangle size={18} /> },
@@ -73,7 +73,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
-        <Link to="/welcome" className="brand-title" aria-label="Urban Twin Pune home">
+        <Link to="/" className="brand-title" aria-label="Urban Twin Pune home">
           <span className="landing-brand-mark" aria-hidden="true">
             <Activity size={19} />
           </span>
@@ -106,7 +106,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
                   <NavLink
                     to={item.to}
                     className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-                    end={item.to === '/'}
+                    end={item.to === '/dashboard'}
                     title={collapsed ? item.label : undefined}
                   >
                     <span className="nav-icon">{item.icon}</span>

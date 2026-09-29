@@ -16,9 +16,10 @@ export const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/welcome" element={<LandingPage />} />
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Dashboard />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/welcome" element={<Navigate to="/" replace />} />
+        <Route element={<Layout />}>
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="stations" element={<Stations />} />
           <Route path="stations/:stationId" element={<StationDetails />} />
           <Route path="digital-twin" element={<DigitalTwinMap />} />

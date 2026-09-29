@@ -6,7 +6,7 @@ export const Navbar: React.FC = () => {
   const location = useLocation();
 
   const getPageTitle = () => {
-    if (location.pathname === '/') return 'Urban Environmental Overview';
+    if (location.pathname === '/' || location.pathname === '/dashboard') return 'Urban Environmental Overview';
     if (location.pathname.startsWith('/stations')) {
       if (location.pathname === '/stations') return 'Continuous Air Quality Monitoring Stations';
       return 'Station Profile & Diagnostics';
