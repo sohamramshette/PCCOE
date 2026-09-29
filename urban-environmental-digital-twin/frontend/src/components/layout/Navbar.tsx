@@ -27,7 +27,12 @@ export const Navbar: React.FC = () => {
         ? 'DATA GOVERNANCE'
         : 'PUNE · PCMC';
 
-  const apiDocsUrl = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'}/docs`;
+  const baseApiUrl = (
+    import.meta.env.VITE_API_BASE_URL ||
+    import.meta.env.VITE_API_URL ||
+    'http://localhost:8000'
+  ).replace(/\/+$/, '');
+  const apiDocsUrl = `${baseApiUrl}/docs`;
 
   return (
     <header className="top-navbar">
