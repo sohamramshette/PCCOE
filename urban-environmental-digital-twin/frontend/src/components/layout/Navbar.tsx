@@ -27,10 +27,14 @@ export const Navbar: React.FC = () => {
         ? 'DATA GOVERNANCE'
         : 'PUNE · PCMC';
 
+  const defaultApiUrl = import.meta.env.PROD
+    ? 'https://pccoe-75ij.onrender.com'
+    : 'http://localhost:8000';
+
   const baseApiUrl = (
     import.meta.env.VITE_API_BASE_URL ||
     import.meta.env.VITE_API_URL ||
-    'http://localhost:8000'
+    defaultApiUrl
   ).replace(/\/+$/, '');
   const apiDocsUrl = `${baseApiUrl}/docs`;
 
