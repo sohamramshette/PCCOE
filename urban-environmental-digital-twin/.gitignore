@@ -81,13 +81,12 @@ pnpm-debug.log*
 
 # ---------------------------------------------------------------------------
 # ML generated artifacts
-# NOTE: We intentionally do NOT ignore all datasets. Dataset commit decisions
-#       will be made later. Only generated model binaries are ignored here.
 # ---------------------------------------------------------------------------
 ml/models/*
 !ml/models/.gitkeep
+!ml/models/feature_names.json
+!ml/models/*.joblib
 *.pkl
-*.joblib
 *.h5
 *.pt
 *.onnx

@@ -51,10 +51,31 @@ def get_naqi_tier(pm25: float) -> str:
 class ForecastService:
     @staticmethod
     def get_latest_data_timestamp(db: Session, station_id: int) -> Optional[datetime]:
-        """Finds the latest contiguous hour where both observations and weather exist for the station."""
+        """Finds the latest contiguous hour where both observations (with valid PM2.5) and weather exist for the station."""
+        latest_ts = (
+            db.query(EnvironmentalObservation.datetime_utc)
+            .join(
+                WeatherReanalysis,
+                (WeatherReanalysis.station_id == EnvironmentalObservation.station_id) &
+                (WeatherReanalysis.datetime_utc == EnvironmentalObservation.datetime_utc)
+            )
+            .filter(
+                EnvironmentalObservation.station_id == station_id,
+                EnvironmentalObservation.pm25.isnot(None)
+            )
+            .order_by(EnvironmentalObservation.datetime_utc.desc())
+            .first()
+        )
+        if latest_ts:
+            return latest_ts[0]
+
+        # Fallback if strict join yields no records
         latest_obs = (
             db.query(func.max(EnvironmentalObservation.datetime_utc))
-            .filter(EnvironmentalObservation.station_id == station_id)
+            .filter(
+                EnvironmentalObservation.station_id == station_id,
+                EnvironmentalObservation.pm25.isnot(None)
+            )
             .scalar()
         )
         return latest_obs
@@ -87,6 +108,36 @@ class ForecastService:
             )
             .first()
         )
+
+        # Resilient alignment fallback: if weather or obs at t is momentarily unaligned by <= 2h
+        if current_weather is None:
+            near_weather = (
+                db.query(WeatherReanalysis)
+                .filter(
+                    WeatherReanalysis.station_id == station.station_id,
+                    WeatherReanalysis.datetime_utc <= pred_time_utc,
+                    WeatherReanalysis.datetime_utc >= pred_time_utc - timedelta(hours=2)
+                )
+                .order_by(WeatherReanalysis.datetime_utc.desc())
+                .first()
+            )
+            if near_weather:
+                current_weather = near_weather
+
+        if current_obs is None or current_obs.pm25 is None:
+            near_obs = (
+                db.query(EnvironmentalObservation)
+                .filter(
+                    EnvironmentalObservation.station_id == station.station_id,
+                    EnvironmentalObservation.datetime_utc <= pred_time_utc,
+                    EnvironmentalObservation.datetime_utc >= pred_time_utc - timedelta(hours=2),
+                    EnvironmentalObservation.pm25.isnot(None)
+                )
+                .order_by(EnvironmentalObservation.datetime_utc.desc())
+                .first()
+            )
+            if near_obs:
+                current_obs = near_obs
 
         if current_obs is None or current_weather is None:
             latest_dt = cls.get_latest_data_timestamp(db, station.station_id)
