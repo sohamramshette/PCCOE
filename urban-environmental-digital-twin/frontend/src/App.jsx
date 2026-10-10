@@ -4,6 +4,13 @@ import { AuthProvider } from './context/AuthContext';
 import { Layout } from './components/layout/Layout';
 import { LoadingSpinner } from './components/common/LoadingSpinner';
 import { CitizenPortal } from './pages/CitizenPortal';
+import { ExploreAirQuality } from './pages/ExploreAirQuality';
+import { CleanerRoutes } from './pages/CleanerRoutes';
+import { ForecastGuidance } from './pages/ForecastGuidance';
+import { PollutionSources } from './pages/PollutionSources';
+import { MyAlerts } from './pages/MyAlerts';
+import { ReportPollution } from './pages/ReportPollution';
+import { MyPlaces } from './pages/MyPlaces';
 import { Dashboard } from './pages/Dashboard';
 import { Stations } from './pages/Stations';
 import { StationDetails } from './pages/StationDetails';
@@ -41,6 +48,13 @@ export default function App() {
           <Route element={<Layout />}>
             {/* Clean Citizen Portal */}
             <Route path="citizen" element={<CitizenPortal />} />
+            <Route path="explore" element={<ExploreAirQuality />} />
+            <Route path="cleaner-routes" element={<CleanerRoutes />} />
+            <Route path="forecast-guidance" element={<ForecastGuidance />} />
+            <Route path="pollution-sources" element={<PollutionSources />} />
+            <Route path="my-alerts" element={<MyAlerts />} />
+            <Route path="report-pollution" element={<ReportPollution />} />
+            <Route path="my-places" element={<MyPlaces />} />
 
             {/* Authority & Engineering Control Room */}
             <Route path="dashboard" element={<Dashboard />} />

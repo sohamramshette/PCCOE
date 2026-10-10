@@ -6750,3 +6750,34 @@ tr:hover td {
   background: #8fa07e !important;
   box-shadow: 0 0 10px #8fa07e !important;
 }
+
+/* Cleaner Routes Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .cleaner-routes-form-grid {
+    grid-template-columns: 1fr auto 1fr !important;
+  }
+  .cleaner-routes-form-grid > div:nth-child(4) {
+    grid-column: 1 / span 2;
+  }
+  .cleaner-routes-form-grid > div:nth-child(5) {
+    grid-column: 3;
+  }
+  .cleaner-routes-results-layout {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .cleaner-routes-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .cleaner-routes-form-grid > div:nth-child(2) {
+    padding-top: 0 !important;
+    justify-content: center;
+  }
+  .cleaner-routes-form-grid > div:nth-child(4),
+  .cleaner-routes-form-grid > div:nth-child(5) {
+    grid-column: 1 !important;
+    padding-top: 4px !important;
+  }
+}

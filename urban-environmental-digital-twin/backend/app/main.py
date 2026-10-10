@@ -79,6 +79,14 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.error(f"Failed to initialize model serving artifacts during startup: {e}")
 
+    # Ensure all declarative tables exist
+    try:
+        from backend.app.database.session import engine
+        from backend.app.database.base import Base
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        logger.warning(f"Database table verification skipped: {e}")
+
     # Ensure canonical environmental alerts are populated if table is empty
     try:
         from backend.app.models.alert import Alert
@@ -164,10 +172,11 @@ def _get_cors_headers(request: Request) -> dict:
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     """Formats 422 validation errors without exposing internal data structures."""
+    from fastapi.encoders import jsonable_encoder
     return JSONResponse(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         content={
-            "detail": exc.errors(),
+            "detail": jsonable_encoder(exc.errors()),
             "code": "VALIDATION_ERROR",
             "timestamp": datetime.now(timezone.utc).isoformat()
         },

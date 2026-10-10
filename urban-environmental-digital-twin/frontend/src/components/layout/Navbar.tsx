@@ -8,7 +8,14 @@ export const Navbar: React.FC = () => {
   const { user, role, openAuthModal, logout, isAuthenticated } = useAuth();
 
   const getPageTitle = () => {
-    if (location.pathname === '/citizen') return 'Citizen Clean Air & Health Portal';
+    if (location.pathname === '/citizen') return 'My Air Dashboard';
+    if (location.pathname === '/explore') return 'Explore Air Quality';
+    if (location.pathname === '/cleaner-routes') return 'Cleaner Routes';
+    if (location.pathname === '/forecast-guidance') return 'Forecast & Activity Guidance';
+    if (location.pathname === '/pollution-sources') return 'Pollution Sources';
+    if (location.pathname === '/my-alerts') return 'My Alerts';
+    if (location.pathname === '/report-pollution') return 'Report Pollution';
+    if (location.pathname === '/my-places') return 'My Places & History';
     if (location.pathname === '/' || location.pathname === '/dashboard') return 'Urban Environmental Overview';
     if (location.pathname.startsWith('/stations')) {
       if (location.pathname === '/stations') return 'Continuous Air Quality Monitoring Stations';
@@ -39,9 +46,27 @@ export const Navbar: React.FC = () => {
     <header className="top-navbar">
       <div className="navbar-context">
         <div className="navbar-breadcrumb">
-          <span>{role === 'CITIZEN' ? 'PUBLIC PORTAL' : 'AUTHORITY DIGITAL TWIN'}</span>
+          <span>{role === 'CITIZEN' ? 'USER PORTAL' : 'AUTHORITY DIGITAL TWIN'}</span>
           <ChevronRight size={12} />
-          <span>{role === 'CITIZEN' ? 'RESIDENT BRIEFING' : 'ENVIRONMENTAL CONTROL ROOM'}</span>
+          <span>
+            {role === 'CITIZEN'
+              ? location.pathname === '/my-places'
+                ? 'MY PLACES & HISTORY'
+                : location.pathname === '/report-pollution'
+                ? 'REPORT POLLUTION'
+                : location.pathname === '/my-alerts'
+                ? 'MY ALERTS'
+                : location.pathname === '/pollution-sources'
+                ? 'POLLUTION SOURCES'
+                : location.pathname === '/forecast-guidance'
+                ? 'FORECAST & ACTIVITY GUIDANCE'
+                : location.pathname === '/cleaner-routes'
+                ? 'CLEANER ROUTES'
+                : location.pathname === '/explore'
+                ? 'EXPLORE AIR QUALITY'
+                : 'MY AIR DASHBOARD'
+              : 'ENVIRONMENTAL CONTROL ROOM'}
+          </span>
         </div>
         <h1 style={{ fontSize: '1.45rem', fontWeight: 700, color: '#0d1710', margin: '0.2rem 0' }}>{getPageTitle()}</h1>
         <div className="navbar-period" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#475569', fontSize: '0.78rem' }}>

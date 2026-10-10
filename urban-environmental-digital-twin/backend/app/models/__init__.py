@@ -16,10 +16,12 @@ from backend.app.models.prediction import ModelPrediction
 from backend.app.models.scenario import Scenario, ScenarioResult
 from backend.app.models.alert import Alert, AlertStatus, AlertSeverity, AlertType
 from backend.app.models.user import User
+from backend.app.models.citizen_report import CitizenReport
 
 __all__ = [
     "Base",
     "User",
+    "CitizenReport",
     "Station",
     "EnvironmentalObservation",
     "WeatherReanalysis",
