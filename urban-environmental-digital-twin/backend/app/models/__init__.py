@@ -15,9 +15,11 @@ from backend.app.models.model_registry import ModelRegistry
 from backend.app.models.prediction import ModelPrediction
 from backend.app.models.scenario import Scenario, ScenarioResult
 from backend.app.models.alert import Alert, AlertStatus, AlertSeverity, AlertType
+from backend.app.models.user import User
 
 __all__ = [
     "Base",
+    "User",
     "Station",
     "EnvironmentalObservation",
     "WeatherReanalysis",

@@ -18,9 +18,17 @@ from backend.app.api.routes import (
     sync,
     alerts,
     backtracking,
+    auth,
+    citizen,
 )
 
 api_router = APIRouter()
+
+# Authentication & Access Control
+api_router.include_router(auth.router)
+
+# Citizen Voice & Public Assistant
+api_router.include_router(citizen.router)
 
 # Health probe (also available at root /health)
 api_router.include_router(health.router)

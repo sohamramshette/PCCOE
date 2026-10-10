@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import {
   LayoutDashboard,
   MapPin,
@@ -14,6 +15,9 @@ import {
   AlertTriangle,
   Compass,
   Sparkles,
+  Heart,
+  Shield,
+  KeyRound,
 } from 'lucide-react';
 import { getHealth } from '../../api/health';
 import { HealthResponse } from '../../types/common';
@@ -24,6 +28,7 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
+  const { role, openAuthModal } = useAuth();
   const [health, setHealth] = useState<HealthResponse | null>(null);
   const [isHealthy, setIsHealthy] = useState<boolean | null>(null);
 
@@ -51,18 +56,32 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
     };
   }, []);
 
-  const navGroups = [
+  // Citizen Navigation (Clean & Understandable)
+  const citizenNav = [
+    {
+      label: 'PUBLIC CITIZEN VIEW',
+      items: [
+        { to: '/citizen', label: 'Air Quality Today', icon: <Heart size={18} /> },
+        { to: '/digital-twin', label: 'Pune Live Map', icon: <Layers size={18} /> },
+        { to: '/alerts', label: 'Health Alerts', icon: <AlertTriangle size={18} /> },
+      ],
+    },
+  ];
+
+  // Authority Navigation (Complete Digital Twin Control Room)
+  const authorityNav = [
     {
       label: 'MONITOR',
       items: [
-        { to: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={18} /> },
-        { to: '/stations', label: 'Stations', icon: <MapPin size={18} /> },
+        { to: '/citizen', label: 'Citizen View', icon: <Heart size={18} /> },
         { to: '/digital-twin', label: 'Pune Digital Twin', icon: <Layers size={18} /> },
+        { to: '/dashboard', label: 'Executive Dashboard', icon: <LayoutDashboard size={18} /> },
+        { to: '/stations', label: 'Stations Network', icon: <MapPin size={18} /> },
         { to: '/alerts', label: 'Alerts & Events', icon: <AlertTriangle size={18} /> },
       ],
     },
     {
-      label: 'ANALYZE',
+      label: 'AUTHORITY ANALYTICS',
       items: [
         { to: '/forecast', label: 'Next-Hour Forecast', icon: <TrendingUp size={18} /> },
         { to: '/scenarios', label: 'What-If Scenarios', icon: <SlidersHorizontal size={18} /> },
@@ -72,6 +91,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
       ],
     },
   ];
+
+  const currentNav = role === 'CITIZEN' ? citizenNav : authorityNav;
 
   return (
     <aside className="sidebar">
@@ -84,11 +105,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
               <span style={{ fontWeight: 600, color: '#eef1e7' }}>AirLens</span>
               <span className="brand-badge-pill" style={{ background: 'rgba(143, 160, 126, 0.25)', color: '#a3b593', fontSize: '0.65rem', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>
-                PUNE
+                {role === 'AUTHORITY' ? 'AUTHORITY' : 'CITIZEN'}
               </span>
             </div>
             <div className="brand-subtitle" style={{ color: 'rgba(238, 241, 231, 0.5)', fontSize: '0.72rem' }}>
-              Digital Twin System
+              {role === 'AUTHORITY' ? 'Control Room' : 'Pune Air Guide'}
             </div>
           </div>
         </Link>
@@ -131,7 +152,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
         </div>
 
         <ul className="nav-list">
-          {navGroups.map((group) => (
+          {currentNav.map((group) => (
             <React.Fragment key={group.label}>
               <li className="nav-group-label">{group.label}</li>
               {group.items.map((item) => (
@@ -139,7 +160,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
                   <NavLink
                     to={item.to}
                     className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-                    end={item.to === '/dashboard'}
+                    end={item.to === '/citizen' || item.to === '/dashboard'}
                     title={collapsed ? item.label : undefined}
                   >
                     <span className="nav-icon">{item.icon}</span>
@@ -151,6 +172,45 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
             </React.Fragment>
           ))}
         </ul>
+
+        {/* If Citizen, display Authority Upgrade Card in sidebar */}
+        {role === 'CITIZEN' && !collapsed && (
+          <div
+            style={{
+              margin: '1.25rem 0.75rem',
+              padding: '1rem',
+              borderRadius: '14px',
+              background: 'rgba(207, 152, 97, 0.12)',
+              border: '1px solid rgba(207, 152, 97, 0.25)',
+              color: '#f3c491',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 700, fontSize: '0.82rem', marginBottom: '4px' }}>
+              <Shield size={14} color="#cf9861" />
+              <span>Authority Control Room</span>
+            </div>
+            <p style={{ margin: 0, fontSize: '0.74rem', color: '#d2b48c', lineHeight: 1.4 }}>
+              Are you an environmental officer? Access policy simulations &amp; backtracking.
+            </p>
+            <button
+              onClick={openAuthModal}
+              style={{
+                marginTop: '8px',
+                width: '100%',
+                padding: '6px',
+                borderRadius: '8px',
+                background: '#cf9861',
+                border: 'none',
+                color: '#131812',
+                fontSize: '0.78rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+              }}
+            >
+              Switch Role / Sign In →
+            </button>
+          </div>
+        )}
       </nav>
 
       <div className="sidebar-footer">
@@ -185,7 +245,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
         {health && (
           <div className="backend-metrics" style={{ color: 'rgba(238, 241, 231, 0.45)', fontSize: '0.7rem', lineHeight: 1.45 }}>
             <div>Active Stations: {health.active_stations ?? 6}</div>
-            <div>Registered Models: {health.registered_models ?? 4}</div>
+            <div>Auth RBAC: {role}</div>
           </div>
         )}
       </div>

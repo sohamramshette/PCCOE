@@ -58,7 +58,8 @@ def get_configured_engine():
             max_overflow=5,
             pool_recycle=300,
             pool_timeout=15,
-            pool_pre_ping=True
+            pool_pre_ping=True,
+            connect_args={"connect_timeout": 3}
         )
         # Probe connection
         with pg_engine.connect() as conn:

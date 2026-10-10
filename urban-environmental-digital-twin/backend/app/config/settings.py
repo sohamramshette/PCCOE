@@ -30,6 +30,14 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     APP_ENV: str = Field(default="development", description="Environment: development, testing, production")
 
+    # JWT Authentication & Security
+    SECRET_KEY: str = Field(
+        default="pccoe-airlens-digital-twin-secure-jwt-2026-auth-token-key-supersecret",
+        description="Cryptographic secret key for signing JWT tokens"
+    )
+    ALGORITHM: str = Field(default="HS256", description="JWT encoding algorithm")
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = Field(default=60 * 24 * 7, description="JWT validity duration (7 days)")
+
     # PostgreSQL Connection Components
     POSTGRES_USER: str = Field(default="postgres", description="PostgreSQL database user")
     POSTGRES_PASSWORD: str = Field(default="postgres", description="PostgreSQL database password")

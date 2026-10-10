@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Navbar } from './Navbar';
+import { AuthModal } from '../auth/AuthModal';
 
 export const Layout: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
     <div className={`app-container${sidebarCollapsed ? ' sidebar-collapsed' : ''}`}>
-      {/* Subtle ambient background orbs (decorative, non-interactive) */}
+      {/* Subtle ambient background orbs */}
       <div className="ambient-orb ambient-orb--blue" aria-hidden="true" />
       <div className="ambient-orb ambient-orb--orange" aria-hidden="true" />
       <div className="ambient-orb ambient-orb--blue-soft" aria-hidden="true" />
@@ -19,6 +20,8 @@ export const Layout: React.FC = () => {
           <Outlet />
         </main>
       </div>
+      {/* Global Role & Authentication Modal */}
+      <AuthModal />
     </div>
   );
 };
