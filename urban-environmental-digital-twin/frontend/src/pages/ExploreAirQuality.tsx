@@ -212,9 +212,13 @@ export const ExploreAirQuality: React.FC = () => {
                 background: 'rgba(143, 160, 126, 0.22)',
                 color: '#a3b593',
                 border: '1px solid rgba(163, 181, 147, 0.3)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
               }}
             >
-              🗺️ Explore Air Quality
+              <MapPin size={13} />
+              Explore Air Quality
             </span>
             <span style={{ fontSize: '11px', color: '#9eab93' }}>Pune &amp; Pimpri-Chinchwad Localities</span>
           </div>
@@ -349,6 +353,8 @@ export const ExploreAirQuality: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
+                aria-label="Clear search"
+                title="Clear search"
                 style={{
                   background: 'none',
                   border: 'none',
@@ -610,6 +616,7 @@ export const ExploreAirQuality: React.FC = () => {
                     display: 'flex',
                   }}
                   title="Close station details"
+                  aria-label="Close station details"
                 >
                   <X size={16} />
                 </button>

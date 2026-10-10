@@ -9,6 +9,10 @@ import {
   User,
   Radio,
   Square,
+  Activity,
+  Smile,
+  Shield,
+  Car,
 } from 'lucide-react';
 
 interface VapiVoiceAssistantProps {
@@ -56,10 +60,10 @@ export const VapiVoiceAssistant: React.FC<VapiVoiceAssistantProps> = ({
 
   // 1-Click Spoken Quick Prompts
   const SUGGESTIONS = [
-    { label: '🏃 Can I go for a jog right now?', query: 'Can I go for a jog in my neighborhood right now?' },
-    { label: '👶 Is it safe for kids to play sports?', query: 'Is it safe for children to play outdoor sports today?' },
-    { label: '🫁 What precautions for asthma & seniors?', query: 'What precautions should seniors and asthma patients take?' },
-    { label: '🚗 Roll up car windows in commute?', query: 'Should I keep windows closed during evening commute?' },
+    { icon: <Activity size={13} color="#a3b593" />, label: 'Can I go for a jog right now?', query: 'Can I go for a jog in my neighborhood right now?' },
+    { icon: <Smile size={13} color="#a3b593" />, label: 'Is it safe for kids to play sports?', query: 'Is it safe for children to play outdoor sports today?' },
+    { icon: <Shield size={13} color="#a3b593" />, label: 'What precautions for asthma & seniors?', query: 'What precautions should seniors and asthma patients take?' },
+    { icon: <Car size={13} color="#a3b593" />, label: 'Roll up car windows in commute?', query: 'Should I keep windows closed during evening commute?' },
   ];
 
   // Auto-scroll to latest dialogue
@@ -226,7 +230,7 @@ export const VapiVoiceAssistant: React.FC<VapiVoiceAssistantProps> = ({
           {
             id: userMsgId,
             role: 'user',
-            text: `🎙️ "${transcribed}"`,
+            text: `"${transcribed}"`,
             timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
           },
           {
@@ -500,7 +504,7 @@ export const VapiVoiceAssistant: React.FC<VapiVoiceAssistantProps> = ({
             }}
           >
             {isRecording ? <Square size={16} /> : <Mic size={16} />}
-            <span>{isRecording ? `Stop & Answer (${recordingSeconds}s)` : '🎙️ Speak Question'}</span>
+            <span>{isRecording ? `Stop & Answer (${recordingSeconds}s)` : 'Speak Question'}</span>
           </button>
         </div>
       </div>
@@ -699,6 +703,9 @@ export const VapiVoiceAssistant: React.FC<VapiVoiceAssistantProps> = ({
             onClick={() => handleUserMessage(item.query)}
             disabled={isLoading || isRecording}
             style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
               padding: '6px 12px',
               borderRadius: '10px',
               background: 'rgba(163, 181, 147, 0.12)',
@@ -710,7 +717,8 @@ export const VapiVoiceAssistant: React.FC<VapiVoiceAssistantProps> = ({
               transition: 'all 0.2s ease',
             }}
           >
-            {item.label}
+            {item.icon}
+            <span>{item.label}</span>
           </button>
         ))}
       </div>
@@ -736,7 +744,7 @@ export const VapiVoiceAssistant: React.FC<VapiVoiceAssistantProps> = ({
             placeholder={
               isRecording
                 ? `Recording voice (${recordingSeconds}s)... Click Stop & Answer when done!`
-                : `Ask any question about ${stationName} (or tap 🎙️ Speak Question)`
+                : `Ask any question about ${stationName} (or tap Speak Question)`
             }
             style={{
               width: '100%',

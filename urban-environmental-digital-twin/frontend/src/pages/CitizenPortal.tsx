@@ -19,6 +19,7 @@ import {
   CheckCircle2,
   Activity,
   Info,
+  Mic,
 } from 'lucide-react';
 
 import { getStations } from '../api/stations';
@@ -399,9 +400,13 @@ export const CitizenPortal: React.FC = () => {
                 background: 'rgba(143, 160, 126, 0.22)',
                 color: '#a3b593',
                 border: '1px solid rgba(163, 181, 147, 0.3)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
               }}
             >
-              🌿 My Air Dashboard
+              <Heart size={13} />
+              My Air Dashboard
             </span>
             <span style={{ fontSize: '11px', color: '#9eab93' }}>Pune &amp; Pimpri-Chinchwad Metropolitan Area</span>
           </div>
@@ -552,7 +557,7 @@ export const CitizenPortal: React.FC = () => {
                 justifyContent: 'center',
               }}
             >
-              🎙️
+              <Mic size={18} />
             </div>
             <div>
               <div style={{ fontSize: '0.88rem', fontWeight: 600, color: '#f4f6f0' }}>

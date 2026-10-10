@@ -6,6 +6,7 @@ import { RouteComparisonResult } from '../../utils/routePollution';
 import { Station } from '../../types/station';
 import { ObservationItem } from '../../types/observation';
 import { calcPM25SubIndex, getNAQICategoryInfo } from '../../utils/aqi';
+import { Clock, Navigation, Wind } from 'lucide-react';
 
 interface MapBoundsFitterProps {
   startLocation: LocationItem | null;
@@ -285,22 +286,24 @@ export const RouteMap: React.FC<RouteMapProps> = ({
               <Tooltip sticky>
                 <div style={{ fontSize: '11px', lineHeight: 1.4 }}>
                   <strong>{route.name}</strong> ({route.summary})
-                  <br />
-                  <span>
-                    ⏱️ {route.durationMinutes} min · 📏 {route.distanceKm} km
-                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
+                    <Clock size={11} style={{ display: 'inline', verticalAlign: 'middle' }} />
+                    <span>{route.durationMinutes} min</span>
+                    <span>·</span>
+                    <Navigation size={11} style={{ display: 'inline', verticalAlign: 'middle' }} />
+                    <span>{route.distanceKm} km</span>
+                  </div>
                   {estimate.coverageStatus === 'VALID' && estimate.avgPm25 !== null && (
-                    <>
-                      <br />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
+                      <Wind size={11} style={{ display: 'inline', verticalAlign: 'middle' }} />
                       <span>
-                        🍃 Est. PM2.5: <strong>{estimate.avgPm25} µg/m³</strong>
+                        Est. PM2.5: <strong>{estimate.avgPm25} µg/m³</strong>
                       </span>
-                    </>
+                    </div>
                   )}
-                  <br />
-                  <span style={{ fontSize: '10px', color: '#64748b' }}>
+                  <div style={{ fontSize: '10px', color: '#64748b', marginTop: '2px' }}>
                     Click to select this route
-                  </span>
+                  </div>
                 </div>
               </Tooltip>
             </Polyline>

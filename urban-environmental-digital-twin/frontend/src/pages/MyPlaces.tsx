@@ -865,6 +865,7 @@ export const MyPlaces: React.FC = () => {
                         <button
                           onClick={() => handleOpenEditModal(place)}
                           title="Rename or edit notes"
+                          aria-label="Rename or edit notes"
                           style={{
                             background: 'none',
                             border: 'none',
@@ -884,6 +885,7 @@ export const MyPlaces: React.FC = () => {
                         <button
                           onClick={() => handleDeletePlace(place.id, place.customName)}
                           title="Remove saved place"
+                          aria-label="Remove saved place"
                           style={{
                             background: 'none',
                             border: 'none',
@@ -1908,6 +1910,8 @@ export const MyPlaces: React.FC = () => {
               </div>
               <button
                 onClick={() => setIsModalOpen(false)}
+                title="Close dialog"
+                aria-label="Close dialog"
                 style={{
                   background: 'none',
                   border: 'none',

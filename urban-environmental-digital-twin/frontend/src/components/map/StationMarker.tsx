@@ -43,7 +43,7 @@ export const StationMarker: React.FC<StationMarkerProps> = ({
     html: `
       <div class="custom-station-pin ${isSelected ? 'selected' : ''} ${isOutage ? 'outage' : hasActiveAlerts ? 'has-alert' : ''}" style="${isOutage ? 'background: #f59e0b; border-color: #b45309;' : ''}" title="${station.station_name}${isOutage ? ' (SIMULATED OUTAGE)' : hasActiveAlerts ? ` (${alerts.length} active alerts)` : ''}">
         <div class="pin-badge" style="${isOutage ? 'background: #d97706;' : ''}">
-          <span class="pin-id">${isOutage ? '⚡' : station.station_id}</span>
+          <span class="pin-id">${isOutage ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>' : station.station_id}</span>
           ${isOutage ? `<span class="pin-alert-count" style="background: #dc2626;">OFF</span>` : hasActiveAlerts ? `<span class="pin-alert-count">${alerts.length}</span>` : ''}
         </div>
         <div class="pin-pulse" style="${isOutage ? 'border-color: #f59e0b;' : ''}"></div>

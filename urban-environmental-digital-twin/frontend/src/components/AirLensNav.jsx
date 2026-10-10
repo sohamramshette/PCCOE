@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { LogIn, ArrowUpRight, Menu, X } from 'lucide-react';
 
 export default function AirLensNav({ onOpenDashboard }) {
   const navigate = useNavigate();
@@ -120,9 +121,7 @@ export default function AirLensNav({ onOpenDashboard }) {
             onClick={handleLoginClick}
             aria-label="Login to AirLens Portal"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="13" height="13" style={{ marginRight: '4px' }}>
-              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <LogIn size={13} style={{ marginRight: '4px' }} />
             <span>Login</span>
           </button>
 
@@ -133,9 +132,7 @@ export default function AirLensNav({ onOpenDashboard }) {
             aria-label="Open Pune Environmental Dashboard"
           >
             <span>Open Dashboard</span>
-            <svg className="arrow-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M4 12L12 4M12 4H6M12 4V10" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <ArrowUpRight size={14} className="arrow-icon" />
           </button>
 
           {/* Mobile Menu Toggle */}
@@ -146,13 +143,11 @@ export default function AirLensNav({ onOpenDashboard }) {
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              {mobileMenuOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" strokeLinecap="round" />
-              ) : (
-                <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
-              )}
-            </svg>
+            {mobileMenuOpen ? (
+              <X size={18} />
+            ) : (
+              <Menu size={18} />
+            )}
           </button>
         </div>
       </nav>

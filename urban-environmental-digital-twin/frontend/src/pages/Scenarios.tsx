@@ -11,6 +11,8 @@ import {
   HardHat,
   FileText,
   Sparkles,
+  Leaf,
+  AlertTriangle,
 } from 'lucide-react';
 import { getStations } from '../api/stations';
 import { createScenario, getScenarios, runScenario, getScenarioResults } from '../api/scenarios';
@@ -325,7 +327,8 @@ export const Scenarios: React.FC = () => {
                 style={{ fontSize: '0.75rem', padding: '0.3rem 0.6rem', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
                 onClick={() => applyPreset('pune_action_plan')}
               >
-                <span>🌿 Clean Air Plan 2026</span>
+                <Leaf size={12} color="#10b981" />
+                <span>Clean Air Plan 2026</span>
               </button>
               <button
                 type="button"
@@ -351,7 +354,8 @@ export const Scenarios: React.FC = () => {
                 style={{ fontSize: '0.75rem', padding: '0.3rem 0.6rem', display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}
                 onClick={() => applyPreset('winter_emergency')}
               >
-                <span>⚠️ Winter Smog Curbs</span>
+                <AlertTriangle size={12} color="#f59e0b" />
+                <span>Winter Smog Curbs</span>
               </button>
             </div>
           </div>

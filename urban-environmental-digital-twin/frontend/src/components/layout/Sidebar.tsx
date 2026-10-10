@@ -18,6 +18,7 @@ import {
   Bell,
   Camera,
   Bookmark,
+  Route,
 } from 'lucide-react';
 import { getHealth } from '../../api/health';
 import { HealthResponse } from '../../types/common';
@@ -63,7 +64,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
       items: [
         { to: '/citizen', label: 'My Air Dashboard', icon: <Heart size={18} /> },
         { to: '/explore', label: 'Explore Air Quality', icon: <MapPin size={18} /> },
-        { to: '/cleaner-routes', label: 'Cleaner Routes', icon: <Compass size={18} /> },
+        { to: '/cleaner-routes', label: 'Cleaner Routes', icon: <Route size={18} /> },
         { to: '/forecast-guidance', label: 'Forecast & Activity Guidance', icon: <TrendingUp size={18} /> },
         { to: '/pollution-sources', label: 'Pollution Sources', icon: <Wind size={18} /> },
         { to: '/my-alerts', label: 'My Alerts', icon: <Bell size={18} /> },

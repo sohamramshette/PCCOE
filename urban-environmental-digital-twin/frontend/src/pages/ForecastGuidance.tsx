@@ -9,6 +9,9 @@ import {
   Sparkles,
   CheckCircle2,
   AlertCircle,
+  Activity,
+  Footprints,
+  Smile,
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -748,9 +751,9 @@ export const ForecastGuidance: React.FC = () => {
           }}
         >
           {[
-            { type: 'exercise' as ActivityType, label: 'Outdoor Exercise & Running', icon: '🏃' },
-            { type: 'walking' as ActivityType, label: 'Walking & Outdoor Errands', icon: '🚶' },
-            { type: 'children' as ActivityType, label: "Children's Outdoor Play", icon: '🛝' },
+            { type: 'exercise' as ActivityType, label: 'Outdoor Exercise & Running', icon: <Activity size={18} /> },
+            { type: 'walking' as ActivityType, label: 'Walking & Outdoor Errands', icon: <Footprints size={18} /> },
+            { type: 'children' as ActivityType, label: "Children's Outdoor Play", icon: <Smile size={18} /> },
           ].map((act) => {
             const active = selectedActivity === act.type;
             return (
@@ -761,7 +764,7 @@ export const ForecastGuidance: React.FC = () => {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '8px',
+                  gap: '10px',
                   padding: '12px 16px',
                   borderRadius: '14px',
                   border: active ? '1.5px solid #8fa07e' : '1px solid rgba(163, 181, 147, 0.2)',
@@ -774,7 +777,7 @@ export const ForecastGuidance: React.FC = () => {
                   transition: 'all 0.15s ease',
                 }}
               >
-                <span style={{ fontSize: '1.25rem' }}>{act.icon}</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', color: active ? '#8fa07e' : '#9eab93' }}>{act.icon}</span>
                 <span>{act.label}</span>
               </button>
             );

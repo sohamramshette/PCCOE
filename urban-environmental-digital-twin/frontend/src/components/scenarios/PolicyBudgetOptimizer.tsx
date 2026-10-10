@@ -17,6 +17,7 @@ import {
   Zap,
   HardHat,
   Scale,
+  Droplets,
 } from 'lucide-react';
 import { optimizeScenarios } from '../../api/scenarios';
 import {
@@ -549,11 +550,31 @@ export const PolicyBudgetOptimizer: React.FC<PolicyBudgetOptimizerProps> = ({
                           </td>
                           <td style={{ fontSize: '0.78rem' }}>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem' }}>
-                              {pkg.interventions.traffic > 0 && <span>🚗 Traffic: {pkg.interventions.traffic}%</span>}
-                              {pkg.interventions.ev_fleet > 0 && <span>⚡ EV Fleet: {pkg.interventions.ev_fleet}%</span>}
-                              {pkg.interventions.industrial > 0 && <span>🏭 Industrial: {pkg.interventions.industrial}%</span>}
-                              {pkg.interventions.green_buffer > 0 && <span>🌿 Green Buffer: {pkg.interventions.green_buffer}%</span>}
-                              {pkg.interventions.dust_misting && <span>💦 Dust Misting: ACTIVE</span>}
+                              {pkg.interventions.traffic > 0 && (
+                                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                                  <Car size={12} color="#94a3b8" /> Traffic: {pkg.interventions.traffic}%
+                                </span>
+                              )}
+                              {pkg.interventions.ev_fleet > 0 && (
+                                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                                  <Zap size={12} color="#059669" /> EV Fleet: {pkg.interventions.ev_fleet}%
+                                </span>
+                              )}
+                              {pkg.interventions.industrial > 0 && (
+                                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                                  <Factory size={12} color="#ef4444" /> Industrial: {pkg.interventions.industrial}%
+                                </span>
+                              )}
+                              {pkg.interventions.green_buffer > 0 && (
+                                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                                  <Leaf size={12} color="#10b981" /> Green Buffer: {pkg.interventions.green_buffer}%
+                                </span>
+                              )}
+                              {pkg.interventions.dust_misting && (
+                                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                                  <Droplets size={12} color="#38bdf8" /> Dust Misting: ACTIVE
+                                </span>
+                              )}
                             </div>
                           </td>
                           <td>
@@ -724,8 +745,9 @@ export const PolicyBudgetOptimizer: React.FC<PolicyBudgetOptimizerProps> = ({
                   style={{ width: '100%' }}
                 />
                 {customTraffic > 40 && (
-                  <div style={{ fontSize: '0.68rem', color: '#b91c1c', marginTop: '0.2rem' }}>
-                    ⚠️ Operational limit exceeded by {(customTraffic - 40).toFixed(0)} percentage points (max 40%).
+                  <div style={{ fontSize: '0.68rem', color: '#b91c1c', marginTop: '0.2rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <AlertTriangle size={11} color="#b91c1c" />
+                    <span>Operational limit exceeded by {(customTraffic - 40).toFixed(0)} percentage points (max 40%).</span>
                   </div>
                 )}
               </div>
@@ -748,8 +770,9 @@ export const PolicyBudgetOptimizer: React.FC<PolicyBudgetOptimizerProps> = ({
                   style={{ width: '100%' }}
                 />
                 {customEvFleet > 50 && (
-                  <div style={{ fontSize: '0.68rem', color: '#b91c1c', marginTop: '0.2rem' }}>
-                    ⚠️ Operational limit exceeded by {(customEvFleet - 50).toFixed(0)} percentage points (max 50%).
+                  <div style={{ fontSize: '0.68rem', color: '#b91c1c', marginTop: '0.2rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <AlertTriangle size={11} color="#b91c1c" />
+                    <span>Operational limit exceeded by {(customEvFleet - 50).toFixed(0)} percentage points (max 50%).</span>
                   </div>
                 )}
               </div>
@@ -773,13 +796,15 @@ export const PolicyBudgetOptimizer: React.FC<PolicyBudgetOptimizerProps> = ({
                   style={{ width: '100%' }}
                 />
                 {industrialBlocked && (
-                  <div style={{ fontSize: '0.68rem', color: '#b91c1c', marginTop: '0.2rem' }}>
-                    ⚠️ Lever currently unavailable due to legal dispute.
+                  <div style={{ fontSize: '0.68rem', color: '#b91c1c', marginTop: '0.2rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <AlertTriangle size={11} color="#b91c1c" />
+                    <span>Lever currently unavailable due to legal dispute.</span>
                   </div>
                 )}
                 {customIndustrial > 35 && !industrialBlocked && (
-                  <div style={{ fontSize: '0.68rem', color: '#b91c1c', marginTop: '0.2rem' }}>
-                    ⚠️ Operational limit exceeded by {(customIndustrial - 35).toFixed(0)} percentage points (max 35%).
+                  <div style={{ fontSize: '0.68rem', color: '#b91c1c', marginTop: '0.2rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <AlertTriangle size={11} color="#b91c1c" />
+                    <span>Operational limit exceeded by {(customIndustrial - 35).toFixed(0)} percentage points (max 35%).</span>
                   </div>
                 )}
               </div>
@@ -802,8 +827,9 @@ export const PolicyBudgetOptimizer: React.FC<PolicyBudgetOptimizerProps> = ({
                   style={{ width: '100%' }}
                 />
                 {customGreenBuffer > 30 && (
-                  <div style={{ fontSize: '0.68rem', color: '#b91c1c', marginTop: '0.2rem' }}>
-                    ⚠️ Operational limit exceeded by {(customGreenBuffer - 30).toFixed(0)} percentage points (max 30%).
+                  <div style={{ fontSize: '0.68rem', color: '#b91c1c', marginTop: '0.2rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <AlertTriangle size={11} color="#b91c1c" />
+                    <span>Operational limit exceeded by {(customGreenBuffer - 30).toFixed(0)} percentage points (max 30%).</span>
                   </div>
                 )}
               </div>

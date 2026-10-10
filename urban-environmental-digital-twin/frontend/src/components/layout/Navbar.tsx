@@ -138,6 +138,7 @@ export const Navbar: React.FC = () => {
               cursor: 'pointer',
             }}
             title="Sign out"
+            aria-label="Sign out"
           >
             <LogOut size={14} />
           </button>

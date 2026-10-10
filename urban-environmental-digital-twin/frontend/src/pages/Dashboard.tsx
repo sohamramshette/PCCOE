@@ -231,6 +231,7 @@ export const Dashboard: React.FC = () => {
               }}
               className="btn btn-secondary dashboard-refresh-button"
               title="Refresh Station Data"
+              aria-label="Refresh Station Data"
             >
               <RefreshCw size={16} />
             </button>

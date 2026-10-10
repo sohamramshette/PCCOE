@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
-  Compass,
   ArrowUpDown,
   RotateCcw,
   Search,
@@ -16,6 +15,8 @@ import {
   MapPin,
   RefreshCw,
   Sparkles,
+  Route,
+  Clock,
 } from 'lucide-react';
 
 import { getStations } from '../api/stations';
@@ -266,7 +267,7 @@ export const CleanerRoutes: React.FC = () => {
                 gap: '5px',
               }}
             >
-              <Compass size={13} />
+              <Route size={13} />
               Cleaner Routes
             </span>
             <span style={{ fontSize: '11px', color: '#9eab93' }}>Pune &amp; Pimpri-Chinchwad Commute Advisor</span>
@@ -477,6 +478,7 @@ export const CleanerRoutes: React.FC = () => {
               type="button"
               onClick={handleSwapLocations}
               title="Swap starting point and destination"
+              aria-label="Swap starting point and destination"
               style={{
                 background: 'rgba(143, 160, 126, 0.14)',
                 border: '1px solid rgba(163, 181, 147, 0.3)',
@@ -1074,9 +1076,16 @@ export const CleanerRoutes: React.FC = () => {
                     color: '#f4f6f0',
                     fontSize: '0.78rem',
                     fontWeight: 600,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
                   }}
                 >
-                  ⏱️ ~{selectedRouteComparison.route.durationMinutes} mins · 📏 {selectedRouteComparison.route.distanceKm} km
+                  <Clock size={13} color="#a3b593" />
+                  <span>~{selectedRouteComparison.route.durationMinutes} mins</span>
+                  <span style={{ opacity: 0.4 }}>·</span>
+                  <Navigation size={13} color="#a3b593" />
+                  <span>{selectedRouteComparison.route.distanceKm} km</span>
                 </span>
               </div>
             )}
