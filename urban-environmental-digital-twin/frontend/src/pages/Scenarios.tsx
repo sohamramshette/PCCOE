@@ -259,10 +259,6 @@ export const Scenarios: React.FC = () => {
           <span className="badge badge-observed">Counterfactual Engine</span>
         </div>
         <h2 style={{ fontSize: '1.5rem', fontWeight: 700 }}>What-If Policy Intervention Simulator</h2>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', maxWidth: '850px', marginTop: '0.2rem' }}>
-          Evaluate hypothetical urban interventions (traffic congestion restrictions, industrial curtailment, or combined policies)
-          against historical baseline conditions to forecast counterfactual air quality changes in Pune & PCMC.
-        </p>
       </div>
 
       {actionSuccess && (

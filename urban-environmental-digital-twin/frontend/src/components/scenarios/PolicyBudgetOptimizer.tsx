@@ -157,11 +157,6 @@ export const PolicyBudgetOptimizer: React.FC<PolicyBudgetOptimizerProps> = ({
             <h2 style={{ fontSize: '1.45rem', fontWeight: 700, margin: '0 0 0.35rem 0' }}>
               Policy & Budget Optimizer
             </h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', margin: 0, maxWidth: '820px', lineHeight: 1.5 }}>
-              Evaluate municipal intervention portfolios under strict budgetary ceilings, operational deployment limits,
-              and policy availability constraints. Modeled outcomes are estimated dynamically via Pune’s multi-feature
-              forecasting pipeline.
-            </p>
           </div>
           <div style={{ textAlign: 'right', minWidth: '180px' }}>
             <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Target Airshed Monitor:</span>

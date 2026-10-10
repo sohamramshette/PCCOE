@@ -16,14 +16,12 @@ import { getStations } from '../api/stations';
 import { getObservations } from '../api/observations';
 import { getWeather } from '../api/weather';
 import { getForecast } from '../api/forecast';
-import { getModels } from '../api/models';
 import { getActiveAlerts } from '../api/alerts';
 import { getPredictions } from '../api/predictions';
 import { Station } from '../types/station';
 import { ObservationItem } from '../types/observation';
 import { WeatherItem } from '../types/weather';
 import { ForecastResponse } from '../types/forecast';
-import { ModelSummary } from '../types/model';
 import { Alert } from '../types/alert';
 import { PredictionItem } from '../types/prediction';
 import { LoadingSpinner } from '../components/common/LoadingSpinner';
@@ -41,28 +39,25 @@ export const Dashboard: React.FC = () => {
   const [weatherItems, setWeatherItems] = useState<WeatherItem[]>([]);
   const [predictions, setPredictions] = useState<PredictionItem[]>([]);
   const [forecast, setForecast] = useState<ForecastResponse | null>(null);
-  const [models, setModels] = useState<ModelSummary[]>([]);
   const [activeAlerts, setActiveAlerts] = useState<Alert[]>([]);
   
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingDetails, setLoadingDetails] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Initial load: stations, models, and active alerts
+  // Initial load: stations and active alerts
   const loadInitialData = async () => {
     try {
       setLoading(true);
       setError(null);
-      const [stationList, modelList, alertsList] = await Promise.all([
+      const [stationList, alertsList] = await Promise.all([
         getStations(true),
-        getModels(),
         getActiveAlerts().catch((err) => {
           console.error('Failed to load active alerts:', err);
           return [] as Alert[];
         }),
       ]);
       setStations(stationList);
-      setModels(modelList);
       setActiveAlerts(alertsList);
       if (stationList.length > 0 && selectedStationId === null) {
         setSelectedStationId(stationList[0].station_id);
@@ -566,71 +561,6 @@ export const Dashboard: React.FC = () => {
           ) : (
             <div className="state-container">No weather data available.</div>
           )}
-        </div>
-      </div>
-
-      {/* Baseline Models Overview Table */}
-      <div className="card">
-        <div className="card-header">
-          <div>
-            <div className="card-title">
-              <Cpu size={18} color="var(--primary)" />
-              <span>Registered Machine Learning Baseline Models</span>
-            </div>
-            <div className="card-subtitle">
-              Trained on 84,096 station-hours with strict chronological validation & test holdout
-            </div>
-          </div>
-          <span className="badge badge-predicted">Phase 7 Benchmarks</span>
-        </div>
-
-        <div className="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Model Identifier</th>
-                <th>Algorithm Family</th>
-                <th>Target Horizon</th>
-                <th>Validation MAE</th>
-                <th>Test MAE</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {models.map((m) => (
-                <tr key={m.model_id}>
-                  <td>
-                    <strong>{m.model_name}</strong>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{m.model_id}</div>
-                  </td>
-                  <td>
-                    <code style={{ fontSize: '0.8rem', color: '#1d4ed8' }}>{m.model_type}</code>
-                  </td>
-                  <td>{m.horizon} ({m.target})</td>
-                  <td>{formatNumber(m.validation_mae, 4)} µg/m³</td>
-                  <td>
-                    <strong style={{ color: m.test_mae < 4.1 ? '#10b981' : 'inherit' }}>
-                      {formatNumber(m.test_mae, 4)} µg/m³
-                    </strong>
-                  </td>
-                  <td>
-                    <span
-                      style={{
-                        padding: '0.2rem 0.5rem',
-                        borderRadius: '4px',
-                        fontSize: '0.75rem',
-                        backgroundColor: m.is_active ? 'rgba(16, 185, 129, 0.15)' : 'rgba(148, 163, 184, 0.1)',
-                        color: m.is_active ? '#047857' : '#64748b',
-                        fontWeight: 600,
-                      }}
-                    >
-                      {m.is_active ? 'ACTIVE' : 'STANDBY'}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
       </div>
     </div>

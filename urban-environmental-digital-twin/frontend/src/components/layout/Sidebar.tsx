@@ -8,8 +8,6 @@ import {
   SlidersHorizontal,
   Activity,
   Layers,
-  BarChart2,
-  BookOpen,
   PanelLeftClose,
   PanelLeftOpen,
   AlertTriangle,
@@ -85,8 +83,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
         { to: '/forecast', label: 'Next-Hour Forecast', icon: <TrendingUp size={18} /> },
         { to: '/scenarios', label: 'What-If Scenarios', icon: <SlidersHorizontal size={18} /> },
         { to: '/backtracking', label: 'Backtracking Engine', icon: <Compass size={18} /> },
-        { to: '/model-performance', label: 'Model Performance', icon: <BarChart2 size={18} /> },
-        { to: '/data-methodology', label: 'Data & Methodology', icon: <BookOpen size={18} /> },
       ],
     },
   ];
