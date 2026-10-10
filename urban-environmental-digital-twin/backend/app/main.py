@@ -127,23 +127,33 @@ logger.info(f"Configuring CORS with allowed origins: {settings.cors_origins}")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins,
-    allow_origin_regex=r"https://.*\.vercel\.app",
+    allow_origin_regex=r"^(https?://(localhost|127\.0\.0\.1)(:\d+)?|https://.*\.vercel\.app)$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
+def _is_allowed_origin(origin: str) -> bool:
+    if not origin:
+        return False
+    if origin in settings.cors_origins or "*" in settings.cors_origins:
+        return True
+    if origin.endswith(".vercel.app"):
+        return True
+    if origin.startswith("http://localhost:") or origin.startswith("http://127.0.0.1:"):
+        return True
+    return False
+
+
 def _get_cors_headers(request: Request) -> dict:
     origin = request.headers.get("origin")
-    if origin and (
-        origin in settings.cors_origins
-        or "*" in settings.cors_origins
-        or origin.endswith(".vercel.app")
-    ):
+    if origin and _is_allowed_origin(origin):
         return {
             "Access-Control-Allow-Origin": origin,
             "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Methods": "*",
+            "Access-Control-Allow-Headers": "*",
         }
     return {}
 

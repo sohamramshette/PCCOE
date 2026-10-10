@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
+import { LoadingSpinner } from './components/common/LoadingSpinner';
 import { Dashboard } from './pages/Dashboard';
 import { Stations } from './pages/Stations';
 import { StationDetails } from './pages/StationDetails';
@@ -11,6 +12,8 @@ import { ModelPerformance } from './pages/ModelPerformance';
 import { DataMethodology } from './pages/DataMethodology';
 import { Alerts } from './pages/Alerts';
 import { LandingPage } from './pages/LandingPage';
+
+const Backtracking = lazy(() => import('./pages/Backtracking').then((m) => ({ default: m.Backtracking })));
 
 export const App: React.FC = () => {
   return (
@@ -26,6 +29,14 @@ export const App: React.FC = () => {
           <Route path="alerts" element={<Alerts />} />
           <Route path="forecast" element={<Forecast />} />
           <Route path="scenarios" element={<Scenarios />} />
+          <Route
+            path="backtracking"
+            element={
+              <Suspense fallback={<LoadingSpinner message="Loading Atmospheric Backtracking Engine..." />}>
+                <Backtracking />
+              </Suspense>
+            }
+          />
           <Route path="model-performance" element={<ModelPerformance />} />
           <Route path="data-methodology" element={<DataMethodology />} />
           <Route path="*" element={<Navigate to="/" replace />} />

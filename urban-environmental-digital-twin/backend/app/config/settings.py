@@ -45,10 +45,20 @@ class Settings(BaseSettings):
         default=f"sqlite:///{BACKEND_DIR.as_posix()}/dev_digital_twin.db",
         description="Local SQLite fallback path"
     )
+    ALLOW_SQLITE_FALLBACK: bool = Field(
+        default=True,
+        description="Explicit flag allowing development fallback to local SQLite when primary database is unreachable."
+    )
 
     # CORS Configuration
     CORS_ORIGINS_RAW: str = Field(
-        default="http://localhost:3000,http://localhost:5173,http://127.0.0.1:3000,http://127.0.0.1:5173,https://air-lens11.vercel.app",
+        default=(
+            "http://localhost:3000,http://localhost:3001,http://localhost:5173,http://localhost:5174,"
+            "http://localhost:5175,http://localhost:5176,http://localhost:4173,"
+            "http://127.0.0.1:3000,http://127.0.0.1:3001,http://127.0.0.1:5173,http://127.0.0.1:5174,"
+            "http://127.0.0.1:5175,http://127.0.0.1:5176,http://127.0.0.1:4173,"
+            "https://air-lens11.vercel.app"
+        ),
         alias="CORS_ORIGINS",
         description="Comma-separated allowed CORS origins"
     )

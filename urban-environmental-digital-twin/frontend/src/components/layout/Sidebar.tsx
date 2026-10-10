@@ -12,6 +12,7 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   AlertTriangle,
+  Compass,
 } from 'lucide-react';
 import { getHealth } from '../../api/health';
 import { HealthResponse } from '../../types/common';
@@ -64,6 +65,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
       items: [
         { to: '/forecast', label: 'Next-Hour Forecast', icon: <TrendingUp size={18} /> },
         { to: '/scenarios', label: 'What-If Scenarios', icon: <SlidersHorizontal size={18} /> },
+        { to: '/backtracking', label: 'Backtracking Engine', icon: <Compass size={18} /> },
         { to: '/model-performance', label: 'Model Performance', icon: <BarChart2 size={18} /> },
         { to: '/data-methodology', label: 'Data & Methodology', icon: <BookOpen size={18} /> },
       ],

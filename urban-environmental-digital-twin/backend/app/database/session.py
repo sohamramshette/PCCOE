@@ -65,9 +65,22 @@ def get_configured_engine():
             pass
         return pg_engine
     except Exception as e:
+        if settings.APP_ENV == "production" or not settings.ALLOW_SQLITE_FALLBACK:
+            logger.critical(
+                "Primary PostgreSQL database connection failed (%s: %s). SQLite fallback is disabled in %s mode.",
+                type(e).__name__,
+                e,
+                settings.APP_ENV,
+            )
+            raise RuntimeError(
+                f"Primary database connection to PostgreSQL/Supabase failed: {e}. "
+                f"Silent fallback to SQLite is disabled (APP_ENV={settings.APP_ENV}, ALLOW_SQLITE_FALLBACK={settings.ALLOW_SQLITE_FALLBACK})."
+            ) from e
+
         logger.warning(
-            "PostgreSQL connection failed (%s). Operating in local verification mode using %s.",
+            "Primary PostgreSQL connection failed (%s: %s). Operating in explicit development fallback mode using %s.",
             type(e).__name__,
+            e,
             settings.SQLITE_DEV_URL,
         )
         return create_engine(
