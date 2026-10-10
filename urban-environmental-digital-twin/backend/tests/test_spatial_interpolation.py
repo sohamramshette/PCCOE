@@ -78,3 +78,35 @@ def test_coordinate_interpolation_pune_center(client):
     # Verify sensor weight sum
     total_weights = sum(s["weight_percentage"] for s in data["contributing_stations"])
     assert 99.0 <= total_weights <= 101.0  # Around 100% accounting for rounding
+
+
+def test_spatial_interpolation_withheld_stations(client):
+    """Verifies that withheld stations are excluded from interpolation and active_stations_count drops."""
+    # Standard interpolation with all stations
+    res_all = client.get("/api/v1/spatial/interpolation")
+    assert res_all.status_code == status.HTTP_200_OK
+    count_all = res_all.json()["active_stations_count"]
+
+    # Interpolation withholding Shivajinagar (11613)
+    res_withheld = client.get("/api/v1/spatial/interpolation?withheld_station_ids=11613")
+    assert res_withheld.status_code == status.HTTP_200_OK
+    data_withheld = res_withheld.json()
+
+    assert data_withheld["active_stations_count"] == max(0, count_all - 1)
+
+
+def test_coordinate_interpolation_withheld_stations(client):
+    """Verifies that coordinate interpolation excludes withheld stations from contributing_stations."""
+    payload = {
+        "latitude": 18.5304,
+        "longitude": 73.8567,
+        "power": 2.0,
+        "withheld_station_ids": [11613]
+    }
+    response = client.post("/api/v1/spatial/interpolate-coordinate", json=payload)
+    assert response.status_code == status.HTTP_200_OK
+    data = response.json()
+
+    contributing_ids = [s["station_id"] for s in data["contributing_stations"]]
+    assert 11613 not in contributing_ids
+

@@ -35,13 +35,16 @@ def get_spatial_interpolation(
     grid_step: float = Query(0.015, ge=0.005, le=0.05, description="Geographic grid step in degrees"),
     power: float = Query(2.0, ge=1.0, le=5.0, description="Inverse distance weighting power (p)"),
     timestamp: Optional[datetime] = Query(None, description="Target UTC timestamp for historical re-interpolation"),
+    withheld_station_ids: Optional[str] = Query(None, description="Comma-separated station IDs to withhold for simulated outage"),
     db: Session = Depends(get_db)
 ):
+    withheld_ids = [int(s.strip()) for s in withheld_station_ids.split(",") if s.strip().isdigit()] if withheld_station_ids else None
     return SpatialInterpolationService.generate_grid_interpolation(
         db=db,
         grid_step=grid_step,
         power=power,
-        target_timestamp=timestamp
+        target_timestamp=timestamp,
+        withheld_station_ids=withheld_ids
     )
 
 
@@ -64,5 +67,6 @@ def interpolate_coordinate(
         lat=request.latitude,
         lon=request.longitude,
         power=request.power,
-        target_timestamp=request.timestamp
+        target_timestamp=request.timestamp,
+        withheld_station_ids=request.withheld_station_ids
     )

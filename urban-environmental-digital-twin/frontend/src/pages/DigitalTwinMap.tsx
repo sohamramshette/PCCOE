@@ -1,14 +1,18 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useState, useCallback, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   MapPin,
+  Database,
+  ArrowRight,
   Flame,
   Crosshair,
   RotateCcw,
+  Calendar,
+  Info,
+  Radio,
   RefreshCw,
   AlertTriangle,
   WifiOff,
-  ArrowRight,
 } from 'lucide-react';
 
 import { getStations } from '../api/stations';
@@ -22,8 +26,10 @@ import { AlertItem } from '../types/alert';
 import { InterpolatedGridPoint, CoordinateInterpolationResponse } from '../types/spatial';
 import { PuneTwinMap } from '../components/map/PuneTwinMap';
 import { MapLegend } from '../components/map/MapLegend';
+import { SyncWidget } from '../components/sync/SyncWidget';
 import { LoadingSpinner } from '../components/common/LoadingSpinner';
 import { ErrorDisplay } from '../components/common/ErrorDisplay';
+import { ProvenanceBadge } from '../components/common/ProvenanceBadge';
 import { formatNumber } from '../utils/formatters';
 
 interface AtmosphericEpisode {
@@ -43,18 +49,18 @@ const ATMOSPHERIC_EPISODES: AtmosphericEpisode[] = [
     name: 'Live Telemetry Stream',
     badge: 'LIVE AUTO-SYNC',
     color: '#2563eb',
-    timestamp: undefined,
-    description: 'Active real-time telemetry stream ingesting live CPCB / IITM SAFAR telemetry via OpenAQ API v3.',
+    timestamp: undefined, // pulls freshest realtime observation
+    description: 'Active real-time telemetry stream ingesting live CPCB / IITM SAFAR telemetry via OpenAQ API v3. Station cards, AQI tiers, and IDW spatial continuous dots auto-renew continuously.',
     seasonTag: 'Continuous Real-Time Stream · Auto-Renew Active',
     isLive: true,
   },
   {
     id: 'monsoon_clean',
-    name: 'Post-Monsoon Clean',
+    name: 'Latest / Post-Monsoon Clean',
     badge: 'GOOD / SATISFACTORY',
     color: '#059669',
-    timestamp: undefined,
-    description: 'Monsoon precipitation scavenging has washed particulate matter out of the troposphere.',
+    timestamp: undefined, // uses latest in DB (Sep 24, 2026)
+    description: 'Monsoon precipitation scavenging has washed particulate matter out of the troposphere. Station PM2.5 ranges from 1.1 to 32.4 µg/m³ (all CPCB Good/Satisfactory green dots).',
     seasonTag: 'Sep 2026 · Post-Monsoon Clean Air'
   },
   {
@@ -63,7 +69,7 @@ const ATMOSPHERIC_EPISODES: AtmosphericEpisode[] = [
     badge: 'MODERATE / POOR',
     color: '#ca8a04',
     timestamp: '2026-01-06T07:00:00Z',
-    description: 'Morning commute emissions under moderate winter cooling.',
+    description: 'Morning commute emissions under moderate winter cooling. Station PM2.5 ranges from 35.4 to 101.5 µg/m³ across Pune (Yellow & Orange plumes).',
     seasonTag: 'Jan 06, 2026 · Morning Commute Peak'
   },
   {
@@ -72,7 +78,7 @@ const ATMOSPHERIC_EPISODES: AtmosphericEpisode[] = [
     badge: 'VERY POOR / SEVERE',
     color: '#dc2626',
     timestamp: '2025-12-26T16:00:00Z',
-    description: 'Ground-level thermal inversion traps vehicular & industrial emissions.',
+    description: 'Ground-level thermal inversion traps vehicular & industrial emissions. PM2.5 spikes up to 570.8 µg/m³ in Hadapsar (Red & Maroon hotspots).',
     seasonTag: 'Dec 26, 2025 · Winter Inversion Smog'
   }
 ];
@@ -82,6 +88,7 @@ export const DigitalTwinMap: React.FC = () => {
   const [selectedStationId, setSelectedStationId] = useState<number | null>(null);
   const [latestObservations, setLatestObservations] = useState<Record<number, ObservationItem | null>>({});
   const [selectedEpisodeId, setSelectedEpisodeId] = useState<string>('live_telemetry');
+  const [lastSyncTime, setLastSyncTime] = useState<string>('Just now');
   const [isSyncingLive, setIsSyncingLive] = useState<boolean>(false);
   const [countdown, setCountdown] = useState<number>(30);
   const [activeAlerts, setActiveAlerts] = useState<AlertItem[]>([]);
@@ -92,48 +99,76 @@ export const DigitalTwinMap: React.FC = () => {
   const [showHeatmap, setShowHeatmap] = useState<boolean>(true);
   const [idwPower, setIdwPower] = useState<number>(2.0);
 
-  // IDW Heatmap state
+  // Heatmap & Inspection state
   const [heatmapGrid, setHeatmapGrid] = useState<InterpolatedGridPoint[]>([]);
   const [heatmapLoading, setHeatmapLoading] = useState<boolean>(false);
-
-  // Custom click inspection state
   const [customInspection, setCustomInspection] = useState<CoordinateInterpolationResponse | null>(null);
   const [inspectingCoord, setInspectingCoord] = useState<boolean>(false);
-
-  // HackMatrix 5.0 Addition 2: Sensor Outage Simulation state
-  const [outageStationIds, setOutageStationIds] = useState<number[]>([]);
 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const currentEpisode = useMemo(
-    () => ATMOSPHERIC_EPISODES.find((e) => e.id === selectedEpisodeId) || ATMOSPHERIC_EPISODES[0],
-    [selectedEpisodeId]
-  );
+  const currentEpisode = ATMOSPHERIC_EPISODES.find((e) => e.id === selectedEpisodeId) || ATMOSPHERIC_EPISODES[0];
 
   const alertsByStation = useMemo(() => {
     const map: Record<number, AlertItem[]> = {};
-    activeAlerts.forEach((a) => {
+    for (const a of activeAlerts) {
       if (!map[a.station_id]) map[a.station_id] = [];
       map[a.station_id].push(a);
-    });
+    }
     return map;
   }, [activeAlerts]);
 
-  const loadHeatmap = useCallback(async (power: number, targetTimestamp?: string) => {
+  // HackMatrix 5.0 Addition 2: Simulated Sensor Outage State
+  const [outageStationIds, setOutageStationIds] = useState<number[]>([]);
+  const outageStationIdsRef = useRef<number[]>(outageStationIds);
+  outageStationIdsRef.current = outageStationIds;
+
+  const loadHeatmap = useCallback(async (powerVal: number = idwPower, timestamp?: string, withheldIds?: number[]) => {
     try {
       setHeatmapLoading(true);
-      const data = await getSpatialInterpolation({
-        power,
-        ...(targetTimestamp ? { timestamp: targetTimestamp } : {}),
+      const activeWithheld = withheldIds !== undefined ? withheldIds : outageStationIdsRef.current;
+      const res = await getSpatialInterpolation({
+        power: powerVal,
+        timestamp,
+        withheld_station_ids: activeWithheld.length > 0 ? activeWithheld.join(',') : undefined,
       });
-      setHeatmapGrid(data.grid_points || []);
-    } catch (err) {
+      setHeatmapGrid(res.grid_points);
+    } catch (err: unknown) {
       console.error('Failed to load spatial interpolation heatmap:', err);
     } finally {
       setHeatmapLoading(false);
     }
-  }, []);
+  }, [idwPower]);
+
+  const toggleStationOutage = (stationId: number) => {
+    const nextIds = outageStationIds.includes(stationId)
+      ? outageStationIds.filter((id) => id !== stationId)
+      : [...outageStationIds, stationId];
+    setOutageStationIds(nextIds);
+    loadHeatmap(idwPower, currentEpisode.timestamp, nextIds);
+  };
+
+  const applyOutagePreset = (preset: 'none' | 'withheld' | '50pct' | '100pct') => {
+    let nextIds: number[] = [];
+    if (preset === 'none') {
+      nextIds = [];
+    } else if (preset === 'withheld') {
+      nextIds = [11613]; // Station 11613 (Shivajinagar) withheld location
+    } else if (preset === '50pct') {
+      const ids = stations.slice(0, Math.ceil(stations.length / 2)).map((s) => s.station_id);
+      nextIds = ids.length > 0 ? ids : [11613, 11609, 3409331];
+    } else if (preset === '100pct') {
+      nextIds = stations.map((s) => s.station_id);
+    }
+    setOutageStationIds(nextIds);
+    loadHeatmap(idwPower, currentEpisode.timestamp, nextIds);
+  };
+
+  const handleRestoreAllFeeds = () => {
+    setOutageStationIds([]);
+    loadHeatmap(idwPower, currentEpisode.timestamp, []);
+  };
 
   const refreshStationReadings = async (stationList: Station[], targetTimestamp?: string) => {
     const obsMap: Record<number, ObservationItem | null> = {};
@@ -168,6 +203,7 @@ export const DigitalTwinMap: React.FC = () => {
       setLoading(true);
       setError(null);
 
+      // Fetch all active monitoring stations
       const stationList = await getStations(true);
       setStations(stationList);
 
@@ -176,8 +212,13 @@ export const DigitalTwinMap: React.FC = () => {
       }
 
       const ep = ATMOSPHERIC_EPISODES.find((e) => e.id === episodeId) || ATMOSPHERIC_EPISODES[0];
+
+      // Fetch observation for each station in parallel
       await refreshStationReadings(stationList, ep.timestamp);
+
+      // Load spatial interpolation grid
       await loadHeatmap(idwPower, ep.timestamp);
+      setLastSyncTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to load spatial digital twin data.');
     } finally {
@@ -192,10 +233,13 @@ export const DigitalTwinMap: React.FC = () => {
   const handleForceLiveSync = async () => {
     try {
       setIsSyncingLive(true);
+      // Reset any simulated outages so live stream is immediately 100% active
+      setOutageStationIds([]);
       await triggerOpenAQSync();
       const currentStations = stations.length > 0 ? stations : await getStations(true);
       await refreshStationReadings(currentStations, undefined);
-      await loadHeatmap(idwPower, undefined);
+      await loadHeatmap(idwPower, undefined, []);
+      setLastSyncTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
       setCountdown(30);
     } catch (err) {
       console.error('Manual live sync failed:', err);
@@ -211,12 +255,14 @@ export const DigitalTwinMap: React.FC = () => {
     const timer = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
+          // Trigger automated background renew
           (async () => {
             try {
               setIsSyncingLive(true);
               const currentStations = stations.length > 0 ? stations : await getStations(true);
               await refreshStationReadings(currentStations, undefined);
-              await loadHeatmap(idwPower, undefined);
+              await loadHeatmap(idwPower, undefined, outageStationIdsRef.current);
+              setLastSyncTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
             } catch (e) {
               console.error('Auto-renew telemetry error:', e);
             } finally {
@@ -235,7 +281,13 @@ export const DigitalTwinMap: React.FC = () => {
   const handleMapClick = async (lat: number, lon: number) => {
     try {
       setInspectingCoord(true);
-      const res = await interpolateCoordinate(lat, lon, idwPower, currentEpisode.timestamp);
+      const res = await interpolateCoordinate(
+        lat,
+        lon,
+        idwPower,
+        currentEpisode.timestamp,
+        outageStationIdsRef.current.length > 0 ? outageStationIdsRef.current : undefined
+      );
       setCustomInspection(res);
     } catch (err) {
       console.error('Coordinate interpolation failed:', err);
@@ -246,7 +298,7 @@ export const DigitalTwinMap: React.FC = () => {
 
   const handlePowerChange = (newPower: number) => {
     setIdwPower(newPower);
-    loadHeatmap(newPower, currentEpisode.timestamp);
+    loadHeatmap(newPower, currentEpisode.timestamp, outageStationIds);
   };
 
   const handleEpisodeChange = async (episodeId: string) => {
@@ -255,248 +307,353 @@ export const DigitalTwinMap: React.FC = () => {
     setCountdown(30);
     const ep = ATMOSPHERIC_EPISODES.find((e) => e.id === episodeId) || ATMOSPHERIC_EPISODES[0];
     
+    // If switching to live telemetry, reset any simulated outages and force a fresh pull
     if (ep.isLive) {
+      setOutageStationIds([]);
       handleForceLiveSync();
       return;
     }
 
-    await loadHeatmap(idwPower, ep.timestamp);
+    // Load heatmap for historical episode
+    await loadHeatmap(idwPower, ep.timestamp, outageStationIds);
+
+    // Refresh station readings for historical episode
     const currentStations = stations.length > 0 ? stations : await getStations(true);
     await refreshStationReadings(currentStations, ep.timestamp);
   };
 
-  const toggleStationOutage = (stationId: number) => {
-    setOutageStationIds((prev) => {
-      if (prev.includes(stationId)) {
-        return prev.filter((id) => id !== stationId);
-      } else {
-        return [...prev, stationId];
-      }
-    });
-  };
-
-  const applyOutagePreset = (preset: 'none' | 'withheld' | '50pct' | '100pct') => {
-    if (preset === 'none') {
-      setOutageStationIds([]);
-    } else if (preset === 'withheld') {
-      setOutageStationIds([11613]);
-    } else if (preset === '50pct') {
-      const halfCount = Math.ceil(stations.length / 2);
-      setOutageStationIds(stations.slice(0, halfCount).map((s) => s.station_id));
-    } else if (preset === '100pct') {
-      setOutageStationIds(stations.map((s) => s.station_id));
-    }
+  const handleSyncSuccess = () => {
+    // Refresh both observations and continuous heatmap
+    loadData();
   };
 
   const selectedStation = stations.find((s) => s.station_id === selectedStationId) || null;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-      {/* 1. Sleek Control Room HUD Header Bar */}
-      <div
-        className="card"
-        style={{
-          background: 'rgba(255, 255, 255, 0.85)',
-          border: '1px solid rgba(40, 122, 69, 0.16)',
-          borderRadius: '16px',
-          padding: '0.85rem 1.35rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '0.75rem',
-          boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
-        }}
-      >
-        {/* Left: Title + Key Metrics Pill Track */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flexWrap: 'wrap' }}>
-          <div>
-            <h1 style={{ fontSize: '1.3rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
-              Pune Digital Twin
-            </h1>
-            <p style={{ fontSize: '0.75rem', color: '#475e4e', margin: 0, fontWeight: 500 }}>
-              Spatial continuous air quality interpolation &amp; live environmental telemetry
-            </p>
-          </div>
-
-          {/* Quick HUD Metrics Chips */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
-            <span
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.3rem',
-                padding: '0.25rem 0.6rem',
-                borderRadius: '7px',
-                background: 'rgba(40, 122, 69, 0.1)',
-                border: '1px solid rgba(40, 122, 69, 0.25)',
-                fontSize: '0.74rem',
-                color: '#166534',
-                fontWeight: 600,
-              }}
-            >
-              <MapPin size={12} color="#166534" /> {stations.length || 6} CAAQMN Stations
-            </span>
-            <span
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.3rem',
-                padding: '0.25rem 0.6rem',
-                borderRadius: '7px',
-                background: 'rgba(2, 132, 199, 0.1)',
-                border: '1px solid rgba(2, 132, 199, 0.25)',
-                fontSize: '0.74rem',
-                color: '#0369a1',
-                fontWeight: 600,
-              }}
-            >
-              <Flame size={12} color="#0284c7" /> {heatmapGrid.length || 289} IDW Grid Cells
-            </span>
-          </div>
+    <div className="page-container">
+      {/* Header & Spatial Subtitle */}
+      <div className="page-header" style={{ marginBottom: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+        <div>
+          <h1 className="page-title">Pune Digital Twin</h1>
+          <p className="page-subtitle">
+            Spatial continuous air quality interpolation &amp; live environmental telemetry
+          </p>
         </div>
-
-        {/* Center / Right: Atmospheric Scenario Pills & Sync Bar */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
-          {/* Scenario Selector Pills */}
-          <div
-            style={{
-              display: 'flex',
-              gap: '3px',
-              background: 'rgba(241, 245, 249, 0.95)',
-              padding: '3px',
-              borderRadius: '10px',
-              border: '1px solid rgba(40, 122, 69, 0.18)',
-            }}
-          >
-            {ATMOSPHERIC_EPISODES.map((ep) => {
-              const isSelected = ep.id === selectedEpisodeId;
-              return (
-                <button
-                  key={ep.id}
-                  onClick={() => handleEpisodeChange(ep.id)}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '5px',
-                    padding: '4px 9px',
-                    borderRadius: '7px',
-                    fontSize: '11px',
-                    fontWeight: isSelected ? 700 : 500,
-                    cursor: 'pointer',
-                    border: isSelected ? '1px solid rgba(40, 122, 69, 0.3)' : '1px solid transparent',
-                    backgroundColor: isSelected ? (ep.isLive ? 'rgba(37, 99, 235, 0.15)' : `${ep.color}25`) : 'transparent',
-                    color: isSelected ? (ep.isLive ? '#1d4ed8' : '#0d1710') : '#475569',
-                    boxShadow: isSelected ? '0 2px 6px rgba(0, 0, 0, 0.06)' : 'none',
-                    transition: 'all 0.15s ease',
-                  }}
-                  title={ep.description}
-                >
-                  <span style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: ep.color }} />
-                  <span>{ep.name.split('/')[0].trim()}</span>
-                </button>
-              );
-            })}
+        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+          <SyncWidget onSyncCompleted={handleSyncSuccess} />
+          <div style={{ display: 'flex', gap: '0.4rem' }}>
+            <ProvenanceBadge classification="OBSERVED" />
+            <ProvenanceBadge classification="REANALYSIS" />
+            <ProvenanceBadge classification="STATIC" />
           </div>
-
-          {/* Live Sync Status & Button */}
-          {currentEpisode.isLive && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ fontSize: '0.72rem', color: '#166534', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-                <span
-                  style={{
-                    width: 6,
-                    height: 6,
-                    borderRadius: '50%',
-                    backgroundColor: '#16a34a',
-                    boxShadow: '0 0 6px #16a34a',
-                  }}
-                />
-                <span>{countdown}s</span>
-              </span>
-              <button
-                onClick={handleForceLiveSync}
-                disabled={isSyncingLive}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                  padding: '4px 9px',
-                  borderRadius: '7px',
-                  border: '1px solid rgba(22, 101, 52, 0.35)',
-                  backgroundColor: 'rgba(22, 101, 52, 0.1)',
-                  color: '#166534',
-                  fontSize: '11px',
-                  fontWeight: 700,
-                  cursor: isSyncingLive ? 'not-allowed' : 'pointer',
-                }}
-                title="Force instant sync from OpenAQ"
-              >
-                <RefreshCw size={11} className={isSyncingLive ? 'animate-spin' : ''} />
-                <span>Sync</span>
-              </button>
-            </div>
-          )}
         </div>
       </div>
 
-      {/* 2. Main Spatial Twin Command Center Grid */}
+      {/* Information Panel */}
+      <div className="info-banner-grid" style={{ marginBottom: '1.5rem' }}>
+        <div className="card" style={{ padding: '0.85rem 1.15rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '0.2rem' }}>
+            <MapPin size={14} className="text-primary" />
+            <span>Monitoring Stations</span>
+          </div>
+          <div style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+            {stations.length || 6}
+          </div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+            Continuous CAAQMN stations
+          </div>
+        </div>
+
+        <div className="card" style={{ padding: '0.85rem 1.15rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '0.2rem' }}>
+            <Flame size={14} className="text-primary" />
+            <span>Spatial Interpolation</span>
+          </div>
+          <div style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.25rem' }}>
+            2D IDW Continuous Surface
+          </div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+            {heatmapGrid.length} grid cells across Pune &amp; PCMC
+          </div>
+        </div>
+
+        <div className="card" style={{ padding: '0.85rem 1.15rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '0.2rem' }}>
+            <Database size={14} className="text-primary" />
+            <span>Live Data Sync</span>
+          </div>
+          <div style={{ fontSize: '0.92rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.25rem' }}>
+            OpenAQ API v3 Pipeline
+          </div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+            In-situ sensor telemetry + reanalysis
+          </div>
+        </div>
+      </div>
+
+      {/* Main Spatial Twin Layout */}
       {loading ? (
         <LoadingSpinner message="Loading spatial twin geometry and monitoring network..." />
       ) : error ? (
         <ErrorDisplay message={error} onRetry={loadData} />
       ) : (
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(0, 1fr) 360px',
-            gap: '1rem',
-            alignItems: 'start',
-          }}
-        >
-          {/* Left Column: Interactive Map Deck */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-            {/* Map Top Toolbar */}
+        <div className="digital-twin-grid">
+          {/* Left Column: Interactive Map */}
+          <div className="map-column">
+            {/* Atmospheric Episode / Season Selector */}
+            <div
+              className="card"
+              style={{
+                marginBottom: '0.75rem',
+                padding: '0.65rem 0.9rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+                gap: '0.6rem',
+                background: 'rgba(22, 30, 21, 0.85)',
+                border: '1px solid rgba(163, 181, 147, 0.2)',
+                borderRadius: '12px',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Calendar size={15} className="text-primary" />
+                <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                  Monitoring Mode &amp; Scenarios:
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                {ATMOSPHERIC_EPISODES.map((ep) => {
+                  const isSelected = ep.id === selectedEpisodeId;
+                  return (
+                    <button
+                      key={ep.id}
+                      onClick={() => handleEpisodeChange(ep.id)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        padding: '4px 10px',
+                        borderRadius: '6px',
+                        fontSize: '11px',
+                        fontWeight: isSelected ? 700 : 500,
+                        cursor: 'pointer',
+                        border: isSelected ? `2px solid ${ep.color}` : '1px solid rgba(163, 181, 147, 0.2)',
+                        backgroundColor: isSelected ? `${ep.color}25` : 'rgba(26, 36, 25, 0.8)',
+                        color: isSelected ? ep.color : 'var(--text-secondary)',
+                        boxShadow: isSelected && ep.isLive ? '0 0 10px rgba(37, 99, 235, 0.2)' : 'none',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      {ep.isLive ? (
+                        <span style={{ position: 'relative', display: 'flex', height: '8px', width: '8px' }}>
+                          <span
+                            style={{
+                              position: 'absolute',
+                              display: 'inline-flex',
+                              height: '100%',
+                              width: '100%',
+                              borderRadius: '50%',
+                              backgroundColor: '#ef4444',
+                              opacity: 0.75,
+                              animation: 'pulse 1.5s infinite',
+                            }}
+                          />
+                          <span
+                            style={{
+                              position: 'relative',
+                              display: 'inline-flex',
+                              borderRadius: '50%',
+                              height: '8px',
+                              width: '8px',
+                              backgroundColor: '#dc2626',
+                            }}
+                          />
+                        </span>
+                      ) : (
+                        <span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: ep.color }} />
+                      )}
+
+                      <span>{ep.name}</span>
+
+                      <span
+                        style={{
+                          fontSize: '9px',
+                          fontWeight: 700,
+                          padding: '1px 5px',
+                          borderRadius: '4px',
+                          backgroundColor: isSelected ? (ep.isLive ? '#2563eb' : ep.color) : '#f1f5f9',
+                          color: isSelected ? '#ffffff' : '#475569',
+                        }}
+                      >
+                        {ep.badge}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Active Mode Banner: Live Stream vs Historical Scenarios */}
+            {currentEpisode.isLive ? (
+              <div
+                style={{
+                  marginBottom: '0.75rem',
+                  padding: '0.75rem 1rem',
+                  borderRadius: '10px',
+                  fontSize: '0.75rem',
+                  lineHeight: 1.45,
+                  backgroundColor: 'rgba(20, 32, 22, 0.95)',
+                  border: '1px solid rgba(74, 222, 128, 0.3)',
+                  borderLeft: '4px solid #22c55e',
+                  color: 'var(--text-secondary)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                  gap: '12px',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', flex: 1, minWidth: '280px' }}>
+                  <Radio size={16} style={{ color: '#4ade80', flexShrink: 0, marginTop: '2px' }} />
+                  <div>
+                    <div style={{ fontWeight: 700, color: '#4ade80', marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                      <span>LIVE TELEMETRY STREAM ACTIVE</span>
+                      <span style={{ fontSize: '9px', fontWeight: 700, padding: '1px 6px', borderRadius: '4px', backgroundColor: 'rgba(34, 197, 94, 0.15)', color: '#4ade80', border: '1px solid rgba(74, 222, 128, 0.3)' }}>
+                        ● AUTO-RENEWING
+                      </span>
+                      {outageStationIds.length > 0 && (
+                        <span style={{ fontSize: '9px', fontWeight: 700, padding: '1px 7px', borderRadius: '4px', backgroundColor: 'rgba(245, 158, 11, 0.2)', color: '#fbbf24', border: '1px solid rgba(245, 158, 11, 0.4)', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                          <WifiOff size={10} />
+                          {outageStationIds.length} SENSOR{outageStationIds.length > 1 ? 'S' : ''} WITHHELD (OUTAGE SIMULATION)
+                        </span>
+                      )}
+                    </div>
+                    <div style={{ color: 'var(--text-secondary)' }}>
+                      Ingesting continuous telemetry from CPCB / IITM SAFAR stations via OpenAQ API v3. Map grid nodes, station cards, and pinpoint estimates renew dynamically.
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                  <div style={{ textAlign: 'right', fontSize: '11px', color: 'var(--text-muted)' }}>
+                    <div>Last renewed: <strong style={{ color: 'var(--text-primary)' }}>{lastSyncTime}</strong></div>
+                    <div style={{ fontSize: '10px', color: '#4ade80' }}>
+                      Next auto-poll in <strong>{countdown}s</strong>
+                    </div>
+                  </div>
+                  {outageStationIds.length > 0 && (
+                    <button
+                      onClick={handleRestoreAllFeeds}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '5px',
+                        padding: '6px 11px',
+                        borderRadius: '6px',
+                        border: '1px solid rgba(245, 158, 11, 0.5)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.15)',
+                        color: '#fbbf24',
+                        fontSize: '11px',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                      }}
+                      title="Clear simulated outages and unmask all live sensor streams"
+                    >
+                      <RotateCcw size={12} />
+                      <span>Restore All Feeds</span>
+                    </button>
+                  )}
+                  <button
+                    onClick={handleForceLiveSync}
+                    disabled={isSyncingLive}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '5px',
+                      padding: '6px 12px',
+                      borderRadius: '6px',
+                      border: '1px solid #16a34a',
+                      backgroundColor: '#16a34a',
+                      color: '#ffffff',
+                      fontSize: '11px',
+                      fontWeight: 600,
+                      cursor: isSyncingLive ? 'not-allowed' : 'pointer',
+                      opacity: isSyncingLive ? 0.7 : 1,
+                      boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
+                    }}
+                    title="Force an instant pull from OpenAQ CAAQMS servers (also resets any simulated outages)"
+                  >
+                    <RefreshCw size={12} className={isSyncingLive ? 'animate-spin' : ''} />
+                    <span>{isSyncingLive ? 'Syncing...' : 'Force Sync Now'}</span>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div
+                style={{
+                  marginBottom: '0.75rem',
+                  padding: '0.65rem 0.95rem',
+                  borderRadius: '8px',
+                  fontSize: '0.75rem',
+                  lineHeight: 1.45,
+                  backgroundColor: `${currentEpisode.color}15`,
+                  border: `1px solid ${currentEpisode.color}40`,
+                  borderLeft: `4px solid ${currentEpisode.color}`,
+                  color: 'var(--text-secondary)',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '8px',
+                }}
+              >
+                <Info size={15} style={{ color: currentEpisode.color, flexShrink: 0, marginTop: '2px' }} />
+                <div>
+                  <strong style={{ color: currentEpisode.color }}>{currentEpisode.seasonTag}:</strong>{' '}
+                  {currentEpisode.description}
+                  <span style={{ marginLeft: '6px', fontSize: '10px', color: 'var(--text-muted)', fontStyle: 'italic' }}>
+                    (Historical scenario mode active · live auto-sync paused for demonstration)
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Spatial Heatmap Layer Controls */}
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                padding: '8px 14px',
-                backgroundColor: 'rgba(255, 255, 255, 0.88)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                border: '1px solid rgba(40, 122, 69, 0.18)',
-                borderBottom: 'none',
-                borderRadius: '14px 14px 0 0',
-                fontSize: '11px',
+                padding: '10px 16px',
+                backgroundColor: 'rgba(22, 30, 21, 0.92)',
+                border: '1px solid rgba(163, 181, 147, 0.2)',
+                borderRadius: '12px 12px 0 0',
+                fontSize: '12px',
                 gap: '8px',
                 flexWrap: 'wrap',
-                boxShadow: '0 4px 14px rgba(22, 38, 25, 0.03)',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <button
                   onClick={() => setSelectedStationId(null)}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '4px',
-                    padding: '4px 10px',
-                    borderRadius: '7px',
+                    gap: '5px',
+                    padding: '5px 12px',
+                    borderRadius: '6px',
                     border: '1px solid',
-                    borderColor: selectedStationId === null ? '#0284c7' : 'rgba(40, 122, 69, 0.22)',
-                    backgroundColor: selectedStationId === null ? 'rgba(2, 132, 199, 0.12)' : '#ffffff',
-                    color: selectedStationId === null ? '#0284c7' : '#334155',
-                    fontWeight: 650,
+                    borderColor: selectedStationId === null ? '#60a5fa' : 'rgba(163, 181, 147, 0.25)',
+                    backgroundColor: selectedStationId === null ? 'rgba(37, 99, 235, 0.25)' : 'rgba(26, 36, 25, 0.8)',
+                    color: selectedStationId === null ? '#93c5fd' : 'var(--text-secondary)',
+                    fontWeight: 600,
                     cursor: 'pointer',
                     fontSize: '11px',
-                    boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
                   }}
-                  title="Fit camera to view all 6 monitoring stations"
+                  title="Fit camera to view all 6 monitoring stations simultaneously"
                 >
-                  <MapPin size={12} color={selectedStationId === null ? '#0284c7' : '#475569'} />
-                  <span>Fit All Stations</span>
+                  <MapPin size={13} />
+                  <span>Fit All 6 Stations</span>
                 </button>
 
                 <button
@@ -504,39 +661,37 @@ export const DigitalTwinMap: React.FC = () => {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '4px',
-                    padding: '4px 10px',
-                    borderRadius: '7px',
+                    gap: '6px',
+                    padding: '5px 12px',
+                    borderRadius: '6px',
                     border: '1px solid',
-                    borderColor: showHeatmap ? '#ea580c' : 'rgba(40, 122, 69, 0.22)',
-                    backgroundColor: showHeatmap ? 'rgba(234, 88, 12, 0.12)' : '#ffffff',
-                    color: showHeatmap ? '#c2410c' : '#334155',
-                    fontWeight: 650,
+                    borderColor: showHeatmap ? '#f97316' : 'rgba(163, 181, 147, 0.25)',
+                    backgroundColor: showHeatmap ? 'rgba(249, 115, 22, 0.2)' : 'rgba(26, 36, 25, 0.8)',
+                    color: showHeatmap ? '#fb923c' : 'var(--text-secondary)',
+                    fontWeight: 600,
                     cursor: 'pointer',
-                    fontSize: '11px',
-                    boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
                   }}
                   title="Toggle continuous PM2.5 IDW spatial interpolation heatmap"
                 >
-                  <Flame size={12} color={showHeatmap ? '#ea580c' : '#475569'} />
-                  <span>IDW Heatmap ({showHeatmap ? 'ON' : 'OFF'})</span>
+                  <Flame size={14} />
+                  <span>IDW Heatmap Layer ({showHeatmap ? 'ON' : 'OFF'})</span>
                 </button>
 
                 {showHeatmap && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <span style={{ color: '#475569', fontSize: '10.5px', fontWeight: 600 }}>Power:</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ color: 'var(--text-muted)', fontSize: '11px' }}>Power (p):</span>
                     {[1.5, 2.0, 3.0].map((p) => (
                       <button
                         key={p}
                         onClick={() => handlePowerChange(p)}
                         style={{
-                          padding: '2px 7px',
-                          borderRadius: '5px',
+                          padding: '2px 8px',
+                          borderRadius: '4px',
                           border: '1px solid',
-                          borderColor: idwPower === p ? '#0284c7' : 'rgba(40, 122, 69, 0.2)',
-                          backgroundColor: idwPower === p ? 'rgba(2, 132, 199, 0.15)' : '#ffffff',
-                          color: idwPower === p ? '#0369a1' : '#475569',
-                          fontSize: '10.5px',
+                          borderColor: idwPower === p ? '#60a5fa' : 'rgba(163, 181, 147, 0.25)',
+                          backgroundColor: idwPower === p ? 'rgba(37, 99, 235, 0.25)' : 'rgba(26, 36, 25, 0.8)',
+                          color: idwPower === p ? '#93c5fd' : 'var(--text-muted)',
+                          fontSize: '11px',
                           fontWeight: idwPower === p ? 700 : 500,
                           cursor: 'pointer',
                         }}
@@ -548,47 +703,35 @@ export const DigitalTwinMap: React.FC = () => {
                 )}
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#475569', fontSize: '11px' }}>
-                {heatmapLoading && <span style={{ color: '#ea580c', fontWeight: 600 }}>Calculating IDW...</span>}
-                {inspectingCoord && <span style={{ color: '#0284c7', fontWeight: 600 }}>Estimating...</span>}
-                <Crosshair size={12} style={{ color: '#0284c7' }} />
-                <span style={{ color: '#166534', fontWeight: 600 }}>Click map to interpolate coordinate</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '11px' }}>
+                {heatmapLoading && <span style={{ color: '#fb923c', fontStyle: 'italic' }}>Calculating IDW...</span>}
+                {inspectingCoord && <span style={{ color: '#60a5fa', fontStyle: 'italic' }}>Estimating coordinate...</span>}
+                <Crosshair size={13} style={{ color: '#60a5fa' }} />
+                <span>Click map to inspect any neighborhood coordinate</span>
                 {customInspection && (
                   <button
                     onClick={() => setCustomInspection(null)}
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '3px',
-                      padding: '2px 7px',
-                      borderRadius: '5px',
-                      border: '1px solid rgba(40, 122, 69, 0.25)',
-                      background: '#ffffff',
-                      color: '#334155',
-                      fontSize: '10.5px',
-                      fontWeight: 600,
+                      gap: '4px',
+                      padding: '3px 8px',
+                      borderRadius: '4px',
+                      border: '1px solid rgba(163, 181, 147, 0.3)',
+                      background: 'rgba(26, 36, 25, 0.8)',
+                      color: 'var(--text-secondary)',
+                      fontSize: '10px',
                       cursor: 'pointer',
                     }}
                   >
-                    <RotateCcw size={9} /> Clear
+                    <RotateCcw size={10} /> Clear Pin
                   </button>
                 )}
               </div>
+
             </div>
 
-            {/* Map Frame (Hero Height, Directly Visible) */}
-            <div
-              className="card map-card"
-              style={{
-                padding: 0,
-                overflow: 'hidden',
-                position: 'relative',
-                borderRadius: '0 0 14px 14px',
-                borderTop: 'none',
-                height: 'calc(100vh - 215px)',
-                minHeight: '560px',
-              }}
-            >
+            <div className="card map-card" style={{ padding: 0, overflow: 'hidden', position: 'relative', borderRadius: '0 0 8px 8px' }}>
               <PuneTwinMap
                 stations={stations}
                 selectedStationId={selectedStationId}
@@ -605,6 +748,7 @@ export const DigitalTwinMap: React.FC = () => {
                 onClearCustomInspection={() => setCustomInspection(null)}
               />
 
+              {/* Overlay Map Legend */}
               <div className="map-legend-overlay">
                 <MapLegend
                   showTrafficBuffer={showTrafficBuffer}
@@ -616,55 +760,45 @@ export const DigitalTwinMap: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Station Roster & Diagnostics Deck */}
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.75rem',
-              maxHeight: 'calc(100vh - 165px)',
-              overflowY: 'auto',
-              paddingRight: '2px',
-            }}
-          >
-            {/* 1. Pinpoint Coordinate Inspection Card (if active) */}
+          {/* Right Column: Station Selector & Spatial Exposure Panel */}
+          <div className="station-sidebar-column">
+            {/* Custom Coordinate Pinpoint Inspection Banner */}
             {customInspection && (
               <div
                 className="card"
                 style={{
-                  padding: '1rem',
-                  border: `1.5px solid ${customInspection.color}`,
-                  background: 'rgba(255, 255, 255, 0.92)',
-                  borderRadius: '16px',
-                  boxShadow: '0 6px 20px rgba(22, 38, 25, 0.05)',
+                  padding: '1.15rem',
+                  marginBottom: '1rem',
+                  border: `2px solid ${customInspection.color}`,
+                  backgroundColor: 'rgba(22, 30, 21, 0.95)',
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.4rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                    <Crosshair size={14} style={{ color: customInspection.color }} />
-                    <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: '#0d1710' }}>
-                      Pinpoint Interpolation
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Crosshair size={15} style={{ color: customInspection.color }} />
+                    <span style={{ fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-primary)' }}>
+                      Pinpoint Location Estimate
                     </span>
                   </div>
                   <button
                     onClick={() => setCustomInspection(null)}
-                    style={{ background: 'none', border: 'none', color: '#64748b', cursor: 'pointer', fontSize: '13px', fontWeight: 700 }}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '13px' }}
                   >
                     ✕
                   </button>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '4px' }}>
-                  <span style={{ fontSize: '1.6rem', fontWeight: 800, color: customInspection.color }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '4px' }}>
+                  <span style={{ fontSize: '1.8rem', fontWeight: 800, color: customInspection.color }}>
                     {customInspection.interpolated_pm25}
                   </span>
-                  <span style={{ fontSize: '0.8rem', color: '#64748b' }}>µg/m³</span>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>µg/m³</span>
                   <span
                     style={{
                       marginLeft: 'auto',
                       padding: '2px 8px',
                       borderRadius: '10px',
-                      fontSize: '10px',
+                      fontSize: '11px',
                       fontWeight: 700,
                       backgroundColor: `${customInspection.color}25`,
                       color: customInspection.color,
@@ -675,25 +809,25 @@ export const DigitalTwinMap: React.FC = () => {
                   </span>
                 </div>
 
-                <div style={{ fontSize: '0.72rem', color: '#475569', marginBottom: '0.5rem' }}>
-                  Nearest: <strong style={{ color: '#0d1710' }}>{customInspection.nearest_station_name}</strong> ({customInspection.distance_to_nearest_km} km)
-                  <span style={{ marginLeft: '6px', color: '#166534', fontWeight: 700 }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.6rem' }}>
+                  Nearest: <strong>{customInspection.nearest_station_name}</strong> ({customInspection.distance_to_nearest_km} km)
+                  <span style={{ marginLeft: '6px', color: '#4ade80', fontWeight: 600 }}>
                     • {Math.round(customInspection.confidence_score * 100)}% confidence
                   </span>
                 </div>
 
-                <div style={{ borderTop: '1px solid rgba(40, 122, 69, 0.15)', paddingTop: '6px' }}>
-                  <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#334155', marginBottom: '4px' }}>
+                <div style={{ borderTop: '1px solid rgba(163, 181, 147, 0.2)', paddingTop: '6px' }}>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '4px' }}>
                     Sensor Attribution Weights:
                   </div>
                   {customInspection.contributing_stations.slice(0, 3).map((st) => (
-                    <div key={st.station_id} style={{ fontSize: '0.7rem', marginBottom: '3px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', color: '#475569' }}>
+                    <div key={st.station_id} style={{ fontSize: '0.75rem', marginBottom: '4px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)' }}>
                         <span>{st.station_name.split(',')[0]} ({st.distance_km} km)</span>
-                        <span style={{ fontWeight: 700, color: '#0d1710' }}>{st.weight_percentage}%</span>
+                        <span style={{ fontWeight: 600 }}>{st.weight_percentage}%</span>
                       </div>
-                      <div style={{ height: '4px', width: '100%', backgroundColor: 'rgba(0, 0, 0, 0.08)', borderRadius: '2px', overflow: 'hidden' }}>
-                        <div style={{ height: '100%', width: `${st.weight_percentage}%`, backgroundColor: '#0284c7' }} />
+                      <div style={{ height: '3px', width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.1)', borderRadius: '2px', overflow: 'hidden' }}>
+                        <div style={{ height: '100%', width: `${st.weight_percentage}%`, backgroundColor: '#3b82f6' }} />
                       </div>
                     </div>
                   ))}
@@ -701,254 +835,409 @@ export const DigitalTwinMap: React.FC = () => {
               </div>
             )}
 
-            {/* 2. Sensor Outage Simulator (Addition 2) Card */}
-            <div
-              className="card"
-              style={{
-                background: 'rgba(255, 255, 255, 0.85)',
-                border: `1px solid ${outageStationIds.length > 0 ? '#f59e0b' : 'rgba(40, 122, 69, 0.16)'}`,
-                borderRadius: '16px',
-                padding: '0.9rem 1.1rem',
-                boxShadow: '0 6px 20px rgba(22, 38, 25, 0.04)',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontWeight: 700, fontSize: '0.82rem', color: '#0d1710' }}>
-                  <WifiOff size={14} color={outageStationIds.length > 0 ? '#d97706' : '#287a45'} />
-                  <span>Sensor Outage Simulator</span>
+            <div className="card" style={{ padding: '1.25rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <MapPin size={16} className="text-primary" />
+                  <h3 style={{ fontSize: '1rem', fontWeight: 600 }}>Pune Monitoring Network</h3>
                 </div>
+                <span className="badge badge-primary">{stations.length} Monitored</span>
+              </div>
+
+              {/* HackMatrix 5.0 Addition 2: Sensor Outage Simulation Control */}
+              <div
+                style={{
+                  marginBottom: '1rem',
+                  padding: '0.75rem 0.85rem',
+                  backgroundColor: outageStationIds.length > 0 ? 'rgba(40, 30, 15, 0.85)' : 'rgba(26, 36, 25, 0.75)',
+                  border: `1px solid ${outageStationIds.length > 0 ? 'rgba(245, 158, 11, 0.45)' : 'rgba(163, 181, 147, 0.2)'}`,
+                  borderRadius: '10px',
+                  fontSize: '0.75rem',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 700, color: outageStationIds.length > 0 ? '#fbbf24' : 'var(--text-primary)' }}>
+                    <WifiOff size={13} color={outageStationIds.length > 0 ? '#f59e0b' : 'var(--primary)'} />
+                    <span>Outage Simulator (Stress Testing):</span>
+                  </div>
+                  {outageStationIds.length > 0 ? (
+                    <span style={{ fontSize: '9px', fontWeight: 700, padding: '1px 6px', borderRadius: '4px', backgroundColor: 'rgba(239, 68, 68, 0.2)', color: '#f87171', border: '1px solid rgba(239, 68, 68, 0.4)' }}>
+                      {outageStationIds.length} OFFLINE (SIMULATED)
+                    </span>
+                  ) : (
+                    <span style={{ fontSize: '9px', fontWeight: 600, padding: '1px 6px', borderRadius: '4px', backgroundColor: 'rgba(34, 197, 94, 0.15)', color: '#4ade80', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
+                      ALL ONLINE
+                    </span>
+                  )}
+                </div>
+
                 {outageStationIds.length > 0 && (
-                  <span
-                    style={{
-                      fontSize: '9.5px',
-                      padding: '2px 6px',
-                      borderRadius: '5px',
-                      background: '#fef3c7',
-                      color: '#b45309',
-                      border: '1px solid rgba(180, 83, 9, 0.3)',
-                      fontWeight: 700,
-                    }}
-                  >
-                    {outageStationIds.length} OFFLINE
-                  </span>
+                  <div style={{ marginBottom: '0.5rem', padding: '0.45rem 0.65rem', borderRadius: '6px', backgroundColor: 'rgba(245, 158, 11, 0.12)', border: '1px solid rgba(245, 158, 11, 0.25)', color: '#fde68a', fontSize: '11px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+                    <span>Live telemetry withheld from {outageStationIds.length} station(s). Spatial IDW surface recalculates dynamically without them.</span>
+                    <button
+                      onClick={handleRestoreAllFeeds}
+                      style={{
+                        padding: '2px 7px',
+                        borderRadius: '4px',
+                        border: '1px solid rgba(245, 158, 11, 0.4)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.25)',
+                        color: '#fbbf24',
+                        fontWeight: 600,
+                        fontSize: '10px',
+                        cursor: 'pointer',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      Restore All
+                    </button>
+                  </div>
                 )}
-              </div>
 
-              <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
-                {[
-                  { label: '0% Live', preset: 'none' as const, active: outageStationIds.length === 0 },
-                  { label: 'Withheld #11613', preset: 'withheld' as const, active: outageStationIds.length === 1 && outageStationIds.includes(11613) },
-                  { label: '50% Loss', preset: '50pct' as const, active: outageStationIds.length === Math.ceil(stations.length / 2) },
-                  { label: '100% Blackout', preset: '100pct' as const, active: outageStationIds.length === stations.length && stations.length > 0 },
-                ].map((btn) => (
+                <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
                   <button
-                    key={btn.preset}
-                    onClick={() => applyOutagePreset(btn.preset)}
+                    onClick={() => applyOutagePreset('none')}
                     style={{
-                      flex: '1 1 70px',
-                      padding: '5px 7px',
-                      fontSize: '10.5px',
-                      borderRadius: '7px',
+                      padding: '4px 9px',
+                      fontSize: '11px',
+                      borderRadius: '6px',
                       border: '1px solid',
-                      borderColor: btn.active ? (btn.preset === '100pct' ? '#dc2626' : btn.preset === 'none' ? '#16a34a' : '#d97706') : 'rgba(40, 122, 69, 0.18)',
-                      background: btn.active ? (btn.preset === '100pct' ? 'rgba(239, 68, 68, 0.15)' : btn.preset === 'none' ? 'rgba(34, 197, 94, 0.15)' : 'rgba(245, 158, 11, 0.15)') : '#ffffff',
-                      color: btn.active ? (btn.preset === '100pct' ? '#b91c1c' : btn.preset === 'none' ? '#15803d' : '#b45309') : '#334155',
-                      fontWeight: btn.active ? 700 : 600,
+                      borderColor: outageStationIds.length === 0 ? 'var(--primary)' : 'rgba(163, 181, 147, 0.25)',
+                      background: outageStationIds.length === 0 ? 'var(--primary)' : 'rgba(26, 36, 25, 0.8)',
+                      color: outageStationIds.length === 0 ? '#111610' : 'var(--text-secondary)',
+                      fontWeight: outageStationIds.length === 0 ? 700 : 500,
                       cursor: 'pointer',
-                      textAlign: 'center',
-                      boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)',
                     }}
+                    title="All 6 stations active and streaming live telemetry"
                   >
-                    {btn.label}
+                    All Online (0% Loss)
                   </button>
-                ))}
+                  <button
+                    onClick={() => applyOutagePreset('withheld')}
+                    style={{
+                      padding: '4px 9px',
+                      fontSize: '11px',
+                      borderRadius: '6px',
+                      border: '1px solid',
+                      borderColor: outageStationIds.length === 1 && outageStationIds.includes(11613) ? '#f59e0b' : 'rgba(163, 181, 147, 0.25)',
+                      background: outageStationIds.length === 1 && outageStationIds.includes(11613) ? '#f59e0b' : 'rgba(26, 36, 25, 0.8)',
+                      color: outageStationIds.length === 1 && outageStationIds.includes(11613) ? '#111610' : 'var(--text-secondary)',
+                      fontWeight: outageStationIds.length === 1 && outageStationIds.includes(11613) ? 700 : 500,
+                      cursor: 'pointer',
+                    }}
+                    title="Withhold Station 11613 (Shivajinagar) to test spatial transfer"
+                  >
+                    Withheld #11613
+                  </button>
+                  <button
+                    onClick={() => applyOutagePreset('50pct')}
+                    style={{
+                      padding: '4px 9px',
+                      fontSize: '11px',
+                      borderRadius: '6px',
+                      border: '1px solid',
+                      borderColor: outageStationIds.length === Math.ceil(stations.length / 2) && stations.length > 0 ? '#f59e0b' : 'rgba(163, 181, 147, 0.25)',
+                      background: outageStationIds.length === Math.ceil(stations.length / 2) && stations.length > 0 ? '#f59e0b' : 'rgba(26, 36, 25, 0.8)',
+                      color: outageStationIds.length === Math.ceil(stations.length / 2) && stations.length > 0 ? '#111610' : 'var(--text-secondary)',
+                      fontWeight: outageStationIds.length === Math.ceil(stations.length / 2) && stations.length > 0 ? 700 : 500,
+                      cursor: 'pointer',
+                    }}
+                    title="Simulate 50% sensor network failure across Pune"
+                  >
+                    50% Loss
+                  </button>
+                  <button
+                    onClick={() => applyOutagePreset('100pct')}
+                    style={{
+                      padding: '4px 9px',
+                      fontSize: '11px',
+                      borderRadius: '6px',
+                      border: '1px solid',
+                      borderColor: outageStationIds.length === stations.length && stations.length > 0 ? '#ef4444' : 'rgba(163, 181, 147, 0.25)',
+                      background: outageStationIds.length === stations.length && stations.length > 0 ? '#ef4444' : 'rgba(26, 36, 25, 0.8)',
+                      color: outageStationIds.length === stations.length && stations.length > 0 ? '#ffffff' : 'var(--text-secondary)',
+                      fontWeight: outageStationIds.length === stations.length && stations.length > 0 ? 700 : 500,
+                      cursor: 'pointer',
+                    }}
+                    title="Simulate complete sensor network blackout"
+                  >
+                    100% Blackout
+                  </button>
+                </div>
               </div>
-            </div>
 
-            {/* 3. Station Roster List */}
-            <div
-              className="card"
-              style={{
-                background: 'rgba(255, 255, 255, 0.85)',
-                border: '1px solid rgba(40, 122, 69, 0.16)',
-                borderRadius: '16px',
-                padding: '0.9rem 1.1rem',
-                boxShadow: '0 6px 20px rgba(22, 38, 25, 0.04)',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
-                <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0d1710' }}>Monitoring Network</span>
-                <span style={{ fontSize: '0.72rem', color: '#166534', fontWeight: 600 }}>{stations.length} Active Stations</span>
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+              {/* Station List Selector */}
+              <div className="twin-station-list">
                 {stations.map((station) => {
                   const isSelected = station.station_id === selectedStationId;
                   const isOutage = outageStationIds.includes(station.station_id);
                   const obs = isOutage ? null : latestObservations[station.station_id];
-                  const pm25Val = obs?.pm25;
-                  const hasVal = pm25Val !== null && pm25Val !== undefined;
+                  const hasVal = obs && obs.pm25 !== null && obs.pm25 !== undefined;
+
                   const stationAlertCount = alertsByStation[station.station_id]?.length || 0;
 
                   return (
                     <div
                       key={station.station_id}
                       onClick={() => setSelectedStationId(station.station_id)}
-                      style={{
-                        padding: '0.55rem 0.7rem',
-                        borderRadius: '9px',
-                        backgroundColor: isSelected ? 'rgba(40, 122, 69, 0.1)' : '#ffffff',
-                        border: `1px solid ${isSelected ? '#287a45' : 'rgba(40, 122, 69, 0.14)'}`,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        cursor: 'pointer',
-                        transition: 'all 0.15s ease',
-                        boxShadow: isSelected ? '0 2px 8px rgba(40, 122, 69, 0.1)' : '0 1px 3px rgba(0, 0, 0, 0.02)',
-                      }}
+                      className={`twin-station-item ${isSelected ? 'active' : ''}`}
+                      style={isOutage ? { borderColor: 'rgba(245, 158, 11, 0.45)', backgroundColor: isSelected ? undefined : 'rgba(40, 30, 15, 0.3)' } : undefined}
                     >
-                      <div style={{ minWidth: 0, flex: 1 }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0d1710', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                            {station.station_name.split(',')[0]}
-                          </span>
+                      <div className="twin-station-info">
+                        <div className="twin-station-name" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                          <span>{station.station_name}</span>
                           {stationAlertCount > 0 && !isOutage && (
                             <span
                               style={{
                                 padding: '1px 5px',
                                 borderRadius: '4px',
-                                background: '#fee2e2',
-                                color: '#b91c1c',
-                                border: '1px solid rgba(220, 38, 38, 0.25)',
-                                fontSize: '9px',
+                                backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                                color: '#f87171',
+                                fontSize: '10px',
                                 fontWeight: 700,
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 gap: '2px',
+                                border: '1px solid rgba(239, 68, 68, 0.4)',
                               }}
+                              title={`${stationAlertCount} active environmental anomalies`}
                             >
-                              <AlertTriangle size={8} />
+                              <AlertTriangle size={10} />
                               <span>{stationAlertCount}</span>
                             </span>
                           )}
                         </div>
-                        <div style={{ fontSize: '0.68rem', color: '#64748b', fontWeight: 500 }}>
-                          ID: {station.station_id} · {station.monitoring_authority}
+                        <div className="twin-station-meta">
+                          <span>ID: {station.station_id}</span>
+                          <span>•</span>
+                          <span>{station.monitoring_authority}</span>
                         </div>
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
+                      <div className="twin-station-badge-col">
                         {isOutage ? (
-                          <span style={{ fontSize: '0.68rem', fontWeight: 700, color: '#b91c1c', padding: '2px 6px', borderRadius: '5px', background: '#fee2e2', border: '1px solid rgba(220, 38, 38, 0.25)' }}>
-                            OFFLINE
-                          </span>
-                        ) : hasVal && pm25Val !== null && pm25Val !== undefined ? (
-                          <span
-                            style={{
-                              fontSize: '0.76rem',
-                              fontWeight: 700,
-                              color: pm25Val < 30 ? '#15803d' : pm25Val < 60 ? '#854d0e' : '#c2410c',
-                              padding: '2px 7px',
-                              borderRadius: '6px',
-                              background: pm25Val < 30 ? '#dcfce7' : pm25Val < 60 ? '#fef9c3' : '#ffedd5',
-                              border: `1px solid ${pm25Val < 30 ? 'rgba(22, 101, 52, 0.3)' : pm25Val < 60 ? 'rgba(161, 98, 7, 0.3)' : 'rgba(194, 65, 12, 0.3)'}`,
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleStationOutage(station.station_id);
                             }}
+                            style={{
+                              padding: '2px 7px',
+                              borderRadius: '4px',
+                              backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                              color: '#f87171',
+                              fontSize: '10px',
+                              fontWeight: 700,
+                              cursor: 'pointer',
+                              border: '1px solid rgba(239, 68, 68, 0.4)',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '3px',
+                            }}
+                            title="Sensor simulated offline - click to restore live stream"
                           >
-                            {formatNumber(pm25Val, 1)} <span style={{ fontSize: '0.62rem', opacity: 0.8 }}>µg</span>
-                          </span>
+                            <WifiOff size={10} />
+                            <span>OFFLINE (Restore)</span>
+                          </button>
+                        ) : hasVal ? (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                            <div className="twin-pm25-pill">
+                              <span className="val">{formatNumber(obs.pm25, 1)}</span>
+                              <span className="unit">µg/m³</span>
+                            </div>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleStationOutage(station.station_id);
+                              }}
+                              style={{
+                                background: 'none',
+                                border: 'none',
+                                color: 'var(--text-muted)',
+                                cursor: 'pointer',
+                                padding: '2px',
+                                display: 'flex',
+                                alignItems: 'center',
+                              }}
+                              title="Simulate sensor outage for this station"
+                            >
+                              <WifiOff size={12} />
+                            </button>
+                          </div>
                         ) : (
-                          <span style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 600 }}>NO DATA</span>
+                          <span className="badge badge-muted">NO DATA</span>
                         )}
-
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            toggleStationOutage(station.station_id);
-                          }}
-                          style={{
-                            background: 'none',
-                            border: 'none',
-                            color: isOutage ? '#dc2626' : '#94a3b8',
-                            cursor: 'pointer',
-                            padding: '3px',
-                          }}
-                          title={isOutage ? 'Restore sensor' : 'Simulate outage'}
-                        >
-                          <WifiOff size={12} />
-                        </button>
                       </div>
                     </div>
                   );
                 })}
               </div>
-            </div>
 
-            {/* 4. Selected Station Quick Diagnostics Card */}
-            {selectedStation && (
-              <div
-                className="card"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.92)',
-                  border: '1px solid rgba(40, 122, 69, 0.22)',
-                  borderRadius: '16px',
-                  padding: '1rem 1.15rem',
-                  boxShadow: '0 8px 24px rgba(22, 38, 25, 0.05)',
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
-                  <span style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', color: '#166534', letterSpacing: '0.04em' }}>
-                    Station Inspector
-                  </span>
-                  {outageStationIds.includes(selectedStation.station_id) ? (
-                    <span style={{ fontSize: '0.68rem', fontWeight: 700, color: '#b45309', padding: '2px 6px', borderRadius: '5px', background: '#fef3c7', border: '1px solid rgba(180, 83, 9, 0.3)' }}>
-                      SIMULATED OUTAGE
-                    </span>
-                  ) : (
-                    <span style={{ fontSize: '0.68rem', fontWeight: 700, color: '#15803d', padding: '2px 6px', borderRadius: '5px', background: '#dcfce7', border: '1px solid rgba(22, 101, 52, 0.3)' }}>
-                      ONLINE
-                    </span>
+              {/* Active Station Summary Card */}
+              {selectedStation && (
+                <div className="selected-station-card">
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+                    <div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--primary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        Selected Station Details
+                      </div>
+                      <div style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.2rem' }}>
+                        {selectedStation.station_name}
+                      </div>
+                    </div>
+                    {outageStationIds.includes(selectedStation.station_id) ? (
+                      <span className="badge badge-warning" style={{ backgroundColor: 'rgba(245, 158, 11, 0.2)', color: '#fbbf24', border: '1px solid rgba(245, 158, 11, 0.4)' }}>
+                        OUTAGE SIMULATED
+                      </span>
+                    ) : (
+                      <span className="badge badge-success">ACTIVE</span>
+                    )}
+                  </div>
+
+                  {/* Outage Information Banner if station is simulated offline */}
+                  {outageStationIds.includes(selectedStation.station_id) && (
+                    <div
+                      style={{
+                        margin: '0.5rem 0 0.75rem 0',
+                        padding: '0.7rem 0.85rem',
+                        backgroundColor: 'rgba(40, 30, 15, 0.85)',
+                        border: '1px solid rgba(245, 158, 11, 0.45)',
+                        borderRadius: 'var(--radius-sm)',
+                        fontSize: '0.78rem',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontWeight: 700, color: '#fbbf24' }}>
+                          <WifiOff size={14} />
+                          <span>Sensor Outage Simulated</span>
+                        </div>
+                        <button
+                          onClick={() => toggleStationOutage(selectedStation.station_id)}
+                          style={{
+                            padding: '2px 7px',
+                            borderRadius: '4px',
+                            border: '1px solid rgba(245, 158, 11, 0.4)',
+                            backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                            color: '#fbbf24',
+                            fontSize: '10px',
+                            fontWeight: 600,
+                            cursor: 'pointer',
+                          }}
+                        >
+                          Restore Feed
+                        </button>
+                      </div>
+                      <p style={{ margin: 0, color: '#fde68a', lineHeight: 1.4, fontSize: '0.74rem' }}>
+                        Telemetry stream withheld for stress testing. Digital twin falls back to Universal ML spatial-meteorological transfer using ERA5 weather &amp; OSM roads (±12.4 µg/m³ calibrated corridor).
+                      </p>
+                      <div style={{ marginTop: '0.4rem' }}>
+                        <Link
+                          to="/model-performance"
+                          style={{ color: '#fbbf24', fontWeight: 600, fontSize: '0.73rem', textDecoration: 'underline' }}
+                        >
+                          View 0% - 100% Sensor Loss Benchmark →
+                        </Link>
+                      </div>
+                    </div>
                   )}
-                </div>
 
-                <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#0d1710', marginBottom: '0.5rem' }}>
-                  {selectedStation.station_name}
-                </div>
+                  {/* Active Station Alerts Banner */}
+                  {(alertsByStation[selectedStation.station_id]?.length || 0) > 0 && (
+                    <div
+                      style={{
+                        margin: '0.5rem 0 0.75rem 0',
+                        padding: '0.65rem 0.8rem',
+                        backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                        border: '1px solid rgba(239, 68, 68, 0.35)',
+                        borderRadius: 'var(--radius-sm)',
+                        fontSize: '0.8rem',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.2rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontWeight: 700, color: '#f87171' }}>
+                          <AlertTriangle size={13} />
+                          <span>
+                            {alertsByStation[selectedStation.station_id].length} Active Alert
+                            {alertsByStation[selectedStation.station_id].length > 1 ? 's' : ''}
+                          </span>
+                        </div>
+                        <Link
+                          to={`/alerts?station_id=${selectedStation.station_id}`}
+                          style={{ color: '#fca5a5', fontWeight: 600, fontSize: '0.75rem' }}
+                        >
+                          View all →
+                        </Link>
+                      </div>
+                      <div style={{ color: '#fecaca', fontSize: '0.75rem', lineHeight: 1.35 }}>
+                        {alertsByStation[selectedStation.station_id][0].message}
+                      </div>
+                    </div>
+                  )}
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.74rem', marginBottom: '0.75rem' }}>
-                  <div style={{ background: 'rgba(241, 245, 249, 0.7)', padding: '0.4rem 0.6rem', borderRadius: '8px' }}>
-                    <span style={{ color: '#64748b', fontSize: '0.68rem' }}>Zoning:</span>
-                    <div style={{ color: '#0d1710', fontWeight: 600 }}>{selectedStation.zone_type}</div>
+                  <div className="selected-station-grid">
+                    <div className="diag-stat">
+                      <div className="diag-label">Station ID</div>
+                      <div className="diag-val font-mono">{selectedStation.station_id}</div>
+                    </div>
+                    <div className="diag-stat">
+                      <div className="diag-label">Zone Type</div>
+                      <div className="diag-val">{selectedStation.zone_type}</div>
+                    </div>
+                    <div className="diag-stat">
+                      <div className="diag-label">Authority</div>
+                      <div className="diag-val">{selectedStation.monitoring_authority}</div>
+                    </div>
+                    <div className="diag-stat">
+                      <div className="diag-label">Coordinates</div>
+                      <div className="diag-val font-mono">
+                        {selectedStation.latitude.toFixed(4)}°, {selectedStation.longitude.toFixed(4)}°
+                      </div>
+                    </div>
                   </div>
-                  <div style={{ background: 'rgba(241, 245, 249, 0.7)', padding: '0.4rem 0.6rem', borderRadius: '8px' }}>
-                    <span style={{ color: '#64748b', fontSize: '0.68rem' }}>Authority:</span>
-                    <div style={{ color: '#0d1710', fontWeight: 600 }}>{selectedStation.monitoring_authority}</div>
+
+                  <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                    <Link
+                      to={`/stations/${selectedStation.station_id}`}
+                      className="btn btn-primary btn-sm w-full"
+                      style={{ justifyContent: 'center' }}
+                    >
+                      <span>Explore Station Diagnostics</span>
+                      <ArrowRight size={14} />
+                    </Link>
+                    {(alertsByStation[selectedStation.station_id]?.length || 0) > 0 && (
+                      <Link
+                        to={`/alerts?station_id=${selectedStation.station_id}`}
+                        className="btn btn-secondary btn-sm w-full"
+                        style={{ justifyContent: 'center', color: '#b91c1c' }}
+                      >
+                        <span>Manage Station Alerts ({alertsByStation[selectedStation.station_id].length})</span>
+                      </Link>
+                    )}
                   </div>
                 </div>
+              )}
 
-                <Link
-                  to={`/stations/${selectedStation.station_id}`}
+              {!selectedStation && (
+                <div
+                  className="selected-station-card"
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '6px',
-                    width: '100%',
-                    padding: '0.55rem',
-                    borderRadius: '9px',
-                    backgroundColor: '#166534',
-                    border: '1px solid #166534',
-                    color: '#ffffff',
-                    fontSize: '0.78rem',
-                    fontWeight: 600,
-                    textDecoration: 'none',
-                    boxShadow: '0 2px 8px rgba(22, 101, 52, 0.2)',
+                    textAlign: 'center',
+                    padding: '1.25rem 1rem',
+                    backgroundColor: 'var(--bg-secondary)',
+                    borderRadius: '8px',
+                    border: '1px solid var(--border-subtle)',
+                    marginTop: '0.75rem',
                   }}
                 >
-                  <span>Explore Station Diagnostics</span>
-                  <ArrowRight size={13} color="#ffffff" />
-                </Link>
-              </div>
-            )}
+                  <MapPin size={22} style={{ margin: '0 auto 0.5rem auto', color: 'var(--primary)', opacity: 0.8 }} />
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.9rem', marginBottom: '0.25rem' }}>
+                    Full Network Overview Active
+                  </div>
+                  <div style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                    All 6 CAAQMS stations across Pune &amp; PCMC are visible. Click any pin on the map or select from the list above to zoom in and inspect localized telemetry.
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
