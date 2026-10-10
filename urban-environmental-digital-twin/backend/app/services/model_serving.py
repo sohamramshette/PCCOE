@@ -9,7 +9,7 @@ to avoid costly file I/O on inference requests.
 import json
 import logging
 from pathlib import Path
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 import joblib
 import numpy as np
 import pandas as pd
@@ -91,6 +91,28 @@ class ModelServingManager:
         self.loaded_models["persistence_baseline"] = "HEURISTIC_PERSISTENCE"
         logger.info("Registered heuristic persistence model.")
 
+        # 4. Load Upgrade 1 Quantile model artifacts (p10, p50, p90)
+        self.quantile_models: Dict[str, Any] = {}
+        for q_tag in ["10", "50", "90"]:
+            q_filename = f"gradient_boosting_quantile_{q_tag}.joblib"
+            q_path = self.models_dir / q_filename
+            if q_path.exists():
+                try:
+                    self.quantile_models[q_tag] = joblib.load(q_path)
+                    logger.info(f"Loaded quantile model p{q_tag} from {q_filename}.")
+                except Exception as e:
+                    logger.warning(f"Failed to load quantile model p{q_tag}: {e}")
+
+        # 5. Load Upgrade 2 Direct Multi-Horizon model artifacts (1h, 3h, 6h, 12h, 24h)
+        self.multi_horizon_models: Dict[str, Any] = {}
+        mh_path = self.models_dir / "multi_horizon_models.joblib"
+        if mh_path.exists():
+            try:
+                self.multi_horizon_models = joblib.load(mh_path)
+                logger.info(f"Loaded direct multi-horizon models container ({list(self.multi_horizon_models.keys())}).")
+            except Exception as e:
+                logger.warning(f"Failed to load multi_horizon_models.joblib: {e}")
+
         self.is_initialized = True
         logger.info(f"ModelServingManager initialized with models: {list(self.loaded_models.keys())}")
 
@@ -138,6 +160,55 @@ class ModelServingManager:
         # Physical boundary: PM2.5 concentration cannot be negative
         bounded_pred = max(0.0, prediction_val)
         return round(bounded_pred, 2)
+
+    def predict_quantiles(self, feature_df: pd.DataFrame) -> Tuple[float, float, float]:
+        """
+        Computes calibrated empirical quantiles (p10, p50, p90) for a feature row.
+        Falls back to empirical margins if quantile models are not loaded.
+        """
+        if self.preprocessor is None or not getattr(self, "quantile_models", None):
+            point_pred = self.predict(self.default_model_id, feature_df)
+            return max(0.0, round(point_pred - 10.0, 2)), point_pred, round(point_pred + 10.0, 2)
+
+        try:
+            missing_feats = [col for col in self.core_features if col not in feature_df.columns]
+            if missing_feats:
+                point_pred = self.predict(self.default_model_id, feature_df)
+                return max(0.0, round(point_pred - 10.0, 2)), point_pred, round(point_pred + 10.0, 2)
+
+            X_proc = self.preprocessor.transform(feature_df[self.core_features])
+            p10 = float(self.quantile_models["10"].predict(X_proc)[0]) if "10" in self.quantile_models else None
+            p50 = float(self.quantile_models["50"].predict(X_proc)[0]) if "50" in self.quantile_models else None
+            p90 = float(self.quantile_models["90"].predict(X_proc)[0]) if "90" in self.quantile_models else None
+
+            median_pred = max(0.0, round(p50, 2)) if p50 is not None else self.predict(self.default_model_id, feature_df)
+            lower_b = max(0.0, round(min(p10 if p10 is not None else median_pred - 5.0, median_pred), 2))
+            upper_b = max(median_pred, round(max(p90 if p90 is not None else median_pred + 5.0, median_pred), 2))
+            return lower_b, median_pred, upper_b
+        except Exception as e:
+            logger.warning(f"Quantile inference fallback: {e}")
+            point_pred = self.predict(self.default_model_id, feature_df)
+            return max(0.0, round(point_pred - 10.0, 2)), point_pred, round(point_pred + 10.0, 2)
+
+    def predict_horizon(self, horizon_key: str, feature_df: pd.DataFrame) -> Optional[float]:
+        """
+        Computes direct multi-horizon prediction for anchor horizons: '1h', '3h', '6h', '12h', '24h'.
+        """
+        if self.preprocessor is None or not getattr(self, "multi_horizon_models", None):
+            return None
+        model = self.multi_horizon_models.get(horizon_key)
+        if model is None:
+            return None
+        try:
+            missing_feats = [col for col in self.core_features if col not in feature_df.columns]
+            if missing_feats:
+                return None
+            X_proc = self.preprocessor.transform(feature_df[self.core_features])
+            raw_val = float(model.predict(X_proc)[0])
+            return round(max(0.0, raw_val), 2)
+        except Exception as e:
+            logger.warning(f"Direct multi-horizon prediction failed for {horizon_key}: {e}")
+            return None
 
     def explain_prediction(self, model_id: str, feature_df: pd.DataFrame) -> List[Dict[str, Any]]:
         """Returns the top SHAP-style feature contributions for a single forecast instance."""

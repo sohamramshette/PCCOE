@@ -672,13 +672,33 @@ class ForecastService:
             # E. Predict PM2.5 for this step
             step_pred = model_serving.predict(target_model_id, curr_feat_df)
             step_pred = round(max(0.0, float(step_pred)), 2)
+
+            # Direct multi-horizon anchor guidance (Upgrade 2)
+            horizon_key = f"{step}h"
+            direct_pred = model_serving.predict_horizon(horizon_key, base_df) if target_model_id == "gradient_boosting_baseline" else None
+            if direct_pred is not None:
+                # Blend direct non-compounding prediction with autoregressive step (70% direct anchor, 30% autoregressive)
+                step_pred = round(0.70 * direct_pred + 0.30 * step_pred, 2)
+
             simulated_pm25_history.append(step_pred)
 
-            # F. Calculate compounding empirical confidence intervals
-            std_compound = base_sigma * np.sqrt(1.0 + 0.08 * (step - 1))
-            margin = round(1.96 * std_compound, 2)
-            lower_bound = max(0.0, round(step_pred - margin, 2))
-            upper_bound = round(step_pred + margin, 2)
+            # F. Calculate calibrated quantile bounds (Upgrade 1)
+            if target_model_id == "gradient_boosting_baseline" and getattr(model_serving, "quantile_models", None):
+                if step == 1:
+                    q_lower, _, q_upper = model_serving.predict_quantiles(curr_feat_df)
+                    lower_bound = max(0.0, round(min(q_lower, step_pred), 2))
+                    upper_bound = max(step_pred, round(max(q_upper, step_pred), 2))
+                    q10_spread = max(3.0, step_pred - lower_bound)
+                    q90_spread = max(3.0, upper_bound - step_pred)
+                else:
+                    h_factor = np.sqrt(1.0 + 0.05 * (step - 1))
+                    lower_bound = max(0.0, round(step_pred - q10_spread * h_factor, 2))
+                    upper_bound = round(step_pred + q90_spread * h_factor, 2)
+            else:
+                std_compound = base_sigma * np.sqrt(1.0 + 0.08 * (step - 1))
+                margin = round(1.96 * std_compound, 2)
+                lower_bound = max(0.0, round(step_pred - margin, 2))
+                upper_bound = round(step_pred + margin, 2)
 
             trajectory_points.append({
                 "step": step,
@@ -717,6 +737,6 @@ class ForecastService:
             "min_target_time_utc": trajectory_points[min_idx]["target_time_utc"],
             "average_predicted_pm25": avg_val,
             "dominant_naqi_category": dominant_cat,
-            "uncertainty_note": "Empirical 95% confidence intervals compound across multi-step autoregressive horizons."
+            "uncertainty_note": "Calibrated empirical quantiles (p10 to p90) anchored with direct multi-horizon models (1h, 3h, 6h, 12h, 24h)."
         }
 

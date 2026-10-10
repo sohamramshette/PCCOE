@@ -1,0 +1,73 @@
+{
+  "timestamp_utc": "2026-10-10 05:50:00",
+  "quantile_models": {
+    "p10": {
+      "quantile": 0.1,
+      "fit_time_seconds": 1.27,
+      "validation_pinball_loss": 0.9614,
+      "test_pinball_loss": 0.7208,
+      "test_mae": 5.311
+    },
+    "p50": {
+      "quantile": 0.5,
+      "fit_time_seconds": 1.4,
+      "validation_pinball_loss": 2.2266,
+      "test_pinball_loss": 1.9137,
+      "test_mae": 3.827
+    },
+    "p90": {
+      "quantile": 0.9,
+      "fit_time_seconds": 1.25,
+      "validation_pinball_loss": 1.1756,
+      "test_pinball_loss": 1.0897,
+      "test_mae": 6.692
+    },
+    "interval_80pct": {
+      "nominal_coverage_pct": 80.0,
+      "empirical_coverage_pct": 73.79,
+      "average_width_ug_m3": 10.48
+    }
+  },
+  "multi_horizon_models": {
+    "1h": {
+      "horizon_hours": 1,
+      "fit_time_seconds": 0.9,
+      "val_mae": 4.648,
+      "test_mae": 3.98,
+      "test_rmse": 9.154,
+      "test_r2": 0.4527
+    },
+    "3h": {
+      "horizon_hours": 3,
+      "fit_time_seconds": 1.09,
+      "val_mae": 6.425,
+      "test_mae": 5.281,
+      "test_rmse": 11.098,
+      "test_r2": 0.1961
+    },
+    "6h": {
+      "horizon_hours": 6,
+      "fit_time_seconds": 1.15,
+      "val_mae": 7.353,
+      "test_mae": 5.856,
+      "test_rmse": 11.8,
+      "test_r2": 0.0919
+    },
+    "12h": {
+      "horizon_hours": 12,
+      "fit_time_seconds": 1.15,
+      "val_mae": 7.77,
+      "test_mae": 6.438,
+      "test_rmse": 13.238,
+      "test_r2": -0.1406
+    },
+    "24h": {
+      "horizon_hours": 24,
+      "fit_time_seconds": 1.07,
+      "val_mae": 8.032,
+      "test_mae": 7.438,
+      "test_rmse": 14.534,
+      "test_r2": -0.3706
+    }
+  }
+}

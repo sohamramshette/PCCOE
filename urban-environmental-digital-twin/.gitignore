@@ -85,6 +85,7 @@ pnpm-debug.log*
 ml/models/*
 !ml/models/.gitkeep
 !ml/models/feature_names.json
+!ml/models/advanced_model_metrics.json
 !ml/models/*.joblib
 *.pkl
 *.h5
