@@ -1336,6 +1336,30 @@ button:focus-visible {
   gap: 12px;
 }
 
+.btn-nav-login {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(143, 160, 126, 0.16);
+  border: 1px solid rgba(163, 181, 147, 0.38);
+  color: var(--al-ink);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-nav-login:hover {
+  background: rgba(143, 160, 126, 0.3);
+  border-color: rgba(163, 181, 147, 0.65);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(143, 160, 126, 0.2);
+}
+
 .btn-open-dashboard {
   display: inline-flex;
   align-items: center;
@@ -3720,6 +3744,22 @@ button:focus-visible {
     text-align: left;
     padding: 8px 4px;
     cursor: pointer;
+  }
+  .mobile-login-btn {
+    background: rgba(143, 160, 126, 0.2);
+    border: 1px solid rgba(163, 181, 147, 0.45);
+    color: #eef1e7;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .mobile-login-btn:hover {
+    background: rgba(143, 160, 126, 0.32);
   }
   .mobile-cta-btn {
     background: var(--al-olive);

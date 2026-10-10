@@ -1,7 +1,9 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import { Layout } from './components/layout/Layout';
 import { LoadingSpinner } from './components/common/LoadingSpinner';
+import { CitizenPortal } from './pages/CitizenPortal';
 import { Dashboard } from './pages/Dashboard';
 import { Stations } from './pages/Stations';
 import { StationDetails } from './pages/StationDetails';
@@ -12,17 +14,25 @@ import { ModelPerformance } from './pages/ModelPerformance';
 import { DataMethodology } from './pages/DataMethodology';
 import { Alerts } from './pages/Alerts';
 import { LandingPage } from './pages/LandingPage';
+import { PortalSelection } from './pages/PortalSelection';
+import { UserDemoLogin } from './pages/UserDemoLogin';
+import { AuthorityDemoLogin } from './pages/AuthorityDemoLogin';
 
 const Backtracking = lazy(() => import('./pages/Backtracking').then((m) => ({ default: m.Backtracking })));
 
 export const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/welcome" element={<Navigate to="/" replace />} />
-        <Route element={<Layout />}>
-          <Route path="dashboard" element={<Dashboard />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/welcome" element={<Navigate to="/" replace />} />
+          <Route path="/login" element={<PortalSelection />} />
+          <Route path="/login/user" element={<UserDemoLogin />} />
+          <Route path="/login/authority" element={<AuthorityDemoLogin />} />
+          <Route element={<Layout />}>
+            <Route path="citizen" element={<CitizenPortal />} />
+            <Route path="dashboard" element={<Dashboard />} />
           <Route path="stations" element={<Stations />} />
           <Route path="stations/:stationId" element={<StationDetails />} />
           <Route path="digital-twin" element={<DigitalTwinMap />} />
@@ -43,7 +53,8 @@ export const App: React.FC = () => {
         </Route>
       </Routes>
     </BrowserRouter>
-  );
+  </AuthProvider>
+);
 };
 
 export default App;

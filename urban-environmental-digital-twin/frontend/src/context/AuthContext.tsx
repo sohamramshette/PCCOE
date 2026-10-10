@@ -28,6 +28,7 @@ interface AuthContextType {
     organization?: string;
   }) => Promise<UserProfile>;
   quickLogin: (role: UserRole) => Promise<UserProfile>;
+  enterDemo: (role: UserRole) => UserProfile;
   logout: () => void;
   openAuthModal: () => void;
   closeAuthModal: () => void;
@@ -122,20 +123,48 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return data.user;
   };
 
-  const quickLogin = async (targetRole: UserRole): Promise<UserProfile> => {
-    const res = await fetch('/api/v1/auth/quick-login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ role: targetRole }),
-    });
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.detail || 'Quick login failed.');
-    }
-    const data = await res.json();
-    setSession(data.access_token, data.user);
+  const enterDemo = (targetRole: UserRole): UserProfile => {
+    const demoProfile: UserProfile = {
+      id: targetRole === 'CITIZEN' ? 1 : 2,
+      email: targetRole === 'CITIZEN' ? 'citizen@pune-air.in' : 'officer@pcmc.gov.in',
+      full_name: targetRole === 'CITIZEN' ? 'Rahul Sharma (Citizen)' : 'Dr. Sunita Kulkarni (Env Officer)',
+      role: targetRole,
+      organization: targetRole === 'CITIZEN' ? 'Pune Resident - Kothrud' : 'PCMC Environmental Protection Cell',
+      phone: targetRole === 'CITIZEN' ? '+91 98220 12345' : '+91 94220 54321',
+      is_active: true,
+      created_at: new Date().toISOString(),
+    };
+    setSession('demo-access-token', demoProfile);
     setIsAuthModalOpen(false);
-    return data.user;
+    return demoProfile;
+  };
+
+  const quickLogin = async (targetRole: UserRole): Promise<UserProfile> => {
+    try {
+      const defaultApiUrl = import.meta.env.PROD
+        ? 'https://pccoe-75ji.onrender.com'
+        : 'http://localhost:8000';
+      const baseApiUrl = (
+        import.meta.env.VITE_API_BASE_URL ||
+        import.meta.env.VITE_API_URL ||
+        defaultApiUrl
+      ).replace(/\/+$/, '');
+
+      const res = await fetch(`${baseApiUrl}/api/v1/auth/quick-login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role: targetRole }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setSession(data.access_token, data.user);
+        setIsAuthModalOpen(false);
+        return data.user;
+      }
+    } catch (err) {
+      console.warn('Backend quick-login unreachable, falling back to local demo session:', err);
+    }
+    return enterDemo(targetRole);
   };
 
   const logout = () => {
@@ -159,6 +188,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         login,
         register,
         quickLogin,
+        enterDemo,
         logout,
         openAuthModal: () => setIsAuthModalOpen(true),
         closeAuthModal: () => setIsAuthModalOpen(false),

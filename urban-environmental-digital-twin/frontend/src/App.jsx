@@ -14,6 +14,9 @@ import { ModelPerformance } from './pages/ModelPerformance';
 import { DataMethodology } from './pages/DataMethodology';
 import { Alerts } from './pages/Alerts';
 import { LandingPage } from './pages/LandingPage';
+import { PortalSelection } from './pages/PortalSelection';
+import { UserDemoLogin } from './pages/UserDemoLogin';
+import { AuthorityDemoLogin } from './pages/AuthorityDemoLogin';
 import { Scene } from './Scene';
 
 const Backtracking = lazy(() => import('./pages/Backtracking').then((m) => ({ default: m.Backtracking })));
@@ -28,6 +31,11 @@ export default function App() {
           {/* Master AirLens 3D Living World Landing Page */}
           <Route path="/" element={<LandingPage />} />
           <Route path="/welcome" element={<Navigate to="/" replace />} />
+
+          {/* Portal Selection & Demo Login Flows */}
+          <Route path="/login" element={<PortalSelection />} />
+          <Route path="/login/user" element={<UserDemoLogin />} />
+          <Route path="/login/authority" element={<AuthorityDemoLogin />} />
 
           {/* Dedicated Urban Environmental Digital Twin Workspace Pages */}
           <Route element={<Layout />}>

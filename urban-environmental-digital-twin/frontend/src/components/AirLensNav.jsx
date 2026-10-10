@@ -40,6 +40,11 @@ export default function AirLensNav({ onOpenDashboard }) {
     navigate('/dashboard');
   };
 
+  const handleLoginClick = () => {
+    setMobileMenuOpen(false);
+    navigate('/login');
+  };
+
   return (
     <header className={`airlens-nav-wrapper ${scrolled ? 'is-scrolled' : ''}`}>
       <nav className="airlens-nav" aria-label="Main Navigation">
@@ -111,6 +116,18 @@ export default function AirLensNav({ onOpenDashboard }) {
         <div className="airlens-nav-cta">
           <button
             type="button"
+            className="btn-nav-login"
+            onClick={handleLoginClick}
+            aria-label="Login to AirLens Portal"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="13" height="13" style={{ marginRight: '4px' }}>
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span>Login</span>
+          </button>
+
+          <button
+            type="button"
             className="btn-open-dashboard"
             onClick={handleDashboardClick}
             aria-label="Open Pune Environmental Dashboard"
@@ -143,6 +160,13 @@ export default function AirLensNav({ onOpenDashboard }) {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="mobile-nav-drawer">
+          <button
+            type="button"
+            className="mobile-login-btn"
+            onClick={handleLoginClick}
+          >
+            Login to Portals →
+          </button>
           <button type="button" onClick={() => handleNavClick('/dashboard')} className="mobile-link">
             Dashboard
           </button>
