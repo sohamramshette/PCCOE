@@ -1,5 +1,5 @@
 {
-  "timestamp_utc": "2026-10-10T07:21:21.979814+00:00",
+  "timestamp_utc": "2026-10-10T08:28:24.465463+00:00",
   "task": "HackMatrix 5.0 ENR-01 Addition 2: Forecasting with Missing Sensors and Unseen Locations",
   "description": "Empirical stress-testing of Spatial-Meteorological ML transfer vs IDW and Persistence across declared sensor-loss levels.",
   "non_causal_methodological_disclaimer": "Documented Reliability Criterion: Forecast prediction intervals assess policy risk and feature stability under unmonitored conditions. Model-predicted shifts represent associative feature transformations under historical meteorological bounds, not unconfounded causal proofs.",
