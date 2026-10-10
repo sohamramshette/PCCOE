@@ -12,6 +12,7 @@ import {
   Radio,
   RefreshCw,
   AlertTriangle,
+  WifiOff,
 } from 'lucide-react';
 
 import { getStations } from '../api/stations';
@@ -117,6 +118,28 @@ export const DigitalTwinMap: React.FC = () => {
     }
     return map;
   }, [activeAlerts]);
+
+  // HackMatrix 5.0 Addition 2: Simulated Sensor Outage State
+  const [outageStationIds, setOutageStationIds] = useState<number[]>([]);
+
+  const toggleStationOutage = (stationId: number) => {
+    setOutageStationIds((prev) =>
+      prev.includes(stationId) ? prev.filter((id) => id !== stationId) : [...prev, stationId]
+    );
+  };
+
+  const applyOutagePreset = (preset: 'none' | 'withheld' | '50pct' | '100pct') => {
+    if (preset === 'none') {
+      setOutageStationIds([]);
+    } else if (preset === 'withheld') {
+      setOutageStationIds([11613]); // Station 11613 (Shivajinagar) withheld location
+    } else if (preset === '50pct') {
+      const ids = stations.slice(0, Math.ceil(stations.length / 2)).map((s) => s.station_id);
+      setOutageStationIds(ids.length > 0 ? ids : [11613, 11609, 3409331]);
+    } else if (preset === '100pct') {
+      setOutageStationIds(stations.map((s) => s.station_id));
+    }
+  };
 
   const loadHeatmap = useCallback(async (powerVal: number = idwPower, timestamp?: string) => {
     try {
@@ -637,6 +660,7 @@ export const DigitalTwinMap: React.FC = () => {
                 onSelectStation={(id) => setSelectedStationId(id)}
                 latestObservations={latestObservations}
                 alertsByStation={alertsByStation}
+                outageStationIds={outageStationIds}
                 showTrafficBuffer={showTrafficBuffer}
                 showActivityBuffer={showActivityBuffer}
                 showHeatmap={showHeatmap}
@@ -734,20 +758,107 @@ export const DigitalTwinMap: React.FC = () => {
             )}
 
             <div className="card" style={{ padding: '1.25rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <MapPin size={16} className="text-primary" />
                   <h3 style={{ fontSize: '1rem', fontWeight: 600 }}>Pune Monitoring Network</h3>
                 </div>
-                <span className="badge badge-primary">{stations.length} Active</span>
+                <span className="badge badge-primary">{stations.length} Monitored</span>
               </div>
 
+              {/* HackMatrix 5.0 Addition 2: Sensor Outage Simulation Control */}
+              <div
+                style={{
+                  marginBottom: '1rem',
+                  padding: '0.65rem 0.8rem',
+                  backgroundColor: outageStationIds.length > 0 ? '#fffbeb' : 'var(--bg-secondary)',
+                  border: `1px solid ${outageStationIds.length > 0 ? '#f59e0b' : 'var(--border-subtle)'}`,
+                  borderRadius: '8px',
+                  fontSize: '0.75rem',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.4rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontWeight: 700, color: outageStationIds.length > 0 ? '#b45309' : 'var(--text-primary)' }}>
+                    <WifiOff size={13} color={outageStationIds.length > 0 ? '#d97706' : '#64748b'} />
+                    <span>Outage Simulator (Addition 2):</span>
+                  </div>
+                  {outageStationIds.length > 0 && (
+                    <span className="badge badge-warning" style={{ fontSize: '9px', padding: '1px 5px' }}>
+                      {outageStationIds.length} OFFLINE
+                    </span>
+                  )}
+                </div>
+                <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+                  <button
+                    onClick={() => applyOutagePreset('none')}
+                    style={{
+                      padding: '3px 7px',
+                      fontSize: '10px',
+                      borderRadius: '4px',
+                      border: '1px solid #cbd5e1',
+                      background: outageStationIds.length === 0 ? 'var(--primary)' : '#ffffff',
+                      color: outageStationIds.length === 0 ? '#ffffff' : 'var(--text-secondary)',
+                      fontWeight: outageStationIds.length === 0 ? 700 : 500,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    0% Live
+                  </button>
+                  <button
+                    onClick={() => applyOutagePreset('withheld')}
+                    style={{
+                      padding: '3px 7px',
+                      fontSize: '10px',
+                      borderRadius: '4px',
+                      border: '1px solid #cbd5e1',
+                      background: outageStationIds.length === 1 && outageStationIds.includes(11613) ? '#d97706' : '#ffffff',
+                      color: outageStationIds.length === 1 && outageStationIds.includes(11613) ? '#ffffff' : 'var(--text-secondary)',
+                      fontWeight: outageStationIds.length === 1 && outageStationIds.includes(11613) ? 700 : 500,
+                      cursor: 'pointer',
+                    }}
+                    title="Withhold Station 11613 (Shivajinagar) to test spatial transfer"
+                  >
+                    Withheld #11613
+                  </button>
+                  <button
+                    onClick={() => applyOutagePreset('50pct')}
+                    style={{
+                      padding: '3px 7px',
+                      fontSize: '10px',
+                      borderRadius: '4px',
+                      border: '1px solid #cbd5e1',
+                      background: outageStationIds.length === Math.ceil(stations.length / 2) && stations.length > 0 ? '#d97706' : '#ffffff',
+                      color: outageStationIds.length === Math.ceil(stations.length / 2) && stations.length > 0 ? '#ffffff' : 'var(--text-secondary)',
+                      fontWeight: outageStationIds.length === Math.ceil(stations.length / 2) && stations.length > 0 ? 700 : 500,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    50% Loss
+                  </button>
+                  <button
+                    onClick={() => applyOutagePreset('100pct')}
+                    style={{
+                      padding: '3px 7px',
+                      fontSize: '10px',
+                      borderRadius: '4px',
+                      border: '1px solid #cbd5e1',
+                      background: outageStationIds.length === stations.length && stations.length > 0 ? '#dc2626' : '#ffffff',
+                      color: outageStationIds.length === stations.length && stations.length > 0 ? '#ffffff' : 'var(--text-secondary)',
+                      fontWeight: outageStationIds.length === stations.length && stations.length > 0 ? 700 : 500,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    100% Blackout
+                  </button>
+                </div>
+              </div>
 
               {/* Station List Selector */}
               <div className="twin-station-list">
                 {stations.map((station) => {
                   const isSelected = station.station_id === selectedStationId;
-                  const obs = latestObservations[station.station_id];
+                  const isOutage = outageStationIds.includes(station.station_id);
+                  const obs = isOutage ? null : latestObservations[station.station_id];
                   const hasVal = obs && obs.pm25 !== null && obs.pm25 !== undefined;
 
                   const stationAlertCount = alertsByStation[station.station_id]?.length || 0;
@@ -757,11 +868,12 @@ export const DigitalTwinMap: React.FC = () => {
                       key={station.station_id}
                       onClick={() => setSelectedStationId(station.station_id)}
                       className={`twin-station-item ${isSelected ? 'active' : ''}`}
+                      style={isOutage ? { borderColor: '#fcd34d', backgroundColor: isSelected ? undefined : '#fffbeb' } : undefined}
                     >
                       <div className="twin-station-info">
                         <div className="twin-station-name" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                           <span>{station.station_name}</span>
-                          {stationAlertCount > 0 && (
+                          {stationAlertCount > 0 && !isOutage && (
                             <span
                               style={{
                                 padding: '1px 5px',
@@ -790,10 +902,54 @@ export const DigitalTwinMap: React.FC = () => {
                       </div>
 
                       <div className="twin-station-badge-col">
-                        {hasVal ? (
-                          <div className="twin-pm25-pill">
-                            <span className="val">{formatNumber(obs.pm25, 1)}</span>
-                            <span className="unit">µg/m³</span>
+                        {isOutage ? (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleStationOutage(station.station_id);
+                            }}
+                            style={{
+                              padding: '2px 6px',
+                              borderRadius: '4px',
+                              backgroundColor: '#fee2e2',
+                              color: '#b91c1c',
+                              fontSize: '10px',
+                              fontWeight: 700,
+                              cursor: 'pointer',
+                              border: '1px solid #fca5a5',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '3px',
+                            }}
+                            title="Click to restore sensor"
+                          >
+                            <WifiOff size={10} />
+                            <span>OFFLINE</span>
+                          </button>
+                        ) : hasVal ? (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                            <div className="twin-pm25-pill">
+                              <span className="val">{formatNumber(obs.pm25, 1)}</span>
+                              <span className="unit">µg/m³</span>
+                            </div>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleStationOutage(station.station_id);
+                              }}
+                              style={{
+                                background: 'none',
+                                border: 'none',
+                                color: '#94a3b8',
+                                cursor: 'pointer',
+                                padding: '2px',
+                                display: 'flex',
+                                alignItems: 'center',
+                              }}
+                              title="Simulate sensor outage for this station"
+                            >
+                              <WifiOff size={12} />
+                            </button>
                           </div>
                         ) : (
                           <span className="badge badge-muted">NO DATA</span>
@@ -816,8 +972,44 @@ export const DigitalTwinMap: React.FC = () => {
                         {selectedStation.station_name}
                       </div>
                     </div>
-                    <span className="badge badge-success">ACTIVE</span>
+                    {outageStationIds.includes(selectedStation.station_id) ? (
+                      <span className="badge badge-warning" style={{ backgroundColor: '#fef3c7', color: '#b45309', border: '1px solid #fcd34d' }}>
+                        OUTAGE SIMULATED
+                      </span>
+                    ) : (
+                      <span className="badge badge-success">ACTIVE</span>
+                    )}
                   </div>
+
+                  {/* Outage Information Banner if station is simulated offline */}
+                  {outageStationIds.includes(selectedStation.station_id) && (
+                    <div
+                      style={{
+                        margin: '0.5rem 0 0.75rem 0',
+                        padding: '0.65rem 0.8rem',
+                        backgroundColor: '#fffbeb',
+                        border: '1px solid #f59e0b',
+                        borderRadius: 'var(--radius-sm)',
+                        fontSize: '0.78rem',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontWeight: 700, color: '#b45309', marginBottom: '0.2rem' }}>
+                        <WifiOff size={14} />
+                        <span>HackMatrix Addition 2: Sensor Outage Active</span>
+                      </div>
+                      <p style={{ margin: 0, color: '#78350f', lineHeight: 1.4, fontSize: '0.74rem' }}>
+                        Telemetry stream offline. Digital twin falls back to Universal ML spatial-meteorological transfer using ERA5 weather &amp; OSM roads (±12.4 µg/m³ calibrated corridor).
+                      </p>
+                      <div style={{ marginTop: '0.35rem' }}>
+                        <Link
+                          to="/model-performance"
+                          style={{ color: '#b45309', fontWeight: 600, fontSize: '0.73rem', textDecoration: 'underline' }}
+                        >
+                          View 0% - 100% Sensor Loss Benchmark →
+                        </Link>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Active Station Alerts Banner */}
                   {(alertsByStation[selectedStation.station_id]?.length || 0) > 0 && (

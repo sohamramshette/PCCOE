@@ -39,6 +39,7 @@ interface PuneTwinMapProps {
   onSelectStation: (stationId: number) => void;
   latestObservations: Record<number, ObservationItem | null>;
   alertsByStation?: Record<number, AlertItem[]>;
+  outageStationIds?: number[];
   showTrafficBuffer: boolean;
   showActivityBuffer: boolean;
   showHeatmap?: boolean;
@@ -54,6 +55,7 @@ export const PuneTwinMap: React.FC<PuneTwinMapProps> = ({
   onSelectStation,
   latestObservations,
   alertsByStation = {},
+  outageStationIds = [],
   showTrafficBuffer,
   showActivityBuffer,
   showHeatmap = false,
@@ -102,18 +104,22 @@ export const PuneTwinMap: React.FC<PuneTwinMapProps> = ({
         )}
 
         {/* Render 6 Monitoring Stations */}
-        {stations.map((station) => (
-          <StationMarker
-            key={station.station_id}
-            station={station}
-            isSelected={station.station_id === selectedStationId}
-            latestObservation={latestObservations[station.station_id]}
-            alerts={alertsByStation[station.station_id] || []}
-            onSelect={onSelectStation}
-            showTrafficBuffer={showTrafficBuffer}
-            showActivityBuffer={showActivityBuffer}
-          />
-        ))}
+        {stations.map((station) => {
+          const isOutage = outageStationIds.includes(station.station_id);
+          return (
+            <StationMarker
+              key={station.station_id}
+              station={station}
+              isSelected={station.station_id === selectedStationId}
+              isOutage={isOutage}
+              latestObservation={isOutage ? null : latestObservations[station.station_id]}
+              alerts={alertsByStation[station.station_id] || []}
+              onSelect={onSelectStation}
+              showTrafficBuffer={showTrafficBuffer}
+              showActivityBuffer={showActivityBuffer}
+            />
+          );
+        })}
       </MapContainer>
     </div>
   );

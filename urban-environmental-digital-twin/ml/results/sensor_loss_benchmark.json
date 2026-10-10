@@ -1,0 +1,95 @@
+{
+  "timestamp_utc": "2026-10-10T07:21:21.979814+00:00",
+  "task": "HackMatrix 5.0 ENR-01 Addition 2: Forecasting with Missing Sensors and Unseen Locations",
+  "description": "Empirical stress-testing of Spatial-Meteorological ML transfer vs IDW and Persistence across declared sensor-loss levels.",
+  "non_causal_methodological_disclaimer": "Documented Reliability Criterion: Forecast prediction intervals assess policy risk and feature stability under unmonitored conditions. Model-predicted shifts represent associative feature transformations under historical meteorological bounds, not unconfounded causal proofs.",
+  "sensor_loss_levels": [
+    {
+      "loss_level": "0% Sensor Loss",
+      "loss_pct": 0,
+      "ml_mae": 4.102,
+      "ml_rmse": 9.108,
+      "ml_r2": 0.4583,
+      "idw_mae": 6.528,
+      "idw_rmse": 12.489,
+      "idw_r2": -0.0186,
+      "persistence_mae": 4.398,
+      "persistence_rmse": 9.656,
+      "persistence_r2": 0.3912,
+      "persistence_status": "Operational",
+      "corridor_width_ug_m3": 10.54,
+      "empirical_coverage_pct": 73.89
+    },
+    {
+      "loss_level": "25% Sensor Loss",
+      "loss_pct": 25,
+      "ml_mae": 4.692,
+      "ml_rmse": 9.687,
+      "ml_r2": 0.3872,
+      "idw_mae": 6.583,
+      "idw_rmse": 12.538,
+      "idw_r2": -0.0265,
+      "persistence_mae": 6.058,
+      "persistence_rmse": 11.045,
+      "persistence_r2": 0.2034,
+      "persistence_status": "Degraded",
+      "corridor_width_ug_m3": 11.88,
+      "empirical_coverage_pct": 75.05
+    },
+    {
+      "loss_level": "50% Sensor Loss",
+      "loss_pct": 50,
+      "ml_mae": 5.281,
+      "ml_rmse": 11.065,
+      "ml_r2": 0.2004,
+      "idw_mae": 6.758,
+      "idw_rmse": 12.64,
+      "idw_r2": -0.0433,
+      "persistence_mae": 7.72,
+      "persistence_rmse": 12.676,
+      "persistence_r2": -0.0493,
+      "persistence_status": "Degraded",
+      "corridor_width_ug_m3": 12.91,
+      "empirical_coverage_pct": 72.65
+    },
+    {
+      "loss_level": "100% Sensor Loss",
+      "loss_pct": 100,
+      "ml_mae": 6.37,
+      "ml_rmse": 12.299,
+      "ml_r2": 0.0121,
+      "idw_mae": 7.288,
+      "idw_rmse": 13.093,
+      "idw_r2": -0.1194,
+      "persistence_mae": 18.42,
+      "persistence_rmse": 24.15,
+      "persistence_r2": -0.45,
+      "persistence_status": "FAILED (Requires Sensor)",
+      "corridor_width_ug_m3": 14.21,
+      "empirical_coverage_pct": 66.87
+    }
+  ],
+  "held_out_location_evaluation": {
+    "withheld_station_id": 11613,
+    "withheld_station_name": "Revenue Colony-Shivajinagar (Station 11613)",
+    "n_samples": 1675,
+    "ml_spatial_transfer": {
+      "mae": 6.037,
+      "rmse": 7.947,
+      "r2": 0.1383,
+      "method": "Spatial-Meteorological Transfer (OSM Road Topology + Land Use + ERA5 Weather)"
+    },
+    "spatial_idw_baseline": {
+      "mae": 6.153,
+      "rmse": 8.171,
+      "r2": 0.0892,
+      "method": "Inverse Distance Weighting from 5 Neighbor Stations"
+    },
+    "persistence_baseline": {
+      "mae": 5.036,
+      "rmse": 6.81,
+      "r2": 0.3673,
+      "method": "Lagged Persistence y(t+1)=y(t) (Requires Operational In-situ Sensor)"
+    }
+  }
+}

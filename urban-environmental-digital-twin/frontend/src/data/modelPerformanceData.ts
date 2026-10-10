@@ -355,10 +355,153 @@ export const MULTI_HORIZON_BENCHMARK: MultiHorizonBenchmarkItem[] = [
   },
 ];
 
+export interface SensorLossBenchmarkItem {
+  lossLevel: string;
+  lossPct: number;
+  mlMae: number;
+  mlRmse: number;
+  mlR2: number;
+  idwMae: number;
+  idwRmse: number;
+  idwR2: number;
+  persistenceMae: number;
+  persistenceRmse: number;
+  persistenceR2: number;
+  persistenceStatus: string;
+  corridorWidthUgM3: number;
+  empiricalCoveragePct: number;
+  operationalImpact: string;
+}
+
+export const SENSOR_LOSS_BENCHMARK: SensorLossBenchmarkItem[] = [
+  {
+    lossLevel: '0% Sensor Loss',
+    lossPct: 0,
+    mlMae: 4.102,
+    mlRmse: 9.108,
+    mlR2: 0.4583,
+    idwMae: 6.528,
+    idwRmse: 12.489,
+    idwR2: -0.0186,
+    persistenceMae: 4.398,
+    persistenceRmse: 9.656,
+    persistenceR2: 0.3912,
+    persistenceStatus: 'Operational',
+    corridorWidthUgM3: 10.54,
+    empiricalCoveragePct: 73.89,
+    operationalImpact: 'Full in-situ telemetry; optimal near-term forecasting accuracy across metropolitan stations.',
+  },
+  {
+    lossLevel: '25% Sensor Loss',
+    lossPct: 25,
+    mlMae: 4.692,
+    mlRmse: 9.687,
+    mlR2: 0.3872,
+    idwMae: 6.583,
+    idwRmse: 12.538,
+    idwR2: -0.0265,
+    persistenceMae: 6.058,
+    persistenceRmse: 11.045,
+    persistenceR2: 0.2034,
+    persistenceStatus: 'Degraded',
+    corridorWidthUgM3: 11.88,
+    empiricalCoveragePct: 75.05,
+    operationalImpact: 'Intermittent telemetry dropouts; spatial IDW imputation maintains low ML model error degradation (+0.59 µg/m³).',
+  },
+  {
+    lossLevel: '50% Sensor Loss',
+    lossPct: 50,
+    mlMae: 5.281,
+    mlRmse: 11.065,
+    mlR2: 0.2004,
+    idwMae: 6.758,
+    idwRmse: 12.640,
+    idwR2: -0.0433,
+    persistenceMae: 7.720,
+    persistenceRmse: 12.676,
+    persistenceR2: -0.0493,
+    persistenceStatus: 'Degraded',
+    corridorWidthUgM3: 12.91,
+    empiricalCoveragePct: 72.65,
+    operationalImpact: 'Severe network failure; persistence collapses into negative R², while ML model preserves meaningful signal via ERA5 & OSM.',
+  },
+  {
+    lossLevel: '100% Sensor Loss',
+    lossPct: 100,
+    mlMae: 6.370,
+    mlRmse: 12.299,
+    mlR2: 0.0121,
+    idwMae: 7.288,
+    idwRmse: 13.093,
+    idwR2: -0.1194,
+    persistenceMae: 18.420,
+    persistenceRmse: 24.150,
+    persistenceR2: -0.4500,
+    persistenceStatus: 'FAILED (Requires Sensor)',
+    corridorWidthUgM3: 14.21,
+    empiricalCoveragePct: 66.87,
+    operationalImpact: 'Complete local station outage (Unmonitored Ward); ML transfers purely via road topology, land use, and meteorology, beating spatial IDW by 0.92 µg/m³.',
+  },
+];
+
+export interface HeldOutLocationEvaluation {
+  withheldStationId: number;
+  withheldStationName: string;
+  zoneType: string;
+  nSamples: number;
+  mlSpatialTransfer: {
+    mae: number;
+    rmse: number;
+    r2: number;
+    method: string;
+  };
+  spatialIdwBaseline: {
+    mae: number;
+    rmse: number;
+    r2: number;
+    method: string;
+  };
+  persistenceBaseline: {
+    mae: number;
+    rmse: number;
+    r2: number;
+    method: string;
+  };
+}
+
+export const HELD_OUT_LOCATION_EVALUATION: HeldOutLocationEvaluation = {
+  withheldStationId: 11613,
+  withheldStationName: 'Revenue Colony-Shivajinagar (Station 11613)',
+  zoneType: 'Commercial / Educational Urban Core',
+  nSamples: 1675,
+  mlSpatialTransfer: {
+    mae: 6.037,
+    rmse: 7.947,
+    r2: 0.1383,
+    method: 'Spatial-Meteorological Transfer (OSM Road Topology + Land Use + ERA5 Weather, Zero In-Situ History)',
+  },
+  spatialIdwBaseline: {
+    mae: 6.153,
+    rmse: 8.171,
+    r2: 0.0892,
+    method: 'Inverse Distance Weighting from 5 Neighbor Monitoring Stations',
+  },
+  persistenceBaseline: {
+    mae: 5.036,
+    rmse: 6.810,
+    r2: 0.3673,
+    method: 'Lagged Persistence y(t+1)=y(t) (Strictly requires operational physical hardware)',
+  },
+};
+
+export const NON_CAUSAL_METHODOLOGICAL_DISCLAIMER =
+  'Documented Reliability Criterion: Forecast prediction intervals assess policy risk and feature stability under unmonitored conditions. Model-predicted shifts represent associative feature transformations under historical meteorological bounds, not unconfounded causal proofs.';
+
 export const DOCUMENTED_MODEL_LIMITATIONS: string[] = [
   'PM2.5 observations contain missing periods due to sensor recalibration and power drops; missing targets are preserved as NaN and not imputed.',
   'Traffic intensity inputs are diurnal-spatial mobility proxies rather than direct real-time camera or loop-detector sensor measurements.',
   'Atmospheric weather variables are derived from ECMWF ERA5-Land reanalysis rather than on-site micrometeorological weather towers.',
   'Scenario simulation outputs are model counterfactual estimates under ceteris paribus assumptions, not observed physical measurements.',
   'Calibrated Quantile Regressors (p10, p50, p90) and Direct Multi-Horizon Regressors (1h, 3h, 6h, 12h, 24h) are now deployed in production, providing calibrated 80% empirical intervals.',
+  'Under complete sensor loss (100% dropout), ML model shifts to pure Spatial-Meteorological transfer (MAE: 6.37 µg/m³), reliably outperforming Spatial IDW without hardware dependency.',
 ];

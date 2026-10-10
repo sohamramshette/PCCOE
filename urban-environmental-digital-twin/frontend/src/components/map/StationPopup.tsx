@@ -13,14 +13,16 @@ interface StationPopupProps {
   station: Station;
   latestObservation?: ObservationItem | null;
   alerts?: AlertItem[];
+  isOutage?: boolean;
 }
 
 export const StationPopup: React.FC<StationPopupProps> = ({
   station,
   latestObservation,
   alerts = [],
+  isOutage = false,
 }) => {
-  const hasObservation = latestObservation && latestObservation.pm25 !== null && latestObservation.pm25 !== undefined;
+  const hasObservation = !isOutage && latestObservation && latestObservation.pm25 !== null && latestObservation.pm25 !== undefined;
   const pm25Value = hasObservation ? latestObservation.pm25 : null;
   const activeAlerts = alerts.filter((a) => a.status === 'ACTIVE' || a.status === 'ACKNOWLEDGED');
 
@@ -33,12 +35,37 @@ export const StationPopup: React.FC<StationPopupProps> = ({
         </div>
         <div style={{ display: 'flex', gap: '0.35rem', marginTop: '0.25rem', flexWrap: 'wrap' }}>
           <span className="badge badge-primary">ID: {station.station_id}</span>
-          <span className="badge badge-success">ACTIVE</span>
-          <ProvenanceBadge classification="OBSERVED" />
+          {isOutage ? (
+            <span className="badge badge-warning" style={{ backgroundColor: '#fef3c7', color: '#b45309', border: '1px solid #fcd34d' }}>
+              SIMULATED OUTAGE
+            </span>
+          ) : (
+            <span className="badge badge-success">ACTIVE</span>
+          )}
+          <ProvenanceBadge classification={isOutage ? 'MODEL_COUNTERFACTUAL_ESTIMATE' : 'OBSERVED'} />
         </div>
       </div>
 
       <div className="station-popup-body">
+        {/* Outage Notice if simulated */}
+        {isOutage && (
+          <div
+            style={{
+              padding: '0.5rem 0.65rem',
+              backgroundColor: '#fffbeb',
+              border: '1px solid #fde68a',
+              borderRadius: 'var(--radius-sm)',
+              marginBottom: '0.6rem',
+              fontSize: '0.78rem',
+              color: '#92400e',
+            }}
+          >
+            <strong>HackMatrix Addition 2 Outage Mode:</strong>
+            <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.74rem' }}>
+              In-situ sensor offline. Spatial-Met ML model estimates neighborhood PM2.5 using ERA5 weather &amp; OSM roads.
+            </p>
+          </div>
+        )}
         {/* Active Alerts Banner if present */}
         {activeAlerts.length > 0 && (
           <div

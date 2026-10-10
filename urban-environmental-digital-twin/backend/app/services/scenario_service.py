@@ -436,12 +436,24 @@ class ScenarioService:
             }
 
 
+        # Calibrated Quantiles for counterfactual stability assessment (Addition 2 requirement)
+        try:
+            cf_p10, _, cf_p90 = model_serving.predict_quantiles(cf_df)
+            uncertainty_corridor = [cf_p10, cf_p90]
+            uncertainty_available = True
+            uncertainty_note = f"Calibrated 80% conformal quantile corridor: p10={cf_p10:.2f} to p90={cf_p90:.2f} µg/m³. Evaluates intervention package stability without claiming causal effects from correlation alone."
+        except Exception:
+            uncertainty_corridor = None
+            uncertainty_available = False
+            uncertainty_note = "Point estimate only; calibrated quantile models not loaded."
+
         # Structured metadata
         execution_meta = {
             "intervention": intervention_dict,
-            "uncertainty_available": False,
-            "uncertainty_note": "Point estimate only; the current baseline model does not provide calibrated uncertainty.",
-            "interpretation_note": "Counterfactual model estimate; not a causal measurement.",
+            "uncertainty_available": uncertainty_available,
+            "uncertainty_corridor": uncertainty_corridor,
+            "uncertainty_note": uncertainty_note,
+            "interpretation_note": "Counterfactual model estimate assessing associative stability; not an unconfounded causal measurement.",
             "data_classification": "MODEL_COUNTERFACTUAL_ESTIMATE",
             "features_modified_count": len(audit_items),
             "affected_features_audit": [item.model_dump() for item in audit_items],

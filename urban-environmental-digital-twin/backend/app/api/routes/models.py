@@ -49,6 +49,21 @@ def list_models(
 
 
 @router.get(
+    "/sensor-loss-benchmark",
+    summary="Get Sensor Loss & Spatial Transferability Benchmark",
+    description="Returns empirical metrics across declared sensor-loss levels (0%, 25%, 50%, 100%) and held-out location spatial transfer."
+)
+def get_sensor_loss_benchmark():
+    import json
+    from pathlib import Path
+    benchmark_file = Path(__file__).resolve().parents[4] / "ml" / "results" / "sensor_loss_benchmark.json"
+    if benchmark_file.exists():
+        with open(benchmark_file, "r") as f:
+            return json.load(f)
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Sensor loss benchmark not found.")
+
+
+@router.get(
     "/{model_id}",
     response_model=ModelRegistryDetail,
     summary="Get Registered Model Details & Full Metrics",

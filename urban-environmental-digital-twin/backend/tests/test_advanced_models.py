@@ -54,3 +54,20 @@ def test_predict_horizon_anchors():
         val = model_serving.predict_horizon(h, df)
         assert val is not None
         assert val > 0.0
+
+
+def test_sensor_loss_benchmark_artifact():
+    from pathlib import Path
+    import json
+    p = Path(__file__).resolve().parents[2] / "ml" / "results" / "sensor_loss_benchmark.json"
+    assert p.exists(), "Sensor loss benchmark JSON artifact must exist"
+    with open(p, "r") as f:
+        data = json.load(f)
+    assert "sensor_loss_levels" in data
+    assert len(data["sensor_loss_levels"]) == 4
+    assert data["sensor_loss_levels"][0]["loss_pct"] == 0
+    assert data["sensor_loss_levels"][3]["loss_pct"] == 100
+    assert "held_out_location_evaluation" in data
+    assert data["held_out_location_evaluation"]["withheld_station_id"] == 11613
+    assert data["held_out_location_evaluation"]["ml_spatial_transfer"]["mae"] < 6.5
+

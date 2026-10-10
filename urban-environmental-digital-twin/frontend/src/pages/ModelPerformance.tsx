@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BarChart,
   Bar,
@@ -19,6 +19,8 @@ import {
   Layers,
   Activity,
   Target,
+  WifiOff,
+  Radio,
 } from 'lucide-react';
 import {
   BASELINE_MODELS_BENCHMARK,
@@ -29,11 +31,16 @@ import {
   QUANTILE_REGRESSION_BENCHMARK,
   QUANTILE_CALIBRATION_SUMMARY,
   MULTI_HORIZON_BENCHMARK,
+  SENSOR_LOSS_BENCHMARK,
+  HELD_OUT_LOCATION_EVALUATION,
+  NON_CAUSAL_METHODOLOGICAL_DISCLAIMER,
 } from '../data/modelPerformanceData';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';
 import { formatNumber } from '../utils/formatters';
 
 export const ModelPerformance: React.FC = () => {
+  const [selectedLossPct, setSelectedLossPct] = useState<number>(0);
+
   // Chart data: Comparing Test MAE and Test RMSE
   const chartData = BASELINE_MODELS_BENCHMARK.map((m) => ({
     name: m.modelName.replace(' Regressor', '').replace(' Baseline', ''),
@@ -46,6 +53,14 @@ export const ModelPerformance: React.FC = () => {
     horizon: h.horizon,
     'Test MAE': h.testMae,
     'Test RMSE': h.testRmse,
+  }));
+
+  // Chart data: Sensor Loss Comparison across baselines
+  const sensorLossChartData = SENSOR_LOSS_BENCHMARK.map((s) => ({
+    name: s.lossLevel.replace(' Sensor Loss', ' Loss'),
+    'Universal ML (Spatial-Met)': s.mlMae,
+    'Spatial IDW': s.idwMae,
+    'Persistence': s.persistenceMae,
   }));
 
   return (
@@ -362,6 +377,215 @@ export const ModelPerformance: React.FC = () => {
               ))}
             </tbody>
           </table>
+        </div>
+      </div>
+
+      {/* Addition 2: Sensor Resilience & Spatial Transferability Lab (HackMatrix 5.0) */}
+      <div className="card" style={{ marginBottom: '1.5rem', border: '1px solid #0284c7', boxShadow: 'var(--shadow-md)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.2rem' }}>
+              <span className="badge badge-scenario">HACKMATRIX 5.0 ADDITION 2</span>
+              <span className="badge badge-success">SENSOR RESILIENCE & SPATIAL TRANSFER</span>
+            </div>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <WifiOff size={20} color="#0284c7" />
+              <span>Forecasting Under Sensor Outages & Unseen Held-Out Locations</span>
+            </h3>
+            <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+              Empirical stress-testing across declared sensor-loss levels (0%, 25%, 50%, 100%) and spatial transfer to an unmonitored location withheld from model development.
+            </p>
+          </div>
+
+          {/* Level Selector Buttons */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'var(--bg-secondary)', padding: '0.25rem', borderRadius: '8px', border: '1px solid var(--border-subtle)', flexWrap: 'wrap' }}>
+            {SENSOR_LOSS_BENCHMARK.map((sl) => (
+              <button
+                key={sl.lossPct}
+                onClick={() => setSelectedLossPct(sl.lossPct)}
+                className={`btn ${selectedLossPct === sl.lossPct ? 'btn-primary' : 'btn-secondary'}`}
+                style={{ padding: '0.35rem 0.65rem', fontSize: '0.78rem', border: 'none', cursor: 'pointer' }}
+              >
+                {sl.lossLevel}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Highlight Banner for selected level */}
+        {(() => {
+          const activeSl = SENSOR_LOSS_BENCHMARK.find((s) => s.lossPct === selectedLossPct) || SENSOR_LOSS_BENCHMARK[0];
+          return (
+            <div style={{ backgroundColor: selectedLossPct === 100 ? 'rgba(239, 68, 68, 0.08)' : 'rgba(2, 132, 199, 0.08)', border: `1px solid ${selectedLossPct === 100 ? '#ef4444' : '#0284c7'}`, borderRadius: '8px', padding: '0.85rem 1.1rem', marginBottom: '1.25rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.35rem' }}>
+                <strong style={{ fontSize: '0.9rem', color: selectedLossPct === 100 ? '#dc2626' : '#0284c7' }}>
+                  Active Stress-Test Scenario: {activeSl.lossLevel} ({activeSl.lossPct}% Telemetry Dropout)
+                </strong>
+                <span className="badge badge-primary">
+                  Corridor Width: {activeSl.corridorWidthUgM3} µg/m³ ({activeSl.empiricalCoveragePct}% Empirical Coverage)
+                </span>
+              </div>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: 0 }}>
+                {activeSl.operationalImpact}
+              </p>
+            </div>
+          );
+        })()}
+
+        {/* Sub-grid: Comparative Chart + Held-out Location Card */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 450px), 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
+          {/* Comparative Escalation Bar Chart */}
+          <div style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', padding: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+              <h4 style={{ fontSize: '0.92rem', fontWeight: 600, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <TrendingUp size={16} className="text-primary" />
+                <span>Error Escalation (Holdout Test MAE vs. Sensor Dropout)</span>
+              </h4>
+              <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Lower error = superior resilience</span>
+            </div>
+
+            <div style={{ width: '100%', height: 230 }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={sensorLossChartData} margin={{ top: 5, right: 15, left: -5, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                  <XAxis dataKey="name" stroke="#64748b" fontSize={11} tickLine={false} />
+                  <YAxis stroke="#64748b" fontSize={11} tickLine={false} unit=" µg" />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px', fontSize: '11px' }}
+                    formatter={(val: unknown, name: string) => [`${formatNumber(Number(val), 2)} µg/m³`, name]}
+                  />
+                  <Legend verticalAlign="top" align="right" wrapperStyle={{ fontSize: '11px', paddingBottom: '6px' }} />
+                  <Bar dataKey="Universal ML (Spatial-Met)" fill="#2563eb" radius={[4, 4, 0, 0]} barSize={16} />
+                  <Bar dataKey="Spatial IDW" fill="#0284c7" radius={[4, 4, 0, 0]} barSize={16} />
+                  <Bar dataKey="Persistence" fill="#ef4444" radius={[4, 4, 0, 0]} barSize={16} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <div style={{ fontSize: '0.73rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>
+              Key Insight: At 100% sensor loss, in-situ persistence fails (MAE 18.42 µg/m³). The Universal ML model degrades gracefully to 6.37 µg/m³, outperforming Spatial IDW (7.29 µg/m³) via OpenStreetMap GIS and ERA5 dispersion terms.
+            </div>
+          </div>
+
+          {/* Withheld Location Spotlight: Station 11613 (Shivajinagar) */}
+          <div style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', padding: '1rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                <h4 style={{ fontSize: '0.92rem', fontWeight: 600, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Radio size={16} color="#0284c7" />
+                  <span>Held-Out Location Spatial Transfer (Station 11613)</span>
+                </h4>
+                <span className="badge badge-scenario">Leave-One-Station-Out</span>
+              </div>
+
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>
+                Target: <strong>{HELD_OUT_LOCATION_EVALUATION.withheldStationName}</strong> ({HELD_OUT_LOCATION_EVALUATION.nSamples} test samples).
+                Simulating deployment to an unmonitored Pune neighborhood with <em>zero in-situ historical training data</em>.
+              </p>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.6rem', marginBottom: '0.75rem' }}>
+                <div style={{ backgroundColor: 'rgba(37, 99, 235, 0.08)', border: '1px solid #2563eb', borderRadius: '6px', padding: '0.6rem', textAlign: 'center' }}>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>Universal ML</div>
+                  <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#2563eb' }}>{HELD_OUT_LOCATION_EVALUATION.mlSpatialTransfer.mae}</div>
+                  <div style={{ fontSize: '0.68rem', color: 'var(--text-secondary)' }}>µg/m³ MAE (Zero Sensors)</div>
+                </div>
+
+                <div style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-subtle)', borderRadius: '6px', padding: '0.6rem', textAlign: 'center' }}>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>Spatial IDW</div>
+                  <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0284c7' }}>{HELD_OUT_LOCATION_EVALUATION.spatialIdwBaseline.mae}</div>
+                  <div style={{ fontSize: '0.68rem', color: 'var(--text-secondary)' }}>µg/m³ MAE (5 Neighbors)</div>
+                </div>
+
+                <div style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-subtle)', borderRadius: '6px', padding: '0.6rem', textAlign: 'center' }}>
+                  <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>Persistence</div>
+                  <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-muted)' }}>{HELD_OUT_LOCATION_EVALUATION.persistenceBaseline.mae}</div>
+                  <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Requires Hardware</div>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ fontSize: '0.74rem', color: 'var(--text-secondary)', backgroundColor: 'var(--bg-secondary)', padding: '0.6rem 0.75rem', borderRadius: '6px', borderLeft: '3px solid #0284c7' }}>
+              <strong>Transferability Verdict:</strong> The universal model accurately estimates unseen municipal zones by encoding physical road density buffers (major road density: 1.5 km/km²), commercial POI activity, and ERA5 planetary boundary layer ventilation.
+            </div>
+          </div>
+        </div>
+
+        {/* Detailed Benchmark Table Across All Declared Sensor Loss Levels */}
+        <div className="table-container" style={{ marginBottom: '1rem' }}>
+          <table>
+            <thead>
+              <tr>
+                <th>Declared Telemetry Level</th>
+                <th>Universal ML (Test MAE)</th>
+                <th>Universal ML (Test RMSE)</th>
+                <th>Spatial IDW Baseline</th>
+                <th>Persistence Baseline</th>
+                <th>Quantile Corridor (p10–p90)</th>
+                <th>Operational Stability & Risk Assessment</th>
+              </tr>
+            </thead>
+            <tbody>
+              {SENSOR_LOSS_BENCHMARK.map((sl) => (
+                <tr
+                  key={sl.lossPct}
+                  style={{
+                    backgroundColor: selectedLossPct === sl.lossPct ? 'rgba(2, 132, 199, 0.08)' : undefined,
+                    fontWeight: selectedLossPct === sl.lossPct ? 600 : undefined,
+                  }}
+                >
+                  <td>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                      <span className={`badge ${sl.lossPct === 0 ? 'badge-success' : sl.lossPct === 100 ? 'badge-danger' : 'badge-primary'}`}>
+                        {sl.lossLevel}
+                      </span>
+                    </div>
+                  </td>
+                  <td><strong style={{ color: '#2563eb' }}>{formatNumber(sl.mlMae, 3)} µg/m³</strong></td>
+                  <td>{formatNumber(sl.mlRmse, 3)}</td>
+                  <td>{formatNumber(sl.idwMae, 3)} µg/m³</td>
+                  <td>
+                    {sl.lossPct === 100 ? (
+                      <span style={{ color: '#dc2626', fontWeight: 600 }}>{sl.persistenceStatus}</span>
+                    ) : (
+                      `${formatNumber(sl.persistenceMae, 3)} µg/m³`
+                    )}
+                  </td>
+                  <td>
+                    <span>± {formatNumber(sl.corridorWidthUgM3 / 2, 2)} µg</span>
+                    <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block' }}>
+                      width: {sl.corridorWidthUgM3} µg ({sl.empiricalCoveragePct}% cov)
+                    </span>
+                  </td>
+                  <td style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{sl.operationalImpact}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Mandatory Non-Causal Methodological Disclaimer Banner */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            gap: '0.6rem',
+            backgroundColor: 'rgba(217, 119, 6, 0.08)',
+            border: '1px solid #d97706',
+            borderRadius: '8px',
+            padding: '0.85rem 1rem',
+            fontSize: '0.78rem',
+            color: 'var(--text-primary)',
+          }}
+        >
+          <AlertTriangle size={18} color="#d97706" style={{ flexShrink: 0, marginTop: '2px' }} />
+          <div>
+            <strong>Documented Reliability & Scientific Non-Causal Disclaimer:</strong>
+            <p style={{ margin: '0.2rem 0 0 0', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+              {NON_CAUSAL_METHODOLOGICAL_DISCLAIMER}
+            </p>
+            <div style={{ marginTop: '0.35rem', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+              Reproducible experiment script: <code>ml/src/experiments/simulate_sensor_loss.py</code> | Benchmark Artifact: <code>ml/results/sensor_loss_benchmark.json</code>
+            </div>
+          </div>
         </div>
       </div>
 

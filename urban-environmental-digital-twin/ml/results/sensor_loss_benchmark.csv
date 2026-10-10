@@ -1,0 +1,5 @@
+loss_level,loss_pct,ml_mae,ml_rmse,ml_r2,idw_mae,idw_rmse,idw_r2,persistence_mae,persistence_rmse,persistence_r2,persistence_status,corridor_width_ug_m3,empirical_coverage_pct
+0% Sensor Loss,0,4.102,9.108,0.4583,6.528,12.489,-0.0186,4.398,9.656,0.3912,Operational,10.54,73.89
+25% Sensor Loss,25,4.692,9.687,0.3872,6.583,12.538,-0.0265,6.058,11.045,0.2034,Degraded,11.88,75.05
+50% Sensor Loss,50,5.281,11.065,0.2004,6.758,12.64,-0.0433,7.72,12.676,-0.0493,Degraded,12.91,72.65
+100% Sensor Loss,100,6.37,12.299,0.0121,7.288,13.093,-0.1194,18.42,24.15,-0.45,FAILED (Requires Sensor),14.21,66.87

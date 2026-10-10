@@ -11,6 +11,7 @@ interface StationMarkerProps {
   isSelected: boolean;
   latestObservation?: ObservationItem | null;
   alerts?: AlertItem[];
+  isOutage?: boolean;
   onSelect: (stationId: number) => void;
   showTrafficBuffer: boolean;
   showActivityBuffer: boolean;
@@ -21,6 +22,7 @@ export const StationMarker: React.FC<StationMarkerProps> = ({
   isSelected,
   latestObservation,
   alerts = [],
+  isOutage = false,
   onSelect,
   showTrafficBuffer,
   showActivityBuffer,
@@ -39,12 +41,12 @@ export const StationMarker: React.FC<StationMarkerProps> = ({
   const customIcon = L.divIcon({
     className: 'custom-station-marker-wrapper',
     html: `
-      <div class="custom-station-pin ${isSelected ? 'selected' : ''} ${hasActiveAlerts ? 'has-alert' : ''}" title="${station.station_name}${hasActiveAlerts ? ` (${alerts.length} active alerts)` : ''}">
-        <div class="pin-badge">
-          <span class="pin-id">${station.station_id}</span>
-          ${hasActiveAlerts ? `<span class="pin-alert-count">${alerts.length}</span>` : ''}
+      <div class="custom-station-pin ${isSelected ? 'selected' : ''} ${isOutage ? 'outage' : hasActiveAlerts ? 'has-alert' : ''}" style="${isOutage ? 'background: #f59e0b; border-color: #b45309;' : ''}" title="${station.station_name}${isOutage ? ' (SIMULATED OUTAGE)' : hasActiveAlerts ? ` (${alerts.length} active alerts)` : ''}">
+        <div class="pin-badge" style="${isOutage ? 'background: #d97706;' : ''}">
+          <span class="pin-id">${isOutage ? '⚡' : station.station_id}</span>
+          ${isOutage ? `<span class="pin-alert-count" style="background: #dc2626;">OFF</span>` : hasActiveAlerts ? `<span class="pin-alert-count">${alerts.length}</span>` : ''}
         </div>
-        <div class="pin-pulse"></div>
+        <div class="pin-pulse" style="${isOutage ? 'border-color: #f59e0b;' : ''}"></div>
       </div>
     `,
     iconSize: [38, 38],
@@ -94,7 +96,7 @@ export const StationMarker: React.FC<StationMarkerProps> = ({
         }}
       >
         <Popup className="custom-leaflet-popup" autoPan={true} closeButton={true}>
-          <StationPopup station={station} latestObservation={latestObservation} alerts={alerts} />
+          <StationPopup station={station} latestObservation={latestObservation} alerts={alerts} isOutage={isOutage} />
         </Popup>
       </Marker>
     </>
