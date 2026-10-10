@@ -158,16 +158,17 @@ export const CitizenPortal: React.FC = () => {
               gap: '8px',
               padding: '10px 18px',
               borderRadius: '14px',
-              background: 'rgba(163, 181, 147, 0.15)',
-              border: '1px solid rgba(163, 181, 147, 0.35)',
-              color: '#eef1e7',
+              background: '#ffffff',
+              border: '1.5px solid #287a45',
+              color: '#166534',
               fontSize: '0.85rem',
-              fontWeight: 600,
+              fontWeight: 700,
               cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(40, 122, 69, 0.08)',
               transition: 'all 0.2s ease',
             }}
           >
-            <Sparkles size={16} color="#8fa07e" />
+            <Sparkles size={16} color="#287a45" />
             <span>Switch Role / Login</span>
           </button>
           {role === 'AUTHORITY' && (
@@ -179,11 +180,12 @@ export const CitizenPortal: React.FC = () => {
                 gap: '8px',
                 padding: '10px 18px',
                 borderRadius: '14px',
-                background: 'linear-gradient(135deg, #cf9861 0%, #a46d38 100%)',
-                color: '#131812',
+                background: 'linear-gradient(135deg, #b45309 0%, #d97706 100%)',
+                color: '#ffffff',
                 fontSize: '0.85rem',
                 fontWeight: 700,
                 textDecoration: 'none',
+                boxShadow: '0 2px 8px rgba(217, 119, 6, 0.25)',
               }}
             >
               <Layers size={16} />
@@ -205,8 +207,8 @@ export const CitizenPortal: React.FC = () => {
       {/* Neighborhood Selector Chips */}
       <div style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-          <MapPin size={16} color="#8fa07e" />
-          <span style={{ fontSize: '0.86rem', fontWeight: 700, color: '#eef1e7', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+          <MapPin size={16} color="#166534" />
+          <span style={{ fontSize: '0.86rem', fontWeight: 700, color: '#0d1710', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Choose Your Pune Neighborhood:
           </span>
         </div>
@@ -223,15 +225,15 @@ export const CitizenPortal: React.FC = () => {
                   gap: '8px',
                   padding: '8px 16px',
                   borderRadius: '12px',
-                  border: isSelected ? '1.5px solid #8fa07e' : '1px solid rgba(163, 181, 147, 0.2)',
+                  border: isSelected ? '1.5px solid #166534' : '1px solid rgba(40, 122, 69, 0.22)',
                   background: isSelected
-                    ? 'linear-gradient(135deg, rgba(38, 56, 35, 0.95) 0%, rgba(24, 38, 23, 0.95) 100%)'
-                    : 'rgba(20, 28, 19, 0.65)',
-                  color: isSelected ? '#ffffff' : '#c9d3bf',
+                    ? 'rgba(22, 101, 52, 0.12)'
+                    : '#ffffff',
+                  color: isSelected ? '#166534' : '#334155',
                   fontSize: '0.86rem',
                   fontWeight: isSelected ? 700 : 500,
                   cursor: 'pointer',
-                  boxShadow: isSelected ? '0 4px 16px rgba(0, 0, 0, 0.3)' : 'none',
+                  boxShadow: isSelected ? '0 2px 8px rgba(22, 101, 52, 0.12)' : '0 1px 3px rgba(0, 0, 0, 0.03)',
                   transition: 'all 0.2s ease',
                 }}
               >
@@ -255,11 +257,11 @@ export const CitizenPortal: React.FC = () => {
         {/* Left: Big AQI Health Card */}
         <div
           style={{
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-            border: '1px solid rgba(163, 181, 147, 0.22)',
+            background: 'rgba(255, 255, 255, 0.85)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             borderRadius: '24px',
             padding: '2rem',
-            boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+            boxShadow: '0 12px 36px rgba(22, 38, 25, 0.05)',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
@@ -268,13 +270,13 @@ export const CitizenPortal: React.FC = () => {
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
               <div>
-                <span style={{ fontSize: '0.78rem', color: '#8fa07e', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                <span style={{ fontSize: '0.78rem', color: '#166534', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                   Live Telemetry Feed
                 </span>
-                <h3 style={{ fontSize: '1.35rem', fontWeight: 700, margin: '4px 0 0', color: '#f4f6f0' }}>
+                <h3 style={{ fontSize: '1.35rem', fontWeight: 700, margin: '4px 0 0', color: '#0d1710' }}>
                   {selectedStation.name}
                 </h3>
-                <span style={{ fontSize: '0.82rem', color: '#9eab93' }}>{selectedStation.area}</span>
+                <span style={{ fontSize: '0.82rem', color: '#475569', fontWeight: 500 }}>{selectedStation.area}</span>
               </div>
               <span
                 style={{
@@ -282,8 +284,8 @@ export const CitizenPortal: React.FC = () => {
                   borderRadius: '12px',
                   fontSize: '11px',
                   fontWeight: 700,
-                  backgroundColor: `${selectedStation.color}25`,
-                  color: '#ffffff',
+                  backgroundColor: `${selectedStation.color}18`,
+                  color: selectedStation.color === '#00E400' ? '#166534' : selectedStation.color,
                   border: `1.5px solid ${selectedStation.color}`,
                 }}
               >
@@ -300,16 +302,16 @@ export const CitizenPortal: React.FC = () => {
                 marginBottom: '1rem',
                 padding: '1.5rem',
                 borderRadius: '18px',
-                background: 'rgba(14, 20, 14, 0.65)',
-                border: '1px solid rgba(163, 181, 147, 0.15)',
+                background: 'rgba(240, 248, 242, 0.85)',
+                border: '1px solid rgba(40, 122, 69, 0.18)',
               }}
             >
-              <span style={{ fontSize: '3.6rem', fontWeight: 800, color: selectedStation.color, lineHeight: 1 }}>
+              <span style={{ fontSize: '3.6rem', fontWeight: 800, color: selectedStation.color === '#00E400' ? '#16a34a' : selectedStation.color, lineHeight: 1 }}>
                 {selectedStation.pm25.toFixed(1)}
               </span>
               <div>
-                <span style={{ fontSize: '1rem', fontWeight: 600, color: '#eef1e7' }}>µg/m³ PM2.5</span>
-                <div style={{ fontSize: '0.78rem', color: '#9eab93' }}>Fine breathable particles</div>
+                <span style={{ fontSize: '1rem', fontWeight: 700, color: '#0d1710' }}>µg/m³ PM2.5</span>
+                <div style={{ fontSize: '0.78rem', color: '#64748b', fontWeight: 500 }}>Fine breathable particles</div>
               </div>
             </div>
 
@@ -318,47 +320,47 @@ export const CitizenPortal: React.FC = () => {
               style={{
                 padding: '1rem 1.25rem',
                 borderRadius: '14px',
-                background: 'rgba(143, 160, 126, 0.12)',
+                background: 'rgba(241, 245, 249, 0.9)',
                 borderLeft: `4px solid ${selectedStation.color}`,
-                color: '#eef1e7',
+                color: '#1f2937',
                 fontSize: '0.88rem',
                 lineHeight: 1.5,
                 marginBottom: '1.5rem',
               }}
             >
-              <strong>Resident Guidance:</strong> {selectedStation.advice}
+              <strong style={{ color: '#0d1710' }}>Resident Guidance:</strong> {selectedStation.advice}
             </div>
           </div>
 
           <div
             style={{
               paddingTop: '1rem',
-              borderTop: '1px solid rgba(163, 181, 147, 0.15)',
+              borderTop: '1px solid rgba(40, 122, 69, 0.14)',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
               fontSize: '0.78rem',
-              color: '#9eab93',
+              color: '#64748b',
             }}
           >
             <span>Verified by CPCB / IITM SAFAR Network</span>
-            <span style={{ color: '#8fa07e', fontWeight: 600 }}>Updated 5 mins ago</span>
+            <span style={{ color: '#166534', fontWeight: 650 }}>Updated 5 mins ago</span>
           </div>
         </div>
 
         {/* Right: "Can I Go Outside?" Activity Safety Matrix */}
         <div
           style={{
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-            border: '1px solid rgba(163, 181, 147, 0.22)',
+            background: 'rgba(255, 255, 255, 0.85)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             borderRadius: '24px',
             padding: '2rem',
-            boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+            boxShadow: '0 12px 36px rgba(22, 38, 25, 0.05)',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.25rem' }}>
-            <Heart size={20} color="#8fa07e" />
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: '#f4f6f0' }}>
+            <Heart size={20} color="#166534" />
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
               Daily Activity &amp; Health Checklist
             </h3>
           </div>
@@ -369,8 +371,8 @@ export const CitizenPortal: React.FC = () => {
               style={{
                 padding: '1rem 1.15rem',
                 borderRadius: '16px',
-                background: 'rgba(14, 22, 14, 0.65)',
-                border: '1px solid rgba(163, 181, 147, 0.14)',
+                background: 'rgba(245, 250, 246, 0.85)',
+                border: '1px solid rgba(40, 122, 69, 0.14)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '14px',
@@ -381,22 +383,22 @@ export const CitizenPortal: React.FC = () => {
                   width: '40px',
                   height: '40px',
                   borderRadius: '10px',
-                  background: 'rgba(0, 228, 0, 0.15)',
-                  border: '1px solid #00E400',
+                  background: 'rgba(34, 197, 94, 0.15)',
+                  border: '1px solid #16a34a',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#4ade80',
+                  color: '#16a34a',
                   flexShrink: 0,
                 }}
               >
                 <Sun size={20} />
               </div>
               <div>
-                <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#f4f6f0' }}>
+                <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0d1710' }}>
                   Morning Jogging &amp; Outdoor Walks
                 </div>
-                <div style={{ fontSize: '0.78rem', color: '#c9d3bf', marginTop: '2px' }}>
+                <div style={{ fontSize: '0.78rem', color: '#475569', marginTop: '2px' }}>
                   Safe &amp; recommended. Air is clearest between 6:00 AM and 9:00 AM in parks.
                 </div>
               </div>
@@ -407,8 +409,8 @@ export const CitizenPortal: React.FC = () => {
               style={{
                 padding: '1rem 1.15rem',
                 borderRadius: '16px',
-                background: 'rgba(14, 22, 14, 0.65)',
-                border: '1px solid rgba(163, 181, 147, 0.14)',
+                background: 'rgba(245, 250, 246, 0.85)',
+                border: '1px solid rgba(40, 122, 69, 0.14)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '14px',
@@ -419,22 +421,22 @@ export const CitizenPortal: React.FC = () => {
                   width: '40px',
                   height: '40px',
                   borderRadius: '10px',
-                  background: 'rgba(0, 228, 0, 0.15)',
-                  border: '1px solid #00E400',
+                  background: 'rgba(34, 197, 94, 0.15)',
+                  border: '1px solid #16a34a',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#4ade80',
+                  color: '#16a34a',
                   flexShrink: 0,
                 }}
               >
                 <CheckCircle2 size={20} />
               </div>
               <div>
-                <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#f4f6f0' }}>
+                <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0d1710' }}>
                   Children &amp; School Playground
                 </div>
-                <div style={{ fontSize: '0.78rem', color: '#c9d3bf', marginTop: '2px' }}>
+                <div style={{ fontSize: '0.78rem', color: '#475569', marginTop: '2px' }}>
                   Normal outdoor sports and break time playtime safe. No restrictions.
                 </div>
               </div>
@@ -445,8 +447,8 @@ export const CitizenPortal: React.FC = () => {
               style={{
                 padding: '1rem 1.15rem',
                 borderRadius: '16px',
-                background: 'rgba(14, 22, 14, 0.65)',
-                border: '1px solid rgba(163, 181, 147, 0.14)',
+                background: 'rgba(245, 250, 246, 0.85)',
+                border: '1px solid rgba(40, 122, 69, 0.14)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '14px',
@@ -462,17 +464,17 @@ export const CitizenPortal: React.FC = () => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#fbbf24',
+                  color: '#d97706',
                   flexShrink: 0,
                 }}
               >
                 <Shield size={20} />
               </div>
               <div>
-                <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#f4f6f0' }}>
+                <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0d1710' }}>
                   Seniors &amp; Asthma Patients
                 </div>
-                <div style={{ fontSize: '0.78rem', color: '#c9d3bf', marginTop: '2px' }}>
+                <div style={{ fontSize: '0.78rem', color: '#475569', marginTop: '2px' }}>
                   Mild caution during evening traffic peak (6 PM - 8 PM). Avoid busy highway junctions.
                 </div>
               </div>
@@ -483,8 +485,8 @@ export const CitizenPortal: React.FC = () => {
               style={{
                 padding: '1rem 1.15rem',
                 borderRadius: '16px',
-                background: 'rgba(14, 22, 14, 0.65)',
-                border: '1px solid rgba(163, 181, 147, 0.14)',
+                background: 'rgba(245, 250, 246, 0.85)',
+                border: '1px solid rgba(40, 122, 69, 0.14)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '14px',
@@ -495,22 +497,22 @@ export const CitizenPortal: React.FC = () => {
                   width: '40px',
                   height: '40px',
                   borderRadius: '10px',
-                  background: 'rgba(59, 130, 246, 0.15)',
-                  border: '1px solid #3b82f6',
+                  background: 'rgba(2, 132, 199, 0.15)',
+                  border: '1px solid #0284c7',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#60a5fa',
+                  color: '#0284c7',
                   flexShrink: 0,
                 }}
               >
                 <Wind size={20} />
               </div>
               <div>
-                <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#f4f6f0' }}>
+                <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0d1710' }}>
                   Home Ventilation &amp; Windows
                 </div>
-                <div style={{ fontSize: '0.78rem', color: '#c9d3bf', marginTop: '2px' }}>
+                <div style={{ fontSize: '0.78rem', color: '#475569', marginTop: '2px' }}>
                   Keep windows open between 10:00 AM and 4:00 PM to circulate clean daytime air.
                 </div>
               </div>
@@ -522,21 +524,21 @@ export const CitizenPortal: React.FC = () => {
       {/* Simplified 24-Hour Neighborhood Outlook */}
       <div
         style={{
-          background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-          border: '1px solid rgba(163, 181, 147, 0.22)',
+          background: 'rgba(255, 255, 255, 0.85)',
+          border: '1px solid rgba(40, 122, 69, 0.18)',
           borderRadius: '24px',
           padding: '2rem',
-          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+          boxShadow: '0 12px 36px rgba(22, 38, 25, 0.05)',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Clock size={18} color="#8fa07e" />
-            <h3 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: '#f4f6f0' }}>
+            <Clock size={18} color="#166534" />
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
               Simplified 24-Hour Neighborhood Outlook
             </h3>
           </div>
-          <span style={{ fontSize: '0.78rem', color: '#9eab93' }}>Forecast calibrated by meteorological patterns</span>
+          <span style={{ fontSize: '0.78rem', color: '#64748b' }}>Forecast calibrated by meteorological patterns</span>
         </div>
 
         <div
@@ -552,18 +554,18 @@ export const CitizenPortal: React.FC = () => {
               style={{
                 padding: '1.1rem 0.85rem',
                 borderRadius: '16px',
-                background: 'rgba(14, 20, 14, 0.65)',
-                border: '1px solid rgba(163, 181, 147, 0.14)',
+                background: 'rgba(245, 250, 246, 0.85)',
+                border: '1px solid rgba(40, 122, 69, 0.14)',
                 textAlign: 'center',
               }}
             >
-              <div style={{ fontSize: '0.78rem', color: '#9eab93', fontWeight: 600 }}>{h.time}</div>
+              <div style={{ fontSize: '0.78rem', color: '#475569', fontWeight: 600 }}>{h.time}</div>
               <div
                 style={{
                   fontSize: '1.4rem',
                   fontWeight: 800,
                   margin: '6px 0',
-                  color: h.safe ? '#4ade80' : '#facc15',
+                  color: h.safe ? '#16a34a' : '#d97706',
                 }}
               >
                 {h.pm25}
@@ -574,9 +576,9 @@ export const CitizenPortal: React.FC = () => {
                   fontWeight: 700,
                   padding: '2px 8px',
                   borderRadius: '8px',
-                  background: h.safe ? 'rgba(74, 222, 128, 0.15)' : 'rgba(250, 204, 21, 0.15)',
-                  color: h.safe ? '#4ade80' : '#facc15',
-                  border: `1px solid ${h.safe ? '#4ade80' : '#facc15'}50`,
+                  background: h.safe ? 'rgba(34, 197, 94, 0.15)' : 'rgba(245, 158, 11, 0.15)',
+                  color: h.safe ? '#15803d' : '#b45309',
+                  border: `1px solid ${h.safe ? '#16a34a' : '#f59e0b'}50`,
                 }}
               >
                 {h.status}
