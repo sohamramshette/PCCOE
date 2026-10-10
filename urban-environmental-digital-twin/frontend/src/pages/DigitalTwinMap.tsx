@@ -577,7 +577,29 @@ export const DigitalTwinMap: React.FC = () => {
                 flexWrap: 'wrap',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <button
+                  onClick={() => setSelectedStationId(null)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                    padding: '5px 10px',
+                    borderRadius: '6px',
+                    border: '1px solid',
+                    borderColor: selectedStationId === null ? '#2563eb' : '#cbd5e1',
+                    backgroundColor: selectedStationId === null ? '#eff6ff' : '#ffffff',
+                    color: selectedStationId === null ? '#1d4ed8' : '#475569',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    fontSize: '11px',
+                  }}
+                  title="Fit camera to view all 6 monitoring stations simultaneously"
+                >
+                  <MapPin size={13} />
+                  <span>Fit All 6 Stations</span>
+                </button>
+
                 <button
                   onClick={() => setShowHeatmap(!showHeatmap)}
                   style={{
@@ -1083,6 +1105,28 @@ export const DigitalTwinMap: React.FC = () => {
                         <span>Manage Station Alerts ({alertsByStation[selectedStation.station_id].length})</span>
                       </Link>
                     )}
+                  </div>
+                </div>
+              )}
+
+              {!selectedStation && (
+                <div
+                  className="selected-station-card"
+                  style={{
+                    textAlign: 'center',
+                    padding: '1.25rem 1rem',
+                    backgroundColor: 'var(--bg-secondary)',
+                    borderRadius: '8px',
+                    border: '1px solid var(--border-subtle)',
+                    marginTop: '0.75rem',
+                  }}
+                >
+                  <MapPin size={22} style={{ margin: '0 auto 0.5rem auto', color: 'var(--primary)', opacity: 0.8 }} />
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.9rem', marginBottom: '0.25rem' }}>
+                    Full Network Overview Active
+                  </div>
+                  <div style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
+                    All 6 CAAQMS stations across Pune &amp; PCMC are visible. Click any pin on the map or select from the list above to zoom in and inspect localized telemetry.
                   </div>
                 </div>
               )}

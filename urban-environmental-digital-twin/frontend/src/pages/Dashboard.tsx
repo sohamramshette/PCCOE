@@ -18,12 +18,14 @@ import { getWeather } from '../api/weather';
 import { getForecast } from '../api/forecast';
 import { getModels } from '../api/models';
 import { getActiveAlerts } from '../api/alerts';
+import { getPredictions } from '../api/predictions';
 import { Station } from '../types/station';
 import { ObservationItem } from '../types/observation';
 import { WeatherItem } from '../types/weather';
 import { ForecastResponse } from '../types/forecast';
 import { ModelSummary } from '../types/model';
 import { Alert } from '../types/alert';
+import { PredictionItem } from '../types/prediction';
 import { LoadingSpinner } from '../components/common/LoadingSpinner';
 import { ErrorDisplay } from '../components/common/ErrorDisplay';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';
@@ -37,6 +39,7 @@ export const Dashboard: React.FC = () => {
   const [selectedStationId, setSelectedStationId] = useState<number | null>(null);
   const [observations, setObservations] = useState<ObservationItem[]>([]);
   const [weatherItems, setWeatherItems] = useState<WeatherItem[]>([]);
+  const [predictions, setPredictions] = useState<PredictionItem[]>([]);
   const [forecast, setForecast] = useState<ForecastResponse | null>(null);
   const [models, setModels] = useState<ModelSummary[]>([]);
   const [activeAlerts, setActiveAlerts] = useState<Alert[]>([]);
@@ -83,15 +86,24 @@ export const Dashboard: React.FC = () => {
     const loadStationData = async () => {
       try {
         setLoadingDetails(true);
-        // Fetch the last 48 hourly observations and weather for the station
-        const [obsRes, weatherRes] = await Promise.all([
+        // Fetch the last 48 hourly observations, weather, and predictions for the station
+        const [obsRes, weatherRes, predRes] = await Promise.all([
           getObservations(selectedStationId, { limit: 48, offset: 0, order: 'desc', valid_pm25_only: true }),
           getWeather(selectedStationId, { limit: 24, offset: 0, order: 'desc' }),
+          getPredictions(selectedStationId, { limit: 200, offset: 0, order: 'desc', model_id: 'gradient_boosting_baseline' }).catch(() => ({
+            station_id: selectedStationId,
+            items: [] as PredictionItem[],
+            total: 0,
+            page: 1,
+            limit: 200,
+            offset: 0,
+          })),
         ]);
 
         if (!isCurrent) return;
         setObservations(obsRes.items || []);
         setWeatherItems(weatherRes.items || []);
+        setPredictions(predRes.items || []);
 
         // Attempt to fetch current forecast
         try {
@@ -137,8 +149,13 @@ export const Dashboard: React.FC = () => {
   const latestObservation = canonicalObservations.length > 0 ? canonicalObservations[canonicalObservations.length - 1] : null;
   const latestWeather = sortedWeatherItems.length > 0 ? sortedWeatherItems[sortedWeatherItems.length - 1] : null;
 
-  // Chart data points in strict chronological order (oldest -> newest, datetime_utc ASC)
+  // Chart data points in strict chronological order (oldest -> newest, datetime_utc ASC) with both observed and predicted
   const chartData: ChartDataPoint[] = useMemo(() => {
+    const predMap = new Map<string, number>();
+    predictions.forEach((p) => {
+      predMap.set(p.target_time_utc, p.predicted_pm25);
+    });
+
     return canonicalObservations.map((obs) => {
       const d = parseUtcDate(obs.datetime_utc);
       const label = isNaN(d.getTime())
@@ -148,9 +165,10 @@ export const Dashboard: React.FC = () => {
         timestamp: obs.datetime_utc,
         label,
         observed: obs.pm25,
+        predicted: predMap.get(obs.datetime_utc) ?? null,
       };
     });
-  }, [canonicalObservations]);
+  }, [canonicalObservations, predictions]);
 
   if (loading) {
     return <LoadingSpinner message="Initializing Pune Digital Twin Dashboard..." />;

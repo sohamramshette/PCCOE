@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { Station } from '../../types/station';
@@ -16,13 +16,28 @@ interface MapControllerProps {
 
 const MapController: React.FC<MapControllerProps> = ({ selectedStation, stations }) => {
   const map = useMap();
+  const initialFittedRef = useRef<boolean>(false);
+  const prevSelectedStationIdRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (selectedStation) {
+    if (!initialFittedRef.current && stations.length > 0) {
+      const bounds = L.latLngBounds(
+        stations.map((s) => [s.latitude, s.longitude] as [number, number])
+      );
+      map.fitBounds(bounds, { padding: [50, 50] });
+      initialFittedRef.current = true;
+      if (selectedStation) {
+        prevSelectedStationIdRef.current = selectedStation.station_id;
+      }
+      return;
+    }
+
+    if (selectedStation && selectedStation.station_id !== prevSelectedStationIdRef.current) {
+      prevSelectedStationIdRef.current = selectedStation.station_id;
       map.flyTo([selectedStation.latitude, selectedStation.longitude], 13, {
         duration: 1.2,
       });
-    } else if (stations.length > 0) {
+    } else if (!selectedStation && stations.length > 0) {
       const bounds = L.latLngBounds(
         stations.map((s) => [s.latitude, s.longitude] as [number, number])
       );

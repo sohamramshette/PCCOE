@@ -52,7 +52,7 @@ export const StationDetails: React.FC = () => {
         getStation(numericStationId),
         getObservations(numericStationId, { limit: 48, order: 'desc', valid_pm25_only: true }),
         getWeather(numericStationId, { limit: 24, order: 'desc' }),
-        getPredictions(numericStationId, { limit: 48, order: 'desc' }),
+        getPredictions(numericStationId, { limit: 200, order: 'desc', model_id: 'gradient_boosting_baseline' }),
       ]);
 
       setStation(stationRes);
