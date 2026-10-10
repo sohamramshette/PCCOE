@@ -25,9 +25,11 @@ import { LoadingSpinner } from '../components/common/LoadingSpinner';
 import { ErrorDisplay } from '../components/common/ErrorDisplay';
 import { ScenarioResultVisualization } from '../components/scenarios/ScenarioResultVisualization';
 import { PolicyReportModal } from '../components/scenarios/PolicyReportModal';
+import { PolicyBudgetOptimizer } from '../components/scenarios/PolicyBudgetOptimizer';
 import { formatNumber } from '../utils/formatters';
 
 export const Scenarios: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<'optimizer' | 'single_scenario'>('optimizer');
   const [stations, setStations] = useState<Station[]>([]);
   const [scenarios, setScenarios] = useState<ScenarioResponse[]>([]);
   const [selectedScenarioId, setSelectedScenarioId] = useState<string | null>(null);
@@ -275,7 +277,36 @@ export const Scenarios: React.FC = () => {
 
       {error && <ErrorDisplay message={error} onRetry={loadScenariosAndStations} />}
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))', gap: '1.5rem' }}>
+      {/* Mode Switcher Tabs */}
+      <div style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.75rem', flexWrap: 'wrap' }}>
+        <button
+          type="button"
+          className={`btn ${activeTab === 'optimizer' ? 'btn-primary' : 'btn-secondary'}`}
+          onClick={() => setActiveTab('optimizer')}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600, fontSize: '0.85rem' }}
+        >
+          <Sparkles size={16} />
+          <span>Policy & Budget Optimizer</span>
+        </button>
+        <button
+          type="button"
+          className={`btn ${activeTab === 'single_scenario' ? 'btn-primary' : 'btn-secondary'}`}
+          onClick={() => setActiveTab('single_scenario')}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600, fontSize: '0.85rem' }}
+        >
+          <Play size={16} />
+          <span>Single Counterfactual Studio</span>
+        </button>
+      </div>
+
+      {activeTab === 'optimizer' ? (
+        <PolicyBudgetOptimizer
+          stationId={stationId}
+          stationName={stations.find((s) => s.station_id === stationId)?.station_name}
+        />
+      ) : (
+        <>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))', gap: '1.5rem' }}>
         {/* Scenario Creation Form */}
         <div className="card">
           <div className="card-header">
@@ -707,6 +738,8 @@ export const Scenarios: React.FC = () => {
         scenarioId={selectedScenarioId || ''}
         scenarioName={selectedScenario?.scenario_name || 'Policy Scenario'}
       />
-    </div>
-  );
+    </>
+  )}
+</div>
+);
 };

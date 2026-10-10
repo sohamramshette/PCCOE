@@ -206,7 +206,7 @@ class ScenarioService:
         Creates a decoupled deep copy of baseline features and modifies ONLY the
         intervention-controlled features. Never alters baseline_df in-place.
         """
-        cf_df = baseline_df.copy(deep=True)
+        cf_df = baseline_df.copy(deep=True).reset_index(drop=True)
         audit_items: List[FeatureAuditItem] = []
 
         # Multipliers

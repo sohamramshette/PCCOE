@@ -54,3 +54,16 @@ export async function generatePolicyReport(scenarioId: string): Promise<PolicyRe
   });
 }
 
+export async function optimizeScenarios(data: import('../types/scenario').OptimizeRequest): Promise<import('../types/scenario').OptimizeResponse> {
+  return apiClient<import('../types/scenario').OptimizeResponse>('/api/v1/scenarios/optimize', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+export async function getOptimizerMatrix(unavailable?: string[]): Promise<Record<string, import('../types/scenario').InterventionCostSpec>> {
+  const query = unavailable && unavailable.length > 0 ? `?unavailable=${unavailable.join(',')}` : '';
+  return apiClient<Record<string, import('../types/scenario').InterventionCostSpec>>(`/api/v1/scenarios/optimizer/matrix${query}`);
+}
+
+
