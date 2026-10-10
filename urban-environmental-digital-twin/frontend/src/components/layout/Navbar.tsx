@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Calendar, ExternalLink, ShieldCheck, ChevronRight, Sparkles, UserCheck, Shield, KeyRound, LogOut } from 'lucide-react';
+import { Calendar, ExternalLink, ChevronRight, Sparkles, UserCheck, Shield, KeyRound, LogOut } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const location = useLocation();

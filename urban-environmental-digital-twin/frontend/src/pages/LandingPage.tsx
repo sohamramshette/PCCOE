@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '@designcodeio/threeui/style.css';
+import '../shaders/threeui.css';
 
 import AirLensNav from '../components/AirLensNav';
 import HeroSection from '../components/HeroSection';

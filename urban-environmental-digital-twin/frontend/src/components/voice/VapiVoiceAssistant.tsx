@@ -1,18 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
   Mic,
-  MicOff,
   Volume2,
   VolumeX,
-  Sparkles,
   Loader2,
   Send,
   Bot,
   User,
   Radio,
   Square,
-  Play,
-  RotateCcw,
 } from 'lucide-react';
 
 interface VapiVoiceAssistantProps {

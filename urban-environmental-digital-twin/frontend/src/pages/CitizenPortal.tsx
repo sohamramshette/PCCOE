@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { VapiVoiceAssistant } from '../components/voice/VapiVoiceAssistant';
 import {
   MapPin,
   Heart,
-  Activity,
   Wind,
   Shield,
   Sun,
-  AlertCircle,
   CheckCircle2,
   Clock,
-  ArrowRight,
   Sparkles,
-  Info,
   Layers,
 } from 'lucide-react';
 
@@ -86,7 +82,7 @@ const NEIGHBORHOODS: StationOption[] = [
 ];
 
 export const CitizenPortal: React.FC = () => {
-  const { user, role, openAuthModal } = useAuth();
+  const { role, openAuthModal } = useAuth();
   const [selectedStation, setSelectedStation] = useState<StationOption>(NEIGHBORHOODS[0]);
 
   // Hourly simplified trend

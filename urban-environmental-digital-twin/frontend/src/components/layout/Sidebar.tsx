@@ -17,7 +17,6 @@ import {
   Sparkles,
   Heart,
   Shield,
-  KeyRound,
 } from 'lucide-react';
 import { getHealth } from '../../api/health';
 import { HealthResponse } from '../../types/common';

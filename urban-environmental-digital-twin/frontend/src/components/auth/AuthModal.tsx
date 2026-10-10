@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useAuth, UserRole } from '../../context/AuthContext';
-import { X, ShieldCheck, UserCheck, KeyRound, UserPlus, LogIn, Sparkles, Building2 } from 'lucide-react';
+import { X, ShieldCheck, UserCheck, KeyRound, UserPlus, LogIn, Sparkles } from 'lucide-react';
 
 export const AuthModal: React.FC = () => {
-  const { isAuthModalOpen, closeAuthModal, login, register, quickLogin, user, role } = useAuth();
+  const { isAuthModalOpen, closeAuthModal, login, register, quickLogin } = useAuth();
   const [tab, setTab] = useState<'quick' | 'signin' | 'register'>('quick');
 
   // Form states

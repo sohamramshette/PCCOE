@@ -1,5 +1,5 @@
-import { SylvaLivingWorldScene } from "@designcodeio/threeui";
-import "@designcodeio/threeui/style.css";
+import { SylvaLivingWorldScene } from "./shaders/sylva-living-world/SylvaLivingWorldScene";
+import "./shaders/threeui.css";
 
 export function Scene() {
   return (
