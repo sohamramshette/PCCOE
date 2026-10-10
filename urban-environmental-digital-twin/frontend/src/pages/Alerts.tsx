@@ -173,10 +173,10 @@ export const Alerts: React.FC = () => {
         <div
           style={{
             padding: '0.75rem 1rem',
-            backgroundColor: '#f0fdf4',
-            border: '1px solid #bbf7d0',
+            backgroundColor: 'rgba(16, 185, 129, 0.15)',
+            border: '1px solid rgba(16, 185, 129, 0.3)',
             borderRadius: 'var(--radius-md)',
-            color: '#166534',
+            color: '#34d399',
             fontSize: '0.88rem',
             display: 'flex',
             alignItems: 'center',
@@ -231,13 +231,13 @@ export const Alerts: React.FC = () => {
               border: '1px solid var(--border)',
               padding: '1.25rem',
               boxShadow: 'var(--shadow-sm)',
-              borderLeft: '4px solid #c2410c',
+              borderLeft: '4px solid #f97316',
             }}
           >
             <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>
               Critical & High Severity
             </div>
-            <div style={{ fontSize: '1.8rem', fontWeight: 700, color: '#c2410c', marginTop: '0.3rem' }}>
+            <div style={{ fontSize: '1.8rem', fontWeight: 700, color: '#fb923c', marginTop: '0.3rem' }}>
               {(summary.by_severity['CRITICAL'] || 0) + (summary.by_severity['HIGH'] || 0)}
             </div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>

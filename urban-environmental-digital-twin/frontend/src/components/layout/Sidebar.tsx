@@ -13,6 +13,7 @@ import {
   PanelLeftOpen,
   AlertTriangle,
   Compass,
+  Sparkles,
 } from 'lucide-react';
 import { getHealth } from '../../api/health';
 import { HealthResponse } from '../../types/common';
@@ -75,16 +76,20 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
-        <Link to="/" className="brand-title" aria-label="Urban Twin Pune home">
-          <span className="landing-brand-mark" aria-hidden="true">
-            <Activity size={19} />
-          </span>
+        <Link to="/" className="brand-title" aria-label="Return to AirLens Living World Landing Page" title="Return to 3D Living World">
+          <div className="landing-brand-mark" aria-hidden="true" style={{ background: 'rgba(143, 160, 126, 0.2)', color: '#a3b593', padding: '6px', borderRadius: '10px' }}>
+            <Activity size={18} />
+          </div>
           <div className="brand-copy">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span>Urban Twin</span>
-              <span className="landing-brand-city">PUNE</span>
+              <span style={{ fontWeight: 600, color: '#eef1e7' }}>AirLens</span>
+              <span className="brand-badge-pill" style={{ background: 'rgba(143, 160, 126, 0.25)', color: '#a3b593', fontSize: '0.65rem', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>
+                PUNE
+              </span>
             </div>
-            <div className="brand-subtitle">Environmental Digital Twin</div>
+            <div className="brand-subtitle" style={{ color: 'rgba(238, 241, 231, 0.5)', fontSize: '0.72rem' }}>
+              Digital Twin System
+            </div>
           </div>
         </Link>
         <button
@@ -98,7 +103,33 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
         </button>
       </div>
 
-      <nav style={{ flex: 1 }}>
+      <nav style={{ flex: 1, overflowY: 'auto' }}>
+        {/* Quick return button */}
+        <div style={{ padding: '0.75rem 0.75rem 0.25rem' }}>
+          <Link
+            to="/"
+            className="btn-return-home"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              padding: '0.55rem 0.75rem',
+              borderRadius: '10px',
+              background: 'rgba(143, 160, 126, 0.12)',
+              border: '1px solid rgba(143, 160, 126, 0.22)',
+              color: '#a3b593',
+              fontSize: '0.8rem',
+              fontWeight: 500,
+              textDecoration: 'none',
+              transition: 'all 0.2s ease',
+            }}
+            title="Return to 3D Living World Landing Page"
+          >
+            <Sparkles size={14} />
+            {!collapsed && <span>3D Living World Home</span>}
+          </Link>
+        </div>
+
         <ul className="nav-list">
           {navGroups.map((group) => (
             <React.Fragment key={group.label}>
@@ -131,24 +162,28 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
             marginBottom: '0.5rem',
           }}
         >
-          <span className="backend-label" style={{ color: 'var(--text-muted)', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+          <span className="backend-label" style={{ color: 'rgba(238, 241, 231, 0.55)', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
             <Layers size={13} />
             FastAPI Backend
           </span>
-          <div className="health-status-badge">
+          <div className="health-status-badge" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: isHealthy ? '#a3b593' : '#cf9861' }}>
             <span
-              className={`status-dot ${
-                isHealthy === true ? 'healthy' : isHealthy === false ? 'unhealthy' : ''
-              }`}
+              style={{
+                width: 7,
+                height: 7,
+                borderRadius: '50%',
+                background: isHealthy === true ? '#8fa07e' : isHealthy === false ? '#cf6651' : '#cf9861',
+                boxShadow: isHealthy === true ? '0 0 8px #8fa07e' : 'none',
+              }}
             />
-            <span style={{ fontSize: '0.75rem' }}>
-              {isHealthy === true ? 'Connected' : isHealthy === false ? 'Offline' : 'Checking...'}
+            <span>
+              {isHealthy === true ? 'Live Feed' : isHealthy === false ? 'Offline' : 'Connecting...'}
             </span>
           </div>
         </div>
 
         {health && (
-          <div className="backend-metrics" style={{ color: 'var(--text-muted)', fontSize: '0.7rem', lineHeight: 1.4 }}>
+          <div className="backend-metrics" style={{ color: 'rgba(238, 241, 231, 0.45)', fontSize: '0.7rem', lineHeight: 1.45 }}>
             <div>Active Stations: {health.active_stations ?? 6}</div>
             <div>Registered Models: {health.registered_models ?? 4}</div>
           </div>

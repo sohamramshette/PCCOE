@@ -433,9 +433,9 @@ export const Scenarios: React.FC = () => {
 
             {/* Traffic Slider */}
             {(interventionType === 'TRAFFIC_REDUCTION' || interventionType === 'COMBINED_INTERVENTION' || interventionType === 'COMPREHENSIVE_POLICY') && (
-              <div className="form-group" style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+              <div className="form-group" style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '0.85rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
-                  <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0 }}>
+                  <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0, color: 'var(--text-primary)' }}>
                     <Car size={15} color="#ea580c" /> Traffic Reduction:
                   </label>
                   <strong style={{ color: '#ea580c', fontSize: '0.95rem' }}>{trafficPercent}%</strong>
@@ -457,9 +457,9 @@ export const Scenarios: React.FC = () => {
 
             {/* Industrial Slider */}
             {(interventionType === 'INDUSTRIAL_ACTIVITY_REDUCTION' || interventionType === 'COMBINED_INTERVENTION' || interventionType === 'COMPREHENSIVE_POLICY') && (
-              <div className="form-group" style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+              <div className="form-group" style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '0.85rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
-                  <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0 }}>
+                  <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0, color: 'var(--text-primary)' }}>
                     <Factory size={15} color="#f87171" /> Industrial Activity Reduction:
                   </label>
                   <strong style={{ color: '#f87171', fontSize: '0.95rem' }}>{industrialPercent}%</strong>
@@ -481,9 +481,9 @@ export const Scenarios: React.FC = () => {
 
             {/* EV Fleet Transition Slider */}
             {(interventionType === 'EV_FLEET_TRANSITION' || interventionType === 'COMPREHENSIVE_POLICY') && (
-              <div className="form-group" style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+              <div className="form-group" style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '0.85rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
-                  <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0 }}>
+                  <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0, color: 'var(--text-primary)' }}>
                     <Zap size={15} color="#059669" /> EV Fleet Electrification Mandate:
                   </label>
                   <strong style={{ color: '#059669', fontSize: '0.95rem' }}>{evFleetPercent}%</strong>
@@ -505,9 +505,9 @@ export const Scenarios: React.FC = () => {
 
             {/* Urban Green Buffer Slider */}
             {(interventionType === 'GREEN_BUFFER_EXPANSION' || interventionType === 'COMPREHENSIVE_POLICY') && (
-              <div className="form-group" style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+              <div className="form-group" style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '0.85rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
-                  <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0 }}>
+                  <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0, color: 'var(--text-primary)' }}>
                     <Trees size={15} color="#10b981" /> Urban Green Buffer Zone Expansion:
                   </label>
                   <strong style={{ color: '#10b981', fontSize: '0.95rem' }}>{greenBufferPercent}%</strong>
@@ -531,9 +531,9 @@ export const Scenarios: React.FC = () => {
             {interventionType === 'COMPREHENSIVE_POLICY' && (
               <div
                 style={{
-                  background: '#f8fafc',
+                  background: 'rgba(26, 36, 25, 0.85)',
                   padding: '0.85rem',
-                  borderRadius: '8px',
+                  borderRadius: '12px',
                   border: '1px solid var(--border-subtle)',
                   marginBottom: '1rem',
                   display: 'flex',

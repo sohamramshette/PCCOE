@@ -184,30 +184,44 @@ export const Dashboard: React.FC = () => {
       <div
         className="card dashboard-summary-card"
         style={{
-          background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(249, 115, 22, 0.04) 100%)',
-          borderColor: 'var(--border-blue)',
+          background: 'linear-gradient(135deg, rgba(34, 48, 33, 0.75) 0%, rgba(19, 27, 18, 0.85) 100%)',
+          border: '1px solid var(--border-subtle, rgba(163, 181, 147, 0.18))',
+          borderRadius: '16px',
+          padding: '1.75rem',
         }}
       >
-        <div className="dashboard-summary-header">
-          <div className="dashboard-summary-copy">
-            <div className="dashboard-summary-badges">
+        <div
+          className="dashboard-summary-header"
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            gap: '2rem',
+            flexWrap: 'wrap',
+          }}
+        >
+          <div className="dashboard-summary-copy" style={{ flex: '1 1 500px', display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+            <div className="dashboard-summary-badges" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.25rem' }}>
               <span className="badge badge-observed">Continuous Monitoring</span>
               <span className="badge badge-reanalysis">ECMWF ERA5-Land Reanalysis</span>
             </div>
-            <h2>Pune Urban Environmental Digital Twin</h2>
-            <p>
+            <h2 style={{ position: 'relative', display: 'block', fontSize: '1.65rem', fontWeight: 600, color: 'var(--text-primary, #eef1e7)', margin: 0, lineHeight: 1.25 }}>
+              Pune Urban Environmental Digital Twin
+            </h2>
+            <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary, rgba(238, 241, 231, 0.74))', margin: 0, lineHeight: 1.5, maxWidth: '720px' }}>
               Multi-source environmental intelligence fusing physical CAAQMS telemetry with atmospheric reanalysis
               and machine learning forecasting for the Pune & PCMC metropolitan corridor.
             </p>
           </div>
 
-          <div className="dashboard-summary-controls">
-            <div className="form-group dashboard-station-select-group">
-              <label className="form-label" style={{ fontSize: '0.75rem' }}>Select Focus Station</label>
+          <div className="dashboard-summary-controls" style={{ flex: '0 0 auto', display: 'flex', alignItems: 'flex-end', gap: '0.75rem' }}>
+            <div className="form-group dashboard-station-select-group" style={{ margin: 0 }}>
+              <label className="form-label" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Select Focus Station</label>
               <select
                 className="form-select dashboard-station-select"
                 value={selectedStationId || ''}
                 onChange={(e) => setSelectedStationId(Number(e.target.value))}
+                style={{ minWidth: '260px' }}
               >
                 {stations.map((st) => (
                   <option key={st.station_id} value={st.station_id}>
@@ -300,11 +314,13 @@ export const Dashboard: React.FC = () => {
       <div
         className="card"
         style={{
-          borderLeft: activeAlerts.length > 0 ? '4px solid #ef4444' : '4px solid #10b981',
+          borderLeft: activeAlerts.length > 0 ? '4px solid #cf6651' : '4px solid #8fa07e',
           background:
             activeAlerts.length > 0
-              ? 'linear-gradient(135deg, rgba(239, 68, 68, 0.03) 0%, #ffffff 100%)'
-              : '#ffffff',
+              ? 'linear-gradient(135deg, rgba(207, 102, 81, 0.1) 0%, rgba(22, 30, 21, 0.88) 100%)'
+              : 'rgba(22, 30, 21, 0.85)',
+          border: '1px solid var(--border-subtle, rgba(163, 181, 147, 0.16))',
+          borderRadius: '16px',
         }}
       >
         <div
@@ -313,7 +329,7 @@ export const Dashboard: React.FC = () => {
         >
           <div>
             <div className="card-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <AlertTriangle size={18} color={activeAlerts.length > 0 ? '#ef4444' : '#10b981'} />
+              <AlertTriangle size={18} color={activeAlerts.length > 0 ? '#cf6651' : '#8fa07e'} />
               <span>Active Environmental Alerts</span>
               <span
                 style={{
@@ -321,8 +337,8 @@ export const Dashboard: React.FC = () => {
                   fontWeight: 700,
                   padding: '0.15rem 0.55rem',
                   borderRadius: '9999px',
-                  backgroundColor: activeAlerts.length > 0 ? 'rgba(239, 68, 68, 0.12)' : 'rgba(16, 185, 129, 0.12)',
-                  color: activeAlerts.length > 0 ? '#b91c1c' : '#047857',
+                  backgroundColor: activeAlerts.length > 0 ? 'rgba(207, 102, 81, 0.18)' : 'rgba(143, 160, 126, 0.18)',
+                  color: activeAlerts.length > 0 ? '#f87171' : '#a3b593',
                 }}
               >
                 {activeAlerts.length}
@@ -337,15 +353,16 @@ export const Dashboard: React.FC = () => {
             style={{
               fontSize: '0.85rem',
               fontWeight: 600,
-              color: 'var(--primary)',
+              color: 'var(--primary-light, #a3b593)',
               textDecoration: 'none',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.35rem',
-              padding: '0.35rem 0.75rem',
-              borderRadius: '6px',
-              backgroundColor: 'rgba(37, 99, 235, 0.08)',
-              border: '1px solid rgba(37, 99, 235, 0.2)',
+              padding: '0.4rem 0.85rem',
+              borderRadius: '8px',
+              backgroundColor: 'rgba(143, 160, 126, 0.14)',
+              border: '1px solid rgba(143, 160, 126, 0.25)',
+              transition: 'background 0.2s ease',
             }}
           >
             <span>View All Alerts →</span>
@@ -378,13 +395,14 @@ export const Dashboard: React.FC = () => {
               <div
                 key={alert.alert_id}
                 style={{
-                  padding: '0.85rem 1rem',
-                  backgroundColor: '#f8fafc',
-                  borderRadius: '8px',
-                  border: '1px solid var(--border-subtle)',
+                  padding: '1rem',
+                  backgroundColor: 'rgba(26, 36, 25, 0.9)',
+                  borderRadius: '12px',
+                  border: '1px solid var(--border-subtle, rgba(163, 181, 147, 0.16))',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '0.35rem',
+                  gap: '0.4rem',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.25)',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -393,13 +411,13 @@ export const Dashboard: React.FC = () => {
                     {formatDateTime(alert.detected_at)}
                   </span>
                 </div>
-                <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--text-dark)', marginTop: '0.2rem' }}>
+                <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--text-primary, #eef1e7)', marginTop: '0.2rem' }}>
                   {alert.station_name || `Station #${alert.station_id}`}
                 </div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#334155' }}>
+                <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--primary-light, #a3b593)' }}>
                   {alert.alert_type.replace(/_/g, ' ')}
                 </div>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary, rgba(238, 241, 231, 0.74))' }}>
                   {alert.observed_value !== null && alert.expected_value !== null ? (
                     <span>
                       <strong>{formatNumber(alert.observed_value, 1)}</strong>
@@ -492,42 +510,42 @@ export const Dashboard: React.FC = () => {
           ) : latestWeather ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div className="weather-metric-grid">
-                <div style={{ background: '#ffffff', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '0.75rem', borderRadius: '10px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                    <Thermometer size={14} color="#2563eb" /> Temperature
+                    <Thermometer size={14} color="#60a5fa" /> Temperature
                   </div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
-                    {formatNumber(latestWeather.temp_c, 1)} <span style={{ fontSize: '0.8rem', fontWeight: 400 }}>°C</span>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
+                    {formatNumber(latestWeather.temp_c, 1)} <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'var(--text-secondary)' }}>°C</span>
                   </div>
                 </div>
 
-                <div style={{ background: '#ffffff', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '0.75rem', borderRadius: '10px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                    <Droplets size={14} color="#f97316" /> Humidity
+                    <Droplets size={14} color="#fb923c" /> Humidity
                   </div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
-                    {formatNumber(latestWeather.humidity_pct, 1)} <span style={{ fontSize: '0.8rem', fontWeight: 400 }}>%</span>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
+                    {formatNumber(latestWeather.humidity_pct, 1)} <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'var(--text-secondary)' }}>%</span>
                   </div>
                 </div>
 
-                <div style={{ background: '#ffffff', padding: '0.75rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '0.75rem', borderRadius: '10px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                    <Wind size={14} color="#059669" /> Wind Speed
+                    <Wind size={14} color="#4ade80" /> Wind Speed
                   </div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
-                    {formatNumber(latestWeather.wind_speed_ms, 2)} <span style={{ fontSize: '0.8rem', fontWeight: 400 }}>m/s</span>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
+                    {formatNumber(latestWeather.wind_speed_ms, 2)} <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'var(--text-secondary)' }}>m/s</span>
                   </div>
                 </div>
               </div>
 
               <div className="weather-context-grid">
-                <div style={{ padding: '0.5rem 0.75rem', background: '#f8fafc', borderRadius: '6px' }}>
+                <div style={{ padding: '0.55rem 0.85rem', background: 'rgba(19, 27, 18, 0.75)', border: '1px solid var(--border-subtle)', borderRadius: '8px' }}>
                   <span style={{ color: 'var(--text-muted)' }}>Surface Pressure:</span>{' '}
-                  <strong>{formatNumber(latestWeather.pressure_hpa, 1)} hPa</strong>
+                  <strong style={{ color: 'var(--text-primary)' }}>{formatNumber(latestWeather.pressure_hpa, 1)} hPa</strong>
                 </div>
-                <div style={{ padding: '0.5rem 0.75rem', background: '#f8fafc', borderRadius: '6px' }}>
+                <div style={{ padding: '0.55rem 0.85rem', background: 'rgba(19, 27, 18, 0.75)', border: '1px solid var(--border-subtle)', borderRadius: '8px' }}>
                   <span style={{ color: 'var(--text-muted)' }}>Boundary Layer (PBLH):</span>{' '}
-                  <strong>{formatNumber(latestWeather.pbl_height_m, 0)} m</strong>
+                  <strong style={{ color: 'var(--text-primary)' }}>{formatNumber(latestWeather.pbl_height_m, 0)} m</strong>
                 </div>
               </div>
 

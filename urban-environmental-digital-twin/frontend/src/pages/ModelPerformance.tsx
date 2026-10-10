@@ -155,15 +155,15 @@ export const ModelPerformance: React.FC = () => {
           <div style={{ width: '100%', height: 280 }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 20 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <XAxis dataKey="name" stroke="#64748b" fontSize={11} tickLine={false} dy={8} />
-                <YAxis stroke="#64748b" fontSize={11} tickLine={false} unit=" µg/m³" />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(163, 181, 147, 0.14)" />
+                <XAxis dataKey="name" stroke="var(--text-muted)" fontSize={11} tickLine={false} dy={8} />
+                <YAxis stroke="var(--text-muted)" fontSize={11} tickLine={false} unit=" µg/m³" />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#ffffff',
-                    borderColor: '#e2e8f0',
+                    backgroundColor: 'rgba(20, 27, 19, 0.95)',
+                    borderColor: 'rgba(163, 181, 147, 0.25)',
                     borderRadius: '12px',
-                    color: '#0f172a',
+                    color: '#eef1e7',
                   }}
                   formatter={(val: unknown, name: string) => [`${formatNumber(Number(val), 2)} µg/m³`, name]}
                 />
@@ -330,11 +330,11 @@ export const ModelPerformance: React.FC = () => {
             <div style={{ width: '100%', height: 200, marginBottom: '0.5rem' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={multiHorizonChartData} margin={{ top: 5, right: 15, left: 0, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                  <XAxis dataKey="horizon" stroke="#64748b" fontSize={11} tickLine={false} />
-                  <YAxis stroke="#64748b" fontSize={11} tickLine={false} unit=" µg" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(163, 181, 147, 0.14)" />
+                  <XAxis dataKey="horizon" stroke="var(--text-muted)" fontSize={11} tickLine={false} />
+                  <YAxis stroke="var(--text-muted)" fontSize={11} tickLine={false} unit=" µg" />
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px', fontSize: '11px' }}
+                    contentStyle={{ backgroundColor: 'rgba(20, 27, 19, 0.95)', borderColor: 'rgba(163, 181, 147, 0.25)', borderRadius: '10px', fontSize: '11px', color: '#eef1e7' }}
                     formatter={(val: unknown, name: string) => [`${formatNumber(Number(val), 2)} µg/m³`, name]}
                   />
                   <Bar dataKey="Test MAE" fill="#0284c7" radius={[4, 4, 0, 0]} barSize={22} />
@@ -447,11 +447,11 @@ export const ModelPerformance: React.FC = () => {
             <div style={{ width: '100%', height: 230 }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={sensorLossChartData} margin={{ top: 5, right: 15, left: -5, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                  <XAxis dataKey="name" stroke="#64748b" fontSize={11} tickLine={false} />
-                  <YAxis stroke="#64748b" fontSize={11} tickLine={false} unit=" µg" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(163, 181, 147, 0.14)" />
+                  <XAxis dataKey="name" stroke="var(--text-muted)" fontSize={11} tickLine={false} />
+                  <YAxis stroke="var(--text-muted)" fontSize={11} tickLine={false} unit=" µg" />
                   <Tooltip
-                    contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px', fontSize: '11px' }}
+                    contentStyle={{ backgroundColor: 'rgba(20, 27, 19, 0.95)', borderColor: 'rgba(163, 181, 147, 0.25)', borderRadius: '10px', fontSize: '11px', color: '#eef1e7' }}
                     formatter={(val: unknown, name: string) => [`${formatNumber(Number(val), 2)} µg/m³`, name]}
                   />
                   <Legend verticalAlign="top" align="right" wrapperStyle={{ fontSize: '11px', paddingBottom: '6px' }} />

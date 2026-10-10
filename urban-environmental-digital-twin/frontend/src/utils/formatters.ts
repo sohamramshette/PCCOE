@@ -95,8 +95,8 @@ export function getPm25AqiCategory(pm25: number | null | undefined): AqiCategory
     return {
       label: 'No Data',
       color: '#94a3b8',
-      textColor: '#475569',
-      bgLight: 'rgba(148, 163, 184, 0.1)',
+      textColor: '#cbd5e1',
+      bgLight: 'rgba(148, 163, 184, 0.16)',
     };
   }
 
@@ -104,46 +104,46 @@ export function getPm25AqiCategory(pm25: number | null | undefined): AqiCategory
     return {
       label: 'Good',
       color: '#10b981',
-      textColor: '#047857',
-      bgLight: 'rgba(16, 185, 129, 0.12)',
+      textColor: '#34d399',
+      bgLight: 'rgba(16, 185, 129, 0.18)',
     };
   }
   if (pm25 <= 60) {
     return {
       label: 'Satisfactory',
       color: '#84cc16',
-      textColor: '#4d7c0f',
-      bgLight: 'rgba(132, 204, 22, 0.12)',
+      textColor: '#a3e635',
+      bgLight: 'rgba(132, 204, 22, 0.18)',
     };
   }
   if (pm25 <= 90) {
     return {
       label: 'Moderate',
       color: '#eab308',
-      textColor: '#a16207',
-      bgLight: 'rgba(234, 179, 8, 0.14)',
+      textColor: '#fde047',
+      bgLight: 'rgba(234, 179, 8, 0.18)',
     };
   }
   if (pm25 <= 120) {
     return {
       label: 'Poor',
       color: '#f97316',
-      textColor: '#c2410c',
-      bgLight: 'rgba(249, 115, 22, 0.12)',
+      textColor: '#fb923c',
+      bgLight: 'rgba(249, 115, 22, 0.18)',
     };
   }
   if (pm25 <= 250) {
     return {
       label: 'Very Poor',
       color: '#ef4444',
-      textColor: '#b91c1c',
-      bgLight: 'rgba(239, 68, 68, 0.12)',
+      textColor: '#f87171',
+      bgLight: 'rgba(239, 68, 68, 0.18)',
     };
   }
   return {
     label: 'Severe',
-    color: '#991b1b',
-    textColor: '#7f1d1d',
-    bgLight: 'rgba(153, 27, 27, 0.14)',
+    color: '#ef4444',
+    textColor: '#fca5a5',
+    bgLight: 'rgba(239, 68, 68, 0.28)',
   };
 }

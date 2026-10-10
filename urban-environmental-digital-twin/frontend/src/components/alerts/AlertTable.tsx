@@ -177,16 +177,23 @@ export const AlertTable: React.FC<AlertTableProps> = ({
                     borderRadius: '4px',
                     backgroundColor:
                       alert.status === 'ACTIVE'
-                        ? '#fee2e2'
+                        ? 'rgba(239, 68, 68, 0.2)'
                         : alert.status === 'ACKNOWLEDGED'
-                        ? '#fef3c7'
-                        : '#dcfce7',
+                        ? 'rgba(234, 179, 8, 0.2)'
+                        : 'rgba(16, 185, 129, 0.2)',
                     color:
                       alert.status === 'ACTIVE'
-                        ? '#991b1b'
+                        ? '#f87171'
                         : alert.status === 'ACKNOWLEDGED'
-                        ? '#92400e'
-                        : '#166534',
+                        ? '#facc15'
+                        : '#34d399',
+                    border: `1px solid ${
+                      alert.status === 'ACTIVE'
+                        ? 'rgba(239, 68, 68, 0.35)'
+                        : alert.status === 'ACKNOWLEDGED'
+                        ? 'rgba(234, 179, 8, 0.35)'
+                        : 'rgba(16, 185, 129, 0.35)'
+                    }`,
                     textTransform: 'uppercase',
                     letterSpacing: '0.04em',
                   }}

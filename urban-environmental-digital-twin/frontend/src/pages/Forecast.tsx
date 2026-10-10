@@ -299,9 +299,9 @@ export const Forecast: React.FC = () => {
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                <div style={{ background: '#ffffff', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Baseline PM2.5 (t)</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
                     {forecast.input_features_summary.pm25_t !== null && forecast.input_features_summary.pm25_t !== undefined
                       ? `${formatNumber(forecast.input_features_summary.pm25_t, 1)} µg/m³`
                       : 'Missing'}
@@ -309,16 +309,16 @@ export const Forecast: React.FC = () => {
                   <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.35rem', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
                     <ProvenanceBadge classification="OBSERVED" />
                     {(forecast.input_features_summary.pm25_t === null || forecast.input_features_summary.pm25_t === undefined) && (
-                      <span style={{ color: '#b45309', fontSize: '0.7rem' }}>
+                      <span style={{ color: '#fb923c', fontSize: '0.7rem' }}>
                         Input fallback: model pipeline median
                       </span>
                     )}
                   </div>
                 </div>
 
-                <div style={{ background: '#ffffff', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Air Temperature</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
                     {formatNumber(forecast.input_features_summary.temp_c, 1)} °C
                   </div>
                   <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
@@ -326,9 +326,9 @@ export const Forecast: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ background: '#ffffff', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Wind Speed</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
                     {formatNumber(forecast.input_features_summary.wind_speed_ms, 2)} m/s
                   </div>
                   <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
@@ -336,9 +336,9 @@ export const Forecast: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ background: '#ffffff', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Ventilation Index</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
                     {formatNumber(forecast.input_features_summary.ventilation_index, 1)} m²/s
                   </div>
                   <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
@@ -346,9 +346,9 @@ export const Forecast: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ background: '#ffffff', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Traffic Intensity Index</div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem' }}>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
                     {formatNumber(forecast.input_features_summary.traffic_proxy_index, 3)}
                   </div>
                   <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
@@ -376,12 +376,12 @@ export const Forecast: React.FC = () => {
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.9rem' }}>
                 {forecast.feature_attributions.map((item, index) => (
-                  <div key={`${item.feature}-${index}`} style={{ background: '#ffffff', border: '1px solid var(--border-subtle)', borderRadius: '8px', padding: '0.9rem 1rem' }}>
+                  <div key={`${item.feature}-${index}`} style={{ background: 'rgba(26, 36, 25, 0.85)', border: '1px solid var(--border-subtle)', borderRadius: '12px', padding: '0.9rem 1rem' }}>
                     <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                       {item.feature}
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.55rem' }}>
-                      <span style={{ fontWeight: 700, fontSize: '1.05rem', color: item.direction === 'positive' ? '#b91c1c' : '#0f766e' }}>
+                      <span style={{ fontWeight: 700, fontSize: '1.05rem', color: item.direction === 'positive' ? '#f87171' : '#34d399' }}>
                         {item.direction === 'positive' ? '+' : '-'}{formatNumber(Math.abs(item.contribution), 3)}
                       </span>
                       <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>

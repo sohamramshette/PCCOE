@@ -1,0 +1,349 @@
+/* ==========================================================================
+   CARDSWAP 3D COMPONENT STYLES
+   ========================================================================== */
+
+.card-swap-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+/* 3D Isometric Staging Viewport */
+.card-swap-stage {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  height: 440px;
+  perspective: 1100px;
+  perspective-origin: 50% 40%;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Individual Stack Slot */
+.card-swap-slot {
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  width: 90%;
+  max-width: 460px;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: transform 0.65s cubic-bezier(0.2, 0.9, 0.3, 1),
+              opacity 0.55s ease,
+              box-shadow 0.4s ease;
+  will-change: transform, opacity;
+  outline: none;
+}
+
+.card-swap-slot.is-active-front {
+  cursor: default;
+}
+
+.card-swap-slot.is-stacked-back {
+  cursor: pointer;
+}
+
+.card-swap-slot.is-stacked-back:hover {
+  filter: brightness(1.1);
+}
+
+.card-swap-slot.is-dropping {
+  pointer-events: none;
+  transition: transform 0.54s cubic-bezier(0.4, 0, 0.9, 1),
+              opacity 0.45s ease;
+}
+
+/* Inner Card Theme - Aligned with AirLens Aesthetics */
+.card-swap-item {
+  position: relative;
+  width: 100%;
+  padding: 32px 28px;
+  background: rgba(30, 37, 27, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  box-shadow: 0 24px 50px -12px rgba(8, 12, 6, 0.75),
+              0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  color: #f7f9f5;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  overflow: hidden;
+}
+
+/* Subtle corner aura */
+.card-swap-item::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(143, 160, 126, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.card-swap-slot.is-active-front .card-swap-item {
+  border-color: rgba(163, 181, 147, 0.48);
+  background: rgba(36, 45, 32, 0.94);
+  box-shadow: 0 30px 60px -15px rgba(5, 8, 4, 0.85),
+              0 0 24px rgba(143, 160, 126, 0.14),
+              0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+
+/* Card Slot Hover Enhancement */
+.card-swap-slot.is-stacked-back:hover .card-swap-item {
+  border-color: rgba(143, 160, 126, 0.35);
+  box-shadow: 0 26px 54px -10px rgba(8, 12, 6, 0.8);
+}
+
+/* ==========================================================================
+   HUD / CONTROLS & PAGINATION
+   ========================================================================== */
+.card-swap-hud {
+  position: relative;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  max-width: 460px;
+  margin-top: 24px;
+  padding: 10px 16px;
+  background: rgba(22, 27, 20, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 999px;
+}
+
+/* Indicator Progress Dots */
+.card-swap-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-swap-dot {
+  position: relative;
+  width: 28px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.card-swap-dot:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.card-swap-dot.is-active {
+  width: 38px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.card-swap-dot-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #8fa07e, #b8c9a7);
+  border-radius: 999px;
+  transition: width 0.05s linear;
+}
+
+/* Buttons */
+.card-swap-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-swap-ctrl-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(247, 249, 245, 0.75);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.card-swap-ctrl-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.card-swap-ctrl-btn:hover {
+  background: rgba(143, 160, 126, 0.2);
+  border-color: rgba(143, 160, 126, 0.4);
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.card-swap-ctrl-btn.is-paused {
+  background: rgba(216, 178, 110, 0.2);
+  border-color: rgba(216, 178, 110, 0.45);
+  color: #d8b26e;
+}
+
+/* ==========================================================================
+   MOBILE & RESPONSIVE ADJUSTMENTS
+   ========================================================================== */
+/* ==========================================================================
+   DECISIONS INTEGRATION LAYOUT & CONTROLS
+   ========================================================================== */
+.decisions-view-toggle-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.decisions-toggle-group {
+  display: inline-flex;
+  background: rgba(22, 27, 20, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.decisions-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: var(--al-ink-soft, rgba(247, 249, 245, 0.7));
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.decisions-toggle-btn.is-active {
+  background: rgba(143, 160, 126, 0.25);
+  color: #ffffff;
+  border: 1px solid rgba(143, 160, 126, 0.4);
+}
+
+.decisions-swap-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.decisions-swap-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.decisions-pipeline-nav-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 18px 22px;
+  border-radius: 18px;
+  background: rgba(25, 31, 23, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.decisions-pipeline-nav-item:hover {
+  background: rgba(30, 38, 27, 0.7);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateX(4px);
+}
+
+.decisions-pipeline-nav-item.is-active {
+  background: rgba(38, 47, 34, 0.9);
+  border-color: rgba(163, 181, 147, 0.4);
+  box-shadow: 0 10px 24px rgba(8, 12, 6, 0.4);
+}
+
+.pipeline-step-num {
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--al-moss-light, #8fa07e);
+  line-height: 1;
+}
+
+.pipeline-step-info h4 {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+}
+
+.pipeline-step-info p {
+  font-size: 0.8rem;
+  color: rgba(247, 249, 245, 0.65);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.decisions-swap-right {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 960px) {
+  .decisions-swap-showcase {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-swap-stage {
+    max-width: 340px;
+    height: 480px;
+    perspective: 850px;
+  }
+
+  .card-swap-slot {
+    left: 2%;
+    width: 96%;
+  }
+
+  .card-swap-item {
+    padding: 24px 20px;
+  }
+
+  .card-swap-hud {
+    max-width: 340px;
+  }
+}
+
+
