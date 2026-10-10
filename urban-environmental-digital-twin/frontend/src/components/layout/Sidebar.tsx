@@ -14,7 +14,10 @@ import {
   Compass,
   Sparkles,
   Heart,
-  Shield,
+  Wind,
+  Bell,
+  Camera,
+  Bookmark,
 } from 'lucide-react';
 import { getHealth } from '../../api/health';
 import { HealthResponse } from '../../types/common';
@@ -25,7 +28,7 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
-  const { role, openAuthModal } = useAuth();
+  const { role } = useAuth();
   const [health, setHealth] = useState<HealthResponse | null>(null);
   const [isHealthy, setIsHealthy] = useState<boolean | null>(null);
 
@@ -56,11 +59,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
   // Citizen Navigation (Clean & Understandable)
   const citizenNav = [
     {
-      label: 'PUBLIC CITIZEN VIEW',
+      label: 'USER PORTAL',
       items: [
-        { to: '/citizen', label: 'Air Quality Today', icon: <Heart size={18} /> },
-        { to: '/digital-twin', label: 'Pune Live Map', icon: <Layers size={18} /> },
-        { to: '/alerts', label: 'Health Alerts', icon: <AlertTriangle size={18} /> },
+        { to: '/citizen', label: 'My Air Dashboard', icon: <Heart size={18} /> },
+        { to: '/explore', label: 'Explore Air Quality', icon: <MapPin size={18} /> },
+        { to: '/cleaner-routes', label: 'Cleaner Routes', icon: <Compass size={18} /> },
+        { to: '/forecast-guidance', label: 'Forecast & Activity Guidance', icon: <TrendingUp size={18} /> },
+        { to: '/pollution-sources', label: 'Pollution Sources', icon: <Wind size={18} /> },
+        { to: '/my-alerts', label: 'My Alerts', icon: <Bell size={18} /> },
+        { to: '/report-pollution', label: 'Report Pollution', icon: <Camera size={18} /> },
+        { to: '/my-places', label: 'My Places & History', icon: <Bookmark size={18} /> },
       ],
     },
   ];
@@ -167,45 +175,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
             </React.Fragment>
           ))}
         </ul>
-
-        {/* If Citizen, display Authority Upgrade Card in sidebar */}
-        {role === 'CITIZEN' && !collapsed && (
-          <div
-            style={{
-              margin: '1.25rem 0.75rem',
-              padding: '1rem',
-              borderRadius: '14px',
-              background: 'rgba(207, 152, 97, 0.12)',
-              border: '1px solid rgba(207, 152, 97, 0.25)',
-              color: '#f3c491',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 700, fontSize: '0.82rem', marginBottom: '4px' }}>
-              <Shield size={14} color="#cf9861" />
-              <span>Authority Control Room</span>
-            </div>
-            <p style={{ margin: 0, fontSize: '0.74rem', color: '#d2b48c', lineHeight: 1.4 }}>
-              Are you an environmental officer? Access policy simulations &amp; backtracking.
-            </p>
-            <button
-              onClick={openAuthModal}
-              style={{
-                marginTop: '8px',
-                width: '100%',
-                padding: '6px',
-                borderRadius: '8px',
-                background: '#cf9861',
-                border: 'none',
-                color: '#131812',
-                fontSize: '0.78rem',
-                fontWeight: 700,
-                cursor: 'pointer',
-              }}
-            >
-              Switch Role / Sign In →
-            </button>
-          </div>
-        )}
       </nav>
 
       <div className="sidebar-footer">
