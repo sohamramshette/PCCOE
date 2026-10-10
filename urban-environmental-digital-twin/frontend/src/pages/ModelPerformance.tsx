@@ -17,6 +17,8 @@ import {
   Info,
   ShieldCheck,
   Layers,
+  Activity,
+  Target,
 } from 'lucide-react';
 import {
   BASELINE_MODELS_BENCHMARK,
@@ -24,6 +26,9 @@ import {
   TOP_PREDICTIVE_FEATURES,
   TEMPORAL_SPLIT_INFO,
   DOCUMENTED_MODEL_LIMITATIONS,
+  QUANTILE_REGRESSION_BENCHMARK,
+  QUANTILE_CALIBRATION_SUMMARY,
+  MULTI_HORIZON_BENCHMARK,
 } from '../data/modelPerformanceData';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';
 import { formatNumber } from '../utils/formatters';
@@ -34,6 +39,13 @@ export const ModelPerformance: React.FC = () => {
     name: m.modelName.replace(' Regressor', '').replace(' Baseline', ''),
     'Test MAE': m.testMae,
     'Test RMSE': m.testRmse,
+  }));
+
+  // Chart data: Direct Multi-Horizon Test MAE & RMSE
+  const multiHorizonChartData = MULTI_HORIZON_BENCHMARK.map((h) => ({
+    horizon: h.horizon,
+    'Test MAE': h.testMae,
+    'Test RMSE': h.testRmse,
   }));
 
   return (
@@ -227,6 +239,130 @@ export const ModelPerformance: React.FC = () => {
         <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.75rem', lineHeight: 1.4 }}>
           Scientific Takeaway: The Universal Network model trained on 42,796 multi-station samples significantly outperformed the single-station model trained on Station 11613 alone ($n = 7,535$), despite the single-station model having co-pollutant inputs. Single-station co-pollutant sensors exhibit seasonal drift between monsoon and winter, whereas network training learns robust synoptic relationships across the metropolitan basin.
         </p>
+      </div>
+
+      {/* Production Upgrades: Calibrated Quantile Forecasters & Direct Multi-Horizon Regressors */}
+      <div className="card" style={{ marginBottom: '1.5rem', border: '1px solid var(--border-blue)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.2rem' }}>
+              <span className="badge badge-success">PRODUCTION UPGRADES</span>
+              <span className="badge badge-scenario">PINBALL QUANTILE + DIRECT HORIZON</span>
+            </div>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+              Advanced Model Upgrades: Calibrated Uncertainty & Direct Multi-Horizon Regressors
+            </h3>
+            <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+              Eliminating recursive autoregressive drift and providing statistically calibrated confidence corridors (p10 to p90).
+            </p>
+          </div>
+        </div>
+
+        {/* Sub-grid: Quantiles & Multi-Horizon side-by-side */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 460px), 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
+          {/* Upgrade 1: Quantile Table & Coverage */}
+          <div style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', padding: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+              <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <Target size={16} className="text-primary" />
+                <span>Upgrade 1: Pinball Quantile Regressors (p10, p50, p90)</span>
+              </h4>
+              <span className="badge badge-primary">Conformal Bounds</span>
+            </div>
+
+            <div className="table-container" style={{ marginBottom: '0.75rem' }}>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Quantile Head</th>
+                    <th>Fit Time</th>
+                    <th>Test Pinball Loss</th>
+                    <th>Test MAE</th>
+                    <th>Semantic Health Boundary</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {QUANTILE_REGRESSION_BENCHMARK.map((q) => (
+                    <tr key={q.percentile}>
+                      <td><strong>{q.percentile}</strong></td>
+                      <td>{q.fitTimeSeconds}s</td>
+                      <td>{formatNumber(q.testPinballLoss, 4)}</td>
+                      <td><strong>{formatNumber(q.testMae, 2)} µg/m³</strong></td>
+                      <td style={{ fontSize: '0.74rem', color: 'var(--text-secondary)' }}>{q.semanticRole}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', backgroundColor: 'var(--bg-secondary)', padding: '0.75rem', borderRadius: '8px', fontSize: '0.78rem' }}>
+              <div>Nominal Coverage: <strong>{QUANTILE_CALIBRATION_SUMMARY.nominalCoveragePct}%</strong></div>
+              <div>Empirical Test Coverage: <strong style={{ color: '#059669' }}>{QUANTILE_CALIBRATION_SUMMARY.empiricalCoveragePct}%</strong></div>
+              <div>Avg Interval Width: <strong>{QUANTILE_CALIBRATION_SUMMARY.averageWidthUgM3} µg/m³</strong></div>
+            </div>
+          </div>
+
+          {/* Upgrade 2: Multi-Horizon Progression Chart */}
+          <div style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', padding: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+              <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <Activity size={16} className="text-primary" />
+                <span>Upgrade 2: Direct Multi-Horizon Regressors (t+1h to t+24h)</span>
+              </h4>
+              <span className="badge badge-scenario">Anti-Drift Anchors</span>
+            </div>
+
+            <div style={{ width: '100%', height: 200, marginBottom: '0.5rem' }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={multiHorizonChartData} margin={{ top: 5, right: 15, left: 0, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                  <XAxis dataKey="horizon" stroke="#64748b" fontSize={11} tickLine={false} />
+                  <YAxis stroke="#64748b" fontSize={11} tickLine={false} unit=" µg" />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px', fontSize: '11px' }}
+                    formatter={(val: unknown, name: string) => [`${formatNumber(Number(val), 2)} µg/m³`, name]}
+                  />
+                  <Bar dataKey="Test MAE" fill="#0284c7" radius={[4, 4, 0, 0]} barSize={22} />
+                  <Bar dataKey="Test RMSE" fill="#f59e0b" radius={[4, 4, 0, 0]} barSize={22} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+              Direct multi-horizon models train independent heads for t+1h, t+3h, t+6h, t+12h, and t+24h, preventing error compounding over recursive 24-hour autoregressive loops.
+            </div>
+          </div>
+        </div>
+
+        {/* Detailed Multi-Horizon Table */}
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Horizon</th>
+                <th>Lead Time</th>
+                <th>Validation MAE</th>
+                <th>Test MAE</th>
+                <th>Test RMSE</th>
+                <th>Test R²</th>
+                <th>Governing Physical & Dispersion Dynamics</th>
+              </tr>
+            </thead>
+            <tbody>
+              {MULTI_HORIZON_BENCHMARK.map((h) => (
+                <tr key={h.horizon}>
+                  <td><span className="badge badge-primary">{h.horizon}</span></td>
+                  <td>{h.leadHours} hour(s)</td>
+                  <td>{formatNumber(h.valMae, 3)}</td>
+                  <td><strong>{formatNumber(h.testMae, 3)} µg/m³</strong></td>
+                  <td>{formatNumber(h.testRmse, 3)}</td>
+                  <td>{formatNumber(h.testR2, 4)}</td>
+                  <td style={{ fontSize: '0.76rem', color: 'var(--text-secondary)' }}>{h.keyDrivers}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Section E: Temporal Split Specifications */}

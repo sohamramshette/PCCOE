@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ResponsiveContainer,
   ComposedChart,
@@ -10,7 +10,7 @@ import {
   ReferenceLine,
   CartesianGrid,
 } from 'recharts';
-import { Activity, Info } from 'lucide-react';
+import { Activity, Info, ShieldCheck, Target } from 'lucide-react';
 import { ForecastTrajectoryResponse, TrajectoryPoint } from '../../types/forecast';
 import { formatNumber, formatDateTimeIST } from '../../utils/formatters';
 
@@ -27,7 +27,7 @@ export const ForecastTrajectoryChart: React.FC<ForecastTrajectoryChartProps> = (
   onHorizonChange,
   loading = false,
 }) => {
-
+  const [showCorridor, setShowCorridor] = useState<boolean>(true);
 
   const formatISTHour = (isoUtc: string) => {
     try {
@@ -43,11 +43,15 @@ export const ForecastTrajectoryChart: React.FC<ForecastTrajectoryChartProps> = (
     }
   };
 
-  const chartData = trajectoryData.trajectory.slice(0, selectedHorizon).map((p) => ({
-    ...p,
-    hourLabel: formatISTHour(p.target_time_utc),
-    confidenceBand: [p.lower_bound_pm25, p.upper_bound_pm25],
-  }));
+  const chartData = trajectoryData.trajectory.slice(0, selectedHorizon).map((p) => {
+    const isAnchor = [1, 3, 6, 12, 24].includes(p.step);
+    return {
+      ...p,
+      isAnchor,
+      hourLabel: formatISTHour(p.target_time_utc),
+      confidenceBand: [p.lower_bound_pm25, p.upper_bound_pm25],
+    };
+  });
 
   const getAqiColor = (cat: string) => {
     switch (cat?.toLowerCase()) {
@@ -66,6 +70,22 @@ export const ForecastTrajectoryChart: React.FC<ForecastTrajectoryChartProps> = (
       default:
         return '#2563eb';
     }
+  };
+
+  const renderAnchorDot = (dotProps: any) => {
+    const { cx, cy, payload } = dotProps;
+    if (!cx || !cy) {
+      return <circle key={`dot-empty-${payload?.step || 0}`} cx={0} cy={0} r={0} opacity={0} />;
+    }
+    if (payload?.isAnchor) {
+      return (
+        <g key={`anchor-dot-${payload.step}`}>
+          <circle cx={cx} cy={cy} r={6} fill="#0284c7" stroke="#ffffff" strokeWidth={2} />
+          <circle cx={cx} cy={cy} r={9} fill="none" stroke="#0284c7" strokeWidth={1.5} strokeDasharray="2 2" opacity={0.85} />
+        </g>
+      );
+    }
+    return <circle key={`dot-${payload?.step || 0}`} cx={cx} cy={cy} r={3} fill="#2563eb" stroke="#ffffff" strokeWidth={1.5} />;
   };
 
   return (
@@ -99,24 +119,46 @@ export const ForecastTrajectoryChart: React.FC<ForecastTrajectoryChartProps> = (
           </p>
         </div>
 
-        {/* Horizon Toggle */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'var(--bg-secondary)', padding: '0.25rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+        {/* Controls: Corridor Toggle & Horizon Toggle */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+          {/* Corridor Toggle */}
           <button
-            onClick={() => onHorizonChange(12)}
-            className={`btn ${selectedHorizon === 12 ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ padding: '0.35rem 0.75rem', fontSize: '0.8rem', border: 'none' }}
-            disabled={loading}
+            onClick={() => setShowCorridor(!showCorridor)}
+            className={`btn ${showCorridor ? 'btn-primary' : 'btn-secondary'}`}
+            style={{
+              padding: '0.35rem 0.75rem',
+              fontSize: '0.8rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              border: '1px solid var(--border-subtle)',
+              cursor: 'pointer',
+            }}
+            title="Toggle Calibrated p10–p90 Quantile Corridor"
           >
-            12 Hours
+            <ShieldCheck size={14} />
+            <span>{showCorridor ? '80% Corridor (p10–p90) Active' : 'Corridor Hidden'}</span>
           </button>
-          <button
-            onClick={() => onHorizonChange(24)}
-            className={`btn ${selectedHorizon === 24 ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ padding: '0.35rem 0.75rem', fontSize: '0.8rem', border: 'none' }}
-            disabled={loading}
-          >
-            24 Hours
-          </button>
+
+          {/* Horizon Toggle */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', background: 'var(--bg-secondary)', padding: '0.25rem', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+            <button
+              onClick={() => onHorizonChange(12)}
+              className={`btn ${selectedHorizon === 12 ? 'btn-primary' : 'btn-secondary'}`}
+              style={{ padding: '0.35rem 0.75rem', fontSize: '0.8rem', border: 'none' }}
+              disabled={loading}
+            >
+              12 Hours
+            </button>
+            <button
+              onClick={() => onHorizonChange(24)}
+              className={`btn ${selectedHorizon === 24 ? 'btn-primary' : 'btn-secondary'}`}
+              style={{ padding: '0.35rem 0.75rem', fontSize: '0.8rem', border: 'none' }}
+              disabled={loading}
+            >
+              24 Hours
+            </button>
+          </div>
         </div>
       </div>
 
@@ -214,7 +256,7 @@ export const ForecastTrajectoryChart: React.FC<ForecastTrajectoryChartProps> = (
             <Tooltip
               content={({ active, payload }) => {
                 if (active && payload && payload.length > 0) {
-                  const data = payload[0].payload as TrajectoryPoint & { hourLabel: string };
+                  const data = payload[0].payload as TrajectoryPoint & { hourLabel: string; isAnchor?: boolean };
                   return (
                     <div
                       style={{
@@ -224,25 +266,37 @@ export const ForecastTrajectoryChart: React.FC<ForecastTrajectoryChartProps> = (
                         padding: '0.85rem 1rem',
                         boxShadow: '0 8px 24px rgba(15, 23, 42, 0.12)',
                         fontSize: '0.82rem',
-                        minWidth: '220px',
+                        minWidth: '240px',
                       }}
                     >
-                      <div style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.4rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.3rem' }}>
-                        {formatDateTimeIST(data.target_time_utc)}
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.3rem' }}>
+                        <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>
+                          {formatDateTimeIST(data.target_time_utc)}
+                        </span>
+                        <span className="badge badge-primary" style={{ fontSize: '0.68rem', padding: '0.1rem 0.4rem' }}>
+                          t+{data.step}h
+                        </span>
                       </div>
+
+                      {data.isAnchor && (
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', backgroundColor: 'rgba(2, 132, 199, 0.12)', color: '#0284c7', padding: '0.2rem 0.5rem', borderRadius: '4px', fontSize: '0.72rem', fontWeight: 600, marginBottom: '0.4rem', width: '100%' }}>
+                          <Target size={12} /> Direct Horizon Anchor Model
+                        </div>
+                      )}
+
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
                         <span style={{ color: 'var(--text-secondary)' }}>Predicted PM2.5:</span>
-                        <strong style={{ color: 'var(--primary)' }}>{data.predicted_pm25} µg/m³</strong>
+                        <strong style={{ color: 'var(--primary)', fontSize: '0.9rem' }}>{data.predicted_pm25} µg/m³</strong>
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem', fontSize: '0.76rem', color: 'var(--text-muted)' }}>
-                        <span>95% Confidence:</span>
-                        <span>[{data.lower_bound_pm25} – {data.upper_bound_pm25}]</span>
+                        <span>80% Quantile Corridor:</span>
+                        <span style={{ fontWeight: 500 }}>p₁₀: {data.lower_bound_pm25} – p₉₀: {data.upper_bound_pm25} µg/m³</span>
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
                         <span style={{ color: 'var(--text-secondary)' }}>NAQI Tier:</span>
                         <strong style={{ color: getAqiColor(data.aqi_category) }}>{data.aqi_category}</strong>
                       </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.76rem', color: 'var(--text-muted)', marginTop: '0.3rem', borderTop: '1px dashed var(--border-subtle)', paddingTop: '0.3rem' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: '0.35rem', borderTop: '1px dashed var(--border-subtle)', paddingTop: '0.35rem' }}>
                         <span>Traffic Index: {data.traffic_proxy_index}</span>
                         <span>Ventilation: {data.ventilation_index} m²/s</span>
                       </div>
@@ -254,28 +308,32 @@ export const ForecastTrajectoryChart: React.FC<ForecastTrajectoryChartProps> = (
             />
 
             {/* Shaded Compounding Confidence Area */}
-            <Area
-              type="monotone"
-              dataKey="upper_bound_pm25"
-              stroke="transparent"
-              fill="rgba(37, 99, 235, 0.12)"
-              name="Confidence Interval"
-            />
-            <Area
-              type="monotone"
-              dataKey="lower_bound_pm25"
-              stroke="transparent"
-              fill="#ffffff"
-            />
+            {showCorridor && (
+              <>
+                <Area
+                  type="monotone"
+                  dataKey="upper_bound_pm25"
+                  stroke="transparent"
+                  fill="rgba(37, 99, 235, 0.14)"
+                  name="Quantile Corridor (p90)"
+                />
+                <Area
+                  type="monotone"
+                  dataKey="lower_bound_pm25"
+                  stroke="transparent"
+                  fill="#ffffff"
+                />
+              </>
+            )}
 
-            {/* Primary Predicted Trajectory Curve */}
+            {/* Primary Predicted Trajectory Curve with Direct Anchor indicators */}
             <Line
               type="monotone"
               dataKey="predicted_pm25"
               stroke="#2563eb"
               strokeWidth={2.8}
-              dot={{ r: 3, fill: '#2563eb', strokeWidth: 1.5, stroke: '#ffffff' }}
-              activeDot={{ r: 6, fill: '#1d4ed8', stroke: '#ffffff', strokeWidth: 2 }}
+              dot={renderAnchorDot}
+              activeDot={{ r: 7, fill: '#1d4ed8', stroke: '#ffffff', strokeWidth: 2 }}
               name="Forecasted PM2.5"
             />
           </ComposedChart>
@@ -297,14 +355,20 @@ export const ForecastTrajectoryChart: React.FC<ForecastTrajectoryChartProps> = (
           color: 'var(--text-muted)',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <span style={{ width: 14, height: 3, backgroundColor: '#2563eb', borderRadius: 2 }} />
             <span>Predicted Trajectory</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <span style={{ width: 12, height: 12, borderRadius: '50%', border: '2px dashed #0284c7', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#0284c7' }} />
+            </span>
+            <span>Direct Horizon Anchors (t+1, 3, 6, 12, 24h)</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <span style={{ width: 14, height: 8, backgroundColor: 'rgba(37, 99, 235, 0.2)', borderRadius: 2 }} />
-            <span>95% Compounding Bounds</span>
+            <span>80% Quantile Corridor (p₁₀–p₉₀)</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <span style={{ width: 14, height: 2, borderTop: '2px dashed #d97706' }} />
@@ -314,7 +378,7 @@ export const ForecastTrajectoryChart: React.FC<ForecastTrajectoryChartProps> = (
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
           <Info size={13} color="var(--primary)" />
-          <span>Autoregressive recursive feature propagation across {selectedHorizon} hours</span>
+          <span>Hybrid Direct Horizon Anchors + Autoregressive Propagation with Pinball Quantiles</span>
         </div>
       </div>
     </div>

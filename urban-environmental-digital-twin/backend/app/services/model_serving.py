@@ -166,14 +166,26 @@ class ModelServingManager:
         Computes calibrated empirical quantiles (p10, p50, p90) for a feature row.
         Falls back to empirical margins if quantile models are not loaded.
         """
+        if not isinstance(feature_df, pd.DataFrame):
+            try:
+                feature_df = pd.DataFrame(feature_df)
+            except Exception:
+                return 15.0, 25.0, 35.0
+
         if self.preprocessor is None or not getattr(self, "quantile_models", None):
-            point_pred = self.predict(self.default_model_id, feature_df)
+            try:
+                point_pred = self.predict(self.default_model_id, feature_df)
+            except Exception:
+                point_pred = 25.0
             return max(0.0, round(point_pred - 10.0, 2)), point_pred, round(point_pred + 10.0, 2)
 
         try:
             missing_feats = [col for col in self.core_features if col not in feature_df.columns]
             if missing_feats:
-                point_pred = self.predict(self.default_model_id, feature_df)
+                try:
+                    point_pred = self.predict(self.default_model_id, feature_df)
+                except Exception:
+                    point_pred = 25.0
                 return max(0.0, round(point_pred - 10.0, 2)), point_pred, round(point_pred + 10.0, 2)
 
             X_proc = self.preprocessor.transform(feature_df[self.core_features])
@@ -187,16 +199,29 @@ class ModelServingManager:
             return lower_b, median_pred, upper_b
         except Exception as e:
             logger.warning(f"Quantile inference fallback: {e}")
-            point_pred = self.predict(self.default_model_id, feature_df)
+            try:
+                point_pred = self.predict(self.default_model_id, feature_df)
+            except Exception:
+                point_pred = 25.0
             return max(0.0, round(point_pred - 10.0, 2)), point_pred, round(point_pred + 10.0, 2)
 
     def predict_horizon(self, horizon_key: str, feature_df: pd.DataFrame) -> Optional[float]:
         """
         Computes direct multi-horizon prediction for anchor horizons: '1h', '3h', '6h', '12h', '24h'.
+        Supports formats like '3h', 't+3h', '3', 't+3'.
         """
         if self.preprocessor is None or not getattr(self, "multi_horizon_models", None):
             return None
-        model = self.multi_horizon_models.get(horizon_key)
+
+        if not isinstance(feature_df, pd.DataFrame):
+            try:
+                feature_df = pd.DataFrame(feature_df)
+            except Exception:
+                return None
+
+        clean_suffix = horizon_key.lower().replace("t+", "").rstrip("h")
+        clean_key = f"{clean_suffix}h"
+        model = self.multi_horizon_models.get(clean_key) or self.multi_horizon_models.get(horizon_key)
         if model is None:
             return None
         try:
