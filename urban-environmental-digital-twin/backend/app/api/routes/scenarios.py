@@ -126,6 +126,41 @@ def list_scenarios(
         "items": formatted
     }
 
+@router.get(
+    "/optimizer/matrix",
+    response_model=Dict[str, InterventionCostSpec],
+    summary="Get Declared Intervention Cost Matrix",
+    description="Returns the municipal cost matrix, operational limits, unit costs, and policy mappings for Pune clean air interventions."
+)
+def get_optimizer_matrix(
+    unavailable: Optional[str] = Query(default=None, description="Comma-separated IDs of unavailable interventions")
+):
+    unavail_list = [u.strip() for u in unavailable.split(",") if u.strip()] if unavailable else []
+    return PolicyOptimizerService.get_declared_cost_matrix(unavail_list)
+
+
+@router.post(
+    "/optimize",
+    response_model=OptimizeResponse,
+    summary="Evaluate Budget-Constrained Intervention Packages",
+    description=(
+        "Evaluates municipal intervention packages against declared budget, operational limits, "
+        "and availability constraints. Recomputes feasibility dynamically and scores counterfactual PM2.5 "
+        "outcomes using the verified forecasting model."
+    )
+)
+def optimize_scenarios(
+    req: OptimizeRequest,
+    db: Session = Depends(get_db)
+):
+    try:
+        return PolicyOptimizerService.optimize_and_evaluate(db=db, req=req)
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Optimization failed: {str(exc)}"
+        )
+
 
 @router.get(
     "/{scenario_id}",
@@ -279,41 +314,5 @@ def generate_scenario_policy_report(
         if "not exist" in msg or "not found" in msg:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=msg)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=msg)
-
-
-@router.get(
-    "/optimizer/matrix",
-    response_model=Dict[str, InterventionCostSpec],
-    summary="Get Declared Intervention Cost Matrix",
-    description="Returns the municipal cost matrix, operational limits, unit costs, and policy mappings for Pune clean air interventions."
-)
-def get_optimizer_matrix(
-    unavailable: Optional[str] = Query(default=None, description="Comma-separated IDs of unavailable interventions")
-):
-    unavail_list = [u.strip() for u in unavailable.split(",") if u.strip()] if unavailable else []
-    return PolicyOptimizerService.get_declared_cost_matrix(unavail_list)
-
-
-@router.post(
-    "/optimize",
-    response_model=OptimizeResponse,
-    summary="Evaluate Budget-Constrained Intervention Packages",
-    description=(
-        "Evaluates municipal intervention packages against declared budget, operational limits, "
-        "and availability constraints. Recomputes feasibility dynamically and scores counterfactual PM2.5 "
-        "outcomes using the verified forecasting model."
-    )
-)
-def optimize_scenarios(
-    req: OptimizeRequest,
-    db: Session = Depends(get_db)
-):
-    try:
-        return PolicyOptimizerService.optimize_and_evaluate(db=db, req=req)
-    except Exception as exc:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Optimization failed: {str(exc)}"
-        )
 
 
