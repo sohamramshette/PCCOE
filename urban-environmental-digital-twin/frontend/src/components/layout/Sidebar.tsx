@@ -32,29 +32,40 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle, onSwitchToHorizontal }) => {
   const { role } = useAuth();
   const [health, setHealth] = useState<HealthResponse | null>(null);
-  const [isHealthy, setIsHealthy] = useState<boolean | null>(null);
+  const [healthState, setHealthState] = useState<'connecting' | 'waking' | 'live' | 'offline'>('connecting');
 
   useEffect(() => {
     let isMounted = true;
+    let timer: ReturnType<typeof setTimeout>;
+    let retryCount = 0;
+
     const checkHealth = async () => {
       try {
         const data = await getHealth();
         if (isMounted) {
           setHealth(data);
-          setIsHealthy(data.status === 'ok' && data.database === 'connected');
+          setHealthState(data.status === 'ok' && data.database === 'connected' ? 'live' : 'offline');
+          retryCount = 0;
+          timer = setTimeout(checkHealth, 30000);
         }
       } catch {
         if (isMounted) {
-          setIsHealthy(false);
+          retryCount++;
+          if (retryCount <= 4) {
+            setHealthState('waking');
+            timer = setTimeout(checkHealth, 7000);
+          } else {
+            setHealthState('offline');
+            timer = setTimeout(checkHealth, 30000);
+          }
         }
       }
     };
 
     checkHealth();
-    const interval = setInterval(checkHealth, 30000);
     return () => {
       isMounted = false;
-      clearInterval(interval);
+      clearTimeout(timer);
     };
   }, []);
 
@@ -218,18 +229,49 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle, onSwitchT
             <Layers size={13} color="#4ade80" />
             FastAPI Backend
           </span>
-          <div className="health-status-badge" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: isHealthy ? '#4ade80' : isHealthy === false ? '#f87171' : '#fbbf24', fontWeight: 600 }}>
+          <div
+            className="health-status-badge"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+              fontSize: '0.75rem',
+              color:
+                healthState === 'live'
+                  ? '#4ade80'
+                  : healthState === 'offline'
+                  ? '#f87171'
+                  : '#fbbf24',
+              fontWeight: 600,
+            }}
+          >
             <span
               style={{
                 width: 7,
                 height: 7,
                 borderRadius: '50%',
-                background: isHealthy === true ? '#22c55e' : isHealthy === false ? '#ef4444' : '#f59e0b',
-                boxShadow: isHealthy === true ? '0 0 8px #22c55e' : 'none',
+                background:
+                  healthState === 'live'
+                    ? '#22c55e'
+                    : healthState === 'offline'
+                    ? '#ef4444'
+                    : '#f59e0b',
+                boxShadow:
+                  healthState === 'live'
+                    ? '0 0 8px #22c55e'
+                    : healthState === 'waking' || healthState === 'connecting'
+                    ? '0 0 6px #f59e0b'
+                    : 'none',
               }}
             />
             <span>
-              {isHealthy === true ? 'Live Feed' : isHealthy === false ? 'Offline' : 'Connecting...'}
+              {healthState === 'live'
+                ? 'Live Feed'
+                : healthState === 'waking'
+                ? 'Waking Server...'
+                : healthState === 'offline'
+                ? 'Offline'
+                : 'Connecting...'}
             </span>
           </div>
         </div>

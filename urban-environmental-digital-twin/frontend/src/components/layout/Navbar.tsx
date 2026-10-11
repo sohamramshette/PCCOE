@@ -29,29 +29,41 @@ export const Navbar: React.FC = () => {
   const location = useLocation();
   const { user, role, openAuthModal, logout, isAuthenticated } = useAuth();
   const [health, setHealth] = useState<HealthResponse | null>(null);
-  const [isHealthy, setIsHealthy] = useState<boolean | null>(null);
+  const [healthState, setHealthState] = useState<'connecting' | 'waking' | 'live' | 'offline'>('connecting');
 
   useEffect(() => {
     let isMounted = true;
+    let timer: ReturnType<typeof setTimeout>;
+    let retryCount = 0;
+
     const checkHealth = async () => {
       try {
         const data = await getHealth();
         if (isMounted) {
           setHealth(data);
-          setIsHealthy(data.status === 'ok' && data.database === 'connected');
+          setHealthState(data.status === 'ok' && data.database === 'connected' ? 'live' : 'offline');
+          retryCount = 0;
+          timer = setTimeout(checkHealth, 30000);
         }
       } catch {
         if (isMounted) {
-          setIsHealthy(false);
+          retryCount++;
+          if (retryCount <= 4) {
+            setHealthState('waking');
+            // Render cold start can take ~45-60s, retry quickly every 7s
+            timer = setTimeout(checkHealth, 7000);
+          } else {
+            setHealthState('offline');
+            timer = setTimeout(checkHealth, 30000);
+          }
         }
       }
     };
 
     checkHealth();
-    const interval = setInterval(checkHealth, 30000);
     return () => {
       isMounted = false;
-      clearInterval(interval);
+      clearTimeout(timer);
     };
   }, []);
 
@@ -200,11 +212,27 @@ export const Navbar: React.FC = () => {
               gap: '0.45rem',
               padding: '0.4rem 0.85rem',
               borderRadius: '9999px',
-              background: isHealthy ? 'rgba(34, 197, 94, 0.08)' : 'rgba(239, 68, 68, 0.08)',
-              border: `1px solid ${isHealthy ? 'rgba(34, 197, 94, 0.25)' : 'rgba(239, 68, 68, 0.25)'}`,
+              background:
+                healthState === 'live'
+                  ? 'rgba(34, 197, 94, 0.08)'
+                  : healthState === 'offline'
+                  ? 'rgba(239, 68, 68, 0.08)'
+                  : 'rgba(245, 158, 11, 0.08)',
+              border: `1px solid ${
+                healthState === 'live'
+                  ? 'rgba(34, 197, 94, 0.25)'
+                  : healthState === 'offline'
+                  ? 'rgba(239, 68, 68, 0.25)'
+                  : 'rgba(245, 158, 11, 0.25)'
+              }`,
               fontSize: '0.75rem',
               fontWeight: 600,
-              color: isHealthy ? '#166534' : isHealthy === false ? '#b91c1c' : '#d97706',
+              color:
+                healthState === 'live'
+                  ? '#166534'
+                  : healthState === 'offline'
+                  ? '#b91c1c'
+                  : '#d97706',
             }}
           >
             <span
@@ -212,14 +240,30 @@ export const Navbar: React.FC = () => {
                 width: '7px',
                 height: '7px',
                 borderRadius: '50%',
-                background: isHealthy === true ? '#22c55e' : isHealthy === false ? '#ef4444' : '#f59e0b',
-                boxShadow: isHealthy === true ? '0 0 8px #22c55e' : 'none',
+                background:
+                  healthState === 'live'
+                    ? '#22c55e'
+                    : healthState === 'offline'
+                    ? '#ef4444'
+                    : '#f59e0b',
+                boxShadow:
+                  healthState === 'live'
+                    ? '0 0 8px #22c55e'
+                    : healthState === 'waking' || healthState === 'connecting'
+                    ? '0 0 6px #f59e0b'
+                    : 'none',
               }}
             />
             <span>
-              {isHealthy === true ? 'FastAPI Live' : isHealthy === false ? 'Backend Offline' : 'Connecting...'}
+              {healthState === 'live'
+                ? 'FastAPI Live'
+                : healthState === 'waking'
+                ? 'Waking Server...'
+                : healthState === 'offline'
+                ? 'Backend Offline'
+                : 'Connecting...'}
             </span>
-            {health?.active_stations && (
+            {health?.active_stations && healthState === 'live' && (
               <span style={{ color: '#64748b', fontSize: '0.7rem' }}>
                 ({health.active_stations} stns)
               </span>
