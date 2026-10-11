@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { API_BASE_URL } from '../api/client';
 
 export type UserRole = 'CITIZEN' | 'AUTHORITY';
 
@@ -58,7 +59,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         return;
       }
       try {
-        const res = await fetch('/api/v1/auth/me', {
+        const res = await fetch(`${API_BASE_URL}/api/v1/auth/me`, {
           headers: { Authorization: `Bearer ${savedToken}` },
         });
         if (res.ok) {
@@ -86,7 +87,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const login = async (email: string, password: string): Promise<UserProfile> => {
-    const res = await fetch('/api/v1/auth/login', {
+    const res = await fetch(`${API_BASE_URL}/api/v1/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
@@ -108,7 +109,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     role: UserRole;
     organization?: string;
   }): Promise<UserProfile> => {
-    const res = await fetch('/api/v1/auth/register', {
+    const res = await fetch(`${API_BASE_URL}/api/v1/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData),
@@ -141,16 +142,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const quickLogin = async (targetRole: UserRole): Promise<UserProfile> => {
     try {
-      const defaultApiUrl = import.meta.env.PROD
-        ? 'https://pccoe-75ji.onrender.com'
-        : 'http://localhost:8000';
-      const baseApiUrl = (
-        import.meta.env.VITE_API_BASE_URL ||
-        import.meta.env.VITE_API_URL ||
-        defaultApiUrl
-      ).replace(/\/+$/, '');
-
-      const res = await fetch(`${baseApiUrl}/api/v1/auth/quick-login`, {
+      const res = await fetch(`${API_BASE_URL}/api/v1/auth/quick-login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ role: targetRole }),

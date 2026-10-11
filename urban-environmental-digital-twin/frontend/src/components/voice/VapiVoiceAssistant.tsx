@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { API_BASE_URL } from '../../api/client';
 import {
   Mic,
   Volume2,
@@ -52,11 +53,6 @@ export const VapiVoiceAssistant: React.FC<VapiVoiceAssistantProps> = ({
   const audioChunksRef = useRef<Blob[]>([]);
   const recordingTimerRef = useRef<any>(null);
   const chatScrollRef = useRef<HTMLDivElement>(null);
-
-  const API_BASE =
-    import.meta.env.VITE_API_BASE_URL ||
-    import.meta.env.VITE_API_URL ||
-    'http://127.0.0.1:8000';
 
   // 1-Click Spoken Quick Prompts
   const SUGGESTIONS = [
@@ -193,9 +189,13 @@ export const VapiVoiceAssistant: React.FC<VapiVoiceAssistantProps> = ({
       reader.readAsDataURL(blob);
       const base64Audio = await base64Promise;
 
-      const res = await fetch('/api/v1/citizen/voice-chat-audio', {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 25000);
+
+      const res = await fetch(`${API_BASE_URL}/api/v1/citizen/voice-chat-audio`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({
           audio_base64: base64Audio,
           mime_type: mimeType,
@@ -203,19 +203,9 @@ export const VapiVoiceAssistant: React.FC<VapiVoiceAssistantProps> = ({
           pm25: pm25,
           aqi_category: aqiCategory,
         }),
-      }).catch(async () => {
-        return await fetch(`${API_BASE}/api/v1/citizen/voice-chat-audio`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            audio_base64: base64Audio,
-            mime_type: mimeType,
-            station_name: stationName,
-            pm25: pm25,
-            aqi_category: aqiCategory,
-          }),
-        });
       });
+
+      clearTimeout(timer);
 
       if (res && res.ok) {
         const data = await res.json();
@@ -313,10 +303,9 @@ export const VapiVoiceAssistant: React.FC<VapiVoiceAssistantProps> = ({
 
     try {
       const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 4000);
+      const timer = setTimeout(() => controller.abort(), 20000);
 
-      const url = '/api/v1/citizen/voice-chat';
-      let res = await fetch(url, {
+      const res = await fetch(`${API_BASE_URL}/api/v1/citizen/voice-chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         signal: controller.signal,
@@ -327,19 +316,6 @@ export const VapiVoiceAssistant: React.FC<VapiVoiceAssistantProps> = ({
           aqi_category: aqiCategory,
           history: messages.slice(-4).map((m) => ({ role: m.role, content: m.text })),
         }),
-      }).catch(async () => {
-        return await fetch(`${API_BASE}/api/v1/citizen/voice-chat`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          signal: controller.signal,
-          body: JSON.stringify({
-            message: cleanText,
-            station_name: stationName,
-            pm25: pm25,
-            aqi_category: aqiCategory,
-            history: messages.slice(-4).map((m) => ({ role: m.role, content: m.text })),
-          }),
-        });
       });
 
       clearTimeout(timer);
