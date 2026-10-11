@@ -349,44 +349,151 @@ export const DigitalTwinMap: React.FC = () => {
         </div>
       </div>
 
-      {/* Information Panel */}
-      <div className="info-banner-grid" style={{ marginBottom: '1.5rem' }}>
-        <div className="card" style={{ padding: '0.85rem 1.15rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '0.2rem' }}>
-            <MapPin size={14} className="text-primary" />
-            <span>Monitoring Stations</span>
+      {/* Compact Telemetry & Geometry Status Strip */}
+      <div
+        className="digital-twin-stats-strip"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+          gap: '0.85rem',
+          marginBottom: '1.25rem',
+        }}
+      >
+        {/* Metric 1: Monitoring Stations */}
+        <div
+          className="twin-stat-card"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.85rem',
+            padding: '0.75rem 1.15rem',
+            background: 'rgba(255, 255, 255, 0.88)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
+            borderRadius: '14px',
+            boxShadow: '0 4px 16px rgba(22, 38, 25, 0.04)',
+          }}
+        >
+          <div
+            style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '10px',
+              background: 'rgba(34, 197, 94, 0.12)',
+              border: '1px solid rgba(74, 222, 128, 0.35)',
+              display: 'grid',
+              placeItems: 'center',
+              color: '#166534',
+              flexShrink: 0,
+            }}
+          >
+            <MapPin size={18} />
           </div>
-          <div style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-            {stations.length || 6}
-          </div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-            Continuous CAAQMN stations
+          <div style={{ minWidth: 0, flex: 1 }}>
+            <div style={{ fontSize: '0.68rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Monitoring Network
+            </div>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.45rem', marginTop: '0.1rem' }}>
+              <span style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0d1710', lineHeight: 1.1 }}>
+                {stations.length || 6}
+              </span>
+              <span style={{ fontSize: '0.75rem', color: '#166534', fontWeight: 600 }}>
+                Active CAAQMN Stations
+              </span>
+            </div>
           </div>
         </div>
 
-        <div className="card" style={{ padding: '0.85rem 1.15rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '0.2rem' }}>
-            <Flame size={14} className="text-primary" />
-            <span>Spatial Interpolation</span>
+        {/* Metric 2: Spatial Interpolation */}
+        <div
+          className="twin-stat-card"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.85rem',
+            padding: '0.75rem 1.15rem',
+            background: 'rgba(255, 255, 255, 0.88)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
+            borderRadius: '14px',
+            boxShadow: '0 4px 16px rgba(22, 38, 25, 0.04)',
+          }}
+        >
+          <div
+            style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '10px',
+              background: 'rgba(217, 119, 6, 0.12)',
+              border: '1px solid rgba(245, 158, 11, 0.35)',
+              display: 'grid',
+              placeItems: 'center',
+              color: '#b45309',
+              flexShrink: 0,
+            }}
+          >
+            <Flame size={18} />
           </div>
-          <div style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.25rem' }}>
-            2D IDW Continuous Surface
-          </div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-            {heatmapGrid.length} grid cells across Pune &amp; PCMC
+          <div style={{ minWidth: 0, flex: 1 }}>
+            <div style={{ fontSize: '0.68rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Spatial Interpolation
+            </div>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.45rem', marginTop: '0.1rem' }}>
+              <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0d1710', lineHeight: 1.2 }}>
+                2D IDW Surface
+              </span>
+              <span style={{ fontSize: '0.74rem', color: '#b45309', fontWeight: 600 }}>
+                {heatmapGrid.length || 289} Grid Cells
+              </span>
+            </div>
           </div>
         </div>
 
-        <div className="card" style={{ padding: '0.85rem 1.15rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.8rem', marginBottom: '0.2rem' }}>
-            <Database size={14} className="text-primary" />
-            <span>Live Data Sync</span>
+        {/* Metric 3: Live Data Sync */}
+        <div
+          className="twin-stat-card"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.85rem',
+            padding: '0.75rem 1.15rem',
+            background: 'rgba(255, 255, 255, 0.88)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
+            borderRadius: '14px',
+            boxShadow: '0 4px 16px rgba(22, 38, 25, 0.04)',
+          }}
+        >
+          <div
+            style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '10px',
+              background: 'rgba(37, 99, 235, 0.12)',
+              border: '1px solid rgba(59, 130, 246, 0.35)',
+              display: 'grid',
+              placeItems: 'center',
+              color: '#1d4ed8',
+              flexShrink: 0,
+            }}
+          >
+            <Database size={18} />
           </div>
-          <div style={{ fontSize: '0.92rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.25rem' }}>
-            OpenAQ API v3 Pipeline
-          </div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-            In-situ sensor telemetry + reanalysis
+          <div style={{ minWidth: 0, flex: 1 }}>
+            <div style={{ fontSize: '0.68rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Live Telemetry Pipeline
+            </div>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.45rem', marginTop: '0.1rem' }}>
+              <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0d1710', lineHeight: 1.2 }}>
+                OpenAQ API v3
+              </span>
+              <span style={{ fontSize: '0.74rem', color: '#1d4ed8', fontWeight: 600 }}>
+                In-situ Telemetry
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -411,14 +518,15 @@ export const DigitalTwinMap: React.FC = () => {
                 justifyContent: 'space-between',
                 flexWrap: 'wrap',
                 gap: '0.6rem',
-                background: 'rgba(22, 30, 21, 0.85)',
-                border: '1px solid rgba(163, 181, 147, 0.2)',
+                background: '#ffffff',
+                border: '1px solid #e2e8f0',
                 borderRadius: '12px',
+                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)',
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <Calendar size={15} className="text-primary" />
-                <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0f172a' }}>
                   Monitoring Mode &amp; Scenarios:
                 </span>
               </div>
@@ -439,9 +547,9 @@ export const DigitalTwinMap: React.FC = () => {
                         fontSize: '11px',
                         fontWeight: isSelected ? 700 : 500,
                         cursor: 'pointer',
-                        border: isSelected ? `2px solid ${ep.color}` : '1px solid rgba(163, 181, 147, 0.2)',
-                        backgroundColor: isSelected ? `${ep.color}25` : 'rgba(26, 36, 25, 0.8)',
-                        color: isSelected ? ep.color : 'var(--text-secondary)',
+                        border: isSelected ? `2px solid ${ep.color}` : '1px solid #cbd5e1',
+                        backgroundColor: isSelected ? `${ep.color}18` : '#ffffff',
+                        color: isSelected ? ep.color : '#334155',
                         boxShadow: isSelected && ep.isLive ? '0 0 10px rgba(37, 99, 235, 0.2)' : 'none',
                         transition: 'all 0.15s ease',
                       }}
@@ -625,8 +733,8 @@ export const DigitalTwinMap: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '10px 16px',
-                backgroundColor: 'rgba(22, 30, 21, 0.92)',
-                border: '1px solid rgba(163, 181, 147, 0.2)',
+                backgroundColor: '#ffffff',
+                border: '1px solid #e2e8f0',
                 borderRadius: '12px 12px 0 0',
                 fontSize: '12px',
                 gap: '8px',
@@ -643,9 +751,9 @@ export const DigitalTwinMap: React.FC = () => {
                     padding: '5px 12px',
                     borderRadius: '6px',
                     border: '1px solid',
-                    borderColor: selectedStationId === null ? '#60a5fa' : 'rgba(163, 181, 147, 0.25)',
-                    backgroundColor: selectedStationId === null ? 'rgba(37, 99, 235, 0.25)' : 'rgba(26, 36, 25, 0.8)',
-                    color: selectedStationId === null ? '#93c5fd' : 'var(--text-secondary)',
+                    borderColor: selectedStationId === null ? '#3b82f6' : '#cbd5e1',
+                    backgroundColor: selectedStationId === null ? '#eff6ff' : '#ffffff',
+                    color: selectedStationId === null ? '#1d4ed8' : '#334155',
                     fontWeight: 600,
                     cursor: 'pointer',
                     fontSize: '11px',
@@ -665,9 +773,9 @@ export const DigitalTwinMap: React.FC = () => {
                     padding: '5px 12px',
                     borderRadius: '6px',
                     border: '1px solid',
-                    borderColor: showHeatmap ? '#f97316' : 'rgba(163, 181, 147, 0.25)',
-                    backgroundColor: showHeatmap ? 'rgba(249, 115, 22, 0.2)' : 'rgba(26, 36, 25, 0.8)',
-                    color: showHeatmap ? '#fb923c' : 'var(--text-secondary)',
+                    borderColor: showHeatmap ? '#f97316' : '#cbd5e1',
+                    backgroundColor: showHeatmap ? '#fff7ed' : '#ffffff',
+                    color: showHeatmap ? '#c2410c' : '#334155',
                     fontWeight: 600,
                     cursor: 'pointer',
                   }}
@@ -679,7 +787,7 @@ export const DigitalTwinMap: React.FC = () => {
 
                 {showHeatmap && (
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <span style={{ color: 'var(--text-muted)', fontSize: '11px' }}>Power (p):</span>
+                    <span style={{ color: '#64748b', fontSize: '11px' }}>Power (p):</span>
                     {[1.5, 2.0, 3.0].map((p) => (
                       <button
                         key={p}
@@ -688,9 +796,9 @@ export const DigitalTwinMap: React.FC = () => {
                           padding: '2px 8px',
                           borderRadius: '4px',
                           border: '1px solid',
-                          borderColor: idwPower === p ? '#60a5fa' : 'rgba(163, 181, 147, 0.25)',
-                          backgroundColor: idwPower === p ? 'rgba(37, 99, 235, 0.25)' : 'rgba(26, 36, 25, 0.8)',
-                          color: idwPower === p ? '#93c5fd' : 'var(--text-muted)',
+                          borderColor: idwPower === p ? '#3b82f6' : '#cbd5e1',
+                          backgroundColor: idwPower === p ? '#eff6ff' : '#ffffff',
+                          color: idwPower === p ? '#1d4ed8' : '#64748b',
                           fontSize: '11px',
                           fontWeight: idwPower === p ? 700 : 500,
                           cursor: 'pointer',
@@ -703,10 +811,10 @@ export const DigitalTwinMap: React.FC = () => {
                 )}
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '11px' }}>
-                {heatmapLoading && <span style={{ color: '#fb923c', fontStyle: 'italic' }}>Calculating IDW...</span>}
-                {inspectingCoord && <span style={{ color: '#60a5fa', fontStyle: 'italic' }}>Estimating coordinate...</span>}
-                <Crosshair size={13} style={{ color: '#60a5fa' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#64748b', fontSize: '11px' }}>
+                {heatmapLoading && <span style={{ color: '#ea580c', fontStyle: 'italic' }}>Calculating IDW...</span>}
+                {inspectingCoord && <span style={{ color: '#2563eb', fontStyle: 'italic' }}>Estimating coordinate...</span>}
+                <Crosshair size={13} style={{ color: '#2563eb' }} />
                 <span>Click map to inspect any neighborhood coordinate</span>
                 {customInspection && (
                   <button
@@ -717,9 +825,9 @@ export const DigitalTwinMap: React.FC = () => {
                       gap: '4px',
                       padding: '3px 8px',
                       borderRadius: '4px',
-                      border: '1px solid rgba(163, 181, 147, 0.3)',
-                      background: 'rgba(26, 36, 25, 0.8)',
-                      color: 'var(--text-secondary)',
+                      border: '1px solid #cbd5e1',
+                      background: '#ffffff',
+                      color: '#475569',
                       fontSize: '10px',
                       cursor: 'pointer',
                     }}
@@ -770,7 +878,8 @@ export const DigitalTwinMap: React.FC = () => {
                   padding: '1.15rem',
                   marginBottom: '1rem',
                   border: `2px solid ${customInspection.color}`,
-                  backgroundColor: 'rgba(22, 30, 21, 0.95)',
+                  backgroundColor: '#ffffff',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
@@ -849,39 +958,39 @@ export const DigitalTwinMap: React.FC = () => {
                 style={{
                   marginBottom: '1rem',
                   padding: '0.75rem 0.85rem',
-                  backgroundColor: outageStationIds.length > 0 ? 'rgba(40, 30, 15, 0.85)' : 'rgba(26, 36, 25, 0.75)',
-                  border: `1px solid ${outageStationIds.length > 0 ? 'rgba(245, 158, 11, 0.45)' : 'rgba(163, 181, 147, 0.2)'}`,
+                  backgroundColor: outageStationIds.length > 0 ? '#fffbeb' : '#f8fafc',
+                  border: `1px solid ${outageStationIds.length > 0 ? '#fcd34d' : '#e2e8f0'}`,
                   borderRadius: '10px',
                   fontSize: '0.75rem',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 700, color: outageStationIds.length > 0 ? '#fbbf24' : 'var(--text-primary)' }}>
-                    <WifiOff size={13} color={outageStationIds.length > 0 ? '#f59e0b' : 'var(--primary)'} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 700, color: outageStationIds.length > 0 ? '#b45309' : '#0f172a' }}>
+                    <WifiOff size={13} color={outageStationIds.length > 0 ? '#f59e0b' : '#10b981'} />
                     <span>Outage Simulator (Stress Testing):</span>
                   </div>
                   {outageStationIds.length > 0 ? (
-                    <span style={{ fontSize: '9px', fontWeight: 700, padding: '1px 6px', borderRadius: '4px', backgroundColor: 'rgba(239, 68, 68, 0.2)', color: '#f87171', border: '1px solid rgba(239, 68, 68, 0.4)' }}>
+                    <span style={{ fontSize: '9px', fontWeight: 700, padding: '1px 6px', borderRadius: '4px', backgroundColor: '#fee2e2', color: '#dc2626', border: '1px solid #fca5a5' }}>
                       {outageStationIds.length} OFFLINE (SIMULATED)
                     </span>
                   ) : (
-                    <span style={{ fontSize: '9px', fontWeight: 600, padding: '1px 6px', borderRadius: '4px', backgroundColor: 'rgba(34, 197, 94, 0.15)', color: '#4ade80', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
+                    <span style={{ fontSize: '9px', fontWeight: 600, padding: '1px 6px', borderRadius: '4px', backgroundColor: '#ecfdf5', color: '#059669', border: '1px solid #a7f3d0' }}>
                       ALL ONLINE
                     </span>
                   )}
                 </div>
 
                 {outageStationIds.length > 0 && (
-                  <div style={{ marginBottom: '0.5rem', padding: '0.45rem 0.65rem', borderRadius: '6px', backgroundColor: 'rgba(245, 158, 11, 0.12)', border: '1px solid rgba(245, 158, 11, 0.25)', color: '#fde68a', fontSize: '11px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+                  <div style={{ marginBottom: '0.5rem', padding: '0.45rem 0.65rem', borderRadius: '6px', backgroundColor: '#fef3c7', border: '1px solid #fde68a', color: '#92400e', fontSize: '11px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
                     <span>Live telemetry withheld from {outageStationIds.length} station(s). Spatial IDW surface recalculates dynamically without them.</span>
                     <button
                       onClick={handleRestoreAllFeeds}
                       style={{
                         padding: '2px 7px',
                         borderRadius: '4px',
-                        border: '1px solid rgba(245, 158, 11, 0.4)',
-                        backgroundColor: 'rgba(245, 158, 11, 0.25)',
-                        color: '#fbbf24',
+                        border: '1px solid #f59e0b',
+                        backgroundColor: '#fffbeb',
+                        color: '#b45309',
                         fontWeight: 600,
                         fontSize: '10px',
                         cursor: 'pointer',
@@ -901,9 +1010,9 @@ export const DigitalTwinMap: React.FC = () => {
                       fontSize: '11px',
                       borderRadius: '6px',
                       border: '1px solid',
-                      borderColor: outageStationIds.length === 0 ? 'var(--primary)' : 'rgba(163, 181, 147, 0.25)',
-                      background: outageStationIds.length === 0 ? 'var(--primary)' : 'rgba(26, 36, 25, 0.8)',
-                      color: outageStationIds.length === 0 ? '#111610' : 'var(--text-secondary)',
+                      borderColor: outageStationIds.length === 0 ? '#10b981' : '#cbd5e1',
+                      background: outageStationIds.length === 0 ? '#ecfdf5' : '#ffffff',
+                      color: outageStationIds.length === 0 ? '#047857' : '#334155',
                       fontWeight: outageStationIds.length === 0 ? 700 : 500,
                       cursor: 'pointer',
                     }}
@@ -918,9 +1027,9 @@ export const DigitalTwinMap: React.FC = () => {
                       fontSize: '11px',
                       borderRadius: '6px',
                       border: '1px solid',
-                      borderColor: outageStationIds.length === 1 && outageStationIds.includes(11613) ? '#f59e0b' : 'rgba(163, 181, 147, 0.25)',
-                      background: outageStationIds.length === 1 && outageStationIds.includes(11613) ? '#f59e0b' : 'rgba(26, 36, 25, 0.8)',
-                      color: outageStationIds.length === 1 && outageStationIds.includes(11613) ? '#111610' : 'var(--text-secondary)',
+                      borderColor: outageStationIds.length === 1 && outageStationIds.includes(11613) ? '#f59e0b' : '#cbd5e1',
+                      background: outageStationIds.length === 1 && outageStationIds.includes(11613) ? '#fffbeb' : '#ffffff',
+                      color: outageStationIds.length === 1 && outageStationIds.includes(11613) ? '#b45309' : '#334155',
                       fontWeight: outageStationIds.length === 1 && outageStationIds.includes(11613) ? 700 : 500,
                       cursor: 'pointer',
                     }}
@@ -935,9 +1044,9 @@ export const DigitalTwinMap: React.FC = () => {
                       fontSize: '11px',
                       borderRadius: '6px',
                       border: '1px solid',
-                      borderColor: outageStationIds.length === Math.ceil(stations.length / 2) && stations.length > 0 ? '#f59e0b' : 'rgba(163, 181, 147, 0.25)',
-                      background: outageStationIds.length === Math.ceil(stations.length / 2) && stations.length > 0 ? '#f59e0b' : 'rgba(26, 36, 25, 0.8)',
-                      color: outageStationIds.length === Math.ceil(stations.length / 2) && stations.length > 0 ? '#111610' : 'var(--text-secondary)',
+                      borderColor: outageStationIds.length === Math.ceil(stations.length / 2) && stations.length > 0 ? '#f59e0b' : '#cbd5e1',
+                      background: outageStationIds.length === Math.ceil(stations.length / 2) && stations.length > 0 ? '#fffbeb' : '#ffffff',
+                      color: outageStationIds.length === Math.ceil(stations.length / 2) && stations.length > 0 ? '#b45309' : '#334155',
                       fontWeight: outageStationIds.length === Math.ceil(stations.length / 2) && stations.length > 0 ? 700 : 500,
                       cursor: 'pointer',
                     }}
@@ -952,9 +1061,9 @@ export const DigitalTwinMap: React.FC = () => {
                       fontSize: '11px',
                       borderRadius: '6px',
                       border: '1px solid',
-                      borderColor: outageStationIds.length === stations.length && stations.length > 0 ? '#ef4444' : 'rgba(163, 181, 147, 0.25)',
-                      background: outageStationIds.length === stations.length && stations.length > 0 ? '#ef4444' : 'rgba(26, 36, 25, 0.8)',
-                      color: outageStationIds.length === stations.length && stations.length > 0 ? '#ffffff' : 'var(--text-secondary)',
+                      borderColor: outageStationIds.length === stations.length && stations.length > 0 ? '#ef4444' : '#cbd5e1',
+                      background: outageStationIds.length === stations.length && stations.length > 0 ? '#fef2f2' : '#ffffff',
+                      color: outageStationIds.length === stations.length && stations.length > 0 ? '#b91c1c' : '#334155',
                       fontWeight: outageStationIds.length === stations.length && stations.length > 0 ? 700 : 500,
                       cursor: 'pointer',
                     }}

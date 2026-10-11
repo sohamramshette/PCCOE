@@ -229,19 +229,19 @@ export default function DashboardModal({ isOpen, onClose }) {
                   />
                 </div>
 
-                <div className="sim-results-comparison" style={{ marginTop: '1.25rem', padding: '1rem', background: 'rgba(22, 30, 21, 0.7)', borderRadius: '14px', border: '1px solid rgba(163, 181, 147, 0.18)' }}>
+                <div className="sim-results-comparison" style={{ marginTop: '1.25rem', padding: '1rem', background: '#f8fafc', borderRadius: '14px', border: '1px solid #e2e8f0' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
-                      <span style={{ fontSize: '0.75rem', color: 'rgba(238, 241, 231, 0.6)' }}>Baseline PM2.5:</span>
-                      <div style={{ fontSize: '1.25rem', fontWeight: 600, color: '#eef1e7' }}>{curr.pm25} µg/m³</div>
+                      <span style={{ fontSize: '0.75rem', color: '#64748b' }}>Baseline PM2.5:</span>
+                      <div style={{ fontSize: '1.25rem', fontWeight: 600, color: '#0f172a' }}>{curr.pm25} µg/m³</div>
                     </div>
                     <div style={{ textAlign: 'center' }}>
-                      <span style={{ fontSize: '0.75rem', color: '#a3b593' }}>Intervention Impact:</span>
-                      <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#8fa07e' }}>{deltaPct}%</div>
+                      <span style={{ fontSize: '0.75rem', color: '#059669', fontWeight: 600 }}>Intervention Impact:</span>
+                      <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#059669' }}>{deltaPct}%</div>
                     </div>
                     <div style={{ textAlign: 'right' }}>
-                      <span style={{ fontSize: '0.75rem', color: 'rgba(238, 241, 231, 0.6)' }}>Simulated PM2.5:</span>
-                      <div style={{ fontSize: '1.25rem', fontWeight: 600, color: '#8fa07e' }}>{simulatedPm25} µg/m³</div>
+                      <span style={{ fontSize: '0.75rem', color: '#64748b' }}>Simulated PM2.5:</span>
+                      <div style={{ fontSize: '1.25rem', fontWeight: 600, color: '#059669' }}>{simulatedPm25} µg/m³</div>
                     </div>
                   </div>
                 </div>

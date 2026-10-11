@@ -26,9 +26,10 @@ import { HealthResponse } from '../../types/common';
 interface SidebarProps {
   collapsed: boolean;
   onToggle: () => void;
+  onSwitchToHorizontal?: () => void;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle, onSwitchToHorizontal }) => {
   const { role } = useAuth();
   const [health, setHealth] = useState<HealthResponse | null>(null);
   const [isHealthy, setIsHealthy] = useState<boolean | null>(null);
@@ -153,6 +154,32 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
             <Sparkles size={14} />
             {!collapsed && <span>3D Living World Home</span>}
           </Link>
+          {onSwitchToHorizontal && (
+            <button
+              type="button"
+              onClick={onSwitchToHorizontal}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                width: '100%',
+                marginTop: '0.4rem',
+                padding: '0.5rem 0.75rem',
+                borderRadius: '10px',
+                background: 'rgba(59, 130, 246, 0.15)',
+                border: '1px solid rgba(96, 165, 250, 0.35)',
+                color: '#93c5fd',
+                fontSize: '0.76rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              title="Shift vertical menu to horizontal stacking bar"
+            >
+              <SlidersHorizontal size={14} />
+              {!collapsed && <span>Shift to Horizontal Bar</span>}
+            </button>
+          )}
         </div>
 
         <ul className="nav-list">

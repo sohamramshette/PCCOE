@@ -24,6 +24,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      '@': path.resolve(__dirname, 'src'),
+      'next/link': path.resolve(__dirname, 'src/shims/next-link.tsx'),
       '@designcodeio/threeui/style.css': path.resolve(__dirname, 'src/shaders/threeui.css'),
       '@designcodeio/threeui': path.resolve(__dirname, 'src/shaders/sylva-living-world/SylvaLivingWorldScene.tsx'),
     },

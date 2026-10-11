@@ -823,6 +823,7 @@ export const PolicyBudgetOptimizer: React.FC<PolicyBudgetOptimizerProps> = ({
 
       {/* 5. Package Comparison Table (Visual & Scannable) */}
       <div
+        id="portfolio-comparison-table"
         className="card"
         style={{
           background: 'rgba(255, 255, 255, 0.85)',
@@ -1229,6 +1230,7 @@ export const PolicyBudgetOptimizer: React.FC<PolicyBudgetOptimizerProps> = ({
 
       {/* 7. Traceable Cost Matrix & Governance (Collapsible) */}
       <div
+        id="stress-testing-section"
         className="card"
         style={{
           background: 'rgba(255, 255, 255, 0.85)',

@@ -28,6 +28,7 @@ import { ErrorDisplay } from '../components/common/ErrorDisplay';
 import { ScenarioResultVisualization } from '../components/scenarios/ScenarioResultVisualization';
 import { PolicyReportModal } from '../components/scenarios/PolicyReportModal';
 import { PolicyBudgetOptimizer } from '../components/scenarios/PolicyBudgetOptimizer';
+import { ScenariosFeatureStackingNav } from '../components/scenarios/ScenariosFeatureStackingNav';
 import { formatNumber } from '../utils/formatters';
 
 export const Scenarios: React.FC = () => {
@@ -275,27 +276,12 @@ export const Scenarios: React.FC = () => {
 
       {error && <ErrorDisplay message={error} onRetry={loadScenariosAndStations} />}
 
-      {/* Mode Switcher Tabs */}
-      <div style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.75rem', flexWrap: 'wrap' }}>
-        <button
-          type="button"
-          className={`btn ${activeTab === 'optimizer' ? 'btn-primary' : 'btn-secondary'}`}
-          onClick={() => setActiveTab('optimizer')}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600, fontSize: '0.85rem' }}
-        >
-          <Sparkles size={16} />
-          <span>Policy & Budget Optimizer</span>
-        </button>
-        <button
-          type="button"
-          className={`btn ${activeTab === 'single_scenario' ? 'btn-primary' : 'btn-secondary'}`}
-          onClick={() => setActiveTab('single_scenario')}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600, fontSize: '0.85rem' }}
-        >
-          <Play size={16} />
-          <span>Single Counterfactual Studio</span>
-        </button>
-      </div>
+      {/* Table Features & Modes Converted into Stacking Menus */}
+      <ScenariosFeatureStackingNav
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        onSelectPreset={applyPreset}
+      />
 
       {activeTab === 'optimizer' ? (
         <PolicyBudgetOptimizer
@@ -433,7 +419,7 @@ export const Scenarios: React.FC = () => {
 
             {/* Traffic Slider */}
             {(interventionType === 'TRAFFIC_REDUCTION' || interventionType === 'COMBINED_INTERVENTION' || interventionType === 'COMPREHENSIVE_POLICY') && (
-              <div className="form-group" style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '0.85rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
+              <div className="form-group" style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
                   <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0, color: 'var(--text-primary)' }}>
                     <Car size={15} color="#ea580c" /> Traffic Reduction:
@@ -457,7 +443,7 @@ export const Scenarios: React.FC = () => {
 
             {/* Industrial Slider */}
             {(interventionType === 'INDUSTRIAL_ACTIVITY_REDUCTION' || interventionType === 'COMBINED_INTERVENTION' || interventionType === 'COMPREHENSIVE_POLICY') && (
-              <div className="form-group" style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '0.85rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
+              <div className="form-group" style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
                   <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0, color: 'var(--text-primary)' }}>
                     <Factory size={15} color="#f87171" /> Industrial Activity Reduction:
@@ -481,7 +467,7 @@ export const Scenarios: React.FC = () => {
 
             {/* EV Fleet Transition Slider */}
             {(interventionType === 'EV_FLEET_TRANSITION' || interventionType === 'COMPREHENSIVE_POLICY') && (
-              <div className="form-group" style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '0.85rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
+              <div className="form-group" style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
                   <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0, color: 'var(--text-primary)' }}>
                     <Zap size={15} color="#059669" /> EV Fleet Electrification Mandate:
@@ -505,7 +491,7 @@ export const Scenarios: React.FC = () => {
 
             {/* Urban Green Buffer Slider */}
             {(interventionType === 'GREEN_BUFFER_EXPANSION' || interventionType === 'COMPREHENSIVE_POLICY') && (
-              <div className="form-group" style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '0.85rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
+              <div className="form-group" style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.3rem' }}>
                   <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', margin: 0, color: 'var(--text-primary)' }}>
                     <Trees size={15} color="#10b981" /> Urban Green Buffer Zone Expansion:
@@ -531,10 +517,11 @@ export const Scenarios: React.FC = () => {
             {interventionType === 'COMPREHENSIVE_POLICY' && (
               <div
                 style={{
-                  background: 'rgba(26, 36, 25, 0.85)',
+                  background: '#f8fafc',
                   padding: '0.85rem',
                   borderRadius: '12px',
-                  border: '1px solid var(--border-subtle)',
+                  border: '1px solid #e2e8f0',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
                   marginBottom: '1rem',
                   display: 'flex',
                   alignItems: 'center',
