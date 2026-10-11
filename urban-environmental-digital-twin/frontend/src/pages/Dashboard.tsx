@@ -200,10 +200,10 @@ export const Dashboard: React.FC = () => {
               <span className="badge badge-observed">Continuous Monitoring</span>
               <span className="badge badge-reanalysis">ECMWF ERA5-Land Reanalysis</span>
             </div>
-            <h2 style={{ position: 'relative', display: 'block', fontSize: '1.65rem', fontWeight: 600, color: 'var(--text-primary, #eef1e7)', margin: 0, lineHeight: 1.25 }}>
+            <h2 style={{ position: 'relative', display: 'block', fontSize: '1.65rem', fontWeight: 700, color: 'var(--text-primary, #0d1710)', margin: 0, lineHeight: 1.25 }}>
               Pune Urban Environmental Digital Twin
             </h2>
-            <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary, rgba(238, 241, 231, 0.74))', margin: 0, lineHeight: 1.5, maxWidth: '720px' }}>
+            <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary, #3d5242)', margin: 0, lineHeight: 1.5, maxWidth: '720px', fontWeight: 450 }}>
               Multi-source environmental intelligence fusing physical CAAQMS telemetry with atmospheric reanalysis
               and machine learning forecasting for the Pune & PCMC metropolitan corridor.
             </p>
@@ -407,13 +407,13 @@ export const Dashboard: React.FC = () => {
                     {formatDateTime(alert.detected_at)}
                   </span>
                 </div>
-                <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--text-primary, #eef1e7)', marginTop: '0.2rem' }}>
+                <div style={{ fontWeight: 650, fontSize: '0.95rem', color: 'var(--text-primary, #0d1710)', marginTop: '0.2rem' }}>
                   {alert.station_name || `Station #${alert.station_id}`}
                 </div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--primary-light, #a3b593)' }}>
+                <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--primary-dark, #166534)' }}>
                   {alert.alert_type.replace(/_/g, ' ')}
                 </div>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary, rgba(238, 241, 231, 0.74))' }}>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary, #3d5242)' }}>
                   {alert.observed_value !== null && alert.expected_value !== null ? (
                     <span>
                       <strong>{formatNumber(alert.observed_value, 1)}</strong>

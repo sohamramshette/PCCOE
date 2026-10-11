@@ -102,17 +102,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
     <aside className="sidebar">
       <div className="sidebar-header">
         <Link to="/" className="brand-title" aria-label="Return to AirLens Living World Landing Page" title="Return to 3D Living World">
-          <div className="landing-brand-mark" aria-hidden="true" style={{ background: 'rgba(143, 160, 126, 0.2)', color: '#a3b593', padding: '6px', borderRadius: '10px' }}>
+          <div className="landing-brand-mark" aria-hidden="true" style={{ background: 'rgba(34, 197, 94, 0.2)', color: '#4ade80', padding: '6px', borderRadius: '10px', display: 'grid', placeItems: 'center' }}>
             <Activity size={18} />
           </div>
           <div className="brand-copy">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{ fontWeight: 600, color: '#eef1e7' }}>AirLens</span>
-              <span className="brand-badge-pill" style={{ background: 'rgba(143, 160, 126, 0.25)', color: '#a3b593', fontSize: '0.65rem', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>
+              <span style={{ fontWeight: 700, color: '#ffffff', fontSize: '1.05rem', letterSpacing: '-0.01em' }}>AirLens</span>
+              <span className="brand-badge-pill" style={{ background: 'rgba(34, 197, 94, 0.22)', color: '#4ade80', fontSize: '0.65rem', padding: '2px 7px', borderRadius: '4px', fontWeight: 700, border: '1px solid rgba(74, 222, 128, 0.35)' }}>
                 {role === 'AUTHORITY' ? 'AUTHORITY' : 'CITIZEN'}
               </span>
             </div>
-            <div className="brand-subtitle" style={{ color: 'rgba(238, 241, 231, 0.5)', fontSize: '0.72rem' }}>
+            <div className="brand-subtitle" style={{ color: '#94a3b8', fontSize: '0.72rem', fontWeight: 500 }}>
               {role === 'AUTHORITY' ? 'Control Room' : 'Pune Air Guide'}
             </div>
           </div>
@@ -140,11 +140,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
               gap: '0.5rem',
               padding: '0.55rem 0.75rem',
               borderRadius: '10px',
-              background: 'rgba(143, 160, 126, 0.12)',
-              border: '1px solid rgba(143, 160, 126, 0.22)',
-              color: '#a3b593',
+              background: 'rgba(34, 197, 94, 0.12)',
+              border: '1px solid rgba(74, 222, 128, 0.3)',
+              color: '#86efac',
               fontSize: '0.8rem',
-              fontWeight: 500,
+              fontWeight: 600,
               textDecoration: 'none',
               transition: 'all 0.2s ease',
             }}
@@ -187,18 +187,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
             marginBottom: '0.5rem',
           }}
         >
-          <span className="backend-label" style={{ color: 'rgba(238, 241, 231, 0.55)', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-            <Layers size={13} />
+          <span className="backend-label" style={{ color: '#94a3b8', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.35rem', fontWeight: 500 }}>
+            <Layers size={13} color="#4ade80" />
             FastAPI Backend
           </span>
-          <div className="health-status-badge" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: isHealthy ? '#a3b593' : '#cf9861' }}>
+          <div className="health-status-badge" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: isHealthy ? '#4ade80' : isHealthy === false ? '#f87171' : '#fbbf24', fontWeight: 600 }}>
             <span
               style={{
                 width: 7,
                 height: 7,
                 borderRadius: '50%',
-                background: isHealthy === true ? '#8fa07e' : isHealthy === false ? '#cf6651' : '#cf9861',
-                boxShadow: isHealthy === true ? '0 0 8px #8fa07e' : 'none',
+                background: isHealthy === true ? '#22c55e' : isHealthy === false ? '#ef4444' : '#f59e0b',
+                boxShadow: isHealthy === true ? '0 0 8px #22c55e' : 'none',
               }}
             />
             <span>
@@ -208,7 +208,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
         </div>
 
         {health && (
-          <div className="backend-metrics" style={{ color: 'rgba(238, 241, 231, 0.45)', fontSize: '0.7rem', lineHeight: 1.45 }}>
+          <div className="backend-metrics" style={{ color: '#64748b', fontSize: '0.7rem', lineHeight: 1.45 }}>
             <div>Active Stations: {health.active_stations ?? 6}</div>
             <div>Auth RBAC: {role}</div>
           </div>

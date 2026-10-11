@@ -8,6 +8,7 @@ export interface SpatialInterpolationParams {
   grid_step?: number;
   power?: number;
   timestamp?: string;
+  withheld_station_ids?: string;
 }
 
 export async function getSpatialInterpolation(
@@ -23,11 +24,12 @@ export async function interpolateCoordinate(
   latitude: number,
   longitude: number,
   power: number = 2.0,
-  timestamp?: string
+  timestamp?: string,
+  withheld_station_ids?: number[]
 ): Promise<CoordinateInterpolationResponse> {
   return apiClient<CoordinateInterpolationResponse>('/api/v1/spatial/interpolate-coordinate', {
     method: 'POST',
-    body: JSON.stringify({ latitude, longitude, power, timestamp }),
+    body: JSON.stringify({ latitude, longitude, power, timestamp, withheld_station_ids }),
     timeoutMs: 15000,
   });
 }

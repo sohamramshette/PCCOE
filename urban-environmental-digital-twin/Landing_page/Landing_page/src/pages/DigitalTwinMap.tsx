@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useState, useCallback, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   MapPin,
@@ -121,37 +121,54 @@ export const DigitalTwinMap: React.FC = () => {
 
   // HackMatrix 5.0 Addition 2: Simulated Sensor Outage State
   const [outageStationIds, setOutageStationIds] = useState<number[]>([]);
+  const outageStationIdsRef = useRef<number[]>(outageStationIds);
+  outageStationIdsRef.current = outageStationIds;
 
-  const toggleStationOutage = (stationId: number) => {
-    setOutageStationIds((prev) =>
-      prev.includes(stationId) ? prev.filter((id) => id !== stationId) : [...prev, stationId]
-    );
-  };
-
-  const applyOutagePreset = (preset: 'none' | 'withheld' | '50pct' | '100pct') => {
-    if (preset === 'none') {
-      setOutageStationIds([]);
-    } else if (preset === 'withheld') {
-      setOutageStationIds([11613]); // Station 11613 (Shivajinagar) withheld location
-    } else if (preset === '50pct') {
-      const ids = stations.slice(0, Math.ceil(stations.length / 2)).map((s) => s.station_id);
-      setOutageStationIds(ids.length > 0 ? ids : [11613, 11609, 3409331]);
-    } else if (preset === '100pct') {
-      setOutageStationIds(stations.map((s) => s.station_id));
-    }
-  };
-
-  const loadHeatmap = useCallback(async (powerVal: number = idwPower, timestamp?: string) => {
+  const loadHeatmap = useCallback(async (powerVal: number = idwPower, timestamp?: string, withheldIds?: number[]) => {
     try {
       setHeatmapLoading(true);
-      const res = await getSpatialInterpolation({ power: powerVal, timestamp });
+      const activeWithheld = withheldIds !== undefined ? withheldIds : outageStationIdsRef.current;
+      const res = await getSpatialInterpolation({
+        power: powerVal,
+        timestamp,
+        withheld_station_ids: activeWithheld.length > 0 ? activeWithheld.join(',') : undefined,
+      });
       setHeatmapGrid(res.grid_points);
     } catch (err: unknown) {
       console.error('Failed to load spatial interpolation heatmap:', err);
     } finally {
       setHeatmapLoading(false);
     }
-  }, []);
+  }, [idwPower]);
+
+  const toggleStationOutage = (stationId: number) => {
+    const nextIds = outageStationIds.includes(stationId)
+      ? outageStationIds.filter((id) => id !== stationId)
+      : [...outageStationIds, stationId];
+    setOutageStationIds(nextIds);
+    loadHeatmap(idwPower, currentEpisode.timestamp, nextIds);
+  };
+
+  const applyOutagePreset = (preset: 'none' | 'withheld' | '50pct' | '100pct') => {
+    let nextIds: number[] = [];
+    if (preset === 'none') {
+      nextIds = [];
+    } else if (preset === 'withheld') {
+      nextIds = [11613]; // Station 11613 (Shivajinagar) withheld location
+    } else if (preset === '50pct') {
+      const ids = stations.slice(0, Math.ceil(stations.length / 2)).map((s) => s.station_id);
+      nextIds = ids.length > 0 ? ids : [11613, 11609, 3409331];
+    } else if (preset === '100pct') {
+      nextIds = stations.map((s) => s.station_id);
+    }
+    setOutageStationIds(nextIds);
+    loadHeatmap(idwPower, currentEpisode.timestamp, nextIds);
+  };
+
+  const handleRestoreAllFeeds = () => {
+    setOutageStationIds([]);
+    loadHeatmap(idwPower, currentEpisode.timestamp, []);
+  };
 
   const refreshStationReadings = async (stationList: Station[], targetTimestamp?: string) => {
     const obsMap: Record<number, ObservationItem | null> = {};
@@ -216,10 +233,12 @@ export const DigitalTwinMap: React.FC = () => {
   const handleForceLiveSync = async () => {
     try {
       setIsSyncingLive(true);
+      // Reset any simulated outages so live stream is immediately 100% active
+      setOutageStationIds([]);
       await triggerOpenAQSync();
       const currentStations = stations.length > 0 ? stations : await getStations(true);
       await refreshStationReadings(currentStations, undefined);
-      await loadHeatmap(idwPower, undefined);
+      await loadHeatmap(idwPower, undefined, []);
       setLastSyncTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
       setCountdown(30);
     } catch (err) {
@@ -242,7 +261,7 @@ export const DigitalTwinMap: React.FC = () => {
               setIsSyncingLive(true);
               const currentStations = stations.length > 0 ? stations : await getStations(true);
               await refreshStationReadings(currentStations, undefined);
-              await loadHeatmap(idwPower, undefined);
+              await loadHeatmap(idwPower, undefined, outageStationIdsRef.current);
               setLastSyncTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
             } catch (e) {
               console.error('Auto-renew telemetry error:', e);
@@ -262,7 +281,13 @@ export const DigitalTwinMap: React.FC = () => {
   const handleMapClick = async (lat: number, lon: number) => {
     try {
       setInspectingCoord(true);
-      const res = await interpolateCoordinate(lat, lon, idwPower, currentEpisode.timestamp);
+      const res = await interpolateCoordinate(
+        lat,
+        lon,
+        idwPower,
+        currentEpisode.timestamp,
+        outageStationIdsRef.current.length > 0 ? outageStationIdsRef.current : undefined
+      );
       setCustomInspection(res);
     } catch (err) {
       console.error('Coordinate interpolation failed:', err);
@@ -273,7 +298,7 @@ export const DigitalTwinMap: React.FC = () => {
 
   const handlePowerChange = (newPower: number) => {
     setIdwPower(newPower);
-    loadHeatmap(newPower, currentEpisode.timestamp);
+    loadHeatmap(newPower, currentEpisode.timestamp, outageStationIds);
   };
 
   const handleEpisodeChange = async (episodeId: string) => {
@@ -282,14 +307,15 @@ export const DigitalTwinMap: React.FC = () => {
     setCountdown(30);
     const ep = ATMOSPHERIC_EPISODES.find((e) => e.id === episodeId) || ATMOSPHERIC_EPISODES[0];
     
-    // If switching to live telemetry, force a fresh pull
+    // If switching to live telemetry, reset any simulated outages and force a fresh pull
     if (ep.isLive) {
+      setOutageStationIds([]);
       handleForceLiveSync();
       return;
     }
 
     // Load heatmap for historical episode
-    await loadHeatmap(idwPower, ep.timestamp);
+    await loadHeatmap(idwPower, ep.timestamp, outageStationIds);
 
     // Refresh station readings for historical episode
     const currentStations = stations.length > 0 ? stations : await getStations(true);
@@ -474,14 +500,14 @@ export const DigitalTwinMap: React.FC = () => {
               <div
                 style={{
                   marginBottom: '0.75rem',
-                  padding: '0.65rem 0.95rem',
-                  borderRadius: '8px',
+                  padding: '0.75rem 1rem',
+                  borderRadius: '10px',
                   fontSize: '0.75rem',
                   lineHeight: 1.45,
-                  backgroundColor: '#f0fdf4',
-                  border: '1px solid #bbf7d0',
-                  borderLeft: '4px solid #16a34a',
-                  color: '#14532d',
+                  backgroundColor: 'rgba(20, 32, 22, 0.95)',
+                  border: '1px solid rgba(74, 222, 128, 0.3)',
+                  borderLeft: '4px solid #22c55e',
+                  color: 'var(--text-secondary)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
@@ -490,27 +516,55 @@ export const DigitalTwinMap: React.FC = () => {
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', flex: 1, minWidth: '280px' }}>
-                  <Radio size={16} style={{ color: '#16a34a', flexShrink: 0, marginTop: '2px' }} />
+                  <Radio size={16} style={{ color: '#4ade80', flexShrink: 0, marginTop: '2px' }} />
                   <div>
-                    <div style={{ fontWeight: 700, color: '#15803d', marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <div style={{ fontWeight: 700, color: '#4ade80', marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
                       <span>LIVE TELEMETRY STREAM ACTIVE</span>
-                      <span style={{ fontSize: '9px', fontWeight: 700, padding: '1px 6px', borderRadius: '4px', backgroundColor: '#dcfce7', color: '#166534', border: '1px solid #86efac' }}>
+                      <span style={{ fontSize: '9px', fontWeight: 700, padding: '1px 6px', borderRadius: '4px', backgroundColor: 'rgba(34, 197, 94, 0.15)', color: '#4ade80', border: '1px solid rgba(74, 222, 128, 0.3)' }}>
                         ● AUTO-RENEWING
                       </span>
+                      {outageStationIds.length > 0 && (
+                        <span style={{ fontSize: '9px', fontWeight: 700, padding: '1px 7px', borderRadius: '4px', backgroundColor: 'rgba(245, 158, 11, 0.2)', color: '#fbbf24', border: '1px solid rgba(245, 158, 11, 0.4)', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                          <WifiOff size={10} />
+                          {outageStationIds.length} SENSOR{outageStationIds.length > 1 ? 'S' : ''} WITHHELD (OUTAGE SIMULATION)
+                        </span>
+                      )}
                     </div>
-                    <div style={{ color: '#334155' }}>
+                    <div style={{ color: 'var(--text-secondary)' }}>
                       Ingesting continuous telemetry from CPCB / IITM SAFAR stations via OpenAQ API v3. Map grid nodes, station cards, and pinpoint estimates renew dynamically.
                     </div>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div style={{ textAlign: 'right', fontSize: '11px', color: '#475569' }}>
-                    <div>Last renewed: <strong style={{ color: '#0f172a' }}>{lastSyncTime}</strong></div>
-                    <div style={{ fontSize: '10px', color: '#16a34a' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                  <div style={{ textAlign: 'right', fontSize: '11px', color: 'var(--text-muted)' }}>
+                    <div>Last renewed: <strong style={{ color: 'var(--text-primary)' }}>{lastSyncTime}</strong></div>
+                    <div style={{ fontSize: '10px', color: '#4ade80' }}>
                       Next auto-poll in <strong>{countdown}s</strong>
                     </div>
                   </div>
+                  {outageStationIds.length > 0 && (
+                    <button
+                      onClick={handleRestoreAllFeeds}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '5px',
+                        padding: '6px 11px',
+                        borderRadius: '6px',
+                        border: '1px solid rgba(245, 158, 11, 0.5)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.15)',
+                        color: '#fbbf24',
+                        fontSize: '11px',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                      }}
+                      title="Clear simulated outages and unmask all live sensor streams"
+                    >
+                      <RotateCcw size={12} />
+                      <span>Restore All Feeds</span>
+                    </button>
+                  )}
                   <button
                     onClick={handleForceLiveSync}
                     disabled={isSyncingLive}
@@ -527,9 +581,9 @@ export const DigitalTwinMap: React.FC = () => {
                       fontWeight: 600,
                       cursor: isSyncingLive ? 'not-allowed' : 'pointer',
                       opacity: isSyncingLive ? 0.7 : 1,
-                      boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
+                      boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
                     }}
-                    title="Force an instant pull from OpenAQ CAAQMS servers"
+                    title="Force an instant pull from OpenAQ CAAQMS servers (also resets any simulated outages)"
                   >
                     <RefreshCw size={12} className={isSyncingLive ? 'animate-spin' : ''} />
                     <span>{isSyncingLive ? 'Syncing...' : 'Force Sync Now'}</span>
@@ -540,13 +594,14 @@ export const DigitalTwinMap: React.FC = () => {
               <div
                 style={{
                   marginBottom: '0.75rem',
-                  padding: '0.55rem 0.85rem',
-                  borderRadius: '6px',
+                  padding: '0.65rem 0.95rem',
+                  borderRadius: '8px',
                   fontSize: '0.75rem',
                   lineHeight: 1.45,
-                  backgroundColor: `${currentEpisode.color}10`,
+                  backgroundColor: `${currentEpisode.color}15`,
+                  border: `1px solid ${currentEpisode.color}40`,
                   borderLeft: `4px solid ${currentEpisode.color}`,
-                  color: '#334155',
+                  color: 'var(--text-secondary)',
                   display: 'flex',
                   alignItems: 'flex-start',
                   gap: '8px',
@@ -556,7 +611,7 @@ export const DigitalTwinMap: React.FC = () => {
                 <div>
                   <strong style={{ color: currentEpisode.color }}>{currentEpisode.seasonTag}:</strong>{' '}
                   {currentEpisode.description}
-                  <span style={{ marginLeft: '6px', fontSize: '10px', color: '#64748b', fontStyle: 'italic' }}>
+                  <span style={{ marginLeft: '6px', fontSize: '10px', color: 'var(--text-muted)', fontStyle: 'italic' }}>
                     (Historical scenario mode active · live auto-sync paused for demonstration)
                   </span>
                 </div>
@@ -715,19 +770,19 @@ export const DigitalTwinMap: React.FC = () => {
                   padding: '1.15rem',
                   marginBottom: '1rem',
                   border: `2px solid ${customInspection.color}`,
-                  backgroundColor: '#fafafa',
+                  backgroundColor: 'rgba(22, 30, 21, 0.95)',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <Crosshair size={15} style={{ color: customInspection.color }} />
-                    <span style={{ fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', color: '#1e293b' }}>
+                    <span style={{ fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--text-primary)' }}>
                       Pinpoint Location Estimate
                     </span>
                   </div>
                   <button
                     onClick={() => setCustomInspection(null)}
-                    style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '13px' }}
+                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '13px' }}
                   >
                     ✕
                   </button>
@@ -737,7 +792,7 @@ export const DigitalTwinMap: React.FC = () => {
                   <span style={{ fontSize: '1.8rem', fontWeight: 800, color: customInspection.color }}>
                     {customInspection.interpolated_pm25}
                   </span>
-                  <span style={{ fontSize: '0.85rem', color: '#64748b' }}>µg/m³</span>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>µg/m³</span>
                   <span
                     style={{
                       marginLeft: 'auto',
@@ -745,7 +800,7 @@ export const DigitalTwinMap: React.FC = () => {
                       borderRadius: '10px',
                       fontSize: '11px',
                       fontWeight: 700,
-                      backgroundColor: `${customInspection.color}20`,
+                      backgroundColor: `${customInspection.color}25`,
                       color: customInspection.color,
                       border: `1px solid ${customInspection.color}60`,
                     }}
@@ -754,24 +809,24 @@ export const DigitalTwinMap: React.FC = () => {
                   </span>
                 </div>
 
-                <div style={{ fontSize: '0.75rem', color: '#475569', marginBottom: '0.6rem' }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.6rem' }}>
                   Nearest: <strong>{customInspection.nearest_station_name}</strong> ({customInspection.distance_to_nearest_km} km)
-                  <span style={{ marginLeft: '6px', color: '#059669', fontWeight: 600 }}>
+                  <span style={{ marginLeft: '6px', color: '#4ade80', fontWeight: 600 }}>
                     • {Math.round(customInspection.confidence_score * 100)}% confidence
                   </span>
                 </div>
 
-                <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '6px' }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 600, color: '#334155', marginBottom: '4px' }}>
+                <div style={{ borderTop: '1px solid rgba(163, 181, 147, 0.2)', paddingTop: '6px' }}>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '4px' }}>
                     Sensor Attribution Weights:
                   </div>
                   {customInspection.contributing_stations.slice(0, 3).map((st) => (
                     <div key={st.station_id} style={{ fontSize: '0.75rem', marginBottom: '4px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', color: '#475569' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)' }}>
                         <span>{st.station_name.split(',')[0]} ({st.distance_km} km)</span>
                         <span style={{ fontWeight: 600 }}>{st.weight_percentage}%</span>
                       </div>
-                      <div style={{ height: '3px', width: '100%', backgroundColor: '#e2e8f0', borderRadius: '2px', overflow: 'hidden' }}>
+                      <div style={{ height: '3px', width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.1)', borderRadius: '2px', overflow: 'hidden' }}>
                         <div style={{ height: '100%', width: `${st.weight_percentage}%`, backgroundColor: '#3b82f6' }} />
                       </div>
                     </div>
@@ -793,24 +848,51 @@ export const DigitalTwinMap: React.FC = () => {
               <div
                 style={{
                   marginBottom: '1rem',
-                  padding: '0.65rem 0.8rem',
-                  backgroundColor: outageStationIds.length > 0 ? '#fffbeb' : 'var(--bg-secondary)',
-                  border: `1px solid ${outageStationIds.length > 0 ? '#f59e0b' : 'var(--border-subtle)'}`,
-                  borderRadius: '8px',
+                  padding: '0.75rem 0.85rem',
+                  backgroundColor: outageStationIds.length > 0 ? 'rgba(40, 30, 15, 0.85)' : 'rgba(26, 36, 25, 0.75)',
+                  border: `1px solid ${outageStationIds.length > 0 ? 'rgba(245, 158, 11, 0.45)' : 'rgba(163, 181, 147, 0.2)'}`,
+                  borderRadius: '10px',
                   fontSize: '0.75rem',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.4rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontWeight: 700, color: outageStationIds.length > 0 ? '#b45309' : 'var(--text-primary)' }}>
-                    <WifiOff size={13} color={outageStationIds.length > 0 ? '#d97706' : '#64748b'} />
-                    <span>Outage Simulator (Addition 2):</span>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 700, color: outageStationIds.length > 0 ? '#fbbf24' : 'var(--text-primary)' }}>
+                    <WifiOff size={13} color={outageStationIds.length > 0 ? '#f59e0b' : 'var(--primary)'} />
+                    <span>Outage Simulator (Stress Testing):</span>
                   </div>
-                  {outageStationIds.length > 0 && (
-                    <span className="badge badge-warning" style={{ fontSize: '9px', padding: '1px 5px' }}>
-                      {outageStationIds.length} OFFLINE
+                  {outageStationIds.length > 0 ? (
+                    <span style={{ fontSize: '9px', fontWeight: 700, padding: '1px 6px', borderRadius: '4px', backgroundColor: 'rgba(239, 68, 68, 0.2)', color: '#f87171', border: '1px solid rgba(239, 68, 68, 0.4)' }}>
+                      {outageStationIds.length} OFFLINE (SIMULATED)
+                    </span>
+                  ) : (
+                    <span style={{ fontSize: '9px', fontWeight: 600, padding: '1px 6px', borderRadius: '4px', backgroundColor: 'rgba(34, 197, 94, 0.15)', color: '#4ade80', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
+                      ALL ONLINE
                     </span>
                   )}
                 </div>
+
+                {outageStationIds.length > 0 && (
+                  <div style={{ marginBottom: '0.5rem', padding: '0.45rem 0.65rem', borderRadius: '6px', backgroundColor: 'rgba(245, 158, 11, 0.12)', border: '1px solid rgba(245, 158, 11, 0.25)', color: '#fde68a', fontSize: '11px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+                    <span>Live telemetry withheld from {outageStationIds.length} station(s). Spatial IDW surface recalculates dynamically without them.</span>
+                    <button
+                      onClick={handleRestoreAllFeeds}
+                      style={{
+                        padding: '2px 7px',
+                        borderRadius: '4px',
+                        border: '1px solid rgba(245, 158, 11, 0.4)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.25)',
+                        color: '#fbbf24',
+                        fontWeight: 600,
+                        fontSize: '10px',
+                        cursor: 'pointer',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      Restore All
+                    </button>
+                  </div>
+                )}
+
                 <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
                   <button
                     onClick={() => applyOutagePreset('none')}
@@ -825,8 +907,9 @@ export const DigitalTwinMap: React.FC = () => {
                       fontWeight: outageStationIds.length === 0 ? 700 : 500,
                       cursor: 'pointer',
                     }}
+                    title="All 6 stations active and streaming live telemetry"
                   >
-                    0% Live
+                    All Online (0% Loss)
                   </button>
                   <button
                     onClick={() => applyOutagePreset('withheld')}
@@ -858,6 +941,7 @@ export const DigitalTwinMap: React.FC = () => {
                       fontWeight: outageStationIds.length === Math.ceil(stations.length / 2) && stations.length > 0 ? 700 : 500,
                       cursor: 'pointer',
                     }}
+                    title="Simulate 50% sensor network failure across Pune"
                   >
                     50% Loss
                   </button>
@@ -874,6 +958,7 @@ export const DigitalTwinMap: React.FC = () => {
                       fontWeight: outageStationIds.length === stations.length && stations.length > 0 ? 700 : 500,
                       cursor: 'pointer',
                     }}
+                    title="Simulate complete sensor network blackout"
                   >
                     100% Blackout
                   </button>
@@ -895,7 +980,7 @@ export const DigitalTwinMap: React.FC = () => {
                       key={station.station_id}
                       onClick={() => setSelectedStationId(station.station_id)}
                       className={`twin-station-item ${isSelected ? 'active' : ''}`}
-                      style={isOutage ? { borderColor: '#fcd34d', backgroundColor: isSelected ? undefined : '#fffbeb' } : undefined}
+                      style={isOutage ? { borderColor: 'rgba(245, 158, 11, 0.45)', backgroundColor: isSelected ? undefined : 'rgba(40, 30, 15, 0.3)' } : undefined}
                     >
                       <div className="twin-station-info">
                         <div className="twin-station-name" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
@@ -905,14 +990,14 @@ export const DigitalTwinMap: React.FC = () => {
                               style={{
                                 padding: '1px 5px',
                                 borderRadius: '4px',
-                                backgroundColor: '#fee2e2',
-                                color: '#b91c1c',
+                                backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                                color: '#f87171',
                                 fontSize: '10px',
                                 fontWeight: 700,
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 gap: '2px',
-                                border: '1px solid #fca5a5',
+                                border: '1px solid rgba(239, 68, 68, 0.4)',
                               }}
                               title={`${stationAlertCount} active environmental anomalies`}
                             >
@@ -936,22 +1021,22 @@ export const DigitalTwinMap: React.FC = () => {
                               toggleStationOutage(station.station_id);
                             }}
                             style={{
-                              padding: '2px 6px',
+                              padding: '2px 7px',
                               borderRadius: '4px',
-                              backgroundColor: '#fee2e2',
-                              color: '#b91c1c',
+                              backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                              color: '#f87171',
                               fontSize: '10px',
                               fontWeight: 700,
                               cursor: 'pointer',
-                              border: '1px solid #fca5a5',
+                              border: '1px solid rgba(239, 68, 68, 0.4)',
                               display: 'inline-flex',
                               alignItems: 'center',
                               gap: '3px',
                             }}
-                            title="Click to restore sensor"
+                            title="Sensor simulated offline - click to restore live stream"
                           >
                             <WifiOff size={10} />
-                            <span>OFFLINE</span>
+                            <span>OFFLINE (Restore)</span>
                           </button>
                         ) : hasVal ? (
                           <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -967,7 +1052,7 @@ export const DigitalTwinMap: React.FC = () => {
                               style={{
                                 background: 'none',
                                 border: 'none',
-                                color: '#94a3b8',
+                                color: 'var(--text-muted)',
                                 cursor: 'pointer',
                                 padding: '2px',
                                 display: 'flex',
@@ -1000,7 +1085,7 @@ export const DigitalTwinMap: React.FC = () => {
                       </div>
                     </div>
                     {outageStationIds.includes(selectedStation.station_id) ? (
-                      <span className="badge badge-warning" style={{ backgroundColor: '#fef3c7', color: '#b45309', border: '1px solid #fcd34d' }}>
+                      <span className="badge badge-warning" style={{ backgroundColor: 'rgba(245, 158, 11, 0.2)', color: '#fbbf24', border: '1px solid rgba(245, 158, 11, 0.4)' }}>
                         OUTAGE SIMULATED
                       </span>
                     ) : (
@@ -1013,24 +1098,41 @@ export const DigitalTwinMap: React.FC = () => {
                     <div
                       style={{
                         margin: '0.5rem 0 0.75rem 0',
-                        padding: '0.65rem 0.8rem',
-                        backgroundColor: '#fffbeb',
-                        border: '1px solid #f59e0b',
+                        padding: '0.7rem 0.85rem',
+                        backgroundColor: 'rgba(40, 30, 15, 0.85)',
+                        border: '1px solid rgba(245, 158, 11, 0.45)',
                         borderRadius: 'var(--radius-sm)',
                         fontSize: '0.78rem',
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontWeight: 700, color: '#b45309', marginBottom: '0.2rem' }}>
-                        <WifiOff size={14} />
-                        <span>HackMatrix Addition 2: Sensor Outage Active</span>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontWeight: 700, color: '#fbbf24' }}>
+                          <WifiOff size={14} />
+                          <span>Sensor Outage Simulated</span>
+                        </div>
+                        <button
+                          onClick={() => toggleStationOutage(selectedStation.station_id)}
+                          style={{
+                            padding: '2px 7px',
+                            borderRadius: '4px',
+                            border: '1px solid rgba(245, 158, 11, 0.4)',
+                            backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                            color: '#fbbf24',
+                            fontSize: '10px',
+                            fontWeight: 600,
+                            cursor: 'pointer',
+                          }}
+                        >
+                          Restore Feed
+                        </button>
                       </div>
-                      <p style={{ margin: 0, color: '#78350f', lineHeight: 1.4, fontSize: '0.74rem' }}>
-                        Telemetry stream offline. Digital twin falls back to Universal ML spatial-meteorological transfer using ERA5 weather &amp; OSM roads (±12.4 µg/m³ calibrated corridor).
+                      <p style={{ margin: 0, color: '#fde68a', lineHeight: 1.4, fontSize: '0.74rem' }}>
+                        Telemetry stream withheld for stress testing. Digital twin falls back to Universal ML spatial-meteorological transfer using ERA5 weather &amp; OSM roads (±12.4 µg/m³ calibrated corridor).
                       </p>
-                      <div style={{ marginTop: '0.35rem' }}>
+                      <div style={{ marginTop: '0.4rem' }}>
                         <Link
                           to="/model-performance"
-                          style={{ color: '#b45309', fontWeight: 600, fontSize: '0.73rem', textDecoration: 'underline' }}
+                          style={{ color: '#fbbf24', fontWeight: 600, fontSize: '0.73rem', textDecoration: 'underline' }}
                         >
                           View 0% - 100% Sensor Loss Benchmark →
                         </Link>
@@ -1043,15 +1145,15 @@ export const DigitalTwinMap: React.FC = () => {
                     <div
                       style={{
                         margin: '0.5rem 0 0.75rem 0',
-                        padding: '0.6rem 0.75rem',
-                        backgroundColor: '#fee2e2',
-                        border: '1px solid #fca5a5',
+                        padding: '0.65rem 0.8rem',
+                        backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                        border: '1px solid rgba(239, 68, 68, 0.35)',
                         borderRadius: 'var(--radius-sm)',
                         fontSize: '0.8rem',
                       }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.2rem' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontWeight: 700, color: '#991b1b' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', fontWeight: 700, color: '#f87171' }}>
                           <AlertTriangle size={13} />
                           <span>
                             {alertsByStation[selectedStation.station_id].length} Active Alert
@@ -1060,12 +1162,12 @@ export const DigitalTwinMap: React.FC = () => {
                         </div>
                         <Link
                           to={`/alerts?station_id=${selectedStation.station_id}`}
-                          style={{ color: '#b91c1c', fontWeight: 600, fontSize: '0.75rem' }}
+                          style={{ color: '#fca5a5', fontWeight: 600, fontSize: '0.75rem' }}
                         >
                           View all →
                         </Link>
                       </div>
-                      <div style={{ color: '#7f1d1d', fontSize: '0.75rem', lineHeight: 1.35 }}>
+                      <div style={{ color: '#fecaca', fontSize: '0.75rem', lineHeight: 1.35 }}>
                         {alertsByStation[selectedStation.station_id][0].message}
                       </div>
                     </div>

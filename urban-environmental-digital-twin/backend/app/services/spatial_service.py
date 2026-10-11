@@ -59,13 +59,21 @@ class SpatialInterpolationService:
 
     @classmethod
     def get_latest_station_readings(
-        cls, db: Session, target_timestamp: Optional[datetime] = None
+        cls,
+        db: Session,
+        target_timestamp: Optional[datetime] = None,
+        withheld_station_ids: Optional[list[int]] = None
     ) -> List[Dict[str, Any]]:
         """
         Retrieves the most recent verified PM2.5 readings for all active stations.
         If target_timestamp is given, queries exact or nearest preceding hour.
+        If withheld_station_ids is provided, excludes them to simulate sensor outages.
         """
         stations = db.query(Station).filter(Station.is_active == True).all()
+        if withheld_station_ids:
+            withheld_set = set(withheld_station_ids)
+            stations = [st for st in stations if st.station_id not in withheld_set]
+
         station_readings = []
 
         for st in stations:
@@ -107,12 +115,13 @@ class SpatialInterpolationService:
         db: Session,
         grid_step: float = 0.015,
         power: float = 2.0,
-        target_timestamp: Optional[datetime] = None
+        target_timestamp: Optional[datetime] = None,
+        withheld_station_ids: Optional[list[int]] = None
     ) -> Dict[str, Any]:
         """
         Generates a 2D regular spatial grid with IDW-interpolated PM2.5 values across Pune/PCMC.
         """
-        readings = cls.get_latest_station_readings(db, target_timestamp)
+        readings = cls.get_latest_station_readings(db, target_timestamp, withheld_station_ids)
         if not readings:
             return {
                 "method": "INVERSE_DISTANCE_WEIGHTING_V1",
@@ -201,12 +210,13 @@ class SpatialInterpolationService:
         lat: float,
         lon: float,
         power: float = 2.0,
-        target_timestamp: Optional[datetime] = None
+        target_timestamp: Optional[datetime] = None,
+        withheld_station_ids: Optional[list[int]] = None
     ) -> Dict[str, Any]:
         """
         Interpolates PM2.5 concentration for an arbitrary single coordinate (e.g. map click).
         """
-        readings = cls.get_latest_station_readings(db, target_timestamp)
+        readings = cls.get_latest_station_readings(db, target_timestamp, withheld_station_ids)
         if not readings:
             tier, color = get_naqi_tier_and_color(45.0)
             return {

@@ -373,18 +373,21 @@ export const CitizenPortal: React.FC = () => {
     <div style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box' }}>
       {/* Introduction Header Banner */}
       <div
+        className="card"
         style={{
-          background: 'linear-gradient(135deg, rgba(28, 42, 27, 0.92) 0%, rgba(18, 28, 17, 0.96) 100%)',
-          border: '1px solid rgba(163, 181, 147, 0.22)',
+          background: 'rgba(255, 255, 255, 0.85)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          border: '1px solid rgba(40, 122, 69, 0.18)',
           borderRadius: '24px',
-          padding: '1.75rem 2.25rem',
+          padding: '2rem 2.5rem',
           marginBottom: '1.75rem',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '1.25rem',
-          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+          boxShadow: '0 12px 36px rgba(22, 38, 25, 0.05)',
         }}
       >
         <div>
@@ -396,10 +399,9 @@ export const CitizenPortal: React.FC = () => {
                 textTransform: 'uppercase',
                 letterSpacing: '0.06em',
                 padding: '3px 10px',
-                borderRadius: '6px',
-                background: 'rgba(143, 160, 126, 0.22)',
-                color: '#a3b593',
-                border: '1px solid rgba(163, 181, 147, 0.3)',
+                background: 'rgba(40, 122, 69, 0.1)',
+                color: '#166534',
+                border: '1px solid rgba(40, 122, 69, 0.25)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '5px',
@@ -408,7 +410,7 @@ export const CitizenPortal: React.FC = () => {
               <Heart size={13} />
               My Air Dashboard
             </span>
-            <span style={{ fontSize: '11px', color: '#9eab93' }}>Pune &amp; Pimpri-Chinchwad Metropolitan Area</span>
+            <span style={{ fontSize: '11px', color: '#526b59' }}>Pune &amp; Pimpri-Chinchwad Metropolitan Area</span>
           </div>
 
           <h1
@@ -416,7 +418,7 @@ export const CitizenPortal: React.FC = () => {
               fontSize: '2rem',
               fontWeight: 700,
               margin: '0 0 6px 0',
-              color: '#f4f6f0',
+              color: '#0d1710',
               fontFamily: 'var(--font-heading)',
               letterSpacing: '-0.01em',
             }}
@@ -424,7 +426,7 @@ export const CitizenPortal: React.FC = () => {
             How is the air in your neighborhood today?
           </h1>
 
-          <p style={{ margin: 0, fontSize: '0.92rem', color: '#c9d3bf', maxWidth: '720px', lineHeight: 1.5 }}>
+          <p style={{ margin: 0, fontSize: '0.92rem', color: '#475e4e', maxWidth: '720px', lineHeight: 1.5 }}>
             Real-time, zero-jargon air quality insights and practical recommendations for your family, daily exercise, and commute.
           </p>
         </div>
@@ -441,9 +443,9 @@ export const CitizenPortal: React.FC = () => {
               gap: '6px',
               padding: '8px 14px',
               borderRadius: '12px',
-              background: 'rgba(143, 160, 126, 0.12)',
-              border: '1px solid rgba(163, 181, 147, 0.28)',
-              color: '#a3b593',
+              background: 'rgba(40, 122, 69, 0.08)',
+              border: '1px solid rgba(40, 122, 69, 0.22)',
+              color: '#166534',
               fontSize: '0.8rem',
               fontWeight: 600,
               cursor: 'pointer',
@@ -463,9 +465,9 @@ export const CitizenPortal: React.FC = () => {
               gap: '6px',
               padding: '8px 14px',
               borderRadius: '12px',
-              background: 'rgba(143, 160, 126, 0.12)',
-              border: '1px solid rgba(163, 181, 147, 0.28)',
-              color: '#a3b593',
+              background: '#166534',
+              border: '1px solid #14532d',
+              color: '#ffffff',
               fontSize: '0.8rem',
               fontWeight: 600,
               textDecoration: 'none',
@@ -518,13 +520,17 @@ export const CitizenPortal: React.FC = () => {
 
       {/* Unobtrusive Conversational Voice Assistant Accordion */}
       <div
+        className="card"
         style={{
           marginBottom: '1.75rem',
-          background: 'rgba(23, 33, 21, 0.72)',
-          border: '1px solid rgba(163, 181, 147, 0.2)',
+          background: 'rgba(255, 255, 255, 0.85)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          border: '1px solid rgba(40, 122, 69, 0.18)',
           borderRadius: '18px',
           overflow: 'hidden',
           transition: 'all 0.3s ease',
+          boxShadow: '0 8px 30px rgba(22, 38, 25, 0.04)',
         }}
       >
         <button
@@ -532,13 +538,13 @@ export const CitizenPortal: React.FC = () => {
           onClick={() => setVoiceAssistantOpen(!voiceAssistantOpen)}
           style={{
             width: '100%',
-            padding: '12px 20px',
+            padding: '14px 20px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             background: 'none',
             border: 'none',
-            color: '#eef1e7',
+            color: '#0d1710',
             cursor: 'pointer',
             textAlign: 'left',
           }}
@@ -550,8 +556,8 @@ export const CitizenPortal: React.FC = () => {
                 width: '32px',
                 height: '32px',
                 borderRadius: '8px',
-                background: 'rgba(143, 160, 126, 0.2)',
-                color: '#a3b593',
+                background: 'rgba(40, 122, 69, 0.12)',
+                color: '#166534',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -560,23 +566,23 @@ export const CitizenPortal: React.FC = () => {
               <Mic size={18} />
             </div>
             <div>
-              <div style={{ fontSize: '0.88rem', fontWeight: 600, color: '#f4f6f0' }}>
+              <div style={{ fontSize: '0.88rem', fontWeight: 600, color: '#0d1710' }}>
                 AirLens Voice Assistant
               </div>
-              <div style={{ fontSize: '0.74rem', color: '#9eab93' }}>
+              <div style={{ fontSize: '0.74rem', color: '#475e4e' }}>
                 Ask spoken or typed questions about workouts, sensitive health advisories, or clean travel
               </div>
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: '#a3b593', fontWeight: 600 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: '#166534', fontWeight: 600 }}>
             <span>{voiceAssistantOpen ? 'Hide Assistant' : 'Ask Question'}</span>
             {voiceAssistantOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </div>
         </button>
 
         {voiceAssistantOpen && (
-          <div style={{ padding: '0 16px 16px 16px', borderTop: '1px solid rgba(163, 181, 147, 0.12)' }}>
+          <div style={{ padding: '0 16px 16px 16px', borderTop: '1px solid rgba(40, 122, 69, 0.12)' }}>
             <VapiVoiceAssistant
               stationName={selectedStation ? selectedStation.station_name : 'Pune Urban Area'}
               pm25={latestObs?.pm25 ?? null}
@@ -589,8 +595,8 @@ export const CitizenPortal: React.FC = () => {
       {/* Locality & Station Selector Chips */}
       <div style={{ marginBottom: '1.75rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-          <MapPin size={16} color="#8fa07e" />
-          <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#eef1e7', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+          <MapPin size={16} color="#166534" />
+          <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#166534', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Select Your Pune Neighborhood Monitoring Station:
           </span>
         </div>
@@ -609,15 +615,15 @@ export const CitizenPortal: React.FC = () => {
                   gap: '8px',
                   padding: '7px 14px',
                   borderRadius: '12px',
-                  border: isSelected ? '1.5px solid #8fa07e' : '1px solid rgba(163, 181, 147, 0.2)',
+                  border: isSelected ? '1px solid #14532d' : '1px solid rgba(40, 122, 69, 0.2)',
                   background: isSelected
-                    ? 'linear-gradient(135deg, rgba(38, 56, 35, 0.95) 0%, rgba(24, 38, 23, 0.95) 100%)'
-                    : 'rgba(20, 28, 19, 0.65)',
-                  color: isSelected ? '#ffffff' : '#c9d3bf',
+                    ? '#166534'
+                    : 'rgba(255, 255, 255, 0.85)',
+                  color: isSelected ? '#ffffff' : '#1e3a24',
                   fontSize: '0.82rem',
                   fontWeight: isSelected ? 700 : 500,
                   cursor: 'pointer',
-                  boxShadow: isSelected ? '0 4px 14px rgba(0, 0, 0, 0.3)' : 'none',
+                  boxShadow: isSelected ? '0 4px 14px rgba(22, 101, 52, 0.25)' : 'none',
                   transition: 'all 0.18s ease',
                 }}
               >
@@ -626,7 +632,7 @@ export const CitizenPortal: React.FC = () => {
                     width: '7px',
                     height: '7px',
                     borderRadius: '50%',
-                    backgroundColor: isSelected ? '#8fa07e' : '#a3b593',
+                    backgroundColor: isSelected ? '#ffffff' : '#166534',
                   }}
                 />
                 <span>{st.station_name.split(',')[0]}</span>
@@ -639,19 +645,21 @@ export const CitizenPortal: React.FC = () => {
       {/* SECTION E: ACTIVE ALERTS (Displayed ONLY if real active alerts exist for selected locality) */}
       {activeAlerts.length > 0 && (
         <div
+          className="card"
           style={{
             marginBottom: '1.75rem',
             padding: '1.25rem 1.75rem',
             borderRadius: '20px',
-            background: 'rgba(245, 158, 11, 0.12)',
+            background: 'rgba(254, 243, 199, 0.85)',
+            backdropFilter: 'blur(16px)',
             border: '1px solid rgba(245, 158, 11, 0.35)',
-            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.25)',
+            boxShadow: '0 8px 24px rgba(245, 158, 11, 0.08)',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px', flexWrap: 'wrap', gap: '8px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <AlertTriangle size={18} color="#f59e0b" />
-              <span style={{ fontSize: '0.88rem', fontWeight: 700, color: '#fef3c7', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <AlertTriangle size={18} color="#d97706" />
+              <span style={{ fontSize: '0.88rem', fontWeight: 700, color: '#92400e', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 Active Local Environmental Alert ({activeAlerts.length})
               </span>
             </div>
@@ -659,7 +667,7 @@ export const CitizenPortal: React.FC = () => {
               to="/alerts"
               style={{
                 fontSize: '0.78rem',
-                color: '#fbbf24',
+                color: '#b45309',
                 fontWeight: 600,
                 textDecoration: 'none',
                 display: 'flex',
@@ -679,8 +687,8 @@ export const CitizenPortal: React.FC = () => {
                 style={{
                   padding: '10px 14px',
                   borderRadius: '12px',
-                  background: 'rgba(20, 28, 19, 0.65)',
-                  border: '1px solid rgba(245, 158, 11, 0.2)',
+                  background: 'rgba(255, 255, 255, 0.9)',
+                  border: '1px solid rgba(245, 158, 11, 0.25)',
                   display: 'flex',
                   alignItems: 'flex-start',
                   justifyContent: 'space-between',
@@ -688,10 +696,10 @@ export const CitizenPortal: React.FC = () => {
                 }}
               >
                 <div>
-                  <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#ffffff' }}>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#0d1710' }}>
                     {alt.message}
                   </div>
-                  <div style={{ fontSize: '0.72rem', color: 'rgba(238, 241, 231, 0.6)', marginTop: '2px' }}>
+                  <div style={{ fontSize: '0.72rem', color: '#78350f', marginTop: '2px' }}>
                     Type: {alt.alert_type.replace(/_/g, ' ')} · Severity: {alt.severity}
                   </div>
                 </div>
@@ -701,8 +709,8 @@ export const CitizenPortal: React.FC = () => {
                     borderRadius: '6px',
                     fontSize: '10px',
                     fontWeight: 700,
-                    backgroundColor: alt.severity === 'HIGH' ? 'rgba(239, 68, 68, 0.25)' : 'rgba(245, 158, 11, 0.25)',
-                    color: alt.severity === 'HIGH' ? '#fca5a5' : '#fde68a',
+                    backgroundColor: alt.severity === 'HIGH' ? 'rgba(239, 68, 68, 0.15)' : 'rgba(245, 158, 11, 0.2)',
+                    color: alt.severity === 'HIGH' ? '#dc2626' : '#b45309',
                     border: `1px solid ${alt.severity === 'HIGH' ? '#ef4444' : '#f59e0b'}`,
                     whiteSpace: 'nowrap',
                   }}
@@ -726,12 +734,15 @@ export const CitizenPortal: React.FC = () => {
       >
         {/* SECTION A: CURRENT AIR QUALITY */}
         <div
+          className="card"
           style={{
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-            border: '1px solid rgba(163, 181, 147, 0.22)',
+            background: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             borderRadius: '24px',
             padding: '2rem',
-            boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+            boxShadow: '0 10px 30px rgba(22, 38, 25, 0.05)',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
@@ -748,27 +759,27 @@ export const CitizenPortal: React.FC = () => {
                       borderRadius: '6px',
                       fontSize: '11px',
                       fontWeight: 700,
-                      background: latestObs?.data_provenance === 'OBSERVED' ? 'rgba(74, 222, 128, 0.15)' : 'rgba(143, 160, 126, 0.18)',
-                      color: latestObs?.data_provenance === 'OBSERVED' ? '#4ade80' : '#a3b593',
-                      border: '1px solid rgba(163, 181, 147, 0.3)',
+                      background: latestObs?.data_provenance === 'OBSERVED' ? 'rgba(34, 197, 94, 0.12)' : 'rgba(40, 122, 69, 0.1)',
+                      color: latestObs?.data_provenance === 'OBSERVED' ? '#15803d' : '#166534',
+                      border: '1px solid rgba(40, 122, 69, 0.25)',
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '5px',
                     }}
                   >
-                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: latestObs?.data_provenance === 'OBSERVED' ? '#4ade80' : '#a3b593' }} />
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: latestObs?.data_provenance === 'OBSERVED' ? '#15803d' : '#166534' }} />
                     {latestObs?.data_provenance === 'OBSERVED' ? 'Measured reading' : 'Model estimate'}
                   </span>
-                  <span style={{ fontSize: '11px', color: '#9eab93' }}>
+                  <span style={{ fontSize: '11px', color: '#526b59' }}>
                     {latestObs?.data_provenance === 'OBSERVED'
                       ? 'Direct sensor reading from this station'
                       : 'Statistical estimate from neighboring station network'}
                   </span>
                 </div>
-                <h2 style={{ fontSize: '1.35rem', fontWeight: 700, margin: '2px 0 0', color: '#f4f6f0' }}>
+                <h2 style={{ fontSize: '1.35rem', fontWeight: 700, margin: '2px 0 0', color: '#0d1710' }}>
                   {selectedStation ? selectedStation.station_name : 'Monitoring Station'}
                 </h2>
-                <div style={{ fontSize: '0.8rem', color: '#9eab93' }}>
+                <div style={{ fontSize: '0.8rem', color: '#475e4e' }}>
                   {selectedStation ? selectedStation.zone_type : 'Pune Metropolitan Region'}
                 </div>
               </div>
@@ -781,10 +792,10 @@ export const CitizenPortal: React.FC = () => {
                     borderRadius: '12px',
                     fontSize: '0.78rem',
                     fontWeight: 700,
-                    backgroundColor: `${airQualityEval.particulateColor || '#a3b593'}25`,
-                    color: '#ffffff',
-                    border: `1.5px solid ${airQualityEval.particulateColor || '#a3b593'}`,
-                    boxShadow: `0 0 16px ${airQualityEval.particulateColor || '#a3b593'}30`,
+                    backgroundColor: `${airQualityEval.particulateColor || '#166534'}20`,
+                    color: airQualityEval.particulateColor || '#166534',
+                    border: `1.5px solid ${airQualityEval.particulateColor || '#166534'}`,
+                    boxShadow: `0 0 16px ${airQualityEval.particulateColor || '#166534'}25`,
                   }}
                 >
                   {airQualityEval.particulateCategory} Air
@@ -796,9 +807,9 @@ export const CitizenPortal: React.FC = () => {
                     borderRadius: '12px',
                     fontSize: '0.78rem',
                     fontWeight: 700,
-                    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                    color: '#9eab93',
-                    border: '1.5px solid rgba(255, 255, 255, 0.15)',
+                    backgroundColor: 'rgba(40, 122, 69, 0.08)',
+                    color: '#526b59',
+                    border: '1.5px solid rgba(40, 122, 69, 0.18)',
                   }}
                 >
                   Awaiting Data
@@ -811,17 +822,17 @@ export const CitizenPortal: React.FC = () => {
               style={{
                 padding: '8px 12px',
                 borderRadius: '10px',
-                background: airQualityEval.isOfficialAqiAvailable ? 'rgba(74, 222, 128, 0.1)' : 'rgba(255, 255, 255, 0.04)',
-                border: '1px solid rgba(163, 181, 147, 0.16)',
+                background: airQualityEval.isOfficialAqiAvailable ? 'rgba(240, 253, 244, 0.9)' : 'rgba(248, 250, 248, 0.9)',
+                border: '1px solid rgba(40, 122, 69, 0.16)',
                 marginBottom: '1rem',
                 fontSize: '0.76rem',
-                color: '#c9d3bf',
+                color: '#1b432a',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
               }}
             >
-              <Info size={14} color="#a3b593" style={{ flexShrink: 0 }} />
+              <Info size={14} color="#166534" style={{ flexShrink: 0 }} />
               <span>
                 {airQualityEval.isOfficialAqiAvailable ? (
                   <>
@@ -843,13 +854,13 @@ export const CitizenPortal: React.FC = () => {
                 justifyContent: 'space-between',
                 padding: '1.4rem 1.6rem',
                 borderRadius: '20px',
-                background: 'rgba(14, 20, 14, 0.72)',
-                border: '1px solid rgba(163, 181, 147, 0.18)',
+                background: 'rgba(245, 248, 245, 0.95)',
+                border: '1px solid rgba(40, 122, 69, 0.16)',
                 marginBottom: '1.25rem',
               }}
             >
               <div>
-                <div style={{ fontSize: '0.74rem', color: '#9eab93', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                <div style={{ fontSize: '0.74rem', color: '#475e4e', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                   Particulate-Based Air Index (Estimate)
                 </div>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginTop: '2px' }}>
@@ -857,16 +868,16 @@ export const CitizenPortal: React.FC = () => {
                     style={{
                       fontSize: '3.6rem',
                       fontWeight: 800,
-                      color: airQualityEval.particulateColor || '#a3b593',
+                      color: airQualityEval.particulateColor || '#166534',
                       lineHeight: 1,
                       letterSpacing: '-0.03em',
                     }}
                   >
                     {airQualityEval.particulateIndex ?? '--'}
                   </span>
-                  <span style={{ fontSize: '0.9rem', color: '#9eab93', fontWeight: 600 }}>/ 500</span>
+                  <span style={{ fontSize: '0.9rem', color: '#475e4e', fontWeight: 600 }}>/ 500</span>
                 </div>
-                <div style={{ fontSize: '0.72rem', color: '#9eab93', marginTop: '4px' }}>
+                <div style={{ fontSize: '0.72rem', color: '#526b59', marginTop: '4px' }}>
                   Calculated from available {airQualityEval.prominentParticulate || 'PM2.5'} using CPCB sub-index scale
                 </div>
               </div>
@@ -877,12 +888,12 @@ export const CitizenPortal: React.FC = () => {
                   style={{
                     padding: '6px 12px',
                     borderRadius: '10px',
-                    background: 'rgba(255, 255, 255, 0.04)',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    border: '1px solid rgba(40, 122, 69, 0.14)',
                   }}
                 >
-                  <div style={{ fontSize: '0.68rem', color: '#9eab93', textTransform: 'uppercase' }}>PM2.5 Fine Particles</div>
-                  <div style={{ fontSize: '1rem', fontWeight: 700, color: '#f4f6f0' }}>
+                  <div style={{ fontSize: '0.68rem', color: '#526b59', textTransform: 'uppercase', fontWeight: 600 }}>PM2.5 Fine Particles</div>
+                  <div style={{ fontSize: '1rem', fontWeight: 700, color: '#0d1710' }}>
                     {latestObs?.pm25 !== null && latestObs?.pm25 !== undefined ? `${latestObs.pm25.toFixed(1)} µg/m³` : 'Unavailable'}
                   </div>
                 </div>
@@ -891,12 +902,12 @@ export const CitizenPortal: React.FC = () => {
                   style={{
                     padding: '6px 12px',
                     borderRadius: '10px',
-                    background: 'rgba(255, 255, 255, 0.04)',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    border: '1px solid rgba(40, 122, 69, 0.14)',
                   }}
                 >
-                  <div style={{ fontSize: '0.68rem', color: '#9eab93', textTransform: 'uppercase' }}>PM10 Coarse Dust</div>
-                  <div style={{ fontSize: '1rem', fontWeight: 700, color: '#f4f6f0' }}>
+                  <div style={{ fontSize: '0.68rem', color: '#526b59', textTransform: 'uppercase', fontWeight: 600 }}>PM10 Coarse Dust</div>
+                  <div style={{ fontSize: '1rem', fontWeight: 700, color: '#0d1710' }}>
                     {latestObs?.pm10 !== null && latestObs?.pm10 !== undefined ? `${latestObs.pm10.toFixed(1)} µg/m³` : 'Not monitored'}
                   </div>
                 </div>
@@ -908,9 +919,9 @@ export const CitizenPortal: React.FC = () => {
               style={{
                 padding: '1rem 1.25rem',
                 borderRadius: '14px',
-                background: 'rgba(143, 160, 126, 0.1)',
-                borderLeft: `4px solid ${airQualityEval.particulateColor || '#a3b593'}`,
-                color: '#eef1e7',
+                background: 'rgba(240, 248, 242, 0.85)',
+                borderLeft: `4px solid ${airQualityEval.particulateColor || '#166534'}`,
+                color: '#172a1e',
                 fontSize: '0.88rem',
                 lineHeight: 1.5,
                 marginBottom: '1rem',
@@ -926,16 +937,16 @@ export const CitizenPortal: React.FC = () => {
           <div
             style={{
               paddingTop: '0.9rem',
-              borderTop: '1px solid rgba(163, 181, 147, 0.15)',
+              borderTop: '1px solid rgba(40, 122, 69, 0.14)',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
               fontSize: '0.78rem',
-              color: '#9eab93',
+              color: '#526b59',
             }}
           >
             <span>Verified by {selectedStation?.monitoring_authority || 'IITM SAFAR / CPCB'}</span>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#a3b593', fontWeight: 600 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#166534', fontWeight: 600 }}>
               <Clock size={12} />
               <span>{formatTimestamp(latestObs?.datetime_local_ist || latestObs?.datetime_utc)}</span>
             </div>
@@ -944,12 +955,15 @@ export const CitizenPortal: React.FC = () => {
 
         {/* SECTION C: QUICK RECOMMENDATIONS */}
         <div
+          className="card"
           style={{
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-            border: '1px solid rgba(163, 181, 147, 0.22)',
+            background: 'rgba(255, 255, 255, 0.85)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             borderRadius: '24px',
             padding: '2rem',
-            boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+            boxShadow: '0 10px 30px rgba(22, 38, 25, 0.05)',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
@@ -958,12 +972,12 @@ export const CitizenPortal: React.FC = () => {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Heart size={20} color="#8fa07e" />
-                <h2 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: '#f4f6f0' }}>
+                <Heart size={20} color="#166534" />
+                <h2 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
                   Quick Practical Recommendations
                 </h2>
               </div>
-              <span style={{ fontSize: '0.74rem', color: '#9eab93' }}>Data-calibrated</span>
+              <span style={{ fontSize: '0.74rem', color: '#526b59', fontWeight: 600 }}>Data-calibrated</span>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
@@ -973,8 +987,8 @@ export const CitizenPortal: React.FC = () => {
                   style={{
                     padding: '1rem 1.15rem',
                     borderRadius: '16px',
-                    background: 'rgba(14, 22, 14, 0.65)',
-                    border: '1px solid rgba(163, 181, 147, 0.14)',
+                    background: 'rgba(245, 248, 245, 0.95)',
+                    border: '1px solid rgba(40, 122, 69, 0.14)',
                     display: 'flex',
                     alignItems: 'flex-start',
                     gap: '12px',
@@ -998,10 +1012,10 @@ export const CitizenPortal: React.FC = () => {
                     {rec.icon}
                   </div>
                   <div>
-                    <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#f4f6f0' }}>
+                    <div style={{ fontWeight: 700, fontSize: '0.88rem', color: '#0d1710' }}>
                       {rec.title}
                     </div>
-                    <div style={{ fontSize: '0.8rem', color: '#c9d3bf', marginTop: '3px', lineHeight: 1.45 }}>
+                    <div style={{ fontSize: '0.8rem', color: '#374151', marginTop: '3px', lineHeight: 1.45 }}>
                       {rec.desc}
                     </div>
                   </div>
@@ -1013,15 +1027,15 @@ export const CitizenPortal: React.FC = () => {
           <div
             style={{
               paddingTop: '0.9rem',
-              borderTop: '1px solid rgba(163, 181, 147, 0.15)',
+              borderTop: '1px solid rgba(40, 122, 69, 0.14)',
               fontSize: '0.75rem',
-              color: 'rgba(238, 241, 231, 0.5)',
+              color: '#526b59',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
             }}
           >
-            <Info size={13} />
+            <Info size={13} color="#166534" />
             <span>Practical resident suggestions based on current measured particulate levels and CPCB guidance.</span>
           </div>
         </div>
@@ -1029,20 +1043,23 @@ export const CitizenPortal: React.FC = () => {
 
       {/* SECTION B: TODAY'S FORECAST */}
       <div
+        className="card"
         style={{
-          background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-          border: '1px solid rgba(163, 181, 147, 0.22)',
+          background: 'rgba(255, 255, 255, 0.85)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          border: '1px solid rgba(40, 122, 69, 0.18)',
           borderRadius: '24px',
           padding: '1.75rem 2rem',
           marginBottom: '1.75rem',
-          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+          boxShadow: '0 10px 30px rgba(22, 38, 25, 0.05)',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Clock size={18} color="#8fa07e" />
-              <h2 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: '#f4f6f0' }}>
+              <Clock size={18} color="#166534" />
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
                 Today&apos;s Next-Hour Forecast
               </h2>
             </div>
@@ -1053,9 +1070,9 @@ export const CitizenPortal: React.FC = () => {
                 alignItems: 'center',
                 gap: '5px',
                 fontSize: '0.76rem',
-                color: '#a3b593',
-                background: 'rgba(143, 160, 126, 0.12)',
-                border: '1px solid rgba(163, 181, 147, 0.25)',
+                color: '#166534',
+                background: 'rgba(40, 122, 69, 0.08)',
+                border: '1px solid rgba(40, 122, 69, 0.22)',
                 padding: '3px 10px',
                 borderRadius: '8px',
                 textDecoration: 'none',
@@ -1077,7 +1094,7 @@ export const CitizenPortal: React.FC = () => {
                 gap: '6px',
                 padding: '4px 12px',
                 borderRadius: '8px',
-                background: 'rgba(14, 20, 14, 0.65)',
+                background: 'rgba(245, 248, 245, 0.95)',
                 border: `1px solid ${trend.badgeColor}40`,
                 fontSize: '0.78rem',
                 color: trend.badgeColor,
@@ -1096,10 +1113,10 @@ export const CitizenPortal: React.FC = () => {
             style={{
               padding: '8px 14px',
               borderRadius: '12px',
-              background: 'rgba(14, 20, 14, 0.5)',
-              border: '1px solid rgba(163, 181, 147, 0.12)',
+              background: 'rgba(240, 248, 242, 0.85)',
+              border: '1px solid rgba(40, 122, 69, 0.14)',
               fontSize: '0.82rem',
-              color: '#c9d3bf',
+              color: '#172a1e',
               marginBottom: '1.25rem',
             }}
           >
@@ -1113,10 +1130,10 @@ export const CitizenPortal: React.FC = () => {
             style={{
               padding: '1.5rem',
               borderRadius: '16px',
-              background: 'rgba(14, 20, 14, 0.55)',
-              border: '1px solid rgba(163, 181, 147, 0.12)',
+              background: 'rgba(245, 248, 245, 0.95)',
+              border: '1px solid rgba(40, 122, 69, 0.14)',
               textAlign: 'center',
-              color: '#9eab93',
+              color: '#526b59',
               fontSize: '0.86rem',
             }}
           >
@@ -1147,32 +1164,32 @@ export const CitizenPortal: React.FC = () => {
                   style={{
                     padding: '1rem 0.85rem',
                     borderRadius: '16px',
-                    background: 'rgba(14, 20, 14, 0.65)',
-                    border: '1px solid rgba(163, 181, 147, 0.14)',
+                    background: 'rgba(245, 248, 245, 0.95)',
+                    border: '1px solid rgba(40, 122, 69, 0.14)',
                     textAlign: 'center',
                   }}
                 >
-                  <div style={{ fontSize: '0.78rem', color: '#9eab93', fontWeight: 600 }}>{timeLabel}</div>
+                  <div style={{ fontSize: '0.78rem', color: '#526b59', fontWeight: 600 }}>{timeLabel}</div>
                   <div
                     style={{
                       fontSize: '1.45rem',
                       fontWeight: 800,
                       margin: '6px 0',
-                      color: stepCat?.color || '#a3b593',
+                      color: stepCat?.color || '#166534',
                     }}
                   >
                     {step.predicted_pm25.toFixed(1)}
                   </div>
-                  <div style={{ fontSize: '0.7rem', color: '#9eab93', marginBottom: '6px' }}>µg/m³ PM2.5</div>
+                  <div style={{ fontSize: '0.7rem', color: '#526b59', marginBottom: '6px' }}>µg/m³ PM2.5</div>
                   <span
                     style={{
                       fontSize: '10px',
                       fontWeight: 700,
                       padding: '2px 8px',
                       borderRadius: '8px',
-                      background: `${stepCat?.color || '#a3b593'}20`,
-                      color: stepCat?.color || '#a3b593',
-                      border: `1px solid ${stepCat?.color || '#a3b593'}50`,
+                      background: `${stepCat?.color || '#166534'}20`,
+                      color: stepCat?.color || '#166534',
+                      border: `1px solid ${stepCat?.color || '#166534'}50`,
                     }}
                   >
                     {step.aqi_category || stepCat?.category || 'Expected'}
@@ -1186,23 +1203,26 @@ export const CitizenPortal: React.FC = () => {
 
       {/* SECTION D: LOCAL AIR QUALITY PREVIEW (COMPACT PUNE MAP) */}
       <div
+        className="card"
         style={{
-          background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-          border: '1px solid rgba(163, 181, 147, 0.22)',
+          background: 'rgba(255, 255, 255, 0.85)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          border: '1px solid rgba(40, 122, 69, 0.18)',
           borderRadius: '24px',
           padding: '1.75rem 2rem',
-          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+          boxShadow: '0 10px 30px rgba(22, 38, 25, 0.05)',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '10px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Layers size={18} color="#8fa07e" />
-              <h2 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: '#f4f6f0' }}>
+              <Layers size={18} color="#166534" />
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
                 Pune Pollution Map Preview
               </h2>
             </div>
-            <div style={{ fontSize: '0.78rem', color: '#9eab93', marginTop: '2px' }}>
+            <div style={{ fontSize: '0.78rem', color: '#475e4e', marginTop: '2px' }}>
               Continuous spatial monitoring grid covering PMC &amp; PCMC metropolitan areas
             </div>
           </div>
@@ -1215,13 +1235,13 @@ export const CitizenPortal: React.FC = () => {
               gap: '6px',
               padding: '8px 16px',
               borderRadius: '12px',
-              background: 'linear-gradient(135deg, #7c936b 0%, #4a5c3e 100%)',
+              background: '#166534',
               color: '#ffffff',
               fontSize: '0.82rem',
               fontWeight: 700,
               textDecoration: 'none',
-              border: '1px solid rgba(163, 181, 147, 0.4)',
-              boxShadow: '0 4px 14px rgba(0, 0, 0, 0.2)',
+              border: '1px solid #14532d',
+              boxShadow: '0 4px 14px rgba(22, 101, 52, 0.2)',
               transition: 'all 0.2s ease',
             }}
           >
@@ -1236,7 +1256,7 @@ export const CitizenPortal: React.FC = () => {
             height: '340px',
             borderRadius: '18px',
             overflow: 'hidden',
-            border: '1px solid rgba(163, 181, 147, 0.2)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             position: 'relative',
           }}
         >
@@ -1258,7 +1278,7 @@ export const CitizenPortal: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#9eab93',
+                color: '#526b59',
                 fontSize: '0.88rem',
               }}
             >
