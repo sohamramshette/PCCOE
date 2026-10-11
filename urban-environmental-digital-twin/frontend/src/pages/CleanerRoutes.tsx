@@ -115,26 +115,39 @@ export const CleanerRoutes: React.FC = () => {
   const simIndexRef = useRef<number>(0);
   const simIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const selectedRouteRef = useRef<RouteOption | null>(null);
+  const cachedRoutesRef = useRef<RouteOption[] | null>(null);
 
   // 1. Fetch Station Network and Latest Observations
   const loadStationData = useCallback(async () => {
     try {
       setIsLoadingStations(true);
       const stationList = await getStations(true);
-      setStations(stationList);
 
       const obsMap: Record<number, ObservationItem | null> = {};
       await Promise.all(
         stationList.map(async (st) => {
           try {
-            const res = await getObservations(st.station_id, { limit: 1, order: 'desc' });
+            const res = await getObservations(st.station_id, {
+              limit: 1,
+              order: 'desc',
+              valid_pm25_only: true,
+            });
             obsMap[st.station_id] = res.items.length > 0 ? res.items[0] : null;
           } catch {
             obsMap[st.station_id] = null;
           }
         })
       );
+
+      // Set stations AND observations simultaneously to prevent race condition
+      setStations(stationList);
       setStationObservations(obsMap);
+
+      // If routes have already been calculated, refresh them with fresh observations
+      if (cachedRoutesRef.current && cachedRoutesRef.current.length > 0) {
+        const refreshed = compareRoutes(cachedRoutesRef.current, stationList, obsMap);
+        setRouteResults(refreshed);
+      }
     } catch {
       // Station network fallback
     } finally {
@@ -328,6 +341,7 @@ export const CleanerRoutes: React.FC = () => {
         return;
       }
 
+      cachedRoutesRef.current = routes;
       const compared = compareRoutes(routes, stations, stationObservations);
       setRouteResults(compared);
 
