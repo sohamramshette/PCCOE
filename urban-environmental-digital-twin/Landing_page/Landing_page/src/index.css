@@ -1324,6 +1324,12 @@ button:focus-visible {
   color: var(--al-ink);
 }
 
+.nav-link.is-active {
+  color: #ffffff;
+  font-weight: 500;
+  text-shadow: 0 0 12px rgba(163, 181, 147, 0.45);
+}
+
 .nav-dot {
   color: var(--al-ink-faint);
   font-size: 0.8rem;

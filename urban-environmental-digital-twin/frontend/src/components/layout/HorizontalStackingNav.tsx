@@ -11,7 +11,6 @@ import {
   TrendingUp,
   SlidersHorizontal,
   Compass,
-  Activity,
   Sparkles,
   Wind,
   Bell,
@@ -21,6 +20,7 @@ import {
   Minimize2,
   Sidebar as SidebarIcon,
 } from 'lucide-react';
+import { AirLensLogo } from '../common/AirLensLogo';
 
 interface HorizontalStackingNavProps {
   onToggleSidebarMode?: () => void;
@@ -98,16 +98,12 @@ export const HorizontalStackingNav: React.FC<HorizontalStackingNavProps> = ({
         >
           <div
             style={{
-              background: 'rgba(34, 197, 94, 0.2)',
-              color: '#4ade80',
-              padding: '6px',
-              borderRadius: '10px',
               display: 'grid',
               placeItems: 'center',
-              border: '1px solid rgba(74, 222, 128, 0.3)',
             }}
+            aria-hidden="true"
           >
-            <Activity size={17} />
+            <AirLensLogo size={24} />
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>

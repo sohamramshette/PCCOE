@@ -1,35 +1,72 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { LogIn, Menu, X } from 'lucide-react';
+import { scrollToCard } from '../utils/scrollHelper';
+
+const NAV_MENUS = [
+  { id: 'environmental-intelligence', label: 'Environmental Intelligence' },
+  { id: 'live-monitoring-map', label: 'Live Monitoring Map' },
+  { id: 'digital-twin-explorer', label: 'Digital Twin Explorer' },
+  { id: 'data-transparency', label: 'Data Transparency' }
+];
 
 export default function AirLensNav() {
   const navigate = useNavigate();
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
+
+      // Determine active scrolling card section in stack
+      const sections = Array.from(document.querySelectorAll('.stack-card-section'));
+      if (sections.length > 1) {
+        const scrollY = window.scrollY;
+        let cumulative = sections[0].offsetHeight;
+        let current = '';
+        for (let i = 1; i < sections.length; i++) {
+          const sec = sections[i];
+          const nextHeight = sec.offsetHeight;
+          if (scrollY >= cumulative - 120 && scrollY < cumulative + nextHeight - 120) {
+            current = sec.id;
+            break;
+          }
+          cumulative += nextHeight;
+        }
+        setActiveSection(current);
+      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (targetPath, anchorId) => {
+  const handleNavClick = (anchorId) => {
     setMobileMenuOpen(false);
-    if (anchorId && location.pathname === '/') {
-      const element = document.getElementById(anchorId);
-      if (element) {
-        if (window.__lenis) {
-          window.__lenis.scrollTo(element, { duration: 1.2, offset: 0 });
-        } else {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-        return;
-      }
+    if (location.pathname === '/') {
+      scrollToCard(anchorId);
+    } else {
+      navigate('/', { state: { scrollTo: anchorId } });
     }
-    navigate(targetPath);
+  };
+
+  const handleBrandClick = () => {
+    setMobileMenuOpen(false);
+    if (location.pathname === '/') {
+      const allSections = document.querySelectorAll('.stack-card-section');
+      allSections.forEach((s) => {
+        s.style.visibility = 'visible';
+      });
+      if (window.__lenis) {
+        window.__lenis.scrollTo(0, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else {
+      navigate('/');
+    }
   };
 
   const handleLoginClick = () => {
@@ -43,17 +80,7 @@ export default function AirLensNav() {
         {/* Brand Left */}
         <div
           className="airlens-nav-brand"
-          onClick={() => {
-            if (location.pathname === '/') {
-              if (window.__lenis) {
-                window.__lenis.scrollTo(0, { duration: 1.2 });
-              } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }
-            } else {
-              navigate('/');
-            }
-          }}
+          onClick={handleBrandClick}
           role="button"
           tabIndex={0}
         >
@@ -73,31 +100,20 @@ export default function AirLensNav() {
           </div>
         </div>
 
-        {/* Center Links */}
+        {/* Center Links - 4 Scrolling Card Menus */}
         <div className="airlens-nav-links">
-          <button type="button" onClick={() => handleNavClick('/digital-twin', 'live-twin')} className="nav-link">
-            Digital Twin Map
-          </button>
-          <span className="nav-dot" aria-hidden="true">·</span>
-          <button type="button" onClick={() => handleNavClick('/stations', null)} className="nav-link">
-            Stations
-          </button>
-          <span className="nav-dot" aria-hidden="true">·</span>
-          <button type="button" onClick={() => handleNavClick('/forecast', null)} className="nav-link">
-            Forecast
-          </button>
-          <span className="nav-dot" aria-hidden="true">·</span>
-          <button type="button" onClick={() => handleNavClick('/scenarios', null)} className="nav-link">
-            Scenarios
-          </button>
-          <span className="nav-dot" aria-hidden="true">·</span>
-          <button type="button" onClick={() => handleNavClick('/backtracking', null)} className="nav-link">
-            Backtracking
-          </button>
-          <span className="nav-dot" aria-hidden="true">·</span>
-          <button type="button" onClick={() => handleNavClick('/data-methodology', 'methodology')} className="nav-link">
-            Methodology
-          </button>
+          {NAV_MENUS.map((item, index) => (
+            <React.Fragment key={item.id}>
+              {index > 0 && <span className="nav-dot" aria-hidden="true">·</span>}
+              <button
+                type="button"
+                onClick={() => handleNavClick(item.id)}
+                className={`nav-link ${activeSection === item.id ? 'is-active' : ''}`}
+              >
+                {item.label}
+              </button>
+            </React.Fragment>
+          ))}
         </div>
 
         {/* Right Nav CTA: Login Button */}
@@ -139,24 +155,16 @@ export default function AirLensNav() {
           >
             Login to Portals →
           </button>
-          <button type="button" onClick={() => handleNavClick('/digital-twin')} className="mobile-link">
-            Digital Twin Map
-          </button>
-          <button type="button" onClick={() => handleNavClick('/stations')} className="mobile-link">
-            Stations Profile
-          </button>
-          <button type="button" onClick={() => handleNavClick('/forecast')} className="mobile-link">
-            Next-Hour Forecast
-          </button>
-          <button type="button" onClick={() => handleNavClick('/scenarios')} className="mobile-link">
-            What-If Scenarios
-          </button>
-          <button type="button" onClick={() => handleNavClick('/backtracking')} className="mobile-link">
-            Atmospheric Backtracking
-          </button>
-          <button type="button" onClick={() => handleNavClick('/data-methodology')} className="mobile-link">
-            Data & Methodology
-          </button>
+          {NAV_MENUS.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => handleNavClick(item.id)}
+              className={`mobile-link ${activeSection === item.id ? 'is-active' : ''}`}
+            >
+              {item.label}
+            </button>
+          ))}
         </div>
       )}
     </header>

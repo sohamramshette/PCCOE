@@ -8,7 +8,6 @@ import {
   Shield,
   KeyRound,
   LogOut,
-  Activity,
   Heart,
   Layers,
   LayoutDashboard,
@@ -24,6 +23,7 @@ import {
 } from 'lucide-react';
 import { getHealth } from '../../api/health';
 import { HealthResponse } from '../../types/common';
+import { AirLensLogo } from '../common/AirLensLogo';
 
 export const Navbar: React.FC = () => {
   const location = useLocation();
@@ -155,19 +155,7 @@ export const Navbar: React.FC = () => {
             }}
             title="Return to 3D Living World"
           >
-            <div
-              style={{
-                background: 'linear-gradient(135deg, #166534 0%, #15803d 100%)',
-                color: '#ffffff',
-                padding: '7px',
-                borderRadius: '12px',
-                display: 'grid',
-                placeItems: 'center',
-                boxShadow: '0 2px 8px rgba(22, 101, 52, 0.25)',
-              }}
-            >
-              <Activity size={18} />
-            </div>
+            <AirLensLogo size={20} withBackground={true} />
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
                 <span

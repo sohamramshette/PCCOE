@@ -1418,6 +1418,12 @@ button:focus-visible {
   color: var(--al-ink);
 }
 
+.nav-link.is-active {
+  color: #ffffff;
+  font-weight: 500;
+  text-shadow: 0 0 12px rgba(163, 181, 147, 0.45);
+}
+
 .nav-dot {
   color: var(--al-ink-faint);
   font-size: 0.8rem;
@@ -3840,6 +3846,10 @@ button:focus-visible {
     text-align: left;
     padding: 8px 4px;
     cursor: pointer;
+  }
+  .mobile-link.is-active {
+    color: #a3b593;
+    font-weight: 600;
   }
   .mobile-login-btn {
     background: rgba(143, 160, 126, 0.2);
@@ -6579,7 +6589,17 @@ h1, h2, h3, h4 {
 .airlens-section .card-heading,
 .section-bigger-picture .section-title,
 .section-bigger-picture .card-heading,
-.signal-card .card-heading {
+.signal-card .card-heading,
+.auth-page-root h1,
+.auth-page-root h2,
+.auth-page-root h3,
+.auth-page-root h4,
+.auth-title,
+.portal-name,
+.demo-login-heading,
+.auth-modal-window h1,
+.auth-modal-window h2,
+.auth-modal-window h3 {
   color: #ffffff !important;
 }
 

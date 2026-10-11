@@ -20,6 +20,16 @@
   box-sizing: border-box;
 }
 
+.auth-page-root h1,
+.auth-page-root h2,
+.auth-page-root h3,
+.auth-page-root h4,
+.auth-title,
+.portal-name,
+.demo-login-heading {
+  color: #ffffff !important;
+}
+
 /* Atmospheric Noise / Glow Overlay */
 .auth-page-glow {
   position: absolute;
@@ -125,7 +135,7 @@
 .auth-title {
   font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 700;
-  color: #f7f9f5;
+  color: #ffffff !important;
   letter-spacing: -0.02em;
   line-height: 1.15;
   margin: 0 0 14px 0;
@@ -257,7 +267,7 @@
 .portal-name {
   font-size: 1.45rem;
   font-weight: 700;
-  color: #f7f9f5;
+  color: #ffffff !important;
   margin: 0 0 10px 0;
   letter-spacing: -0.01em;
 }
@@ -411,7 +421,7 @@
 .demo-login-heading {
   font-size: 2rem;
   font-weight: 700;
-  color: #f7f9f5;
+  color: #ffffff !important;
   margin: 0 0 10px 0;
   letter-spacing: -0.02em;
 }

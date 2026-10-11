@@ -6,7 +6,6 @@ import {
   MapPin,
   TrendingUp,
   SlidersHorizontal,
-  Activity,
   Layers,
   PanelLeftClose,
   PanelLeftOpen,
@@ -22,6 +21,7 @@ import {
 } from 'lucide-react';
 import { getHealth } from '../../api/health';
 import { HealthResponse } from '../../types/common';
+import { AirLensLogo } from '../common/AirLensLogo';
 
 interface SidebarProps {
   collapsed: boolean;
@@ -114,8 +114,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle, onSwitchT
     <aside className="sidebar">
       <div className="sidebar-header">
         <Link to="/" className="brand-title" aria-label="Return to AirLens Living World Landing Page" title="Return to 3D Living World">
-          <div className="landing-brand-mark" aria-hidden="true" style={{ background: 'rgba(34, 197, 94, 0.2)', color: '#4ade80', padding: '6px', borderRadius: '10px', display: 'grid', placeItems: 'center' }}>
-            <Activity size={18} />
+          <div className="landing-brand-mark" aria-hidden="true" style={{ display: 'grid', placeItems: 'center' }}>
+            <AirLensLogo size={24} />
           </div>
           <div className="brand-copy">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>

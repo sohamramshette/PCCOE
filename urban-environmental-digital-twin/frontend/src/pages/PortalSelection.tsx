@@ -29,7 +29,7 @@ export const PortalSelection: React.FC = () => {
       <main className="auth-stage-container">
         <div className="auth-header-block">
           <span className="auth-eyebrow">Portal Selection</span>
-          <h1 className="auth-title">Choose Your Portal</h1>
+          <h1 className="auth-title" style={{ color: '#ffffff' }}>Choose Your Portal</h1>
           <p className="auth-subtitle">
             Access Pune &amp; Pimpri-Chinchwad&apos;s urban environmental intelligence tailored to your role.
           </p>
@@ -48,7 +48,7 @@ export const PortalSelection: React.FC = () => {
               </div>
 
               <div className="portal-card-body">
-                <h2 className="portal-name">User Portal</h2>
+                <h2 className="portal-name" style={{ color: '#ffffff' }}>User Portal</h2>
                 <p className="portal-desc">
                   Explore local air quality, pollution hotspots, forecasts, and cleaner routes.
                 </p>
@@ -92,7 +92,7 @@ export const PortalSelection: React.FC = () => {
               </div>
 
               <div className="portal-card-body">
-                <h2 className="portal-name">Authority Portal</h2>
+                <h2 className="portal-name" style={{ color: '#ffffff' }}>Authority Portal</h2>
                 <p className="portal-desc">
                   Access citywide environmental monitoring and authority-specific tools.
                 </p>

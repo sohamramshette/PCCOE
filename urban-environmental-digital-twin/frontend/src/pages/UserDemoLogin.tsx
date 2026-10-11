@@ -55,7 +55,7 @@ export const UserDemoLogin: React.FC = () => {
             <Heart size={34} />
           </div>
 
-          <h1 className="demo-login-heading">User Login</h1>
+          <h1 className="demo-login-heading" style={{ color: '#ffffff' }}>User Login</h1>
           <p className="demo-login-subtext">
             Enter the citizen air quality portal to view neighborhood PM2.5 levels, daily health advisories, and clean travel recommendations across Pune.
           </p>

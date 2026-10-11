@@ -1,4 +1,5 @@
 import React from 'react';
+import { AirLensLogo } from './common/AirLensLogo';
 
 export default function AirLensFooter() {
   const scrollTo = (id) => {
@@ -12,9 +13,9 @@ export default function AirLensFooter() {
         <div className="footer-top-grid">
           {/* Brand Col */}
           <div className="footer-brand-col">
-            <div className="footer-brand-title">
-              <span className="footer-logo-dot"></span>
-              AirLens
+            <div className="footer-brand-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <AirLensLogo size={20} />
+              <span>AirLens</span>
             </div>
             <p className="footer-tagline">
               Urban Environmental Digital Twin for Pune and Pimpri-Chinchwad. Connecting observational sensor telemetry, atmospheric dispersion models, and policy simulation.

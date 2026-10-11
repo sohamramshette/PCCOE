@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../shaders/threeui.css';
 
 import AirLensNav from '../components/AirLensNav';
@@ -11,9 +11,11 @@ import TransparencySection from '../components/TransparencySection';
 import CtaSection from '../components/CtaSection';
 import AirLensFooter from '../components/AirLensFooter';
 import StackingSections, { StackSection } from '../components/StackingSections';
+import { scrollToCard } from '../utils/scrollHelper';
 
 export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     document.body.classList.add('is-ready');
@@ -22,19 +24,22 @@ export const LandingPage: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (location.state && (location.state as any).scrollTo) {
+      const targetId = (location.state as any).scrollTo;
+      const timer = setTimeout(() => {
+        scrollToCard(targetId);
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, [location.state]);
+
   const handleOpenDashboard = () => {
     navigate('/dashboard');
   };
 
   const handleScrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      if ((window as any).__lenis) {
-        (window as any).__lenis.scrollTo(el, { duration: 1.2, offset: 0 });
-      } else {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+    scrollToCard(id);
   };
 
   return (
@@ -45,35 +50,35 @@ export const LandingPage: React.FC = () => {
       {/* Stacking Sections - Each page overlays on top of the previous one on scroll */}
       <StackingSections>
         {/* Page 01: Hero Section with 3D Scene */}
-        <StackSection className="stack-section-hero">
+        <StackSection className="stack-section-hero" id="hero-section">
           <HeroSection
-            onExploreTwin={() => handleScrollTo('live-twin')}
-            onDiscoverApproach={() => handleScrollTo('how-it-works')}
+            onExploreTwin={() => handleScrollTo('live-monitoring-map')}
+            onDiscoverApproach={() => handleScrollTo('digital-twin-explorer')}
           />
         </StackSection>
 
-        {/* Page 02: The Bigger Picture */}
-        <StackSection>
+        {/* Page 02: Card 01 - Environmental Intelligence */}
+        <StackSection id="environmental-intelligence">
           <BiggerPictureSection />
         </StackSection>
 
-        {/* Page 03: The Live Twin */}
-        <StackSection>
+        {/* Page 03: Card 02 - Live Monitoring Map */}
+        <StackSection id="live-monitoring-map">
           <LiveTwinSection onExploreTwin={handleOpenDashboard} />
         </StackSection>
 
-        {/* Page 04: From Data to Decisions */}
-        <StackSection>
+        {/* Page 04: Card 03 - Digital Twin Explorer */}
+        <StackSection id="digital-twin-explorer">
           <DataToDecisionsSection onOpenDashboard={handleOpenDashboard} />
         </StackSection>
 
-        {/* Page 05: Built for Transparency */}
-        <StackSection>
-          <TransparencySection onExploreMethodology={() => handleScrollTo('methodology')} />
+        {/* Page 05: Card 04 - Data Transparency */}
+        <StackSection id="data-transparency">
+          <TransparencySection onExploreMethodology={() => handleScrollTo('data-transparency')} />
         </StackSection>
 
         {/* Page 06: Final Call to Action & Footer */}
-        <StackSection className="stack-section-final">
+        <StackSection className="stack-section-final" id="final-section">
           <CtaSection onEnterAirLens={handleOpenDashboard} />
           <AirLensFooter />
         </StackSection>
@@ -83,3 +88,4 @@ export const LandingPage: React.FC = () => {
 };
 
 export default LandingPage;
+

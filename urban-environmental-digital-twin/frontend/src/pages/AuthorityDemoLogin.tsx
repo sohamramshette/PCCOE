@@ -55,7 +55,7 @@ export const AuthorityDemoLogin: React.FC = () => {
             <Shield size={34} />
           </div>
 
-          <h1 className="demo-login-heading">Authority Login</h1>
+          <h1 className="demo-login-heading" style={{ color: '#ffffff' }}>Authority Login</h1>
           <p className="demo-login-subtext">
             Access the high-resolution digital twin control room, continuous sensor telemetry, What-If policy simulations, and trajectory backtracking.
           </p>
