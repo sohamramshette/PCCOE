@@ -554,12 +554,6 @@ export const PollutionSources: React.FC = () => {
 
       {/* 4. Main Two-Column Layout: Interactive Map + Scientific Interpretation */}
       <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'minmax(420px, 1.35fr) minmax(360px, 1fr)',
-          gap: '1.75rem',
-          alignItems: 'start',
-        }}
         className="pollution-sources-layout"
       >
         {/* Left Column: Atmospheric Airflow Map */}

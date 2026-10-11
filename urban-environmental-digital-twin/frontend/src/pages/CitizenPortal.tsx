@@ -702,9 +702,10 @@ export const CitizenPortal: React.FC = () => {
 
       {/* MAIN GRID: SECTION A (CURRENT AQI) & SECTION C (RECOMMENDATIONS) */}
       <div
+        className="citizen-main-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 380px), 1fr))',
           gap: '1.75rem',
           marginBottom: '1.75rem',
         }}

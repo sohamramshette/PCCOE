@@ -922,12 +922,6 @@ export const CleanerRoutes: React.FC = () => {
 
       {/* 2. Unified Two-Column Studio Layout */}
       <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'minmax(380px, 460px) 1fr',
-          gap: '1.5rem',
-          alignItems: 'start',
-        }}
         className="cleaner-routes-studio-grid"
       >
         {/* ========================================================= */}

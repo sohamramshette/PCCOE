@@ -23,7 +23,6 @@ export const Layout: React.FC = () => {
           style={{
             maxWidth: '100%',
             width: '100%',
-            padding: '1.75rem 2.5rem',
           }}
         >
           <Outlet />

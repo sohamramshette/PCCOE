@@ -133,14 +133,7 @@ export const Navbar: React.FC = () => {
     >
       {/* 1. Main Header Row: Brand Logo, Breadcrumb, Actions */}
       <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '0.85rem 2rem 0.5rem',
-          flexWrap: 'wrap',
-          gap: '1rem',
-        }}
+        className="top-navbar-brand-row"
       >
         {/* Brand & Subtitle */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -191,7 +184,7 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Right Header Actions */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
+        <div className="top-navbar-actions-row">
           {/* FastAPI Backend Live Status */}
           <div
             style={{
@@ -312,15 +305,7 @@ export const Navbar: React.FC = () => {
       </div>
 
       {/* 2. Horizontal Nav Bar with Proper Padding & Rounding */}
-      <div
-        style={{
-          padding: '0.35rem 2rem 0.75rem',
-          display: 'flex',
-          alignItems: 'center',
-          overflowX: 'auto',
-          scrollbarWidth: 'none',
-        }}
-      >
+      <div className="top-navbar-nav-row">
         <nav
           className="horizontal-nav-pill-track"
           style={{
