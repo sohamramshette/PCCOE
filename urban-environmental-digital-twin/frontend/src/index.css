@@ -6554,6 +6554,24 @@ h1, h2, h3, h4 {
   font-weight: 700 !important;
 }
 
+/* Crisp white headings on dark landing page sections & hero */
+.airlens-hero .hero-title,
+.hero-title,
+.hero-title-line,
+.hero-title .fold-text,
+.hero-title .fold-text-piece,
+.airlens-section h1,
+.airlens-section h2,
+.airlens-section h3,
+.airlens-section h4,
+.airlens-section .section-title,
+.airlens-section .card-heading,
+.section-bigger-picture .section-title,
+.section-bigger-picture .card-heading,
+.signal-card .card-heading {
+  color: #ffffff !important;
+}
+
 .card-subtitle {
   color: #4b6352 !important;
   font-weight: 400 !important;

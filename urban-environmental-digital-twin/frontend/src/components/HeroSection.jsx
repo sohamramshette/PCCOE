@@ -39,14 +39,6 @@ export default function HeroSection({ onExploreTwin, onDiscoverApproach }) {
     }
   };
 
-  const handleApproachClick = () => {
-    if (onDiscoverApproach) {
-      onDiscoverApproach();
-    } else {
-      navigate('/data-methodology');
-    }
-  };
-
   return (
     <section className="airlens-hero" id="hero">
       {/* 3D Living World Scene Background (Sylva living-green Three.js runtime) */}
@@ -78,7 +70,7 @@ export default function HeroSection({ onExploreTwin, onDiscoverApproach }) {
             }
           }}
         >
-          <span className="hero-title-line">
+          <span className="hero-title-line" style={{ color: '#ffffff' }}>
             <FoldText
               text="See the city."
               splitBy="char"
@@ -91,7 +83,7 @@ export default function HeroSection({ onExploreTwin, onDiscoverApproach }) {
               creaseShading={0.45}
               fontSize="inherit"
               fontWeight="inherit"
-              color="inherit"
+              color="#ffffff"
             />
             <span className="butterfly-perch-anchor" aria-hidden="true">
               <InteractiveButterfly
@@ -100,7 +92,7 @@ export default function HeroSection({ onExploreTwin, onDiscoverApproach }) {
               />
             </span>
           </span>
-          <span className="hero-title-line">
+          <span className="hero-title-line" style={{ color: '#ffffff' }}>
             <FoldText
               text="Understand the air."
               splitBy="char"
@@ -113,10 +105,10 @@ export default function HeroSection({ onExploreTwin, onDiscoverApproach }) {
               creaseShading={0.45}
               fontSize="inherit"
               fontWeight="inherit"
-              color="inherit"
+              color="#ffffff"
             />
           </span>
-          <span className="hero-title-line highlight-phrase">
+          <span className="hero-title-line highlight-phrase" style={{ color: '#ffffff' }}>
             <FoldText
               text="Shape what comes next."
               splitBy="char"
@@ -129,16 +121,14 @@ export default function HeroSection({ onExploreTwin, onDiscoverApproach }) {
               creaseShading={0.45}
               fontSize="inherit"
               fontWeight="inherit"
-              color="inherit"
+              color="#ffffff"
             />
           </span>
         </h1>
 
         {/* Hero Short Description */}
         <p className="hero-lead-text">
-          Cities are interconnected living environmental systems. Air quality, weather dynamics, transport emissions, and policy actions converge in real time.
-          <br className="hero-lead-break" />
-          AirLens brings these signals together into a production-grade digital twin of Pune & PCMC, empowering researchers, city authorities, and citizens to explore verified observations, test counterfactual policies, and forecast atmospheric risk.
+          AirLens transforms Pune &amp; PCMC into a living digital twin, unifying environmental intelligence to reveal pollution patterns and predict urban risks. From real-time insights to simulated policies, we turn environmental data into smarter decisions for cleaner cities.
         </p>
 
         {/* Buttons */}
@@ -150,18 +140,6 @@ export default function HeroSection({ onExploreTwin, onDiscoverApproach }) {
             id="btn-hero-explore"
           >
             <span>Explore the Digital Twin</span>
-            <svg className="btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6">
-              <path d="M3.5 8h9M9 4.5l3.5 3.5L9 11.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-
-          <button
-            type="button"
-            className="btn-secondary-subtle"
-            onClick={handleApproachClick}
-            id="btn-hero-approach"
-          >
-            <span>Data & Methodology</span>
             <svg className="btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6">
               <path d="M3.5 8h9M9 4.5l3.5 3.5L9 11.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>

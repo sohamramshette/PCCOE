@@ -78,7 +78,7 @@ export default function BiggerPictureSection() {
         {/* Section Header */}
         <div className="section-header-block">
           <span className="section-eyebrow">THE CITY IS A CONNECTED SYSTEM</span>
-          <h2 className="section-title">Every environmental signal tells part of the story.</h2>
+          <h2 className="section-title" style={{ color: '#ffffff' }}>Every environmental signal tells part of the story.</h2>
           <p className="section-lead">
             Pollution does not exist in isolation. Weather influences dispersion, traffic contributes emissions, and urban activity shapes environmental conditions.
             <br className="section-lead-break" />
@@ -94,7 +94,7 @@ export default function BiggerPictureSection() {
               <span className="card-tag">SIGNAL 01</span>
               <span className="card-status-badge">Ground Truth Sensors</span>
             </div>
-            <h3 className="card-heading">Air Quality Intelligence</h3>
+            <h3 className="card-heading" style={{ color: '#ffffff' }}>Air Quality Intelligence</h3>
             <p className="card-description">
               Understand observed pollution levels and their spatial and temporal patterns.
             </p>
@@ -149,7 +149,7 @@ export default function BiggerPictureSection() {
               <span className="card-tag">SIGNAL 02</span>
               <span className="card-status-badge">IMD Doppler & ECMWF</span>
             </div>
-            <h3 className="card-heading">Atmospheric Context</h3>
+            <h3 className="card-heading" style={{ color: '#ffffff' }}>Atmospheric Context</h3>
             <p className="card-description">
               Explore how weather and environmental conditions relate to air quality.
             </p>
@@ -194,7 +194,7 @@ export default function BiggerPictureSection() {
               <span className="card-tag">SIGNAL 03</span>
               <span className="card-status-badge">WRF-Chem Physics Ensemble</span>
             </div>
-            <h3 className="card-heading">Environmental Forecasting</h3>
+            <h3 className="card-heading" style={{ color: '#ffffff' }}>Environmental Forecasting</h3>
             <p className="card-description">
               Examine model-based estimates of near-term conditions alongside available observations.
             </p>
@@ -236,7 +236,7 @@ export default function BiggerPictureSection() {
               <span className="card-tag">SIGNAL 04</span>
               <span className="card-status-badge">Intervention Twin</span>
             </div>
-            <h3 className="card-heading">Policy Scenario Exploration</h3>
+            <h3 className="card-heading" style={{ color: '#ffffff' }}>Policy Scenario Exploration</h3>
             <p className="card-description">
               Compare potential interventions and their modeled outcomes to support more informed planning.
             </p>
