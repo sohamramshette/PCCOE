@@ -179,10 +179,11 @@ export const Dashboard: React.FC = () => {
       <div
         className="card dashboard-summary-card"
         style={{
-          background: 'linear-gradient(135deg, rgba(34, 48, 33, 0.75) 0%, rgba(19, 27, 18, 0.85) 100%)',
-          border: '1px solid var(--border-subtle, rgba(163, 181, 147, 0.18))',
+          background: '#ffffff',
+          border: '1px solid #e2e8f0',
           borderRadius: '16px',
           padding: '1.75rem',
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)',
         }}
       >
         <div
@@ -200,10 +201,10 @@ export const Dashboard: React.FC = () => {
               <span className="badge badge-observed">Continuous Monitoring</span>
               <span className="badge badge-reanalysis">ECMWF ERA5-Land Reanalysis</span>
             </div>
-            <h2 style={{ position: 'relative', display: 'block', fontSize: '1.65rem', fontWeight: 700, color: 'var(--text-primary, #0d1710)', margin: 0, lineHeight: 1.25 }}>
+            <h2 style={{ position: 'relative', display: 'block', fontSize: '1.65rem', fontWeight: 700, color: '#0f172a', margin: 0, lineHeight: 1.25 }}>
               Pune Urban Environmental Digital Twin
             </h2>
-            <p style={{ fontSize: '0.92rem', color: 'var(--text-secondary, #3d5242)', margin: 0, lineHeight: 1.5, maxWidth: '720px', fontWeight: 450 }}>
+            <p style={{ fontSize: '0.92rem', color: '#475569', margin: 0, lineHeight: 1.5, maxWidth: '720px', fontWeight: 450 }}>
               Multi-source environmental intelligence fusing physical CAAQMS telemetry with atmospheric reanalysis
               and machine learning forecasting for the Pune & PCMC metropolitan corridor.
             </p>
@@ -310,13 +311,12 @@ export const Dashboard: React.FC = () => {
       <div
         className="card"
         style={{
-          borderLeft: activeAlerts.length > 0 ? '4px solid #cf6651' : '4px solid #8fa07e',
-          background:
-            activeAlerts.length > 0
-              ? 'linear-gradient(135deg, rgba(207, 102, 81, 0.1) 0%, rgba(22, 30, 21, 0.88) 100%)'
-              : 'rgba(22, 30, 21, 0.85)',
-          border: '1px solid var(--border-subtle, rgba(163, 181, 147, 0.16))',
+          borderLeft: activeAlerts.length > 0 ? '4px solid #ef4444' : '4px solid #10b981',
+          background: '#ffffff',
+          border: '1px solid #e2e8f0',
+          borderLeftWidth: '4px',
           borderRadius: '16px',
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)',
         }}
       >
         <div
@@ -324,8 +324,8 @@ export const Dashboard: React.FC = () => {
           style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}
         >
           <div>
-            <div className="card-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <AlertTriangle size={18} color={activeAlerts.length > 0 ? '#cf6651' : '#8fa07e'} />
+            <div className="card-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#0f172a' }}>
+              <AlertTriangle size={18} color={activeAlerts.length > 0 ? '#ef4444' : '#10b981'} />
               <span>Active Environmental Alerts</span>
               <span
                 style={{
@@ -333,14 +333,14 @@ export const Dashboard: React.FC = () => {
                   fontWeight: 700,
                   padding: '0.15rem 0.55rem',
                   borderRadius: '9999px',
-                  backgroundColor: activeAlerts.length > 0 ? 'rgba(207, 102, 81, 0.18)' : 'rgba(143, 160, 126, 0.18)',
-                  color: activeAlerts.length > 0 ? '#f87171' : '#a3b593',
+                  backgroundColor: activeAlerts.length > 0 ? '#fee2e2' : '#ecfdf5',
+                  color: activeAlerts.length > 0 ? '#dc2626' : '#059669',
                 }}
               >
                 {activeAlerts.length}
               </span>
             </div>
-            <div className="card-subtitle">
+            <div className="card-subtitle" style={{ color: '#64748b' }}>
               Continuous CAAQMS anomaly detection & dispersion limit monitoring
             </div>
           </div>
@@ -349,15 +349,15 @@ export const Dashboard: React.FC = () => {
             style={{
               fontSize: '0.85rem',
               fontWeight: 600,
-              color: 'var(--primary-light, #a3b593)',
+              color: '#0f172a',
               textDecoration: 'none',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.35rem',
               padding: '0.4rem 0.85rem',
               borderRadius: '8px',
-              backgroundColor: 'rgba(143, 160, 126, 0.14)',
-              border: '1px solid rgba(143, 160, 126, 0.25)',
+              backgroundColor: '#f1f5f9',
+              border: '1px solid #cbd5e1',
               transition: 'background 0.2s ease',
             }}
           >
@@ -387,55 +387,61 @@ export const Dashboard: React.FC = () => {
               marginTop: '0.75rem',
             }}
           >
-            {activeAlerts.slice(0, 4).map((alert) => (
-              <div
-                key={alert.alert_id}
-                style={{
-                  padding: '1rem',
-                  backgroundColor: 'rgba(26, 36, 25, 0.9)',
-                  borderRadius: '12px',
-                  border: '1px solid var(--border-subtle, rgba(163, 181, 147, 0.16))',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.4rem',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.25)',
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <AlertSeverityBadge severity={alert.severity} />
-                  <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                    {formatDateTime(alert.detected_at)}
-                  </span>
-                </div>
-                <div style={{ fontWeight: 650, fontSize: '0.95rem', color: 'var(--text-primary, #0d1710)', marginTop: '0.2rem' }}>
-                  {alert.station_name || `Station #${alert.station_id}`}
-                </div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--primary-dark, #166534)' }}>
-                  {alert.alert_type.replace(/_/g, ' ')}
-                </div>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary, #3d5242)' }}>
-                  {alert.observed_value !== null && alert.expected_value !== null ? (
-                    <span>
-                      <strong>{formatNumber(alert.observed_value, 1)}</strong>
-                      {alert.pollutant ? ' µg/m³' : ''} vs expected{' '}
-                      <strong>{formatNumber(alert.expected_value, 1)}</strong>
-                      {alert.pollutant ? ' µg/m³' : ''}
+            {activeAlerts.slice(0, 4).map((alert) => {
+              const isCritical = alert.severity?.toUpperCase() === 'CRITICAL';
+              return (
+                <div
+                  key={alert.alert_id}
+                  style={{
+                    padding: '1.1rem 1.25rem',
+                    backgroundColor: '#ffffff',
+                    borderRadius: '14px',
+                    border: `1.5px solid ${isCritical ? '#fecaca' : '#fef3c7'}`,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.45rem',
+                    boxShadow: isCritical
+                      ? '0 4px 16px rgba(239, 68, 68, 0.06)'
+                      : '0 4px 16px rgba(245, 158, 11, 0.06)',
+                    transition: 'all 0.2s ease',
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <AlertSeverityBadge severity={alert.severity} />
+                    <span style={{ fontSize: '0.74rem', color: '#64748b', fontWeight: 500 }}>
+                      {formatDateTime(alert.detected_at)}
                     </span>
-                  ) : alert.deviation != null ? (
-                    <span>
-                      Deviation:{' '}
-                      <strong>
-                        {alert.deviation > 0 ? '+' : ''}
-                        {formatNumber(alert.deviation, 1)}
-                      </strong>
-                      {alert.pollutant ? ' µg/m³' : ''}
-                    </span>
-                  ) : (
-                    <span>{alert.message}</span>
-                  )}
+                  </div>
+                  <div style={{ fontWeight: 700, fontSize: '0.96rem', color: '#0f172a', marginTop: '0.2rem', lineHeight: 1.3 }}>
+                    {alert.station_name || `Station #${alert.station_id}`}
+                  </div>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 700, color: isCritical ? '#dc2626' : '#d97706', letterSpacing: '0.02em' }}>
+                    {alert.alert_type.replace(/_/g, ' ')}
+                  </div>
+                  <div style={{ fontSize: '0.82rem', color: '#334155', fontWeight: 500, lineHeight: 1.4 }}>
+                    {alert.observed_value !== null && alert.expected_value !== null ? (
+                      <span>
+                        <strong style={{ color: '#0f172a' }}>{formatNumber(alert.observed_value, 1)}</strong>
+                        {alert.pollutant ? ' µg/m³' : ''} vs expected{' '}
+                        <strong style={{ color: '#0f172a' }}>{formatNumber(alert.expected_value, 1)}</strong>
+                        {alert.pollutant ? ' µg/m³' : ''}
+                      </span>
+                    ) : alert.deviation != null ? (
+                      <span>
+                        Deviation:{' '}
+                        <strong style={{ color: '#0f172a' }}>
+                          {alert.deviation > 0 ? '+' : ''}
+                          {formatNumber(alert.deviation, 1)}
+                        </strong>
+                        {alert.pollutant ? ' µg/m³' : ''}
+                      </span>
+                    ) : (
+                      <span>{alert.message}</span>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
@@ -506,53 +512,54 @@ export const Dashboard: React.FC = () => {
           ) : latestWeather ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div className="weather-metric-grid">
-                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '0.75rem', borderRadius: '10px', border: '1px solid var(--border-subtle)' }}>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                    <Thermometer size={14} color="#60a5fa" /> Temperature
+                <div style={{ background: '#f8fafc', padding: '0.85rem 1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0, 0, 0, 0.02)' }}>
+                  <div style={{ fontSize: '0.75rem', color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.35rem', fontWeight: 600 }}>
+                    <Thermometer size={15} color="#2563eb" /> Temperature
                   </div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
-                    {formatNumber(latestWeather.temp_c, 1)} <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'var(--text-secondary)' }}>°C</span>
-                  </div>
-                </div>
-
-                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '0.75rem', borderRadius: '10px', border: '1px solid var(--border-subtle)' }}>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                    <Droplets size={14} color="#fb923c" /> Humidity
-                  </div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
-                    {formatNumber(latestWeather.humidity_pct, 1)} <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'var(--text-secondary)' }}>%</span>
+                  <div style={{ fontSize: '1.35rem', fontWeight: 800, marginTop: '0.25rem', color: '#0f172a' }}>
+                    {formatNumber(latestWeather.temp_c, 1)} <span style={{ fontSize: '0.85rem', fontWeight: 500, color: '#64748b' }}>°C</span>
                   </div>
                 </div>
 
-                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '0.75rem', borderRadius: '10px', border: '1px solid var(--border-subtle)' }}>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                    <Wind size={14} color="#4ade80" /> Wind Speed
+                <div style={{ background: '#f8fafc', padding: '0.85rem 1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0, 0, 0, 0.02)' }}>
+                  <div style={{ fontSize: '0.75rem', color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.35rem', fontWeight: 600 }}>
+                    <Droplets size={15} color="#ea580c" /> Humidity
                   </div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
-                    {formatNumber(latestWeather.wind_speed_ms, 2)} <span style={{ fontSize: '0.8rem', fontWeight: 400, color: 'var(--text-secondary)' }}>m/s</span>
+                  <div style={{ fontSize: '1.35rem', fontWeight: 800, marginTop: '0.25rem', color: '#0f172a' }}>
+                    {formatNumber(latestWeather.humidity_pct, 1)} <span style={{ fontSize: '0.85rem', fontWeight: 500, color: '#64748b' }}>%</span>
+                  </div>
+                </div>
+
+                <div style={{ background: '#f8fafc', padding: '0.85rem 1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0, 0, 0, 0.02)' }}>
+                  <div style={{ fontSize: '0.75rem', color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.35rem', fontWeight: 600 }}>
+                    <Wind size={15} color="#16a34a" /> Wind Speed
+                  </div>
+                  <div style={{ fontSize: '1.35rem', fontWeight: 800, marginTop: '0.25rem', color: '#0f172a' }}>
+                    {formatNumber(latestWeather.wind_speed_ms, 2)} <span style={{ fontSize: '0.85rem', fontWeight: 500, color: '#64748b' }}>m/s</span>
                   </div>
                 </div>
               </div>
 
               <div className="weather-context-grid">
-                <div style={{ padding: '0.55rem 0.85rem', background: 'rgba(19, 27, 18, 0.75)', border: '1px solid var(--border-subtle)', borderRadius: '8px' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>Surface Pressure:</span>{' '}
-                  <strong style={{ color: 'var(--text-primary)' }}>{formatNumber(latestWeather.pressure_hpa, 1)} hPa</strong>
+                <div style={{ padding: '0.65rem 1rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px' }}>
+                  <span style={{ color: '#64748b', fontSize: '0.8rem' }}>Surface Pressure:</span>{' '}
+                  <strong style={{ color: '#0f172a', fontSize: '0.85rem' }}>{formatNumber(latestWeather.pressure_hpa, 1)} hPa</strong>
                 </div>
-                <div style={{ padding: '0.55rem 0.85rem', background: 'rgba(19, 27, 18, 0.75)', border: '1px solid var(--border-subtle)', borderRadius: '8px' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>Boundary Layer (PBLH):</span>{' '}
-                  <strong style={{ color: 'var(--text-primary)' }}>{formatNumber(latestWeather.pbl_height_m, 0)} m</strong>
+                <div style={{ padding: '0.65rem 1rem', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px' }}>
+                  <span style={{ color: '#64748b', fontSize: '0.8rem' }}>Boundary Layer (PBLH):</span>{' '}
+                  <strong style={{ color: '#0f172a', fontSize: '0.85rem' }}>{formatNumber(latestWeather.pbl_height_m, 0)} m</strong>
                 </div>
               </div>
 
               <div
                 style={{
-                  fontSize: '0.75rem',
-                  color: 'var(--text-muted)',
-                  backgroundColor: 'rgba(96, 165, 250, 0.05)',
-                  padding: '0.65rem 0.85rem',
-                  borderRadius: '6px',
-                  border: '1px solid rgba(96, 165, 250, 0.15)',
+                  fontSize: '0.78rem',
+                  color: '#1e40af',
+                  backgroundColor: '#eff6ff',
+                  padding: '0.75rem 1rem',
+                  borderRadius: '10px',
+                  border: '1px solid #bfdbfe',
+                  lineHeight: 1.5,
                 }}
               >
                 Reanalysis represents continuous numerical atmospheric assimilation, capturing regional boundary

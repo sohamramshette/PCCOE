@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Heart, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { SakuraPetals } from '../components/common/SakuraPetals';
 import '../components/auth/AuthPages.css';
 
 export const UserDemoLogin: React.FC = () => {
@@ -28,6 +29,7 @@ export const UserDemoLogin: React.FC = () => {
   return (
     <div className="auth-page-root">
       <div className="auth-page-glow" />
+      <SakuraPetals />
 
       {/* Top Bar with Back Link */}
       <header className="auth-topbar">

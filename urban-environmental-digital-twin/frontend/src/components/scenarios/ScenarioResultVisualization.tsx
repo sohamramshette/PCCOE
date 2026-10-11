@@ -328,7 +328,7 @@ export const ScenarioResultVisualization: React.FC<ScenarioResultVisualizationPr
         )}
 
         {/* 5. Intervention Explanation & Core Feature Transformations */}
-        <div style={{ backgroundColor: 'var(--bg-surface)', padding: '1.25rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)' }}>
+        <div id="feature-audit-table" style={{ backgroundColor: 'var(--bg-surface)', padding: '1.25rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.5rem' }}>
             <Layers size={16} color="var(--primary)" />
             <h4 style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-primary)' }}>

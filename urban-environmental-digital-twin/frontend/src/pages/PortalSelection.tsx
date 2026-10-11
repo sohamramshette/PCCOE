@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Heart, Shield, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { SakuraPetals } from '../components/common/SakuraPetals';
 import '../components/auth/AuthPages.css';
 
 export const PortalSelection: React.FC = () => {
@@ -9,6 +10,7 @@ export const PortalSelection: React.FC = () => {
   return (
     <div className="auth-page-root">
       <div className="auth-page-glow" />
+      <SakuraPetals />
 
       {/* Top Bar with Back Link and AirLens Branding */}
       <header className="auth-topbar">

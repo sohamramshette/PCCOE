@@ -299,7 +299,7 @@ export const Forecast: React.FC = () => {
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: '#f8fafc', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Baseline PM2.5 (t)</div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
                     {forecast.input_features_summary.pm25_t !== null && forecast.input_features_summary.pm25_t !== undefined
@@ -316,7 +316,7 @@ export const Forecast: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: '#f8fafc', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Air Temperature</div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
                     {formatNumber(forecast.input_features_summary.temp_c, 1)} °C
@@ -326,7 +326,7 @@ export const Forecast: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: '#f8fafc', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Wind Speed</div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
                     {formatNumber(forecast.input_features_summary.wind_speed_ms, 2)} m/s
@@ -336,7 +336,7 @@ export const Forecast: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: '#f8fafc', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Ventilation Index</div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
                     {formatNumber(forecast.input_features_summary.ventilation_index, 1)} m²/s
@@ -346,7 +346,7 @@ export const Forecast: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ background: 'rgba(26, 36, 25, 0.85)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: '#f8fafc', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Traffic Intensity Index</div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--text-primary)' }}>
                     {formatNumber(forecast.input_features_summary.traffic_proxy_index, 3)}
@@ -376,7 +376,7 @@ export const Forecast: React.FC = () => {
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.9rem' }}>
                 {forecast.feature_attributions.map((item, index) => (
-                  <div key={`${item.feature}-${index}`} style={{ background: 'rgba(26, 36, 25, 0.85)', border: '1px solid var(--border-subtle)', borderRadius: '12px', padding: '0.9rem 1rem' }}>
+                  <div key={`${item.feature}-${index}`} style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '0.9rem 1rem', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
                     <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                       {item.feature}
                     </div>
