@@ -6,7 +6,6 @@ import {
   Wind,
   Shield,
   Clock,
-  Sparkles,
   Layers,
   AlertTriangle,
   TrendingUp,
@@ -456,28 +455,6 @@ export const CitizenPortal: React.FC = () => {
             <RefreshCw size={13} className={isRefreshing ? 'spin-icon' : ''} />
             <span>{isRefreshing ? 'Refreshing...' : 'Refresh Telemetry'}</span>
           </button>
-
-          <Link
-            to="/digital-twin"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '8px 14px',
-              borderRadius: '12px',
-              background: '#166534',
-              border: '1px solid #14532d',
-              color: '#ffffff',
-              fontSize: '0.8rem',
-              fontWeight: 600,
-              textDecoration: 'none',
-              transition: 'all 0.2s ease',
-            }}
-            title="View 3D Interactive Digital Twin"
-          >
-            <Sparkles size={13} />
-            <span>3D Twin View</span>
-          </Link>
         </div>
       </div>
 

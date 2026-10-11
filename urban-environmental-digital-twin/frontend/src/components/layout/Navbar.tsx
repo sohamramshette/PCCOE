@@ -1,7 +1,7 @@
 import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Calendar, ExternalLink, ChevronRight, Sparkles, UserCheck, Shield, KeyRound, LogOut } from 'lucide-react';
+import { Calendar, ChevronRight, UserCheck, Shield, KeyRound, LogOut } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const location = useLocation();
@@ -30,17 +30,6 @@ export const Navbar: React.FC = () => {
     if (location.pathname === '/data-methodology') return 'Data Governance & Methodology';
     return 'Urban Environmental Workspace';
   };
-
-  const defaultApiUrl = import.meta.env.PROD
-    ? 'https://pccoe-75ji.onrender.com'
-    : 'http://localhost:8000';
-
-  const baseApiUrl = (
-    import.meta.env.VITE_API_BASE_URL ||
-    import.meta.env.VITE_API_URL ||
-    defaultApiUrl
-  ).replace(/\/+$/, '');
-  const apiDocsUrl = `${baseApiUrl}/docs`;
 
   return (
     <header className="top-navbar">
@@ -123,52 +112,6 @@ export const Navbar: React.FC = () => {
             <LogOut size={14} />
           </button>
         )}
-
-        <Link
-          to="/"
-          className="btn btn-secondary"
-          style={{
-            padding: '0.55rem 0.95rem',
-            fontSize: '0.8rem',
-            gap: '0.4rem',
-            background: '#ffffff',
-            borderColor: '#287a45',
-            color: '#166534',
-            display: 'inline-flex',
-            alignItems: 'center',
-            textDecoration: 'none',
-            fontWeight: 600,
-            boxShadow: '0 2px 8px rgba(40, 122, 69, 0.08)',
-          }}
-          title="Return to 3D Living World Landing Page"
-        >
-          <Sparkles size={13} color="#287a45" />
-          <span>3D Twin View</span>
-        </Link>
-
-        <a
-          href={apiDocsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-secondary"
-          style={{
-            padding: '0.55rem 0.95rem',
-            fontSize: '0.8rem',
-            gap: '0.4rem',
-            background: '#ffffff',
-            borderColor: 'rgba(40, 122, 69, 0.3)',
-            color: '#166534',
-            fontWeight: 600,
-            display: 'inline-flex',
-            alignItems: 'center',
-            textDecoration: 'none',
-            boxShadow: '0 2px 8px rgba(40, 122, 69, 0.08)',
-          }}
-          title="Open FastAPI Swagger Interactive Documentation"
-        >
-          <span>FastAPI Docs</span>
-          <ExternalLink size={13} color="#166534" />
-        </a>
       </div>
     </header>
   );

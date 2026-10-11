@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { LogIn, ArrowUpRight, Menu, X } from 'lucide-react';
+import { LogIn, Menu, X } from 'lucide-react';
 
-export default function AirLensNav({ onOpenDashboard }) {
+export default function AirLensNav() {
   const navigate = useNavigate();
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
@@ -18,10 +18,6 @@ export default function AirLensNav({ onOpenDashboard }) {
 
   const handleNavClick = (targetPath, anchorId) => {
     setMobileMenuOpen(false);
-    if (targetPath === '/dashboard') {
-      navigate('/dashboard');
-      return;
-    }
     if (anchorId && location.pathname === '/') {
       const element = document.getElementById(anchorId);
       if (element) {
@@ -34,11 +30,6 @@ export default function AirLensNav({ onOpenDashboard }) {
       }
     }
     navigate(targetPath);
-  };
-
-  const handleDashboardClick = () => {
-    setMobileMenuOpen(false);
-    navigate('/dashboard');
   };
 
   const handleLoginClick = () => {
@@ -84,10 +75,6 @@ export default function AirLensNav({ onOpenDashboard }) {
 
         {/* Center Links */}
         <div className="airlens-nav-links">
-          <button type="button" onClick={() => handleNavClick('/dashboard')} className="nav-link">
-            Dashboard
-          </button>
-          <span className="nav-dot" aria-hidden="true">·</span>
           <button type="button" onClick={() => handleNavClick('/digital-twin', 'live-twin')} className="nav-link">
             Digital Twin Map
           </button>
@@ -113,7 +100,7 @@ export default function AirLensNav({ onOpenDashboard }) {
           </button>
         </div>
 
-        {/* Right Dashboard CTA */}
+        {/* Right Nav CTA: Login Button */}
         <div className="airlens-nav-cta">
           <button
             type="button"
@@ -121,18 +108,8 @@ export default function AirLensNav({ onOpenDashboard }) {
             onClick={handleLoginClick}
             aria-label="Login to AirLens Portal"
           >
-            <LogIn size={13} style={{ marginRight: '4px' }} />
+            <LogIn size={14} style={{ marginRight: '6px' }} />
             <span>Login</span>
-          </button>
-
-          <button
-            type="button"
-            className="btn-open-dashboard"
-            onClick={handleDashboardClick}
-            aria-label="Open Pune Environmental Dashboard"
-          >
-            <span>Open Dashboard</span>
-            <ArrowUpRight size={14} className="arrow-icon" />
           </button>
 
           {/* Mobile Menu Toggle */}
@@ -162,9 +139,6 @@ export default function AirLensNav({ onOpenDashboard }) {
           >
             Login to Portals →
           </button>
-          <button type="button" onClick={() => handleNavClick('/dashboard')} className="mobile-link">
-            Dashboard
-          </button>
           <button type="button" onClick={() => handleNavClick('/digital-twin')} className="mobile-link">
             Digital Twin Map
           </button>
@@ -182,13 +156,6 @@ export default function AirLensNav({ onOpenDashboard }) {
           </button>
           <button type="button" onClick={() => handleNavClick('/data-methodology')} className="mobile-link">
             Data & Methodology
-          </button>
-          <button
-            type="button"
-            className="mobile-cta-btn"
-            onClick={handleDashboardClick}
-          >
-            Launch Full Dashboard →
           </button>
         </div>
       )}

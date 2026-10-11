@@ -62,6 +62,7 @@ interface PuneTwinMapProps {
   customInspectionResult?: CoordinateInterpolationResponse | null;
   onMapClickCoordinate?: (lat: number, lon: number) => void;
   onClearCustomInspection?: () => void;
+  disablePopup?: boolean;
 }
 
 export const PuneTwinMap: React.FC<PuneTwinMapProps> = ({
@@ -78,6 +79,7 @@ export const PuneTwinMap: React.FC<PuneTwinMapProps> = ({
   customInspectionResult = null,
   onMapClickCoordinate,
   onClearCustomInspection,
+  disablePopup = false,
 }) => {
   // Center of PCMC / Pune air quality monitoring network
   const defaultCenter: [number, number] = [18.64, 73.80];
@@ -132,6 +134,7 @@ export const PuneTwinMap: React.FC<PuneTwinMapProps> = ({
               onSelect={onSelectStation}
               showTrafficBuffer={showTrafficBuffer}
               showActivityBuffer={showActivityBuffer}
+              disablePopup={disablePopup}
             />
           );
         })}

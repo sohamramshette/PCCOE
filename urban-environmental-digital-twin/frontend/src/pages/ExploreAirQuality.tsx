@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import {
   MapPin,
   Search,
@@ -9,6 +9,12 @@ import {
   Info,
   RefreshCw,
   Clock,
+  Compass,
+  ArrowRight,
+  ShieldCheck,
+  Building2,
+  Navigation,
+  CheckCircle2,
 } from 'lucide-react';
 
 import { getStations } from '../api/stations';
@@ -25,7 +31,9 @@ import {
 } from '../utils/aqi';
 
 export const ExploreAirQuality: React.FC = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+
   const [stations, setStations] = useState<Station[]>([]);
   const [selectedStationId, setSelectedStationId] = useState<number | null>(null);
 
@@ -39,6 +47,19 @@ export const ExploreAirQuality: React.FC = () => {
       }
     }
   }, [searchParams]);
+
+  const handleSelectStation = useCallback(
+    (id: number | null) => {
+      setSelectedStationId(id);
+      if (id !== null) {
+        setSearchParams({ station: id.toString() });
+      } else {
+        setSearchParams({});
+      }
+    },
+    [setSearchParams]
+  );
+
   const [stationObservations, setStationObservations] = useState<Record<number, ObservationItem | null>>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
@@ -132,6 +153,26 @@ export const ExploreAirQuality: React.FC = () => {
     );
   }, [stations, searchQuery]);
 
+  // Network overview statistics when no station is selected
+  const networkStats = useMemo(() => {
+    const validObs = stations
+      .map((s) => ({ station: s, obs: stationObservations[s.station_id] }))
+      .filter((item) => item.obs && item.obs.pm25 !== null && item.obs.pm25 !== undefined);
+
+    if (validObs.length === 0) {
+      return { avgPm25: null, cleanest: null, highest: null };
+    }
+
+    const totalPm25 = validObs.reduce((sum, item) => sum + (item.obs!.pm25 || 0), 0);
+    const avgPm25 = (totalPm25 / validObs.length).toFixed(1);
+
+    const sorted = [...validObs].sort((a, b) => (a.obs!.pm25 || 0) - (b.obs!.pm25 || 0));
+    const cleanest = sorted[0];
+    const highest = sorted[sorted.length - 1];
+
+    return { avgPm25, cleanest, highest };
+  }, [stations, stationObservations]);
+
   // Format local timestamp
   const formatTime = (isoString?: string | null) => {
     if (!isoString) return 'Real-time feed';
@@ -183,67 +224,102 @@ export const ExploreAirQuality: React.FC = () => {
 
   return (
     <div style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box' }}>
-      {/* Page Introduction Banner */}
+      {/* 1. Header Bar: Compact & Integrated */}
       <div
         style={{
-          background: 'linear-gradient(135deg, rgba(28, 42, 27, 0.92) 0%, rgba(18, 28, 17, 0.96) 100%)',
+          background: 'linear-gradient(135deg, rgba(28, 42, 27, 0.95) 0%, rgba(18, 28, 17, 0.98) 100%)',
           border: '1px solid rgba(163, 181, 147, 0.22)',
-          borderRadius: '24px',
-          padding: '1.75rem 2.25rem',
-          marginBottom: '1.75rem',
+          borderRadius: '18px',
+          padding: '1rem 1.5rem',
+          marginBottom: '1.25rem',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
-          gap: '1.25rem',
-          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+          gap: '1rem',
+          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)',
         }}
       >
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-            <span
-              style={{
-                fontSize: '11px',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                padding: '3px 10px',
-                borderRadius: '6px',
-                background: 'rgba(143, 160, 126, 0.22)',
-                color: '#a3b593',
-                border: '1px solid rgba(163, 181, 147, 0.3)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '5px',
-              }}
-            >
-              <MapPin size={13} />
-              Explore Air Quality
-            </span>
-            <span style={{ fontSize: '11px', color: '#9eab93' }}>Pune &amp; Pimpri-Chinchwad Localities</span>
-          </div>
-
-          <h1
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div
             style={{
-              fontSize: '2rem',
-              fontWeight: 700,
-              margin: '0 0 6px 0',
-              color: '#f4f6f0',
-              fontFamily: 'var(--font-heading)',
-              letterSpacing: '-0.01em',
+              width: '40px',
+              height: '40px',
+              borderRadius: '12px',
+              background: 'rgba(74, 222, 128, 0.15)',
+              border: '1px solid rgba(74, 222, 128, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#86efac',
+              flexShrink: 0,
             }}
           >
-            Explore Pollution Levels Across Pune
-          </h1>
+            <MapPin size={20} />
+          </div>
 
-          <p style={{ margin: 0, fontSize: '0.92rem', color: '#c9d3bf', maxWidth: '750px', lineHeight: 1.5 }}>
-            Interactive neighborhood pollution map. Click on any monitoring station marker or search below to inspect
-            local air quality, particulate concentrations, and data provenance.
-          </p>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <h1
+                style={{
+                  fontSize: '1.45rem',
+                  fontWeight: 700,
+                  margin: 0,
+                  color: '#f4f6f0',
+                  fontFamily: 'var(--font-heading)',
+                  letterSpacing: '-0.01em',
+                }}
+              >
+                Explore Air Quality
+              </h1>
+              <span
+                style={{
+                  fontSize: '10px',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.04em',
+                  padding: '2px 8px',
+                  borderRadius: '6px',
+                  background: 'rgba(143, 160, 126, 0.2)',
+                  color: '#a3b593',
+                  border: '1px solid rgba(163, 181, 147, 0.25)',
+                }}
+              >
+                Pune &amp; PCMC Air Twin
+              </span>
+            </div>
+            <p style={{ margin: '2px 0 0 0', fontSize: '0.82rem', color: '#9eab93' }}>
+              Real-time ground station network and spatial particulate interpolation.
+            </p>
+          </div>
         </div>
 
-        {/* Action Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {/* Telemetry pill & refresh button */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+          <div
+            style={{
+              background: 'rgba(14, 20, 14, 0.75)',
+              border: '1px solid rgba(163, 181, 147, 0.2)',
+              borderRadius: '10px',
+              padding: '6px 12px',
+              fontSize: '0.74rem',
+              color: '#c9d3bf',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+            }}
+          >
+            <span
+              style={{
+                width: '7px',
+                height: '7px',
+                borderRadius: '50%',
+                background: isRefreshing ? '#facc15' : '#4ade80',
+              }}
+            />
+            <span>{isRefreshing ? 'Syncing...' : `${stations.length || 6} Ground Stations Active`}</span>
+          </div>
+
           <button
             type="button"
             onClick={loadData}
@@ -252,20 +328,20 @@ export const ExploreAirQuality: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              padding: '8px 14px',
-              borderRadius: '12px',
+              padding: '6px 12px',
+              borderRadius: '10px',
               background: 'rgba(143, 160, 126, 0.12)',
               border: '1px solid rgba(163, 181, 147, 0.28)',
               color: '#f4f6f0',
-              fontSize: '0.82rem',
+              fontSize: '0.76rem',
               fontWeight: 600,
               cursor: isRefreshing ? 'wait' : 'pointer',
               transition: 'all 0.2s ease',
             }}
             title="Refresh air quality readings"
           >
-            <RefreshCw size={14} style={{ animation: isRefreshing ? 'spin 1s linear infinite' : 'none' }} />
-            <span>{isRefreshing ? 'Refreshing...' : 'Refresh Readings'}</span>
+            <RefreshCw size={13} style={{ animation: isRefreshing ? 'spin 1s linear infinite' : 'none' }} />
+            <span>{isRefreshing ? 'Refreshing...' : 'Refresh'}</span>
           </button>
         </div>
       </div>
@@ -274,15 +350,16 @@ export const ExploreAirQuality: React.FC = () => {
       {loadError && (
         <div
           style={{
-            padding: '1rem 1.25rem',
-            borderRadius: '16px',
+            padding: '0.85rem 1.25rem',
+            borderRadius: '14px',
             background: 'rgba(239, 68, 68, 0.12)',
             border: '1px solid rgba(239, 68, 68, 0.3)',
             color: '#fca5a5',
-            marginBottom: '1.75rem',
+            marginBottom: '1.25rem',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            fontSize: '0.84rem',
           }}
         >
           <span>{loadError}</span>
@@ -293,9 +370,9 @@ export const ExploreAirQuality: React.FC = () => {
               background: 'none',
               border: '1px solid #fca5a5',
               color: '#fca5a5',
-              padding: '4px 12px',
-              borderRadius: '8px',
-              fontSize: '0.8rem',
+              padding: '3px 10px',
+              borderRadius: '6px',
+              fontSize: '0.76rem',
               cursor: 'pointer',
             }}
           >
@@ -304,36 +381,36 @@ export const ExploreAirQuality: React.FC = () => {
         </div>
       )}
 
-      {/* Locality Search & Selector Controls */}
+      {/* 2. Sleek Filter & Search Toolbar */}
       <div
         style={{
           background: 'rgba(23, 33, 21, 0.72)',
           border: '1px solid rgba(163, 181, 147, 0.2)',
-          borderRadius: '18px',
-          padding: '1.15rem 1.5rem',
-          marginBottom: '1.75rem',
+          borderRadius: '16px',
+          padding: '0.85rem 1.25rem',
+          marginBottom: '1.25rem',
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '1rem',
+          gap: '0.85rem',
         }}
       >
         {/* Search Input */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: '1 1 280px', minWidth: '240px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: '1 1 280px', minWidth: '220px' }}>
           <div
             style={{
               position: 'relative',
               display: 'flex',
               alignItems: 'center',
               width: '100%',
-              background: 'rgba(14, 20, 14, 0.8)',
+              background: 'rgba(14, 20, 14, 0.85)',
               border: '1px solid rgba(163, 181, 147, 0.25)',
-              borderRadius: '12px',
-              padding: '0 12px',
+              borderRadius: '10px',
+              padding: '0 10px',
             }}
           >
-            <Search size={16} color="#9eab93" style={{ flexShrink: 0, marginRight: '8px' }} />
+            <Search size={15} color="#9eab93" style={{ flexShrink: 0, marginRight: '8px' }} />
             <input
               type="text"
               placeholder="Search station or locality (e.g. Shivajinagar, Bhosari, Katraj)..."
@@ -345,8 +422,8 @@ export const ExploreAirQuality: React.FC = () => {
                 border: 'none',
                 outline: 'none',
                 color: '#f4f6f0',
-                fontSize: '0.86rem',
-                padding: '9px 0',
+                fontSize: '0.84rem',
+                padding: '8px 0',
               }}
             />
             {searchQuery && (
@@ -364,29 +441,29 @@ export const ExploreAirQuality: React.FC = () => {
                   display: 'flex',
                 }}
               >
-                <X size={14} />
+                <X size={13} />
               </button>
             )}
           </div>
         </div>
 
-        {/* Station Select Dropdown & View Reset */}
+        {/* Station Select Dropdown & Controls */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
           <select
             value={selectedStationId ?? ''}
-            onChange={(e) => setSelectedStationId(e.target.value ? Number(e.target.value) : null)}
+            onChange={(e) => handleSelectStation(e.target.value ? Number(e.target.value) : null)}
             style={{
-              padding: '9px 14px',
-              borderRadius: '12px',
+              padding: '8px 12px',
+              borderRadius: '10px',
               background: 'rgba(14, 20, 14, 0.85)',
               border: '1px solid rgba(163, 181, 147, 0.3)',
               color: '#f4f6f0',
-              fontSize: '0.84rem',
+              fontSize: '0.82rem',
               cursor: 'pointer',
               outline: 'none',
             }}
           >
-            <option value="">-- All Pune Stations (Overview) --</option>
+            <option value="">-- Select Station to Inspect Outside Map --</option>
             {stations.map((st) => (
               <option key={st.station_id} value={st.station_id}>
                 {st.station_name.split(',')[0]} ({st.city})
@@ -397,22 +474,23 @@ export const ExploreAirQuality: React.FC = () => {
           {selectedStationId !== null && (
             <button
               type="button"
-              onClick={() => setSelectedStationId(null)}
+              onClick={() => handleSelectStation(null)}
               style={{
-                padding: '8px 14px',
-                borderRadius: '12px',
+                padding: '7px 12px',
+                borderRadius: '10px',
                 background: 'rgba(143, 160, 126, 0.14)',
                 border: '1px solid rgba(163, 181, 147, 0.3)',
                 color: '#c9d3bf',
-                fontSize: '0.82rem',
+                fontSize: '0.78rem',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px',
+                gap: '5px',
               }}
+              title="Clear station selection"
             >
-              <X size={14} />
-              <span>Reset Map View</span>
+              <X size={13} />
+              <span>Deselect</span>
             </button>
           )}
 
@@ -421,12 +499,12 @@ export const ExploreAirQuality: React.FC = () => {
             type="button"
             onClick={() => setShowHeatmap(!showHeatmap)}
             style={{
-              padding: '8px 14px',
-              borderRadius: '12px',
+              padding: '7px 12px',
+              borderRadius: '10px',
               background: showHeatmap ? 'rgba(74, 222, 128, 0.18)' : 'rgba(20, 28, 19, 0.65)',
               border: showHeatmap ? '1.5px solid #4ade80' : '1px solid rgba(163, 181, 147, 0.25)',
               color: showHeatmap ? '#ffffff' : '#a3b593',
-              fontSize: '0.82rem',
+              fontSize: '0.78rem',
               fontWeight: showHeatmap ? 700 : 500,
               cursor: 'pointer',
               display: 'flex',
@@ -435,51 +513,75 @@ export const ExploreAirQuality: React.FC = () => {
               transition: 'all 0.2s ease',
             }}
           >
-            <Layers size={14} color={showHeatmap ? '#4ade80' : '#a3b593'} />
+            <Layers size={13} color={showHeatmap ? '#4ade80' : '#a3b593'} />
             <span>{showHeatmap ? 'Heatmap: ON' : 'Spatial Heatmap'}</span>
-            {isLoadingHeatmap && <RefreshCw size={12} style={{ animation: 'spin 1s linear infinite' }} />}
+            {isLoadingHeatmap && <RefreshCw size={11} style={{ animation: 'spin 1s linear infinite' }} />}
           </button>
         </div>
       </div>
 
-      {/* Main Map & Selected Location Grid */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: selectedStationId ? 'repeat(auto-fit, minmax(360px, 1fr))' : '1fr',
-          gap: '1.75rem',
-          marginBottom: '1.75rem',
-        }}
-      >
-        {/* Map Container */}
+      {/* 3. Studio Workspace Grid: Map Studio (Left, Generous) + Outside-the-Map Station Inspector (Right) */}
+      <div className="explore-air-studio-grid" style={{ marginBottom: '1.75rem' }}>
+        {/* ========================================================= */}
+        {/* LEFT COLUMN: Clear, Unobstructed Full-Height Map Studio   */}
+        {/* ========================================================= */}
         <div
           style={{
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
+            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.9) 0%, rgba(18, 26, 17, 0.96) 100%)',
             border: '1px solid rgba(163, 181, 147, 0.22)',
             borderRadius: '24px',
-            padding: '1.5rem',
+            padding: '1.25rem',
             boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
             display: 'flex',
             flexDirection: 'column',
+            gap: '10px',
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '8px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <MapPin size={18} color="#8fa07e" />
-              <h2 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: '#f4f6f0' }}>
-                Interactive Pune Environmental Map
-              </h2>
-            </div>
-            <span style={{ fontSize: '0.78rem', color: '#9eab93' }}>
-              {stations.length} Active Monitoring Stations · PMC &amp; PCMC
-            </span>
-          </div>
-
-          {/* Leaflet Map */}
+          {/* Map Header Status Bar */}
           <div
             style={{
-              height: selectedStationId ? '460px' : '520px',
-              borderRadius: '18px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: '8px',
+              paddingBottom: '2px',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Compass size={17} color="#86efac" />
+              <div>
+                <h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#f4f6f0' }}>
+                  Interactive Pune Environmental Map
+                </h2>
+                <div style={{ fontSize: '0.72rem', color: '#9eab93' }}>
+                  Click any monitoring station pin to inspect real-time measurements in the side inspector
+                </div>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span
+                style={{
+                  fontSize: '0.72rem',
+                  padding: '3px 8px',
+                  borderRadius: '6px',
+                  background: 'rgba(143, 160, 126, 0.15)',
+                  border: '1px solid rgba(163, 181, 147, 0.2)',
+                  color: '#c9d3bf',
+                }}
+              >
+                {filteredStations.length} of {stations.length} Stations
+              </span>
+            </div>
+          </div>
+
+          {/* Leaflet Map Canvas: High visibility, NO in-map popup */}
+          <div
+            style={{
+              height: 'calc(100vh - 240px)',
+              minHeight: '620px',
+              borderRadius: '16px',
               overflow: 'hidden',
               border: '1px solid rgba(163, 181, 147, 0.2)',
               position: 'relative',
@@ -488,220 +590,291 @@ export const ExploreAirQuality: React.FC = () => {
             <PuneTwinMap
               stations={filteredStations}
               selectedStationId={selectedStationId}
-              onSelectStation={(id) => setSelectedStationId(id)}
+              onSelectStation={(id) => handleSelectStation(id)}
               latestObservations={stationObservations}
               showTrafficBuffer={false}
               showActivityBuffer={false}
               showHeatmap={showHeatmap}
               heatmapGridPoints={heatmapPoints}
+              disablePopup={true}
             />
           </div>
 
-          {/* Simple Map Legend */}
-          <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid rgba(163, 181, 147, 0.15)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
-              <Info size={14} color="#8fa07e" />
-              <span style={{ fontSize: '0.76rem', fontWeight: 700, textTransform: 'uppercase', color: '#a3b593', letterSpacing: '0.04em' }}>
-                Map Marker Colors: Particulate-Based Pollution Estimate
-              </span>
+          {/* Docked Map Legend: Sleek horizontal bar */}
+          <div
+            style={{
+              marginTop: '4px',
+              padding: '10px 12px',
+              borderRadius: '14px',
+              background: 'rgba(14, 20, 14, 0.7)',
+              border: '1px solid rgba(163, 181, 147, 0.16)',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', marginBottom: '6px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <Info size={13} color="#8fa07e" />
+                <span style={{ fontSize: '0.74rem', fontWeight: 700, textTransform: 'uppercase', color: '#a3b593', letterSpacing: '0.04em' }}>
+                  Marker Colors: Particulate-Based Pollution Scale
+                </span>
+              </div>
+              <span style={{ fontSize: '0.68rem', color: '#9eab93' }}>Standard CPCB Breakpoints (µg/m³)</span>
             </div>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
               {legendItems.map((item) => (
                 <div
                   key={item.label}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '6px',
-                    padding: '5px 10px',
-                    borderRadius: '8px',
-                    background: 'rgba(14, 20, 14, 0.65)',
-                    border: `1px solid ${item.color}35`,
+                    gap: '5px',
+                    padding: '3px 8px',
+                    borderRadius: '7px',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    border: `1px solid ${item.color}30`,
                   }}
                   title={item.desc}
                 >
                   <span
                     style={{
-                      width: '8px',
-                      height: '8px',
+                      width: '7px',
+                      height: '7px',
                       borderRadius: '50%',
                       backgroundColor: item.color,
                       flexShrink: 0,
                     }}
                   />
-                  <span style={{ fontSize: '0.74rem', fontWeight: 600, color: '#f4f6f0' }}>{item.label}</span>
-                  <span style={{ fontSize: '0.68rem', color: '#9eab93' }}>({item.range})</span>
+                  <span style={{ fontSize: '0.72rem', fontWeight: 600, color: '#f4f6f0' }}>{item.label}</span>
+                  <span style={{ fontSize: '0.66rem', color: '#9eab93' }}>({item.range})</span>
                 </div>
               ))}
             </div>
-
-            <p style={{ margin: '8px 0 0', fontSize: '0.72rem', color: '#9eab93', lineHeight: 1.4 }}>
-              * Colored indicators represent particulate-based pollution estimates (PM2.5/PM10) evaluated against standard CPCB breakpoints. They are not the official overall CPCB AQI (which requires a minimum of 3 criteria pollutants including PM2.5 or PM10 over a 24-hour averaging period). Where stations are undergoing routine calibration or telemetry updates, markers show gray.
-            </p>
           </div>
         </div>
 
-        {/* Selected Station Details Panel */}
-        {selectedStation && (
-          <div
-            style={{
-              background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-              border: '1px solid rgba(163, 181, 147, 0.22)',
-              borderRadius: '24px',
-              padding: '1.75rem',
-              boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-            }}
-          >
-            <div>
-              {/* Header: Station & Close */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
+        {/* ========================================================= */}
+        {/* RIGHT COLUMN: Station Inspector Window (Outside the Map)  */}
+        {/* ========================================================= */}
+        <div
+          style={{
+            position: 'sticky',
+            top: '1rem',
+            maxHeight: 'calc(100vh - 80px)',
+            overflowY: 'auto',
+            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.9) 0%, rgba(18, 26, 17, 0.96) 100%)',
+            border: '1px solid rgba(163, 181, 147, 0.22)',
+            borderRadius: '24px',
+            padding: '1.4rem',
+            boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem',
+          }}
+        >
+          {selectedStation ? (
+            /* STATE A: A Station IS Selected (Popup Window rendered OUTSIDE the map) */
+            <>
+              {/* Header: Station Name & Close Button */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px', flexWrap: 'wrap' }}>
                     <span
                       style={{
-                        padding: '3px 9px',
+                        padding: '2px 8px',
                         borderRadius: '6px',
-                        fontSize: '11px',
+                        fontSize: '10px',
                         fontWeight: 700,
+                        background: 'rgba(143, 160, 126, 0.2)',
+                        color: '#c9d3bf',
+                        border: '1px solid rgba(163, 181, 147, 0.3)',
+                      }}
+                    >
+                      ID: {selectedStation.station_id}
+                    </span>
+                    <span
+                      style={{
+                        padding: '2px 8px',
+                        borderRadius: '6px',
+                        fontSize: '10px',
+                        fontWeight: 700,
+                        background: 'rgba(74, 222, 128, 0.18)',
+                        color: '#86efac',
+                        border: '1px solid rgba(74, 222, 128, 0.3)',
+                      }}
+                    >
+                      ACTIVE
+                    </span>
+                    <span
+                      style={{
+                        padding: '2px 8px',
+                        borderRadius: '6px',
+                        fontSize: '10px',
+                        fontWeight: 600,
                         background:
                           selectedObservation?.data_provenance === 'OBSERVED'
                             ? 'rgba(74, 222, 128, 0.15)'
-                            : 'rgba(143, 160, 126, 0.18)',
+                            : 'rgba(143, 160, 126, 0.15)',
                         color: selectedObservation?.data_provenance === 'OBSERVED' ? '#4ade80' : '#a3b593',
-                        border: '1px solid rgba(163, 181, 147, 0.3)',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '5px',
+                        border: '1px solid rgba(163, 181, 147, 0.25)',
                       }}
                     >
-                      <span
-                        style={{
-                          width: '6px',
-                          height: '6px',
-                          borderRadius: '50%',
-                          background: selectedObservation?.data_provenance === 'OBSERVED' ? '#4ade80' : '#a3b593',
-                        }}
-                      />
-                      {selectedObservation?.data_provenance === 'OBSERVED' ? 'Measured reading' : 'Model estimate'}
-                    </span>
-                    <span style={{ fontSize: '11px', color: '#9eab93' }}>
-                      {selectedObservation?.data_provenance === 'OBSERVED'
-                        ? 'Direct sensor reading'
-                        : 'Spatial model estimate'}
+                      {selectedObservation?.data_provenance === 'OBSERVED' ? 'Measured' : 'Model Estimate'}
                     </span>
                   </div>
 
-                  <h2 style={{ fontSize: '1.3rem', fontWeight: 700, margin: '2px 0 0', color: '#f4f6f0' }}>
+                  <h3
+                    style={{
+                      fontSize: '1.25rem',
+                      fontWeight: 700,
+                      margin: '4px 0 2px',
+                      color: '#f4f6f0',
+                      lineHeight: 1.25,
+                      fontFamily: 'var(--font-heading)',
+                    }}
+                  >
                     {selectedStation.station_name}
-                  </h2>
-                  <div style={{ fontSize: '0.8rem', color: '#9eab93' }}>
+                  </h3>
+                  <div style={{ fontSize: '0.78rem', color: '#9eab93' }}>
                     {selectedStation.zone_type} · {selectedStation.city}
                   </div>
                 </div>
 
                 <button
                   type="button"
-                  onClick={() => setSelectedStationId(null)}
+                  onClick={() => handleSelectStation(null)}
                   style={{
-                    background: 'rgba(255, 255, 255, 0.06)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    border: '1px solid rgba(255, 255, 255, 0.15)',
                     borderRadius: '8px',
-                    color: '#9eab93',
+                    color: '#c9d3bf',
                     cursor: 'pointer',
                     padding: '6px',
                     display: 'flex',
+                    flexShrink: 0,
                   }}
-                  title="Close station details"
-                  aria-label="Close station details"
+                  title="Close station inspector"
+                  aria-label="Close station inspector"
                 >
-                  <X size={16} />
+                  <X size={15} />
                 </button>
               </div>
 
-              {/* Official CPCB AQI Status Banner */}
+              {/* Station Metadata 2x2 Grid (Previously cramped in popup) */}
               <div
                 style={{
-                  padding: '8px 12px',
-                  borderRadius: '10px',
-                  background: selectedEvaluation.isOfficialAqiAvailable
-                    ? 'rgba(74, 222, 128, 0.1)'
-                    : 'rgba(255, 255, 255, 0.04)',
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gap: '8px',
+                  background: 'rgba(14, 20, 14, 0.65)',
                   border: '1px solid rgba(163, 181, 147, 0.16)',
-                  marginBottom: '1rem',
-                  fontSize: '0.76rem',
-                  color: '#c9d3bf',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                }}
-              >
-                <Info size={14} color="#a3b593" style={{ flexShrink: 0 }} />
-                <span>
-                  {selectedEvaluation.isOfficialAqiAvailable ? (
-                    <>
-                      <strong>Official CPCB NAQI:</strong> {selectedEvaluation.officialAqi} ({selectedEvaluation.officialCategory}) — Prominent: {selectedEvaluation.prominentPollutant}
-                    </>
-                  ) : (
-                    <>
-                      <strong>Official Overall CPCB AQI:</strong> Unavailable ({selectedEvaluation.officialUnavailableReason})
-                    </>
-                  )}
-                </span>
-              </div>
-
-              {/* Particulate Index Box */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '1.25rem 1.5rem',
-                  borderRadius: '18px',
-                  background: 'rgba(14, 20, 14, 0.72)',
-                  border: '1px solid rgba(163, 181, 147, 0.18)',
-                  marginBottom: '1.25rem',
+                  borderRadius: '14px',
+                  padding: '10px 12px',
                 }}
               >
                 <div>
-                  <div style={{ fontSize: '0.74rem', color: '#9eab93', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                    Particulate-Based Air Index (Estimate)
+                  <div style={{ fontSize: '0.68rem', color: '#9eab93', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <ShieldCheck size={11} color="#8fa07e" />
+                    <span>Authority</span>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginTop: '2px' }}>
-                    <span
-                      style={{
-                        fontSize: '3.2rem',
-                        fontWeight: 800,
-                        color: selectedEvaluation.particulateColor || '#a3b593',
-                        lineHeight: 1,
-                        letterSpacing: '-0.03em',
-                      }}
-                    >
-                      {selectedEvaluation.particulateIndex ?? '--'}
-                    </span>
-                    <span style={{ fontSize: '0.85rem', color: '#9eab93', fontWeight: 600 }}>/ 500</span>
-                  </div>
-                  <div style={{ fontSize: '0.72rem', color: '#9eab93', marginTop: '4px' }}>
-                    {selectedEvaluation.hasParticulateEstimate
-                      ? `Calculated from ${selectedEvaluation.prominentParticulate} using CPCB scale`
-                      : 'Telemetry data currently updating'}
+                  <div style={{ fontSize: '0.78rem', fontWeight: 600, color: '#f4f6f0', marginTop: '2px' }}>
+                    {selectedStation.monitoring_authority}
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', textAlign: 'right' }}>
+                <div>
+                  <div style={{ fontSize: '0.68rem', color: '#9eab93', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <Building2 size={11} color="#8fa07e" />
+                    <span>Zoning</span>
+                  </div>
+                  <div style={{ fontSize: '0.78rem', fontWeight: 600, color: '#f4f6f0', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {selectedStation.zone_type.split('/')[0]}
+                  </div>
+                </div>
+
+                <div>
+                  <div style={{ fontSize: '0.68rem', color: '#9eab93' }}>Coordinates</div>
+                  <div style={{ fontSize: '0.74rem', fontWeight: 600, color: '#c9d3bf', marginTop: '2px', fontFamily: 'monospace' }}>
+                    {selectedStation.latitude.toFixed(4)}° N, {selectedStation.longitude.toFixed(4)}° E
+                  </div>
+                </div>
+
+                <div>
+                  <div style={{ fontSize: '0.68rem', color: '#9eab93' }}>Elevation</div>
+                  <div style={{ fontSize: '0.78rem', fontWeight: 600, color: '#c9d3bf', marginTop: '2px' }}>
+                    {selectedStation.elevation_m !== null && selectedStation.elevation_m !== undefined
+                      ? `${selectedStation.elevation_m} m`
+                      : '560 m'}
+                  </div>
+                </div>
+              </div>
+
+              {/* Particulate-Based Air Index Card */}
+              <div
+                style={{
+                  padding: '1.15rem 1.25rem',
+                  borderRadius: '16px',
+                  background: 'rgba(14, 20, 14, 0.85)',
+                  border: '1px solid rgba(163, 181, 147, 0.22)',
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <div>
+                    <div style={{ fontSize: '0.72rem', color: '#9eab93', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                      Particulate Air Index (Estimate)
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginTop: '3px' }}>
+                      <span
+                        style={{
+                          fontSize: '2.8rem',
+                          fontWeight: 800,
+                          color: selectedEvaluation.particulateColor || '#a3b593',
+                          lineHeight: 1,
+                          letterSpacing: '-0.02em',
+                        }}
+                      >
+                        {selectedEvaluation.particulateIndex ?? '--'}
+                      </span>
+                      <span style={{ fontSize: '0.82rem', color: '#9eab93', fontWeight: 600 }}>/ 500</span>
+                    </div>
+                  </div>
+
+                  {selectedEvaluation.particulateCategory && (
+                    <span
+                      style={{
+                        padding: '4px 10px',
+                        borderRadius: '8px',
+                        fontSize: '0.76rem',
+                        fontWeight: 700,
+                        background: `${selectedEvaluation.particulateColor}22`,
+                        color: selectedEvaluation.particulateColor || '#4ade80',
+                        border: `1px solid ${selectedEvaluation.particulateColor}40`,
+                      }}
+                    >
+                      {selectedEvaluation.particulateCategory}
+                    </span>
+                  )}
+                </div>
+
+                <div style={{ fontSize: '0.7rem', color: '#9eab93', marginTop: '6px' }}>
+                  {selectedEvaluation.hasParticulateEstimate
+                    ? `Calculated from ${selectedEvaluation.prominentParticulate || 'PM2.5'} using CPCB scale`
+                    : 'Telemetry data currently updating'}
+                </div>
+
+                {/* PM2.5 and PM10 Dual Tiles */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginTop: '12px' }}>
                   <div
                     style={{
-                      padding: '6px 12px',
+                      padding: '8px 10px',
                       borderRadius: '10px',
                       background: 'rgba(255, 255, 255, 0.04)',
                       border: '1px solid rgba(255, 255, 255, 0.08)',
                     }}
                   >
-                    <div style={{ fontSize: '0.68rem', color: '#9eab93', textTransform: 'uppercase' }}>PM2.5 Fine Particles</div>
-                    <div style={{ fontSize: '1rem', fontWeight: 700, color: '#f4f6f0' }}>
+                    <div style={{ fontSize: '0.66rem', color: '#9eab93', textTransform: 'uppercase', fontWeight: 600 }}>
+                      PM2.5 Fine Particles
+                    </div>
+                    <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#f4f6f0', marginTop: '2px' }}>
                       {selectedObservation?.pm25 !== null && selectedObservation?.pm25 !== undefined
                         ? `${selectedObservation.pm25.toFixed(1)} µg/m³`
                         : 'Unavailable'}
@@ -710,70 +883,286 @@ export const ExploreAirQuality: React.FC = () => {
 
                   <div
                     style={{
-                      padding: '6px 12px',
+                      padding: '8px 10px',
                       borderRadius: '10px',
                       background: 'rgba(255, 255, 255, 0.04)',
                       border: '1px solid rgba(255, 255, 255, 0.08)',
                     }}
                   >
-                    <div style={{ fontSize: '0.68rem', color: '#9eab93', textTransform: 'uppercase' }}>PM10 Coarse Dust</div>
-                    <div style={{ fontSize: '1rem', fontWeight: 700, color: '#f4f6f0' }}>
+                    <div style={{ fontSize: '0.66rem', color: '#9eab93', textTransform: 'uppercase', fontWeight: 600 }}>
+                      PM10 Coarse Dust
+                    </div>
+                    <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#f4f6f0', marginTop: '2px' }}>
                       {selectedObservation?.pm10 !== null && selectedObservation?.pm10 !== undefined
                         ? `${selectedObservation.pm10.toFixed(1)} µg/m³`
-                        : 'Not monitored'}
+                        : 'Not Monitored'}
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Resident Guidance */}
+              {/* Official CPCB AQI Status Notice */}
               <div
                 style={{
-                  padding: '1rem 1.25rem',
-                  borderRadius: '14px',
+                  padding: '8px 12px',
+                  borderRadius: '10px',
+                  background: selectedEvaluation.isOfficialAqiAvailable
+                    ? 'rgba(74, 222, 128, 0.1)'
+                    : 'rgba(255, 255, 255, 0.04)',
+                  border: '1px solid rgba(163, 181, 147, 0.16)',
+                  fontSize: '0.74rem',
+                  color: '#c9d3bf',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '6px',
+                  lineHeight: 1.35,
+                }}
+              >
+                <Info size={13} color="#a3b593" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <span>
+                  {selectedEvaluation.isOfficialAqiAvailable ? (
+                    <>
+                      <strong>Official CPCB NAQI:</strong> {selectedEvaluation.officialAqi} ({selectedEvaluation.officialCategory})
+                    </>
+                  ) : (
+                    <>
+                      <strong>Official Overall CPCB AQI:</strong> Unavailable ({selectedEvaluation.officialUnavailableReason || 'Requires 3+ criteria pollutants over 24h'})
+                    </>
+                  )}
+                </span>
+              </div>
+
+              {/* Resident Guidance Advisory Card */}
+              <div
+                style={{
+                  padding: '10px 12px',
+                  borderRadius: '12px',
                   background: 'rgba(143, 160, 126, 0.1)',
                   borderLeft: `4px solid ${selectedEvaluation.particulateColor || '#a3b593'}`,
                   color: '#eef1e7',
-                  fontSize: '0.86rem',
-                  lineHeight: 1.5,
-                  marginBottom: '1rem',
+                  fontSize: '0.8rem',
+                  lineHeight: 1.4,
                 }}
               >
-                <strong>Neighborhood Advisory:</strong>{' '}
+                <strong style={{ color: '#86efac' }}>Neighborhood Advisory:</strong>{' '}
                 {selectedEvaluation.particulateExplanation ||
-                  'Observation data is currently updating for this station.'}
+                  'Air quality is acceptable. Observation data is updating continuously.'}
               </div>
-            </div>
 
-            {/* Footer Metadata */}
-            <div
-              style={{
-                paddingTop: '0.9rem',
-                borderTop: '1px solid rgba(163, 181, 147, 0.15)',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                fontSize: '0.78rem',
-                color: '#9eab93',
-              }}
-            >
-              <span>Monitoring Authority: {selectedStation.monitoring_authority}</span>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#a3b593', fontWeight: 600 }}>
-                <Clock size={12} />
-                <span>{formatTime(selectedObservation?.datetime_local_ist || selectedObservation?.datetime_utc)}</span>
+              {/* Action Buttons & Footer Timestamp */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const localityName = selectedStation.station_name.split(',')[0].trim();
+                    navigate(`/cleaner-routes?dest=${encodeURIComponent(localityName)}`);
+                  }}
+                  style={{
+                    width: '100%',
+                    padding: '9px 14px',
+                    borderRadius: '10px',
+                    background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
+                    border: '1px solid rgba(134, 239, 172, 0.4)',
+                    color: '#ffffff',
+                    fontSize: '0.82rem',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                    boxShadow: '0 4px 14px rgba(22, 101, 52, 0.4)',
+                  }}
+                >
+                  <Navigation size={13} />
+                  <span>Plan Cleaner Route to Here</span>
+                  <ArrowRight size={13} />
+                </button>
+
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    fontSize: '0.72rem',
+                    color: '#9eab93',
+                    paddingTop: '6px',
+                    borderTop: '1px solid rgba(163, 181, 147, 0.12)',
+                  }}
+                >
+                  <span>Sensor Feed: Live</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#a3b593', fontWeight: 600 }}>
+                    <Clock size={11} />
+                    <span>{formatTime(selectedObservation?.datetime_local_ist || selectedObservation?.datetime_utc)}</span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+            </>
+          ) : (
+            /* STATE B: No Station Selected (Pune Air Network Overview) */
+            <>
+              {/* Header */}
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+                  <Activity size={14} color="#86efac" />
+                  <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#86efac', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                    Network Overview
+                  </span>
+                </div>
+                <h3
+                  style={{
+                    fontSize: '1.2rem',
+                    fontWeight: 700,
+                    margin: '0 0 4px',
+                    color: '#f4f6f0',
+                    fontFamily: 'var(--font-heading)',
+                  }}
+                >
+                  Pune Air Quality Network
+                </h3>
+                <p style={{ margin: 0, fontSize: '0.78rem', color: '#9eab93', lineHeight: 1.4 }}>
+                  Select any station on the map or from the list below to inspect localized telemetry outside the map.
+                </p>
+              </div>
+
+              {/* Network Highlights */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div
+                  style={{
+                    padding: '10px 12px',
+                    borderRadius: '12px',
+                    background: 'rgba(14, 20, 14, 0.7)',
+                    border: '1px solid rgba(163, 181, 147, 0.18)',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <span style={{ fontSize: '0.74rem', color: '#c9d3bf' }}>City Average PM2.5</span>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
+                    <span style={{ fontSize: '1.25rem', fontWeight: 800, color: '#86efac' }}>
+                      {networkStats.avgPm25 ?? '--'}
+                    </span>
+                    <span style={{ fontSize: '0.7rem', color: '#9eab93' }}>µg/m³</span>
+                  </div>
+                </div>
+
+                {networkStats.cleanest && (
+                  <div
+                    style={{
+                      padding: '10px 12px',
+                      borderRadius: '12px',
+                      background: 'rgba(14, 20, 14, 0.7)',
+                      border: '1px solid rgba(163, 181, 147, 0.18)',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <div>
+                      <div style={{ fontSize: '0.66rem', color: '#4ade80', textTransform: 'uppercase', fontWeight: 700 }}>
+                        Cleanest Monitored Locality
+                      </div>
+                      <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#f4f6f0', marginTop: '2px' }}>
+                        {networkStats.cleanest.station.station_name.split(',')[0]}
+                      </div>
+                    </div>
+                    <span style={{ fontSize: '0.9rem', fontWeight: 700, color: '#4ade80' }}>
+                      {networkStats.cleanest.obs?.pm25?.toFixed(1)} µg/m³
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Station Quick Selector Cards */}
+              <div>
+                <div style={{ fontSize: '0.72rem', color: '#9eab93', fontWeight: 700, textTransform: 'uppercase', marginBottom: '8px', letterSpacing: '0.04em' }}>
+                  Monitoring Stations ({stations.length})
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  {stations.map((st) => {
+                    const obs = stationObservations[st.station_id];
+                    const pm25 = obs?.pm25;
+                    const subAqi = calcPM25SubIndex(pm25);
+                    const catInfo = subAqi !== null ? getNAQICategoryInfo(subAqi) : null;
+
+                    return (
+                      <div
+                        key={st.station_id}
+                        onClick={() => handleSelectStation(st.station_id)}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          padding: '9px 12px',
+                          borderRadius: '12px',
+                          background: 'rgba(14, 20, 14, 0.55)',
+                          border: '1px solid rgba(163, 181, 147, 0.15)',
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease',
+                        }}
+                      >
+                        <div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <span
+                              style={{
+                                width: '6px',
+                                height: '6px',
+                                borderRadius: '50%',
+                                background: catInfo?.color || '#a3b593',
+                              }}
+                            />
+                            <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#f4f6f0' }}>
+                              {st.station_name.split(',')[0]}
+                            </span>
+                          </div>
+                          <div style={{ fontSize: '0.68rem', color: '#9eab93', marginTop: '1px' }}>
+                            {st.zone_type.split('/')[0]}
+                          </div>
+                        </div>
+
+                        <div style={{ textAlign: 'right' }}>
+                          <span style={{ fontSize: '0.85rem', fontWeight: 700, color: catInfo?.color || '#f4f6f0' }}>
+                            {pm25 !== null && pm25 !== undefined ? `${pm25.toFixed(1)}` : '--'}
+                          </span>
+                          <span style={{ fontSize: '0.66rem', color: '#9eab93', marginLeft: '3px' }}>µg/m³</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Helpful Hint Pill */}
+              <div
+                style={{
+                  padding: '8px 12px',
+                  borderRadius: '10px',
+                  background: 'rgba(143, 160, 126, 0.08)',
+                  border: '1px dashed rgba(163, 181, 147, 0.25)',
+                  fontSize: '0.72rem',
+                  color: '#c9d3bf',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                }}
+              >
+                <CheckCircle2 size={13} color="#86efac" style={{ flexShrink: 0 }} />
+                <span>Click any station marker on the map to inspect full telemetry in this panel.</span>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
-      {/* Comparison of Monitored Localities Across Pune */}
+      {/* 4. Full Neighborhood Comparison Table */}
       <div
         style={{
           background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
           border: '1px solid rgba(163, 181, 147, 0.22)',
           borderRadius: '24px',
-          padding: '1.75rem 2rem',
+          padding: '1.5rem 1.75rem',
           boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
         }}
       >
@@ -791,11 +1180,11 @@ export const ExploreAirQuality: React.FC = () => {
           </div>
 
           <span style={{ fontSize: '0.76rem', color: '#a3b593' }}>
-            Click any station to focus on the map
+            Click any row to focus and inspect in the side inspector
           </span>
         </div>
 
-        {/* Responsive Table / Cards */}
+        {/* Responsive Table */}
         <div style={{ overflowX: 'auto' }}>
           <table
             style={{
@@ -838,9 +1227,11 @@ export const ExploreAirQuality: React.FC = () => {
                     key={st.station_id}
                     style={{
                       borderBottom: '1px solid rgba(163, 181, 147, 0.1)',
-                      background: isSelected ? 'rgba(143, 160, 126, 0.12)' : 'transparent',
+                      background: isSelected ? 'rgba(143, 160, 126, 0.15)' : 'transparent',
                       transition: 'background 0.15s ease',
+                      cursor: 'pointer',
                     }}
+                    onClick={() => handleSelectStation(st.station_id)}
                   >
                     <td style={{ padding: '12px', fontWeight: 600, color: '#f4f6f0' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -896,7 +1287,10 @@ export const ExploreAirQuality: React.FC = () => {
                     <td style={{ padding: '12px', textAlign: 'right' }}>
                       <button
                         type="button"
-                        onClick={() => setSelectedStationId(st.station_id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleSelectStation(isSelected ? null : st.station_id);
+                        }}
                         style={{
                           padding: '5px 12px',
                           borderRadius: '8px',

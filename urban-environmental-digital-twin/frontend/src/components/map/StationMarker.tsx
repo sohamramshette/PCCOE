@@ -15,6 +15,7 @@ interface StationMarkerProps {
   onSelect: (stationId: number) => void;
   showTrafficBuffer: boolean;
   showActivityBuffer: boolean;
+  disablePopup?: boolean;
 }
 
 export const StationMarker: React.FC<StationMarkerProps> = ({
@@ -26,15 +27,16 @@ export const StationMarker: React.FC<StationMarkerProps> = ({
   onSelect,
   showTrafficBuffer,
   showActivityBuffer,
+  disablePopup = false,
 }) => {
   const markerRef = useRef<L.Marker | null>(null);
 
-  // Auto-open popup when selected externally
+  // Auto-open popup when selected externally unless disablePopup is true
   useEffect(() => {
-    if (isSelected && markerRef.current) {
+    if (!disablePopup && isSelected && markerRef.current) {
       markerRef.current.openPopup();
     }
-  }, [isSelected]);
+  }, [isSelected, disablePopup]);
 
   const hasActiveAlerts = alerts && alerts.length > 0;
 
@@ -95,9 +97,11 @@ export const StationMarker: React.FC<StationMarkerProps> = ({
           click: () => onSelect(station.station_id),
         }}
       >
-        <Popup className="custom-leaflet-popup" autoPan={true} closeButton={true}>
-          <StationPopup station={station} latestObservation={latestObservation} alerts={alerts} isOutage={isOutage} />
-        </Popup>
+        {!disablePopup && (
+          <Popup className="custom-leaflet-popup" autoPan={true} closeButton={true}>
+            <StationPopup station={station} latestObservation={latestObservation} alerts={alerts} isOutage={isOutage} />
+          </Popup>
+        )}
       </Marker>
     </>
   );

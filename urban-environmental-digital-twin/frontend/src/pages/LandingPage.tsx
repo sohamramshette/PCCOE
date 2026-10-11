@@ -40,7 +40,7 @@ export const LandingPage: React.FC = () => {
   return (
     <div className="airlens-app-root">
       {/* Navigation */}
-      <AirLensNav onOpenDashboard={handleOpenDashboard} />
+      <AirLensNav />
 
       {/* Stacking Sections - Each page overlays on top of the previous one on scroll */}
       <StackingSections>
