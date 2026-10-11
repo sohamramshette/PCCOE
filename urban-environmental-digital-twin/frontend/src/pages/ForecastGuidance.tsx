@@ -181,14 +181,14 @@ export const ForecastGuidance: React.FC = () => {
           justifyContent: 'center',
           minHeight: '420px',
           gap: '16px',
-          color: '#a3b593',
+          color: '#166534',
         }}
       >
         <RefreshCw size={36} style={{ animation: 'spin 1.5s linear infinite' }} />
-        <h3 style={{ margin: 0, color: '#f4f6f0', fontSize: '1.25rem', fontFamily: 'var(--font-heading)' }}>
+        <h3 style={{ margin: 0, color: '#0d1710', fontSize: '1.25rem', fontFamily: 'var(--font-heading)' }}>
           Loading Forecast &amp; Activity Planner...
         </h3>
-        <p style={{ margin: 0, fontSize: '0.9rem', color: '#9eab93' }}>
+        <p style={{ margin: 0, fontSize: '0.9rem', color: '#526b59' }}>
           Connecting to continuous monitoring stations and machine learning forecasting models
         </p>
       </div>
@@ -200,8 +200,8 @@ export const ForecastGuidance: React.FC = () => {
       {/* 1. Header Banner */}
       <div
         style={{
-          background: 'linear-gradient(135deg, rgba(28, 42, 27, 0.92) 0%, rgba(18, 28, 17, 0.96) 100%)',
-          border: '1px solid rgba(163, 181, 147, 0.22)',
+          background: 'rgba(255, 255, 255, 0.95)',
+          border: '1px solid rgba(40, 122, 69, 0.18)',
           borderRadius: '24px',
           padding: '1.75rem 2.25rem',
           marginBottom: '1.75rem',
@@ -210,7 +210,9 @@ export const ForecastGuidance: React.FC = () => {
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '1.25rem',
-          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+          boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
         }}
       >
         <div>
@@ -221,11 +223,11 @@ export const ForecastGuidance: React.FC = () => {
                 fontWeight: 700,
                 textTransform: 'uppercase',
                 letterSpacing: '0.06em',
-                padding: '3px 10px',
-                borderRadius: '6px',
-                background: 'rgba(143, 160, 126, 0.22)',
-                color: '#a3b593',
-                border: '1px solid rgba(163, 181, 147, 0.3)',
+                padding: '4px 10px',
+                borderRadius: '999px',
+                background: 'rgba(40, 122, 69, 0.1)',
+                color: '#166534',
+                border: '1px solid rgba(40, 122, 69, 0.25)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '5px',
@@ -234,7 +236,7 @@ export const ForecastGuidance: React.FC = () => {
               <TrendingUp size={13} />
               Forecast &amp; Activity Guidance
             </span>
-            <span style={{ fontSize: '11px', color: '#9eab93' }}>Hourly Projections for Pune &amp; PCMC</span>
+            <span style={{ fontSize: '11px', color: '#526b59', fontWeight: 600 }}>Hourly Projections for Pune &amp; PCMC</span>
           </div>
 
           <h1
@@ -242,7 +244,7 @@ export const ForecastGuidance: React.FC = () => {
               fontSize: '2rem',
               fontWeight: 700,
               margin: '0 0 6px 0',
-              color: '#f4f6f0',
+              color: '#0d1710',
               fontFamily: 'var(--font-heading)',
               letterSpacing: '-0.01em',
             }}
@@ -250,7 +252,7 @@ export const ForecastGuidance: React.FC = () => {
             Upcoming Air Quality &amp; Activity Guide
           </h1>
 
-          <p style={{ margin: 0, fontSize: '0.92rem', color: '#c9d3bf', maxWidth: '780px', lineHeight: 1.5 }}>
+          <p style={{ margin: 0, fontSize: '0.92rem', color: '#475e4e', maxWidth: '780px', lineHeight: 1.5 }}>
             Anticipate changes in air pollution across upcoming hours and schedule outdoor workouts, commutes,
             and children&apos;s play during periods of lower estimated exposure.
           </p>
@@ -266,14 +268,15 @@ export const ForecastGuidance: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              padding: '8px 14px',
+              padding: '9px 16px',
               borderRadius: '12px',
-              background: 'rgba(143, 160, 126, 0.12)',
-              border: '1px solid rgba(163, 181, 147, 0.28)',
-              color: '#f4f6f0',
-              fontSize: '0.82rem',
+              background: 'rgba(255, 255, 255, 0.95)',
+              border: '1px solid rgba(40, 122, 69, 0.25)',
+              color: '#166534',
+              fontSize: '0.84rem',
               fontWeight: 600,
               cursor: isRefreshing ? 'wait' : 'pointer',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
               transition: 'all 0.2s ease',
             }}
             title="Refresh forecast predictions"
@@ -287,17 +290,19 @@ export const ForecastGuidance: React.FC = () => {
       {/* 2. Locality Selection Chips */}
       <div
         style={{
-          background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-          border: '1px solid rgba(163, 181, 147, 0.22)',
+          background: 'rgba(255, 255, 255, 0.95)',
+          border: '1px solid rgba(40, 122, 69, 0.18)',
           borderRadius: '24px',
           padding: '1.5rem 2rem',
           marginBottom: '1.75rem',
-          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+          boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-          <MapPin size={16} color="#8fa07e" />
-          <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#f4f6f0', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+          <MapPin size={16} color="#166534" />
+          <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0d1710', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Choose Your Pune or PCMC Locality:
           </span>
         </div>
@@ -314,15 +319,16 @@ export const ForecastGuidance: React.FC = () => {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
-                  padding: '7px 14px',
+                  padding: '8px 14px',
                   borderRadius: '12px',
-                  border: isSelected ? '1px solid #8fa07e' : '1px solid rgba(163, 181, 147, 0.2)',
-                  background: isSelected ? 'rgba(143, 160, 126, 0.22)' : 'rgba(14, 20, 14, 0.6)',
-                  color: isSelected ? '#f4f6f0' : '#c9d3bf',
+                  border: isSelected ? '1px solid #166534' : '1px solid rgba(40, 122, 69, 0.2)',
+                  background: isSelected ? '#166534' : 'rgba(255, 255, 255, 0.95)',
+                  color: isSelected ? '#ffffff' : '#1e293b',
                   fontSize: '0.82rem',
                   fontWeight: isSelected ? 700 : 500,
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
+                  boxShadow: isSelected ? '0 2px 8px rgba(22, 101, 52, 0.25)' : '0 1px 3px rgba(0,0,0,0.03)',
                 }}
               >
                 <span
@@ -330,19 +336,32 @@ export const ForecastGuidance: React.FC = () => {
                     width: '6px',
                     height: '6px',
                     borderRadius: '50%',
-                    backgroundColor: isSelected ? '#4ade80' : 'rgba(163, 181, 147, 0.5)',
+                    backgroundColor: isSelected ? '#ffffff' : 'rgba(40, 122, 69, 0.6)',
                   }}
                 />
                 <span>{st.station_name.split(',')[0]}</span>
-                <span style={{ fontSize: '0.7rem', color: '#9eab93' }}>({st.city})</span>
+                <span style={{ fontSize: '0.72rem', color: isSelected ? 'rgba(255, 255, 255, 0.85)' : '#64748b' }}>({st.city})</span>
               </button>
             );
           })}
         </div>
 
         {/* Locality disclaimer notice */}
-        <div style={{ marginTop: '12px', fontSize: '0.74rem', color: '#9eab93', display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <Info size={13} color="#8fa07e" />
+        <div
+          style={{
+            marginTop: '12px',
+            padding: '10px 14px',
+            borderRadius: '12px',
+            background: 'rgba(240, 253, 244, 0.7)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
+            fontSize: '0.78rem',
+            color: '#475e4e',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <Info size={14} color="#166534" style={{ flexShrink: 0 }} />
           <span>
             Forecast applies specifically to the selected ambient monitoring station footprint ({selectedStation?.zone_type}).
             Hyper-local conditions near immediate traffic junctions may vary.
@@ -362,15 +381,17 @@ export const ForecastGuidance: React.FC = () => {
         {/* Card A: Current Measured Observation */}
         <div
           style={{
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-            border: '1px solid rgba(163, 181, 147, 0.22)',
+            background: 'rgba(255, 255, 255, 0.95)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             borderRadius: '20px',
             padding: '1.4rem 1.6rem',
-            boxShadow: '0 12px 30px rgba(0, 0, 0, 0.3)',
+            boxShadow: '0 6px 20px rgba(22, 38, 25, 0.05)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-            <span style={{ fontSize: '0.74rem', fontWeight: 700, color: '#9eab93', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <span style={{ fontSize: '0.76rem', fontWeight: 700, color: '#526b59', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               Current Ground Observation
             </span>
             <span
@@ -378,9 +399,9 @@ export const ForecastGuidance: React.FC = () => {
                 fontSize: '10px',
                 padding: '2px 8px',
                 borderRadius: '6px',
-                background: interpretation.currentObsIsStale ? 'rgba(250, 204, 21, 0.2)' : 'rgba(74, 222, 128, 0.18)',
-                color: interpretation.currentObsIsStale ? '#facc15' : '#4ade80',
-                border: '1px solid rgba(163, 181, 147, 0.3)',
+                background: interpretation.currentObsIsStale ? 'rgba(250, 204, 21, 0.15)' : 'rgba(22, 101, 52, 0.1)',
+                color: interpretation.currentObsIsStale ? '#b45309' : '#166534',
+                border: interpretation.currentObsIsStale ? '1px solid rgba(250, 204, 21, 0.35)' : '1px solid rgba(22, 101, 52, 0.25)',
                 fontWeight: 600,
               }}
             >
@@ -389,16 +410,16 @@ export const ForecastGuidance: React.FC = () => {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', margin: '4px 0 6px' }}>
-            <span style={{ fontSize: '2.5rem', fontWeight: 800, color: '#f4f6f0', letterSpacing: '-0.02em', lineHeight: 1 }}>
+            <span style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0d1710', letterSpacing: '-0.02em', lineHeight: 1 }}>
               {interpretation.currentObsPm25 !== null ? interpretation.currentObsPm25.toFixed(1) : '--'}
             </span>
-            <span style={{ fontSize: '0.85rem', color: '#9eab93', fontWeight: 600 }}>µg/m³ PM2.5</span>
+            <span style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 600 }}>µg/m³ PM2.5</span>
           </div>
 
-          <div style={{ fontSize: '0.74rem', color: '#9eab93', marginTop: '4px' }}>
-            Station: <strong>{selectedStation?.station_name.split(',')[0]}</strong>
+          <div style={{ fontSize: '0.78rem', color: '#334155', marginTop: '4px' }}>
+            Station: <strong style={{ color: '#0d1710' }}>{selectedStation?.station_name.split(',')[0]}</strong>
           </div>
-          <div style={{ fontSize: '0.72rem', color: '#8fa07e', marginTop: '2px' }}>
+          <div style={{ fontSize: '0.72rem', color: '#64748b', marginTop: '3px' }}>
             Timestamp: {formatISTTime(interpretation.currentObsTime)}
           </div>
         </div>
@@ -406,15 +427,17 @@ export const ForecastGuidance: React.FC = () => {
         {/* Card B: Expected Trajectory Trend */}
         <div
           style={{
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-            border: '1px solid rgba(163, 181, 147, 0.22)',
+            background: 'rgba(255, 255, 255, 0.95)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             borderRadius: '20px',
             padding: '1.4rem 1.6rem',
-            boxShadow: '0 12px 30px rgba(0, 0, 0, 0.3)',
+            boxShadow: '0 6px 20px rgba(22, 38, 25, 0.05)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-            <span style={{ fontSize: '0.74rem', fontWeight: 700, color: '#9eab93', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <span style={{ fontSize: '0.76rem', fontWeight: 700, color: '#526b59', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               Forecast Trend (Upcoming Hours)
             </span>
             <span
@@ -422,7 +445,7 @@ export const ForecastGuidance: React.FC = () => {
                 fontSize: '10px',
                 padding: '2px 8px',
                 borderRadius: '6px',
-                background: `${interpretation.trendBadgeColor}20`,
+                background: `${interpretation.trendBadgeColor}18`,
                 color: interpretation.trendBadgeColor,
                 border: `1px solid ${interpretation.trendBadgeColor}40`,
                 fontWeight: 700,
@@ -433,17 +456,17 @@ export const ForecastGuidance: React.FC = () => {
             </span>
           </div>
 
-          <div style={{ fontSize: '0.88rem', fontWeight: 600, color: '#f4f6f0', margin: '6px 0', lineHeight: 1.4 }}>
+          <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#0d1710', margin: '6px 0', lineHeight: 1.45 }}>
             {interpretation.trendText}
           </div>
 
           {interpretation.peakHourLabel && interpretation.lowestHourLabel && (
-            <div style={{ display: 'flex', gap: '12px', fontSize: '0.74rem', color: '#9eab93', marginTop: '8px' }}>
+            <div style={{ display: 'flex', gap: '14px', fontSize: '0.76rem', color: '#526b59', marginTop: '8px' }}>
               <div>
-                Peak: <strong style={{ color: '#fca5a5' }}>{interpretation.peakHourLabel}</strong> (~{interpretation.peakPm25} µg/m³)
+                Peak: <strong style={{ color: '#dc2626' }}>{interpretation.peakHourLabel}</strong> (~{interpretation.peakPm25} µg/m³)
               </div>
               <div>
-                Lowest: <strong style={{ color: '#86efac' }}>{interpretation.lowestHourLabel}</strong> (~{interpretation.lowestPm25} µg/m³)
+                Lowest: <strong style={{ color: '#15803d' }}>{interpretation.lowestHourLabel}</strong> (~{interpretation.lowestPm25} µg/m³)
               </div>
             </div>
           )}
@@ -452,15 +475,17 @@ export const ForecastGuidance: React.FC = () => {
         {/* Card C: Model Initialization & Provenance */}
         <div
           style={{
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-            border: '1px solid rgba(163, 181, 147, 0.22)',
+            background: 'rgba(255, 255, 255, 0.95)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             borderRadius: '20px',
             padding: '1.4rem 1.6rem',
-            boxShadow: '0 12px 30px rgba(0, 0, 0, 0.3)',
+            boxShadow: '0 6px 20px rgba(22, 38, 25, 0.05)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-            <span style={{ fontSize: '0.74rem', fontWeight: 700, color: '#9eab93', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <span style={{ fontSize: '0.76rem', fontWeight: 700, color: '#526b59', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               Prediction Provenance
             </span>
             <span
@@ -468,9 +493,9 @@ export const ForecastGuidance: React.FC = () => {
                 fontSize: '10px',
                 padding: '2px 8px',
                 borderRadius: '6px',
-                background: 'rgba(56, 189, 248, 0.18)',
-                color: '#38bdf8',
-                border: '1px solid rgba(56, 189, 248, 0.3)',
+                background: 'rgba(2, 132, 199, 0.1)',
+                color: '#0284c7',
+                border: '1px solid rgba(2, 132, 199, 0.25)',
                 fontWeight: 600,
               }}
             >
@@ -478,13 +503,13 @@ export const ForecastGuidance: React.FC = () => {
             </span>
           </div>
 
-          <div style={{ fontSize: '0.82rem', color: '#f4f6f0', fontWeight: 600, margin: '6px 0 4px' }}>
+          <div style={{ fontSize: '0.84rem', color: '#0d1710', fontWeight: 700, margin: '6px 0 4px' }}>
             Model: Gradient Boosting Dispersion Baseline
           </div>
-          <div style={{ fontSize: '0.74rem', color: '#9eab93' }}>
+          <div style={{ fontSize: '0.76rem', color: '#475e4e' }}>
             Multi-horizon autoregressive anchor (1h to 24h)
           </div>
-          <div style={{ fontSize: '0.72rem', color: '#8fa07e', marginTop: '6px' }}>
+          <div style={{ fontSize: '0.72rem', color: '#64748b', marginTop: '6px' }}>
             Initialized: {formatISTTime(interpretation.forecastInitTime)}
           </div>
         </div>
@@ -493,23 +518,25 @@ export const ForecastGuidance: React.FC = () => {
       {/* 4. Upcoming Hourly Forecast Visualization & Chart */}
       <div
         style={{
-          background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-          border: '1px solid rgba(163, 181, 147, 0.22)',
+          background: 'rgba(255, 255, 255, 0.95)',
+          border: '1px solid rgba(40, 122, 69, 0.18)',
           borderRadius: '24px',
           padding: '1.75rem 2rem',
           marginBottom: '1.75rem',
-          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+          boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '10px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Clock size={18} color="#8fa07e" />
-              <h2 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: '#f4f6f0' }}>
+              <Clock size={18} color="#166534" />
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
                 Hourly Predicted PM2.5 Trajectory
               </h2>
             </div>
-            <div style={{ fontSize: '0.78rem', color: '#9eab93', marginTop: '2px' }}>
+            <div style={{ fontSize: '0.78rem', color: '#526b59', marginTop: '2px' }}>
               Projected particulate concentrations over upcoming hours for {selectedStation?.station_name.split(',')[0]}
             </div>
           </div>
@@ -518,8 +545,8 @@ export const ForecastGuidance: React.FC = () => {
           <div
             style={{
               display: 'flex',
-              background: 'rgba(14, 20, 14, 0.85)',
-              border: '1px solid rgba(163, 181, 147, 0.25)',
+              background: 'rgba(240, 253, 244, 0.8)',
+              border: '1px solid rgba(40, 122, 69, 0.2)',
               borderRadius: '12px',
               padding: '3px',
             }}
@@ -539,12 +566,13 @@ export const ForecastGuidance: React.FC = () => {
                     padding: '6px 12px',
                     border: 'none',
                     borderRadius: '9px',
-                    background: active ? '#8fa07e' : 'transparent',
-                    color: active ? '#121a11' : '#c9d3bf',
+                    background: active ? '#166534' : 'transparent',
+                    color: active ? '#ffffff' : '#334155',
                     fontSize: '0.78rem',
                     fontWeight: active ? 700 : 500,
                     cursor: 'pointer',
                     transition: 'all 0.15s ease',
+                    boxShadow: active ? '0 2px 6px rgba(22, 101, 52, 0.25)' : 'none',
                   }}
                 >
                   {h.label}
@@ -558,11 +586,11 @@ export const ForecastGuidance: React.FC = () => {
         {forecastError && (
           <div
             style={{
-              padding: '1.5rem',
+              padding: '1.25rem 1.5rem',
               borderRadius: '16px',
-              background: 'rgba(239, 68, 68, 0.08)',
-              border: '1px solid rgba(239, 68, 68, 0.25)',
-              color: '#fca5a5',
+              background: 'rgba(239, 68, 68, 0.1)',
+              border: '1px solid rgba(239, 68, 68, 0.3)',
+              color: '#dc2626',
               fontSize: '0.84rem',
               display: 'flex',
               alignItems: 'center',
@@ -582,23 +610,23 @@ export const ForecastGuidance: React.FC = () => {
               <ComposedChart data={chartData} margin={{ top: 10, right: 15, left: -15, bottom: 0 }}>
                 <defs>
                   <linearGradient id="forecastPm25Grad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#8fa07e" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#8fa07e" stopOpacity={0.0} />
+                    <stop offset="5%" stopColor="#166534" stopOpacity={0.25} />
+                    <stop offset="95%" stopColor="#166534" stopOpacity={0.0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(163, 181, 147, 0.12)" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(40, 122, 69, 0.12)" vertical={false} />
                 <XAxis
                   dataKey="timeLabel"
-                  stroke="#9eab93"
+                  stroke="#526b59"
                   fontSize={11}
                   tickLine={false}
-                  axisLine={{ stroke: 'rgba(163, 181, 147, 0.2)' }}
+                  axisLine={{ stroke: 'rgba(40, 122, 69, 0.2)' }}
                 />
                 <YAxis
-                  stroke="#9eab93"
+                  stroke="#526b59"
                   fontSize={11}
                   tickLine={false}
-                  axisLine={{ stroke: 'rgba(163, 181, 147, 0.2)' }}
+                  axisLine={{ stroke: 'rgba(40, 122, 69, 0.2)' }}
                   unit=" µg"
                 />
                 <Tooltip
@@ -608,26 +636,26 @@ export const ForecastGuidance: React.FC = () => {
                       return (
                         <div
                           style={{
-                            background: 'rgba(18, 25, 17, 0.95)',
-                            border: '1px solid rgba(163, 181, 147, 0.3)',
+                            background: 'rgba(255, 255, 255, 0.96)',
+                            border: '1px solid rgba(40, 122, 69, 0.25)',
                             borderRadius: '12px',
                             padding: '10px 14px',
-                            color: '#f4f6f0',
+                            color: '#0d1710',
                             fontSize: '0.8rem',
-                            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
+                            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.12)',
                             backdropFilter: 'blur(8px)',
                           }}
                         >
-                          <div style={{ fontWeight: 700, color: '#a3b593', marginBottom: '4px' }}>
+                          <div style={{ fontWeight: 700, color: '#166534', marginBottom: '4px' }}>
                             {data.timeLabel} IST (Step +{data.step}h)
                           </div>
-                          <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#f4f6f0' }}>
-                            {data.pm25.toFixed(1)} <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>µg/m³ PM2.5</span>
+                          <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#0d1710' }}>
+                            {data.pm25.toFixed(1)} <span style={{ fontSize: '0.75rem', fontWeight: 500, color: '#64748b' }}>µg/m³ PM2.5</span>
                           </div>
-                          <div style={{ fontSize: '0.72rem', color: '#9eab93', marginTop: '2px' }}>
+                          <div style={{ fontSize: '0.74rem', color: '#526b59', marginTop: '2px' }}>
                             Particulate Tier: <strong style={{ color: data.color }}>{data.category}</strong>
                           </div>
-                          <div style={{ fontSize: '0.68rem', color: '#8fa07e', marginTop: '4px', fontStyle: 'italic' }}>
+                          <div style={{ fontSize: '0.68rem', color: '#64748b', marginTop: '4px', fontStyle: 'italic' }}>
                             * Model Forecast Estimate
                           </div>
                         </div>
@@ -639,7 +667,7 @@ export const ForecastGuidance: React.FC = () => {
                 <Area
                   type="monotone"
                   dataKey="pm25"
-                  stroke="#8fa07e"
+                  stroke="#166534"
                   strokeWidth={2.5}
                   fillOpacity={1}
                   fill="url(#forecastPm25Grad)"
@@ -658,7 +686,7 @@ export const ForecastGuidance: React.FC = () => {
               overflowX: 'auto',
               paddingTop: '1rem',
               marginTop: '0.5rem',
-              borderTop: '1px solid rgba(163, 181, 147, 0.15)',
+              borderTop: '1px solid rgba(40, 122, 69, 0.15)',
             }}
           >
             {chartData.map((item) => (
@@ -668,14 +696,14 @@ export const ForecastGuidance: React.FC = () => {
                   minWidth: '85px',
                   padding: '8px 10px',
                   borderRadius: '12px',
-                  background: 'rgba(14, 20, 14, 0.65)',
-                  border: '1px solid rgba(163, 181, 147, 0.14)',
+                  background: 'rgba(240, 253, 244, 0.75)',
+                  border: '1px solid rgba(40, 122, 69, 0.18)',
                   textAlign: 'center',
                   flexShrink: 0,
                 }}
               >
-                <div style={{ fontSize: '0.72rem', color: '#9eab93', fontWeight: 600 }}>{item.timeLabel}</div>
-                <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#f4f6f0', margin: '3px 0' }}>
+                <div style={{ fontSize: '0.72rem', color: '#526b59', fontWeight: 600 }}>{item.timeLabel}</div>
+                <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0d1710', margin: '3px 0' }}>
                   {item.pm25.toFixed(1)}
                 </div>
                 <span
@@ -684,7 +712,7 @@ export const ForecastGuidance: React.FC = () => {
                     fontWeight: 700,
                     padding: '2px 6px',
                     borderRadius: '6px',
-                    background: `${item.color}20`,
+                    background: `${item.color}18`,
                     color: item.color,
                   }}
                 >
@@ -700,9 +728,9 @@ export const ForecastGuidance: React.FC = () => {
           style={{
             marginTop: '1rem',
             paddingTop: '0.75rem',
-            borderTop: '1px solid rgba(163, 181, 147, 0.1)',
+            borderTop: '1px solid rgba(40, 122, 69, 0.12)',
             fontSize: '0.72rem',
-            color: '#9eab93',
+            color: '#64748b',
             lineHeight: 1.45,
           }}
         >
@@ -715,28 +743,30 @@ export const ForecastGuidance: React.FC = () => {
       {/* 5. Plan Your Activities Section (Section 7 Requirement) */}
       <div
         style={{
-          background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-          border: '1px solid rgba(163, 181, 147, 0.22)',
+          background: 'rgba(255, 255, 255, 0.95)',
+          border: '1px solid rgba(40, 122, 69, 0.18)',
           borderRadius: '24px',
           padding: '1.75rem 2rem',
           marginBottom: '1.75rem',
-          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+          boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '8px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Sparkles size={18} color="#8fa07e" />
-              <h2 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: '#f4f6f0' }}>
+              <Sparkles size={18} color="#166534" />
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
                 Plan Your Activities
               </h2>
             </div>
-            <div style={{ fontSize: '0.78rem', color: '#9eab93', marginTop: '2px' }}>
+            <div style={{ fontSize: '0.78rem', color: '#526b59', marginTop: '2px' }}>
               Actionable outdoor guidance tailored to your selected locality&apos;s forecast trajectory
             </div>
           </div>
 
-          <span style={{ fontSize: '0.74rem', color: '#a3b593' }}>
+          <span style={{ fontSize: '0.74rem', color: '#166534', fontWeight: 600 }}>
             Select an activity to view guidance
           </span>
         </div>
@@ -767,17 +797,18 @@ export const ForecastGuidance: React.FC = () => {
                   gap: '10px',
                   padding: '12px 16px',
                   borderRadius: '14px',
-                  border: active ? '1.5px solid #8fa07e' : '1px solid rgba(163, 181, 147, 0.2)',
-                  background: active ? 'rgba(143, 160, 126, 0.18)' : 'rgba(14, 20, 14, 0.6)',
-                  color: active ? '#f4f6f0' : '#c9d3bf',
+                  border: active ? '1.5px solid #166534' : '1px solid rgba(40, 122, 69, 0.2)',
+                  background: active ? 'rgba(40, 122, 69, 0.12)' : 'rgba(255, 255, 255, 0.95)',
+                  color: active ? '#166534' : '#334155',
                   fontSize: '0.84rem',
                   fontWeight: active ? 700 : 500,
                   cursor: 'pointer',
                   textAlign: 'left',
                   transition: 'all 0.15s ease',
+                  boxShadow: active ? '0 2px 8px rgba(22, 101, 52, 0.15)' : 'none',
                 }}
               >
-                <span style={{ display: 'inline-flex', alignItems: 'center', color: active ? '#8fa07e' : '#9eab93' }}>{act.icon}</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', color: active ? '#166534' : '#526b59' }}>{act.icon}</span>
                 <span>{act.label}</span>
               </button>
             );
@@ -787,15 +818,15 @@ export const ForecastGuidance: React.FC = () => {
         {/* Selected Activity Guidance Card */}
         <div
           style={{
-            background: 'rgba(14, 20, 14, 0.72)',
-            border: '1px solid rgba(163, 181, 147, 0.2)',
+            background: 'rgba(240, 253, 244, 0.75)',
+            border: '1px solid rgba(40, 122, 69, 0.2)',
             borderRadius: '18px',
             padding: '1.4rem 1.6rem',
             marginBottom: '1.25rem',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px', marginBottom: '10px' }}>
-            <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: '#f4f6f0' }}>
+            <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: '#0d1710' }}>
               {interpretation.activeGuidance.title}
             </h3>
 
@@ -806,7 +837,7 @@ export const ForecastGuidance: React.FC = () => {
                   borderRadius: '6px',
                   fontSize: '11px',
                   fontWeight: 700,
-                  background: `${interpretation.activeGuidance.badgeColor}20`,
+                  background: `${interpretation.activeGuidance.badgeColor}18`,
                   color: interpretation.activeGuidance.badgeColor,
                   border: `1px solid ${interpretation.activeGuidance.badgeColor}40`,
                 }}
@@ -821,8 +852,8 @@ export const ForecastGuidance: React.FC = () => {
             style={{
               padding: '10px 14px',
               borderRadius: '12px',
-              background: 'rgba(143, 160, 126, 0.1)',
-              border: '1px solid rgba(163, 181, 147, 0.18)',
+              background: 'rgba(255, 255, 255, 0.95)',
+              border: '1px solid rgba(40, 122, 69, 0.2)',
               marginBottom: '12px',
               display: 'flex',
               alignItems: 'center',
@@ -832,22 +863,22 @@ export const ForecastGuidance: React.FC = () => {
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Clock size={15} color="#8fa07e" />
-              <span style={{ fontSize: '0.8rem', color: '#c9d3bf', fontWeight: 600 }}>
+              <Clock size={15} color="#166534" />
+              <span style={{ fontSize: '0.8rem', color: '#526b59', fontWeight: 600 }}>
                 Suggested Window:
               </span>
-              <strong style={{ fontSize: '0.92rem', color: '#f4f6f0' }}>
+              <strong style={{ fontSize: '0.92rem', color: '#0d1710' }}>
                 {interpretation.activeGuidance.bestTimeWindow}
               </strong>
             </div>
 
-            <span style={{ fontSize: '0.72rem', color: '#a3b593' }}>
+            <span style={{ fontSize: '0.74rem', color: '#166534', fontWeight: 600 }}>
               {interpretation.activeGuidance.timingReason}
             </span>
           </div>
 
           {/* Guidance Paragraph */}
-          <p style={{ margin: '0 0 10px 0', fontSize: '0.88rem', color: '#eef1e7', lineHeight: 1.55 }}>
+          <p style={{ margin: '0 0 10px 0', fontSize: '0.88rem', color: '#334155', lineHeight: 1.55 }}>
             {interpretation.activeGuidance.guidanceText}
           </p>
 
@@ -855,10 +886,10 @@ export const ForecastGuidance: React.FC = () => {
           <div
             style={{
               fontSize: '0.72rem',
-              color: '#9eab93',
+              color: '#64748b',
               lineHeight: 1.4,
               fontStyle: 'italic',
-              borderTop: '1px solid rgba(163, 181, 147, 0.1)',
+              borderTop: '1px solid rgba(40, 122, 69, 0.15)',
               paddingTop: '8px',
             }}
           >
@@ -869,7 +900,7 @@ export const ForecastGuidance: React.FC = () => {
 
         {/* 6. Max 3 Practical Locality Recommendations (Section 8 Requirement) */}
         <div style={{ marginTop: '1.25rem' }}>
-          <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#f4f6f0', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '8px' }}>
+          <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0d1710', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '8px' }}>
             Practical Locality Recommendations ({selectedStation?.station_name.split(',')[0]}):
           </div>
 
@@ -881,16 +912,16 @@ export const ForecastGuidance: React.FC = () => {
                   display: 'flex',
                   alignItems: 'flex-start',
                   gap: '8px',
-                  padding: '9px 12px',
-                  borderRadius: '10px',
-                  background: 'rgba(14, 20, 14, 0.55)',
-                  border: '1px solid rgba(163, 181, 147, 0.12)',
-                  fontSize: '0.82rem',
-                  color: '#c9d3bf',
+                  padding: '10px 14px',
+                  borderRadius: '12px',
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  border: '1px solid rgba(40, 122, 69, 0.18)',
+                  fontSize: '0.84rem',
+                  color: '#334155',
                   lineHeight: 1.45,
                 }}
               >
-                <CheckCircle2 size={15} color="#8fa07e" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <CheckCircle2 size={16} color="#166534" style={{ flexShrink: 0, marginTop: '2px' }} />
                 <span>{rec}</span>
               </div>
             ))}

@@ -318,23 +318,24 @@ export const BacktrackingAirflowMap: React.FC<BacktrackingAirflowMapProps> = ({
           bottom: '12px',
           right: '12px',
           zIndex: 1000,
-          background: 'rgba(18, 26, 17, 0.94)',
-          border: '1px solid rgba(163, 181, 147, 0.28)',
+          background: 'rgba(255, 255, 255, 0.95)',
+          border: '1px solid rgba(40, 122, 69, 0.25)',
           borderRadius: '12px',
           padding: '10px 14px',
           fontSize: '0.74rem',
-          color: '#c9d3bf',
-          backdropFilter: 'blur(8px)',
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.45)',
+          color: '#334155',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          boxShadow: '0 4px 16px rgba(0, 0, 0, 0.12)',
           maxWidth: '260px',
         }}
       >
-        <div style={{ fontWeight: 700, color: '#f4f6f0', marginBottom: '6px' }}>
+        <div style={{ fontWeight: 700, color: '#0d1710', marginBottom: '6px' }}>
           Atmospheric Map Legend
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
           <span style={{ width: '16px', height: '3px', background: '#0284c7', borderTop: '1px dashed #38bdf8' }} />
-          <span>Calculated Airflow Path (Past 12h)</span>
+          <span>Calculated Airflow Path</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
           <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#15803d', border: '1.5px solid #86efac' }} />

@@ -137,12 +137,12 @@ export const IncidentLocationPicker: React.FC<IncidentLocationPickerProps> = ({
             gap: '0.6rem',
             padding: '0.6rem 0.85rem',
             borderRadius: '10px',
-            background: 'rgba(20, 26, 18, 0.8)',
-            border: '1.5px solid rgba(92, 114, 82, 0.35)',
+            background: '#ffffff',
+            border: '1.5px solid rgba(40, 122, 69, 0.25)',
             transition: 'border-color 0.2s ease',
           }}
         >
-          <Search size={16} color="#8aa87e" />
+          <Search size={16} color="#166534" />
           <input
             type="text"
             placeholder="Type a locality or landmark (e.g. Shivajinagar, Kothrud, Bhosari, Hinjawadi)..."
@@ -158,12 +158,12 @@ export const IncidentLocationPicker: React.FC<IncidentLocationPickerProps> = ({
               background: 'transparent',
               border: 'none',
               outline: 'none',
-              color: '#eef1e7',
+              color: '#0f172a',
               fontSize: '0.88rem',
             }}
           />
           {isSearching && (
-            <span style={{ fontSize: '0.72rem', color: '#8aa87e', fontStyle: 'italic' }}>
+            <span style={{ fontSize: '0.72rem', color: '#166534', fontStyle: 'italic' }}>
               Searching...
             </span>
           )}
@@ -174,8 +174,8 @@ export const IncidentLocationPicker: React.FC<IncidentLocationPickerProps> = ({
                 alignItems: 'center',
                 gap: '0.3rem',
                 fontSize: '0.72rem',
-                color: '#8aa87e',
-                background: 'rgba(138, 168, 126, 0.15)',
+                color: '#166534',
+                background: 'rgba(40, 122, 69, 0.1)',
                 padding: '0.2rem 0.5rem',
                 borderRadius: '6px',
                 fontWeight: 600,
@@ -197,10 +197,10 @@ export const IncidentLocationPicker: React.FC<IncidentLocationPickerProps> = ({
               left: 0,
               right: 0,
               zIndex: 100,
-              background: '#181f15',
-              border: '1px solid rgba(92, 114, 82, 0.4)',
+              background: '#ffffff',
+              border: '1px solid rgba(40, 122, 69, 0.25)',
               borderRadius: '10px',
-              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5)',
+              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.12)',
               maxHeight: '220px',
               overflowY: 'auto',
             }}
@@ -212,19 +212,19 @@ export const IncidentLocationPicker: React.FC<IncidentLocationPickerProps> = ({
                 style={{
                   padding: '0.6rem 0.85rem',
                   cursor: 'pointer',
-                  borderBottom: '1px solid rgba(238, 241, 231, 0.05)',
+                  borderBottom: '1px solid rgba(40, 122, 69, 0.08)',
                   transition: 'background 0.15s ease',
                   display: 'flex',
                   alignItems: 'flex-start',
                   gap: '0.5rem',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(92, 114, 82, 0.25)')}
+                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(240, 253, 244, 0.8)')}
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
               >
-                <MapPin size={14} color="#8aa87e" style={{ marginTop: '3px', flexShrink: 0 }} />
+                <MapPin size={14} color="#166534" style={{ marginTop: '3px', flexShrink: 0 }} />
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#eef1e7' }}>{item.name}</div>
-                  <div style={{ fontSize: '0.74rem', color: '#889381', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#0d1710' }}>{item.name}</div>
+                  <div style={{ fontSize: '0.74rem', color: '#64748b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {item.subtitle}
                   </div>
                 </div>
@@ -236,10 +236,10 @@ export const IncidentLocationPicker: React.FC<IncidentLocationPickerProps> = ({
 
       {/* Map Toggle & Coordinate Details */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
-        <div style={{ fontSize: '0.76rem', color: '#889381' }}>
+        <div style={{ fontSize: '0.76rem', color: '#526b59' }}>
           {latitude !== null && longitude !== null ? (
             <span>
-              Pin Location: <strong style={{ color: '#c5cebe' }}>{latitude.toFixed(4)}°N, {longitude.toFixed(4)}°E</strong>
+              Pin Location: <strong style={{ color: '#0d1710' }}>{latitude.toFixed(4)}°N, {longitude.toFixed(4)}°E</strong>
             </span>
           ) : (
             <span>Search a locality above or toggle map to pinpoint the exact location.</span>
@@ -250,9 +250,9 @@ export const IncidentLocationPicker: React.FC<IncidentLocationPickerProps> = ({
           type="button"
           onClick={() => setShowMap((prev) => !prev)}
           style={{
-            background: 'transparent',
-            border: '1px solid rgba(92, 114, 82, 0.35)',
-            color: '#8aa87e',
+            background: 'rgba(240, 253, 244, 0.85)',
+            border: '1px solid rgba(40, 122, 69, 0.25)',
+            color: '#166534',
             borderRadius: '6px',
             padding: '0.25rem 0.65rem',
             fontSize: '0.76rem',
@@ -275,7 +275,7 @@ export const IncidentLocationPicker: React.FC<IncidentLocationPickerProps> = ({
             height: '240px',
             borderRadius: '10px',
             overflow: 'hidden',
-            border: '1px solid rgba(92, 114, 82, 0.35)',
+            border: '1px solid rgba(40, 122, 69, 0.25)',
             marginTop: '0.25rem',
             position: 'relative',
           }}
@@ -288,7 +288,7 @@ export const IncidentLocationPicker: React.FC<IncidentLocationPickerProps> = ({
           >
             <TileLayer
               attribution='&copy; <a href="https://carto.com/">CartoDB</a>'
-              url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+              url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
             />
             <MapClickHandler onMapClick={handleMapClick} />
             {latitude !== null && longitude !== null && (
@@ -301,12 +301,14 @@ export const IncidentLocationPicker: React.FC<IncidentLocationPickerProps> = ({
               bottom: '8px',
               left: '8px',
               zIndex: 400,
-              background: 'rgba(20, 24, 16, 0.85)',
+              background: 'rgba(255, 255, 255, 0.95)',
               padding: '0.25rem 0.55rem',
-              borderRadius: '4px',
+              borderRadius: '6px',
               fontSize: '0.72rem',
-              color: '#8aa87e',
-              border: '1px solid rgba(92, 114, 82, 0.3)',
+              color: '#166534',
+              fontWeight: 600,
+              border: '1px solid rgba(40, 122, 69, 0.25)',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
             }}
           >
             Click anywhere on the map to set the incident pin

@@ -127,14 +127,14 @@ export const PollutionSources: React.FC = () => {
           justifyContent: 'center',
           minHeight: '420px',
           gap: '16px',
-          color: '#a3b593',
+          color: '#166534',
         }}
       >
         <RefreshCw size={36} style={{ animation: 'spin 1.5s linear infinite' }} />
-        <h3 style={{ margin: 0, color: '#f4f6f0', fontSize: '1.25rem', fontFamily: 'var(--font-heading)' }}>
+        <h3 style={{ margin: 0, color: '#0d1710', fontSize: '1.25rem', fontFamily: 'var(--font-heading)' }}>
           Loading Atmospheric Backtracking...
         </h3>
-        <p style={{ margin: 0, fontSize: '0.9rem', color: '#9eab93' }}>
+        <p style={{ margin: 0, fontSize: '0.9rem', color: '#526b59' }}>
           Connecting to meteorological wind reanalysis and Pune monitoring stations
         </p>
       </div>
@@ -146,8 +146,8 @@ export const PollutionSources: React.FC = () => {
       {/* 1. Header Introduction Banner */}
       <div
         style={{
-          background: 'linear-gradient(135deg, rgba(28, 42, 27, 0.92) 0%, rgba(18, 28, 17, 0.96) 100%)',
-          border: '1px solid rgba(163, 181, 147, 0.22)',
+          background: 'rgba(255, 255, 255, 0.95)',
+          border: '1px solid rgba(40, 122, 69, 0.18)',
           borderRadius: '24px',
           padding: '1.75rem 2.25rem',
           marginBottom: '1.75rem',
@@ -156,7 +156,9 @@ export const PollutionSources: React.FC = () => {
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '1.25rem',
-          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+          boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
         }}
       >
         <div>
@@ -167,11 +169,11 @@ export const PollutionSources: React.FC = () => {
                 fontWeight: 700,
                 textTransform: 'uppercase',
                 letterSpacing: '0.06em',
-                padding: '3px 10px',
-                borderRadius: '6px',
-                background: 'rgba(143, 160, 126, 0.22)',
-                color: '#a3b593',
-                border: '1px solid rgba(163, 181, 147, 0.3)',
+                padding: '4px 10px',
+                borderRadius: '999px',
+                background: 'rgba(40, 122, 69, 0.1)',
+                color: '#166534',
+                border: '1px solid rgba(40, 122, 69, 0.25)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '5px',
@@ -180,7 +182,7 @@ export const PollutionSources: React.FC = () => {
               <Wind size={13} />
               Pollution Sources &amp; Atmospheric Transport
             </span>
-            <span style={{ fontSize: '11px', color: '#9eab93' }}>Pune &amp; PCMC Regional Airflow Analysis</span>
+            <span style={{ fontSize: '11px', color: '#526b59', fontWeight: 600 }}>Pune &amp; PCMC Regional Airflow Analysis</span>
           </div>
 
           <h1
@@ -188,7 +190,7 @@ export const PollutionSources: React.FC = () => {
               fontSize: '2rem',
               fontWeight: 700,
               margin: '0 0 6px 0',
-              color: '#f4f6f0',
+              color: '#0d1710',
               fontFamily: 'var(--font-heading)',
               letterSpacing: '-0.01em',
             }}
@@ -196,7 +198,7 @@ export const PollutionSources: React.FC = () => {
             Where Does Your Air Travel From?
           </h1>
 
-          <p style={{ margin: 0, fontSize: '0.92rem', color: '#c9d3bf', maxWidth: '780px', lineHeight: 1.5 }}>
+          <p style={{ margin: 0, fontSize: '0.92rem', color: '#475e4e', maxWidth: '780px', lineHeight: 1.5 }}>
             Explore atmospheric backtracking trajectories to see the path air parcels took before arriving in your neighborhood.
             Understand how regional wind patterns connect different parts of Pune and Pimpri-Chinchwad.
           </p>
@@ -212,14 +214,15 @@ export const PollutionSources: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              padding: '8px 14px',
+              padding: '9px 16px',
               borderRadius: '12px',
-              background: 'rgba(143, 160, 126, 0.12)',
-              border: '1px solid rgba(163, 181, 147, 0.28)',
-              color: '#f4f6f0',
-              fontSize: '0.82rem',
+              background: 'rgba(255, 255, 255, 0.95)',
+              border: '1px solid rgba(40, 122, 69, 0.25)',
+              color: '#166534',
+              fontSize: '0.84rem',
               fontWeight: 600,
               cursor: isSimulating ? 'wait' : 'pointer',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
               transition: 'all 0.2s ease',
             }}
             title="Refresh atmospheric transport calculation"
@@ -233,30 +236,32 @@ export const PollutionSources: React.FC = () => {
       {/* 2. Locality Selection & Backward Duration Selector */}
       <div
         style={{
-          background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-          border: '1px solid rgba(163, 181, 147, 0.22)',
+          background: 'rgba(255, 255, 255, 0.95)',
+          border: '1px solid rgba(40, 122, 69, 0.18)',
           borderRadius: '24px',
           padding: '1.5rem 2rem',
           marginBottom: '1.75rem',
-          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+          boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px', marginBottom: '10px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px', marginBottom: '12px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <MapPin size={16} color="#8fa07e" />
-            <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#f4f6f0', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <MapPin size={16} color="#166534" />
+            <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0d1710', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               Select Monitoring Station / Neighborhood:
             </span>
           </div>
 
           {/* Time Duration Toggle: 6h / 12h / 24h */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ fontSize: '0.74rem', color: '#9eab93' }}>Lookback:</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '0.78rem', color: '#526b59', fontWeight: 600 }}>Lookback:</span>
             <div
               style={{
                 display: 'flex',
-                background: 'rgba(14, 20, 14, 0.85)',
-                border: '1px solid rgba(163, 181, 147, 0.25)',
+                background: 'rgba(240, 253, 244, 0.8)',
+                border: '1px solid rgba(40, 122, 69, 0.2)',
                 borderRadius: '10px',
                 padding: '2px',
               }}
@@ -273,15 +278,16 @@ export const PollutionSources: React.FC = () => {
                     type="button"
                     onClick={() => setBackwardHours(h.hours)}
                     style={{
-                      padding: '4px 10px',
+                      padding: '5px 12px',
                       border: 'none',
                       borderRadius: '8px',
-                      background: active ? '#8fa07e' : 'transparent',
-                      color: active ? '#121a11' : '#c9d3bf',
-                      fontSize: '0.74rem',
+                      background: active ? '#166534' : 'transparent',
+                      color: active ? '#ffffff' : '#334155',
+                      fontSize: '0.76rem',
                       fontWeight: active ? 700 : 500,
                       cursor: 'pointer',
                       transition: 'all 0.15s ease',
+                      boxShadow: active ? '0 2px 6px rgba(22, 101, 52, 0.25)' : 'none',
                     }}
                   >
                     {h.label}
@@ -305,15 +311,16 @@ export const PollutionSources: React.FC = () => {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
-                  padding: '7px 14px',
+                  padding: '8px 14px',
                   borderRadius: '12px',
-                  border: isSelected ? '1px solid #8fa07e' : '1px solid rgba(163, 181, 147, 0.2)',
-                  background: isSelected ? 'rgba(143, 160, 126, 0.22)' : 'rgba(14, 20, 14, 0.6)',
-                  color: isSelected ? '#f4f6f0' : '#c9d3bf',
+                  border: isSelected ? '1px solid #166534' : '1px solid rgba(40, 122, 69, 0.2)',
+                  background: isSelected ? '#166534' : 'rgba(255, 255, 255, 0.95)',
+                  color: isSelected ? '#ffffff' : '#1e293b',
                   fontSize: '0.82rem',
                   fontWeight: isSelected ? 700 : 500,
                   cursor: 'pointer',
                   transition: 'all 0.15s ease',
+                  boxShadow: isSelected ? '0 2px 8px rgba(22, 101, 52, 0.25)' : '0 1px 3px rgba(0,0,0,0.03)',
                 }}
               >
                 <span
@@ -321,20 +328,33 @@ export const PollutionSources: React.FC = () => {
                     width: '6px',
                     height: '6px',
                     borderRadius: '50%',
-                    backgroundColor: isSelected ? '#4ade80' : 'rgba(163, 181, 147, 0.5)',
+                    backgroundColor: isSelected ? '#ffffff' : 'rgba(40, 122, 69, 0.6)',
                   }}
                 />
                 <span>{st.station_name.split(',')[0]}</span>
-                <span style={{ fontSize: '0.7rem', color: '#9eab93' }}>({st.city})</span>
+                <span style={{ fontSize: '0.72rem', color: isSelected ? 'rgba(255, 255, 255, 0.85)' : '#64748b' }}>({st.city})</span>
               </button>
             );
           })}
         </div>
 
-        <div style={{ marginTop: '10px', fontSize: '0.74rem', color: '#9eab93', display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <Info size={13} color="#8fa07e" />
+        <div
+          style={{
+            marginTop: '12px',
+            padding: '10px 14px',
+            borderRadius: '12px',
+            background: 'rgba(240, 253, 244, 0.7)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
+            fontSize: '0.78rem',
+            color: '#475e4e',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <Info size={14} color="#166534" style={{ flexShrink: 0 }} />
           <span>
-            Selected Receptor: <strong>{selectedStation?.station_name}</strong> ({selectedStation?.zone_type} · {selectedStation?.city}).
+            Selected Receptor: <strong style={{ color: '#0d1710' }}>{selectedStation?.station_name}</strong> ({selectedStation?.zone_type} · {selectedStation?.city}).
             Backtracking traces air masses backwards in time to identify upwind sectors.
           </span>
         </div>
@@ -352,15 +372,17 @@ export const PollutionSources: React.FC = () => {
         {/* Card A: Measured PM2.5 at Destination */}
         <div
           style={{
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-            border: '1px solid rgba(163, 181, 147, 0.22)',
+            background: 'rgba(255, 255, 255, 0.95)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             borderRadius: '20px',
             padding: '1.4rem',
-            boxShadow: '0 12px 30px rgba(0, 0, 0, 0.3)',
+            boxShadow: '0 6px 20px rgba(22, 38, 25, 0.05)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-            <span style={{ fontSize: '0.74rem', fontWeight: 700, color: '#9eab93', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <span style={{ fontSize: '0.76rem', fontWeight: 700, color: '#526b59', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               Local PM2.5 Measured
             </span>
             <span
@@ -368,9 +390,9 @@ export const PollutionSources: React.FC = () => {
                 fontSize: '10px',
                 padding: '2px 8px',
                 borderRadius: '6px',
-                background: 'rgba(74, 222, 128, 0.18)',
-                color: '#4ade80',
-                border: '1px solid rgba(74, 222, 128, 0.3)',
+                background: 'rgba(22, 101, 52, 0.1)',
+                color: '#166534',
+                border: '1px solid rgba(22, 101, 52, 0.25)',
                 fontWeight: 600,
               }}
             >
@@ -379,16 +401,16 @@ export const PollutionSources: React.FC = () => {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', margin: '4px 0 6px' }}>
-            <span style={{ fontSize: '2.4rem', fontWeight: 800, color: '#f4f6f0', letterSpacing: '-0.02em', lineHeight: 1 }}>
+            <span style={{ fontSize: '2.4rem', fontWeight: 800, color: '#0d1710', letterSpacing: '-0.02em', lineHeight: 1 }}>
               {latestObs?.pm25 !== null && latestObs?.pm25 !== undefined ? latestObs.pm25.toFixed(1) : '--'}
             </span>
-            <span style={{ fontSize: '0.85rem', color: '#9eab93', fontWeight: 600 }}>µg/m³</span>
+            <span style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 600 }}>µg/m³</span>
           </div>
 
-          <div style={{ fontSize: '0.74rem', color: obsCatInfo?.color || '#a3b593', fontWeight: 600 }}>
+          <div style={{ fontSize: '0.76rem', color: obsCatInfo?.color || '#166534', fontWeight: 700 }}>
             Tier: {obsCatInfo?.category || 'Awaiting Measurement'}
           </div>
-          <div style={{ fontSize: '0.7rem', color: '#8fa07e', marginTop: '2px' }}>
+          <div style={{ fontSize: '0.72rem', color: '#64748b', marginTop: '3px' }}>
             Station: {selectedStation?.station_name.split(',')[0]}
           </div>
         </div>
@@ -396,15 +418,17 @@ export const PollutionSources: React.FC = () => {
         {/* Card B: Atmospheric Wind Direction & Origin */}
         <div
           style={{
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-            border: '1px solid rgba(163, 181, 147, 0.22)',
+            background: 'rgba(255, 255, 255, 0.95)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             borderRadius: '20px',
             padding: '1.4rem',
-            boxShadow: '0 12px 30px rgba(0, 0, 0, 0.3)',
+            boxShadow: '0 6px 20px rgba(22, 38, 25, 0.05)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-            <span style={{ fontSize: '0.74rem', fontWeight: 700, color: '#9eab93', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <span style={{ fontSize: '0.76rem', fontWeight: 700, color: '#526b59', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               Wind Origin Sector
             </span>
             <span
@@ -412,9 +436,9 @@ export const PollutionSources: React.FC = () => {
                 fontSize: '10px',
                 padding: '2px 8px',
                 borderRadius: '6px',
-                background: 'rgba(56, 189, 248, 0.18)',
-                color: '#38bdf8',
-                border: '1px solid rgba(56, 189, 248, 0.3)',
+                background: 'rgba(2, 132, 199, 0.1)',
+                color: '#0284c7',
+                border: '1px solid rgba(2, 132, 199, 0.25)',
                 fontWeight: 600,
               }}
             >
@@ -423,15 +447,15 @@ export const PollutionSources: React.FC = () => {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', margin: '4px 0 6px' }}>
-            <span style={{ fontSize: '1.65rem', fontWeight: 800, color: '#f4f6f0', lineHeight: 1.1 }}>
+            <span style={{ fontSize: '1.65rem', fontWeight: 800, color: '#0d1710', lineHeight: 1.1 }}>
               {insight ? insight.compassDirection : 'Analyzing...'}
             </span>
           </div>
 
-          <div style={{ fontSize: '0.74rem', color: '#c9d3bf' }}>
+          <div style={{ fontSize: '0.76rem', color: '#334155', fontWeight: 500 }}>
             Bearing: {insight?.compassDegrees !== null ? `${insight?.compassDegrees}°` : '--'} · Speed: {insight?.windSpeedKmh ? `${insight.windSpeedKmh} km/h` : '--'}
           </div>
-          <div style={{ fontSize: '0.7rem', color: '#8fa07e', marginTop: '2px' }}>
+          <div style={{ fontSize: '0.72rem', color: '#64748b', marginTop: '3px' }}>
             Wind classification: {insight?.windSpeedCategory || 'Moderate'}
           </div>
         </div>
@@ -439,15 +463,17 @@ export const PollutionSources: React.FC = () => {
         {/* Card C: Transport Distance */}
         <div
           style={{
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-            border: '1px solid rgba(163, 181, 147, 0.22)',
+            background: 'rgba(255, 255, 255, 0.95)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             borderRadius: '20px',
             padding: '1.4rem',
-            boxShadow: '0 12px 30px rgba(0, 0, 0, 0.3)',
+            boxShadow: '0 6px 20px rgba(22, 38, 25, 0.05)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-            <span style={{ fontSize: '0.74rem', fontWeight: 700, color: '#9eab93', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <span style={{ fontSize: '0.76rem', fontWeight: 700, color: '#526b59', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               Transport Distance
             </span>
             <span
@@ -455,9 +481,9 @@ export const PollutionSources: React.FC = () => {
                 fontSize: '10px',
                 padding: '2px 8px',
                 borderRadius: '6px',
-                background: 'rgba(143, 160, 126, 0.18)',
-                color: '#a3b593',
-                border: '1px solid rgba(163, 181, 147, 0.3)',
+                background: 'rgba(40, 122, 69, 0.1)',
+                color: '#166534',
+                border: '1px solid rgba(40, 122, 69, 0.25)',
                 fontWeight: 600,
               }}
             >
@@ -466,16 +492,16 @@ export const PollutionSources: React.FC = () => {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', margin: '4px 0 6px' }}>
-            <span style={{ fontSize: '2.4rem', fontWeight: 800, color: '#f4f6f0', letterSpacing: '-0.02em', lineHeight: 1 }}>
+            <span style={{ fontSize: '2.4rem', fontWeight: 800, color: '#0d1710', letterSpacing: '-0.02em', lineHeight: 1 }}>
               {insight ? insight.transportDistanceKm : '--'}
             </span>
-            <span style={{ fontSize: '0.85rem', color: '#9eab93', fontWeight: 600 }}>km</span>
+            <span style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 600 }}>km</span>
           </div>
 
-          <div style={{ fontSize: '0.74rem', color: '#c9d3bf' }}>
+          <div style={{ fontSize: '0.76rem', color: '#334155', fontWeight: 500 }}>
             Cumulative geodesic travel path
           </div>
-          <div style={{ fontSize: '0.7rem', color: '#8fa07e', marginTop: '2px' }}>
+          <div style={{ fontSize: '0.72rem', color: '#64748b', marginTop: '3px' }}>
             Waypoints tracked: {backtrackingData?.waypoints?.length || 0} hourly steps
           </div>
         </div>
@@ -483,15 +509,17 @@ export const PollutionSources: React.FC = () => {
         {/* Card D: Atmospheric Dispersion Context */}
         <div
           style={{
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-            border: '1px solid rgba(163, 181, 147, 0.22)',
+            background: 'rgba(255, 255, 255, 0.95)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             borderRadius: '20px',
             padding: '1.4rem',
-            boxShadow: '0 12px 30px rgba(0, 0, 0, 0.3)',
+            boxShadow: '0 6px 20px rgba(22, 38, 25, 0.05)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-            <span style={{ fontSize: '0.74rem', fontWeight: 700, color: '#9eab93', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <span style={{ fontSize: '0.76rem', fontWeight: 700, color: '#526b59', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               Atmospheric Mixing
             </span>
             <span
@@ -499,9 +527,9 @@ export const PollutionSources: React.FC = () => {
                 fontSize: '10px',
                 padding: '2px 8px',
                 borderRadius: '6px',
-                background: 'rgba(143, 160, 126, 0.18)',
-                color: '#a3b593',
-                border: '1px solid rgba(163, 181, 147, 0.3)',
+                background: 'rgba(147, 51, 234, 0.1)',
+                color: '#7c3aed',
+                border: '1px solid rgba(147, 51, 234, 0.25)',
                 fontWeight: 600,
               }}
             >
@@ -510,15 +538,15 @@ export const PollutionSources: React.FC = () => {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', margin: '4px 0 6px' }}>
-            <span style={{ fontSize: '1.65rem', fontWeight: 800, color: '#f4f6f0', lineHeight: 1.1 }}>
+            <span style={{ fontSize: '1.65rem', fontWeight: 800, color: '#0d1710', lineHeight: 1.1 }}>
               {backtrackingData?.waypoints?.[0]?.pbl_height_m ? `${backtrackingData.waypoints[0].pbl_height_m} m` : 'Moderate'}
             </span>
           </div>
 
-          <div style={{ fontSize: '0.74rem', color: '#c9d3bf' }}>
+          <div style={{ fontSize: '0.76rem', color: '#334155', fontWeight: 500 }}>
             Ventilation: {backtrackingData?.waypoints?.[0]?.ventilation_index_m2s ? `${backtrackingData.waypoints[0].ventilation_index_m2s} m²/s` : 'Standard'}
           </div>
-          <div style={{ fontSize: '0.7rem', color: '#8fa07e', marginTop: '2px' }}>
+          <div style={{ fontSize: '0.72rem', color: '#64748b', marginTop: '3px' }}>
             Vertical dilution capacity across basin
           </div>
         </div>
@@ -537,11 +565,13 @@ export const PollutionSources: React.FC = () => {
         {/* Left Column: Atmospheric Airflow Map */}
         <div
           style={{
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-            border: '1px solid rgba(163, 181, 147, 0.22)',
+            background: 'rgba(255, 255, 255, 0.95)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             borderRadius: '24px',
             padding: '1.25rem',
-            boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+            boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
             display: 'flex',
             flexDirection: 'column',
             gap: '12px',
@@ -549,10 +579,10 @@ export const PollutionSources: React.FC = () => {
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
             <div>
-              <div style={{ fontSize: '0.74rem', color: '#9eab93', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <div style={{ fontSize: '0.76rem', color: '#526b59', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 Kinematic Atmospheric Backtracking
               </div>
-              <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#f4f6f0' }}>
+              <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0d1710' }}>
                 Air Mass Transport Corridor (Past {backwardHours}h)
               </div>
             </div>
@@ -560,9 +590,9 @@ export const PollutionSources: React.FC = () => {
             <span
               style={{
                 fontSize: '0.74rem',
-                color: '#38bdf8',
-                background: 'rgba(56, 189, 248, 0.12)',
-                border: '1px solid rgba(56, 189, 248, 0.3)',
+                color: '#0284c7',
+                background: 'rgba(2, 132, 199, 0.1)',
+                border: '1px solid rgba(2, 132, 199, 0.25)',
                 padding: '4px 10px',
                 borderRadius: '8px',
                 fontWeight: 600,
@@ -580,7 +610,7 @@ export const PollutionSources: React.FC = () => {
                 borderRadius: '12px',
                 background: 'rgba(239, 68, 68, 0.1)',
                 border: '1px solid rgba(239, 68, 68, 0.3)',
-                color: '#fca5a5',
+                color: '#dc2626',
                 fontSize: '0.82rem',
                 display: 'flex',
                 alignItems: 'center',
@@ -600,13 +630,13 @@ export const PollutionSources: React.FC = () => {
                   position: 'absolute',
                   inset: 0,
                   zIndex: 1000,
-                  background: 'rgba(18, 26, 18, 0.75)',
+                  background: 'rgba(255, 255, 255, 0.85)',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
                   borderRadius: '20px',
-                  color: '#f4f6f0',
+                  color: '#166534',
                   gap: '10px',
                   backdropFilter: 'blur(4px)',
                 }}
@@ -631,21 +661,23 @@ export const PollutionSources: React.FC = () => {
           {/* Card 1: What Does This Path Indicate? (Requirement 6) */}
           <div
             style={{
-              background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-              border: '1px solid rgba(163, 181, 147, 0.22)',
+              background: 'rgba(255, 255, 255, 0.95)',
+              border: '1px solid rgba(40, 122, 69, 0.18)',
               borderRadius: '24px',
               padding: '1.5rem',
-              boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+              boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <Compass size={17} color="#8fa07e" />
-              <h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#f4f6f0' }}>
+              <Compass size={17} color="#166534" />
+              <h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
                 Where Did This Air Mass Travel From?
               </h2>
             </div>
 
-            <p style={{ margin: '0 0 12px 0', fontSize: '0.86rem', color: '#c9d3bf', lineHeight: 1.55 }}>
+            <p style={{ margin: '0 0 12px 0', fontSize: '0.86rem', color: '#334155', lineHeight: 1.55 }}>
               {insight ? insight.corridorSummary : 'Analyzing wind trajectory and upwind sector alignment...'}
             </p>
 
@@ -655,14 +687,14 @@ export const PollutionSources: React.FC = () => {
                 style={{
                   padding: '10px 14px',
                   borderRadius: '12px',
-                  background: 'rgba(56, 189, 248, 0.08)',
-                  border: '1px solid rgba(56, 189, 248, 0.22)',
+                  background: 'rgba(2, 132, 199, 0.08)',
+                  border: '1px solid rgba(2, 132, 199, 0.25)',
                   fontSize: '0.78rem',
-                  color: '#bae6fd',
+                  color: '#0369a1',
                   marginBottom: '10px',
                 }}
               >
-                <strong style={{ color: '#ffffff' }}>Upwind Station Alignment:</strong>{' '}
+                <strong style={{ color: '#0c4a6e' }}>Upwind Station Alignment:</strong>{' '}
                 {insight.upwindStations.map((s) => s.station_name.split(',')[0]).join(', ')} is located directly along the
                 incoming atmospheric corridor ({insight.upwindStations[0]?.distance_to_receptor_km.toFixed(1)} km upwind).
               </div>
@@ -673,14 +705,14 @@ export const PollutionSources: React.FC = () => {
               style={{
                 padding: '10px 12px',
                 borderRadius: '12px',
-                background: 'rgba(14, 20, 14, 0.65)',
-                border: '1px solid rgba(163, 181, 147, 0.16)',
+                background: 'rgba(240, 253, 244, 0.75)',
+                border: '1px solid rgba(40, 122, 69, 0.18)',
                 fontSize: '0.74rem',
-                color: '#9eab93',
+                color: '#475e4e',
                 lineHeight: 1.45,
               }}
             >
-              <strong style={{ color: '#f4f6f0' }}>Crucial Scientific Distinction:</strong> Atmospheric backtracking identifies
+              <strong style={{ color: '#0d1710' }}>Crucial Scientific Distinction:</strong> Atmospheric backtracking identifies
               the general upwind geographic sector. It does <em>not</em> prove that any specific factory, vehicular corridor,
               or construction site caused the measured particulate readings.
             </div>
@@ -689,21 +721,23 @@ export const PollutionSources: React.FC = () => {
           {/* Card 2: Possible Environmental Influences (Requirement 7) */}
           <div
             style={{
-              background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-              border: '1px solid rgba(163, 181, 147, 0.22)',
+              background: 'rgba(255, 255, 255, 0.95)',
+              border: '1px solid rgba(40, 122, 69, 0.18)',
               borderRadius: '24px',
               padding: '1.5rem',
-              boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+              boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <Layers size={17} color="#8fa07e" />
-              <h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#f4f6f0' }}>
+              <Layers size={17} color="#166534" />
+              <h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
                 Possible Urban Pollution Influences
               </h2>
             </div>
 
-            <p style={{ margin: '0 0 10px 0', fontSize: '0.82rem', color: '#c9d3bf', lineHeight: 1.5 }}>
+            <p style={{ margin: '0 0 10px 0', fontSize: '0.82rem', color: '#334155', lineHeight: 1.5 }}>
               Urban air quality in Pune and PCMC is typically composed of a mixed background of diffuse sources
               accumulating along atmospheric transport corridors:
             </p>
@@ -728,13 +762,13 @@ export const PollutionSources: React.FC = () => {
                   style={{
                     padding: '8px 12px',
                     borderRadius: '10px',
-                    background: 'rgba(14, 20, 14, 0.55)',
-                    border: '1px solid rgba(163, 181, 147, 0.12)',
+                    background: 'rgba(240, 253, 244, 0.6)',
+                    border: '1px solid rgba(40, 122, 69, 0.15)',
                     fontSize: '0.78rem',
                   }}
                 >
-                  <div style={{ fontWeight: 700, color: '#f4f6f0' }}>{item.title}</div>
-                  <div style={{ color: '#9eab93', fontSize: '0.72rem', marginTop: '2px' }}>{item.desc}</div>
+                  <div style={{ fontWeight: 700, color: '#0d1710' }}>{item.title}</div>
+                  <div style={{ color: '#475e4e', fontSize: '0.72rem', marginTop: '2px' }}>{item.desc}</div>
                 </div>
               ))}
             </div>
@@ -743,7 +777,7 @@ export const PollutionSources: React.FC = () => {
               style={{
                 marginTop: '10px',
                 fontSize: '0.72rem',
-                color: '#9eab93',
+                color: '#64748b',
                 fontStyle: 'italic',
                 lineHeight: 1.4,
               }}
@@ -756,32 +790,34 @@ export const PollutionSources: React.FC = () => {
           {/* Card 3: Educational Panel: "How to Read This Map" (Requirement 8) */}
           <div
             style={{
-              background: 'linear-gradient(145deg, rgba(22, 32, 21, 0.85) 0%, rgba(14, 20, 14, 0.95) 100%)',
-              border: '1px solid rgba(163, 181, 147, 0.22)',
+              background: 'rgba(255, 255, 255, 0.95)',
+              border: '1px solid rgba(40, 122, 69, 0.18)',
               borderRadius: '24px',
               padding: '1.5rem',
-              boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+              boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <Eye size={17} color="#8fa07e" />
-              <h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#f4f6f0' }}>
+              <Eye size={17} color="#166534" />
+              <h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
                 How to Read This Map
               </h2>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.78rem', color: '#c9d3bf', lineHeight: 1.5 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.78rem', color: '#334155', lineHeight: 1.5 }}>
               <div>
-                1. <strong>Backward in Time:</strong> The path starts at the upwind origin (where the air parcel was {backwardHours} hours ago) and traces forward to the green pin where the local monitor is located.
+                1. <strong style={{ color: '#0d1710' }}>Backward in Time:</strong> The path starts at the upwind origin (where the air parcel was {backwardHours} hours ago) and traces forward to the green pin where the local monitor is located.
               </div>
               <div>
-                2. <strong>Atmospheric Transport:</strong> Wind carries airborne particulates across ward and municipal boundaries, demonstrating that local air is influenced by wider regional weather.
+                2. <strong style={{ color: '#0d1710' }}>Atmospheric Transport:</strong> Wind carries airborne particulates across ward and municipal boundaries, demonstrating that local air is influenced by wider regional weather.
               </div>
               <div>
-                3. <strong>Plausible Pathway, Not Direct Blame:</strong> Proximity to an industrial cluster or highway indicates physical transport alignment, not legal proof of an emission violation.
+                3. <strong style={{ color: '#0d1710' }}>Plausible Pathway, Not Direct Blame:</strong> Proximity to an industrial cluster or highway indicates physical transport alignment, not legal proof of an emission violation.
               </div>
               <div>
-                4. <strong>Data Sources:</strong> Wind vectors are derived from ECMWF ERA5-Land reanalysis winds, while particulate readings are recorded by CPCB/IITM SAFAR regulatory CAAQMS monitors.
+                4. <strong style={{ color: '#0d1710' }}>Data Sources:</strong> Wind vectors are derived from ECMWF ERA5-Land reanalysis winds, while particulate readings are recorded by CPCB/IITM SAFAR regulatory CAAQMS monitors.
               </div>
             </div>
           </div>
@@ -789,28 +825,28 @@ export const PollutionSources: React.FC = () => {
           {/* Card 4: Data Provenance & Limitations (Requirement 9) */}
           <div
             style={{
-              background: 'rgba(14, 20, 14, 0.65)',
-              border: '1px solid rgba(163, 181, 147, 0.16)',
+              background: 'rgba(240, 253, 244, 0.75)',
+              border: '1px solid rgba(40, 122, 69, 0.2)',
               borderRadius: '16px',
               padding: '12px 16px',
               fontSize: '0.74rem',
-              color: '#9eab93',
+              color: '#475e4e',
               display: 'flex',
               flexDirection: 'column',
-              gap: '4px',
+              gap: '6px',
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#c9d3bf' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#334155' }}>
               <span>Simulation Arrival Timestamp:</span>
-              <strong style={{ color: '#f4f6f0' }}>{insight ? insight.provenanceTimestampIST : 'Historical'}</strong>
+              <strong style={{ color: '#0d1710' }}>{insight ? insight.provenanceTimestampIST : 'Historical'}</strong>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span>Meteorological Wind Model:</span>
-              <span>ECMWF ERA5-Land Reanalysis (Open-Meteo)</span>
+              <span style={{ color: '#0d1710', fontWeight: 600 }}>ECMWF ERA5-Land Reanalysis (Open-Meteo)</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span>Air Quality Sensor Telemetry:</span>
-              <span>Regulatory CAAQMS (IITM SAFAR / CPCB)</span>
+              <span style={{ color: '#0d1710', fontWeight: 600 }}>Regulatory CAAQMS (IITM SAFAR / CPCB)</span>
             </div>
           </div>
         </div>

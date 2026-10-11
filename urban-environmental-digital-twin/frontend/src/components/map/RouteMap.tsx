@@ -523,23 +523,23 @@ export const RouteMap: React.FC<RouteMapProps> = ({
             top: '12px',
             right: '12px',
             zIndex: 1000,
-            background: 'rgba(18, 26, 17, 0.92)',
-            border: '1px solid rgba(163, 181, 147, 0.35)',
+            background: 'rgba(255, 255, 255, 0.95)',
+            border: '1px solid rgba(40, 122, 69, 0.25)',
             borderRadius: '10px',
             padding: '8px 12px',
-            color: '#f4f6f0',
+            color: '#0d1710',
             fontSize: '0.75rem',
             fontWeight: 600,
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: '6px',
-            boxShadow: '0 6px 18px rgba(0, 0, 0, 0.4)',
+            boxShadow: '0 4px 16px rgba(22, 38, 25, 0.12)',
             backdropFilter: 'blur(8px)',
             transition: 'all 0.2s ease',
           }}
         >
-          <Crosshair size={14} color="#86efac" />
+          <Crosshair size={14} color="#166534" />
           <span>Recenter on Me</span>
         </button>
       )}
@@ -551,28 +551,28 @@ export const RouteMap: React.FC<RouteMapProps> = ({
           bottom: '12px',
           right: '12px',
           zIndex: 1000,
-          background: 'rgba(18, 26, 17, 0.92)',
-          border: '1px solid rgba(163, 181, 147, 0.28)',
+          background: 'rgba(255, 255, 255, 0.95)',
+          border: '1px solid rgba(40, 122, 69, 0.22)',
           borderRadius: '10px',
           padding: '8px 12px',
           fontSize: '0.74rem',
-          color: '#c9d3bf',
+          color: '#334155',
           backdropFilter: 'blur(8px)',
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
+          boxShadow: '0 6px 20px rgba(22, 38, 25, 0.1)',
           maxWidth: '240px',
         }}
       >
-        <div style={{ fontWeight: 700, color: '#f4f6f0', marginBottom: '4px' }}>
+        <div style={{ fontWeight: 700, color: '#0d1710', marginBottom: '4px' }}>
           Corridor Key
         </div>
         {userLocation && (
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: isNavigating ? '#22c55e' : '#38bdf8', border: '1.5px solid #fff' }} />
-            <span style={{ fontWeight: 600, color: '#f4f6f0' }}>Your GPS Position</span>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: isNavigating ? '#16a34a' : '#0284c7', border: '1.5px solid #fff' }} />
+            <span style={{ fontWeight: 600, color: '#0d1710' }}>Your GPS Position</span>
           </div>
         )}
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
-          <span style={{ width: '12px', height: '4px', background: '#22c55e', borderRadius: '2px' }} />
+          <span style={{ width: '12px', height: '4px', background: '#16a34a', borderRadius: '2px' }} />
           <span>Selected (Lower pollution)</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
@@ -580,11 +580,11 @@ export const RouteMap: React.FC<RouteMapProps> = ({
           <span>Selected (Primary / Faster)</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
-          <span style={{ width: '12px', height: '4px', background: '#64748b', borderRadius: '2px' }} />
+          <span style={{ width: '12px', height: '4px', background: '#94a3b8', borderRadius: '2px' }} />
           <span>Alternate road options</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#a3b593', border: '1px solid #fff' }} />
+          <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#475e4e', border: '1px solid #fff' }} />
           <span>Monitoring stations</span>
         </div>
       </div>

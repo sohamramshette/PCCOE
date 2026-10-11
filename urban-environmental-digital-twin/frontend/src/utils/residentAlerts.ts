@@ -155,43 +155,43 @@ export function getSeverityVisuals(severity: AlertSeverity): SeverityVisuals {
     case 'CRITICAL':
       return {
         label: 'Critical Advisory',
-        badgeBg: 'rgba(239, 68, 68, 0.15)',
-        badgeBorder: 'rgba(239, 68, 68, 0.4)',
-        badgeText: '#fca5a5',
+        badgeBg: 'rgba(239, 68, 68, 0.12)',
+        badgeBorder: 'rgba(239, 68, 68, 0.35)',
+        badgeText: '#dc2626',
         dotColor: '#ef4444',
       };
     case 'HIGH':
       return {
         label: 'Significant Advisory',
-        badgeBg: 'rgba(249, 115, 22, 0.15)',
-        badgeBorder: 'rgba(249, 115, 22, 0.4)',
-        badgeText: '#fdba74',
+        badgeBg: 'rgba(249, 115, 22, 0.12)',
+        badgeBorder: 'rgba(249, 115, 22, 0.35)',
+        badgeText: '#ea580c',
         dotColor: '#f97316',
       };
     case 'MEDIUM':
       return {
         label: 'Moderate Notice',
-        badgeBg: 'rgba(234, 179, 8, 0.15)',
-        badgeBorder: 'rgba(234, 179, 8, 0.4)',
-        badgeText: '#fef08a',
-        dotColor: '#eab308',
+        badgeBg: 'rgba(245, 158, 11, 0.12)',
+        badgeBorder: 'rgba(245, 158, 11, 0.35)',
+        badgeText: '#b45309',
+        dotColor: '#d97706',
       };
     case 'LOW':
       return {
         label: 'Advisory Watch',
-        badgeBg: 'rgba(132, 204, 22, 0.15)',
-        badgeBorder: 'rgba(132, 204, 22, 0.4)',
-        badgeText: '#bef264',
-        dotColor: '#84cc16',
+        badgeBg: 'rgba(22, 163, 74, 0.12)',
+        badgeBorder: 'rgba(22, 163, 74, 0.35)',
+        badgeText: '#15803d',
+        dotColor: '#16a34a',
       };
     case 'INFO':
     default:
       return {
         label: 'Network Notice',
-        badgeBg: 'rgba(56, 189, 248, 0.15)',
-        badgeBorder: 'rgba(56, 189, 248, 0.4)',
-        badgeText: '#7dd3fc',
-        dotColor: '#38bdf8',
+        badgeBg: 'rgba(14, 165, 233, 0.12)',
+        badgeBorder: 'rgba(14, 165, 233, 0.35)',
+        badgeText: '#0284c7',
+        dotColor: '#0ea5e9',
       };
   }
 }

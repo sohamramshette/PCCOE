@@ -266,21 +266,21 @@ export const ReportPollution: React.FC = () => {
               letterSpacing: '0.06em',
               padding: '0.25rem 0.65rem',
               borderRadius: '999px',
-              background: 'rgba(92, 114, 82, 0.25)',
-              border: '1px solid rgba(138, 168, 126, 0.4)',
-              color: '#8aa87e',
+              background: 'rgba(40, 122, 69, 0.1)',
+              border: '1px solid rgba(40, 122, 69, 0.25)',
+              color: '#166534',
               textTransform: 'uppercase',
             }}
           >
             <Camera size={12} />
             Community Incident Log
           </span>
-          <span style={{ fontSize: '0.78rem', color: '#9ba395' }}>· Pune &amp; Pimpri-Chinchwad</span>
+          <span style={{ fontSize: '0.78rem', color: '#526b59' }}>· Pune &amp; Pimpri-Chinchwad</span>
         </div>
-        <h1 style={{ fontSize: '1.9rem', fontWeight: 700, color: '#eef1e7', margin: '0 0 0.35rem' }}>
+        <h1 style={{ fontSize: '1.9rem', fontWeight: 700, color: '#0d1710', margin: '0 0 0.35rem' }}>
           Report Pollution Incident
         </h1>
-        <p style={{ margin: 0, fontSize: '0.92rem', color: '#b2baa8', maxWidth: '750px', lineHeight: 1.5 }}>
+        <p style={{ margin: 0, fontSize: '0.92rem', color: '#526b59', maxWidth: '750px', lineHeight: 1.5 }}>
           Help map localized environmental concerns across Pune and PCMC. Submit visible pollution incidents such as
           waste burning, construction dust, or thick smoke to the digital twin log.
         </p>
@@ -291,7 +291,7 @@ export const ReportPollution: React.FC = () => {
         style={{
           display: 'flex',
           gap: '0.5rem',
-          borderBottom: '1px solid rgba(92, 114, 82, 0.25)',
+          borderBottom: '1px solid rgba(40, 122, 69, 0.18)',
           paddingBottom: '0.65rem',
           marginBottom: '1.75rem',
         }}
@@ -304,15 +304,16 @@ export const ReportPollution: React.FC = () => {
           style={{
             padding: '0.55rem 1.1rem',
             borderRadius: '8px',
-            border: 'none',
-            background: activeTab === 'submit' ? 'rgba(92, 114, 82, 0.35)' : 'transparent',
-            color: activeTab === 'submit' ? '#eef1e7' : '#9ba395',
+            border: activeTab === 'submit' ? 'none' : '1px solid rgba(40, 122, 69, 0.18)',
+            background: activeTab === 'submit' ? '#166534' : 'rgba(255, 255, 255, 0.85)',
+            color: activeTab === 'submit' ? '#ffffff' : '#334155',
             fontWeight: activeTab === 'submit' ? 700 : 500,
             fontSize: '0.88rem',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: '0.45rem',
+            boxShadow: activeTab === 'submit' ? '0 2px 8px rgba(22, 101, 52, 0.25)' : 'none',
             transition: 'all 0.15s ease',
           }}
         >
@@ -325,15 +326,16 @@ export const ReportPollution: React.FC = () => {
           style={{
             padding: '0.55rem 1.1rem',
             borderRadius: '8px',
-            border: 'none',
-            background: activeTab === 'my-reports' ? 'rgba(92, 114, 82, 0.35)' : 'transparent',
-            color: activeTab === 'my-reports' ? '#eef1e7' : '#9ba395',
+            border: activeTab === 'my-reports' ? 'none' : '1px solid rgba(40, 122, 69, 0.18)',
+            background: activeTab === 'my-reports' ? '#166534' : 'rgba(255, 255, 255, 0.85)',
+            color: activeTab === 'my-reports' ? '#ffffff' : '#334155',
             fontWeight: activeTab === 'my-reports' ? 700 : 500,
             fontSize: '0.88rem',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: '0.45rem',
+            boxShadow: activeTab === 'my-reports' ? '0 2px 8px rgba(22, 101, 52, 0.25)' : 'none',
             transition: 'all 0.15s ease',
           }}
         >
@@ -345,8 +347,8 @@ export const ReportPollution: React.FC = () => {
                 fontSize: '0.72rem',
                 padding: '0.1rem 0.45rem',
                 borderRadius: '999px',
-                background: 'rgba(92, 114, 82, 0.3)',
-                color: '#9ba395',
+                background: activeTab === 'my-reports' ? 'rgba(255, 255, 255, 0.25)' : 'rgba(40, 122, 69, 0.12)',
+                color: activeTab === 'my-reports' ? '#ffffff' : '#166534',
                 fontWeight: 600,
               }}
             >
@@ -363,13 +365,13 @@ export const ReportPollution: React.FC = () => {
             /* Confirmation Receipt Screen */
             <div
               style={{
-                background: 'rgba(24, 30, 20, 0.8)',
-                border: '1px solid rgba(138, 168, 126, 0.4)',
+                background: 'rgba(255, 255, 255, 0.98)',
+                border: '1px solid rgba(40, 122, 69, 0.22)',
                 borderRadius: '16px',
                 padding: '2.25rem 2rem',
                 maxWidth: '680px',
                 margin: '1rem auto',
-                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.35)',
+                boxShadow: '0 8px 30px rgba(22, 38, 25, 0.08)',
               }}
             >
               <div
@@ -377,30 +379,30 @@ export const ReportPollution: React.FC = () => {
                   width: '56px',
                   height: '56px',
                   borderRadius: '50%',
-                  background: 'rgba(138, 168, 126, 0.25)',
-                  border: '1.5px solid #8aa87e',
+                  background: 'rgba(34, 197, 94, 0.15)',
+                  border: '1.5px solid #16a34a',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#8aa87e',
+                  color: '#166534',
                   margin: '0 auto 1.25rem',
                 }}
               >
                 <CheckCircle2 size={30} />
               </div>
 
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#eef1e7', textAlign: 'center', margin: '0 0 0.4rem' }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0d1710', textAlign: 'center', margin: '0 0 0.4rem' }}>
                 Report Submitted Successfully
               </h2>
-              <p style={{ fontSize: '0.88rem', color: '#b9c1b2', textAlign: 'center', margin: '0 0 1.5rem', lineHeight: 1.5 }}>
+              <p style={{ fontSize: '0.88rem', color: '#526b59', textAlign: 'center', margin: '0 0 1.5rem', lineHeight: 1.5 }}>
                 Your pollution incident observation has been registered into the AirLens community log with reference:
               </p>
 
               {/* Reference Badge Box */}
               <div
                 style={{
-                  background: 'rgba(18, 22, 15, 0.9)',
-                  border: '1.5px dashed rgba(138, 168, 126, 0.5)',
+                  background: 'rgba(240, 253, 244, 0.9)',
+                  border: '1.5px dashed rgba(40, 122, 69, 0.45)',
                   borderRadius: '12px',
                   padding: '1rem 1.25rem',
                   display: 'flex',
@@ -410,10 +412,10 @@ export const ReportPollution: React.FC = () => {
                 }}
               >
                 <div>
-                  <div style={{ fontSize: '0.74rem', color: '#889381', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  <div style={{ fontSize: '0.74rem', color: '#526b59', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                     Incident Reference Number
                   </div>
-                  <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#8aa87e', letterSpacing: '0.04em', marginTop: '0.2rem' }}>
+                  <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#166534', letterSpacing: '0.04em', marginTop: '0.2rem' }}>
                     {submitSuccessResponse.report_reference}
                   </div>
                 </div>
@@ -422,9 +424,9 @@ export const ReportPollution: React.FC = () => {
                   type="button"
                   onClick={() => handleCopyReference(submitSuccessResponse.report_reference)}
                   style={{
-                    background: copiedRef ? 'rgba(138, 168, 126, 0.25)' : 'rgba(30, 38, 26, 0.8)',
-                    border: '1px solid rgba(138, 168, 126, 0.4)',
-                    color: copiedRef ? '#8aa87e' : '#eef1e7',
+                    background: copiedRef ? 'rgba(34, 197, 94, 0.2)' : '#ffffff',
+                    border: '1px solid rgba(40, 122, 69, 0.3)',
+                    color: copiedRef ? '#15803d' : '#0d1710',
                     padding: '0.45rem 0.8rem',
                     borderRadius: '8px',
                     fontSize: '0.8rem',
@@ -444,9 +446,9 @@ export const ReportPollution: React.FC = () => {
               {/* Incident Details Summary */}
               <div
                 style={{
-                  background: 'rgba(30, 36, 26, 0.6)',
+                  background: 'rgba(240, 253, 244, 0.65)',
                   borderRadius: '10px',
-                  border: '1px solid rgba(92, 114, 82, 0.25)',
+                  border: '1px solid rgba(40, 122, 69, 0.18)',
                   padding: '1rem',
                   display: 'grid',
                   gridTemplateColumns: '1fr 1fr',
@@ -456,29 +458,29 @@ export const ReportPollution: React.FC = () => {
                 }}
               >
                 <div>
-                  <span style={{ color: '#889381' }}>Category:</span>
-                  <div style={{ color: '#eef1e7', fontWeight: 600, marginTop: '0.15rem' }}>
+                  <span style={{ color: '#526b59' }}>Category:</span>
+                  <div style={{ color: '#0d1710', fontWeight: 600, marginTop: '0.15rem' }}>
                     {submitSuccessResponse.report.category.replace(/_/g, ' ')}
                   </div>
                 </div>
 
                 <div>
-                  <span style={{ color: '#889381' }}>Location:</span>
-                  <div style={{ color: '#eef1e7', fontWeight: 600, marginTop: '0.15rem' }}>
+                  <span style={{ color: '#526b59' }}>Location:</span>
+                  <div style={{ color: '#0d1710', fontWeight: 600, marginTop: '0.15rem' }}>
                     {submitSuccessResponse.report.location_name}
                   </div>
                 </div>
 
                 <div>
-                  <span style={{ color: '#889381' }}>Observed At:</span>
-                  <div style={{ color: '#eef1e7', fontWeight: 600, marginTop: '0.15rem' }}>
+                  <span style={{ color: '#526b59' }}>Observed At:</span>
+                  <div style={{ color: '#0d1710', fontWeight: 600, marginTop: '0.15rem' }}>
                     {formatLocalIST(submitSuccessResponse.report.observed_at)}
                   </div>
                 </div>
 
                 <div>
-                  <span style={{ color: '#889381' }}>Current Status:</span>
-                  <div style={{ color: '#8aa87e', fontWeight: 700, marginTop: '0.15rem' }}>
+                  <span style={{ color: '#526b59' }}>Current Status:</span>
+                  <div style={{ color: '#166534', fontWeight: 700, marginTop: '0.15rem' }}>
                     {submitSuccessResponse.report.status}
                   </div>
                 </div>
@@ -489,15 +491,15 @@ export const ReportPollution: React.FC = () => {
                 style={{
                   padding: '0.75rem 0.95rem',
                   borderRadius: '8px',
-                  background: 'rgba(20, 24, 16, 0.7)',
-                  border: '1px solid rgba(92, 114, 82, 0.2)',
+                  background: 'rgba(254, 243, 199, 0.6)',
+                  border: '1px solid rgba(245, 158, 11, 0.35)',
                   fontSize: '0.78rem',
-                  color: '#889381',
+                  color: '#92400e',
                   lineHeight: 1.5,
                   marginBottom: '1.5rem',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#9ba395', fontWeight: 600, marginBottom: '0.2rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#b45309', fontWeight: 600, marginBottom: '0.2rem' }}>
                   <Shield size={13} />
                   <span>Important Governance Notice</span>
                 </div>
@@ -514,9 +516,9 @@ export const ReportPollution: React.FC = () => {
                   style={{
                     padding: '0.65rem 1.25rem',
                     borderRadius: '8px',
-                    border: '1px solid rgba(138, 168, 126, 0.4)',
-                    background: 'rgba(92, 114, 82, 0.25)',
-                    color: '#8aa87e',
+                    border: '1px solid rgba(40, 122, 69, 0.3)',
+                    background: 'rgba(240, 253, 244, 0.8)',
+                    color: '#166534',
                     fontSize: '0.85rem',
                     fontWeight: 600,
                     cursor: 'pointer',
@@ -535,11 +537,12 @@ export const ReportPollution: React.FC = () => {
                     padding: '0.65rem 1.25rem',
                     borderRadius: '8px',
                     border: 'none',
-                    background: 'linear-gradient(135deg, #5c7252 0%, #3e5036 100%)',
+                    background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
                     color: '#ffffff',
                     fontSize: '0.85rem',
                     fontWeight: 600,
                     cursor: 'pointer',
+                    boxShadow: '0 2px 8px rgba(22, 101, 52, 0.25)',
                   }}
                 >
                   View My Submitted Reports
@@ -554,9 +557,9 @@ export const ReportPollution: React.FC = () => {
                   style={{
                     padding: '0.8rem 1rem',
                     borderRadius: '10px',
-                    background: 'rgba(239, 68, 68, 0.15)',
+                    background: 'rgba(254, 226, 226, 0.85)',
                     border: '1px solid rgba(239, 68, 68, 0.4)',
-                    color: '#fca5a5',
+                    color: '#b91c1c',
                     fontSize: '0.85rem',
                     marginBottom: '1.5rem',
                     display: 'flex',
@@ -572,18 +575,19 @@ export const ReportPollution: React.FC = () => {
               {/* Step 1: Category Selection */}
               <div
                 style={{
-                  background: 'rgba(24, 30, 20, 0.75)',
-                  border: '1px solid rgba(92, 114, 82, 0.25)',
-                  borderRadius: '14px',
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  border: '1px solid rgba(40, 122, 69, 0.18)',
+                  borderRadius: '16px',
                   padding: '1.35rem 1.5rem',
                   marginBottom: '1.25rem',
+                  boxShadow: '0 6px 24px rgba(22, 38, 25, 0.05)',
                 }}
               >
                 <div style={{ marginBottom: '1rem' }}>
-                  <label style={{ fontSize: '0.95rem', fontWeight: 700, color: '#eef1e7', display: 'block', marginBottom: '0.2rem' }}>
-                    1. Select Pollution Category <span style={{ color: '#f87171' }}>*</span>
+                  <label style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0d1710', display: 'block', marginBottom: '0.2rem' }}>
+                    1. Select Pollution Category <span style={{ color: '#dc2626' }}>*</span>
                   </label>
-                  <p style={{ margin: 0, fontSize: '0.82rem', color: '#9ba395' }}>
+                  <p style={{ margin: 0, fontSize: '0.82rem', color: '#526b59' }}>
                     Choose the observed incident type. You are reporting an observed concern, not proving a legal violation.
                   </p>
                 </div>
@@ -604,9 +608,9 @@ export const ReportPollution: React.FC = () => {
                         style={{
                           padding: '0.85rem 1rem',
                           borderRadius: '10px',
-                          border: '1.5px solid',
-                          borderColor: isSelected ? '#8aa87e' : 'rgba(92, 114, 82, 0.22)',
-                          background: isSelected ? 'rgba(138, 168, 126, 0.2)' : 'rgba(20, 24, 16, 0.6)',
+                          border: isSelected ? '2px solid #166534' : '1.5px solid rgba(40, 122, 69, 0.2)',
+                          background: isSelected ? 'rgba(240, 253, 244, 0.95)' : '#ffffff',
+                          boxShadow: isSelected ? '0 4px 14px rgba(22, 101, 52, 0.12)' : '0 2px 6px rgba(0,0,0,0.03)',
                           cursor: 'pointer',
                           transition: 'all 0.15s ease',
                           display: 'flex',
@@ -616,11 +620,11 @@ export const ReportPollution: React.FC = () => {
                       >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                           {opt.icon}
-                          <span style={{ fontSize: '0.88rem', fontWeight: 700, color: isSelected ? '#ffffff' : '#d6ded0' }}>
+                          <span style={{ fontSize: '0.88rem', fontWeight: 700, color: isSelected ? '#0d1710' : '#1e293b' }}>
                             {opt.label}
                           </span>
                         </div>
-                        <span style={{ fontSize: '0.74rem', color: isSelected ? '#b9cbb3' : '#7f8a78', lineHeight: 1.4 }}>
+                        <span style={{ fontSize: '0.74rem', color: isSelected ? '#475e4e' : '#64748b', lineHeight: 1.4 }}>
                           {opt.description}
                         </span>
                       </div>
@@ -632,18 +636,19 @@ export const ReportPollution: React.FC = () => {
               {/* Step 2: Location */}
               <div
                 style={{
-                  background: 'rgba(24, 30, 20, 0.75)',
-                  border: '1px solid rgba(92, 114, 82, 0.25)',
-                  borderRadius: '14px',
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  border: '1px solid rgba(40, 122, 69, 0.18)',
+                  borderRadius: '16px',
                   padding: '1.35rem 1.5rem',
                   marginBottom: '1.25rem',
+                  boxShadow: '0 6px 24px rgba(22, 38, 25, 0.05)',
                 }}
               >
                 <div style={{ marginBottom: '0.85rem' }}>
-                  <label style={{ fontSize: '0.95rem', fontWeight: 700, color: '#eef1e7', display: 'block', marginBottom: '0.2rem' }}>
-                    2. Incident Location <span style={{ color: '#f87171' }}>*</span>
+                  <label style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0d1710', display: 'block', marginBottom: '0.2rem' }}>
+                    2. Incident Location <span style={{ color: '#dc2626' }}>*</span>
                   </label>
-                  <p style={{ margin: 0, fontSize: '0.82rem', color: '#9ba395' }}>
+                  <p style={{ margin: 0, fontSize: '0.82rem', color: '#526b59' }}>
                     Specify where the pollution is occurring. Search a Pune or PCMC locality, or pinpoint on the map.
                   </p>
                 </div>
@@ -666,7 +671,7 @@ export const ReportPollution: React.FC = () => {
                 />
 
                 {formErrors.location && (
-                  <div style={{ fontSize: '0.78rem', color: '#f87171', marginTop: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                  <div style={{ fontSize: '0.78rem', color: '#dc2626', marginTop: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                     <AlertCircle size={13} />
                     <span>{formErrors.location}</span>
                   </div>
@@ -676,11 +681,12 @@ export const ReportPollution: React.FC = () => {
               {/* Step 3: Observation Time & Description */}
               <div
                 style={{
-                  background: 'rgba(24, 30, 20, 0.75)',
-                  border: '1px solid rgba(92, 114, 82, 0.25)',
-                  borderRadius: '14px',
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  border: '1px solid rgba(40, 122, 69, 0.18)',
+                  borderRadius: '16px',
                   padding: '1.35rem 1.5rem',
                   marginBottom: '1.25rem',
+                  boxShadow: '0 6px 24px rgba(22, 38, 25, 0.05)',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '1.1rem',
@@ -688,14 +694,14 @@ export const ReportPollution: React.FC = () => {
               >
                 {/* Observation Time */}
                 <div>
-                  <label style={{ fontSize: '0.95rem', fontWeight: 700, color: '#eef1e7', display: 'block', marginBottom: '0.2rem' }}>
-                    3. Observation Date &amp; Time <span style={{ color: '#f87171' }}>*</span>
+                  <label style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0d1710', display: 'block', marginBottom: '0.2rem' }}>
+                    3. Observation Date &amp; Time <span style={{ color: '#dc2626' }}>*</span>
                   </label>
-                  <p style={{ margin: '0 0 0.5rem', fontSize: '0.82rem', color: '#9ba395' }}>
+                  <p style={{ margin: '0 0 0.5rem', fontSize: '0.82rem', color: '#526b59' }}>
                     When did you observe this incident? Defaults to current time; change if observed earlier today.
                   </p>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    <Clock size={16} color="#8aa87e" />
+                    <Clock size={16} color="#166534" />
                     <input
                       type="datetime-local"
                       value={observedAt}
@@ -711,16 +717,16 @@ export const ReportPollution: React.FC = () => {
                       style={{
                         padding: '0.5rem 0.75rem',
                         borderRadius: '8px',
-                        background: 'rgba(20, 26, 18, 0.8)',
-                        border: '1px solid rgba(92, 114, 82, 0.35)',
-                        color: '#eef1e7',
+                        background: '#ffffff',
+                        border: '1.5px solid rgba(40, 122, 69, 0.25)',
+                        color: '#0f172a',
                         fontSize: '0.85rem',
                         outline: 'none',
                       }}
                     />
                   </div>
                   {formErrors.observedAt && (
-                    <div style={{ fontSize: '0.78rem', color: '#f87171', marginTop: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                    <div style={{ fontSize: '0.78rem', color: '#dc2626', marginTop: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                       <AlertCircle size={13} />
                       <span>{formErrors.observedAt}</span>
                     </div>
@@ -730,14 +736,14 @@ export const ReportPollution: React.FC = () => {
                 {/* Description */}
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.2rem' }}>
-                    <label style={{ fontSize: '0.95rem', fontWeight: 700, color: '#eef1e7' }}>
-                      4. Observation Description <span style={{ color: '#f87171' }}>*</span>
+                    <label style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0d1710' }}>
+                      4. Observation Description <span style={{ color: '#dc2626' }}>*</span>
                     </label>
-                    <span style={{ fontSize: '0.75rem', color: description.length > 900 ? '#f59e0b' : '#889381' }}>
+                    <span style={{ fontSize: '0.75rem', color: description.length > 900 ? '#f59e0b' : '#64748b' }}>
                       {description.length} / 1000 characters
                     </span>
                   </div>
-                  <p style={{ margin: '0 0 0.5rem', fontSize: '0.82rem', color: '#9ba395' }}>
+                  <p style={{ margin: '0 0 0.5rem', fontSize: '0.82rem', color: '#526b59' }}>
                     Describe the situation clearly. Example: &ldquo;Thick white smoke from open leaf burning near the housing society boundary.&rdquo;
                   </p>
                   <textarea
@@ -759,9 +765,9 @@ export const ReportPollution: React.FC = () => {
                       boxSizing: 'border-box',
                       padding: '0.75rem',
                       borderRadius: '10px',
-                      background: 'rgba(20, 26, 18, 0.8)',
-                      border: '1.5px solid rgba(92, 114, 82, 0.35)',
-                      color: '#eef1e7',
+                      background: '#ffffff',
+                      border: '1.5px solid rgba(40, 122, 69, 0.25)',
+                      color: '#0f172a',
                       fontSize: '0.88rem',
                       outline: 'none',
                       resize: 'vertical',
@@ -769,7 +775,7 @@ export const ReportPollution: React.FC = () => {
                     }}
                   />
                   {formErrors.description && (
-                    <div style={{ fontSize: '0.78rem', color: '#f87171', marginTop: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                    <div style={{ fontSize: '0.78rem', color: '#dc2626', marginTop: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                       <AlertCircle size={13} />
                       <span>{formErrors.description}</span>
                     </div>
@@ -780,18 +786,19 @@ export const ReportPollution: React.FC = () => {
               {/* Step 4: Optional Photo Attachment */}
               <div
                 style={{
-                  background: 'rgba(24, 30, 20, 0.75)',
-                  border: '1px solid rgba(92, 114, 82, 0.25)',
-                  borderRadius: '14px',
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  border: '1px solid rgba(40, 122, 69, 0.18)',
+                  borderRadius: '16px',
                   padding: '1.35rem 1.5rem',
                   marginBottom: '1.5rem',
+                  boxShadow: '0 6px 24px rgba(22, 38, 25, 0.05)',
                 }}
               >
                 <div style={{ marginBottom: '0.75rem' }}>
-                  <label style={{ fontSize: '0.95rem', fontWeight: 700, color: '#eef1e7', display: 'block', marginBottom: '0.2rem' }}>
+                  <label style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0d1710', display: 'block', marginBottom: '0.2rem' }}>
                     5. Supporting Photograph (Optional)
                   </label>
-                  <p style={{ margin: 0, fontSize: '0.82rem', color: '#9ba395' }}>
+                  <p style={{ margin: 0, fontSize: '0.82rem', color: '#526b59' }}>
                     Attach a clear photo of the smoke or dust cloud. Maximum file size: 5 MB (JPEG, PNG, or WebP).
                   </p>
                 </div>
@@ -799,11 +806,11 @@ export const ReportPollution: React.FC = () => {
                 {!photoPreview ? (
                   <div
                     style={{
-                      border: '1.5px dashed rgba(92, 114, 82, 0.4)',
+                      border: '2px dashed rgba(40, 122, 69, 0.35)',
                       borderRadius: '10px',
                       padding: '1.5rem',
                       textAlign: 'center',
-                      background: 'rgba(20, 24, 16, 0.5)',
+                      background: 'rgba(240, 253, 244, 0.6)',
                       cursor: 'pointer',
                     }}
                     onClick={() => document.getElementById('photo-upload-input')?.click()}
@@ -815,11 +822,11 @@ export const ReportPollution: React.FC = () => {
                       onChange={handlePhotoChange}
                       style={{ display: 'none' }}
                     />
-                    <Camera size={26} color="#8aa87e" style={{ margin: '0 auto 0.5rem', display: 'block' }} />
-                    <div style={{ fontSize: '0.86rem', color: '#eef1e7', fontWeight: 600 }}>
+                    <Camera size={26} color="#166534" style={{ margin: '0 auto 0.5rem', display: 'block' }} />
+                    <div style={{ fontSize: '0.86rem', color: '#0d1710', fontWeight: 600 }}>
                       Click to choose an incident image
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: '#889381', marginTop: '0.2rem' }}>
+                    <div style={{ fontSize: '0.75rem', color: '#526b59', marginTop: '0.2rem' }}>
                       JPG, PNG, or WebP up to 5 MB
                     </div>
                   </div>
@@ -831,8 +838,8 @@ export const ReportPollution: React.FC = () => {
                       gap: '1rem',
                       padding: '0.85rem',
                       borderRadius: '10px',
-                      background: 'rgba(20, 26, 18, 0.8)',
-                      border: '1px solid rgba(92, 114, 82, 0.35)',
+                      background: '#ffffff',
+                      border: '1px solid rgba(40, 122, 69, 0.25)',
                     }}
                   >
                     <img
@@ -843,14 +850,14 @@ export const ReportPollution: React.FC = () => {
                         height: '72px',
                         objectFit: 'cover',
                         borderRadius: '8px',
-                        border: '1px solid rgba(138, 168, 126, 0.4)',
+                        border: '1px solid rgba(40, 122, 69, 0.25)',
                       }}
                     />
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#eef1e7', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#0d1710', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {photoFile?.name}
                       </div>
-                      <div style={{ fontSize: '0.74rem', color: '#889381', marginTop: '0.15rem' }}>
+                      <div style={{ fontSize: '0.74rem', color: '#64748b', marginTop: '0.15rem' }}>
                         {photoFile ? `${(photoFile.size / 1024).toFixed(1)} KB` : ''}
                       </div>
                     </div>
@@ -858,9 +865,9 @@ export const ReportPollution: React.FC = () => {
                       type="button"
                       onClick={handleRemovePhoto}
                       style={{
-                        background: 'rgba(239, 68, 68, 0.15)',
+                        background: 'rgba(239, 68, 68, 0.12)',
                         border: '1px solid rgba(239, 68, 68, 0.35)',
-                        color: '#f87171',
+                        color: '#dc2626',
                         padding: '0.35rem 0.65rem',
                         borderRadius: '6px',
                         fontSize: '0.75rem',
@@ -877,13 +884,13 @@ export const ReportPollution: React.FC = () => {
                 )}
 
                 {formErrors.photo && (
-                  <div style={{ fontSize: '0.78rem', color: '#f87171', marginTop: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                  <div style={{ fontSize: '0.78rem', color: '#dc2626', marginTop: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                     <AlertCircle size={13} />
                     <span>{formErrors.photo}</span>
                   </div>
                 )}
 
-                <div style={{ fontSize: '0.75rem', color: '#7a8573', marginTop: '0.5rem' }}>
+                <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '0.5rem' }}>
                   Privacy notice: Please avoid capturing identifiable faces or license plates in private spaces.
                 </div>
               </div>
@@ -897,12 +904,12 @@ export const ReportPollution: React.FC = () => {
                     padding: '0.8rem 2rem',
                     borderRadius: '10px',
                     border: 'none',
-                    background: 'linear-gradient(135deg, #5c7252 0%, #3e5036 100%)',
+                    background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
                     color: '#ffffff',
                     fontSize: '0.94rem',
                     fontWeight: 700,
                     cursor: isSubmitting ? 'default' : 'pointer',
-                    boxShadow: '0 4px 14px rgba(0, 0, 0, 0.3)',
+                    boxShadow: '0 4px 14px rgba(22, 101, 52, 0.25)',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.55rem',
@@ -921,7 +928,7 @@ export const ReportPollution: React.FC = () => {
                     </>
                   )}
                 </button>
-                <span style={{ fontSize: '0.78rem', color: '#889381' }}>
+                <span style={{ fontSize: '0.78rem', color: '#526b59' }}>
                   Saved to AirLens community incident registry.
                 </span>
               </div>
@@ -935,10 +942,10 @@ export const ReportPollution: React.FC = () => {
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
             <div>
-              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#eef1e7', margin: '0 0 0.3rem' }}>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#0d1710', margin: '0 0 0.3rem' }}>
                 Reports Submitted from this Device
               </h3>
-              <p style={{ margin: 0, fontSize: '0.84rem', color: '#9ba395' }}>
+              <p style={{ margin: 0, fontSize: '0.84rem', color: '#526b59' }}>
                 Your submitted reports are securely associated with this browser session.
               </p>
             </div>
@@ -952,10 +959,11 @@ export const ReportPollution: React.FC = () => {
                 gap: '0.35rem',
                 padding: '0.45rem 0.8rem',
                 borderRadius: '8px',
-                border: '1px solid rgba(238, 241, 231, 0.15)',
-                background: 'rgba(30, 36, 26, 0.7)',
-                color: '#d6ded0',
+                border: '1px solid rgba(40, 122, 69, 0.25)',
+                background: 'rgba(240, 253, 244, 0.85)',
+                color: '#166534',
                 fontSize: '0.8rem',
+                fontWeight: 600,
                 cursor: 'pointer',
               }}
             >
@@ -965,26 +973,27 @@ export const ReportPollution: React.FC = () => {
           </div>
 
           {isLoadingReports ? (
-            <div style={{ padding: '2rem', textAlign: 'center', color: '#8aa87e' }}>
+            <div style={{ padding: '2rem', textAlign: 'center', color: '#166534', fontWeight: 600 }}>
               Loading your submitted reports...
             </div>
           ) : myReports.length === 0 ? (
             <div
               style={{
-                background: 'rgba(24, 30, 20, 0.6)',
-                border: '1px solid rgba(92, 114, 82, 0.25)',
-                borderRadius: '14px',
+                background: 'rgba(255, 255, 255, 0.95)',
+                border: '1px solid rgba(40, 122, 69, 0.18)',
+                borderRadius: '16px',
                 padding: '3rem 2rem',
                 textAlign: 'center',
                 maxWidth: '600px',
                 margin: '1.5rem auto',
+                boxShadow: '0 6px 24px rgba(22, 38, 25, 0.05)',
               }}
             >
-              <FileText size={32} color="#8aa87e" style={{ margin: '0 auto 0.75rem', display: 'block' }} />
-              <h4 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#eef1e7', margin: '0 0 0.4rem' }}>
+              <FileText size={32} color="#166534" style={{ margin: '0 auto 0.75rem', display: 'block' }} />
+              <h4 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#0d1710', margin: '0 0 0.4rem' }}>
                 No Submitted Reports Found
               </h4>
-              <p style={{ fontSize: '0.88rem', color: '#9ba395', margin: '0 0 1.25rem', lineHeight: 1.5 }}>
+              <p style={{ fontSize: '0.88rem', color: '#526b59', margin: '0 0 1.25rem', lineHeight: 1.5 }}>
                 You have not submitted any pollution incidents from this browser yet. Use the Submit a Report tab to log
                 visible smoke, open burning, or dust.
               </p>
@@ -994,11 +1003,12 @@ export const ReportPollution: React.FC = () => {
                   padding: '0.55rem 1.15rem',
                   borderRadius: '8px',
                   border: 'none',
-                  background: 'rgba(92, 114, 82, 0.35)',
-                  color: '#8aa87e',
+                  background: '#166534',
+                  color: '#ffffff',
                   fontSize: '0.85rem',
                   fontWeight: 600,
                   cursor: 'pointer',
+                  boxShadow: '0 2px 8px rgba(22, 101, 52, 0.25)',
                 }}
               >
                 Submit Your First Report
@@ -1010,8 +1020,8 @@ export const ReportPollution: React.FC = () => {
                 <div
                   key={report.id}
                   style={{
-                    background: 'rgba(24, 30, 20, 0.75)',
-                    border: '1px solid rgba(92, 114, 82, 0.25)',
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    border: '1px solid rgba(40, 122, 69, 0.18)',
                     borderRadius: '12px',
                     padding: '1.1rem 1.25rem',
                     display: 'flex',
@@ -1019,6 +1029,7 @@ export const ReportPollution: React.FC = () => {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     gap: '0.85rem',
+                    boxShadow: '0 2px 10px rgba(22, 38, 25, 0.04)',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flexWrap: 'wrap' }}>
@@ -1026,9 +1037,9 @@ export const ReportPollution: React.FC = () => {
                       style={{
                         padding: '0.2rem 0.55rem',
                         borderRadius: '4px',
-                        background: 'rgba(92, 114, 82, 0.25)',
-                        border: '1px solid rgba(138, 168, 126, 0.4)',
-                        color: '#8aa87e',
+                        background: 'rgba(40, 122, 69, 0.1)',
+                        border: '1px solid rgba(40, 122, 69, 0.25)',
+                        color: '#166534',
                         fontSize: '0.74rem',
                         fontWeight: 700,
                       }}
@@ -1038,14 +1049,14 @@ export const ReportPollution: React.FC = () => {
 
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                        <strong style={{ fontSize: '0.94rem', color: '#eef1e7' }}>
+                        <strong style={{ fontSize: '0.94rem', color: '#0d1710' }}>
                           {report.report_reference}
                         </strong>
-                        <span style={{ fontSize: '0.78rem', color: '#adb7a4' }}>
+                        <span style={{ fontSize: '0.78rem', color: '#526b59' }}>
                           · {report.category.replace(/_/g, ' ')}
                         </span>
                       </div>
-                      <div style={{ fontSize: '0.78rem', color: '#889381', marginTop: '0.2rem' }}>
+                      <div style={{ fontSize: '0.78rem', color: '#64748b', marginTop: '0.2rem' }}>
                         {report.location_name} · Submitted: {formatLocalIST(report.submitted_at)}
                       </div>
                     </div>
@@ -1055,12 +1066,13 @@ export const ReportPollution: React.FC = () => {
                     <button
                       onClick={() => setSelectedReportDetail(report)}
                       style={{
-                        background: 'transparent',
-                        border: '1px solid rgba(238, 241, 231, 0.15)',
-                        color: '#9ba395',
+                        background: 'rgba(240, 253, 244, 0.85)',
+                        border: '1px solid rgba(40, 122, 69, 0.25)',
+                        color: '#166534',
                         padding: '0.35rem 0.7rem',
                         borderRadius: '6px',
                         fontSize: '0.75rem',
+                        fontWeight: 600,
                         cursor: 'pointer',
                       }}
                     >
@@ -1083,7 +1095,7 @@ export const ReportPollution: React.FC = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'rgba(0, 0, 0, 0.75)',
+            background: 'rgba(0, 0, 0, 0.5)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -1095,14 +1107,14 @@ export const ReportPollution: React.FC = () => {
         >
           <div
             style={{
-              background: '#191f16',
-              border: '1px solid rgba(92, 114, 82, 0.4)',
+              background: '#ffffff',
+              border: '1px solid rgba(40, 122, 69, 0.25)',
               borderRadius: '16px',
               maxWidth: '560px',
               width: '100%',
               padding: '1.5rem',
-              color: '#eef1e7',
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5)',
+              color: '#0d1710',
+              boxShadow: '0 16px 40px rgba(0, 0, 0, 0.2)',
               maxHeight: '90vh',
               overflowY: 'auto',
             }}
@@ -1115,14 +1127,14 @@ export const ReportPollution: React.FC = () => {
                     fontSize: '0.72rem',
                     padding: '0.2rem 0.5rem',
                     borderRadius: '4px',
-                    background: 'rgba(92, 114, 82, 0.25)',
-                    color: '#8aa87e',
+                    background: 'rgba(40, 122, 69, 0.1)',
+                    color: '#166534',
                     fontWeight: 700,
                   }}
                 >
                   {selectedReportDetail.status}
                 </span>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: '0.4rem 0 0', color: '#8aa87e' }}>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, margin: '0.4rem 0 0', color: '#166534' }}>
                   {selectedReportDetail.report_reference}
                 </h3>
               </div>
@@ -1131,7 +1143,7 @@ export const ReportPollution: React.FC = () => {
                 style={{
                   background: 'transparent',
                   border: 'none',
-                  color: '#9ba395',
+                  color: '#64748b',
                   cursor: 'pointer',
                   padding: '0.25rem',
                 }}
@@ -1147,47 +1159,48 @@ export const ReportPollution: React.FC = () => {
                 gap: '0.75rem',
                 padding: '0.85rem',
                 borderRadius: '8px',
-                background: 'rgba(28, 34, 24, 0.7)',
+                background: 'rgba(240, 253, 244, 0.65)',
+                border: '1px solid rgba(40, 122, 69, 0.18)',
                 fontSize: '0.78rem',
                 marginBottom: '1rem',
               }}
             >
               <div>
-                <span style={{ color: '#889381' }}>Category:</span>
-                <div style={{ fontWeight: 600, color: '#eef1e7', marginTop: '0.15rem' }}>
+                <span style={{ color: '#526b59' }}>Category:</span>
+                <div style={{ fontWeight: 600, color: '#0d1710', marginTop: '0.15rem' }}>
                   {selectedReportDetail.category.replace(/_/g, ' ')}
                 </div>
               </div>
               <div>
-                <span style={{ color: '#889381' }}>Incident Location:</span>
-                <div style={{ fontWeight: 600, color: '#eef1e7', marginTop: '0.15rem' }}>
+                <span style={{ color: '#526b59' }}>Incident Location:</span>
+                <div style={{ fontWeight: 600, color: '#0d1710', marginTop: '0.15rem' }}>
                   {selectedReportDetail.location_name}
                 </div>
               </div>
               <div>
-                <span style={{ color: '#889381' }}>Observed At:</span>
-                <div style={{ fontWeight: 600, color: '#eef1e7', marginTop: '0.15rem' }}>
+                <span style={{ color: '#526b59' }}>Observed At:</span>
+                <div style={{ fontWeight: 600, color: '#0d1710', marginTop: '0.15rem' }}>
                   {formatLocalIST(selectedReportDetail.observed_at)}
                 </div>
               </div>
               <div>
-                <span style={{ color: '#889381' }}>Submitted At:</span>
-                <div style={{ fontWeight: 600, color: '#eef1e7', marginTop: '0.15rem' }}>
+                <span style={{ color: '#526b59' }}>Submitted At:</span>
+                <div style={{ fontWeight: 600, color: '#0d1710', marginTop: '0.15rem' }}>
                   {formatLocalIST(selectedReportDetail.submitted_at)}
                 </div>
               </div>
             </div>
 
             <div style={{ marginBottom: '1rem' }}>
-              <span style={{ fontSize: '0.78rem', color: '#889381' }}>Description:</span>
-              <p style={{ margin: '0.25rem 0 0', fontSize: '0.86rem', color: '#c5cebe', lineHeight: 1.5 }}>
+              <span style={{ fontSize: '0.78rem', color: '#526b59' }}>Description:</span>
+              <p style={{ margin: '0.25rem 0 0', fontSize: '0.86rem', color: '#334155', lineHeight: 1.5 }}>
                 {selectedReportDetail.description}
               </p>
             </div>
 
             {selectedReportDetail.attachment_path && (
               <div style={{ marginBottom: '1.25rem' }}>
-                <span style={{ fontSize: '0.78rem', color: '#889381', display: 'block', marginBottom: '0.35rem' }}>
+                <span style={{ fontSize: '0.78rem', color: '#526b59', display: 'block', marginBottom: '0.35rem' }}>
                   Attached Photograph:
                 </span>
                 <img
@@ -1197,9 +1210,9 @@ export const ReportPollution: React.FC = () => {
                     maxWidth: '100%',
                     maxHeight: '220px',
                     borderRadius: '8px',
-                    border: '1px solid rgba(138, 168, 126, 0.3)',
+                    border: '1px solid rgba(40, 122, 69, 0.25)',
                     objectFit: 'contain',
-                    background: '#0d110c',
+                    background: '#f8fafc',
                   }}
                 />
               </div>
@@ -1211,12 +1224,13 @@ export const ReportPollution: React.FC = () => {
                 style={{
                   padding: '0.45rem 1rem',
                   borderRadius: '6px',
-                  background: 'rgba(92, 114, 82, 0.3)',
-                  border: '1px solid rgba(138, 168, 126, 0.4)',
-                  color: '#8aa87e',
+                  background: '#166534',
+                  border: 'none',
+                  color: '#ffffff',
                   fontSize: '0.8rem',
                   fontWeight: 600,
                   cursor: 'pointer',
+                  boxShadow: '0 2px 6px rgba(22, 101, 52, 0.25)',
                 }}
               >
                 Close

@@ -208,14 +208,14 @@ export const ExploreAirQuality: React.FC = () => {
           justifyContent: 'center',
           minHeight: '420px',
           gap: '16px',
-          color: '#a3b593',
+          color: '#166534',
         }}
       >
         <RefreshCw size={36} style={{ animation: 'spin 1.5s linear infinite' }} />
-        <h3 style={{ margin: 0, color: '#f4f6f0', fontSize: '1.25rem', fontFamily: 'var(--font-heading)' }}>
+        <h3 style={{ margin: 0, color: '#0d1710', fontSize: '1.25rem', fontFamily: 'var(--font-heading)' }}>
           Loading Pollution Map...
         </h3>
-        <p style={{ margin: 0, fontSize: '0.9rem', color: '#9eab93' }}>
+        <p style={{ margin: 0, fontSize: '0.9rem', color: '#526b59' }}>
           Connecting to continuous monitoring stations across Pune &amp; Pimpri-Chinchwad
         </p>
       </div>
@@ -227,8 +227,8 @@ export const ExploreAirQuality: React.FC = () => {
       {/* 1. Header Bar: Compact & Integrated */}
       <div
         style={{
-          background: 'linear-gradient(135deg, rgba(28, 42, 27, 0.95) 0%, rgba(18, 28, 17, 0.98) 100%)',
-          border: '1px solid rgba(163, 181, 147, 0.22)',
+          background: 'rgba(255, 255, 255, 0.95)',
+          border: '1px solid rgba(40, 122, 69, 0.18)',
           borderRadius: '18px',
           padding: '1rem 1.5rem',
           marginBottom: '1.25rem',
@@ -237,7 +237,9 @@ export const ExploreAirQuality: React.FC = () => {
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '1rem',
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)',
+          boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -246,12 +248,12 @@ export const ExploreAirQuality: React.FC = () => {
               width: '40px',
               height: '40px',
               borderRadius: '12px',
-              background: 'rgba(74, 222, 128, 0.15)',
-              border: '1px solid rgba(74, 222, 128, 0.3)',
+              background: 'rgba(40, 122, 69, 0.1)',
+              border: '1px solid rgba(40, 122, 69, 0.22)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#86efac',
+              color: '#166534',
               flexShrink: 0,
             }}
           >
@@ -265,7 +267,7 @@ export const ExploreAirQuality: React.FC = () => {
                   fontSize: '1.45rem',
                   fontWeight: 700,
                   margin: 0,
-                  color: '#f4f6f0',
+                  color: '#0d1710',
                   fontFamily: 'var(--font-heading)',
                   letterSpacing: '-0.01em',
                 }}
@@ -280,15 +282,15 @@ export const ExploreAirQuality: React.FC = () => {
                   letterSpacing: '0.04em',
                   padding: '2px 8px',
                   borderRadius: '6px',
-                  background: 'rgba(143, 160, 126, 0.2)',
-                  color: '#a3b593',
-                  border: '1px solid rgba(163, 181, 147, 0.25)',
+                  background: 'rgba(40, 122, 69, 0.1)',
+                  color: '#166534',
+                  border: '1px solid rgba(40, 122, 69, 0.25)',
                 }}
               >
                 Pune &amp; PCMC Air Twin
               </span>
             </div>
-            <p style={{ margin: '2px 0 0 0', fontSize: '0.82rem', color: '#9eab93' }}>
+            <p style={{ margin: '2px 0 0 0', fontSize: '0.82rem', color: '#526b59' }}>
               Real-time ground station network and spatial particulate interpolation.
             </p>
           </div>
@@ -298,12 +300,12 @@ export const ExploreAirQuality: React.FC = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
           <div
             style={{
-              background: 'rgba(14, 20, 14, 0.75)',
-              border: '1px solid rgba(163, 181, 147, 0.2)',
+              background: 'rgba(240, 253, 244, 0.75)',
+              border: '1px solid rgba(40, 122, 69, 0.2)',
               borderRadius: '10px',
               padding: '6px 12px',
               fontSize: '0.74rem',
-              color: '#c9d3bf',
+              color: '#475e4e',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
@@ -314,7 +316,7 @@ export const ExploreAirQuality: React.FC = () => {
                 width: '7px',
                 height: '7px',
                 borderRadius: '50%',
-                background: isRefreshing ? '#facc15' : '#4ade80',
+                background: isRefreshing ? '#facc15' : '#166534',
               }}
             />
             <span>{isRefreshing ? 'Syncing...' : `${stations.length || 6} Ground Stations Active`}</span>
@@ -330,12 +332,13 @@ export const ExploreAirQuality: React.FC = () => {
               gap: '6px',
               padding: '6px 12px',
               borderRadius: '10px',
-              background: 'rgba(143, 160, 126, 0.12)',
-              border: '1px solid rgba(163, 181, 147, 0.28)',
-              color: '#f4f6f0',
+              background: 'rgba(255, 255, 255, 0.95)',
+              border: '1px solid rgba(40, 122, 69, 0.25)',
+              color: '#166534',
               fontSize: '0.76rem',
               fontWeight: 600,
               cursor: isRefreshing ? 'wait' : 'pointer',
+              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)',
               transition: 'all 0.2s ease',
             }}
             title="Refresh air quality readings"
@@ -352,9 +355,9 @@ export const ExploreAirQuality: React.FC = () => {
           style={{
             padding: '0.85rem 1.25rem',
             borderRadius: '14px',
-            background: 'rgba(239, 68, 68, 0.12)',
+            background: 'rgba(239, 68, 68, 0.1)',
             border: '1px solid rgba(239, 68, 68, 0.3)',
-            color: '#fca5a5',
+            color: '#dc2626',
             marginBottom: '1.25rem',
             display: 'flex',
             alignItems: 'center',
@@ -368,8 +371,8 @@ export const ExploreAirQuality: React.FC = () => {
             onClick={loadData}
             style={{
               background: 'none',
-              border: '1px solid #fca5a5',
-              color: '#fca5a5',
+              border: '1px solid #dc2626',
+              color: '#dc2626',
               padding: '3px 10px',
               borderRadius: '6px',
               fontSize: '0.76rem',
@@ -384,8 +387,8 @@ export const ExploreAirQuality: React.FC = () => {
       {/* 2. Sleek Filter & Search Toolbar */}
       <div
         style={{
-          background: 'rgba(23, 33, 21, 0.72)',
-          border: '1px solid rgba(163, 181, 147, 0.2)',
+          background: 'rgba(255, 255, 255, 0.95)',
+          border: '1px solid rgba(40, 122, 69, 0.18)',
           borderRadius: '16px',
           padding: '0.85rem 1.25rem',
           marginBottom: '1.25rem',
@@ -394,6 +397,9 @@ export const ExploreAirQuality: React.FC = () => {
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: '0.85rem',
+          boxShadow: '0 6px 20px rgba(22, 38, 25, 0.05)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
         }}
       >
         {/* Search Input */}
@@ -404,13 +410,13 @@ export const ExploreAirQuality: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               width: '100%',
-              background: 'rgba(14, 20, 14, 0.85)',
-              border: '1px solid rgba(163, 181, 147, 0.25)',
+              background: '#ffffff',
+              border: '1.5px solid rgba(40, 122, 69, 0.22)',
               borderRadius: '10px',
               padding: '0 10px',
             }}
           >
-            <Search size={15} color="#9eab93" style={{ flexShrink: 0, marginRight: '8px' }} />
+            <Search size={15} color="#166534" style={{ flexShrink: 0, marginRight: '8px' }} />
             <input
               type="text"
               placeholder="Search station or locality (e.g. Shivajinagar, Bhosari, Katraj)..."
@@ -421,7 +427,7 @@ export const ExploreAirQuality: React.FC = () => {
                 background: 'transparent',
                 border: 'none',
                 outline: 'none',
-                color: '#f4f6f0',
+                color: '#0f172a',
                 fontSize: '0.84rem',
                 padding: '8px 0',
               }}
@@ -435,7 +441,7 @@ export const ExploreAirQuality: React.FC = () => {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: '#9eab93',
+                  color: '#64748b',
                   cursor: 'pointer',
                   padding: '2px',
                   display: 'flex',
@@ -455,9 +461,9 @@ export const ExploreAirQuality: React.FC = () => {
             style={{
               padding: '8px 12px',
               borderRadius: '10px',
-              background: 'rgba(14, 20, 14, 0.85)',
-              border: '1px solid rgba(163, 181, 147, 0.3)',
-              color: '#f4f6f0',
+              background: '#ffffff',
+              border: '1.5px solid rgba(40, 122, 69, 0.22)',
+              color: '#0f172a',
               fontSize: '0.82rem',
               cursor: 'pointer',
               outline: 'none',
@@ -478,14 +484,15 @@ export const ExploreAirQuality: React.FC = () => {
               style={{
                 padding: '7px 12px',
                 borderRadius: '10px',
-                background: 'rgba(143, 160, 126, 0.14)',
-                border: '1px solid rgba(163, 181, 147, 0.3)',
-                color: '#c9d3bf',
+                background: 'rgba(255, 255, 255, 0.95)',
+                border: '1px solid rgba(40, 122, 69, 0.25)',
+                color: '#166534',
                 fontSize: '0.78rem',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '5px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
               }}
               title="Clear station selection"
             >
@@ -501,19 +508,20 @@ export const ExploreAirQuality: React.FC = () => {
             style={{
               padding: '7px 12px',
               borderRadius: '10px',
-              background: showHeatmap ? 'rgba(74, 222, 128, 0.18)' : 'rgba(20, 28, 19, 0.65)',
-              border: showHeatmap ? '1.5px solid #4ade80' : '1px solid rgba(163, 181, 147, 0.25)',
-              color: showHeatmap ? '#ffffff' : '#a3b593',
+              background: showHeatmap ? '#166534' : 'rgba(240, 253, 244, 0.85)',
+              border: showHeatmap ? '1px solid #166534' : '1px solid rgba(40, 122, 69, 0.22)',
+              color: showHeatmap ? '#ffffff' : '#166534',
               fontSize: '0.78rem',
-              fontWeight: showHeatmap ? 700 : 500,
+              fontWeight: showHeatmap ? 700 : 600,
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
               transition: 'all 0.2s ease',
+              boxShadow: showHeatmap ? '0 2px 8px rgba(22, 101, 52, 0.25)' : 'none',
             }}
           >
-            <Layers size={13} color={showHeatmap ? '#4ade80' : '#a3b593'} />
+            <Layers size={13} color={showHeatmap ? '#86efac' : '#166534'} />
             <span>{showHeatmap ? 'Heatmap: ON' : 'Spatial Heatmap'}</span>
             {isLoadingHeatmap && <RefreshCw size={11} style={{ animation: 'spin 1s linear infinite' }} />}
           </button>
@@ -527,11 +535,13 @@ export const ExploreAirQuality: React.FC = () => {
         {/* ========================================================= */}
         <div
           style={{
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.9) 0%, rgba(18, 26, 17, 0.96) 100%)',
-            border: '1px solid rgba(163, 181, 147, 0.22)',
+            background: 'rgba(255, 255, 255, 0.95)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             borderRadius: '24px',
             padding: '1.25rem',
-            boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+            boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
             display: 'flex',
             flexDirection: 'column',
             gap: '10px',
@@ -549,12 +559,12 @@ export const ExploreAirQuality: React.FC = () => {
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Compass size={17} color="#86efac" />
+              <Compass size={17} color="#166534" />
               <div>
-                <h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#f4f6f0' }}>
+                <h2 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
                   Interactive Pune Environmental Map
                 </h2>
-                <div style={{ fontSize: '0.72rem', color: '#9eab93' }}>
+                <div style={{ fontSize: '0.74rem', color: '#526b59' }}>
                   Click any monitoring station pin to inspect real-time measurements in the side inspector
                 </div>
               </div>
@@ -564,11 +574,12 @@ export const ExploreAirQuality: React.FC = () => {
               <span
                 style={{
                   fontSize: '0.72rem',
-                  padding: '3px 8px',
-                  borderRadius: '6px',
-                  background: 'rgba(143, 160, 126, 0.15)',
-                  border: '1px solid rgba(163, 181, 147, 0.2)',
-                  color: '#c9d3bf',
+                  fontWeight: 600,
+                  padding: '4px 10px',
+                  borderRadius: '8px',
+                  background: 'rgba(40, 122, 69, 0.1)',
+                  border: '1px solid rgba(40, 122, 69, 0.25)',
+                  color: '#166534',
                 }}
               >
                 {filteredStations.length} of {stations.length} Stations
@@ -583,7 +594,7 @@ export const ExploreAirQuality: React.FC = () => {
               minHeight: '620px',
               borderRadius: '16px',
               overflow: 'hidden',
-              border: '1px solid rgba(163, 181, 147, 0.2)',
+              border: '1px solid rgba(40, 122, 69, 0.2)',
               position: 'relative',
             }}
           >
@@ -604,20 +615,20 @@ export const ExploreAirQuality: React.FC = () => {
           <div
             style={{
               marginTop: '4px',
-              padding: '10px 12px',
+              padding: '10px 14px',
               borderRadius: '14px',
-              background: 'rgba(14, 20, 14, 0.7)',
-              border: '1px solid rgba(163, 181, 147, 0.16)',
+              background: 'rgba(240, 253, 244, 0.75)',
+              border: '1px solid rgba(40, 122, 69, 0.18)',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', marginBottom: '6px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <Info size={13} color="#8fa07e" />
-                <span style={{ fontSize: '0.74rem', fontWeight: 700, textTransform: 'uppercase', color: '#a3b593', letterSpacing: '0.04em' }}>
+                <Info size={14} color="#166534" />
+                <span style={{ fontSize: '0.74rem', fontWeight: 700, textTransform: 'uppercase', color: '#166534', letterSpacing: '0.04em' }}>
                   Marker Colors: Particulate-Based Pollution Scale
                 </span>
               </div>
-              <span style={{ fontSize: '0.68rem', color: '#9eab93' }}>Standard CPCB Breakpoints (µg/m³)</span>
+              <span style={{ fontSize: '0.7rem', color: '#526b59' }}>Standard CPCB Breakpoints (µg/m³)</span>
             </div>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -630,8 +641,9 @@ export const ExploreAirQuality: React.FC = () => {
                     gap: '5px',
                     padding: '3px 8px',
                     borderRadius: '7px',
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    border: `1px solid ${item.color}30`,
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    border: `1px solid ${item.color}40`,
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
                   }}
                   title={item.desc}
                 >
@@ -644,8 +656,8 @@ export const ExploreAirQuality: React.FC = () => {
                       flexShrink: 0,
                     }}
                   />
-                  <span style={{ fontSize: '0.72rem', fontWeight: 600, color: '#f4f6f0' }}>{item.label}</span>
-                  <span style={{ fontSize: '0.66rem', color: '#9eab93' }}>({item.range})</span>
+                  <span style={{ fontSize: '0.74rem', fontWeight: 700, color: '#0d1710' }}>{item.label}</span>
+                  <span style={{ fontSize: '0.68rem', color: '#64748b' }}>({item.range})</span>
                 </div>
               ))}
             </div>
@@ -661,11 +673,13 @@ export const ExploreAirQuality: React.FC = () => {
             top: '1rem',
             maxHeight: 'calc(100vh - 80px)',
             overflowY: 'auto',
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.9) 0%, rgba(18, 26, 17, 0.96) 100%)',
-            border: '1px solid rgba(163, 181, 147, 0.22)',
+            background: 'rgba(255, 255, 255, 0.95)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             borderRadius: '24px',
             padding: '1.4rem',
-            boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+            boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
             display: 'flex',
             flexDirection: 'column',
             gap: '1rem',
@@ -684,9 +698,9 @@ export const ExploreAirQuality: React.FC = () => {
                         borderRadius: '6px',
                         fontSize: '10px',
                         fontWeight: 700,
-                        background: 'rgba(143, 160, 126, 0.2)',
-                        color: '#c9d3bf',
-                        border: '1px solid rgba(163, 181, 147, 0.3)',
+                        background: 'rgba(40, 122, 69, 0.1)',
+                        color: '#166534',
+                        border: '1px solid rgba(40, 122, 69, 0.2)',
                       }}
                     >
                       ID: {selectedStation.station_id}
@@ -697,9 +711,9 @@ export const ExploreAirQuality: React.FC = () => {
                         borderRadius: '6px',
                         fontSize: '10px',
                         fontWeight: 700,
-                        background: 'rgba(74, 222, 128, 0.18)',
-                        color: '#86efac',
-                        border: '1px solid rgba(74, 222, 128, 0.3)',
+                        background: 'rgba(22, 101, 52, 0.1)',
+                        color: '#15803d',
+                        border: '1px solid rgba(22, 101, 52, 0.25)',
                       }}
                     >
                       ACTIVE
@@ -712,10 +726,10 @@ export const ExploreAirQuality: React.FC = () => {
                         fontWeight: 600,
                         background:
                           selectedObservation?.data_provenance === 'OBSERVED'
-                            ? 'rgba(74, 222, 128, 0.15)'
-                            : 'rgba(143, 160, 126, 0.15)',
-                        color: selectedObservation?.data_provenance === 'OBSERVED' ? '#4ade80' : '#a3b593',
-                        border: '1px solid rgba(163, 181, 147, 0.25)',
+                            ? 'rgba(22, 101, 52, 0.1)'
+                            : 'rgba(40, 122, 69, 0.08)',
+                        color: selectedObservation?.data_provenance === 'OBSERVED' ? '#15803d' : '#166534',
+                        border: '1px solid rgba(40, 122, 69, 0.2)',
                       }}
                     >
                       {selectedObservation?.data_provenance === 'OBSERVED' ? 'Measured' : 'Model Estimate'}
@@ -727,14 +741,14 @@ export const ExploreAirQuality: React.FC = () => {
                       fontSize: '1.25rem',
                       fontWeight: 700,
                       margin: '4px 0 2px',
-                      color: '#f4f6f0',
+                      color: '#0d1710',
                       lineHeight: 1.25,
                       fontFamily: 'var(--font-heading)',
                     }}
                   >
                     {selectedStation.station_name}
                   </h3>
-                  <div style={{ fontSize: '0.78rem', color: '#9eab93' }}>
+                  <div style={{ fontSize: '0.78rem', color: '#526b59' }}>
                     {selectedStation.zone_type} · {selectedStation.city}
                   </div>
                 </div>
@@ -743,10 +757,10 @@ export const ExploreAirQuality: React.FC = () => {
                   type="button"
                   onClick={() => handleSelectStation(null)}
                   style={{
-                    background: 'rgba(255, 255, 255, 0.08)',
-                    border: '1px solid rgba(255, 255, 255, 0.15)',
+                    background: 'rgba(0, 0, 0, 0.05)',
+                    border: '1px solid rgba(0, 0, 0, 0.1)',
                     borderRadius: '8px',
-                    color: '#c9d3bf',
+                    color: '#334155',
                     cursor: 'pointer',
                     padding: '6px',
                     display: 'flex',
@@ -759,48 +773,48 @@ export const ExploreAirQuality: React.FC = () => {
                 </button>
               </div>
 
-              {/* Station Metadata 2x2 Grid (Previously cramped in popup) */}
+              {/* Station Metadata 2x2 Grid */}
               <div
                 style={{
                   display: 'grid',
                   gridTemplateColumns: '1fr 1fr',
                   gap: '8px',
-                  background: 'rgba(14, 20, 14, 0.65)',
-                  border: '1px solid rgba(163, 181, 147, 0.16)',
+                  background: 'rgba(240, 253, 244, 0.75)',
+                  border: '1px solid rgba(40, 122, 69, 0.18)',
                   borderRadius: '14px',
                   padding: '10px 12px',
                 }}
               >
                 <div>
-                  <div style={{ fontSize: '0.68rem', color: '#9eab93', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <ShieldCheck size={11} color="#8fa07e" />
+                  <div style={{ fontSize: '0.68rem', color: '#526b59', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <ShieldCheck size={11} color="#166534" />
                     <span>Authority</span>
                   </div>
-                  <div style={{ fontSize: '0.78rem', fontWeight: 600, color: '#f4f6f0', marginTop: '2px' }}>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0d1710', marginTop: '2px' }}>
                     {selectedStation.monitoring_authority}
                   </div>
                 </div>
 
                 <div>
-                  <div style={{ fontSize: '0.68rem', color: '#9eab93', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <Building2 size={11} color="#8fa07e" />
+                  <div style={{ fontSize: '0.68rem', color: '#526b59', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <Building2 size={11} color="#166534" />
                     <span>Zoning</span>
                   </div>
-                  <div style={{ fontSize: '0.78rem', fontWeight: 600, color: '#f4f6f0', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0d1710', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {selectedStation.zone_type.split('/')[0]}
                   </div>
                 </div>
 
                 <div>
-                  <div style={{ fontSize: '0.68rem', color: '#9eab93' }}>Coordinates</div>
-                  <div style={{ fontSize: '0.74rem', fontWeight: 600, color: '#c9d3bf', marginTop: '2px', fontFamily: 'monospace' }}>
+                  <div style={{ fontSize: '0.68rem', color: '#526b59' }}>Coordinates</div>
+                  <div style={{ fontSize: '0.76rem', fontWeight: 600, color: '#334155', marginTop: '2px', fontFamily: 'monospace' }}>
                     {selectedStation.latitude.toFixed(4)}° N, {selectedStation.longitude.toFixed(4)}° E
                   </div>
                 </div>
 
                 <div>
-                  <div style={{ fontSize: '0.68rem', color: '#9eab93' }}>Elevation</div>
-                  <div style={{ fontSize: '0.78rem', fontWeight: 600, color: '#c9d3bf', marginTop: '2px' }}>
+                  <div style={{ fontSize: '0.68rem', color: '#526b59' }}>Elevation</div>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#334155', marginTop: '2px' }}>
                     {selectedStation.elevation_m !== null && selectedStation.elevation_m !== undefined
                       ? `${selectedStation.elevation_m} m`
                       : '560 m'}
@@ -813,13 +827,14 @@ export const ExploreAirQuality: React.FC = () => {
                 style={{
                   padding: '1.15rem 1.25rem',
                   borderRadius: '16px',
-                  background: 'rgba(14, 20, 14, 0.85)',
-                  border: '1px solid rgba(163, 181, 147, 0.22)',
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  border: '1px solid rgba(40, 122, 69, 0.2)',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                   <div>
-                    <div style={{ fontSize: '0.72rem', color: '#9eab93', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    <div style={{ fontSize: '0.74rem', color: '#526b59', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                       Particulate Air Index (Estimate)
                     </div>
                     <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginTop: '3px' }}>
@@ -827,14 +842,14 @@ export const ExploreAirQuality: React.FC = () => {
                         style={{
                           fontSize: '2.8rem',
                           fontWeight: 800,
-                          color: selectedEvaluation.particulateColor || '#a3b593',
+                          color: selectedEvaluation.particulateColor || '#166534',
                           lineHeight: 1,
                           letterSpacing: '-0.02em',
                         }}
                       >
                         {selectedEvaluation.particulateIndex ?? '--'}
                       </span>
-                      <span style={{ fontSize: '0.82rem', color: '#9eab93', fontWeight: 600 }}>/ 500</span>
+                      <span style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 600 }}>/ 500</span>
                     </div>
                   </div>
 
@@ -845,8 +860,8 @@ export const ExploreAirQuality: React.FC = () => {
                         borderRadius: '8px',
                         fontSize: '0.76rem',
                         fontWeight: 700,
-                        background: `${selectedEvaluation.particulateColor}22`,
-                        color: selectedEvaluation.particulateColor || '#4ade80',
+                        background: `${selectedEvaluation.particulateColor}18`,
+                        color: selectedEvaluation.particulateColor || '#15803d',
                         border: `1px solid ${selectedEvaluation.particulateColor}40`,
                       }}
                     >
@@ -855,7 +870,7 @@ export const ExploreAirQuality: React.FC = () => {
                   )}
                 </div>
 
-                <div style={{ fontSize: '0.7rem', color: '#9eab93', marginTop: '6px' }}>
+                <div style={{ fontSize: '0.72rem', color: '#64748b', marginTop: '6px' }}>
                   {selectedEvaluation.hasParticulateEstimate
                     ? `Calculated from ${selectedEvaluation.prominentParticulate || 'PM2.5'} using CPCB scale`
                     : 'Telemetry data currently updating'}
@@ -867,14 +882,14 @@ export const ExploreAirQuality: React.FC = () => {
                     style={{
                       padding: '8px 10px',
                       borderRadius: '10px',
-                      background: 'rgba(255, 255, 255, 0.04)',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      background: 'rgba(240, 253, 244, 0.6)',
+                      border: '1px solid rgba(40, 122, 69, 0.15)',
                     }}
                   >
-                    <div style={{ fontSize: '0.66rem', color: '#9eab93', textTransform: 'uppercase', fontWeight: 600 }}>
+                    <div style={{ fontSize: '0.68rem', color: '#526b59', textTransform: 'uppercase', fontWeight: 600 }}>
                       PM2.5 Fine Particles
                     </div>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#f4f6f0', marginTop: '2px' }}>
+                    <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0d1710', marginTop: '2px' }}>
                       {selectedObservation?.pm25 !== null && selectedObservation?.pm25 !== undefined
                         ? `${selectedObservation.pm25.toFixed(1)} µg/m³`
                         : 'Unavailable'}
@@ -885,14 +900,14 @@ export const ExploreAirQuality: React.FC = () => {
                     style={{
                       padding: '8px 10px',
                       borderRadius: '10px',
-                      background: 'rgba(255, 255, 255, 0.04)',
-                      border: '1px solid rgba(255, 255, 255, 0.08)',
+                      background: 'rgba(240, 253, 244, 0.6)',
+                      border: '1px solid rgba(40, 122, 69, 0.15)',
                     }}
                   >
-                    <div style={{ fontSize: '0.66rem', color: '#9eab93', textTransform: 'uppercase', fontWeight: 600 }}>
+                    <div style={{ fontSize: '0.68rem', color: '#526b59', textTransform: 'uppercase', fontWeight: 600 }}>
                       PM10 Coarse Dust
                     </div>
-                    <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#f4f6f0', marginTop: '2px' }}>
+                    <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0d1710', marginTop: '2px' }}>
                       {selectedObservation?.pm10 !== null && selectedObservation?.pm10 !== undefined
                         ? `${selectedObservation.pm10.toFixed(1)} µg/m³`
                         : 'Not Monitored'}
@@ -904,29 +919,27 @@ export const ExploreAirQuality: React.FC = () => {
               {/* Official CPCB AQI Status Notice */}
               <div
                 style={{
-                  padding: '8px 12px',
+                  padding: '9px 12px',
                   borderRadius: '10px',
-                  background: selectedEvaluation.isOfficialAqiAvailable
-                    ? 'rgba(74, 222, 128, 0.1)'
-                    : 'rgba(255, 255, 255, 0.04)',
-                  border: '1px solid rgba(163, 181, 147, 0.16)',
+                  background: 'rgba(240, 253, 244, 0.75)',
+                  border: '1px solid rgba(40, 122, 69, 0.2)',
                   fontSize: '0.74rem',
-                  color: '#c9d3bf',
+                  color: '#334155',
                   display: 'flex',
                   alignItems: 'flex-start',
                   gap: '6px',
                   lineHeight: 1.35,
                 }}
               >
-                <Info size={13} color="#a3b593" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <Info size={14} color="#166534" style={{ flexShrink: 0, marginTop: '2px' }} />
                 <span>
                   {selectedEvaluation.isOfficialAqiAvailable ? (
                     <>
-                      <strong>Official CPCB NAQI:</strong> {selectedEvaluation.officialAqi} ({selectedEvaluation.officialCategory})
+                      <strong style={{ color: '#0d1710' }}>Official CPCB NAQI:</strong> {selectedEvaluation.officialAqi} ({selectedEvaluation.officialCategory})
                     </>
                   ) : (
                     <>
-                      <strong>Official Overall CPCB AQI:</strong> Unavailable ({selectedEvaluation.officialUnavailableReason || 'Requires 3+ criteria pollutants over 24h'})
+                      <strong style={{ color: '#0d1710' }}>Official Overall CPCB AQI:</strong> Unavailable ({selectedEvaluation.officialUnavailableReason || 'Requires 3+ criteria pollutants over 24h'})
                     </>
                   )}
                 </span>
@@ -935,16 +948,16 @@ export const ExploreAirQuality: React.FC = () => {
               {/* Resident Guidance Advisory Card */}
               <div
                 style={{
-                  padding: '10px 12px',
+                  padding: '10px 14px',
                   borderRadius: '12px',
-                  background: 'rgba(143, 160, 126, 0.1)',
-                  borderLeft: `4px solid ${selectedEvaluation.particulateColor || '#a3b593'}`,
-                  color: '#eef1e7',
+                  background: 'rgba(240, 253, 244, 0.85)',
+                  borderLeft: `4px solid ${selectedEvaluation.particulateColor || '#166534'}`,
+                  color: '#334155',
                   fontSize: '0.8rem',
-                  lineHeight: 1.4,
+                  lineHeight: 1.45,
                 }}
               >
-                <strong style={{ color: '#86efac' }}>Neighborhood Advisory:</strong>{' '}
+                <strong style={{ color: '#166534' }}>Neighborhood Advisory:</strong>{' '}
                 {selectedEvaluation.particulateExplanation ||
                   'Air quality is acceptable. Observation data is updating continuously.'}
               </div>
@@ -959,19 +972,19 @@ export const ExploreAirQuality: React.FC = () => {
                   }}
                   style={{
                     width: '100%',
-                    padding: '9px 14px',
+                    padding: '10px 14px',
                     borderRadius: '10px',
                     background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
-                    border: '1px solid rgba(134, 239, 172, 0.4)',
+                    border: '1px solid rgba(22, 101, 52, 0.4)',
                     color: '#ffffff',
-                    fontSize: '0.82rem',
+                    fontSize: '0.84rem',
                     fontWeight: 700,
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '6px',
-                    boxShadow: '0 4px 14px rgba(22, 101, 52, 0.4)',
+                    boxShadow: '0 4px 14px rgba(22, 101, 52, 0.3)',
                   }}
                 >
                   <Navigation size={13} />
@@ -985,13 +998,13 @@ export const ExploreAirQuality: React.FC = () => {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     fontSize: '0.72rem',
-                    color: '#9eab93',
+                    color: '#64748b',
                     paddingTop: '6px',
-                    borderTop: '1px solid rgba(163, 181, 147, 0.12)',
+                    borderTop: '1px solid rgba(40, 122, 69, 0.15)',
                   }}
                 >
                   <span>Sensor Feed: Live</span>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#a3b593', fontWeight: 600 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#166534', fontWeight: 600 }}>
                     <Clock size={11} />
                     <span>{formatTime(selectedObservation?.datetime_local_ist || selectedObservation?.datetime_utc)}</span>
                   </div>
@@ -1004,8 +1017,8 @@ export const ExploreAirQuality: React.FC = () => {
               {/* Header */}
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
-                  <Activity size={14} color="#86efac" />
-                  <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#86efac', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  <Activity size={14} color="#166534" />
+                  <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#166534', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                     Network Overview
                   </span>
                 </div>
@@ -1014,13 +1027,13 @@ export const ExploreAirQuality: React.FC = () => {
                     fontSize: '1.2rem',
                     fontWeight: 700,
                     margin: '0 0 4px',
-                    color: '#f4f6f0',
+                    color: '#0d1710',
                     fontFamily: 'var(--font-heading)',
                   }}
                 >
                   Pune Air Quality Network
                 </h3>
-                <p style={{ margin: 0, fontSize: '0.78rem', color: '#9eab93', lineHeight: 1.4 }}>
+                <p style={{ margin: 0, fontSize: '0.78rem', color: '#526b59', lineHeight: 1.4 }}>
                   Select any station on the map or from the list below to inspect localized telemetry outside the map.
                 </p>
               </div>
@@ -1029,45 +1042,45 @@ export const ExploreAirQuality: React.FC = () => {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <div
                   style={{
-                    padding: '10px 12px',
+                    padding: '10px 14px',
                     borderRadius: '12px',
-                    background: 'rgba(14, 20, 14, 0.7)',
-                    border: '1px solid rgba(163, 181, 147, 0.18)',
+                    background: 'rgba(240, 253, 244, 0.75)',
+                    border: '1px solid rgba(40, 122, 69, 0.18)',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
                   }}
                 >
-                  <span style={{ fontSize: '0.74rem', color: '#c9d3bf' }}>City Average PM2.5</span>
+                  <span style={{ fontSize: '0.76rem', color: '#526b59', fontWeight: 600 }}>City Average PM2.5</span>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
-                    <span style={{ fontSize: '1.25rem', fontWeight: 800, color: '#86efac' }}>
+                    <span style={{ fontSize: '1.25rem', fontWeight: 800, color: '#166534' }}>
                       {networkStats.avgPm25 ?? '--'}
                     </span>
-                    <span style={{ fontSize: '0.7rem', color: '#9eab93' }}>µg/m³</span>
+                    <span style={{ fontSize: '0.72rem', color: '#64748b' }}>µg/m³</span>
                   </div>
                 </div>
 
                 {networkStats.cleanest && (
                   <div
                     style={{
-                      padding: '10px 12px',
+                      padding: '10px 14px',
                       borderRadius: '12px',
-                      background: 'rgba(14, 20, 14, 0.7)',
-                      border: '1px solid rgba(163, 181, 147, 0.18)',
+                      background: 'rgba(240, 253, 244, 0.75)',
+                      border: '1px solid rgba(40, 122, 69, 0.18)',
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
                     }}
                   >
                     <div>
-                      <div style={{ fontSize: '0.66rem', color: '#4ade80', textTransform: 'uppercase', fontWeight: 700 }}>
+                      <div style={{ fontSize: '0.68rem', color: '#15803d', textTransform: 'uppercase', fontWeight: 700 }}>
                         Cleanest Monitored Locality
                       </div>
-                      <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#f4f6f0', marginTop: '2px' }}>
+                      <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#0d1710', marginTop: '2px' }}>
                         {networkStats.cleanest.station.station_name.split(',')[0]}
                       </div>
                     </div>
-                    <span style={{ fontSize: '0.9rem', fontWeight: 700, color: '#4ade80' }}>
+                    <span style={{ fontSize: '0.92rem', fontWeight: 800, color: '#15803d' }}>
                       {networkStats.cleanest.obs?.pm25?.toFixed(1)} µg/m³
                     </span>
                   </div>
@@ -1076,7 +1089,7 @@ export const ExploreAirQuality: React.FC = () => {
 
               {/* Station Quick Selector Cards */}
               <div>
-                <div style={{ fontSize: '0.72rem', color: '#9eab93', fontWeight: 700, textTransform: 'uppercase', marginBottom: '8px', letterSpacing: '0.04em' }}>
+                <div style={{ fontSize: '0.74rem', color: '#526b59', fontWeight: 700, textTransform: 'uppercase', marginBottom: '8px', letterSpacing: '0.04em' }}>
                   Monitoring Stations ({stations.length})
                 </div>
 
@@ -1097,10 +1110,11 @@ export const ExploreAirQuality: React.FC = () => {
                           justifyContent: 'space-between',
                           padding: '9px 12px',
                           borderRadius: '12px',
-                          background: 'rgba(14, 20, 14, 0.55)',
-                          border: '1px solid rgba(163, 181, 147, 0.15)',
+                          background: 'rgba(255, 255, 255, 0.95)',
+                          border: '1px solid rgba(40, 122, 69, 0.18)',
                           cursor: 'pointer',
                           transition: 'all 0.15s ease',
+                          boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
                         }}
                       >
                         <div>
@@ -1110,23 +1124,23 @@ export const ExploreAirQuality: React.FC = () => {
                                 width: '6px',
                                 height: '6px',
                                 borderRadius: '50%',
-                                background: catInfo?.color || '#a3b593',
+                                background: catInfo?.color || '#166534',
                               }}
                             />
-                            <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#f4f6f0' }}>
+                            <span style={{ fontSize: '0.82rem', fontWeight: 600, color: '#0d1710' }}>
                               {st.station_name.split(',')[0]}
                             </span>
                           </div>
-                          <div style={{ fontSize: '0.68rem', color: '#9eab93', marginTop: '1px' }}>
+                          <div style={{ fontSize: '0.7rem', color: '#64748b', marginTop: '1px' }}>
                             {st.zone_type.split('/')[0]}
                           </div>
                         </div>
 
                         <div style={{ textAlign: 'right' }}>
-                          <span style={{ fontSize: '0.85rem', fontWeight: 700, color: catInfo?.color || '#f4f6f0' }}>
+                          <span style={{ fontSize: '0.85rem', fontWeight: 700, color: catInfo?.color || '#0d1710' }}>
                             {pm25 !== null && pm25 !== undefined ? `${pm25.toFixed(1)}` : '--'}
                           </span>
-                          <span style={{ fontSize: '0.66rem', color: '#9eab93', marginLeft: '3px' }}>µg/m³</span>
+                          <span style={{ fontSize: '0.68rem', color: '#64748b', marginLeft: '3px' }}>µg/m³</span>
                         </div>
                       </div>
                     );
@@ -1137,18 +1151,18 @@ export const ExploreAirQuality: React.FC = () => {
               {/* Helpful Hint Pill */}
               <div
                 style={{
-                  padding: '8px 12px',
-                  borderRadius: '10px',
-                  background: 'rgba(143, 160, 126, 0.08)',
-                  border: '1px dashed rgba(163, 181, 147, 0.25)',
-                  fontSize: '0.72rem',
-                  color: '#c9d3bf',
+                  padding: '10px 14px',
+                  borderRadius: '12px',
+                  background: 'rgba(240, 253, 244, 0.8)',
+                  border: '1px dashed rgba(40, 122, 69, 0.3)',
+                  fontSize: '0.74rem',
+                  color: '#475e4e',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '6px',
+                  gap: '8px',
                 }}
               >
-                <CheckCircle2 size={13} color="#86efac" style={{ flexShrink: 0 }} />
+                <CheckCircle2 size={15} color="#166534" style={{ flexShrink: 0 }} />
                 <span>Click any station marker on the map to inspect full telemetry in this panel.</span>
               </div>
             </>
@@ -1159,27 +1173,29 @@ export const ExploreAirQuality: React.FC = () => {
       {/* 4. Full Neighborhood Comparison Table */}
       <div
         style={{
-          background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.88) 0%, rgba(18, 26, 17, 0.95) 100%)',
-          border: '1px solid rgba(163, 181, 147, 0.22)',
+          background: 'rgba(255, 255, 255, 0.95)',
+          border: '1px solid rgba(40, 122, 69, 0.18)',
           borderRadius: '24px',
           padding: '1.5rem 1.75rem',
-          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+          boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '8px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Activity size={18} color="#8fa07e" />
-              <h2 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: '#f4f6f0' }}>
+              <Activity size={18} color="#166534" />
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
                 Neighborhood Air Quality Comparison
               </h2>
             </div>
-            <div style={{ fontSize: '0.78rem', color: '#9eab93', marginTop: '2px' }}>
+            <div style={{ fontSize: '0.78rem', color: '#526b59', marginTop: '2px' }}>
               Compare current particulate levels across Pune and Pimpri-Chinchwad monitoring stations
             </div>
           </div>
 
-          <span style={{ fontSize: '0.76rem', color: '#a3b593' }}>
+          <span style={{ fontSize: '0.76rem', color: '#166534', fontWeight: 600 }}>
             Click any row to focus and inspect in the side inspector
           </span>
         </div>
@@ -1197,8 +1213,8 @@ export const ExploreAirQuality: React.FC = () => {
             <thead>
               <tr
                 style={{
-                  borderBottom: '1px solid rgba(163, 181, 147, 0.2)',
-                  color: '#9eab93',
+                  borderBottom: '1px solid rgba(40, 122, 69, 0.2)',
+                  color: '#526b59',
                   fontSize: '0.75rem',
                   textTransform: 'uppercase',
                   letterSpacing: '0.04em',
@@ -1226,37 +1242,37 @@ export const ExploreAirQuality: React.FC = () => {
                   <tr
                     key={st.station_id}
                     style={{
-                      borderBottom: '1px solid rgba(163, 181, 147, 0.1)',
-                      background: isSelected ? 'rgba(143, 160, 126, 0.15)' : 'transparent',
+                      borderBottom: '1px solid rgba(40, 122, 69, 0.12)',
+                      background: isSelected ? 'rgba(240, 253, 244, 0.85)' : 'transparent',
                       transition: 'background 0.15s ease',
                       cursor: 'pointer',
                     }}
                     onClick={() => handleSelectStation(st.station_id)}
                   >
-                    <td style={{ padding: '12px', fontWeight: 600, color: '#f4f6f0' }}>
+                    <td style={{ padding: '12px', fontWeight: 600, color: '#0d1710' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <span
                           style={{
                             width: '7px',
                             height: '7px',
                             borderRadius: '50%',
-                            backgroundColor: catInfo?.color || '#a3b593',
+                            backgroundColor: catInfo?.color || '#166534',
                           }}
                         />
                         <span>{st.station_name.split(',')[0]}</span>
                       </div>
-                      <div style={{ fontSize: '0.72rem', color: '#9eab93', marginTop: '1px' }}>{st.city}</div>
+                      <div style={{ fontSize: '0.72rem', color: '#64748b', marginTop: '1px' }}>{st.city}</div>
                     </td>
 
-                    <td style={{ padding: '12px', color: '#c9d3bf', fontSize: '0.78rem' }}>
+                    <td style={{ padding: '12px', color: '#334155', fontSize: '0.78rem' }}>
                       {st.zone_type.split('/')[0]}
                     </td>
 
-                    <td style={{ padding: '12px', fontWeight: 700, color: '#f4f6f0' }}>
+                    <td style={{ padding: '12px', fontWeight: 700, color: '#0d1710' }}>
                       {pm25Val !== null && pm25Val !== undefined ? `${pm25Val.toFixed(1)}` : 'Unavailable'}
                     </td>
 
-                    <td style={{ padding: '12px', color: '#c9d3bf' }}>
+                    <td style={{ padding: '12px', color: '#334155' }}>
                       {pm10Val !== null && pm10Val !== undefined ? `${pm10Val.toFixed(1)}` : 'Not monitored'}
                     </td>
 
@@ -1268,19 +1284,19 @@ export const ExploreAirQuality: React.FC = () => {
                             borderRadius: '6px',
                             fontSize: '11px',
                             fontWeight: 700,
-                            backgroundColor: `${catInfo.color}20`,
+                            backgroundColor: `${catInfo.color}18`,
                             color: catInfo.color,
-                            border: `1px solid ${catInfo.color}50`,
+                            border: `1px solid ${catInfo.color}40`,
                           }}
                         >
                           {catInfo.category} ({subAqi})
                         </span>
                       ) : (
-                        <span style={{ fontSize: '11px', color: '#9eab93' }}>Awaiting data</span>
+                        <span style={{ fontSize: '11px', color: '#64748b' }}>Awaiting data</span>
                       )}
                     </td>
 
-                    <td style={{ padding: '12px', fontSize: '0.76rem', color: '#a3b593' }}>
+                    <td style={{ padding: '12px', fontSize: '0.76rem', color: '#526b59' }}>
                       {obs?.data_provenance === 'OBSERVED' ? 'Measured' : 'Model'}
                     </td>
 
@@ -1294,12 +1310,13 @@ export const ExploreAirQuality: React.FC = () => {
                         style={{
                           padding: '5px 12px',
                           borderRadius: '8px',
-                          background: isSelected ? 'rgba(74, 222, 128, 0.2)' : 'rgba(143, 160, 126, 0.12)',
-                          border: isSelected ? '1px solid #4ade80' : '1px solid rgba(163, 181, 147, 0.25)',
-                          color: isSelected ? '#ffffff' : '#c9d3bf',
+                          background: isSelected ? '#166534' : 'rgba(255, 255, 255, 0.95)',
+                          border: isSelected ? '1px solid #166534' : '1px solid rgba(40, 122, 69, 0.25)',
+                          color: isSelected ? '#ffffff' : '#166534',
                           fontSize: '0.76rem',
                           fontWeight: 600,
                           cursor: 'pointer',
+                          boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
                         }}
                       >
                         {isSelected ? 'Selected' : 'Inspect'}

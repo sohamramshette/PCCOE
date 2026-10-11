@@ -483,7 +483,7 @@ export const MyPlaces: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '1.5rem', maxWidth: '1440px', margin: '0 auto', color: '#eef1e7' }}>
+    <div style={{ padding: '1.5rem', maxWidth: '1440px', margin: '0 auto', color: '#0f172a' }}>
       {/* 1. Header & Storage Information */}
       <div
         style={{
@@ -502,23 +502,24 @@ export const MyPlaces: React.FC = () => {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.35rem',
-                padding: '0.2rem 0.6rem',
+                padding: '0.25rem 0.65rem',
                 borderRadius: '6px',
-                background: 'rgba(163, 181, 147, 0.15)',
-                color: '#a3b593',
+                background: 'rgba(40, 122, 69, 0.1)',
+                border: '1px solid rgba(40, 122, 69, 0.25)',
+                color: '#166534',
                 fontSize: '0.75rem',
                 fontWeight: 600,
                 letterSpacing: '0.05em',
                 textTransform: 'uppercase',
               }}
             >
-              <Bookmark size={12} /> Resident Personal Space · Phase 8
+              <Bookmark size={12} color="#166534" /> Resident Personal Space · Phase 8
             </span>
           </div>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: 700, margin: '0 0 0.4rem 0', color: '#f1f5f9' }}>
+          <h1 style={{ fontSize: '1.85rem', fontWeight: 700, margin: '0 0 0.4rem 0', color: '#0d1710' }}>
             My Places &amp; Air Quality History
           </h1>
-          <p style={{ margin: 0, fontSize: '0.92rem', color: 'rgba(238, 241, 231, 0.7)', maxWidth: '780px' }}>
+          <p style={{ margin: 0, fontSize: '0.92rem', color: '#526b59', maxWidth: '780px', lineHeight: 1.5 }}>
             Save localities that matter to you across Pune and Pimpri-Chinchwad (such as your home, college campus, or
             workplace). Monitor continuous ground-truth pollution readings and explore genuine historical trends.
           </p>
@@ -533,12 +534,13 @@ export const MyPlaces: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '0.4rem',
-              padding: '0.55rem 0.9rem',
+              padding: '0.55rem 0.95rem',
               borderRadius: '8px',
-              border: '1px solid rgba(163, 181, 147, 0.3)',
-              background: 'rgba(26, 32, 22, 0.6)',
-              color: '#d1dbc7',
+              border: '1px solid rgba(40, 122, 69, 0.25)',
+              background: 'rgba(240, 253, 244, 0.85)',
+              color: '#166534',
               fontSize: '0.82rem',
+              fontWeight: 600,
               cursor: isRefreshing ? 'wait' : 'pointer',
               transition: 'all 0.15s ease',
             }}
@@ -554,15 +556,15 @@ export const MyPlaces: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '0.4rem',
-              padding: '0.55rem 1rem',
+              padding: '0.55rem 1.05rem',
               borderRadius: '8px',
-              border: '1px solid #758e5f',
-              background: 'linear-gradient(135deg, #445337 0%, #2f3b26 100%)',
+              border: '1px solid #15803d',
+              background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
               color: '#ffffff',
               fontSize: '0.82rem',
               fontWeight: 600,
               cursor: 'pointer',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
+              boxShadow: '0 4px 14px rgba(22, 101, 52, 0.25)',
               transition: 'all 0.15s ease',
             }}
           >
@@ -581,17 +583,18 @@ export const MyPlaces: React.FC = () => {
             justifyContent: 'space-between',
             flexWrap: 'wrap',
             gap: '0.75rem',
-            padding: '0.8rem 1rem',
-            borderRadius: '8px',
-            background: 'rgba(245, 158, 11, 0.12)',
-            border: '1px solid rgba(245, 158, 11, 0.35)',
+            padding: '0.85rem 1.1rem',
+            borderRadius: '10px',
+            background: 'rgba(254, 243, 199, 0.9)',
+            border: '1px solid rgba(245, 158, 11, 0.4)',
             fontSize: '0.82rem',
-            color: '#fcd34d',
+            color: '#92400e',
             marginBottom: '1.5rem',
+            boxShadow: '0 2px 8px rgba(146, 64, 14, 0.05)',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <AlertTriangle size={16} color="#fbbf24" style={{ flexShrink: 0 }} />
+            <AlertTriangle size={16} color="#d97706" style={{ flexShrink: 0 }} />
             <span>
               <strong>Storage Warning:</strong> {storageStatus.corruptedReason || 'Saved places data was malformed.'}
             </span>
@@ -601,9 +604,9 @@ export const MyPlaces: React.FC = () => {
             style={{
               padding: '0.35rem 0.85rem',
               borderRadius: '6px',
-              border: '1px solid rgba(245, 158, 11, 0.5)',
-              background: 'rgba(245, 158, 11, 0.2)',
-              color: '#ffffff',
+              border: '1px solid rgba(217, 119, 6, 0.4)',
+              background: '#fef3c7',
+              color: '#92400e',
               fontSize: '0.78rem',
               fontWeight: 600,
               cursor: 'pointer',
@@ -621,18 +624,19 @@ export const MyPlaces: React.FC = () => {
             flexWrap: 'wrap',
             gap: '0.75rem',
             padding: '0.75rem 1rem',
-            borderRadius: '8px',
-            background: 'rgba(26, 32, 22, 0.45)',
-            border: '1px solid rgba(163, 181, 147, 0.2)',
+            borderRadius: '10px',
+            background: 'rgba(240, 253, 244, 0.85)',
+            border: '1px solid rgba(40, 122, 69, 0.22)',
             fontSize: '0.82rem',
-            color: 'rgba(238, 241, 231, 0.75)',
+            color: '#284632',
             marginBottom: '1.75rem',
+            boxShadow: '0 2px 8px rgba(22, 38, 25, 0.04)',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Shield size={15} color="#a3b593" />
+            <Shield size={16} color="#166534" />
             <span>
-              <strong>Device-Local Storage:</strong> Your saved places are securely stored inside this browser
+              <strong style={{ color: '#166534' }}>Device-Local Storage:</strong> Your saved places are securely stored inside this browser
               (localStorage) and are not synchronized to remote cloud servers or shared with third parties.
             </span>
           </div>
@@ -642,8 +646,9 @@ export const MyPlaces: React.FC = () => {
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#a3b593',
+                color: '#15803d',
                 fontSize: '0.78rem',
+                fontWeight: 600,
                 textDecoration: 'underline',
                 cursor: 'pointer',
                 padding: 0,
@@ -662,15 +667,15 @@ export const MyPlaces: React.FC = () => {
             alignItems: 'center',
             gap: '0.5rem',
             padding: '0.8rem 1rem',
-            borderRadius: '8px',
-            background: 'rgba(239, 68, 68, 0.12)',
+            borderRadius: '10px',
+            background: 'rgba(254, 242, 242, 0.9)',
             border: '1px solid rgba(239, 68, 68, 0.35)',
-            color: '#fca5a5',
+            color: '#b91c1c',
             fontSize: '0.85rem',
             marginBottom: '1.5rem',
           }}
         >
-          <AlertCircle size={16} />
+          <AlertCircle size={16} color="#dc2626" />
           <span>{networkError}</span>
         </div>
       )}
@@ -688,13 +693,13 @@ export const MyPlaces: React.FC = () => {
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Bookmark size={18} color="#a3b593" />
-            <h2 style={{ fontSize: '1.2rem', fontWeight: 600, margin: 0, color: '#f1f5f9' }}>
+            <Bookmark size={18} color="#166534" />
+            <h2 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
               My Saved Places ({places.length})
             </h2>
           </div>
           {places.length > 0 && (
-            <span style={{ fontSize: '0.8rem', color: 'rgba(238, 241, 231, 0.6)' }}>
+            <span style={{ fontSize: '0.8rem', color: '#64748b' }}>
               Click &apos;Review History Trends&apos; on any card to examine historical observations below
             </span>
           )}
@@ -706,9 +711,11 @@ export const MyPlaces: React.FC = () => {
             style={{
               padding: '3rem 2rem',
               textAlign: 'center',
-              borderRadius: '12px',
-              border: '1px dashed rgba(163, 181, 147, 0.3)',
-              background: 'rgba(26, 32, 22, 0.3)',
+              borderRadius: '14px',
+              border: '1.5px dashed rgba(40, 122, 69, 0.3)',
+              background: 'rgba(255, 255, 255, 0.95)',
+              boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+              backdropFilter: 'blur(16px)',
             }}
           >
             <div
@@ -716,26 +723,27 @@ export const MyPlaces: React.FC = () => {
                 width: '56px',
                 height: '56px',
                 borderRadius: '50%',
-                background: 'rgba(163, 181, 147, 0.1)',
+                background: 'rgba(240, 253, 244, 0.9)',
+                border: '1px solid rgba(40, 122, 69, 0.2)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 margin: '0 auto 1rem auto',
-                color: '#a3b593',
+                color: '#166534',
               }}
             >
               <Bookmark size={26} />
             </div>
-            <h3 style={{ fontSize: '1.15rem', fontWeight: 600, margin: '0 0 0.5rem 0', color: '#f1f5f9' }}>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: '0 0 0.5rem 0', color: '#0d1710' }}>
               No Saved Places
             </h3>
             <p
               style={{
                 fontSize: '0.88rem',
-                color: 'rgba(238, 241, 231, 0.65)',
+                color: '#526b59',
                 maxWidth: '520px',
                 margin: '0 auto 1.5rem auto',
-                lineHeight: 1.5,
+                lineHeight: 1.55,
               }}
             >
               You have not saved any monitoring locations yet. Save places that matter to you — such as your home area,
@@ -748,14 +756,15 @@ export const MyPlaces: React.FC = () => {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.4rem',
-                  padding: '0.6rem 1.25rem',
+                  padding: '0.65rem 1.35rem',
                   borderRadius: '8px',
-                  border: '1px solid #758e5f',
-                  background: 'linear-gradient(135deg, #445337 0%, #2f3b26 100%)',
+                  border: '1px solid #15803d',
+                  background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
                   color: '#ffffff',
                   fontSize: '0.85rem',
                   fontWeight: 600,
                   cursor: 'pointer',
+                  boxShadow: '0 4px 14px rgba(22, 101, 52, 0.25)',
                 }}
               >
                 <Plus size={15} /> Add a Place
@@ -763,13 +772,15 @@ export const MyPlaces: React.FC = () => {
               <button
                 onClick={handleLoadSuggestedPresets}
                 style={{
-                  padding: '0.6rem 1rem',
+                  padding: '0.65rem 1.15rem',
                   borderRadius: '8px',
-                  border: '1px solid rgba(163, 181, 147, 0.3)',
-                  background: 'rgba(26, 32, 22, 0.6)',
-                  color: '#d1dbc7',
+                  border: '1px solid rgba(40, 122, 69, 0.25)',
+                  background: 'rgba(240, 253, 244, 0.85)',
+                  color: '#166534',
                   fontSize: '0.85rem',
+                  fontWeight: 600,
                   cursor: 'pointer',
+                  transition: 'all 0.15s ease',
                 }}
               >
                 Load Suggested Pune Places
@@ -797,18 +808,18 @@ export const MyPlaces: React.FC = () => {
                   style={{
                     borderRadius: '12px',
                     border: isSelected
-                      ? '1.5px solid #a3b593'
-                      : '1px solid rgba(163, 181, 147, 0.2)',
+                      ? '2px solid #166534'
+                      : '1px solid rgba(40, 122, 69, 0.18)',
                     background: isSelected
-                      ? 'linear-gradient(180deg, rgba(38, 48, 32, 0.75) 0%, rgba(26, 32, 22, 0.75) 100%)'
-                      : 'rgba(26, 32, 22, 0.55)',
+                      ? 'rgba(255, 255, 255, 0.98)'
+                      : 'rgba(255, 255, 255, 0.92)',
                     padding: '1.25rem',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
                     boxShadow: isSelected
-                      ? '0 6px 20px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(163, 181, 147, 0.2)'
-                      : '0 4px 12px rgba(0, 0, 0, 0.2)',
+                      ? '0 8px 24px rgba(22, 101, 52, 0.12)'
+                      : '0 4px 16px rgba(22, 38, 25, 0.04)',
                     transition: 'all 0.2s ease',
                     position: 'relative',
                   }}
@@ -829,7 +840,7 @@ export const MyPlaces: React.FC = () => {
                             display: 'inline-flex',
                             alignItems: 'center',
                             gap: '0.3rem',
-                            padding: '0.2rem 0.55rem',
+                            padding: '0.22rem 0.55rem',
                             borderRadius: '6px',
                             background: catBadge.bg,
                             border: `1px solid ${catBadge.border}`,
@@ -845,10 +856,11 @@ export const MyPlaces: React.FC = () => {
                         {isSelected && (
                           <span
                             style={{
-                              padding: '0.18rem 0.45rem',
+                              padding: '0.2rem 0.5rem',
                               borderRadius: '4px',
-                              background: 'rgba(163, 181, 147, 0.25)',
-                              color: '#d1dbc7',
+                              background: 'rgba(40, 122, 69, 0.12)',
+                              border: '1px solid rgba(40, 122, 69, 0.25)',
+                              color: '#166534',
                               fontSize: '0.68rem',
                               fontWeight: 600,
                               textTransform: 'uppercase',
@@ -869,7 +881,7 @@ export const MyPlaces: React.FC = () => {
                           style={{
                             background: 'none',
                             border: 'none',
-                            color: 'rgba(238, 241, 231, 0.5)',
+                            color: '#64748b',
                             cursor: 'pointer',
                             padding: '0.3rem',
                             borderRadius: '4px',
@@ -877,8 +889,8 @@ export const MyPlaces: React.FC = () => {
                             alignItems: 'center',
                             transition: 'color 0.15s ease',
                           }}
-                          onMouseEnter={(e) => (e.currentTarget.style.color = '#eef1e7')}
-                          onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(238, 241, 231, 0.5)')}
+                          onMouseEnter={(e) => (e.currentTarget.style.color = '#166534')}
+                          onMouseLeave={(e) => (e.currentTarget.style.color = '#64748b')}
                         >
                           <Edit3 size={14} />
                         </button>
@@ -889,7 +901,7 @@ export const MyPlaces: React.FC = () => {
                           style={{
                             background: 'none',
                             border: 'none',
-                            color: 'rgba(238, 241, 231, 0.5)',
+                            color: '#94a3b8',
                             cursor: 'pointer',
                             padding: '0.3rem',
                             borderRadius: '4px',
@@ -897,8 +909,8 @@ export const MyPlaces: React.FC = () => {
                             alignItems: 'center',
                             transition: 'color 0.15s ease',
                           }}
-                          onMouseEnter={(e) => (e.currentTarget.style.color = '#f87171')}
-                          onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(238, 241, 231, 0.5)')}
+                          onMouseEnter={(e) => (e.currentTarget.style.color = '#ef4444')}
+                          onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}
                         >
                           <Trash2 size={14} />
                         </button>
@@ -906,7 +918,7 @@ export const MyPlaces: React.FC = () => {
                     </div>
 
                     {/* Place Name & Locality */}
-                    <h3 style={{ fontSize: '1.2rem', fontWeight: 600, margin: '0 0 0.25rem 0', color: '#f8fafc' }}>
+                    <h3 style={{ fontSize: '1.2rem', fontWeight: 700, margin: '0 0 0.25rem 0', color: '#0d1710' }}>
                       {place.customName}
                     </h3>
                     <div
@@ -915,23 +927,23 @@ export const MyPlaces: React.FC = () => {
                         alignItems: 'center',
                         gap: '0.35rem',
                         fontSize: '0.8rem',
-                        color: 'rgba(238, 241, 231, 0.65)',
+                        color: '#526b59',
                         marginBottom: '0.75rem',
                       }}
                     >
-                      <MapPin size={13} color="#a3b593" style={{ flexShrink: 0 }} />
+                      <MapPin size={13} color="#166534" style={{ flexShrink: 0 }} />
                       <span>{place.localityName}</span>
                     </div>
 
                     {/* Associated Station Representation Note */}
                     <div
                       style={{
-                        padding: '0.45rem 0.65rem',
+                        padding: '0.5rem 0.7rem',
                         borderRadius: '6px',
-                        background: 'rgba(16, 20, 14, 0.5)',
-                        border: '1px solid rgba(163, 181, 147, 0.12)',
+                        background: 'rgba(240, 253, 244, 0.75)',
+                        border: '1px solid rgba(40, 122, 69, 0.18)',
                         fontSize: '0.75rem',
-                        color: 'rgba(238, 241, 231, 0.65)',
+                        color: '#284632',
                         marginBottom: '1rem',
                         lineHeight: 1.4,
                       }}
@@ -939,16 +951,16 @@ export const MyPlaces: React.FC = () => {
                       {place.stationId !== null ? (
                         place.isStationDirect ? (
                           <span>
-                            <strong>Continuous CAAQMS Station:</strong> {place.stationName} (Direct Sensor Site)
+                            <strong style={{ color: '#166534' }}>Continuous CAAQMS Station:</strong> {place.stationName} (Direct Sensor Site)
                           </span>
                         ) : (
                           <span>
-                            <strong>Representative Station:</strong> {place.stationName} (~{place.distanceKm} km away).
+                            <strong style={{ color: '#166534' }}>Representative Station:</strong> {place.stationName} (~{place.distanceKm} km away).
                             Reflects ambient regional air quality.
                           </span>
                         )
                       ) : (
-                        <span style={{ color: '#fbbf24' }}>
+                        <span style={{ color: '#d97706' }}>
                           <strong>No CAAQMS in Immediate Area:</strong> Air quality readings unavailable for this
                           specific location.
                         </span>
@@ -963,7 +975,7 @@ export const MyPlaces: React.FC = () => {
                             padding: '1rem',
                             textAlign: 'center',
                             fontSize: '0.8rem',
-                            color: 'rgba(238, 241, 231, 0.5)',
+                            color: '#64748b',
                           }}
                         >
                           Loading observation...
@@ -973,9 +985,10 @@ export const MyPlaces: React.FC = () => {
                           style={{
                             padding: '0.85rem',
                             borderRadius: '8px',
-                            background: 'rgba(16, 20, 14, 0.75)',
-                            border: `1px solid ${evalResult.particulateColor || '#a3b593'}35`,
+                            background: '#f8fafc',
+                            border: `1px solid ${evalResult.particulateColor ? evalResult.particulateColor + '40' : 'rgba(40, 122, 69, 0.2)'}`,
                             marginBottom: '1.15rem',
+                            boxShadow: '0 2px 6px rgba(0,0,0,0.02)',
                           }}
                         >
                           <div
@@ -990,8 +1003,9 @@ export const MyPlaces: React.FC = () => {
                               <span
                                 style={{
                                   fontSize: '0.72rem',
-                                  color: 'rgba(238, 241, 231, 0.55)',
+                                  color: '#64748b',
                                   textTransform: 'uppercase',
+                                  fontWeight: 600,
                                 }}
                               >
                                 Latest PM2.5
@@ -1001,13 +1015,13 @@ export const MyPlaces: React.FC = () => {
                                   style={{
                                     fontSize: '1.65rem',
                                     fontWeight: 700,
-                                    color: evalResult.particulateColor || '#eef1e7',
+                                    color: evalResult.particulateColor || '#0d1710',
                                     lineHeight: 1,
                                   }}
                                 >
                                   {obs.pm25}
                                 </span>
-                                <span style={{ fontSize: '0.75rem', color: 'rgba(238, 241, 231, 0.5)' }}>
+                                <span style={{ fontSize: '0.75rem', color: '#64748b' }}>
                                   µg/m³
                                 </span>
                               </div>
@@ -1020,9 +1034,9 @@ export const MyPlaces: React.FC = () => {
                                   display: 'inline-block',
                                   padding: '0.25rem 0.6rem',
                                   borderRadius: '6px',
-                                  background: `${evalResult.particulateColor || '#a3b593'}20`,
-                                  border: `1px solid ${evalResult.particulateColor || '#a3b593'}50`,
-                                  color: evalResult.particulateColor || '#eef1e7',
+                                  background: `${evalResult.particulateColor || '#166534'}15`,
+                                  border: `1px solid ${evalResult.particulateColor || '#166534'}40`,
+                                  color: evalResult.particulateColor || '#166534',
                                   fontSize: '0.78rem',
                                   fontWeight: 600,
                                 }}
@@ -1032,7 +1046,7 @@ export const MyPlaces: React.FC = () => {
                               <div
                                 style={{
                                   fontSize: '0.7rem',
-                                  color: 'rgba(238, 241, 231, 0.5)',
+                                  color: '#64748b',
                                   marginTop: '0.2rem',
                                 }}
                               >
@@ -1048,8 +1062,8 @@ export const MyPlaces: React.FC = () => {
                               alignItems: 'center',
                               justifyContent: 'space-between',
                               fontSize: '0.73rem',
-                              color: 'rgba(238, 241, 231, 0.55)',
-                              borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+                              color: '#64748b',
+                              borderTop: '1px solid rgba(40, 122, 69, 0.12)',
                               paddingTop: '0.45rem',
                               marginTop: '0.45rem',
                             }}
@@ -1058,7 +1072,7 @@ export const MyPlaces: React.FC = () => {
                               PM10: {obs.pm10 !== null && obs.pm10 !== undefined ? `${obs.pm10} µg/m³` : 'Not reported'}
                             </span>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                              <Clock size={11} />
+                              <Clock size={11} color="#64748b" />
                               {formatRelativeTime(obs.datetime_utc)}
                             </span>
                           </div>
@@ -1068,11 +1082,11 @@ export const MyPlaces: React.FC = () => {
                           style={{
                             padding: '0.85rem',
                             borderRadius: '8px',
-                            background: 'rgba(16, 20, 14, 0.6)',
-                            border: '1px solid rgba(255, 255, 255, 0.07)',
+                            background: 'rgba(240, 253, 244, 0.5)',
+                            border: '1px solid rgba(40, 122, 69, 0.15)',
                             marginBottom: '1.15rem',
                             fontSize: '0.78rem',
-                            color: 'rgba(238, 241, 231, 0.6)',
+                            color: '#526b59',
                             textAlign: 'center',
                           }}
                         >
@@ -1088,11 +1102,11 @@ export const MyPlaces: React.FC = () => {
                         style={{
                           padding: '0.85rem',
                           borderRadius: '8px',
-                          background: 'rgba(16, 20, 14, 0.6)',
-                          border: '1px solid rgba(255, 255, 255, 0.07)',
+                          background: 'rgba(240, 253, 244, 0.5)',
+                          border: '1px solid rgba(40, 122, 69, 0.15)',
                           marginBottom: '1.15rem',
                           fontSize: '0.78rem',
-                          color: 'rgba(238, 241, 231, 0.6)',
+                          color: '#526b59',
                           textAlign: 'center',
                         }}
                       >
@@ -1121,12 +1135,13 @@ export const MyPlaces: React.FC = () => {
                           gap: '0.35rem',
                           padding: '0.55rem 0.75rem',
                           borderRadius: '8px',
-                          border: '1px solid #758e5f',
-                          background: 'linear-gradient(135deg, #445337 0%, #2f3b26 100%)',
+                          border: '1px solid #15803d',
+                          background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
                           color: '#ffffff',
                           fontSize: '0.8rem',
                           fontWeight: 600,
                           cursor: 'pointer',
+                          boxShadow: '0 3px 10px rgba(22, 101, 52, 0.2)',
                           transition: 'all 0.15s ease',
                         }}
                         title="Open this location in Explore Air Quality"
@@ -1151,15 +1166,16 @@ export const MyPlaces: React.FC = () => {
                           padding: '0.55rem 0.75rem',
                           borderRadius: '8px',
                           border: isSelected
-                            ? '1px solid #a3b593'
-                            : '1px solid rgba(163, 181, 147, 0.3)',
+                            ? '1px solid #166534'
+                            : '1px solid rgba(40, 122, 69, 0.25)',
                           background: isSelected
-                            ? 'rgba(163, 181, 147, 0.2)'
-                            : 'rgba(26, 32, 22, 0.6)',
-                          color: isSelected ? '#ffffff' : '#d1dbc7',
+                            ? '#166534'
+                            : 'rgba(240, 253, 244, 0.85)',
+                          color: isSelected ? '#ffffff' : '#166534',
                           fontSize: '0.8rem',
-                          fontWeight: isSelected ? 600 : 500,
+                          fontWeight: 600,
                           cursor: 'pointer',
+                          boxShadow: isSelected ? '0 3px 10px rgba(22, 101, 52, 0.2)' : 'none',
                           transition: 'all 0.15s ease',
                         }}
                         title="Display historical air quality trends below"
@@ -1175,7 +1191,7 @@ export const MyPlaces: React.FC = () => {
                         style={{
                           display: 'flex',
                           justifyContent: 'space-between',
-                          borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+                          borderTop: '1px solid rgba(40, 122, 69, 0.12)',
                           paddingTop: '0.45rem',
                           fontSize: '0.74rem',
                         }}
@@ -1185,7 +1201,8 @@ export const MyPlaces: React.FC = () => {
                           style={{
                             background: 'none',
                             border: 'none',
-                            color: '#a3b593',
+                            color: '#15803d',
+                            fontWeight: 600,
                             cursor: 'pointer',
                             padding: 0,
                             display: 'flex',
@@ -1200,7 +1217,8 @@ export const MyPlaces: React.FC = () => {
                           style={{
                             background: 'none',
                             border: 'none',
-                            color: '#a3b593',
+                            color: '#15803d',
+                            fontWeight: 600,
                             cursor: 'pointer',
                             padding: 0,
                             display: 'flex',
@@ -1227,9 +1245,11 @@ export const MyPlaces: React.FC = () => {
         <div
           id="history-section"
           style={{
-            borderRadius: '12px',
-            border: '1px solid rgba(163, 181, 147, 0.25)',
-            background: 'rgba(26, 32, 22, 0.65)',
+            borderRadius: '14px',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
+            background: 'rgba(255, 255, 255, 0.95)',
+            boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
+            backdropFilter: 'blur(16px)',
             padding: '1.75rem',
             marginBottom: '2.5rem',
           }}
@@ -1243,18 +1263,18 @@ export const MyPlaces: React.FC = () => {
               justifyContent: 'space-between',
               gap: '1rem',
               marginBottom: '1.25rem',
-              borderBottom: '1px solid rgba(163, 181, 147, 0.15)',
+              borderBottom: '1px solid rgba(40, 122, 69, 0.12)',
               paddingBottom: '1rem',
             }}
           >
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-                <TrendingUp size={18} color="#a3b593" />
-                <h2 style={{ fontSize: '1.3rem', fontWeight: 600, margin: 0, color: '#f1f5f9' }}>
+                <TrendingUp size={18} color="#166534" />
+                <h2 style={{ fontSize: '1.3rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
                   Air Quality History: {selectedPlace.customName}
                 </h2>
               </div>
-              <div style={{ fontSize: '0.82rem', color: 'rgba(238, 241, 231, 0.65)' }}>
+              <div style={{ fontSize: '0.82rem', color: '#526b59' }}>
                 {selectedPlace.stationId !== null ? (
                   <span>
                     Ground-truth records from <strong>{selectedPlace.stationName}</strong>
@@ -1270,10 +1290,10 @@ export const MyPlaces: React.FC = () => {
             <div
               style={{
                 display: 'inline-flex',
-                background: 'rgba(16, 20, 14, 0.6)',
+                background: 'rgba(240, 253, 244, 0.85)',
                 padding: '0.25rem',
                 borderRadius: '8px',
-                border: '1px solid rgba(163, 181, 147, 0.2)',
+                border: '1px solid rgba(40, 122, 69, 0.2)',
               }}
             >
               {TIME_RANGES.map((r) => {
@@ -1286,11 +1306,12 @@ export const MyPlaces: React.FC = () => {
                       padding: '0.45rem 0.85rem',
                       borderRadius: '6px',
                       border: 'none',
-                      background: isActive ? '#445337' : 'transparent',
-                      color: isActive ? '#ffffff' : 'rgba(238, 241, 231, 0.7)',
+                      background: isActive ? '#166534' : 'transparent',
+                      color: isActive ? '#ffffff' : '#475e4e',
                       fontSize: '0.8rem',
                       fontWeight: isActive ? 600 : 500,
                       cursor: 'pointer',
+                      boxShadow: isActive ? '0 2px 6px rgba(22, 101, 52, 0.25)' : 'none',
                       transition: 'all 0.15s ease',
                     }}
                   >
@@ -1306,18 +1327,18 @@ export const MyPlaces: React.FC = () => {
             style={{
               padding: '0.75rem 1rem',
               borderRadius: '8px',
-              background: 'rgba(16, 20, 14, 0.5)',
-              border: '1px solid rgba(163, 181, 147, 0.15)',
+              background: 'rgba(240, 253, 244, 0.75)',
+              border: '1px solid rgba(40, 122, 69, 0.2)',
               fontSize: '0.78rem',
-              color: 'rgba(238, 241, 231, 0.7)',
+              color: '#284632',
               lineHeight: 1.5,
               marginBottom: '1.5rem',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-              <Info size={15} color="#a3b593" style={{ flexShrink: 0, marginTop: '2px' }} />
+              <Info size={15} color="#166534" style={{ flexShrink: 0, marginTop: '2px' }} />
               <div>
-                <strong>Honest Sensor Context:</strong> The historical measurements charted below reflect continuous
+                <strong style={{ color: '#166534' }}>Honest Sensor Context:</strong> The historical measurements charted below reflect continuous
                 ambient air quality recorded at the regional monitoring station (
                 {selectedPlace.stationName || 'CAAQMS Site'}). Ambient station records capture macro atmospheric
                 conditions across Pune and Pimpri-Chinchwad, but do not imply identical microclimate readings inside
@@ -1332,9 +1353,9 @@ export const MyPlaces: React.FC = () => {
               style={{
                 padding: '0.8rem 1rem',
                 borderRadius: '8px',
-                background: 'rgba(239, 68, 68, 0.1)',
+                background: 'rgba(254, 242, 242, 0.9)',
                 border: '1px solid rgba(239, 68, 68, 0.3)',
-                color: '#fca5a5',
+                color: '#b91c1c',
                 fontSize: '0.82rem',
                 marginBottom: '1.25rem',
               }}
@@ -1356,27 +1377,29 @@ export const MyPlaces: React.FC = () => {
             <div
               style={{
                 padding: '1rem',
-                borderRadius: '8px',
-                background: 'rgba(16, 20, 14, 0.65)',
-                border: '1px solid rgba(163, 181, 147, 0.15)',
+                borderRadius: '10px',
+                background: '#ffffff',
+                border: '1px solid rgba(40, 122, 69, 0.15)',
+                boxShadow: '0 2px 8px rgba(22, 38, 25, 0.03)',
               }}
             >
               <span
                 style={{
                   fontSize: '0.72rem',
-                  color: 'rgba(238, 241, 231, 0.55)',
+                  color: '#64748b',
                   textTransform: 'uppercase',
+                  fontWeight: 600,
                 }}
               >
                 Period Average PM2.5
               </span>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.3rem', margin: '0.25rem 0' }}>
-                <span style={{ fontSize: '1.6rem', fontWeight: 700, color: '#f1f5f9' }}>
+                <span style={{ fontSize: '1.6rem', fontWeight: 700, color: '#0d1710' }}>
                   {historySummary.averagePm25 !== null ? historySummary.averagePm25 : '—'}
                 </span>
-                <span style={{ fontSize: '0.75rem', color: 'rgba(238, 241, 231, 0.5)' }}>µg/m³</span>
+                <span style={{ fontSize: '0.75rem', color: '#64748b' }}>µg/m³</span>
               </div>
-              <div style={{ fontSize: '0.7rem', color: 'rgba(238, 241, 231, 0.5)' }}>
+              <div style={{ fontSize: '0.7rem', color: '#64748b' }}>
                 Arithmetic mean across {historySummary.validCount} valid measurements
               </div>
             </div>
@@ -1385,27 +1408,29 @@ export const MyPlaces: React.FC = () => {
             <div
               style={{
                 padding: '1rem',
-                borderRadius: '8px',
-                background: 'rgba(16, 20, 14, 0.65)',
-                border: '1px solid rgba(163, 181, 147, 0.15)',
+                borderRadius: '10px',
+                background: '#ffffff',
+                border: '1px solid rgba(40, 122, 69, 0.15)',
+                boxShadow: '0 2px 8px rgba(22, 38, 25, 0.03)',
               }}
             >
               <span
                 style={{
                   fontSize: '0.72rem',
-                  color: 'rgba(238, 241, 231, 0.55)',
+                  color: '#64748b',
                   textTransform: 'uppercase',
+                  fontWeight: 600,
                 }}
               >
                 Highest Recorded PM2.5
               </span>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.3rem', margin: '0.25rem 0' }}>
-                <span style={{ fontSize: '1.6rem', fontWeight: 700, color: '#fb923c' }}>
+                <span style={{ fontSize: '1.6rem', fontWeight: 700, color: '#ea580c' }}>
                   {historySummary.highestPm25 ? historySummary.highestPm25.value : '—'}
                 </span>
-                <span style={{ fontSize: '0.75rem', color: 'rgba(238, 241, 231, 0.5)' }}>µg/m³</span>
+                <span style={{ fontSize: '0.75rem', color: '#64748b' }}>µg/m³</span>
               </div>
-              <div style={{ fontSize: '0.7rem', color: 'rgba(238, 241, 231, 0.5)' }}>
+              <div style={{ fontSize: '0.7rem', color: '#64748b' }}>
                 {historySummary.highestPm25
                   ? formatLocalIST(historySummary.highestPm25.timestampIst)
                   : 'No valid data'}
@@ -1416,27 +1441,29 @@ export const MyPlaces: React.FC = () => {
             <div
               style={{
                 padding: '1rem',
-                borderRadius: '8px',
-                background: 'rgba(16, 20, 14, 0.65)',
-                border: '1px solid rgba(163, 181, 147, 0.15)',
+                borderRadius: '10px',
+                background: '#ffffff',
+                border: '1px solid rgba(40, 122, 69, 0.15)',
+                boxShadow: '0 2px 8px rgba(22, 38, 25, 0.03)',
               }}
             >
               <span
                 style={{
                   fontSize: '0.72rem',
-                  color: 'rgba(238, 241, 231, 0.55)',
+                  color: '#64748b',
                   textTransform: 'uppercase',
+                  fontWeight: 600,
                 }}
               >
                 Lowest Recorded PM2.5
               </span>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.3rem', margin: '0.25rem 0' }}>
-                <span style={{ fontSize: '1.6rem', fontWeight: 700, color: '#86efac' }}>
+                <span style={{ fontSize: '1.6rem', fontWeight: 700, color: '#16a34a' }}>
                   {historySummary.lowestPm25 ? historySummary.lowestPm25.value : '—'}
                 </span>
-                <span style={{ fontSize: '0.75rem', color: 'rgba(238, 241, 231, 0.5)' }}>µg/m³</span>
+                <span style={{ fontSize: '0.75rem', color: '#64748b' }}>µg/m³</span>
               </div>
-              <div style={{ fontSize: '0.7rem', color: 'rgba(238, 241, 231, 0.5)' }}>
+              <div style={{ fontSize: '0.7rem', color: '#64748b' }}>
                 {historySummary.lowestPm25
                   ? formatLocalIST(historySummary.lowestPm25.timestampIst)
                   : 'No valid data'}
@@ -1447,29 +1474,31 @@ export const MyPlaces: React.FC = () => {
             <div
               style={{
                 padding: '1rem',
-                borderRadius: '8px',
-                background: 'rgba(16, 20, 14, 0.65)',
-                border: '1px solid rgba(163, 181, 147, 0.15)',
+                borderRadius: '10px',
+                background: '#ffffff',
+                border: '1px solid rgba(40, 122, 69, 0.15)',
+                boxShadow: '0 2px 8px rgba(22, 38, 25, 0.03)',
               }}
             >
               <span
                 style={{
                   fontSize: '0.72rem',
-                  color: 'rgba(238, 241, 231, 0.55)',
+                  color: '#64748b',
                   textTransform: 'uppercase',
+                  fontWeight: 600,
                 }}
               >
                 Observation Coverage
               </span>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.3rem', margin: '0.25rem 0' }}>
-                <span style={{ fontSize: '1.6rem', fontWeight: 700, color: '#a3b593' }}>
+                <span style={{ fontSize: '1.6rem', fontWeight: 700, color: '#166534' }}>
                   {historySummary.completenessPct}%
                 </span>
-                <span style={{ fontSize: '0.75rem', color: 'rgba(238, 241, 231, 0.5)' }}>
+                <span style={{ fontSize: '0.75rem', color: '#64748b' }}>
                   ({historySummary.validCount}/{activeRangeConfig.expectedHourlySlots} hrs)
                 </span>
               </div>
-              <div style={{ fontSize: '0.7rem', color: 'rgba(238, 241, 231, 0.5)' }}>
+              <div style={{ fontSize: '0.7rem', color: '#64748b' }}>
                 {historySummary.isSparse
                   ? historySummary.sparseReason
                   : 'Valid measurements across available hours'}
@@ -1481,9 +1510,10 @@ export const MyPlaces: React.FC = () => {
           <div
             style={{
               padding: '1.25rem',
-              borderRadius: '8px',
-              background: 'rgba(16, 20, 14, 0.85)',
-              border: '1px solid rgba(163, 181, 147, 0.15)',
+              borderRadius: '10px',
+              background: '#ffffff',
+              border: '1px solid rgba(40, 122, 69, 0.18)',
+              boxShadow: '0 2px 12px rgba(22, 38, 25, 0.04)',
             }}
           >
             <div
@@ -1497,24 +1527,24 @@ export const MyPlaces: React.FC = () => {
               }}
             >
               <div>
-                <span style={{ fontSize: '0.9rem', fontWeight: 600, color: '#f1f5f9' }}>
+                <span style={{ fontSize: '0.9rem', fontWeight: 700, color: '#0d1710' }}>
                   PM2.5 Concentration Trend (µg/m³) — {activeRangeConfig.label}
                 </span>
-                <span style={{ fontSize: '0.75rem', color: 'rgba(238, 241, 231, 0.5)', marginLeft: '0.5rem' }}>
+                <span style={{ fontSize: '0.75rem', color: '#64748b', marginLeft: '0.5rem' }}>
                   CPCB Thresholds: Satisfactory (60 µg/m³), Moderate (90 µg/m³)
                 </span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.75rem' }}>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#86efac' }}>
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#86efac' }} />
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#16a34a', fontWeight: 600 }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#16a34a' }} />
                   Good &le;30
                 </span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#a3b593' }}>
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#a3b593' }} />
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#0d9488', fontWeight: 600 }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#0d9488' }} />
                   Satisfactory &le;60
                 </span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#facc15' }}>
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#facc15' }} />
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', color: '#d97706', fontWeight: 600 }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#d97706' }} />
                   Moderate &le;90
                 </span>
               </div>
@@ -1527,7 +1557,7 @@ export const MyPlaces: React.FC = () => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: 'rgba(238, 241, 231, 0.5)',
+                  color: '#64748b',
                   fontSize: '0.85rem',
                 }}
               >
@@ -1542,15 +1572,15 @@ export const MyPlaces: React.FC = () => {
                   justifyContent: 'center',
                   flexDirection: 'column',
                   gap: '0.5rem',
-                  color: 'rgba(238, 241, 231, 0.6)',
+                  color: '#64748b',
                   fontSize: '0.85rem',
                   textAlign: 'center',
                   padding: '1.5rem',
                 }}
               >
-                <Info size={22} color="#a3b593" />
-                <span>No observations recorded at this station within the selected {activeRangeConfig.label} window.</span>
-                <span style={{ fontSize: '0.78rem', color: 'rgba(238, 241, 231, 0.45)' }}>
+                <Info size={22} color="#166534" />
+                <span style={{ fontWeight: 600, color: '#0d1710' }}>No observations recorded at this station within the selected {activeRangeConfig.label} window.</span>
+                <span style={{ fontSize: '0.78rem', color: '#64748b' }}>
                   Station sensor maintenance or power downtime occurred during this interval. No artificial points are fabricated.
                 </span>
               </div>
@@ -1560,21 +1590,21 @@ export const MyPlaces: React.FC = () => {
                   <AreaChart data={chartData} margin={{ top: 10, right: 15, left: -10, bottom: 0 }}>
                     <defs>
                       <linearGradient id="historyPm25Gradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#a3b593" stopOpacity={0.4} />
-                        <stop offset="95%" stopColor="#a3b593" stopOpacity={0.02} />
+                        <stop offset="5%" stopColor="#166534" stopOpacity={0.25} />
+                        <stop offset="95%" stopColor="#166534" stopOpacity={0.02} />
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.06)" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(40, 122, 69, 0.12)" />
                     <XAxis
                       dataKey="timeLabel"
-                      stroke="rgba(238, 241, 231, 0.4)"
-                      tick={{ fontSize: 11, fill: 'rgba(238, 241, 231, 0.5)' }}
+                      stroke="#64748b"
+                      tick={{ fontSize: 11, fill: '#64748b' }}
                       tickLine={false}
                       minTickGap={timeRange === '30d' ? 45 : 25}
                     />
                     <YAxis
-                      stroke="rgba(238, 241, 231, 0.4)"
-                      tick={{ fontSize: 11, fill: 'rgba(238, 241, 231, 0.5)' }}
+                      stroke="#64748b"
+                      tick={{ fontSize: 11, fill: '#64748b' }}
                       tickLine={false}
                       domain={[0, 'auto']}
                     />
@@ -1585,38 +1615,38 @@ export const MyPlaces: React.FC = () => {
                           return (
                             <div
                               style={{
-                                background: '#1c2418',
-                                border: '1px solid rgba(163, 181, 147, 0.4)',
+                                background: '#ffffff',
+                                border: '1px solid rgba(40, 122, 69, 0.25)',
                                 borderRadius: '8px',
                                 padding: '0.65rem 0.85rem',
-                                color: '#eef1e7',
+                                color: '#0f172a',
                                 fontSize: '0.78rem',
-                                boxShadow: '0 4px 14px rgba(0,0,0,0.4)',
+                                boxShadow: '0 6px 20px rgba(22, 38, 25, 0.12)',
                               }}
                             >
-                              <div style={{ color: 'rgba(238, 241, 231, 0.6)', marginBottom: '0.25rem' }}>
+                              <div style={{ color: '#64748b', marginBottom: '0.25rem' }}>
                                 {formatLocalIST(data.timestamp)}
                               </div>
                               <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.35rem' }}>
                                 <span style={{ fontSize: '1.2rem', fontWeight: 700, color: data.color }}>
                                   {data.pm25 !== null ? data.pm25 : 'Missing / Offline'}
                                 </span>
-                                <span style={{ color: 'rgba(238, 241, 231, 0.6)' }}>µg/m³ PM2.5</span>
+                                <span style={{ color: '#64748b' }}>µg/m³ PM2.5</span>
                               </div>
                               <div style={{ color: data.color, fontWeight: 600, marginTop: '0.2rem' }}>
                                 {data.category}
                               </div>
                               {data.pm10 !== null && (
-                                <div style={{ color: 'rgba(238, 241, 231, 0.6)', marginTop: '0.2rem' }}>
+                                <div style={{ color: '#64748b', marginTop: '0.2rem' }}>
                                   PM10: {data.pm10} µg/m³
                                 </div>
                               )}
                               <div
                                 style={{
                                   fontSize: '0.68rem',
-                                  color: 'rgba(238, 241, 231, 0.4)',
+                                  color: '#94a3b8',
                                   marginTop: '0.35rem',
-                                  borderTop: '1px solid rgba(255,255,255,0.06)',
+                                  borderTop: '1px solid rgba(40, 122, 69, 0.12)',
                                   paddingTop: '0.25rem',
                                 }}
                               >
@@ -1630,22 +1660,22 @@ export const MyPlaces: React.FC = () => {
                     />
                     <ReferenceLine
                       y={60}
-                      stroke="rgba(163, 181, 147, 0.5)"
+                      stroke="rgba(40, 122, 69, 0.5)"
                       strokeDasharray="4 4"
                       label={{
                         value: 'Satisfactory (60)',
-                        fill: 'rgba(163, 181, 147, 0.7)',
+                        fill: '#166534',
                         fontSize: 10,
                         position: 'insideTopRight',
                       }}
                     />
                     <ReferenceLine
                       y={90}
-                      stroke="rgba(250, 204, 21, 0.5)"
+                      stroke="rgba(217, 119, 6, 0.5)"
                       strokeDasharray="4 4"
                       label={{
                         value: 'Moderate (90)',
-                        fill: 'rgba(250, 204, 21, 0.7)',
+                        fill: '#d97706',
                         fontSize: 10,
                         position: 'insideTopRight',
                       }}
@@ -1653,7 +1683,7 @@ export const MyPlaces: React.FC = () => {
                     <Area
                       type="monotone"
                       dataKey="pm25"
-                      stroke="#a3b593"
+                      stroke="#166534"
                       strokeWidth={2}
                       fillOpacity={1}
                       fill="url(#historyPm25Gradient)"
@@ -1672,8 +1702,8 @@ export const MyPlaces: React.FC = () => {
       ========================================================================= */}
       <div style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
-          <Compass size={18} color="#a3b593" />
-          <h2 style={{ fontSize: '1.2rem', fontWeight: 600, margin: 0, color: '#f1f5f9' }}>
+          <Compass size={18} color="#166534" />
+          <h2 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
             Quick Access to Saved Locations
           </h2>
         </div>
@@ -1688,10 +1718,11 @@ export const MyPlaces: React.FC = () => {
           {/* Card 1: Explore on Pune Twin Map */}
           <div
             style={{
-              padding: '1.25rem',
-              borderRadius: '10px',
-              border: '1px solid rgba(163, 181, 147, 0.2)',
-              background: 'rgba(26, 32, 22, 0.55)',
+              padding: '1.35rem',
+              borderRadius: '12px',
+              border: '1px solid rgba(40, 122, 69, 0.18)',
+              background: 'rgba(255, 255, 255, 0.95)',
+              boxShadow: '0 4px 18px rgba(22, 38, 25, 0.05)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -1699,16 +1730,16 @@ export const MyPlaces: React.FC = () => {
           >
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.5rem' }}>
-                <MapPin size={16} color="#a3b593" />
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 600, margin: 0, color: '#f1f5f9' }}>
+                <MapPin size={16} color="#166534" />
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
                   Explore on Pune Digital Twin Map
                 </h3>
               </div>
               <p
                 style={{
-                  fontSize: '0.82rem',
-                  color: 'rgba(238, 241, 231, 0.65)',
-                  margin: '0 0 1rem 0',
+                  fontSize: '0.85rem',
+                  color: '#526b59',
+                  margin: '0 0 1.25rem 0',
                   lineHeight: 1.5,
                 }}
               >
@@ -1729,14 +1760,15 @@ export const MyPlaces: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '0.4rem',
-                padding: '0.6rem 1rem',
+                padding: '0.65rem 1rem',
                 borderRadius: '8px',
-                border: '1px solid rgba(163, 181, 147, 0.3)',
-                background: 'rgba(163, 181, 147, 0.12)',
-                color: '#d1dbc7',
+                border: '1px solid rgba(40, 122, 69, 0.25)',
+                background: 'rgba(240, 253, 244, 0.85)',
+                color: '#166534',
                 fontSize: '0.82rem',
                 fontWeight: 600,
                 cursor: 'pointer',
+                transition: 'all 0.15s ease',
               }}
             >
               <span>Open in Explore Air Quality</span>
@@ -1747,10 +1779,11 @@ export const MyPlaces: React.FC = () => {
           {/* Card 2: Next-Hour Forecast & Activity Guidance */}
           <div
             style={{
-              padding: '1.25rem',
-              borderRadius: '10px',
-              border: '1px solid rgba(163, 181, 147, 0.2)',
-              background: 'rgba(26, 32, 22, 0.55)',
+              padding: '1.35rem',
+              borderRadius: '12px',
+              border: '1px solid rgba(40, 122, 69, 0.18)',
+              background: 'rgba(255, 255, 255, 0.95)',
+              boxShadow: '0 4px 18px rgba(22, 38, 25, 0.05)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -1758,16 +1791,16 @@ export const MyPlaces: React.FC = () => {
           >
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.5rem' }}>
-                <TrendingUp size={16} color="#a3b593" />
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 600, margin: 0, color: '#f1f5f9' }}>
+                <TrendingUp size={16} color="#166534" />
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
                   24-Hour Forecast &amp; Activity Guidance
                 </h3>
               </div>
               <p
                 style={{
-                  fontSize: '0.82rem',
-                  color: 'rgba(238, 241, 231, 0.65)',
-                  margin: '0 0 1rem 0',
+                  fontSize: '0.85rem',
+                  color: '#526b59',
+                  margin: '0 0 1.25rem 0',
                   lineHeight: 1.5,
                 }}
               >
@@ -1788,14 +1821,15 @@ export const MyPlaces: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '0.4rem',
-                padding: '0.6rem 1rem',
+                padding: '0.65rem 1rem',
                 borderRadius: '8px',
-                border: '1px solid rgba(163, 181, 147, 0.3)',
-                background: 'rgba(163, 181, 147, 0.12)',
-                color: '#d1dbc7',
+                border: '1px solid rgba(40, 122, 69, 0.25)',
+                background: 'rgba(240, 253, 244, 0.85)',
+                color: '#166534',
                 fontSize: '0.82rem',
                 fontWeight: 600,
                 cursor: 'pointer',
+                transition: 'all 0.15s ease',
               }}
             >
               <span>Open Activity Guidance</span>
@@ -1806,10 +1840,11 @@ export const MyPlaces: React.FC = () => {
           {/* Card 3: Personal Alert Thresholds */}
           <div
             style={{
-              padding: '1.25rem',
-              borderRadius: '10px',
-              border: '1px solid rgba(163, 181, 147, 0.2)',
-              background: 'rgba(26, 32, 22, 0.55)',
+              padding: '1.35rem',
+              borderRadius: '12px',
+              border: '1px solid rgba(40, 122, 69, 0.18)',
+              background: 'rgba(255, 255, 255, 0.95)',
+              boxShadow: '0 4px 18px rgba(22, 38, 25, 0.05)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -1817,16 +1852,16 @@ export const MyPlaces: React.FC = () => {
           >
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.5rem' }}>
-                <Bell size={16} color="#a3b593" />
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 600, margin: 0, color: '#f1f5f9' }}>
+                <Bell size={16} color="#166534" />
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
                   Configure Personal Alerts
                 </h3>
               </div>
               <p
                 style={{
-                  fontSize: '0.82rem',
-                  color: 'rgba(238, 241, 231, 0.65)',
-                  margin: '0 0 1rem 0',
+                  fontSize: '0.85rem',
+                  color: '#526b59',
+                  margin: '0 0 1.25rem 0',
                   lineHeight: 1.5,
                 }}
               >
@@ -1847,14 +1882,15 @@ export const MyPlaces: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '0.4rem',
-                padding: '0.6rem 1rem',
+                padding: '0.65rem 1rem',
                 borderRadius: '8px',
-                border: '1px solid rgba(163, 181, 147, 0.3)',
-                background: 'rgba(163, 181, 147, 0.12)',
-                color: '#d1dbc7',
+                border: '1px solid rgba(40, 122, 69, 0.25)',
+                background: 'rgba(240, 253, 244, 0.85)',
+                color: '#166534',
                 fontSize: '0.82rem',
                 fontWeight: 600,
                 cursor: 'pointer',
+                transition: 'all 0.15s ease',
               }}
             >
               <span>Manage in My Alerts</span>
@@ -1872,7 +1908,7 @@ export const MyPlaces: React.FC = () => {
           style={{
             position: 'fixed',
             inset: 0,
-            background: 'rgba(0, 0, 0, 0.75)',
+            background: 'rgba(15, 23, 42, 0.6)',
             backdropFilter: 'blur(4px)',
             display: 'flex',
             alignItems: 'center',
@@ -1885,10 +1921,10 @@ export const MyPlaces: React.FC = () => {
             style={{
               width: '100%',
               maxWidth: '520px',
-              borderRadius: '12px',
-              background: '#1c2418',
-              border: '1px solid rgba(163, 181, 147, 0.3)',
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5)',
+              borderRadius: '14px',
+              background: '#ffffff',
+              border: '1px solid rgba(40, 122, 69, 0.25)',
+              boxShadow: '0 20px 45px rgba(15, 23, 42, 0.25)',
               overflow: 'hidden',
             }}
           >
@@ -1899,12 +1935,12 @@ export const MyPlaces: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '1.25rem 1.5rem',
-                borderBottom: '1px solid rgba(163, 181, 147, 0.2)',
+                borderBottom: '1px solid rgba(40, 122, 69, 0.15)',
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Bookmark size={18} color="#a3b593" />
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 600, margin: 0, color: '#f1f5f9' }}>
+                <Bookmark size={18} color="#166534" />
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, color: '#0d1710' }}>
                   {editingPlace ? 'Edit Saved Place' : 'Add New Saved Place'}
                 </h3>
               </div>
@@ -1915,7 +1951,7 @@ export const MyPlaces: React.FC = () => {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: 'rgba(238, 241, 231, 0.6)',
+                  color: '#64748b',
                   cursor: 'pointer',
                   padding: '0.25rem',
                 }}
@@ -1931,9 +1967,9 @@ export const MyPlaces: React.FC = () => {
                   style={{
                     padding: '0.75rem 1rem',
                     borderRadius: '8px',
-                    background: 'rgba(239, 68, 68, 0.12)',
+                    background: 'rgba(254, 242, 242, 0.9)',
                     border: '1px solid rgba(239, 68, 68, 0.35)',
-                    color: '#fca5a5',
+                    color: '#b91c1c',
                     fontSize: '0.8rem',
                     marginBottom: '1.25rem',
                   }}
@@ -1949,7 +1985,7 @@ export const MyPlaces: React.FC = () => {
                     display: 'block',
                     fontSize: '0.82rem',
                     fontWeight: 600,
-                    color: '#eef1e7',
+                    color: '#1e293b',
                     marginBottom: '0.4rem',
                   }}
                 >
@@ -1965,11 +2001,12 @@ export const MyPlaces: React.FC = () => {
                     width: '100%',
                     padding: '0.65rem 0.85rem',
                     borderRadius: '8px',
-                    background: 'rgba(16, 20, 14, 0.8)',
-                    border: '1px solid rgba(163, 181, 147, 0.3)',
-                    color: '#f1f5f9',
+                    background: '#f8fafc',
+                    border: '1.5px solid rgba(40, 122, 69, 0.25)',
+                    color: '#0f172a',
                     fontSize: '0.88rem',
                     boxSizing: 'border-box',
+                    outline: 'none',
                   }}
                   autoFocus
                 />
@@ -1982,7 +2019,7 @@ export const MyPlaces: React.FC = () => {
                     display: 'block',
                     fontSize: '0.82rem',
                     fontWeight: 600,
-                    color: '#eef1e7',
+                    color: '#1e293b',
                     marginBottom: '0.4rem',
                   }}
                 >
@@ -2002,16 +2039,17 @@ export const MyPlaces: React.FC = () => {
                           alignItems: 'center',
                           justifyContent: 'center',
                           gap: '0.35rem',
-                          padding: '0.5rem',
+                          padding: '0.55rem',
                           borderRadius: '6px',
                           border: isSelected
-                            ? '1.5px solid #a3b593'
-                            : '1px solid rgba(163, 181, 147, 0.2)',
-                          background: isSelected ? 'rgba(163, 181, 147, 0.25)' : 'rgba(16, 20, 14, 0.6)',
-                          color: isSelected ? '#ffffff' : 'rgba(238, 241, 231, 0.7)',
+                            ? '1.5px solid #166534'
+                            : '1px solid rgba(40, 122, 69, 0.2)',
+                          background: isSelected ? '#166534' : 'rgba(240, 253, 244, 0.7)',
+                          color: isSelected ? '#ffffff' : '#284632',
                           fontSize: '0.78rem',
-                          fontWeight: isSelected ? 600 : 400,
+                          fontWeight: isSelected ? 600 : 500,
                           cursor: 'pointer',
+                          transition: 'all 0.15s ease',
                         }}
                       >
                         {getCategoryIcon(cat)}
@@ -2031,7 +2069,7 @@ export const MyPlaces: React.FC = () => {
                         display: 'block',
                         fontSize: '0.82rem',
                         fontWeight: 600,
-                        color: '#eef1e7',
+                        color: '#1e293b',
                         marginBottom: '0.4rem',
                       }}
                     >
@@ -2047,15 +2085,15 @@ export const MyPlaces: React.FC = () => {
                           borderRadius: '6px',
                           border:
                             modalSelectionMode === 'LOCALITY'
-                              ? '1.5px solid #a3b593'
-                              : '1px solid rgba(163, 181, 147, 0.2)',
+                              ? '1.5px solid #166534'
+                              : '1px solid rgba(40, 122, 69, 0.2)',
                           background:
                             modalSelectionMode === 'LOCALITY'
-                              ? 'rgba(163, 181, 147, 0.25)'
-                              : 'rgba(16, 20, 14, 0.6)',
-                          color: modalSelectionMode === 'LOCALITY' ? '#ffffff' : 'rgba(238, 241, 231, 0.7)',
+                              ? '#166534'
+                              : 'rgba(240, 253, 244, 0.7)',
+                          color: modalSelectionMode === 'LOCALITY' ? '#ffffff' : '#284632',
                           fontSize: '0.8rem',
-                          fontWeight: modalSelectionMode === 'LOCALITY' ? 600 : 400,
+                          fontWeight: modalSelectionMode === 'LOCALITY' ? 600 : 500,
                           cursor: 'pointer',
                         }}
                       >
@@ -2070,15 +2108,15 @@ export const MyPlaces: React.FC = () => {
                           borderRadius: '6px',
                           border:
                             modalSelectionMode === 'STATION'
-                              ? '1.5px solid #a3b593'
-                              : '1px solid rgba(163, 181, 147, 0.2)',
+                              ? '1.5px solid #166534'
+                              : '1px solid rgba(40, 122, 69, 0.2)',
                           background:
                             modalSelectionMode === 'STATION'
-                              ? 'rgba(163, 181, 147, 0.25)'
-                              : 'rgba(16, 20, 14, 0.6)',
-                          color: modalSelectionMode === 'STATION' ? '#ffffff' : 'rgba(238, 241, 231, 0.7)',
+                              ? '#166534'
+                              : 'rgba(240, 253, 244, 0.7)',
+                          color: modalSelectionMode === 'STATION' ? '#ffffff' : '#284632',
                           fontSize: '0.8rem',
-                          fontWeight: modalSelectionMode === 'STATION' ? 600 : 400,
+                          fontWeight: modalSelectionMode === 'STATION' ? 600 : 500,
                           cursor: 'pointer',
                         }}
                       >
@@ -2094,7 +2132,7 @@ export const MyPlaces: React.FC = () => {
                           display: 'block',
                           fontSize: '0.82rem',
                           fontWeight: 600,
-                          color: '#eef1e7',
+                          color: '#1e293b',
                           marginBottom: '0.4rem',
                         }}
                       >
@@ -2107,15 +2145,16 @@ export const MyPlaces: React.FC = () => {
                           width: '100%',
                           padding: '0.65rem 0.85rem',
                           borderRadius: '8px',
-                          background: 'rgba(16, 20, 14, 0.8)',
-                          border: '1px solid rgba(163, 181, 147, 0.3)',
-                          color: '#f1f5f9',
+                          background: '#f8fafc',
+                          border: '1.5px solid rgba(40, 122, 69, 0.25)',
+                          color: '#0f172a',
                           fontSize: '0.85rem',
                           boxSizing: 'border-box',
+                          outline: 'none',
                         }}
                       >
                         {PUNE_LOCALITY_PRESETS.map((loc) => (
-                          <option key={loc.id} value={loc.id} style={{ background: '#1c2418', color: '#eef1e7' }}>
+                          <option key={loc.id} value={loc.id} style={{ background: '#ffffff', color: '#0f172a' }}>
                             {loc.name} — {loc.subtitle}
                           </option>
                         ))}
@@ -2128,7 +2167,7 @@ export const MyPlaces: React.FC = () => {
                           display: 'block',
                           fontSize: '0.82rem',
                           fontWeight: 600,
-                          color: '#eef1e7',
+                          color: '#1e293b',
                           marginBottom: '0.4rem',
                         }}
                       >
@@ -2141,18 +2180,19 @@ export const MyPlaces: React.FC = () => {
                           width: '100%',
                           padding: '0.65rem 0.85rem',
                           borderRadius: '8px',
-                          background: 'rgba(16, 20, 14, 0.8)',
-                          border: '1px solid rgba(163, 181, 147, 0.3)',
-                          color: '#f1f5f9',
+                          background: '#f8fafc',
+                          border: '1.5px solid rgba(40, 122, 69, 0.25)',
+                          color: '#0f172a',
                           fontSize: '0.85rem',
                           boxSizing: 'border-box',
+                          outline: 'none',
                         }}
                       >
                         {stations.map((st) => (
                           <option
                             key={st.station_id}
                             value={st.station_id}
-                            style={{ background: '#1c2418', color: '#eef1e7' }}
+                            style={{ background: '#ffffff', color: '#0f172a' }}
                           >
                             {st.station_name} ({st.city})
                           </option>
@@ -2170,7 +2210,7 @@ export const MyPlaces: React.FC = () => {
                     display: 'block',
                     fontSize: '0.82rem',
                     fontWeight: 600,
-                    color: '#eef1e7',
+                    color: '#1e293b',
                     marginBottom: '0.4rem',
                   }}
                 >
@@ -2186,11 +2226,12 @@ export const MyPlaces: React.FC = () => {
                     width: '100%',
                     padding: '0.65rem 0.85rem',
                     borderRadius: '8px',
-                    background: 'rgba(16, 20, 14, 0.8)',
-                    border: '1px solid rgba(163, 181, 147, 0.3)',
-                    color: '#f1f5f9',
+                    background: '#f8fafc',
+                    border: '1.5px solid rgba(40, 122, 69, 0.25)',
+                    color: '#0f172a',
                     fontSize: '0.85rem',
                     boxSizing: 'border-box',
+                    outline: 'none',
                   }}
                 />
               </div>
@@ -2203,10 +2244,11 @@ export const MyPlaces: React.FC = () => {
                   style={{
                     padding: '0.6rem 1rem',
                     borderRadius: '8px',
-                    border: '1px solid rgba(163, 181, 147, 0.25)',
-                    background: 'transparent',
-                    color: 'rgba(238, 241, 231, 0.7)',
+                    border: '1px solid #cbd5e1',
+                    background: '#f1f5f9',
+                    color: '#475569',
                     fontSize: '0.85rem',
+                    fontWeight: 500,
                     cursor: 'pointer',
                   }}
                 >
@@ -2215,14 +2257,15 @@ export const MyPlaces: React.FC = () => {
                 <button
                   type="submit"
                   style={{
-                    padding: '0.6rem 1.25rem',
+                    padding: '0.6rem 1.35rem',
                     borderRadius: '8px',
-                    border: '1px solid #758e5f',
-                    background: 'linear-gradient(135deg, #445337 0%, #2f3b26 100%)',
+                    border: '1px solid #15803d',
+                    background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
                     color: '#ffffff',
                     fontSize: '0.85rem',
                     fontWeight: 600,
                     cursor: 'pointer',
+                    boxShadow: '0 4px 14px rgba(22, 101, 52, 0.25)',
                   }}
                 >
                   {editingPlace ? 'Update Place' : 'Save Place'}

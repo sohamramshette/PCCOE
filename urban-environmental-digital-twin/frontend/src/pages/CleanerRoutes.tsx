@@ -746,11 +746,11 @@ export const CleanerRoutes: React.FC = () => {
 
   return (
     <div style={{ width: '100%', maxWidth: '100%', boxSizing: 'border-box' }}>
-      {/* 1. Sleek Compact Header Bar */}
+      {/* 1. Header Bar */}
       <div
         style={{
-          background: 'linear-gradient(135deg, rgba(28, 42, 27, 0.95) 0%, rgba(18, 28, 17, 0.98) 100%)',
-          border: '1px solid rgba(163, 181, 147, 0.22)',
+          background: 'rgba(255, 255, 255, 0.95)',
+          border: '1px solid rgba(40, 122, 69, 0.18)',
           borderRadius: '18px',
           padding: '1rem 1.5rem',
           marginBottom: '1.25rem',
@@ -759,7 +759,7 @@ export const CleanerRoutes: React.FC = () => {
           alignItems: 'center',
           flexWrap: 'wrap',
           gap: '1rem',
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3)',
+          boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -768,12 +768,12 @@ export const CleanerRoutes: React.FC = () => {
               width: '40px',
               height: '40px',
               borderRadius: '12px',
-              background: 'rgba(74, 222, 128, 0.15)',
-              border: '1px solid rgba(74, 222, 128, 0.3)',
+              background: 'rgba(40, 122, 69, 0.12)',
+              border: '1px solid rgba(40, 122, 69, 0.25)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#86efac',
+              color: '#166534',
               flexShrink: 0,
             }}
           >
@@ -787,7 +787,7 @@ export const CleanerRoutes: React.FC = () => {
                   fontSize: '1.45rem',
                   fontWeight: 700,
                   margin: 0,
-                  color: '#f4f6f0',
+                  color: '#0d1710',
                   fontFamily: 'var(--font-heading)',
                   letterSpacing: '-0.01em',
                 }}
@@ -802,15 +802,15 @@ export const CleanerRoutes: React.FC = () => {
                   letterSpacing: '0.04em',
                   padding: '2px 8px',
                   borderRadius: '6px',
-                  background: 'rgba(143, 160, 126, 0.2)',
-                  color: '#a3b593',
-                  border: '1px solid rgba(163, 181, 147, 0.25)',
+                  background: 'rgba(40, 122, 69, 0.1)',
+                  color: '#166534',
+                  border: '1px solid rgba(40, 122, 69, 0.22)',
                 }}
               >
                 Pune &amp; PCMC
               </span>
             </div>
-            <p style={{ margin: '2px 0 0 0', fontSize: '0.82rem', color: '#9eab93' }}>
+            <p style={{ margin: '2px 0 0 0', fontSize: '0.82rem', color: '#526b59' }}>
               Genuine road routes evaluated using live monitoring sensors, spatial interpolation, and GPS navigation.
             </p>
           </div>
@@ -820,12 +820,12 @@ export const CleanerRoutes: React.FC = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
           <div
             style={{
-              background: 'rgba(14, 20, 14, 0.75)',
-              border: '1px solid rgba(163, 181, 147, 0.2)',
+              background: 'rgba(240, 253, 244, 0.75)',
+              border: '1px solid rgba(40, 122, 69, 0.18)',
               borderRadius: '10px',
               padding: '6px 12px',
               fontSize: '0.74rem',
-              color: '#c9d3bf',
+              color: '#475e4e',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
@@ -836,12 +836,12 @@ export const CleanerRoutes: React.FC = () => {
                 width: '7px',
                 height: '7px',
                 borderRadius: '50%',
-                background: isLoadingStations ? '#facc15' : '#4ade80',
+                background: isLoadingStations ? '#facc15' : '#16a34a',
               }}
             />
             <span>{isLoadingStations ? 'Syncing sensors...' : `${stations.length || 6} Ground Stations Active`}</span>
             {gpsState === 'locked' && userGpsPosition && (
-              <span style={{ color: '#86efac', fontWeight: 600 }}>
+              <span style={{ color: '#166534', fontWeight: 600 }}>
                 · GPS Locked (±{Math.round(userGpsPosition.accuracy)}m)
               </span>
             )}
@@ -853,13 +853,13 @@ export const CleanerRoutes: React.FC = () => {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '6px',
-                background: 'rgba(34, 197, 94, 0.18)',
-                border: '1px solid rgba(34, 197, 94, 0.45)',
+                background: 'rgba(34, 197, 94, 0.15)',
+                border: '1px solid rgba(34, 197, 94, 0.35)',
                 borderRadius: '10px',
                 padding: '6px 12px',
                 fontSize: '0.74rem',
                 fontWeight: 700,
-                color: '#86efac',
+                color: '#15803d',
               }}
             >
               <Radio size={12} style={{ animation: 'pulse 1.5s infinite' }} />
@@ -873,22 +873,22 @@ export const CleanerRoutes: React.FC = () => {
       {rerouteNotification && (
         <div
           style={{
-            background: 'linear-gradient(135deg, rgba(22, 101, 52, 0.95) 0%, rgba(20, 83, 45, 0.95) 100%)',
-            border: '1px solid rgba(134, 239, 172, 0.4)',
+            background: 'linear-gradient(135deg, rgba(240, 253, 244, 0.98) 0%, rgba(220, 252, 231, 0.98) 100%)',
+            border: '1px solid rgba(40, 122, 69, 0.3)',
             borderRadius: '14px',
             padding: '10px 16px',
             marginBottom: '1rem',
-            color: '#f0fdf4',
+            color: '#14532d',
             fontSize: '0.84rem',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
+            boxShadow: '0 4px 16px rgba(22, 101, 52, 0.1)',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Sparkles size={16} color="#86efac" />
-            <span>{rerouteNotification}</span>
+            <Sparkles size={16} color="#16a34a" />
+            <span style={{ fontWeight: 600 }}>{rerouteNotification}</span>
           </div>
           <button
             type="button"
@@ -896,7 +896,7 @@ export const CleanerRoutes: React.FC = () => {
             style={{
               background: 'transparent',
               border: 'none',
-              color: '#86efac',
+              color: '#166534',
               cursor: 'pointer',
               padding: '2px',
             }}
@@ -923,17 +923,17 @@ export const CleanerRoutes: React.FC = () => {
           {/* Card A: Journey Planner */}
           <div
             style={{
-              background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.9) 0%, rgba(18, 26, 17, 0.96) 100%)',
-              border: '1px solid rgba(163, 181, 147, 0.22)',
+              background: 'rgba(255, 255, 255, 0.95)',
+              border: '1px solid rgba(40, 122, 69, 0.18)',
               borderRadius: '20px',
               padding: '1.4rem 1.5rem',
-              boxShadow: '0 12px 32px rgba(0, 0, 0, 0.35)',
+              boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
             }}
           >
             {/* Header & Preset commute chips */}
             <div style={{ marginBottom: '1rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#f4f6f0', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#0d1710', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                   Plan Journey Corridor
                 </span>
                 <button
@@ -943,7 +943,7 @@ export const CleanerRoutes: React.FC = () => {
                   style={{
                     background: 'transparent',
                     border: 'none',
-                    color: '#9eab93',
+                    color: '#64748b',
                     fontSize: '0.72rem',
                     cursor: 'pointer',
                     display: 'flex',
@@ -970,11 +970,11 @@ export const CleanerRoutes: React.FC = () => {
                     type="button"
                     onClick={() => handleApplyPresetCommute(p.s, p.d)}
                     style={{
-                      background: 'rgba(143, 160, 126, 0.1)',
-                      border: '1px solid rgba(163, 181, 147, 0.2)',
+                      background: 'rgba(240, 253, 244, 0.8)',
+                      border: '1px solid rgba(40, 122, 69, 0.2)',
                       borderRadius: '6px',
                       padding: '3px 7px',
-                      color: '#c9d3bf',
+                      color: '#166534',
                       fontSize: '0.7rem',
                       fontWeight: 600,
                       cursor: 'pointer',
@@ -997,12 +997,12 @@ export const CleanerRoutes: React.FC = () => {
                     gap: '4px',
                     fontSize: '0.72rem',
                     fontWeight: 700,
-                    color: '#86efac',
+                    color: '#166534',
                     textTransform: 'uppercase',
                     margin: 0,
                   }}
                 >
-                  <MapPin size={11} color="#86efac" />
+                  <MapPin size={11} color="#166534" />
                   Origin
                 </label>
 
@@ -1013,11 +1013,11 @@ export const CleanerRoutes: React.FC = () => {
                   disabled={isLocatingGps}
                   title="Detect your live position via browser GPS"
                   style={{
-                    background: 'rgba(134, 239, 172, 0.12)',
-                    border: '1px solid rgba(134, 239, 172, 0.35)',
+                    background: 'rgba(40, 122, 69, 0.1)',
+                    border: '1px solid rgba(40, 122, 69, 0.25)',
                     borderRadius: '7px',
                     padding: '2px 8px',
-                    color: '#86efac',
+                    color: '#166534',
                     fontSize: '0.7rem',
                     fontWeight: 600,
                     cursor: isLocatingGps ? 'wait' : 'pointer',
@@ -1056,11 +1056,11 @@ export const CleanerRoutes: React.FC = () => {
                   style={{
                     width: '100%',
                     boxSizing: 'border-box',
-                    background: 'rgba(14, 20, 14, 0.85)',
-                    border: '1px solid rgba(163, 181, 147, 0.3)',
+                    background: '#ffffff',
+                    border: '1.5px solid rgba(40, 122, 69, 0.25)',
                     borderRadius: '10px',
                     padding: '9px 12px',
-                    color: '#f4f6f0',
+                    color: '#0f172a',
                     fontSize: '0.86rem',
                     outline: 'none',
                   }}
@@ -1068,21 +1068,21 @@ export const CleanerRoutes: React.FC = () => {
                 {selectedStart && (
                   <CheckCircle2
                     size={15}
-                    color="#4ade80"
+                    color="#16a34a"
                     style={{ position: 'absolute', right: '10px', top: '10px' }}
                   />
                 )}
               </div>
 
               {gpsSuccessMessage && (
-                <div style={{ fontSize: '0.72rem', color: '#86efac', marginTop: '3px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <CheckCircle2 size={11} color="#86efac" />
+                <div style={{ fontSize: '0.72rem', color: '#166534', marginTop: '3px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <CheckCircle2 size={11} color="#166534" />
                   <span>{gpsSuccessMessage}</span>
                 </div>
               )}
 
               {gpsError && (
-                <div style={{ fontSize: '0.72rem', color: '#fca5a5', marginTop: '3px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <div style={{ fontSize: '0.72rem', color: '#dc2626', marginTop: '3px', display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <AlertCircle size={11} color="#ef4444" />
                   <span>{gpsError}</span>
                 </div>
@@ -1097,10 +1097,10 @@ export const CleanerRoutes: React.FC = () => {
                     left: 0,
                     right: 0,
                     zIndex: 2000,
-                    background: '#152016',
-                    border: '1px solid rgba(163, 181, 147, 0.35)',
+                    background: '#ffffff',
+                    border: '1px solid rgba(40, 122, 69, 0.25)',
                     borderRadius: '10px',
-                    boxShadow: '0 12px 32px rgba(0,0,0,0.6)',
+                    boxShadow: '0 12px 32px rgba(0,0,0,0.12)',
                     marginTop: '3px',
                     maxHeight: '220px',
                     overflowY: 'auto',
@@ -1118,11 +1118,11 @@ export const CleanerRoutes: React.FC = () => {
                       style={{
                         padding: '8px 11px',
                         cursor: 'pointer',
-                        borderBottom: '1px solid rgba(163, 181, 147, 0.1)',
+                        borderBottom: '1px solid rgba(40, 122, 69, 0.08)',
                       }}
                     >
-                      <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#f4f6f0' }}>{item.name}</div>
-                      <div style={{ fontSize: '0.7rem', color: '#9eab93' }}>{item.subtitle}</div>
+                      <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#0d1710' }}>{item.name}</div>
+                      <div style={{ fontSize: '0.7rem', color: '#64748b' }}>{item.subtitle}</div>
                     </div>
                   ))}
                 </div>
@@ -1140,12 +1140,12 @@ export const CleanerRoutes: React.FC = () => {
                     gap: '4px',
                     fontSize: '0.72rem',
                     fontWeight: 700,
-                    color: '#fca5a5',
+                    color: '#b91c1c',
                     textTransform: 'uppercase',
                     marginBottom: '4px',
                   }}
                 >
-                  <MapPin size={11} color="#fca5a5" />
+                  <MapPin size={11} color="#b91c1c" />
                   Destination
                 </label>
 
@@ -1164,11 +1164,11 @@ export const CleanerRoutes: React.FC = () => {
                     style={{
                       width: '100%',
                       boxSizing: 'border-box',
-                      background: 'rgba(14, 20, 14, 0.85)',
-                      border: '1px solid rgba(163, 181, 147, 0.3)',
+                      background: '#ffffff',
+                      border: '1.5px solid rgba(40, 122, 69, 0.25)',
                       borderRadius: '10px',
                       padding: '9px 12px',
-                      color: '#f4f6f0',
+                      color: '#0f172a',
                       fontSize: '0.86rem',
                       outline: 'none',
                     }}
@@ -1176,7 +1176,7 @@ export const CleanerRoutes: React.FC = () => {
                   {selectedDest && (
                     <CheckCircle2
                       size={15}
-                      color="#4ade80"
+                      color="#16a34a"
                       style={{ position: 'absolute', right: '10px', top: '10px' }}
                     />
                   )}
@@ -1191,10 +1191,10 @@ export const CleanerRoutes: React.FC = () => {
                       left: 0,
                       right: 0,
                       zIndex: 2000,
-                      background: '#152016',
-                      border: '1px solid rgba(163, 181, 147, 0.35)',
+                      background: '#ffffff',
+                      border: '1px solid rgba(40, 122, 69, 0.25)',
                       borderRadius: '10px',
-                      boxShadow: '0 12px 32px rgba(0,0,0,0.6)',
+                      boxShadow: '0 12px 32px rgba(0,0,0,0.12)',
                       marginTop: '3px',
                       maxHeight: '220px',
                       overflowY: 'auto',
@@ -1211,11 +1211,11 @@ export const CleanerRoutes: React.FC = () => {
                         style={{
                           padding: '8px 11px',
                           cursor: 'pointer',
-                          borderBottom: '1px solid rgba(163, 181, 147, 0.1)',
+                          borderBottom: '1px solid rgba(40, 122, 69, 0.08)',
                         }}
                       >
-                        <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#f4f6f0' }}>{item.name}</div>
-                        <div style={{ fontSize: '0.7rem', color: '#9eab93' }}>{item.subtitle}</div>
+                        <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#0d1710' }}>{item.name}</div>
+                        <div style={{ fontSize: '0.7rem', color: '#64748b' }}>{item.subtitle}</div>
                       </div>
                     ))}
                   </div>
@@ -1230,10 +1230,10 @@ export const CleanerRoutes: React.FC = () => {
                   title="Swap origin and destination"
                   aria-label="Swap origin and destination"
                   style={{
-                    background: 'rgba(143, 160, 126, 0.14)',
-                    border: '1px solid rgba(163, 181, 147, 0.3)',
+                    background: 'rgba(240, 253, 244, 0.8)',
+                    border: '1px solid rgba(40, 122, 69, 0.25)',
                     borderRadius: '10px',
-                    color: '#f4f6f0',
+                    color: '#166534',
                     padding: '9px',
                     cursor: 'pointer',
                     display: 'flex',
@@ -1252,8 +1252,8 @@ export const CleanerRoutes: React.FC = () => {
               <div
                 style={{
                   display: 'flex',
-                  background: 'rgba(14, 20, 14, 0.85)',
-                  border: '1px solid rgba(163, 181, 147, 0.3)',
+                  background: 'rgba(240, 253, 244, 0.8)',
+                  border: '1px solid rgba(40, 122, 69, 0.2)',
                   borderRadius: '10px',
                   padding: '2px',
                 }}
@@ -1276,11 +1276,12 @@ export const CleanerRoutes: React.FC = () => {
                         padding: '6px 9px',
                         border: 'none',
                         borderRadius: '7px',
-                        background: active ? '#8fa07e' : 'transparent',
-                        color: active ? '#121a11' : '#c9d3bf',
+                        background: active ? '#166534' : 'transparent',
+                        color: active ? '#ffffff' : '#334155',
                         fontSize: '0.74rem',
                         fontWeight: active ? 700 : 500,
                         cursor: 'pointer',
+                        boxShadow: active ? '0 2px 6px rgba(22, 101, 52, 0.25)' : 'none',
                       }}
                     >
                       {m.icon}
@@ -1301,8 +1302,8 @@ export const CleanerRoutes: React.FC = () => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '6px',
-                  background: 'linear-gradient(135deg, #8fa07e 0%, #6e7e60 100%)',
-                  color: '#121a11',
+                  background: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
+                  color: '#ffffff',
                   border: 'none',
                   borderRadius: '10px',
                   padding: '9px 16px',
@@ -1310,7 +1311,7 @@ export const CleanerRoutes: React.FC = () => {
                   fontWeight: 700,
                   cursor: isCalculatingRoutes || !selectedStart || !selectedDest ? 'not-allowed' : 'pointer',
                   opacity: !selectedStart || !selectedDest ? 0.6 : 1,
-                  boxShadow: '0 4px 12px rgba(143, 160, 126, 0.3)',
+                  boxShadow: '0 4px 12px rgba(22, 101, 52, 0.25)',
                   whiteSpace: 'nowrap',
                 }}
               >
@@ -1336,7 +1337,7 @@ export const CleanerRoutes: React.FC = () => {
                   borderRadius: '10px',
                   background: 'rgba(239, 68, 68, 0.12)',
                   border: '1px solid rgba(239, 68, 68, 0.3)',
-                  color: '#fca5a5',
+                  color: '#dc2626',
                   fontSize: '0.76rem',
                   display: 'flex',
                   alignItems: 'center',
@@ -1353,11 +1354,11 @@ export const CleanerRoutes: React.FC = () => {
           {isNavigating && (
             <div
               style={{
-                background: 'linear-gradient(135deg, rgba(20, 32, 19, 0.96) 0%, rgba(14, 22, 13, 0.98) 100%)',
-                border: '2px solid rgba(74, 222, 128, 0.45)',
+                background: 'rgba(240, 253, 244, 0.95)',
+                border: '2px solid rgba(40, 122, 69, 0.35)',
                 borderRadius: '20px',
                 padding: '1.2rem 1.4rem',
-                boxShadow: '0 12px 32px rgba(0, 0, 0, 0.45)',
+                boxShadow: '0 8px 24px rgba(22, 38, 25, 0.08)',
               }}
             >
               {/* Top row: Status & Stop Button */}
@@ -1369,8 +1370,8 @@ export const CleanerRoutes: React.FC = () => {
                       alignItems: 'center',
                       gap: '5px',
                       background: 'rgba(34, 197, 94, 0.2)',
-                      color: '#4ade80',
-                      border: '1px solid rgba(74, 222, 128, 0.4)',
+                      color: '#15803d',
+                      border: '1px solid rgba(34, 197, 94, 0.4)',
                       padding: '3px 8px',
                       borderRadius: '6px',
                       fontSize: '0.72rem',
@@ -1386,7 +1387,7 @@ export const CleanerRoutes: React.FC = () => {
                     style={{
                       fontSize: '0.74rem',
                       fontWeight: 600,
-                      color: navStatus === 'off_route' ? '#fdba74' : '#86efac',
+                      color: navStatus === 'off_route' ? '#c2410c' : '#15803d',
                     }}
                   >
                     {navStatus === 'arrived'
@@ -1401,7 +1402,7 @@ export const CleanerRoutes: React.FC = () => {
                   type="button"
                   onClick={handleStopNavigation}
                   style={{
-                    background: 'linear-gradient(135deg, rgba(220, 38, 38, 0.9) 0%, rgba(185, 28, 28, 0.9) 100%)',
+                    background: 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)',
                     color: '#ffffff',
                     border: 'none',
                     borderRadius: '8px',
@@ -1428,45 +1429,45 @@ export const CleanerRoutes: React.FC = () => {
                   marginBottom: '10px',
                 }}
               >
-                <div style={{ background: 'rgba(10, 16, 10, 0.65)', padding: '8px 10px', borderRadius: '10px', border: '1px solid rgba(163, 181, 147, 0.16)' }}>
-                  <div style={{ fontSize: '0.65rem', color: '#9eab93', textTransform: 'uppercase' }}>Remaining Distance</div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#f4f6f0' }}>
+                <div style={{ background: 'rgba(255, 255, 255, 0.95)', padding: '8px 10px', borderRadius: '10px', border: '1px solid rgba(40, 122, 69, 0.18)' }}>
+                  <div style={{ fontSize: '0.65rem', color: '#526b59', textTransform: 'uppercase' }}>Remaining Distance</div>
+                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#0d1710' }}>
                     {routeProgress ? formatNavDistance(routeProgress.remainingDistanceMeters) : `${selectedRouteComparison?.route.distanceKm} km`}
                   </div>
                 </div>
 
-                <div style={{ background: 'rgba(10, 16, 10, 0.65)', padding: '8px 10px', borderRadius: '10px', border: '1px solid rgba(163, 181, 147, 0.16)' }}>
-                  <div style={{ fontSize: '0.65rem', color: '#9eab93', textTransform: 'uppercase' }}>Remaining Time</div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#f4f6f0' }}>
+                <div style={{ background: 'rgba(255, 255, 255, 0.95)', padding: '8px 10px', borderRadius: '10px', border: '1px solid rgba(40, 122, 69, 0.18)' }}>
+                  <div style={{ fontSize: '0.65rem', color: '#526b59', textTransform: 'uppercase' }}>Remaining Time</div>
+                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#0d1710' }}>
                     {routeProgress ? formatNavDuration(routeProgress.remainingDurationMinutes) : `~${selectedRouteComparison?.route.durationMinutes} mins`}
                   </div>
                 </div>
 
-                <div style={{ background: 'rgba(10, 16, 10, 0.65)', padding: '8px 10px', borderRadius: '10px', border: '1px solid rgba(163, 181, 147, 0.16)' }}>
-                  <div style={{ fontSize: '0.65rem', color: '#9eab93', textTransform: 'uppercase' }}>Upcoming PM2.5</div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#f4f6f0' }}>
+                <div style={{ background: 'rgba(255, 255, 255, 0.95)', padding: '8px 10px', borderRadius: '10px', border: '1px solid rgba(40, 122, 69, 0.18)' }}>
+                  <div style={{ fontSize: '0.65rem', color: '#526b59', textTransform: 'uppercase' }}>Upcoming PM2.5</div>
+                  <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#0d1710' }}>
                     {upcomingPollution?.estimate.avgPm25 !== null && upcomingPollution?.estimate.avgPm25 !== undefined
                       ? `${upcomingPollution.estimate.avgPm25} µg/m³`
                       : selectedRouteComparison?.estimate.avgPm25 ? `${selectedRouteComparison.estimate.avgPm25} µg/m³` : '—'}
                   </div>
                 </div>
 
-                <div style={{ background: 'rgba(10, 16, 10, 0.65)', padding: '8px 10px', borderRadius: '10px', border: '1px solid rgba(163, 181, 147, 0.16)' }}>
-                  <div style={{ fontSize: '0.65rem', color: '#9eab93', textTransform: 'uppercase' }}>GPS Precision</div>
-                  <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#f4f6f0' }}>
+                <div style={{ background: 'rgba(255, 255, 255, 0.95)', padding: '8px 10px', borderRadius: '10px', border: '1px solid rgba(40, 122, 69, 0.18)' }}>
+                  <div style={{ fontSize: '0.65rem', color: '#526b59', textTransform: 'uppercase' }}>GPS Precision</div>
+                  <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#0d1710' }}>
                     {userGpsPosition ? `±${Math.round(userGpsPosition.accuracy)}m` : 'Acquiring...'}
                   </div>
                 </div>
               </div>
 
               {/* Auto-switch checkbox */}
-              <div style={{ padding: '6px 10px', background: 'rgba(14, 20, 14, 0.5)', borderRadius: '8px', border: '1px solid rgba(163, 181, 147, 0.16)', marginBottom: '8px' }}>
-                <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.72rem', color: '#c9d3bf', cursor: 'pointer' }}>
+              <div style={{ padding: '6px 10px', background: 'rgba(255, 255, 255, 0.9)', borderRadius: '8px', border: '1px solid rgba(40, 122, 69, 0.18)', marginBottom: '8px' }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.72rem', color: '#334155', cursor: 'pointer' }}>
                   <input
                     type="checkbox"
                     checked={autoRerouteEnabled}
                     onChange={(e) => setAutoRerouteEnabled(e.target.checked)}
-                    style={{ accentColor: '#22c55e', width: '13px', height: '13px' }}
+                    style={{ accentColor: '#166534', width: '13px', height: '13px' }}
                   />
                   <span>Auto-switch to cleaner corridor if ≥3.0 µg/m³ cleaner</span>
                 </label>
@@ -1480,7 +1481,7 @@ export const CleanerRoutes: React.FC = () => {
                   style={{
                     background: 'transparent',
                     border: 'none',
-                    color: '#9eab93',
+                    color: '#526b59',
                     fontSize: '0.7rem',
                     cursor: 'pointer',
                     display: 'flex',
@@ -1495,8 +1496,8 @@ export const CleanerRoutes: React.FC = () => {
 
               {/* Simulation drawer */}
               {showSimControls && (
-                <div style={{ marginTop: '8px', padding: '10px', background: 'rgba(10, 14, 10, 0.9)', borderRadius: '10px', border: '1px dashed rgba(163, 181, 147, 0.3)' }}>
-                  <div style={{ fontSize: '0.7rem', color: '#86efac', fontWeight: 700, marginBottom: '6px' }}>
+                <div style={{ marginTop: '8px', padding: '10px', background: '#ffffff', borderRadius: '10px', border: '1px dashed rgba(40, 122, 69, 0.35)' }}>
+                  <div style={{ fontSize: '0.7rem', color: '#166534', fontWeight: 700, marginBottom: '6px' }}>
                     Simulation Engine
                   </div>
                   <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
@@ -1504,11 +1505,11 @@ export const CleanerRoutes: React.FC = () => {
                       type="button"
                       onClick={handleToggleSimulation}
                       style={{
-                        background: isSimulating ? 'rgba(239, 68, 68, 0.2)' : 'rgba(34, 197, 94, 0.2)',
+                        background: isSimulating ? 'rgba(239, 68, 68, 0.15)' : 'rgba(34, 197, 94, 0.15)',
                         border: '1px solid rgba(34, 197, 94, 0.4)',
                         borderRadius: '6px',
                         padding: '4px 8px',
-                        color: isSimulating ? '#fca5a5' : '#86efac',
+                        color: isSimulating ? '#dc2626' : '#15803d',
                         fontSize: '0.7rem',
                         fontWeight: 700,
                         cursor: 'pointer',
@@ -1526,11 +1527,11 @@ export const CleanerRoutes: React.FC = () => {
                       onClick={handleSimulateOffRoute}
                       disabled={!userGpsPosition}
                       style={{
-                        background: 'rgba(249, 115, 22, 0.2)',
+                        background: 'rgba(249, 115, 22, 0.15)',
                         border: '1px solid rgba(249, 115, 22, 0.4)',
                         borderRadius: '6px',
                         padding: '4px 8px',
-                        color: '#fdba74',
+                        color: '#c2410c',
                         fontSize: '0.7rem',
                         cursor: 'pointer',
                       }}
@@ -1542,11 +1543,11 @@ export const CleanerRoutes: React.FC = () => {
                       type="button"
                       onClick={handleSimulateArrival}
                       style={{
-                        background: 'rgba(56, 189, 248, 0.2)',
+                        background: 'rgba(56, 189, 248, 0.15)',
                         border: '1px solid rgba(56, 189, 248, 0.4)',
                         borderRadius: '6px',
                         padding: '4px 8px',
-                        color: '#7dd3fc',
+                        color: '#0284c7',
                         fontSize: '0.7rem',
                         cursor: 'pointer',
                         display: 'flex',
@@ -1567,8 +1568,8 @@ export const CleanerRoutes: React.FC = () => {
                   style={{
                     marginTop: '8px',
                     padding: '10px 12px',
-                    background: 'rgba(249, 115, 22, 0.15)',
-                    border: '1px solid rgba(249, 115, 22, 0.45)',
+                    background: 'rgba(254, 243, 199, 0.9)',
+                    border: '1px solid rgba(245, 158, 11, 0.45)',
                     borderRadius: '10px',
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -1576,7 +1577,7 @@ export const CleanerRoutes: React.FC = () => {
                     gap: '8px',
                   }}
                 >
-                  <div style={{ fontSize: '0.74rem', color: '#fef3c7' }}>
+                  <div style={{ fontSize: '0.74rem', color: '#92400e' }}>
                     <strong>Off Route:</strong> ~{routeProgress?.distanceToRouteMeters}m deviation.
                   </div>
                   <button
@@ -1605,8 +1606,8 @@ export const CleanerRoutes: React.FC = () => {
                   style={{
                     marginTop: '8px',
                     padding: '10px 12px',
-                    background: 'rgba(234, 179, 8, 0.15)',
-                    border: '1px solid rgba(234, 179, 8, 0.45)',
+                    background: 'rgba(254, 240, 138, 0.65)',
+                    border: '1px solid rgba(202, 138, 4, 0.4)',
                     borderRadius: '10px',
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -1614,7 +1615,7 @@ export const CleanerRoutes: React.FC = () => {
                     gap: '8px',
                   }}
                 >
-                  <div style={{ fontSize: '0.73rem', color: '#fef9c3', lineHeight: 1.3 }}>
+                  <div style={{ fontSize: '0.73rem', color: '#713f12', lineHeight: 1.3 }}>
                     <strong>Elevated PM2.5:</strong> Est. {upcomingPollution.estimate.avgPm25} µg/m³.
                   </div>
                   <button
@@ -1626,8 +1627,8 @@ export const CleanerRoutes: React.FC = () => {
                     }}
                     disabled={isRecalculatingReroute}
                     style={{
-                      background: 'linear-gradient(135deg, #eab308 0%, #ca8a04 100%)',
-                      color: '#1c1917',
+                      background: '#ca8a04',
+                      color: '#ffffff',
                       border: 'none',
                       borderRadius: '7px',
                       padding: '5px 10px',
@@ -1648,15 +1649,15 @@ export const CleanerRoutes: React.FC = () => {
                   style={{
                     marginTop: '8px',
                     padding: '10px 12px',
-                    background: 'linear-gradient(145deg, rgba(20, 36, 21, 0.98) 0%, rgba(12, 24, 13, 0.98) 100%)',
-                    border: '2px solid #4ade80',
+                    background: 'rgba(240, 253, 244, 0.95)',
+                    border: '2px solid #16a34a',
                     borderRadius: '12px',
                   }}
                 >
-                  <div style={{ fontSize: '0.76rem', fontWeight: 700, color: '#4ade80', marginBottom: '4px' }}>
+                  <div style={{ fontSize: '0.76rem', fontWeight: 700, color: '#15803d', marginBottom: '4px' }}>
                     Cleaner Corridor Available:
                   </div>
-                  <div style={{ fontSize: '0.74rem', color: '#f0fdf4', marginBottom: '8px' }}>
+                  <div style={{ fontSize: '0.74rem', color: '#14532d', marginBottom: '8px' }}>
                     Est. PM2.5 is <strong>{rerouteComparison.bestCleanerAlternative.estimate.avgPm25} µg/m³</strong> ({rerouteComparison.pm25ReductionPercent}% cleaner).
                   </div>
                   <div style={{ display: 'flex', gap: '6px', justifyContent: 'flex-end' }}>
@@ -1665,9 +1666,9 @@ export const CleanerRoutes: React.FC = () => {
                       onClick={handleStayOnCurrentRoute}
                       style={{
                         background: 'transparent',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                        border: '1px solid rgba(40, 122, 69, 0.3)',
                         borderRadius: '6px',
-                        color: '#c9d3bf',
+                        color: '#475e4e',
                         padding: '4px 8px',
                         fontSize: '0.7rem',
                         cursor: 'pointer',
@@ -1679,7 +1680,7 @@ export const CleanerRoutes: React.FC = () => {
                       type="button"
                       onClick={handleSwitchToCleanerRoute}
                       style={{
-                        background: '#22c55e',
+                        background: '#16a34a',
                         color: '#ffffff',
                         border: 'none',
                         borderRadius: '6px',
@@ -1701,7 +1702,7 @@ export const CleanerRoutes: React.FC = () => {
                   style={{
                     marginTop: '8px',
                     padding: '10px 12px',
-                    background: 'linear-gradient(135deg, rgba(22, 101, 52, 0.95) 0%, rgba(20, 83, 45, 0.95) 100%)',
+                    background: 'linear-gradient(135deg, #166534 0%, #14532d 100%)',
                     border: '1px solid #86efac',
                     borderRadius: '10px',
                     display: 'flex',
@@ -1763,10 +1764,10 @@ export const CleanerRoutes: React.FC = () => {
           {/* Card D: Route Alternatives Cards List */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f4f6f0', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#0d1710', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 Route Alternatives ({routeResults.length})
               </span>
-              <span style={{ fontSize: '0.72rem', color: '#9eab93' }}>
+              <span style={{ fontSize: '0.72rem', color: '#64748b' }}>
                 Click to preview path
               </span>
             </div>
@@ -1775,16 +1776,16 @@ export const CleanerRoutes: React.FC = () => {
             {isCalculatingRoutes && (
               <div
                 style={{
-                  background: 'rgba(26, 38, 25, 0.7)',
-                  border: '1px solid rgba(163, 181, 147, 0.2)',
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  border: '1px solid rgba(40, 122, 69, 0.18)',
                   borderRadius: '14px',
                   padding: '1.5rem',
                   textAlign: 'center',
-                  color: '#a3b593',
+                  color: '#166534',
                 }}
               >
                 <RefreshCw size={22} style={{ animation: 'spin 1.2s linear infinite', marginBottom: '8px' }} />
-                <div style={{ color: '#f4f6f0', fontWeight: 600, fontSize: '0.86rem' }}>Calculating road corridors...</div>
+                <div style={{ color: '#0d1710', fontWeight: 600, fontSize: '0.86rem' }}>Calculating road corridors...</div>
               </div>
             )}
 
@@ -1800,19 +1801,19 @@ export const CleanerRoutes: React.FC = () => {
                     onClick={() => setSelectedRouteId(route.id)}
                     style={{
                       background: isSelected
-                        ? 'linear-gradient(145deg, rgba(32, 46, 30, 0.95) 0%, rgba(22, 32, 21, 0.98) 100%)'
-                        : 'linear-gradient(145deg, rgba(24, 34, 23, 0.8) 0%, rgba(16, 23, 15, 0.9) 100%)',
+                        ? 'rgba(240, 253, 244, 0.95)'
+                        : 'rgba(255, 255, 255, 0.95)',
                       border: isSelected
                         ? isLowestPollution
-                          ? '2px solid #4ade80'
-                          : '2px solid #38bdf8'
-                        : '1px solid rgba(163, 181, 147, 0.2)',
+                          ? '2px solid #16a34a'
+                          : '2px solid #0284c7'
+                        : '1px solid rgba(40, 122, 69, 0.18)',
                       borderRadius: '16px',
                       padding: '1rem 1.15rem',
                       cursor: 'pointer',
                       boxShadow: isSelected
-                        ? '0 8px 24px rgba(0, 0, 0, 0.45)'
-                        : '0 3px 10px rgba(0, 0, 0, 0.2)',
+                        ? '0 4px 16px rgba(22, 101, 52, 0.12)'
+                        : '0 2px 8px rgba(0, 0, 0, 0.04)',
                       transition: 'all 0.15s ease',
                     }}
                   >
@@ -1820,7 +1821,7 @@ export const CleanerRoutes: React.FC = () => {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <h3 style={{ margin: 0, fontSize: '0.96rem', fontWeight: 700, color: '#f4f6f0' }}>
+                          <h3 style={{ margin: 0, fontSize: '0.96rem', fontWeight: 700, color: '#0d1710' }}>
                             {route.name}
                           </h3>
                           {recommendationBadge && (
@@ -1832,12 +1833,12 @@ export const CleanerRoutes: React.FC = () => {
                                 fontWeight: 700,
                                 textTransform: 'uppercase',
                                 background: isLowestPollution
-                                  ? 'rgba(74, 222, 128, 0.2)'
-                                  : 'rgba(56, 189, 248, 0.2)',
-                                color: isLowestPollution ? '#4ade80' : '#38bdf8',
+                                  ? 'rgba(34, 197, 94, 0.15)'
+                                  : 'rgba(56, 189, 248, 0.15)',
+                                color: isLowestPollution ? '#15803d' : '#0369a1',
                                 border: isLowestPollution
-                                  ? '1px solid rgba(74, 222, 128, 0.4)'
-                                  : '1px solid rgba(56, 189, 248, 0.4)',
+                                  ? '1px solid rgba(34, 197, 94, 0.35)'
+                                  : '1px solid rgba(56, 189, 248, 0.35)',
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 gap: '3px',
@@ -1848,7 +1849,7 @@ export const CleanerRoutes: React.FC = () => {
                             </span>
                           )}
                         </div>
-                        <div style={{ fontSize: '0.72rem', color: '#9eab93', marginTop: '2px' }}>
+                        <div style={{ fontSize: '0.72rem', color: '#526b59', marginTop: '2px' }}>
                           {route.summary}
                         </div>
                       </div>
@@ -1860,10 +1861,10 @@ export const CleanerRoutes: React.FC = () => {
                           borderRadius: '50%',
                           border: isSelected
                             ? isLowestPollution
-                              ? '4.5px solid #4ade80'
-                              : '4.5px solid #38bdf8'
-                            : '2px solid rgba(163, 181, 147, 0.4)',
-                          background: isSelected ? '#152016' : 'transparent',
+                              ? '4.5px solid #16a34a'
+                              : '4.5px solid #0284c7'
+                            : '2px solid rgba(40, 122, 69, 0.3)',
+                          background: isSelected ? '#ffffff' : 'transparent',
                           flexShrink: 0,
                         }}
                       />
@@ -1877,21 +1878,22 @@ export const CleanerRoutes: React.FC = () => {
                         gap: '6px',
                         padding: '8px 10px',
                         borderRadius: '10px',
-                        background: 'rgba(14, 20, 14, 0.65)',
+                        background: 'rgba(255, 255, 255, 0.9)',
+                        border: '1px solid rgba(40, 122, 69, 0.15)',
                         marginTop: '8px',
                         marginBottom: '8px',
                       }}
                     >
                       <div>
-                        <div style={{ fontSize: '0.65rem', color: '#9eab93', textTransform: 'uppercase' }}>Travel Time</div>
-                        <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f4f6f0' }}>
+                        <div style={{ fontSize: '0.65rem', color: '#526b59', textTransform: 'uppercase' }}>Travel Time</div>
+                        <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0d1710' }}>
                           ~{route.durationMinutes} <span style={{ fontSize: '0.78rem', fontWeight: 600 }}>mins</span>
                         </div>
                       </div>
 
                       <div>
-                        <div style={{ fontSize: '0.65rem', color: '#9eab93', textTransform: 'uppercase' }}>Distance</div>
-                        <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f4f6f0' }}>
+                        <div style={{ fontSize: '0.65rem', color: '#526b59', textTransform: 'uppercase' }}>Distance</div>
+                        <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0d1710' }}>
                           {route.distanceKm} <span style={{ fontSize: '0.78rem', fontWeight: 600 }}>km</span>
                         </div>
                       </div>
@@ -1902,27 +1904,24 @@ export const CleanerRoutes: React.FC = () => {
                       style={{
                         padding: '8px 10px',
                         borderRadius: '10px',
-                        background:
-                          estimate.coverageStatus === 'VALID'
-                            ? 'rgba(143, 160, 126, 0.1)'
-                            : 'rgba(255, 255, 255, 0.04)',
-                        border: '1px solid rgba(163, 181, 147, 0.16)',
+                        background: 'rgba(240, 253, 244, 0.7)',
+                        border: '1px solid rgba(40, 122, 69, 0.15)',
                       }}
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <Leaf size={12} color="#8fa07e" />
-                          <span style={{ fontSize: '0.72rem', fontWeight: 600, color: '#c9d3bf' }}>
+                          <Leaf size={12} color="#166534" />
+                          <span style={{ fontSize: '0.72rem', fontWeight: 600, color: '#334155' }}>
                             Est. PM2.5 Exposure:
                           </span>
                         </div>
 
                         {estimate.coverageStatus === 'VALID' && estimate.avgPm25 !== null ? (
                           <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                            <span style={{ fontSize: '0.98rem', fontWeight: 800, color: '#f4f6f0' }}>
+                            <span style={{ fontSize: '0.98rem', fontWeight: 800, color: '#0d1710' }}>
                               {estimate.avgPm25}
                             </span>
-                            <span style={{ fontSize: '0.68rem', color: '#9eab93' }}>µg/m³</span>
+                            <span style={{ fontSize: '0.68rem', color: '#526b59' }}>µg/m³</span>
                             {estimate.categoryInfo && (
                               <span
                                 style={{
@@ -1939,7 +1938,7 @@ export const CleanerRoutes: React.FC = () => {
                             )}
                           </div>
                         ) : (
-                          <span style={{ fontSize: '0.7rem', color: '#fbbf24', fontStyle: 'italic' }}>
+                          <span style={{ fontSize: '0.7rem', color: '#d97706', fontStyle: 'italic' }}>
                             Coverage Unavailable
                           </span>
                         )}
@@ -1950,7 +1949,7 @@ export const CleanerRoutes: React.FC = () => {
                     <div
                       style={{
                         fontSize: '0.74rem',
-                        color: isLowestPollution ? '#86efac' : '#c9d3bf',
+                        color: isLowestPollution ? '#15803d' : '#475e4e',
                         marginTop: '8px',
                         lineHeight: 1.35,
                         display: 'flex',
@@ -1958,7 +1957,7 @@ export const CleanerRoutes: React.FC = () => {
                         gap: '4px',
                       }}
                     >
-                      <Info size={12} style={{ flexShrink: 0, marginTop: '2px' }} />
+                      <Info size={12} color="#166534" style={{ flexShrink: 0, marginTop: '2px' }} />
                       <span>{item.tradeOffSummary}</span>
                     </div>
                   </div>
@@ -1976,11 +1975,11 @@ export const CleanerRoutes: React.FC = () => {
             top: '1rem',
             height: 'calc(100vh - 150px)',
             minHeight: '680px',
-            background: 'linear-gradient(145deg, rgba(26, 38, 25, 0.9) 0%, rgba(18, 26, 17, 0.96) 100%)',
-            border: '1px solid rgba(163, 181, 147, 0.22)',
+            background: 'rgba(255, 255, 255, 0.95)',
+            border: '1px solid rgba(40, 122, 69, 0.18)',
             borderRadius: '24px',
             padding: '1rem',
-            boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+            boxShadow: '0 8px 30px rgba(22, 38, 25, 0.05)',
             display: 'flex',
             flexDirection: 'column',
             gap: '10px',
@@ -1999,10 +1998,10 @@ export const CleanerRoutes: React.FC = () => {
             }}
           >
             <div>
-              <div style={{ fontSize: '0.7rem', color: '#9eab93', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <div style={{ fontSize: '0.7rem', color: '#526b59', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 {isNavigating ? 'Live Navigation Map' : 'Roadway Corridor Map'}
               </div>
-              <div style={{ fontSize: '0.98rem', fontWeight: 700, color: '#f4f6f0' }}>
+              <div style={{ fontSize: '0.98rem', fontWeight: 700, color: '#0d1710' }}>
                 {selectedRouteComparison
                   ? `${selectedRouteComparison.route.name} (${selectedRouteComparison.route.summary})`
                   : 'Selected Road Corridor'}
@@ -2015,9 +2014,9 @@ export const CleanerRoutes: React.FC = () => {
                   style={{
                     padding: '4px 9px',
                     borderRadius: '8px',
-                    background: 'rgba(143, 160, 126, 0.15)',
-                    border: '1px solid rgba(163, 181, 147, 0.25)',
-                    color: '#f4f6f0',
+                    background: 'rgba(40, 122, 69, 0.1)',
+                    border: '1px solid rgba(40, 122, 69, 0.22)',
+                    color: '#166534',
                     fontSize: '0.74rem',
                     fontWeight: 600,
                     display: 'inline-flex',
@@ -2025,14 +2024,14 @@ export const CleanerRoutes: React.FC = () => {
                     gap: '5px',
                   }}
                 >
-                  <Clock size={12} color="#a3b593" />
+                  <Clock size={12} color="#166534" />
                   <span>
                     {isNavigating && routeProgress
                       ? formatNavDuration(routeProgress.remainingDurationMinutes)
                       : `~${selectedRouteComparison.route.durationMinutes} mins`}
                   </span>
                   <span style={{ opacity: 0.4 }}>·</span>
-                  <Navigation size={12} color="#a3b593" />
+                  <Navigation size={12} color="#166534" />
                   <span>
                     {isNavigating && routeProgress
                       ? formatNavDistance(routeProgress.remainingDistanceMeters)

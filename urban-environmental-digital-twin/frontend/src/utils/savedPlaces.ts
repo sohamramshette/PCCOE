@@ -483,45 +483,45 @@ export function getCategoryBadge(category: PlaceCategory): {
     case 'HOME':
       return {
         label: 'Home',
-        bg: 'rgba(74, 222, 128, 0.12)',
-        border: 'rgba(74, 222, 128, 0.35)',
-        color: '#86efac',
+        bg: 'rgba(22, 163, 74, 0.1)',
+        border: 'rgba(22, 163, 74, 0.28)',
+        color: '#15803d',
       };
     case 'COLLEGE':
       return {
         label: 'College / Campus',
-        bg: 'rgba(163, 181, 147, 0.15)',
-        border: 'rgba(163, 181, 147, 0.4)',
-        color: '#c2d4b3',
+        bg: 'rgba(40, 122, 69, 0.12)',
+        border: 'rgba(40, 122, 69, 0.28)',
+        color: '#166534',
       };
     case 'WORK':
       return {
         label: 'Workplace',
-        bg: 'rgba(56, 189, 248, 0.12)',
-        border: 'rgba(56, 189, 248, 0.35)',
-        color: '#7dd3fc',
+        bg: 'rgba(2, 132, 199, 0.1)',
+        border: 'rgba(2, 132, 199, 0.28)',
+        color: '#0284c7',
       };
     case 'FITNESS':
       return {
         label: 'Fitness / Outdoors',
-        bg: 'rgba(250, 204, 21, 0.12)',
-        border: 'rgba(250, 204, 21, 0.35)',
-        color: '#fde047',
+        bg: 'rgba(217, 119, 6, 0.1)',
+        border: 'rgba(217, 119, 6, 0.28)',
+        color: '#b45309',
       };
     case 'FAMILY':
       return {
         label: 'Family / Parents',
-        bg: 'rgba(244, 114, 182, 0.12)',
-        border: 'rgba(244, 114, 182, 0.35)',
-        color: '#f472b6',
+        bg: 'rgba(219, 39, 119, 0.1)',
+        border: 'rgba(219, 39, 119, 0.28)',
+        color: '#be185d',
       };
     case 'OTHER':
     default:
       return {
         label: 'Custom Place',
-        bg: 'rgba(168, 162, 158, 0.15)',
-        border: 'rgba(168, 162, 158, 0.35)',
-        color: '#d6d3d1',
+        bg: 'rgba(100, 116, 139, 0.1)',
+        border: 'rgba(100, 116, 139, 0.28)',
+        color: '#475569',
       };
   }
 }
