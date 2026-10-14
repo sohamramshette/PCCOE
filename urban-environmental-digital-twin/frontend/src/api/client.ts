@@ -4,7 +4,7 @@
  */
 
 const DEFAULT_API_URL = import.meta.env.PROD
-  ? 'https://pccoe-75ji.onrender.com'
+  ? ''
   : 'http://localhost:8000';
 
 const RAW_API_URL =
@@ -96,6 +96,7 @@ export async function apiClient<T>(endpoint: string, options: RequestOptions = {
       throw new ApiError(408, 'REQUEST_TIMEOUT', `Request timed out after ${Math.round(timeoutMs / 1000)} seconds.`);
     }
     const message = error instanceof Error ? error.message : 'Network request failed';
-    throw new ApiError(0, 'NETWORK_ERROR', `Unable to connect to backend at ${API_BASE_URL} (${message}). Ensure FastAPI is running.`);
+    const apiTarget = API_BASE_URL || 'the current site';
+    throw new ApiError(0, 'NETWORK_ERROR', `Unable to connect to backend at ${apiTarget} (${message}). Ensure FastAPI is running.`);
   }
 }

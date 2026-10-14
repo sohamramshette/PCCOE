@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/health",
+      "destination": "https://pccoe-75ji.onrender.com/health"
+    },
+    {
+      "source": "/api/v1/:path*",
+      "destination": "https://pccoe-75ji.onrender.com/api/v1/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
