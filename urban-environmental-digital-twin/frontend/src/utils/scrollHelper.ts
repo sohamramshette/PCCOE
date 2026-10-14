@@ -28,9 +28,14 @@ export function scrollToCard(anchorId: string, duration = 1.2): boolean {
 
     if (targetIndex >= 0) {
       const container = document.querySelector<HTMLElement>('.airlens-stacking-container');
-      let targetY = container ? container.offsetTop : 0;
-      for (let i = 0; i < targetIndex; i++) {
-        targetY += sectionsArray[i].offsetHeight;
+      let targetY: number;
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        targetY = window.scrollY + targetSection.getBoundingClientRect().top;
+      } else {
+        targetY = container ? container.offsetTop : 0;
+        for (let i = 0; i < targetIndex; i++) {
+          targetY += sectionsArray[i].offsetHeight;
+        }
       }
 
       if (lenis && typeof lenis.scrollTo === 'function') {

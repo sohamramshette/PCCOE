@@ -18,29 +18,56 @@ export default function AirLensNav() {
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+    const sections = Array.from(document.querySelectorAll('.stack-card-section'));
+    let sectionRanges = [];
+    let frameId = 0;
+    let previousScrolled = false;
+    let previousSection = '';
 
-      // Determine active scrolling card section in stack
-      const sections = Array.from(document.querySelectorAll('.stack-card-section'));
-      if (sections.length > 1) {
-        const scrollY = window.scrollY;
-        let cumulative = sections[0].offsetHeight;
-        let current = '';
-        for (let i = 1; i < sections.length; i++) {
-          const sec = sections[i];
-          const nextHeight = sec.offsetHeight;
-          if (scrollY >= cumulative - 120 && scrollY < cumulative + nextHeight - 120) {
-            current = sec.id;
-            break;
-          }
-          cumulative += nextHeight;
-        }
-        setActiveSection(current);
-      }
+    const measureSections = () => {
+      let cumulativeHeight = sections[0]?.offsetHeight ?? 0;
+      sectionRanges = sections.slice(1).map((section) => {
+        const sectionHeight = section.offsetHeight;
+        const range = {
+          id: section.id,
+          start: cumulativeHeight - 120,
+          end: cumulativeHeight + sectionHeight - 120,
+        };
+        cumulativeHeight += sectionHeight;
+        return range;
+      });
     };
+
+    const handleScroll = () => {
+      if (frameId) return;
+      frameId = window.requestAnimationFrame(() => {
+        frameId = 0;
+        const nextScrolled = window.scrollY > 30;
+        if (nextScrolled !== previousScrolled) {
+          previousScrolled = nextScrolled;
+          setScrolled(nextScrolled);
+        }
+
+        const scrollY = window.scrollY;
+        const currentSection = sectionRanges.find(
+          (range) => scrollY >= range.start && scrollY < range.end,
+        )?.id ?? '';
+        if (currentSection !== previousSection) {
+          previousSection = currentSection;
+          setActiveSection(currentSection);
+        }
+      });
+    };
+
+    measureSections();
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', measureSections, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', measureSections);
+      if (frameId) window.cancelAnimationFrame(frameId);
+    };
   }, []);
 
   const handleNavClick = (anchorId) => {

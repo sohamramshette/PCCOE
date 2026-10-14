@@ -373,6 +373,7 @@ export const CitizenPortal: React.FC = () => {
       {/* Introduction Header Banner */}
       <div
         className="card"
+        data-citizen-intro
         style={{
           background: 'rgba(255, 255, 255, 0.85)',
           backdropFilter: 'blur(20px)',
@@ -512,6 +513,7 @@ export const CitizenPortal: React.FC = () => {
       >
         <button
           type="button"
+          className="citizen-voice-toggle"
           onClick={() => setVoiceAssistantOpen(!voiceAssistantOpen)}
           style={{
             width: '100%',

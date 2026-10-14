@@ -20,6 +20,8 @@ import {
   Bell,
   Camera,
   Bookmark,
+  Menu,
+  X,
 } from 'lucide-react';
 import { getHealth } from '../../api/health';
 import { HealthResponse } from '../../types/common';
@@ -30,6 +32,7 @@ export const Navbar: React.FC = () => {
   const { user, role, openAuthModal, logout, isAuthenticated } = useAuth();
   const [health, setHealth] = useState<HealthResponse | null>(null);
   const [healthState, setHealthState] = useState<'connecting' | 'waking' | 'live' | 'offline'>('connecting');
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -66,6 +69,10 @@ export const Navbar: React.FC = () => {
       clearTimeout(timer);
     };
   }, []);
+
+  useEffect(() => {
+    setMobileNavOpen(false);
+  }, [location.pathname]);
 
   const getPageTitle = () => {
     if (location.pathname === '/citizen') return 'My Air Dashboard';
@@ -181,6 +188,16 @@ export const Navbar: React.FC = () => {
               </div>
             </div>
           </Link>
+          <button
+            type="button"
+            className="mobile-primary-nav-toggle"
+            onClick={() => setMobileNavOpen((isOpen) => !isOpen)}
+            aria-label={mobileNavOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={mobileNavOpen}
+            aria-controls="primary-navigation"
+          >
+            {mobileNavOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
 
         {/* Right Header Actions */}
@@ -305,8 +322,11 @@ export const Navbar: React.FC = () => {
       </div>
 
       {/* 2. Horizontal Nav Bar with Proper Padding & Rounding */}
-      <div className="top-navbar-nav-row">
+      <div className={`top-navbar-nav-row${mobileNavOpen ? ' is-open' : ''}`}>
         <nav
+          id="primary-navigation"
+          aria-label="Primary navigation"
+          onClick={() => setMobileNavOpen(false)}
           className="horizontal-nav-pill-track"
           style={{
             display: 'inline-flex',

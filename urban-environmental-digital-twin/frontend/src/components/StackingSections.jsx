@@ -47,26 +47,23 @@ export default function StackingSections({ children }) {
 
     const container = containerRef.current;
     if (!container) return;
+    const useNativeScroll = window.matchMedia('(max-width: 768px)').matches;
 
-    // 1. Initialize Lenis for responsive, frictionless momentum scrolling
-    const lenis = new Lenis({
-      duration: 0.9,
+    const lenis = useNativeScroll ? null : new Lenis({
+      duration: 0.55,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.0,
+      wheelMultiplier: 1.05,
     });
 
     window.__lenis = lenis;
 
-    // Connect Lenis to GSAP ScrollTrigger ticker
-    lenis.on('scroll', ScrollTrigger.update);
-
-    const updateRaf = (time) => {
-      lenis.raf(time * 1000);
-    };
-    gsap.ticker.add(updateRaf);
-    gsap.ticker.lagSmoothing(0);
+    let updateRaf;
+    if (lenis) {
+      lenis.on('scroll', ScrollTrigger.update);
+      updateRaf = (time) => lenis.raf(time * 1000);
+      gsap.ticker.add(updateRaf);
+    }
 
     const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     const sections = Array.from(container.querySelectorAll('.stack-card-section'));
@@ -77,7 +74,7 @@ export default function StackingSections({ children }) {
     });
 
     let ctx;
-    if (!reduceMotion && sections.length > 1) {
+    if (!reduceMotion && !useNativeScroll && sections.length > 1) {
       ctx = gsap.context(() => {
         sections.forEach((section, index) => {
           if (index === sections.length - 1) return; // Last card does not get covered
@@ -128,16 +125,14 @@ export default function StackingSections({ children }) {
       }, container);
     }
 
-    const handleResize = () => {
-      ScrollTrigger.refresh();
-    };
-    window.addEventListener('resize', handleResize);
+    const handleResize = () => ScrollTrigger.refresh();
+    if (!useNativeScroll) window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      if (!useNativeScroll) window.removeEventListener('resize', handleResize);
       if (ctx) ctx.revert();
-      gsap.ticker.remove(updateRaf);
-      lenis.destroy();
+      if (updateRaf) gsap.ticker.remove(updateRaf);
+      lenis?.destroy();
       window.__lenis = null;
     };
   }, []);
